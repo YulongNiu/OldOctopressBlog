@@ -1,0 +1,42 @@
+---
+layout: post
+title: "二代测序中的常用工具介绍"
+date: 2014-07-28 12:23:42 -0400
+comments: true
+categories: Bioinfor
+---
+
+## 1. SAMtools ##
+
+[SAMtools](http://samtools.sourceforge.net/)是用于处理SAM (Sequence Alignment/Map)格式文件的一系列工具，主要用来储存大容量的核酸测序结果。
+**简介**：BAM是SAM文件的binary格式文件。SAMtools的主要作者是[Heng Li](http://lh3lh3.users.sourceforge.net/)，Heng Li在2012年因为对二代测序领域的贡献获得[Benjamin Franklin Award](http://en.wikipedia.org/wiki/Benjamin_Franklin_Award_(Bioinformatics))。
+
+**平台**：Mac OS/Linux
+
+**安装**: 
+
+* [下载](http://sourceforge.net/projects/samtools/files/)SAMtools
+
+<!--more-->
+
+* 安装依赖的Ncurse库
+
+``` bash
+# yum install ncurses*
+```
+
+* 添加SAMtools到PATH（[设置参考](http://yulongniu.bionutshell.org/blog/2010/11/08/linux-command/)）
+
+**快速运行**
+
+``` bash
+# 将sam格式文件转换为bam格式文件
+$ samtools view -bS samFile > bamFile
+
+# 将bam格式文件转换为sorted bam格式文件，用于长期储存和后续分析 
+$ samtools sort bamFile sortedBamFile
+```
+
+### 更新记录 ###
+
+2014年7月28日

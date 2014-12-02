@@ -1,0 +1,78 @@
+---
+layout: post
+title: "构建和展示进化树软件使用心得"
+date: 2014-05-01 17:13:59 -0400
+comments: true
+categories: Bioinfor
+---
+
+## 构建进化树 ##
+
+### 1. PhyML ##
+
+**构建进化树方法**：Maximum Likelihood
+
+**评估**：选择bootstrap或者Likelihood-ratio test
+
+**运行方式**：所有平台和[网页](http://atgc.lirmm.fr/phyml/)
+
+**心得**：理论上支持4000条序列，小于2000000个字符。但是，对于个人电脑，通常100-200条序列比较合适。命令行运行时，可以选择非常简介的默认模式运行。在默认模式下，bootstrap需要手动开启。安装和使用非常方便，直接下载后可以直接使用。同时，bootstrap可以通过MPI分布计算，但是需要从源代码安装。
+
+**快速运行**：
+
+~~~ bash
+phyml -i align_file.phy --no_memory_check
+~~~
+
+<!--more-->
+
+* `-i`：后跟需要Phylip格式文件
+* `--no_memory_check`：不用检查内存，防止程序运行时跳出
+
+### 2. RAxML ###
+
+**构建进化树方法**：Maximum Likelihood
+
+**运行方式**：所有[平台](http://www.exelixis-lab.org/)和网页。
+
+**心得**：推荐[网页运行](http://www.phylo.org/portal2/login!input.action)，支持数据的存放和其他构建进化树的方法。本地安装支持MPI和PThreads的分布计算，但是安装有些复杂，需要仔细阅读文档。
+
+**快速运行1**：
+
+~~~ bash
+raxmlHPC-PTHREADS-AVX -x 12345 -p 12345 -# 100 -m GTRGAMMA -T 4 -s align_file.phy -n TEST
+~~~
+
+* `-x`：bootstrap运行时设定随机数，用于结果重现
+* `-p`：parsimony推断时设定随机数，用于结果重现
+* `-#`：bootstrap次数。也可以设定为autoMRE，最大次数是1000。
+* `-m`：设定使用的模型，GTRGAMMA为核苷酸序列适用模型
+* `-T`：设定线程数，不要超过最大线程
+* `-s`：输入文件，Phylip或者fasta文件
+* `-n`：输入文件记号
+
+**快速运行2**：
+
+~~~ bash
+raxmlHPC-PTHREADS-AVX -f a -x 12345 -p 12345 -# autoMRE -m GTRCAT -T 4 -s align_file.phy -n TEST
+~~~
+
+* `-f a`：选定算法，快速bootstrap
+
+
+## 展示进化树 ##
+
+### 1. iTOL ###
+
+**运行方式**：[网页](http://itol.embl.de/)
+
+**心得**：
+
+* 用户可以添加很多自定义的项目，丰富和完善自己的进化树，比如添加柱状图、蛋白结构域、heatmap、基因平行转移（horizontal gene transfer）等；
+
+* 如果输入NCBI taxonomy编号，能够自动转化成物种名称；支持鼠标点击交互式运行，非常方便。
+心得：可以在网站上建立自己的帐号，之后设定不同的project展示和存放自己的项目。尝试构建了2000条左右的序列，显示完全没有问题。
+
+### 更新记录 ###
+
+2014年5月1日

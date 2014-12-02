@@ -1,0 +1,14 @@
+---
+layout: post
+title: "R语言使用进化树相关工具包"
+date: 2014-08-24 22:13:59 -0400
+comments: true
+published: false
+categories: bioinfor
+---
+
+R [Task](http://cran.r-project.org/web/views/Phylogenetics.html)将构建进化树和相关方法，专门列出一个任务集锦。从这个集锦可以看出，R中有非常多的包与进化相关。这篇博文是对其中几个重要的包做简单介绍。
+
+## 1. <span style="color: blue">ape包</span>##
+
+<span style="color: blue">ape（Analysis of Phylogenetics and Evolution）包</span>是一个非常古老和强大的包，项目起始与2002年8月，同时这个包目前依然持续更新。从[项目主页](http://ape-package.ird.fr/)中可以看到具体的安装方法和文档。
