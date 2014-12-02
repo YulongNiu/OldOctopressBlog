@@ -1,0 +1,982 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Bioinfor | My Octopress Blog]]></title>
+  <link href="http://yulongniu.github.io/blog/categories/bioinfor/atom.xml" rel="self"/>
+  <link href="http://yulongniu.github.io/"/>
+  <updated>2014-12-02T01:49:06-05:00</updated>
+  <id>http://yulongniu.github.io/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[二代测序中的常用工具介绍]]></title>
+    <link href="http://yulongniu.github.io/blog/2014/07/28/next-seqence-tools/"/>
+    <updated>2014-07-28T12:23:42-04:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/07/28/next-seqence-tools</id>
+    <content type="html"><![CDATA[<h2 id="samtools">1. SAMtools</h2>
+
+<p><a href="http://samtools.sourceforge.net/">SAMtools</a>是用于处理SAM (Sequence Alignment/Map)格式文件的一系列工具，主要用来储存大容量的核酸测序结果。
+<strong>简介</strong>：BAM是SAM文件的binary格式文件。SAMtools的主要作者是<a href="http://lh3lh3.users.sourceforge.net/">Heng Li</a>，Heng Li在2012年因为对二代测序领域的贡献获得<a href="http://en.wikipedia.org/wiki/Benjamin_Franklin_Award_(Bioinformatics)">Benjamin Franklin Award</a>。</p>
+
+<p><strong>平台</strong>：Mac OS/Linux</p>
+
+<p><strong>安装</strong>: </p>
+
+<ul>
+  <li><a href="http://sourceforge.net/projects/samtools/files/">下载</a>SAMtools</li>
+</ul>
+
+<!--more-->
+
+<ul>
+  <li>安装依赖的Ncurse库</li>
+</ul>
+
+<pre><code class="language-bash"># yum install ncurses*
+</code></pre>
+
+<ul>
+  <li>添加SAMtools到PATH（<a href="http://yulongniu.bionutshell.org/blog/2010/11/08/linux-command/">设置参考</a>）</li>
+</ul>
+
+<p><strong>快速运行</strong></p>
+
+<pre><code class="language-bash"># 将sam格式文件转换为bam格式文件
+$ samtools view -bS samFile &gt; bamFile
+
+# 将bam格式文件转换为sorted bam格式文件，用于长期储存和后续分析 
+$ samtools sort bamFile sortedBamFile
+</code></pre>
+
+<h3 id="section">更新记录</h3>
+
+<p>2014年7月28日</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[二代测序中的短序列比对]]></title>
+    <link href="http://yulongniu.github.io/blog/2014/07/25/short-sequence-alignment/"/>
+    <updated>2014-07-25T14:04:25-04:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/07/25/short-sequence-alignment</id>
+    <content type="html"><![CDATA[<p>在二代测序数据分析中，非常重要的一步是将测得的短序列“对应”到基因组上。所使用的工具被称为“短序列比对工具（short sequence aligners）”。以下是一些常用工具的介绍。</p>
+
+<h2 id="bowtie">1. Bowtie</h2>
+
+<p><strong>简介</strong>：<a href="http://bowtie-bio.sourceforge.net/">Bowtie2</a>是现在广泛使用的序列比对工具。</p>
+
+<p><strong>运行方式</strong>：所有平台</p>
+
+<p><strong>特点</strong>：</p>
+
+<ul>
+  <li>
+    <p>相比较<a href="http://bowtie-bio.sourceforge.net/index.shtml">Bowtie1</a>，处理大于50bp的短序列，速度更快、也更敏感。Bowtie1在处理小于50bp的短序列上，效果更好。</p>
+  </li>
+  <li>
+    <p><a href="http://support.illumina.com/sequencing/sequencing_software/igenome.ilmn">iGenomes</a>提供一些事先编排（index）的基因组。
+<!--more--></p>
+  </li>
+</ul>
+
+<p><strong>快速运行</strong>：</p>
+
+<pre><code class="language-bash"># 建立一系列FASTA文件目录
+$ bowtie2-build /filePath/fastaFile indexName
+
+# unpaired序列比对
+$ bowtie2 -p 4 -x indexName -U readFiles -S samFileName
+
+# paired序列比对
+$ bowtie2 -p 4 -x indexName  -1 readFiles1 -2 readFiles2 -S eg2.sam
+</code></pre>
+
+<ul>
+  <li>
+    <p><code>-p</code>：多线程</p>
+  </li>
+  <li>
+    <p><code>-x</code>：之后跟index名称</p>
+  </li>
+  <li>
+    <p><code>-U</code>：测序文件（比如Fasta，Fastq文件）</p>
+  </li>
+  <li>
+    <p><code>-1</code>/<code>-2</code>：标识paired文件</p>
+  </li>
+  <li>
+    <p><code>-S</code>：SAM格式输出文件</p>
+  </li>
+</ul>
+
+<h3 id="section">参考网址</h3>
+
+<ul>
+  <li><a href="http://lh3lh3.users.sourceforge.net/NGSalign.shtml">Heng Li总结的工具列表</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[构建和展示进化树软件使用心得]]></title>
+    <link href="http://yulongniu.github.io/blog/2014/05/01/phylo-tool-summary/"/>
+    <updated>2014-05-01T17:13:59-04:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/05/01/phylo-tool-summary</id>
+    <content type="html"><![CDATA[<h2 id="section">构建进化树</h2>
+
+<h3 id="phyml">1. PhyML</h3>
+
+<p><strong>构建进化树方法</strong>：Maximum Likelihood</p>
+
+<p><strong>评估</strong>：选择bootstrap或者Likelihood-ratio test</p>
+
+<p><strong>运行方式</strong>：所有平台和<a href="http://atgc.lirmm.fr/phyml/">网页</a></p>
+
+<p><strong>心得</strong>：理论上支持4000条序列，小于2000000个字符。但是，对于个人电脑，通常100-200条序列比较合适。命令行运行时，可以选择非常简介的默认模式运行。在默认模式下，bootstrap需要手动开启。安装和使用非常方便，直接下载后可以直接使用。同时，bootstrap可以通过MPI分布计算，但是需要从源代码安装。</p>
+
+<p><strong>快速运行</strong>：</p>
+
+<pre><code class="language-bash">phyml -i align_file.phy --no_memory_check
+</code></pre>
+
+<!--more-->
+
+<ul>
+  <li><code>-i</code>：后跟需要Phylip格式文件</li>
+  <li><code>--no_memory_check</code>：不用检查内存，防止程序运行时跳出</li>
+</ul>
+
+<h3 id="raxml">2. RAxML</h3>
+
+<p><strong>构建进化树方法</strong>：Maximum Likelihood</p>
+
+<p><strong>运行方式</strong>：所有<a href="http://www.exelixis-lab.org/">平台</a>和网页。</p>
+
+<p><strong>心得</strong>：推荐<a href="http://www.phylo.org/portal2/login!input.action">网页运行</a>，支持数据的存放和其他构建进化树的方法。本地安装支持MPI和PThreads的分布计算，但是安装有些复杂，需要仔细阅读文档。</p>
+
+<p><strong>快速运行1</strong>：</p>
+
+<pre><code class="language-bash">raxmlHPC-PTHREADS-AVX -x 12345 -p 12345 -# 100 -m GTRGAMMA -T 4 -s align_file.phy -n TEST
+</code></pre>
+
+<ul>
+  <li><code>-x</code>：bootstrap运行时设定随机数，用于结果重现</li>
+  <li><code>-p</code>：parsimony推断时设定随机数，用于结果重现</li>
+  <li><code>-#</code>：bootstrap次数。也可以设定为autoMRE，最大次数是1000。</li>
+  <li><code>-m</code>：设定使用的模型，GTRGAMMA为核苷酸序列适用模型</li>
+  <li><code>-T</code>：设定线程数，不要超过最大线程</li>
+  <li><code>-s</code>：输入文件，Phylip或者fasta文件</li>
+  <li><code>-n</code>：输入文件记号</li>
+</ul>
+
+<p><strong>快速运行2</strong>：</p>
+
+<pre><code class="language-bash">raxmlHPC-PTHREADS-AVX -f a -x 12345 -p 12345 -# autoMRE -m GTRCAT -T 4 -s align_file.phy -n TEST
+</code></pre>
+
+<ul>
+  <li><code>-f a</code>：选定算法，快速bootstrap</li>
+</ul>
+
+<h2 id="section-1">展示进化树</h2>
+
+<h3 id="itol">1. iTOL</h3>
+
+<p><strong>运行方式</strong>：<a href="http://itol.embl.de/">网页</a></p>
+
+<p><strong>心得</strong>：</p>
+
+<ul>
+  <li>
+    <p>用户可以添加很多自定义的项目，丰富和完善自己的进化树，比如添加柱状图、蛋白结构域、heatmap、基因平行转移（horizontal gene transfer）等；</p>
+  </li>
+  <li>
+    <p>如果输入NCBI taxonomy编号，能够自动转化成物种名称；支持鼠标点击交互式运行，非常方便。
+心得：可以在网站上建立自己的帐号，之后设定不同的project展示和存放自己的项目。尝试构建了2000条左右的序列，显示完全没有问题。</p>
+  </li>
+</ul>
+
+<h3 id="section-2">更新记录</h3>
+
+<p>2014年5月1日</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Circos Notes]]></title>
+    <link href="http://yulongniu.github.io/blog/2014/03/17/circos-notes/"/>
+    <updated>2014-03-17T15:37:45-04:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/03/17/circos-notes</id>
+    <content type="html"><![CDATA[<p>Mapping data onto a Circos figure requires that you identify what patterns in your data are (a) likely to be important and (b) likely to be present, and create a figure that exposes such patterns. Remember, if the pattern exists, you can’t afford to miss it. If it doesn’t exist, you can’t afford to be fooled into thinking that it’s there, or left wondering whether it’s occluded by other data.</p>
+
+<h2 id="run-circos">1. Run circos</h2>
+
+<pre><code class="language-bash">bin/circos
+-png
+-svg
+-conf etc/circos.conf
+-outputdir /path/to/your/output/directory
+-outputfile yourimage.png
+</code></pre>
+<!--more-->
+
+<ul>
+  <li>
+    <p><code class="language-bash">-debug</code> is used for debugging</p>
+  </li>
+  <li>
+    <p><code class="language-bash">-cdump</code> is used for check the parsing file.</p>
+  </li>
+</ul>
+
+<pre><code class="language-bash"># store all debug output in circos.debug.txt and display only karyotype
+&gt; circos ... -group_debug _all | tee circos.debug.txt | egrep "debuggroup karyotype"
+# extract other debug reports
+&gt; egrep "debuggroup rule" circos.debug.txt
+&gt; egrep "debuggroup (rule|scale)" circos.debug.txt
+</code></pre>
+
+<h2 id="syntax-and-configure-files">2. Syntax and configure files</h2>
+
+<p>Configuration syntax is like:</p>
+
+<pre><code class="language-html">&lt;ideogram&gt;
+ thickness = 30p
+ fill      = yes
+ ...
+&lt;/ideogram&gt;
+</code></pre>
+<p>Usefule syntax: hierarchical structure <code class="language-html">&lt;ideogram&gt;</code>; all data points in all plot tracks <code class="language-html">&lt;links&gt;</code> and <code class="language-html">&lt;plots&gt;</code>; local data points in a given track <code class="language-html">&lt;link&gt;</code> and <code class="language-html">&lt;plot&gt;</code>; rules <code class="language-html">&lt;rules&gt;</code> and <code class="language-html">&lt;rule&gt;</code>; highlight<code class="language-html">&lt;hightlight&gt;</code>.</p>
+
+<p>Extermal imports</p>
+
+<pre><code class="language-html">&lt;image&gt;
+# Included from Circos distribution.
+&lt;&lt;include etc/image.conf&gt;&gt;
+&lt;/image&gt;
+
+# colors, fonts and fill patterns
+&lt;&lt;include etc/colors_fonts_patterns.conf&gt;&gt;
+# system and debug parameters
+&lt;&lt;include etc/housekeeping.conf&gt;&gt;
+</code></pre>
+
+<p>Accessing configuration values<code class="language-html">parameter2 = conf(parameter1)</code> or <code class="language-html">parameter2 = conf(block1,block2,parameter1)</code> for:</p>
+
+<pre><code class="language-html">&lt;block1&gt;
+&lt;block2&gt;
+parameter1 = ...
+&lt;/block2&gt;
+&lt;/block1&gt;
+</code></pre>
+
+<p>Eval</p>
+
+<pre><code class="language-html">track_color = blue
+track_width = 100
+track_start = 0.5
+
+&lt;plots&gt;
+&lt;plot&gt;
+# color=blue
+color = conf(track_color)
+# r0 = 0.5r
+r0    = eval(conf(track_start) . "r")
+# r1 = 0.5r+100p
+r1    = eval(conf(track_start) . "r" + conf(track_width) . "p")
+&lt;/plot&gt;
+&lt;/plots&gt;
+</code></pre>
+
+<p>Color</p>
+
+<p>Use the color name given, like <code class="language-html">red</code>, <code class="language-html">lred</code>, <code class="language-html">vlred</code>, <code class="language-html">vvlred</code>, <code class="language-html">dred</code>, <code class="language-html">vdred</code>, <code class="language-html">vvdred</code>. If a pure color is need, use <code class="language-html">pred</code>. For the transparent color, <code class="language-html">red_a1</code>, <code class="language-html">red_a2</code>, and to <code class="language-html">red_a5</code>. <code class="language-html">red_a1</code> has a 17% tansparency and <code class="language-html">red_a5</code> have a 83% transparency.</p>
+
+<h2 id="ideogram">3. Ideogram</h2>
+
+<p>One of the most common used ideogram is the karyotypes plot. The chromosome is marked as:</p>
+
+<pre><code class="language-perl">chr - id label start end color
+</code></pre>
+<p>for example</p>
+
+<pre><code class="language-perl">chr - hs1 1 0 249250621 chr1
+</code></pre>
+
+<p>The cytogenetic bands data is like:</p>
+
+<pre><code class="language-perl">band hs1 p36.33 p36.33 0 2300000 gneg
+</code></pre>
+<ul>
+  <li>Choose a subset of chromosomes</li>
+</ul>
+
+<pre><code class="language-perl">chromosomes_display_default = no
+
+chromosomes = hs1;hs2;hs3;h4
+chromosomes = /hs[1-4]$/
+chromosomes = /hs[1-4]$/;hs10;hs11
+chromosomes = /hs[1-4]$/;-hs3
+chromosomes = hs1:(-100,120-);hs2;hs3;h4
+</code></pre>
+
+<ul>
+  <li>Order</li>
+</ul>
+
+<pre><code class="language-perl">chromosomes_order = hs2,hs3,hs1,hs5,hs4,hs8,hs7,hs6
+</code></pre>
+
+<ul>
+  <li>Scale</li>
+</ul>
+
+<pre><code class="language-perl">chromosomes_scale = hs1=0.25,hs2=2.0
+# 25% and 50%
+chromosomes_scale = hs1=0.25r,hs2=0.50r
+# each is 25%
+chromosomes_scale = /hs[12]/=0.5rn
+# all ideograms distributed evenly within entire figure
+chromosomes_scale   = /./=1rn
+</code></pre>
+
+<ul>
+  <li>Rotation</li>
+</ul>
+
+<pre><code class="language-html">&lt;image&gt;
+angle_orientation* = counterclockwise
+&lt;&lt;include etc/image&gt;&gt;
+&lt;/image&gt;
+</code></pre>
+
+<pre><code class="language-perl">chromosomes_reverse = /hs[234]/
+</code></pre>
+
+<ul>
+  <li>Chromosome color</li>
+</ul>
+
+<pre><code class="language-perl">chromosomes_color = hs1=red,hs2=orange,hs3=green,hs4=blue
+</code></pre>
+<p>Also, the color could be redefined as</p>
+
+<pre><code class="language-perl">chr1* = red
+chr2* = orange
+chr3* = green
+chr4* = blue
+</code></pre>
+
+<ul>
+  <li>Position</li>
+</ul>
+
+<pre><code class="language-perl">chromosomes_radius = hs4:0.9r
+</code></pre>
+
+<ul>
+  <li>Show bands</li>
+</ul>
+
+<pre><code class="language-perl">band_transparency = 0
+</code></pre>
+
+<ul>
+  <li>Add chromosome</li>
+</ul>
+
+<p>For example, add the human mitochondria chromosome.</p>
+
+<p>Add the following to the file <code class="language-bash">data/karyotype/karyotype.human.txt</code></p>
+
+<pre><code class="language-perl">chr - hsMT MT 0 16569 chrMT
+</code></pre>
+
+<p>Add “hsMT” color in the file <code class="language-bash">etc/colors.ucsc.conf</code></p>
+
+<pre><code class="language-perl">chrMT = 121,204,61
+</code></pre>
+
+<h2 id="highlight">4. Highlight</h2>
+
+<h3 id="data-type">4.1 Data type</h3>
+
+<p>Data type of highlight is</p>
+
+<pre><code class="language-perl">chr start end
+</code></pre>
+<p>for exmaple,</p>
+
+<pre><code class="language-perl">hs1 1298972 1300443
+</code></pre>
+
+<p>We can also add the highlight information into the data file, for example:</p>
+
+<pre><code class="language-perl">hs1 100433463 100487964 fill_color=red,r0=0.6r,r1=0.6r+50p
+hs1 232817594 240828534 fill_color=chr9,z=61,r0=0.4r-78.7058p,r1=0.4r+78.7058p
+</code></pre>
+
+<h3 id="conf-format">4.2 Conf format</h3>
+
+<pre><code class="language-html">
+&lt;highlights&gt;
+
+&lt;highlight&gt;
+...
+&lt;/highlight&gt;
+
+&lt;highlight&gt;
+...
+&lt;/highlight&gt;
+
+&lt;highlight&gt;
+...
+&lt;/highlight&gt;
+
+&lt;/highlights&gt;
+</code></pre>
+
+<h3 id="parameters">4.3 Parameters</h3>
+
+<p><code>r0</code>: inner radius of highlight</p>
+
+<p><code>r1</code>: outer radius of highlight</p>
+
+<p><code>offset</code>:  an offset applied to both r0 and r1 (useful for overriding default r0,r1 values defined at lower precedence)</p>
+
+<p><code>fill_color</code>: color of the highlight slice</p>
+
+<p><code>stroke_color</code>: color of the highlight border, drawn if stroke_thickness is set</p>
+
+<p><code>stroke_thickness</code>: border thickness, if any, of the highlight slice</p>
+
+<p><code>z</code>: z-depth of the highlight, controlling the order in which highlights are drawn</p>
+
+<p><code>ideogram</code>: toggles the position of the highlight to be within the ideogram extent</p>
+
+<h3 id="plot-hightlight">4.4 Plot hightlight</h3>
+
+<pre><code class="language-html">&lt;plots&gt;
+&lt;plot&gt;
+type = highlight
+file = data/3/chr.highlights.txt
+r0   = 0.3r
+r1   = 0.35r
+z    = 10
+&lt;/plot&gt;
+&lt;/plots&gt;
+</code></pre>
+
+<h2 id="links">5. Links</h2>
+
+<h3 id="data-type-1">5.1 Data type</h3>
+
+<pre><code class="language-perl">hs1 100 200 hs2 250 300
+</code></pre>
+<p>or</p>
+
+<pre><code class="language-perl">segdup00010 hs1 100 200
+segdup00010 hs2 250 300
+</code></pre>
+
+<p>with link options</p>
+
+<pre><code class="language-perl">hs1 100 200 hs2 250 300 color=blue
+hs1 400 550 hs3 500 750 color=red,thickness=5p
+hs1 600 800 hs4 150 350 color=black
+</code></pre>
+
+<h3 id="conf-format-1">5.2 Conf format</h3>
+
+<pre><code class="language-html">&lt;links&gt;
+&lt;link&gt;
+file          = data/5/segdup.txt
+radius        = 0.8r
+bezier_radius = 0r
+color         = black_a4
+thickness     = 2
+&lt;/link&gt;
+&lt;/links&gt;
+</code></pre>
+
+<h3 id="parameters-1">5.3 Parameters</h3>
+
+<p><code>radius</code>: this is the radial position of the termination of the link; for relative values, if radius &lt; 1 then it is defined in terms of the inner ideogram radius, otherwise it is defined in terms of the outer ideogram radius</p>
+
+<p><code>bezier_radius</code>: the radial position of the third control point (in addition to the two positions defined by the link coordinates) used to draw the Bezier curve; if this parameter is not defined then straight lines will be used</p>
+
+<p><code>color</code>: color of the link line</p>
+
+<p><code>thickness</code>: thickness of the link line (note that this is not stroke_thickness, since the line isn’t technically stroked)</p>
+
+<p><code>record_limit</code>: if this is defined, the number of records read from the file is capped; coordinate records are sampled from the start of the file; useful for debugging</p>
+
+<p>In each <code class="language-html">&lt;link&gt;</code>, <code class="language-html">&lt;rules&gt;</code> and <code class="language-html">&lt;rule&gt;</code> can be applied to special ruls. Each <code class="language-html">&lt;rule&gt;</code> contains three parts: <em>a condition</em>, <em>formatting statements</em> and <em>an optional ‘flow’ statement</em>.</p>
+
+<p>Marker the priority of rules</p>
+
+<pre><code class="language-html">&lt;rule&gt;
+# 1st
+importance = 10
+&lt;/rule&gt;
+</code></pre>
+
+<p>Add a tag</p>
+
+<pre><code class="language-html">&lt;rule&gt;
+flow = goto special_rule if true
+...
+&lt;/rule&gt;
+
+&lt;rule&gt;
+tag = special_rule
+...
+&lt;/rule&gt;
+</code></pre>
+
+<h2 id="histograms">6. Histograms</h2>
+
+<p>Histogram, line plot, scatter plot, and heat map share the same data format</p>
+
+<pre><code class="language-perl">chr start end value [options]
+</code></pre>
+<p>for exmaple</p>
+
+<pre><code class="language-perl">hs3 196000000 197999999 71.0000 fill_color=blue
+</code></pre>
+<pre><code class="language-perl"># in data file
+hs3 196000000 197999999 71.0000 id=abc
+
+# in rule block
+&lt;rule&gt;
+condition  = var(id) eq "abc"
+fill_color = blue
+&lt;/rule&gt;
+</code></pre>
+<p>Another data format has multiple values</p>
+
+<pre><code class="language-perl">chr start end value,value,value,... [options]
+</code></pre>
+<p>for example</p>
+
+<pre><code class="language-perl">hs3 196000000 197999999 0.0000,7.0000,64.0000,0.0000
+</code></pre>
+
+<ul>
+  <li>Plot histogram</li>
+</ul>
+
+<pre><code class="language-html">&lt;plots&gt;
+&lt;plot&gt;
+type = histogram
+file = data/5/segdup.hs1234.hist.txt
+r1   = 0.88r
+r0   = 0.81r
+
+fill_color = vdgrey
+extend_bin = no
+&lt;/plot&gt;
+</code></pre>
+
+<p>For multiple values, <code class="language-bash">fill_color</code> is used to set the different colors.</p>
+
+<ul>
+  <li>Orientation</li>
+</ul>
+
+<pre><code class="language-html">orientation = in
+</code></pre>
+
+<ul>
+  <li>Rules</li>
+</ul>
+
+<pre><code class="language-html">&lt;rules&gt;
+&lt;&lt;include exclude.hs1.rule&gt;&gt;
+&lt;/rules&gt;
+</code></pre>
+
+<ul>
+  <li>Backgrounds and axes</li>
+</ul>
+
+<pre><code class="language-html">&lt;plot&gt;
+...
+
+&lt;axes&gt;
+ &lt;axis&gt;
+ ...
+ &lt;/axis&gt;
+ &lt;axis&gt;
+ ...
+ &lt;/axis&gt;
+ ...
+&lt;/axes&gt;
+
+&lt;backgrounds&gt;
+ &lt;background&gt;
+ ...
+ &lt;/background&gt;
+ &lt;background&gt;
+ ...
+ &lt;/background&gt;
+ ...
+&lt;/backgrounds&gt;
+
+&lt;/plot&gt;
+</code></pre>
+
+<ul>
+  <li>text</li>
+</ul>
+
+<p>text data format is</p>
+
+<pre><code class="language-perl">chr start end value
+</code></pre>
+
+<p>for exmaple</p>
+
+<pre><code class="language-perl">hs1 100425066 100487997 DBT
+</code></pre>
+
+<pre><code class="language-html">&lt;plots&gt;
+&lt;plot&gt;
+type             = text
+color            = black
+file             = data/phylo/labelGene.txt
+&lt;/plot&gt;
+&lt;/plots&gt;
+</code></pre>
+
+<p>apply rules</p>
+
+<pre><code class="language-html">&lt;rules&gt;
+&lt;rule&gt;
+importance = 90
+condition  = var(value) eq "GeneName"
+color = blue
+&lt;/rule&gt;
+&lt;/rules&gt;
+</code></pre>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+  <li><a href="http://circos.ca/images/scientific_literature/">Ciros grocery of published pictures</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[生物信息学工具网址]]></title>
+    <link href="http://yulongniu.github.io/blog/2013/06/18/bioinfor-tools/"/>
+    <updated>2013-06-18T16:42:10-04:00</updated>
+    <id>http://yulongniu.github.io/blog/2013/06/18/bioinfor-tools</id>
+    <content type="html"><![CDATA[<h2 id="section">1. 基因组注释信息</h2>
+
+<ul>
+  <li>
+    <p><a href="ftp://ftp.ncbi.nih.gov/genomes/">NCBI ftp 下载基因组</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.jcvi.org/cms/home/">Craig Venter Institute</a></p>
+  </li>
+  <li>
+    <p><a href="http://useast.ensembl.org/info/data/ftp/index.html">Ensembl</a></p>
+  </li>
+</ul>
+
+<h2 id="section-1">2. 进化树</h2>
+
+<ul>
+  <li>
+    <p>进化树展示</p>
+
+    <ul>
+      <li>
+        <p><a href="http://en.wikipedia.org/wiki/List_of_phylogenetic_tree_visualization_software">Wiki software list</a></p>
+      </li>
+      <li>
+        <p><a href="https://www.biostars.org/p/2438/">Biostats总结</a></p>
+      </li>
+      <li>
+        <p><a href="http://itol.embl.de/index.shtml">iTOL</a></p>
+      </li>
+      <li>
+        <p><a href="http://ab.inf.uni-tuebingen.de/software/dendroscope/welcome.html">Dendroscope</a></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<!--more-->
+
+<ul>
+  <li>
+    <p>进化树构建</p>
+
+    <ul>
+      <li>
+        <p><a href="http://sco.h-its.org/exelixis/web/software/raxml/index.html">RAxML</a></p>
+      </li>
+      <li>
+        <p><a href="http://www.atgc-montpellier.fr/phyml/">PhyML</a></p>
+      </li>
+      <li>
+        <p><a href="http://evolution.genetics.washington.edu/phylip.html">PHYLIP</a>，在PHYLIP的<a href="http://evolution.genetics.washington.edu/phylip/general.html">介绍</a>中，列出了六个高使用率的构建进化树的软件，MrBayes、PAUP*、RAxML、PhyML、MEGA和PHYLIP。</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>sRNA数据库</p>
+
+    <ul>
+      <li>
+        <p><a href="http://www.arb-silva.de/">16S/23S数据库</a></p>
+      </li>
+      <li>
+        <p><a href="http://greengenes.lbl.gov/cgi-bin/nph-index.cgi">细菌16S数据库</a></p>
+      </li>
+      <li>
+        <p><a href="http://rdp.cme.msu.edu/index.jsp">真核生物rRNA</a></p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>数据格式转换</p>
+
+    <ul>
+      <li>
+        <p><a href="http://sco.h-its.org/exelixis/web/software/raxml/index.html">fasta转换为Phylip</a></p>
+      </li>
+      <li>
+        <p>进化树newick和nexus格式转换</p>
+
+        <ol>
+          <li>R package <span style="color: blue">ape</span>，提供了函数<code class="language-r">read.tree()</code>/<code class="language-r">write.tree()</code>，<code class="language-r">read.nexus()</code>/<code class="language-r">read.nexus()</code>。</li>
+        </ol>
+      </li>
+      <li>
+        <p><a href="http://www.phylogeny.fr/version2_cgi/data_converter.cgi">通用格式转换工具</a></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="section-2">3. 网络可视化</h2>
+
+<ul>
+  <li>
+    <p><a href="http://www.cytoscape.org/">Cytoscape</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.biolayout.org/">3D网络BioLayout Expression3D</a></p>
+  </li>
+  <li>
+    <p><a href="http://visant.bu.edu/">VisAnt</a></p>
+  </li>
+  <li>
+    <p><a href="http://circos.ca/">Circos</a></p>
+  </li>
+</ul>
+
+<h2 id="section-3">4. 序列比对</h2>
+
+<ul>
+  <li>
+    <p><a href="http://www.clustal.org/">Clustal</a></p>
+  </li>
+  <li>
+    <p><a href="ftp://ftp.ncbi.nlm.nih.gov/blast/executables/LATEST/">Blast</a></p>
+  </li>
+  <li>
+    <p><a href="http://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&amp;DOC_TYPE=Download">Blast+</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.ebi.ac.uk/Tools/msa/">EBI总结</a></p>
+  </li>
+  <li>
+    <p><a href="http://mafft.cbrc.jp/alignment/server/">MAFFT</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.drive5.com/muscle/">MUSCLE</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.tcoffee.org/">T-Coffee</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.megasoftware.net/">MEGA</a></p>
+  </li>
+</ul>
+
+<h2 id="section-4">5. 质谱分析</h2>
+
+<ul>
+  <li>
+    <p><a href="http://www.thegpm.org/TANDEM/">X!Tandem</a></p>
+  </li>
+  <li>
+    <p><a href="http://bacteria.thegpm.org/tandem/thegpm_tandem.html">X!Tandem bacterial</a></p>
+  </li>
+  <li>
+    <p><a href="http://prospector2.ucsf.edu/prospector/mshome.htm">ProteinProspector</a></p>
+  </li>
+  <li>
+    <p><a href="http://strimmerlab.org/notes/mass-spectrometry.html">R packages list</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.matrixscience.com/">Mascot</a></p>
+  </li>
+</ul>
+
+<h2 id="section-5">6. 基因注释</h2>
+
+<ul>
+  <li>
+    <p><a href="http://www.ncbi.nlm.nih.gov/IEB/Research/Acembly/index.html">Acembly</a></p>
+  </li>
+  <li>
+    <p><a href="http://rest.kegg.jp/list/hsa">KEGG</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.pantherdb.org/">PANTHER</a></p>
+  </li>
+</ul>
+
+<h2 id="section-6">7. 基因名转换</h2>
+
+<ul>
+  <li>
+    <p><a href="http://biodbnet.abcc.ncifcrf.gov/db/db2db.php">bioDBnet</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.ncbi.nlm.nih.gov/COG/">COG</a></p>
+  </li>
+  <li>
+    <p><a href="http://idconverter.bioinfo.cnio.es/IDconverter.php">IDconverter</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.uniprot.org/">uniprot</a></p>
+  </li>
+  <li>
+    <p><a href="http://david.abcc.ncifcrf.gov/home.jsp">DAVID</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.ncbi.nlm.nih.gov/books/NBK179288/">NCBI E-utilities</a></p>
+  </li>
+</ul>
+
+<h2 id="section-7">8. 结构域分析</h2>
+
+<ul>
+  <li>
+    <p><a href="http://www.ncbi.nlm.nih.gov/Structure/bwrpsb/bwrpsb.cgi">CDD</a></p>
+  </li>
+  <li>
+    <p><a href="http://pfam.sanger.ac.uk/">pfam</a></p>
+  </li>
+</ul>
+
+<h2 id="transcription-unit">9. 原核生物Transcription Unit查询</h2>
+
+<ul>
+  <li>
+    <p><a href="http://biocyc.org/">BioCyc</a></p>
+  </li>
+  <li>
+    <p><a href="http://operons.ibt.unam.mx/OperonPredictor/">ProOpDB</a></p>
+  </li>
+</ul>
+
+<h2 id="section-8">10. 探针设计</h2>
+
+<ul>
+  <li><a href="http://www.arb-home.de/">ARB</a></li>
+</ul>
+
+<h2 id="section-9">11. 统计学网址</h2>
+
+<p><a href="http://www.math.uah.edu/stat/bernoulli/Binomial.html">Virtual Laboratories in Probability and Statistics</a></p>
+
+<h2 id="section-10">12. 生物学通路数据库</h2>
+
+<ul>
+  <li>
+    <p><a href="http://www.genome.jp/kegg/">KEGG</a></p>
+  </li>
+  <li>
+    <p><a href="http://biocyc.org/">BioCyc</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.reactome.org/">Reactome</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.grenoble.prabi.fr/obiwarehouse/unipathway">Unipathway</a></p>
+  </li>
+  <li>
+    <p><a href="http://pid.nci.nih.gov/">PID</a></p>
+  </li>
+  <li>
+    <p><a href="http://biochemical-pathways.com/">Biochemical-pathways</a></p>
+  </li>
+  <li>
+    <p><a href="http://lsresearch.thomsonreuters.com/maps/">Pathway Maps</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.biocarta.com/genes/index.asp">BioCarta</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.genmapp.org/">GenMAPP</a></p>
+  </li>
+</ul>
+
+<h2 id="section-11">13. 转录调控数据库</h2>
+
+<ul>
+  <li>
+    <p><a href="http://regprecise.lbl.gov/RegPrecise/index.jsp">RegPrecise</a> 原核生物“转录因子–下游基因”数据库。</p>
+  </li>
+  <li>
+    <p><a href="http://dbtbs.hgc.jp/">DBTBS</a> 转录因子和相应的DNA结合保守（DNA binding motif）数据库。</p>
+  </li>
+</ul>
+
+<h2 id="section-12">文章介绍</h2>
+
+<ul>
+  <li>
+    <p><a href="http://www.nature.com/nrm/journal/v8/n12/abs/nrm2281.html">未知蛋白功能研究流程</a></p>
+  </li>
+  <li>
+    <p>蛋白质相互作用 <a href="http://www.ploscompbiol.org/article/info:doi/10.1371/journal.pcbi.0030042">1</a>, <a href="http://www.ploscompbiol.org/article/info:doi/10.1371/journal.pcbi.0030043">2</a></p>
+  </li>
+  <li>
+    <p><a href="http://cshprotocols.cshlp.org/content/2008/4/pdb.ip49.full">进化树方法选择</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.plosone.org/article/info:doi/10.1371/journal.pone.0002566">构建进化树</a></p>
+  </li>
+</ul>
+
+<h2 id="section-13">书籍推荐</h2>
+
+<ul>
+  <li><a href="http://a-little-book-of-r-for-bioinformatics.readthedocs.org/en/latest/index.html">a Little Book of R for Bioinformatics</a> 一本使用R语言介绍生物信息学书，提供源代码和示例。</li>
+</ul>
+
+<h3 id="section-14">更新记录</h3>
+
+<p>2014年9月19日</p>
+
+]]></content>
+  </entry>
+  
+</feed>

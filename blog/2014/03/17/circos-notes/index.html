@@ -1,0 +1,663 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Circos Notes - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="Mapping data onto a Circos figure requires that you identify what patterns in your data are (a) likely to be important and (b) likely to be present, &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://yulongniu.github.io/blog/2014/03/17/circos-notes">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:yulongniu.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Circos Notes</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-03-17T15:37:45-04:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>3:37 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Mapping data onto a Circos figure requires that you identify what patterns in your data are (a) likely to be important and (b) likely to be present, and create a figure that exposes such patterns. Remember, if the pattern exists, you can’t afford to miss it. If it doesn’t exist, you can’t afford to be fooled into thinking that it’s there, or left wondering whether it’s occluded by other data.</p>
+
+<h2 id="run-circos">1. Run circos</h2>
+
+<pre><code class="language-bash">bin/circos
+-png
+-svg
+-conf etc/circos.conf
+-outputdir /path/to/your/output/directory
+-outputfile yourimage.png
+</code></pre>
+<!--more-->
+
+<ul>
+  <li>
+    <p><code class="language-bash">-debug</code> is used for debugging</p>
+  </li>
+  <li>
+    <p><code class="language-bash">-cdump</code> is used for check the parsing file.</p>
+  </li>
+</ul>
+
+<pre><code class="language-bash"># store all debug output in circos.debug.txt and display only karyotype
+&gt; circos ... -group_debug _all | tee circos.debug.txt | egrep "debuggroup karyotype"
+# extract other debug reports
+&gt; egrep "debuggroup rule" circos.debug.txt
+&gt; egrep "debuggroup (rule|scale)" circos.debug.txt
+</code></pre>
+
+<h2 id="syntax-and-configure-files">2. Syntax and configure files</h2>
+
+<p>Configuration syntax is like:</p>
+
+<pre><code class="language-html">&lt;ideogram&gt;
+ thickness = 30p
+ fill      = yes
+ ...
+&lt;/ideogram&gt;
+</code></pre>
+<p>Usefule syntax: hierarchical structure <code class="language-html">&lt;ideogram&gt;</code>; all data points in all plot tracks <code class="language-html">&lt;links&gt;</code> and <code class="language-html">&lt;plots&gt;</code>; local data points in a given track <code class="language-html">&lt;link&gt;</code> and <code class="language-html">&lt;plot&gt;</code>; rules <code class="language-html">&lt;rules&gt;</code> and <code class="language-html">&lt;rule&gt;</code>; highlight<code class="language-html">&lt;hightlight&gt;</code>.</p>
+
+<p>Extermal imports</p>
+
+<pre><code class="language-html">&lt;image&gt;
+# Included from Circos distribution.
+&lt;&lt;include etc/image.conf&gt;&gt;
+&lt;/image&gt;
+
+# colors, fonts and fill patterns
+&lt;&lt;include etc/colors_fonts_patterns.conf&gt;&gt;
+# system and debug parameters
+&lt;&lt;include etc/housekeeping.conf&gt;&gt;
+</code></pre>
+
+<p>Accessing configuration values<code class="language-html">parameter2 = conf(parameter1)</code> or <code class="language-html">parameter2 = conf(block1,block2,parameter1)</code> for:</p>
+
+<pre><code class="language-html">&lt;block1&gt;
+&lt;block2&gt;
+parameter1 = ...
+&lt;/block2&gt;
+&lt;/block1&gt;
+</code></pre>
+
+<p>Eval</p>
+
+<pre><code class="language-html">track_color = blue
+track_width = 100
+track_start = 0.5
+
+&lt;plots&gt;
+&lt;plot&gt;
+# color=blue
+color = conf(track_color)
+# r0 = 0.5r
+r0    = eval(conf(track_start) . "r")
+# r1 = 0.5r+100p
+r1    = eval(conf(track_start) . "r" + conf(track_width) . "p")
+&lt;/plot&gt;
+&lt;/plots&gt;
+</code></pre>
+
+<p>Color</p>
+
+<p>Use the color name given, like <code class="language-html">red</code>, <code class="language-html">lred</code>, <code class="language-html">vlred</code>, <code class="language-html">vvlred</code>, <code class="language-html">dred</code>, <code class="language-html">vdred</code>, <code class="language-html">vvdred</code>. If a pure color is need, use <code class="language-html">pred</code>. For the transparent color, <code class="language-html">red_a1</code>, <code class="language-html">red_a2</code>, and to <code class="language-html">red_a5</code>. <code class="language-html">red_a1</code> has a 17% tansparency and <code class="language-html">red_a5</code> have a 83% transparency.</p>
+
+<h2 id="ideogram">3. Ideogram</h2>
+
+<p>One of the most common used ideogram is the karyotypes plot. The chromosome is marked as:</p>
+
+<pre><code class="language-perl">chr - id label start end color
+</code></pre>
+<p>for example</p>
+
+<pre><code class="language-perl">chr - hs1 1 0 249250621 chr1
+</code></pre>
+
+<p>The cytogenetic bands data is like:</p>
+
+<pre><code class="language-perl">band hs1 p36.33 p36.33 0 2300000 gneg
+</code></pre>
+<ul>
+  <li>Choose a subset of chromosomes</li>
+</ul>
+
+<pre><code class="language-perl">chromosomes_display_default = no
+
+chromosomes = hs1;hs2;hs3;h4
+chromosomes = /hs[1-4]$/
+chromosomes = /hs[1-4]$/;hs10;hs11
+chromosomes = /hs[1-4]$/;-hs3
+chromosomes = hs1:(-100,120-);hs2;hs3;h4
+</code></pre>
+
+<ul>
+  <li>Order</li>
+</ul>
+
+<pre><code class="language-perl">chromosomes_order = hs2,hs3,hs1,hs5,hs4,hs8,hs7,hs6
+</code></pre>
+
+<ul>
+  <li>Scale</li>
+</ul>
+
+<pre><code class="language-perl">chromosomes_scale = hs1=0.25,hs2=2.0
+# 25% and 50%
+chromosomes_scale = hs1=0.25r,hs2=0.50r
+# each is 25%
+chromosomes_scale = /hs[12]/=0.5rn
+# all ideograms distributed evenly within entire figure
+chromosomes_scale   = /./=1rn
+</code></pre>
+
+<ul>
+  <li>Rotation</li>
+</ul>
+
+<pre><code class="language-html">&lt;image&gt;
+angle_orientation* = counterclockwise
+&lt;&lt;include etc/image&gt;&gt;
+&lt;/image&gt;
+</code></pre>
+
+<pre><code class="language-perl">chromosomes_reverse = /hs[234]/
+</code></pre>
+
+<ul>
+  <li>Chromosome color</li>
+</ul>
+
+<pre><code class="language-perl">chromosomes_color = hs1=red,hs2=orange,hs3=green,hs4=blue
+</code></pre>
+<p>Also, the color could be redefined as</p>
+
+<pre><code class="language-perl">chr1* = red
+chr2* = orange
+chr3* = green
+chr4* = blue
+</code></pre>
+
+<ul>
+  <li>Position</li>
+</ul>
+
+<pre><code class="language-perl">chromosomes_radius = hs4:0.9r
+</code></pre>
+
+<ul>
+  <li>Show bands</li>
+</ul>
+
+<pre><code class="language-perl">band_transparency = 0
+</code></pre>
+
+<ul>
+  <li>Add chromosome</li>
+</ul>
+
+<p>For example, add the human mitochondria chromosome.</p>
+
+<p>Add the following to the file <code class="language-bash">data/karyotype/karyotype.human.txt</code></p>
+
+<pre><code class="language-perl">chr - hsMT MT 0 16569 chrMT
+</code></pre>
+
+<p>Add “hsMT” color in the file <code class="language-bash">etc/colors.ucsc.conf</code></p>
+
+<pre><code class="language-perl">chrMT = 121,204,61
+</code></pre>
+
+<h2 id="highlight">4. Highlight</h2>
+
+<h3 id="data-type">4.1 Data type</h3>
+
+<p>Data type of highlight is</p>
+
+<pre><code class="language-perl">chr start end
+</code></pre>
+<p>for exmaple,</p>
+
+<pre><code class="language-perl">hs1 1298972 1300443
+</code></pre>
+
+<p>We can also add the highlight information into the data file, for example:</p>
+
+<pre><code class="language-perl">hs1 100433463 100487964 fill_color=red,r0=0.6r,r1=0.6r+50p
+hs1 232817594 240828534 fill_color=chr9,z=61,r0=0.4r-78.7058p,r1=0.4r+78.7058p
+</code></pre>
+
+<h3 id="conf-format">4.2 Conf format</h3>
+
+<pre><code class="language-html">
+&lt;highlights&gt;
+
+&lt;highlight&gt;
+...
+&lt;/highlight&gt;
+
+&lt;highlight&gt;
+...
+&lt;/highlight&gt;
+
+&lt;highlight&gt;
+...
+&lt;/highlight&gt;
+
+&lt;/highlights&gt;
+</code></pre>
+
+<h3 id="parameters">4.3 Parameters</h3>
+
+<p><code>r0</code>: inner radius of highlight</p>
+
+<p><code>r1</code>: outer radius of highlight</p>
+
+<p><code>offset</code>:  an offset applied to both r0 and r1 (useful for overriding default r0,r1 values defined at lower precedence)</p>
+
+<p><code>fill_color</code>: color of the highlight slice</p>
+
+<p><code>stroke_color</code>: color of the highlight border, drawn if stroke_thickness is set</p>
+
+<p><code>stroke_thickness</code>: border thickness, if any, of the highlight slice</p>
+
+<p><code>z</code>: z-depth of the highlight, controlling the order in which highlights are drawn</p>
+
+<p><code>ideogram</code>: toggles the position of the highlight to be within the ideogram extent</p>
+
+<h3 id="plot-hightlight">4.4 Plot hightlight</h3>
+
+<pre><code class="language-html">&lt;plots&gt;
+&lt;plot&gt;
+type = highlight
+file = data/3/chr.highlights.txt
+r0   = 0.3r
+r1   = 0.35r
+z    = 10
+&lt;/plot&gt;
+&lt;/plots&gt;
+</code></pre>
+
+<h2 id="links">5. Links</h2>
+
+<h3 id="data-type-1">5.1 Data type</h3>
+
+<pre><code class="language-perl">hs1 100 200 hs2 250 300
+</code></pre>
+<p>or</p>
+
+<pre><code class="language-perl">segdup00010 hs1 100 200
+segdup00010 hs2 250 300
+</code></pre>
+
+<p>with link options</p>
+
+<pre><code class="language-perl">hs1 100 200 hs2 250 300 color=blue
+hs1 400 550 hs3 500 750 color=red,thickness=5p
+hs1 600 800 hs4 150 350 color=black
+</code></pre>
+
+<h3 id="conf-format-1">5.2 Conf format</h3>
+
+<pre><code class="language-html">&lt;links&gt;
+&lt;link&gt;
+file          = data/5/segdup.txt
+radius        = 0.8r
+bezier_radius = 0r
+color         = black_a4
+thickness     = 2
+&lt;/link&gt;
+&lt;/links&gt;
+</code></pre>
+
+<h3 id="parameters-1">5.3 Parameters</h3>
+
+<p><code>radius</code>: this is the radial position of the termination of the link; for relative values, if radius &lt; 1 then it is defined in terms of the inner ideogram radius, otherwise it is defined in terms of the outer ideogram radius</p>
+
+<p><code>bezier_radius</code>: the radial position of the third control point (in addition to the two positions defined by the link coordinates) used to draw the Bezier curve; if this parameter is not defined then straight lines will be used</p>
+
+<p><code>color</code>: color of the link line</p>
+
+<p><code>thickness</code>: thickness of the link line (note that this is not stroke_thickness, since the line isn’t technically stroked)</p>
+
+<p><code>record_limit</code>: if this is defined, the number of records read from the file is capped; coordinate records are sampled from the start of the file; useful for debugging</p>
+
+<p>In each <code class="language-html">&lt;link&gt;</code>, <code class="language-html">&lt;rules&gt;</code> and <code class="language-html">&lt;rule&gt;</code> can be applied to special ruls. Each <code class="language-html">&lt;rule&gt;</code> contains three parts: <em>a condition</em>, <em>formatting statements</em> and <em>an optional ‘flow’ statement</em>.</p>
+
+<p>Marker the priority of rules</p>
+
+<pre><code class="language-html">&lt;rule&gt;
+# 1st
+importance = 10
+&lt;/rule&gt;
+</code></pre>
+
+<p>Add a tag</p>
+
+<pre><code class="language-html">&lt;rule&gt;
+flow = goto special_rule if true
+...
+&lt;/rule&gt;
+
+&lt;rule&gt;
+tag = special_rule
+...
+&lt;/rule&gt;
+</code></pre>
+
+<h2 id="histograms">6. Histograms</h2>
+
+<p>Histogram, line plot, scatter plot, and heat map share the same data format</p>
+
+<pre><code class="language-perl">chr start end value [options]
+</code></pre>
+<p>for exmaple</p>
+
+<pre><code class="language-perl">hs3 196000000 197999999 71.0000 fill_color=blue
+</code></pre>
+<pre><code class="language-perl"># in data file
+hs3 196000000 197999999 71.0000 id=abc
+
+# in rule block
+&lt;rule&gt;
+condition  = var(id) eq "abc"
+fill_color = blue
+&lt;/rule&gt;
+</code></pre>
+<p>Another data format has multiple values</p>
+
+<pre><code class="language-perl">chr start end value,value,value,... [options]
+</code></pre>
+<p>for example</p>
+
+<pre><code class="language-perl">hs3 196000000 197999999 0.0000,7.0000,64.0000,0.0000
+</code></pre>
+
+<ul>
+  <li>Plot histogram</li>
+</ul>
+
+<pre><code class="language-html">&lt;plots&gt;
+&lt;plot&gt;
+type = histogram
+file = data/5/segdup.hs1234.hist.txt
+r1   = 0.88r
+r0   = 0.81r
+
+fill_color = vdgrey
+extend_bin = no
+&lt;/plot&gt;
+</code></pre>
+
+<p>For multiple values, <code class="language-bash">fill_color</code> is used to set the different colors.</p>
+
+<ul>
+  <li>Orientation</li>
+</ul>
+
+<pre><code class="language-html">orientation = in
+</code></pre>
+
+<ul>
+  <li>Rules</li>
+</ul>
+
+<pre><code class="language-html">&lt;rules&gt;
+&lt;&lt;include exclude.hs1.rule&gt;&gt;
+&lt;/rules&gt;
+</code></pre>
+
+<ul>
+  <li>Backgrounds and axes</li>
+</ul>
+
+<pre><code class="language-html">&lt;plot&gt;
+...
+
+&lt;axes&gt;
+ &lt;axis&gt;
+ ...
+ &lt;/axis&gt;
+ &lt;axis&gt;
+ ...
+ &lt;/axis&gt;
+ ...
+&lt;/axes&gt;
+
+&lt;backgrounds&gt;
+ &lt;background&gt;
+ ...
+ &lt;/background&gt;
+ &lt;background&gt;
+ ...
+ &lt;/background&gt;
+ ...
+&lt;/backgrounds&gt;
+
+&lt;/plot&gt;
+</code></pre>
+
+<ul>
+  <li>text</li>
+</ul>
+
+<p>text data format is</p>
+
+<pre><code class="language-perl">chr start end value
+</code></pre>
+
+<p>for exmaple</p>
+
+<pre><code class="language-perl">hs1 100425066 100487997 DBT
+</code></pre>
+
+<pre><code class="language-html">&lt;plots&gt;
+&lt;plot&gt;
+type             = text
+color            = black
+file             = data/phylo/labelGene.txt
+&lt;/plot&gt;
+&lt;/plots&gt;
+</code></pre>
+
+<p>apply rules</p>
+
+<pre><code class="language-html">&lt;rules&gt;
+&lt;rule&gt;
+importance = 90
+condition  = var(value) eq "GeneName"
+color = blue
+&lt;/rule&gt;
+&lt;/rules&gt;
+</code></pre>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+  <li><a href="http://circos.ca/images/scientific_literature/">Ciros grocery of published pictures</a></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2014-03-17T15:37:45-04:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>3:37 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/bioinfor/'>bioinfor</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.github.io/blog/2014/03/17/circos-notes/" data-via="" data-counturl="http://yulongniu.github.io/blog/2014/03/17/circos-notes/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/02/ggplot2-notes/" title="Previous Post: Ggplot2 Notes">&laquo; Ggplot2 Notes</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/03/27/creat-r-package/" title="Next Post: 创建R包的最简流程">创建R包的最简流程 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/12/01/emacs-config-c/">Emacs配置C语言编程环境</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/28/next-seqence-tools/">二代测序中的常用工具介绍</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/25/short-sequence-alignment/">二代测序中的短序列比对</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/22/octopress-install/">Octopress安装和使用</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/04/my-first-post/">My First Post</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

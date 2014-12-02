@@ -1,0 +1,128 @@
+<p>gi—
+layout: post
+title: “R ggplot2 notes”
+date: 2013-10-02 02:47:11 -0400
+comments: true
+categories: R
+—</p>
+
+<h1 id="r-package-span-stylecolor-blueggplot2span-notes">R Package <span style="color: blue">ggplot2</span> Notes</h1>
+
+<h2 id="basic-grammar">1. Basic grammar</h2>
+
+<h3 id="plot-types">1.1 Plot types</h3>
+
+<p>The R package <span style="color: blue">ggplot2</span> is a famous plot tool for high quality scientific figures. The <span style="color: blue">ggplot2</span> style figures are widely seen in papers published in high quality journals such as <em>PNAS</em>, <em>Nature</em> and <em>Cell</em>.</p>
+
+<p>The input data should be in <strong>data frame</strong> form, and it is easily to use the function <code class="language-r">as.data.frame()</code>. “<span style="color:red"><strong>+</strong></span>” is used to connect different plot statement. A typical <span style="color: blue">ggplot2</span> plot statement is like:</p>
+
+<!--more-->
+
+<pre><code class="language-r">require('ggplot2')
+ggplot(data=mpg, mapping=aes(x=cty, y=hwy, colour=factor(year))) +
+geom_point() + stat_smooth()
+</code></pre>
+<p><code class="language-r">ggplot()</code>: <strong>data</strong> is a <span style="color:blue">data.frame</span> class object. <strong>mapping</strong> is an <code class="language-r">aes()</code> function to specify the X-axis and Y-axis. When a <code class="language-r">aes()</code> is used, a figure legend will be added. If we do not want the legends appear, use <code class="language-r">show_guide = FALSE</code> in <em>geom_XXX</em> or <em>stat_XXX</em></p>
+
+<p><code class="language-r">geom_point()</code>: is used to plot points with the attributes <strong>x</strong>, <strong>y</strong>, alpha, colour, fill, shape, size.</p>
+
+<p><code class="language-r">geom_line()</code>: is used to plot points with the attributes <strong>x</strong>, <strong>y</strong>, alpha, colour, fill, shape, size.</p>
+
+<p><code class="language-r">geom_bar()</code>: bar plot. <code class="language-r">stat = 'identity'</code> for draw the identical, <code class="language-r">hjust</code> and <code class="language-r">vjust</code> is to adjust the x and y axis distance. <code class="language-r">coord_flip()</code> to reverse X and Y axis. <code class="language-r">position = 'dodge'</code> to set position of two bars, can be set as ‘dodge’, ‘stack’, ‘fill’ and ‘identity’.</p>
+
+<p><code class="language-r">geom_box()</code>: boxplot.</p>
+
+<pre><code class="language-r"># example
+require('ggplot2')
+p &lt;- ggplot(mtcars, aes(factor(cyl), mpg))
+# basic plot
+p + geom_boxplot()
+# add colors to boxes
+p + geom_boxplot(aes(fill = factor(cyl)))
+# change default colors
+p + geom_boxplot(aes(fill = factor(cyl))) + scale_fill_manual(values = c('red', 'green', 'blue'))
+</code></pre>
+<p><code class="language-r">geom_rect(mapping = NULL, data = NULL, stat = "identity", position = "identity", ...)</code>: plot rectangles. 
+In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, <code class="language-r">xmax</code>, <code class="language-r">ymin</code>, and <code class="language-r">ymax</code> are necessary. 
+<code class="language-r">inherit.aes = FALSE</code> may be used if new <code class="language-r">data</code> is applied.</p>
+
+<pre><code class="language-r"># example
+ggplot(mtcars) +
+  geom_density(aes(x=disp, group=cyl, fill=cyl), alpha=0.6, adjust=0.75) + 
+  geom_rect(data=mtcars[1,], aes(xmin=100, xmax=200, ymin=0,ymax=Inf), fill="red", alpha=0.2)
+</code></pre>
+
+<h3 id="statistics">1.2 Statistics</h3>
+
+<p><code class="language-r">geom_smooth()</code>: is used for the add smooth line with the <strong>method</strong> lm, glm, gam, loess and rlm. <code class="language-r">se = TRUE</code> is to display the confident region. The following aesthetics <strong>x</strong>, <strong>y</strong>, alpha, colour, fill, linetype, size, weight could be added.</p>
+
+<p><code class="language-r">stat_boxplot()</code>: plot error lines in boxplot.</p>
+
+<h3 id="add-elements">1.3 Add elements</h3>
+
+<p><code class="language-r">xlab()</code>: change X axis label, set <code>xlab('')</code> to remove the X axis label; <code class="language-r">ylab()</code>: change Y axis label; <code class="language-r">ggtitle()</code>: add figure title; <code class="language-r">scale_y_continuous(limits=c(0, 20))</code> and <code class="language-r">scale_x_continuous(limits=c(0, 20))</code> to adjust range of X and Y axis.</p>
+
+<p><code class="language-r">geom_abline(intercept = 37, slope = -5)</code>: to add line.</p>
+
+<p><code class="language-r">geom_hline</code> and <code class="language-r">geom_vline</code>: to add horizontal and vertical lines.</p>
+
+<pre><code class="language-r"># example 
+p &lt;- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
+geom_vline(xintercept = 1:5, colour="green", linetype = "longdash")
+</code></pre>
+
+<pre><code class="language-r"># ggplot2 line type
+d &lt;- data.frame(lt=c('blank', 'solid', 'dashed', 'dotted', 'dotdash', 'longdash', 'twodash', '1F', 'F1', '4C88C488', '12345678'))
+ggplot() +
+  scale_x_continuous(name='', limits=c(0,1), breaks=NULL) +
+  scale_y_discrete(name='linetype') +
+  scale_linetype_identity() +
+  geom_segment(data=d, mapping=aes(x=0, xend=1, y=lt, yend=lt, linetype=lt))
+</code></pre>
+
+<p><code class="language-r">geom_text()</code>: to add text. Set <code>parse = TRUE</code> to use expression and greek letters.</p>
+
+<p><code class="language-r">scale_fill_discrete(..., values)</code>: change labels. <code class="language-r">name</code> to reset label names, <code class="language-r">labels</code> to reset labels.</p>
+
+<p><code class="language-r">scale_shape_manual(..., values)</code>: change the shape of points.</p>
+
+<p><code class="language-r">scale_linetype_manual(..., values)</code>: change the types of lines. line referring <a href="http://www.cookbook-r.com/Graphs/Shapes_and_line_types/">R plot</a>.<code>name</code>, <code>value</code>, <code>labels</code> are used to change value.</p>
+
+<p><code class="language-r">scale_color_manual</code> is used for change the colors. Please refer to <a href="http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/">Useful color palette</a>, and <a href="http://blog.ggplot2.org/post/24607351280/choosing-colour-palettes-part-ii-educated-choices">Introduction of ggplot2 colors</a>. The default ggplot2 colors are generated from the “<em>scales</em>” package, for example the default “hue pallet” could be view as <code class="language-r">show_col(hue_pal(h = c(0, 360) + 15, c = 100, l = 65, h.start = 0, direction = 1)(9))</code></p>
+
+<p><code class="language-r">scale_fill_manual(..., alues)</code> to change filled colors.</p>
+
+<p><code class="language-r">theme</code> is used for exact control. <code>legend.position='none'</code> to remove the side legend.</p>
+
+<h2 id="save-plot">2. Save plot</h2>
+
+<p>The function <code class="language-r">ggsave()</code> is used to save the screen plot to file. <code class="language-r">print()</code> is also applied like:</p>
+
+<pre><code class="language-r">pdf('testfile.pdf')
+q &lt;- ggplot()
+print(q)
+dev.off()
+</code></pre>
+
+<h2 id="other-issues">3. Other issues</h2>
+
+<h3 id="plot-mutiple-ggplot2">3.1 Plot mutiple ggplot2</h3>
+
+<p>Use <span style="color: blue">gridExtra</span> package to plot multiple ggplot2 figures in the one figure. </p>
+
+<pre><code class="language-r"># example
+require('gridExtra')
+# save ggplot object into a list like "plotList"
+do.call(grid.arrange, plotList)
+</code></pre>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li><a href="http://directlabels.r-forge.r-project.org/examples.html">Better labels</a></li>
+  <li><a href="http://docs.ggplot2.org/current/">ggplot2 doc</a></li>
+</ul>
+
+<h3 id="section">更新记录</h3>
+
+<p>2014年8月28日</p>

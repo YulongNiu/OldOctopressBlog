@@ -1,0 +1,608 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>R小技巧集锦 - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="持续更新R语言编程中的一些小技巧，包括一些易错点。
+但是，需要注意的，一旦需要使用一些非常稀奇古怪的技巧时，可以尝试反思是否是自己数据结构或者算法出了问题。 1. if爱你，else就要和你在一起，又要给你一些距离 if (con){ expr } else{ expr2 } if...else &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://yulongniu.github.io/blog/2012/05/02/r-tricks">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:yulongniu.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">R小技巧集锦</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-05-02T22:17:02-04:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2012</span></span> <span class='time'>10:17 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>持续更新R语言编程中的一些小技巧，包括一些易错点。
+但是，需要注意的，<strong>一旦需要使用一些非常稀奇古怪的技巧时，可以尝试反思是否是自己数据结构或者算法出了问题。</strong></p>
+
+<h2 id="iflanguage-relselanguage-r">1. <code class="language-r">if</code>爱你，<code class="language-r">else</code>就要和你在一起，又要给你一些距离</h2>
+
+<pre><code class="language-r">if (con){
+  expr
+  } else{
+  expr2
+  }
+</code></pre>
+
+<p><code class="language-r">if...else..</code>结构中，<code class="language-r">}</code>与<code class="language-r">else</code>必须在同一行。</p>
+
+<!--more-->
+
+<p>简易形式（<span style="color: blue">不推荐</span>）：</p>
+
+<pre><code class="language-r"># else不能与expr在同一行
+if (con) expr
+else expr2
+</code></pre>
+
+<p>建议将所有<code class="language-r">if ... else ...</code>结构写成第一种形式，如果没有<code class="language-r">else</code>，用<code class="language-r">else {}</code>代替。</p>
+
+<h2 id="nulllanguage-rnulllanguage-rnulllanguage-rr">2. <code class="language-r">NULL</code>是空，<code class="language-r">NULL</code>是气，<code class="language-r">NULL</code>在R中就是空气。</h2>
+
+<p>如果表达式（expression）或者函数（function）的值没有定义，那么将返回<code class="language-r">NULL</code>。在R中，<code class="language-r">NULL</code>与很多对象合并在一起时，都被忽略掉。比如以下例子：</p>
+
+<pre><code class="language-r"># NULL is neglected in vector
+&gt; c(1, NA, NULL, FALSE)
+[1]  1 NA  0
+
+# also in matrix
+&gt; matrix(c(1, NA, NULL, 2), c(2, 2))
+     [,1] [,2]
+[1,]    1    2
+[2,]   NA    1
+警告信息：
+In matrix(c(1, NA, NULL, 2), c(2, 2)) : 数据长度[3]不是矩阵行数[2]的整倍
+
+# also in list
+&gt; tmp &lt;- list(1, 2)
+&gt; tmp[1] &lt;- NULL
+&gt; tmp
+[[1]]
+[1] 2
+&gt; tmp[[1]] &lt;- NULL
+&gt; tmp
+list()
+</code></pre>
+
+<p>如果一定要将列表中的某个个元素赋值为NULL，可以使用list(NULL)，比如：</p>
+
+<pre><code class="language-r">&gt; tmp &lt;- list()
+&gt; tmp[1] &lt;- list(NULL)
+&gt; tmp
+[[1]]
+NULL
+&gt; is.null(tmp[[1]])
+[1] TRUE
+</code></pre>
+
+<h2 id="listlist">3. list不是万能的，但没有list是万万不能的</h2>
+
+<p>列表（list）在R中是个全能选手、无所不“包”；list还是金箍棒，别看它丫的开始长度（<code class="language-r">length()</code>）短，之后想变长就变长，多长都行。</p>
+
+<p>这暗示list可以这样用：在循环开始时，我们不知道会产生多少个元素，可以事先规定输出结果为<code class="language-r">a &lt;- list()</code>，之后赋值；甚至可以按照名字赋值，比如<code class="language-r">a$add &lt;- exprs</code>。</p>
+
+<ul>
+  <li>创建</li>
+</ul>
+
+<blockquote>
+  <p>如果要创建一个长度为n的、每个元素都为<code class="language-r">NULL</code>的list，可以使用<code class="language-r">vector("list", n)</code>。</p>
+</blockquote>
+
+<ul>
+  <li>插入</li>
+</ul>
+
+<blockquote>
+  <p>如果要在list中插入元素，可以使用<code class="language-r">append(x, values, after = length(x))</code>函数。<code class="language-r">append()</code>函数原本是对vector设计的，但是list也能使用。</p>
+</blockquote>
+
+<ul>
+  <li>取值</li>
+</ul>
+
+<blockquote>
+  <p>对list进行取值，不能直接使用<code class="language-r">TRUE</code>/<code class="language-r">FALSE</code>向量，而是使用下标进行，可以使用<code class="language-r">which()</code>函数转换。</p>
+</blockquote>
+
+<h2 id="section">4. 创建“空”值很淡定，要么空来要么0</h2>
+
+<p>如果要创建一个空的对象（对象的长度是0）很容易，比如：</p>
+
+<ul>
+  <li>创建一个长度为0的数值向量</li>
+</ul>
+
+<blockquote>
+  <p><code class="language-r">numeric()</code>或者<code class="language-r">numeric(0)</code></p>
+
+  <p><code class="language-r">character()</code>或者<code class="language-r">character(0)</code></p>
+
+  <p><code class="language-r">integer()</code>或者<code class="language-r">integer(0)</code>可以起到同样的效果</p>
+
+  <p><code class="language-r">factor()</code>创建一个长度为0的因子</p>
+
+  <p><span style="color: blue">注意</span>：<code class="language-r">factor(0)</code>的长度是1</p>
+</blockquote>
+
+<ul>
+  <li>创建一个长度为0的矩阵</li>
+</ul>
+
+<blockquote>
+  <p><code>matrix(0, 0, 0)</code></p>
+
+  <p><span style="color: blue">注意</span>：<code class="language-r">array()</code>创建的对象长度为1。</p>
+</blockquote>
+
+<ul>
+  <li>创建一个长度为0的列表</li>
+</ul>
+
+<blockquote>
+  <p><code class="language-r">list()</code></p>
+</blockquote>
+
+<ul>
+  <li>创建一个长度为0的data.frame</li>
+</ul>
+
+<blockquote>
+  <p><code class="language-r">data.frame()</code></p>
+</blockquote>
+
+<h2 id="dataframe">5. 对象转换要小心，data.frame是陷阱</h2>
+
+<p>R中一些对象转换要格外小心，特别是牵扯到data.frame类型。以下是几个常见的陷阱：</p>
+
+<h3 id="section-1">5.1 “字符型因子”转换为“数值型向量”</h3>
+
+<p>需要先转成字符串向量过渡一下：</p>
+
+<pre><code class="language-r">as.numeric(as.character(MyFactor))
+</code></pre>
+
+<h3 id="dataframe-1">5.2 字符和数值因子混搭data.frame</h3>
+
+<p>每一列是按照字符型因子保存。留意表面上是数值的一列，它非常危险，特别是排序。一个例子：</p>
+
+<pre><code class="language-r">&gt; a1 &lt;- as.factor(as.character(a1))
+&gt; a1
+ [1] 5  6  7  8  9  10 11 12 13 14 15
+Levels: 10 11 12 13 14 15 5 6 7 8 9
+&gt; sort(a1)
+ [1] 10 11 12 13 14 15 5  6  7  8  9 
+Levels: 10 11 12 13 14 15 5 6 7 8 9
+</code></pre>
+
+<h2 id="elselanguage-riflanguage-rswitchlanguage-r">6. 多个<code class="language-r">else</code>/<code class="language-r">if</code>别担心，<code class="language-r">switch()</code>函数来帮助</h2>
+
+<p>如果需要在不同情况下，对变量进行不同的处理，自然会联想到使用多个多个<code class="language-r">else</code>/<code class="language-r">if</code>。如果<code class="language-r">else</code>/<code class="language-r">if</code>是用来处理的简单的赋值，可以使用<code class="language-r">switch(EXPR, ...)</code>函数。其中，<code class="language-r">EXPR</code>是一个表达式，生成一个数字或者字符串；接下来，使用生成的数字和字符串匹配<code class="language-r">...</code>中的内容。</p>
+
+<p>所以，我们很容易想到，如果<code class="language-r">EXPR</code>生成的数字，则对应匹配<code class="language-r">...</code>的第几个元素，此时<code class="language-r">...</code>中的变量可以没有名字；如果是字符串，就会严格地匹配<code class="language-r">...</code>中相同名字的变量；如果<code class="language-r">EXPR</code>生成是字符串，<code class="language-r">...</code>中没有相匹配的变量名，则返回<code class="language-r">NULL</code>；如果<code class="language-r">...</code>中有一个“无名”变量（即没有对变量赋值），上一种情况下返回该无名变量，相当于最后一个<code class="language-r">else</code>。比如：</p>
+
+<pre><code class="language-r">&gt; switch(1, a = 3, b = 2)
+[1] 3
+&gt; switch(2, aa = 'red', bb = 'blue', cc = 'yellow', 'No value')
+[1] "blue"
+&gt; switch('aa', aa = 'red', bb = 'blue', cc = 'yellow', 'No value')
+[1] "red"
+&gt; switch('dd', aa = 'red', bb = 'blue', cc = 'yellow', 'No value')
+[1] "No value"
+&gt; switch('bb', aa = 'red', bb = , cc = 'yellow')
+[1] "yellow"
+&gt; switch(2, aa = 'red', bb = , cc = 'yellow')
+Error: empty alternative in numeric switch
+&gt; switch('dd', aa = 'red', bb = , cc = 'yellow', 'no', 'value')
+Error: duplicate switch defaults: '"no"' and '"value"'
+</code></pre>
+
+<p><span style="color: blue">注意</span>：</p>
+
+<ul>
+  <li>
+    <p>如果<code class="language-r">EXPR</code>是数字，范围不能超过<code class="language-r">...</code>的长度。同时，虽然此时<code class="language-r">...</code>变量可以名字，但是有名字的变量必须有数值，不能学习以上例子中倒数第二种情况，否则会报错。</p>
+  </li>
+  <li>
+    <p>如果<code class="language-r">EXPR</code>是字符串，那么会进行自动继承，即前者继承后者。</p>
+  </li>
+  <li>
+    <p>虽然<code class="language-r">EXPR</code>是字符串情况可以自动继承，甚至继承一个无名变量，但是无名变量只能有一个。</p>
+  </li>
+  <li>
+    <p>最后将<code>EXPR</code>明确写出，为了R的版本兼容。</p>
+  </li>
+</ul>
+
+<p><strong>总结</strong>：
+<code class="language-r">swich()</code>函数是一个好玩却又危险的函数，一个没有歧义的使用方法是：<code class="language-r">EXPR</code>明确写出，且返回字符串，<code class="language-r">...</code>中每一个变量都有确切的值，无名变量只有一个，比如：<code class="language-r">switch(EXPR='dd', aa = 'red', bb = 'blue', cc = 'yellow', 'no value')</code>。</p>
+
+<h2 id="rdroplanguage-r">7. R取值有技巧，<code class="language-r">drop</code>选项巧帮助</h2>
+
+<p>当对象是一个矩阵的时候，通常我们要获取其中一些元素。如果取出的正好是一行或者一列，此时，R会返回给我们一个向量，而不是矩阵。这会带来很大的麻烦，因为我们必须判断返回对象是向量，还是矩阵，才能继续下面的操作。此时，<code class="language-r">drop</code>可以帮助我们，如果设置<code class="language-r">drop = FALSE</code>，就会保持原样返回结果。</p>
+
+<pre><code class="language-r">&gt; b &lt;- matrix(1:6, nrow = 2, ncol = 3)
+&gt; b
+     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6
+&gt; b[, 3]
+[1] 5 6
+&gt; b[, 3, drop = FALSE]
+     [,1]
+[1,]    5
+[2,]    6
+&gt; b[1, , drop = FALSE]
+     [,1] [,2] [,3]
+[1,]    1    3    5
+</code></pre>
+
+<h2 id="language-r--language-r-">8. <code class="language-r">|</code> 和 <code class="language-r">||</code> 有区别，返回向量与单值</h2>
+
+<p>R中的逻辑运算符号有两组，<code class="language-r">|</code>或者<code class="language-r">||</code>（<code class="language-r">&amp;</code>或者<code class="language-r">&amp;&amp;</code>），看起来觉得有些多余。其实，这是为了R独特的“<strong>向量运算</strong>”考虑的。<code class="language-r">|</code>或者<code class="language-r">&amp;</code>首先考虑返回一个向量，而<code class="language-r">||</code>和<code class="language-r">&amp;&amp;</code>则只返回最后一个值。比如：</p>
+
+<pre><code class="language-r">&gt; c(FALSE, TRUE) | c(FALSE, FALSE)
+[1] FALSE  TRUE
+&gt; c(FALSE, TRUE) || c(FALSE, FALSE)
+[1] FALSE
+</code></pre>
+
+<h2 id="section-2">9. 递归</h2>
+
+<p>R在解释代码时，不支持尾递归优化，所以在R中不要写递归。</p>
+
+<h2 id="r0language-rnalanguage-r">10. R图例空元素，<code class="language-r">0</code>和<code class="language-r">NA</code>来代替</h2>
+
+<p>在R绘图的图例中，通常需要“线条”和“点”分开单独表示，这里用到<code class="language-r">0</code>和<code class="language-r">NA</code>的小技巧。如果在<code class="language-r">legend()</code>函数函数中，<code class="language-r">pch = NA</code>表示没有点，<code class="language-r">lty=0</code>表示没有线条。</p>
+
+<h2 id="evallanguage-rparselanguage-r">11. 字符串转代码很容易，<code class="language-r">eval()</code>/<code class="language-r">parse()</code>很随意</h2>
+
+<p>如果我们有一个字符字符串，现在需要将其转为可执行代码。方法如下：</p>
+
+<pre><code class="language-r">&gt; test1 = '1:3'
+&gt; test1
+[1] "1:3"
+&gt; eval(parse(text = test1))
+[1] 1 2 3
+</code></pre>
+
+<h2 id="factorclanguage-r">12. factor如需换标签，<code class="language-r">c()</code>函数有妙招</h2>
+
+<p>如果我们需要对一个factor的标签（label）进行转换，并且返回一个向量，有两种方法可以使用:</p>
+
+<ul>
+  <li>第一种方法，使用<code>c()</code>函数</li>
+</ul>
+
+<pre><code>&gt; tmp1 &lt;- factor(rep(1:3, each = 3))
+&gt; tmp1
+[1] 1 1 1 2 2 2 3 3 3
+Levels: 1 2 3
+&gt; c(letters[1:3])[tmp1]
+[1] "a" "a" "a" "b" "b" "b" "c" "c" "c"
+</code></pre>
+
+<ul>
+  <li>第二种方法，先转换标签，之后再使用<code class="language-r">as.character()</code>函数。</li>
+</ul>
+
+<pre><code class="language-r">&gt; tmp2 &lt;- factor(tmp1, labels = letters[1:3])
+&gt; tmp2
+[1] a a a b b b c c c
+Levels: a b c
+&gt; as.character(tmp2)
+[1] "a" "a" "a" "b" "b" "b" "c" "c" "c"
+</code></pre>
+
+<h2 id="section-3">13. 操作符也是函数，使用起来有妙招</h2>
+
+<pre><code class="language-r">&gt; "+"(1, 2)
+[1] 3
+&gt; '&gt;'(1, 2)
+[1] FALSE
+&gt; tmp1 = list()
+&gt; for(i in 1:10)
+  tmp1[[i]] = i:(i+1)
+&gt; tmp1
+[[1]]
+[1] 1 2
+
+[[2]]
+[1] 2 3
+
+[[3]]
+[1] 3 4
+
+[[4]]
+[1] 4 5
+
+[[5]]
+[1] 5 6
+
+[[6]]
+[1] 6 7
+
+[[7]]
+[1] 7 8
+
+[[8]]
+[1] 8 9
+
+[[9]]
+[1]  9 10
+
+[[10]]
+[1] 10 11
+&gt; sapply(tmp1, '[[', 2)
+ [1]  2  3  4  5  6  7  8  9 10 11
+</code></pre>
+
+<p>最后一个例子中，使用了<code class="language-r">[[</code>，巧妙地取得了第二个元素。</p>
+
+<h2 id="tablequotelanguage-r">14. 输出table有引号，<code class="language-r">quote</code>参数来帮忙</h2>
+
+<p>在使用<code class="language-r">write.table()</code>命令输入一个data.frame对象时候，输入文件会加引号。这时，设定<code class="language-r">quote</code>参数，<code class="language-r">write.table(..., quote = FALSE)</code>。</p>
+
+<h2 id="identicallanguage-r">15. 比较两个元素<code class="language-r">identical()</code></h2>
+
+<h2 id="listdocalllanguage-r">16. 压缩list用<code class="language-r">do.call()</code></h2>
+
+<pre><code class="language-r">do.call(rbind, list)
+</code></pre>
+
+<h2 id="splitlanguage-r">17. 分割数据使用<code class="language-r">split()</code></h2>
+
+<pre><code class="language-r">&gt; test1 &lt;- rep(c('a', 'b'), c(3, 4))
+&gt; test1
+[1] "a" "a" "a" "b" "b" "b" "b"
+&gt; split(test1, factor(test1))
+$a
+[1] "a" "a" "a"
+
+$b
+[1] "b" "b" "b" "b"
+</code></pre>
+
+<h2 id="txtsinklanguage-r">18. 输出txt文档找<code class="language-r">sink()</code></h2>
+
+<p><code>sink()</code>可以将R的对象输出到外部文档中，第一遍可能包括了系统信息，需要输出第二遍。一个典型的流程如下：</p>
+
+<pre><code class="language-r">&gt; sink(filename)
+&gt; test1
+&gt; sink()
+</code></pre>
+
+<h2 id="rfor">19. R中循环for妙用</h2>
+
+<p>R中for循环中，需要指定一个计数器，比如i in 1:10之类。R可以直接将一个向量用于计数，返回向量中对应的值，比如:</p>
+
+<pre><code class="language-r">&gt; tmp1 &lt;- letters[1:10]
+for (i in tmp1) {
+  print(i)
+}
+&gt; [1] "a"
+[1] "b"
+[1] "c"
+[1] "d"
+[1] "e"
+[1] "f"
+[1] "g"
+[1] "h"
+[1] "i"
+[1] "j"
+</code></pre>
+
+<h2 id="reducelanguage-r">20. 多个序列取交集并集用<code class="language-r">Reduce()</code></h2>
+
+<pre><code class="language-r">&gt; Reduce(union, list(letters[1:3], letters[1:4], letters[1:5]))
+[1] "a" "b" "c" "d" "e"
+</code></pre>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li>
+    <p><a href="https://stat.ethz.ch/pipermail/r-help/attachments/20030506/ba1b4515/attachment.pl">R中的if/else</a></p>
+  </li>
+  <li>
+    <p>建立长度为0的对象：<a href="http://cos.name/cn/topic/105751">1</a>, <a href="http://cran.r-project.org/doc/contrib/Genolini-S4tutorialV0-5en.pdf">2</a></p>
+  </li>
+  <li>
+    <p>R中其他令人迷惑的地方：<a href="http://ygc.name/2012/07/10/tricky-things-in-r/">1</a>，<a href="http://cos.name/cn/topic/17000#post-17000">2</a></p>
+  </li>
+</ul>
+
+<h3 id="section-4">更新记录</h3>
+
+<p>2014年9月29日</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2012-05-02T22:17:02-04:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2012</span></span> <span class='time'>10:17 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/r/'>r</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.github.io/blog/2012/05/02/r-tricks/" data-via="" data-counturl="http://yulongniu.github.io/blog/2012/05/02/r-tricks/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/08/12/emacs-ess-tips/" title="Previous Post: Emacs和ESS的使用技巧">&laquo; Emacs和ESS的使用技巧</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/05/29/r-package-and-roxygen2/" title="Next Post: R包制作和roxygen2使用说明">R包制作和roxygen2使用说明 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/12/01/emacs-config-c/">Emacs配置C语言编程环境</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/28/next-seqence-tools/">二代测序中的常用工具介绍</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/25/short-sequence-alignment/">二代测序中的短序列比对</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/22/octopress-install/">Octopress安装和使用</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/04/my-first-post/">My First Post</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

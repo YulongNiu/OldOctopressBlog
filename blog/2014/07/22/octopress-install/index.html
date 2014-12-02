@@ -1,0 +1,377 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Octopress安装和使用 - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="安装和使用Octopress的一些注意事项，详细的内容可以参考网址。 1. 安装 请参考官网，其他的博客介绍的安装已经失效或者错误。 常用命令: # 预览，可自动更新。使用Ctrl+c终止。
+$ rake preview 2. Ruby版本调整 因为Octopress需要使用Ruby旧版本， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://yulongniu.github.io/blog/2014/07/22/octopress-install">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:yulongniu.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Octopress安装和使用</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-07-22T13:45:46-04:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2014</span></span> <span class='time'>1:45 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>安装和使用Octopress的一些注意事项，详细的内容可以<a href="#Ref">参考网址</a>。</p>
+
+<h2 id="section">1. 安装</h2>
+
+<p>请参考<a href="http://octopress.org/">官网</a>，其他的博客介绍的安装已经失效或者错误。</p>
+
+<p>常用命令:</p>
+
+<pre><code class="language-bash"># 预览，可自动更新。使用Ctrl+c终止。
+$ rake preview
+</code></pre>
+
+<h2 id="ruby">2. Ruby版本调整</h2>
+
+<p>因为Octopress需要使用Ruby旧版本，推荐使用<a href="https://rvm.io/">RVM</a>安装Ruby 1.9.3版本。在安转过程中可能会出现<code>"gpg: Can't check signature: public key not found"</code>的错误提示，需要执行一下类似命名，添加公用匙。</p>
+
+<pre><code class="language-bash">$ gpg2 --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
+</code></pre>
+
+<p>使用以下操作设定ruby版本：</p>
+
+<pre><code class="language-bash">$ source ~/.rvm/scripts/rvm
+$ rvm use 1.9.3
+</code></pre>
+<!--more-->
+
+<h2 id="section-1">3. 预览错误</h2>
+
+<p>如果在预览博文时出现<code class="language-bash">TCPServer Error: Address already in use - bind(2)</code>的错误，表示端口（Octopress默认4000）被占，解决办法:</p>
+
+<pre><code class="language-bash"># 获取占据4000端口程序的PID
+$ lsof -wni tcp:4000
+$ kill -9 PID
+</code></pre>
+
+<h2 id="section-2">4. 更新博文</h2>
+
+<p>博文放置在<code class="language-bash">source/_posts</code>目录下。</p>
+
+<pre><code class="language-bash">$ rake new_post["new post"]
+$ rake generate
+$ git add .
+$ git commit -m "my comment" 
+$ git push origin source
+$ rake deploy
+</code></pre>
+<p>如果需要在首页显示部分博文，在需要隔断的地方（博文markdown文件）加入：</p>
+
+<pre><code class="language-html">&lt;!--more--&gt;
+</code></pre>
+
+<h2 id="section-3">5. 使用主题</h2>
+
+<p>当前博客使用的是<a href="http://kaworu.github.io/octopress/">octostrap</a>主题。</p>
+
+<h2 id="section-4">6. 修改标签图标记</h2>
+
+<p>可以使用<a href="http://converticon.com/">在线转换工具</a>，将png格式图片转换为ico格式（比如32*32）。之后将ico图片直接放置在<code class="language-bash">souce</code>文件夹下。最后，修改对应<code class="language-bash">source/_includes/head.html</code>文件即可。</p>
+
+<h2 id="section-5">7. 404公益</h2>
+
+<p>在<code class="language-bash">source</code>文件夹下添加<em>404.markdown</em>文件，之后写入</p>
+
+<pre><code class="language-javascript">---
+layout: page
+title: "404 Error"
+date: 2014-07-22
+comments: false
+sharing: false
+footer: false
+---
+
+&lt;script type="text/javascript" src="http://www.qq.com/404/search_children.js?edition=small" charset="utf-8"&gt;&lt;/script&gt;
+</code></pre>
+
+<h2 id="section-6">8. 私密博文</h2>
+
+<p>Octopress提供了隐藏博文的功能，即使文章已经推送到了github，也可以不在博客主页显示。具体方法是在每篇markdown文件头部添加：</p>
+
+<pre><code class="language-ruby">published: false
+</code></pre>
+
+<p>如果需要公开发表，将其删除或者改为：</p>
+
+<pre><code class="language-ruby">published: true
+</code></pre>
+
+<h2 id="kramdown">9. Kramdown语法小技巧</h2>
+
+<ul>
+  <li>
+    <p>代码片段高亮使用三对`，行内引用代码使用一对`</p>
+  </li>
+  <li>
+    <p>四个空格或者个一个Tab可以生成一个文本块</p>
+  </li>
+</ul>
+
+<h2 id="section-7">10. 链接在新的选择卡中打开</h2>
+
+<p>在<code class="language-bash">source/_includes/custom/head.html</code>中添加：</p>
+
+<pre><code class="language-html">&lt;!-- link open with new tab  --&gt;
+&lt;script&gt;
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+  $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+&lt;/script&gt;
+
+</code></pre>
+
+<h2 id="section-8">11. 修改分页数</h2>
+
+<p>修改<code class="language-bash">_config.yml</code>文件</p>
+
+<pre><code class="language-bash"># 每页最多展示的博文数目
+paginate: 5
+
+# 分页后博文地址
+paginate_path: "posts/:num"
+</code></pre>
+
+<h2 id="section-9">12. 添加图片</h2>
+
+<p>将需要添加的图片移动到目录<code class="language-bash">source/images/</code>，之后在正文中添加：</p>
+
+<pre><code class="language-bash">&lt;img class="[class names]" src="/path/to/image" title="[width] [height] [title text [alt text]]" &gt;
+
+# 例子
+&lt;img class="left" src="/images/testimg.png" width="350" height="350" title="image" alt="images"&gt;
+&lt;img class="right" src="http://placekitten.com/300/500" width="150" height="250" title="Place Kitten #3" &gt;
+</code></pre>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li>
+    <p>Octopress安装和域名设置：<a href="http://tchen.me/posts/2012-12-16-first-blog.html">1</a>, <a href="http://beyondvincent.com/blog/2013/08/03/108-creating-a-github-blog-using-octopress/">2</a></p>
+  </li>
+  <li>
+    <p>Octopress其他配制：<a href="http://812lcl.com/blog/2013/10/26/octopressce-bian-lan-ji-ping-lun-xi-tong-ding-zhi/">1</a>, <a href="http://cn.soulmachine.me/blog/20130402/">2</a></p>
+  </li>
+  <li>
+    <p>添加多说：<a href="http://havee.me/internet/2013-02/add-duoshuo-commemt-system-into-octopress.html">1</a>, <a href="http://kaiimeng.cn/my-first-octopress-blog/">2</a>, <a href="http://cn.soulmachine.me/blog/20130402/">3</a></p>
+  </li>
+  <li>
+    <p>添加Mathjax支持：<a href="http://yanping.me/cn/blog/2012/03/10/octopress-with-latex/">1</a>, <a href="http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/">2</a>, <a href="http://yanping.me/cn/blog/2012/03/10/octopress-with-latex/">Mathjax彩色公式</a></p>
+  </li>
+  <li>
+    <p><a href="http://kramdown.gettalong.org/syntax.html">Kramdown语法</a></p>
+  </li>
+  <li>
+    <p><a href="http://kramdown.gettalong.org/quickref.html">Kramdown演示</a></p>
+  </li>
+  <li>
+    <p><a href="http://yibao.buertec.net/blog/2013/12/03/set-up-favicon-dot-png-slash-favicon-dot-ico-on-octopress/">修改标签图标</a></p>
+  </li>
+  <li>
+    <p><a href="http://pygments.org/docs/lexers/">Octopress highlight language list</a></p>
+  </li>
+</ul>
+
+<h3 id="section-10">更新记录</h3>
+
+<p>2014年7月25日</p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2014-07-22T13:45:46-04:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2014</span></span> <span class='time'>1:45 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ppr/'>ppr</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.github.io/blog/2014/07/22/octopress-install/" data-via="" data-counturl="http://yulongniu.github.io/blog/2014/07/22/octopress-install/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/07/04/my-first-post/" title="Previous Post: My first post">&laquo; My first post</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/07/25/short-sequence-alignment/" title="Next Post: 二代测序中的短序列比对">二代测序中的短序列比对 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/12/01/emacs-config-c/">Emacs配置C语言编程环境</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/28/next-seqence-tools/">二代测序中的常用工具介绍</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/25/short-sequence-alignment/">二代测序中的短序列比对</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/22/octopress-install/">Octopress安装和使用</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/04/my-first-post/">My First Post</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

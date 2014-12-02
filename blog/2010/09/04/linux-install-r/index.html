@@ -1,0 +1,448 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Linux安装R语言包 - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="1. R包介绍 R的包（package）通常有两种: 二进制代码包（Binary package）：这种包属于即得即用型（ready-to-use），但是依赖与平台，比如Windows和Linux平台下不同。 源代码包（Source package）: 此类包可以跨平台使用， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://yulongniu.github.io/blog/2010/09/04/linux-install-r">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:yulongniu.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Linux安装R语言包</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2010-09-04T10:21:38-04:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2010</span></span> <span class='time'>10:21 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2 id="r">1. R包介绍</h2>
+
+<p>R的包（package）通常有两种:</p>
+
+<ul>
+  <li>
+    <p>二进制代码包（Binary package）：这种包属于即得即用型（ready-to-use），但是依赖与平台，比如Windows和Linux平台下不同。</p>
+  </li>
+  <li>
+    <p>源代码包（Source package）: 此类包可以跨平台使用，但用之前需要处理或者编译（compiled）。同时，源代码包可以查看到程序源代码，便于查找、修改和引用。</p>
+  </li>
+</ul>
+
+<h2 id="r-1">2. R包安装</h2>
+
+<h3 id="section">2.1 源代码安装</h3>
+
+<pre><code class="language-bash"># R CMD INSTALL /.../myPackage.tar.gz
+</code></pre>
+
+<p>使用此方法，需要解决包依赖问题，即安装此包所依赖的包，安装过程有提示。</p>
+
+<!--more-->
+
+<h3 id="installpackageslanguage-bash">2.2 内置<code class="language-bash">install.packages()</code>函数安装</h3>
+
+<p>使用<code>install.packages()</code>安装，比较简便，联网即可装，装了就可用。使用这种方法安装包时，R会自动安装依赖的包。如果出现安装报错，可能的原因是缺少依赖的系统文件。同时，需要注意的是，一些R包只能在特定的平台上使用。比如<a href="http://www.bioconductor.org/packages/release/bioc/html/Rsubread.html">Rsubread</a>不能在Windows操作系统下使用。</p>
+
+<pre><code class="language-r">install.packages('myPackage')
+</code></pre>
+
+<p>同时，可以使用<code class="language-bash">install.packages()</code>安装本地下载的包，尤其适用于在服务器上安装包</p>
+
+<pre><code class="language-r">install.packages(
+  c('XML_0.99-5.tar.gz', '../../Interfaces/Perl/RSPerl_0.8-0.tar.gz'),
+  repos = NULL,
+  configure.args = c(XML = '--with-xml-config=xml-config', RSPerl = '--with-modules= "IO Fcntl"')) 
+</code></pre>
+
+<h2 id="r-2">3. R包版本查询和更新</h2>
+
+<p>R和R包版本查询</p>
+
+<pre><code class="language-r"># 在启动的R中执行
+R.version
+
+# R包版本
+packageVersion('myPackage')
+
+# 查询当前R的详细信息，包括R版本、R包版本、命名空间等
+sessionInfo()
+</code></pre>
+
+<p><a href="http://cran.r-project.org/">CRAN</a>包更新</p>
+
+<pre><code class="language-r"># 可以定期执行以下
+update.packages()  
+</code></pre>
+
+<p><a href="http://www.bioconductor.org/">Bioconductor</a>的安装和更新方法</p>
+
+<pre><code class="language-r">source('http://bioconductor.org/biocLite.R')
+biocLite('myPackage')
+</code></pre>
+
+<h2 id="r-3">4. 卸载R包</h2>
+
+<pre><code class="language-r">remove.packages('myPackage')
+</code></pre>
+
+<h2 id="r-4">5. R包相关函数</h2>
+
+<pre><code class="language-r"># 查看包的安装目录
+.libPaths()
+
+# 查看已经安装的包目录
+library()
+
+# 查看已安装包信息
+installed.packages()
+
+# 载入myPackage包
+library(myPackage)
+require(myPackage)
+
+# 查看当前载入的包
+search()
+
+# 查看启动R时自动载入的包。
+getOption('defaultPackages')
+</code></pre>
+
+<h2 id="section-1">6. 帮助信息查询</h2>
+
+<h3 id="rr">6.1 R和R包帮助信息</h3>
+
+<pre><code class="language-r"># 查询R HOME安装地址
+Sys.getenv('R_HOME')
+
+# 查询用户HOME地址
+Sys.getenv('HOME')
+
+# 查看某个“函数”或者“方法”的详细内容
+?myFunction
+?myMethod
+
+# 关键词查询
+??myKeyword
+
+# 查看已经安装包的详细HTML文档
+help.start()
+
+# 搜索R网站上的“helpinfor”相关信息
+RSiteSearch('helpinputinfor')
+
+# 查看“myPackage”的帮助
+help(package = 'myPackage')
+
+# 有的包，特别是bioconductor的包有vignette，用函数查看
+vignette('myPackage')
+
+# 这个函数也可以查看vignette，更好用一些
+openVignette('myPackage')
+
+# 展示一些包中demostration
+demo('package')
+</code></pre>
+
+<h3 id="section-2">6.2 查询对象信息</h3>
+
+<pre><code class="language-r"># 查看"myPackage"中的所有对象
+ls('package:myPackage')
+
+# 查看函数的参数
+args(myFunction)
+
+# 自动运行该函数帮助文档中的例子
+example(myFunction)
+
+# 查看某个对象的模式（mode）
+mode(myObject)
+
+# 查看某个对象的属性（attribute）
+attributes(myObject)
+
+# 快速查看某个对象的信息
+# 尤其适用于对象有很多行/列
+str(myObject)
+
+# 查看某个对象的类
+class(myObject)
+
+# 查询某个中某个类的帮助信息，举例如下
+class?graph::graph
+
+# 查看某个S3泛型函数中所有的方法或者一个类中所有的方法（S3：S version 3）
+methods('myMethods')
+
+# 查看S4类的方法
+showMethods(class = 'myClass')
+
+# 查看某个类或者包的具体内容
+getClass('class/package')
+
+# 查看某个类的slot
+getSlots('class')
+
+# 查看某个对象的slot
+slotNames(myObject)
+
+# 访问对象的slot值使用@，可以连续用
+Myobject@slotNames
+</code></pre>
+
+<h2 id="section-3">7. 查看函数源代码</h2>
+
+<h3 id="section-4">7.1 普通函数源代码</h3>
+
+<p>直接输入函数名称，不加后面的括号。比如:</p>
+
+<pre><code class="language-r">&gt; fivenum
+</code></pre>
+
+<h3 id="s3s4">7.2 查询S3/S4函数源代码</h3>
+
+<p>因为如果使用了R的S3和S4方法，可能一个函数名称对应的多个不同的方法（对应不同的对象）。这时，采用的策略是：</p>
+
+<ol>
+  <li>
+    <p>查询函数对应的方法</p>
+  </li>
+  <li>
+    <p>查询具体方法对应的源代码</p>
+  </li>
+</ol>
+
+<p>比如<code class="language-r">t.test</code>的源代码</p>
+
+<pre><code class="language-r">&gt; t.test
+function (x, ...) 
+UseMethod("t.test")
+&lt;bytecode: 0x244a248&gt;
+&lt;environment: namespace:stats&gt;
+
+# 查询S3对象的方法
+&gt; methods('t.test')
+[1] t.test.default* t.test.formula*
+
+   Non-visible functions are asterisked
+   
+
+# 查看源代码，三种方法
+&gt; getAnywhere('t.test.default')
+&gt; getS3method('t.test','default')
+&gt; stats:::t.test.default
+</code></pre>
+
+<p>另外一个例子，查询<span style="color: blue">affy</span>包中<code class="language-r">pm()</code>的源代码：</p>
+
+<pre><code class="language-r">&gt; library(affy)
+&gt; pm
+standardGeneric for "pm" defined from package "affy"
+
+function (object, ...) 
+standardGeneric("pm")
+&lt;environment: 0x4496f10&gt;
+Methods may be defined for arguments: object
+Use  showMethods("pm")  for currently available ones.
+
+&gt; findMethods('pm')
+</code></pre>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li>
+    <p><a href="http://yanping.me/cn/blog/2012/01/09/customizing-the-startup-environment/">R包安装</a></p>
+  </li>
+  <li>
+    <p>《R语言编程技术》(The Art of R Programming)</p>
+  </li>
+</ul>
+
+<h3 id="section-5">更新记录</h3>
+
+<p>2014年11月25日</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2010-09-04T10:21:38-04:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2010</span></span> <span class='time'>10:21 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/r/'>r</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.github.io/blog/2010/09/04/linux-install-r/" data-via="" data-counturl="http://yulongniu.github.io/blog/2010/09/04/linux-install-r/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/blog/2010/11/08/linux-command/" title="Next Post: Linux常用命令集锦">Linux常用命令集锦 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/12/01/emacs-config-c/">Emacs配置C语言编程环境</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/28/next-seqence-tools/">二代测序中的常用工具介绍</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/25/short-sequence-alignment/">二代测序中的短序列比对</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/22/octopress-install/">Octopress安装和使用</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/04/my-first-post/">My First Post</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

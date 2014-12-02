@@ -1,0 +1,4427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[My Octopress Blog]]></title>
+  <link href="http://yulongniu.github.io/atom.xml" rel="self"/>
+  <link href="http://yulongniu.github.io/"/>
+  <updated>2014-12-02T01:49:06-05:00</updated>
+  <id>http://yulongniu.github.io/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Emacs配置C语言编程环境]]></title>
+    <link href="http://yulongniu.github.io/blog/2014/12/01/emacs-config-c/"/>
+    <updated>2014-12-01T17:36:41-05:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/12/01/emacs-config-c</id>
+    <content type="html"><![CDATA[<p>有很多优秀的C语言IDE用来实现高效的编程，比如<a href="https://www.jetbrains.com/clion/">CLion</a>。目前，CLion还在处于公开测试阶段，可以下载试用。本文介绍在Emacs下配置C/C++编程环境。</p>
+
+<!--more-->
+
+<h2 id="section">1. 安装和基本配置</h2>
+
+<ol>
+  <li>
+    <p>安装Emacs的helm、helm-swoop、helm-gtags包。</p>
+  </li>
+  <li>
+    <p>Emacs配置。将</p>
+  </li>
+</ol>
+
+<p><a id="c-mode-config">Emacs configure for C/C++</a></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Emacs configure </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+<span class="line-number">69</span>
+<span class="line-number">70</span>
+<span class="line-number">71</span>
+<span class="line-number">72</span>
+<span class="line-number">73</span>
+<span class="line-number">74</span>
+<span class="line-number">75</span>
+<span class="line-number">76</span>
+<span class="line-number">77</span>
+<span class="line-number">78</span>
+<span class="line-number">79</span>
+<span class="line-number">80</span>
+<span class="line-number">81</span>
+<span class="line-number">82</span>
+<span class="line-number">83</span>
+<span class="line-number">84</span>
+<span class="line-number">85</span>
+<span class="line-number">86</span>
+<span class="line-number">87</span>
+<span class="line-number">88</span>
+<span class="line-number">89</span>
+<span class="line-number">90</span>
+<span class="line-number">91</span>
+<span class="line-number">92</span>
+<span class="line-number">93</span>
+<span class="line-number">94</span>
+<span class="line-number">95</span>
+<span class="line-number">96</span>
+<span class="line-number">97</span>
+<span class="line-number">98</span>
+<span class="line-number">99</span>
+<span class="line-number">100</span>
+<span class="line-number">101</span>
+<span class="line-number">102</span>
+<span class="line-number">103</span>
+<span class="line-number">104</span>
+<span class="line-number">105</span>
+<span class="line-number">106</span>
+<span class="line-number">107</span>
+<span class="line-number">108</span>
+<span class="line-number">109</span>
+<span class="line-number">110</span>
+<span class="line-number">111</span>
+<span class="line-number">112</span>
+<span class="line-number">113</span>
+<span class="line-number">114</span>
+<span class="line-number">115</span>
+<span class="line-number">116</span>
+<span class="line-number">117</span>
+<span class="line-number">118</span>
+<span class="line-number">119</span>
+<span class="line-number">120</span>
+<span class="line-number">121</span>
+<span class="line-number">122</span>
+<span class="line-number">123</span>
+<span class="line-number">124</span>
+<span class="line-number">125</span>
+</pre></td><td class="code"><pre><code class="lisp"><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="c1">;set up helm</span>
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;helm-config</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;helm-grep</span><span class="p">)</span>
+</span><span class="line"><span class="c1">;; The default &quot;C-x c&quot; is quite close to &quot;C-x C-c&quot;, which quits Emacs.</span>
+</span><span class="line"><span class="c1">;; Changed to &quot;C-c h&quot;. Note: We must set &quot;C-c h&quot; globally, because we</span>
+</span><span class="line"><span class="c1">;; cannot change `helm-command-prefix-key&#39; once `helm-config&#39; is loaded.</span>
+</span><span class="line"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c h&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-command-prefix</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">global-unset-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-x c&quot;</span><span class="p">))</span>
+</span><span class="line">
+</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;&lt;tab&gt;&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-execute-persistent-action</span><span class="p">)</span> <span class="c1">; rebihnd tab to do persistent action</span>
+</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-i&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-execute-persistent-action</span><span class="p">)</span> <span class="c1">; make TAB works in terminal</span>
+</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-z&quot;</span><span class="p">)</span>  <span class="ss">&#39;helm-select-action</span><span class="p">)</span> <span class="c1">; list actions using C-z</span>
+</span><span class="line">
+</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-grep-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;&lt;return&gt;&quot;</span><span class="p">)</span>  <span class="ss">&#39;helm-grep-mode-jump-other-window</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-grep-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;n&quot;</span><span class="p">)</span>  <span class="ss">&#39;helm-grep-mode-jump-other-window-forward</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-grep-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;p&quot;</span><span class="p">)</span>  <span class="ss">&#39;helm-grep-mode-jump-other-window-backward</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">executable-find</span> <span class="s">&quot;curl&quot;</span><span class="p">)</span>
+</span><span class="line">  <span class="p">(</span><span class="k">setq</span> <span class="nv">helm-google-suggest-use-curl-p</span> <span class="no">t</span><span class="p">))</span>
+</span><span class="line">
+</span><span class="line"><span class="p">(</span><span class="k">setq</span>
+</span><span class="line"> <span class="nv">helm-scroll-amount</span> <span class="mi">4</span> <span class="c1">; scroll 4 lines other window using M-&lt;next&gt;/M-&lt;prior&gt;</span>
+</span><span class="line"> <span class="nv">helm-quick-update</span> <span class="no">t</span> <span class="c1">; do not display invisible candidates</span>
+</span><span class="line"> <span class="nv">helm-ff-search-library-in-sexp</span> <span class="no">t</span> <span class="c1">; search for library in `require&#39; and `declare-function&#39; sexp.</span>
+</span><span class="line"> <span class="nv">helm-split-window-in-side-p</span> <span class="no">t</span> <span class="c1">;; open helm buffer inside current window, not occupy whole other window</span>
+</span><span class="line"> <span class="nv">helm-candidate-number-limit</span> <span class="mi">500</span> <span class="c1">; limit the number of displayed canidates</span>
+</span><span class="line"> <span class="nv">helm-ff-file-name-history-use-recentf</span> <span class="no">t</span>
+</span><span class="line"> <span class="nv">helm-move-to-line-cycle-in-source</span> <span class="no">t</span> <span class="c1">; move to end or beginning of source when reaching top or bottom of source.</span>
+</span><span class="line"> <span class="nv">helm-buffers-fuzzy-matching</span> <span class="no">t</span>          <span class="c1">; fuzzy matching buffer names when non-nil</span>
+</span><span class="line">                                        <span class="c1">; useful in helm-mini that lists buffers</span>
+</span><span class="line">
+</span><span class="line"> <span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;helm-sources-using-default-as-input</span> <span class="ss">&#39;helm-source-man-pages</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-x&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-M-x</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-y&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-show-kill-ring</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-x b&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-mini</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-x C-f&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-find-files</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-h SPC&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-all-mark-rings</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c h o&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-occur</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c h C-c w&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-wikipedia-suggest</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c h x&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-register</span><span class="p">)</span>
+</span><span class="line"><span class="c1">;; (global-set-key (kbd &quot;C-x r j&quot;) &#39;jump-to-register)</span>
+</span><span class="line">
+</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="ss">&#39;help-command</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-f&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-apropos</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="ss">&#39;help-command</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;r&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-info-emacs</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="ss">&#39;help-command</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-l&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-locate-library</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">;; use helm to list eshell history</span>
+</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;eshell-mode-hook</span>
+</span><span class="line">          <span class="nf">#&#39;</span><span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+</span><span class="line">              <span class="p">(</span><span class="nv">define-key</span> <span class="nv">eshell-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-l&quot;</span><span class="p">)</span>  <span class="ss">&#39;helm-eshell-history</span><span class="p">)))</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">;;; Save current position to mark ring</span>
+</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;helm-goto-line-before-hook</span> <span class="ss">&#39;helm-save-current-pos-to-mark-ring</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">;; show minibuffer history with Helm</span>
+</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">minibuffer-local-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-p&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-minibuffer-history</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">minibuffer-local-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-n&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-minibuffer-history</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[remap</span> <span class="nv">find-tag]</span> <span class="ss">&#39;helm-etags-select</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[remap</span> <span class="nv">list-buffers]</span> <span class="ss">&#39;helm-buffers-list</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="c1">;; PACKAGE: helm-swoop                ;;</span>
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="c1">;; Locate the helm-swoop folder to your path</span>
+</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;helm-swoop</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">;; Change the keybinds to whatever you like :)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c h o&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-swoop</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c s&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-multi-swoop-all</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">;; When doing isearch, hand the word over to helm-swoop</span>
+</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">isearch-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-i&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-swoop-from-isearch</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">;; From helm-swoop to helm-multi-swoop-all</span>
+</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-swoop-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-i&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-multi-swoop-all-from-helm-swoop</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">;; Save buffer when helm-multi-swoop-edit complete</span>
+</span><span class="line"><span class="p">(</span><span class="k">setq</span> <span class="nv">helm-multi-swoop-edit-save</span> <span class="no">t</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">;; If this value is t, split window inside the current window</span>
+</span><span class="line"><span class="p">(</span><span class="k">setq</span> <span class="nv">helm-swoop-split-with-multiple-windows</span> <span class="no">t</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">;; Split direcion. &#39;split-window-vertically or &#39;split-window-horizontally</span>
+</span><span class="line"><span class="p">(</span><span class="k">setq</span> <span class="nv">helm-swoop-split-direction</span> <span class="ss">&#39;split-window-vertically</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">;; If nil, you can slightly boost invoke speed in exchange for text color</span>
+</span><span class="line"><span class="p">(</span><span class="k">setq</span> <span class="nv">helm-swoop-speed-or-color</span> <span class="no">t</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="p">(</span><span class="nv">helm-mode</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;setup-helm</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;setup-helm</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="k">setq</span>
+</span><span class="line"> <span class="nv">helm-gtags-ignore-case</span> <span class="no">t</span>
+</span><span class="line"> <span class="nv">helm-gtags-auto-update</span> <span class="no">t</span>
+</span><span class="line"> <span class="nv">helm-gtags-use-input-at-cursor</span> <span class="no">t</span>
+</span><span class="line"> <span class="nv">helm-gtags-pulse-at-cursor</span> <span class="no">t</span>
+</span><span class="line"> <span class="nv">helm-gtags-prefix-key</span> <span class="s">&quot;\C-cg&quot;</span>
+</span><span class="line"> <span class="nv">helm-gtags-suggested-key-mapping</span> <span class="no">t</span>
+</span><span class="line"> <span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;helm-gtags</span><span class="p">)</span>
+</span><span class="line"><span class="c1">;; Enable helm-gtags-mode</span>
+</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;dired-mode-hook</span> <span class="ss">&#39;helm-gtags-mode</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;eshell-mode-hook</span> <span class="ss">&#39;helm-gtags-mode</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;c-mode-hook</span> <span class="ss">&#39;helm-gtags-mode</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;c++-mode-hook</span> <span class="ss">&#39;helm-gtags-mode</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;asm-mode-hook</span> <span class="ss">&#39;helm-gtags-mode</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-gtags-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c g a&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-gtags-tags-in-this-function</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-gtags-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-j&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-gtags-select</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-gtags-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-.&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-gtags-dwim</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-gtags-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-,&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-gtags-pop-stack</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-gtags-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c &lt;&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-gtags-previous-history</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-gtags-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c &gt;&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-gtags-next-history</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-1">参考网址</h3>
+
+<ul>
+  <li><a href="http://tuhdo.github.io/c-ide.html#sec-1-3">C/C++ Development Environment for Emacs</a></li>
+</ul>
+
+<h3 id="section-2">更新记录</h3>
+
+<p>2014年12月1日</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[二代测序中的常用工具介绍]]></title>
+    <link href="http://yulongniu.github.io/blog/2014/07/28/next-seqence-tools/"/>
+    <updated>2014-07-28T12:23:42-04:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/07/28/next-seqence-tools</id>
+    <content type="html"><![CDATA[<h2 id="samtools">1. SAMtools</h2>
+
+<p><a href="http://samtools.sourceforge.net/">SAMtools</a>是用于处理SAM (Sequence Alignment/Map)格式文件的一系列工具，主要用来储存大容量的核酸测序结果。
+<strong>简介</strong>：BAM是SAM文件的binary格式文件。SAMtools的主要作者是<a href="http://lh3lh3.users.sourceforge.net/">Heng Li</a>，Heng Li在2012年因为对二代测序领域的贡献获得<a href="http://en.wikipedia.org/wiki/Benjamin_Franklin_Award_(Bioinformatics)">Benjamin Franklin Award</a>。</p>
+
+<p><strong>平台</strong>：Mac OS/Linux</p>
+
+<p><strong>安装</strong>: </p>
+
+<ul>
+  <li><a href="http://sourceforge.net/projects/samtools/files/">下载</a>SAMtools</li>
+</ul>
+
+<!--more-->
+
+<ul>
+  <li>安装依赖的Ncurse库</li>
+</ul>
+
+<pre><code class="language-bash"># yum install ncurses*
+</code></pre>
+
+<ul>
+  <li>添加SAMtools到PATH（<a href="http://yulongniu.bionutshell.org/blog/2010/11/08/linux-command/">设置参考</a>）</li>
+</ul>
+
+<p><strong>快速运行</strong></p>
+
+<pre><code class="language-bash"># 将sam格式文件转换为bam格式文件
+$ samtools view -bS samFile &gt; bamFile
+
+# 将bam格式文件转换为sorted bam格式文件，用于长期储存和后续分析 
+$ samtools sort bamFile sortedBamFile
+</code></pre>
+
+<h3 id="section">更新记录</h3>
+
+<p>2014年7月28日</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[二代测序中的短序列比对]]></title>
+    <link href="http://yulongniu.github.io/blog/2014/07/25/short-sequence-alignment/"/>
+    <updated>2014-07-25T14:04:25-04:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/07/25/short-sequence-alignment</id>
+    <content type="html"><![CDATA[<p>在二代测序数据分析中，非常重要的一步是将测得的短序列“对应”到基因组上。所使用的工具被称为“短序列比对工具（short sequence aligners）”。以下是一些常用工具的介绍。</p>
+
+<h2 id="bowtie">1. Bowtie</h2>
+
+<p><strong>简介</strong>：<a href="http://bowtie-bio.sourceforge.net/">Bowtie2</a>是现在广泛使用的序列比对工具。</p>
+
+<p><strong>运行方式</strong>：所有平台</p>
+
+<p><strong>特点</strong>：</p>
+
+<ul>
+  <li>
+    <p>相比较<a href="http://bowtie-bio.sourceforge.net/index.shtml">Bowtie1</a>，处理大于50bp的短序列，速度更快、也更敏感。Bowtie1在处理小于50bp的短序列上，效果更好。</p>
+  </li>
+  <li>
+    <p><a href="http://support.illumina.com/sequencing/sequencing_software/igenome.ilmn">iGenomes</a>提供一些事先编排（index）的基因组。
+<!--more--></p>
+  </li>
+</ul>
+
+<p><strong>快速运行</strong>：</p>
+
+<pre><code class="language-bash"># 建立一系列FASTA文件目录
+$ bowtie2-build /filePath/fastaFile indexName
+
+# unpaired序列比对
+$ bowtie2 -p 4 -x indexName -U readFiles -S samFileName
+
+# paired序列比对
+$ bowtie2 -p 4 -x indexName  -1 readFiles1 -2 readFiles2 -S eg2.sam
+</code></pre>
+
+<ul>
+  <li>
+    <p><code>-p</code>：多线程</p>
+  </li>
+  <li>
+    <p><code>-x</code>：之后跟index名称</p>
+  </li>
+  <li>
+    <p><code>-U</code>：测序文件（比如Fasta，Fastq文件）</p>
+  </li>
+  <li>
+    <p><code>-1</code>/<code>-2</code>：标识paired文件</p>
+  </li>
+  <li>
+    <p><code>-S</code>：SAM格式输出文件</p>
+  </li>
+</ul>
+
+<h3 id="section">参考网址</h3>
+
+<ul>
+  <li><a href="http://lh3lh3.users.sourceforge.net/NGSalign.shtml">Heng Li总结的工具列表</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress安装和使用]]></title>
+    <link href="http://yulongniu.github.io/blog/2014/07/22/octopress-install/"/>
+    <updated>2014-07-22T13:45:46-04:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/07/22/octopress-install</id>
+    <content type="html"><![CDATA[<p>安装和使用Octopress的一些注意事项，详细的内容可以<a href="#Ref">参考网址</a>。</p>
+
+<h2 id="section">1. 安装</h2>
+
+<p>请参考<a href="http://octopress.org/">官网</a>，其他的博客介绍的安装已经失效或者错误。</p>
+
+<p>常用命令:</p>
+
+<pre><code class="language-bash"># 预览，可自动更新。使用Ctrl+c终止。
+$ rake preview
+</code></pre>
+
+<h2 id="ruby">2. Ruby版本调整</h2>
+
+<p>因为Octopress需要使用Ruby旧版本，推荐使用<a href="https://rvm.io/">RVM</a>安装Ruby 1.9.3版本。在安转过程中可能会出现<code>"gpg: Can't check signature: public key not found"</code>的错误提示，需要执行一下类似命名，添加公用匙。</p>
+
+<pre><code class="language-bash">$ gpg2 --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
+</code></pre>
+
+<p>使用以下操作设定ruby版本：</p>
+
+<pre><code class="language-bash">$ source ~/.rvm/scripts/rvm
+$ rvm use 1.9.3
+</code></pre>
+<!--more-->
+
+<h2 id="section-1">3. 预览错误</h2>
+
+<p>如果在预览博文时出现<code class="language-bash">TCPServer Error: Address already in use - bind(2)</code>的错误，表示端口（Octopress默认4000）被占，解决办法:</p>
+
+<pre><code class="language-bash"># 获取占据4000端口程序的PID
+$ lsof -wni tcp:4000
+$ kill -9 PID
+</code></pre>
+
+<h2 id="section-2">4. 更新博文</h2>
+
+<p>博文放置在<code class="language-bash">source/_posts</code>目录下。</p>
+
+<pre><code class="language-bash">$ rake new_post["new post"]
+$ rake generate
+$ git add .
+$ git commit -m "my comment" 
+$ git push origin source
+$ rake deploy
+</code></pre>
+<p>如果需要在首页显示部分博文，在需要隔断的地方（博文markdown文件）加入：</p>
+
+<pre><code class="language-html">&lt;!--more--&gt;
+</code></pre>
+
+<h2 id="section-3">5. 使用主题</h2>
+
+<p>当前博客使用的是<a href="http://kaworu.github.io/octopress/">octostrap</a>主题。</p>
+
+<h2 id="section-4">6. 修改标签图标记</h2>
+
+<p>可以使用<a href="http://converticon.com/">在线转换工具</a>，将png格式图片转换为ico格式（比如32*32）。之后将ico图片直接放置在<code class="language-bash">souce</code>文件夹下。最后，修改对应<code class="language-bash">source/_includes/head.html</code>文件即可。</p>
+
+<h2 id="section-5">7. 404公益</h2>
+
+<p>在<code class="language-bash">source</code>文件夹下添加<em>404.markdown</em>文件，之后写入</p>
+
+<pre><code class="language-javascript">---
+layout: page
+title: "404 Error"
+date: 2014-07-22
+comments: false
+sharing: false
+footer: false
+---
+
+&lt;script type="text/javascript" src="http://www.qq.com/404/search_children.js?edition=small" charset="utf-8"&gt;&lt;/script&gt;
+</code></pre>
+
+<h2 id="section-6">8. 私密博文</h2>
+
+<p>Octopress提供了隐藏博文的功能，即使文章已经推送到了github，也可以不在博客主页显示。具体方法是在每篇markdown文件头部添加：</p>
+
+<pre><code class="language-ruby">published: false
+</code></pre>
+
+<p>如果需要公开发表，将其删除或者改为：</p>
+
+<pre><code class="language-ruby">published: true
+</code></pre>
+
+<h2 id="kramdown">9. Kramdown语法小技巧</h2>
+
+<ul>
+  <li>
+    <p>代码片段高亮使用三对`，行内引用代码使用一对`</p>
+  </li>
+  <li>
+    <p>四个空格或者个一个Tab可以生成一个文本块</p>
+  </li>
+</ul>
+
+<h2 id="section-7">10. 链接在新的选择卡中打开</h2>
+
+<p>在<code class="language-bash">source/_includes/custom/head.html</code>中添加：</p>
+
+<pre><code class="language-html">&lt;!-- link open with new tab  --&gt;
+&lt;script&gt;
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+  $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+&lt;/script&gt;
+
+</code></pre>
+
+<h2 id="section-8">11. 修改分页数</h2>
+
+<p>修改<code class="language-bash">_config.yml</code>文件</p>
+
+<pre><code class="language-bash"># 每页最多展示的博文数目
+paginate: 5
+
+# 分页后博文地址
+paginate_path: "posts/:num"
+</code></pre>
+
+<h2 id="section-9">12. 添加图片</h2>
+
+<p>将需要添加的图片移动到目录<code class="language-bash">source/images/</code>，之后在正文中添加：</p>
+
+<pre><code class="language-bash">&lt;img class="[class names]" src="http://yulongniu.github.io/path/to/image" title="[width] [height] [title text [alt text]]" &gt;
+
+# 例子
+&lt;img class="left" src="http://yulongniu.github.io/images/testimg.png" width="350" height="350" title="image" alt="images"&gt;
+&lt;img class="right" src="http://placekitten.com/300/500" width="150" height="250" title="Place Kitten #3" &gt;
+</code></pre>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li>
+    <p>Octopress安装和域名设置：<a href="http://tchen.me/posts/2012-12-16-first-blog.html">1</a>, <a href="http://beyondvincent.com/blog/2013/08/03/108-creating-a-github-blog-using-octopress/">2</a></p>
+  </li>
+  <li>
+    <p>Octopress其他配制：<a href="http://812lcl.com/blog/2013/10/26/octopressce-bian-lan-ji-ping-lun-xi-tong-ding-zhi/">1</a>, <a href="http://cn.soulmachine.me/blog/20130402/">2</a></p>
+  </li>
+  <li>
+    <p>添加多说：<a href="http://havee.me/internet/2013-02/add-duoshuo-commemt-system-into-octopress.html">1</a>, <a href="http://kaiimeng.cn/my-first-octopress-blog/">2</a>, <a href="http://cn.soulmachine.me/blog/20130402/">3</a></p>
+  </li>
+  <li>
+    <p>添加Mathjax支持：<a href="http://yanping.me/cn/blog/2012/03/10/octopress-with-latex/">1</a>, <a href="http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/">2</a>, <a href="http://yanping.me/cn/blog/2012/03/10/octopress-with-latex/">Mathjax彩色公式</a></p>
+  </li>
+  <li>
+    <p><a href="http://kramdown.gettalong.org/syntax.html">Kramdown语法</a></p>
+  </li>
+  <li>
+    <p><a href="http://kramdown.gettalong.org/quickref.html">Kramdown演示</a></p>
+  </li>
+  <li>
+    <p><a href="http://yibao.buertec.net/blog/2013/12/03/set-up-favicon-dot-png-slash-favicon-dot-ico-on-octopress/">修改标签图标</a></p>
+  </li>
+  <li>
+    <p><a href="http://pygments.org/docs/lexers/">Octopress highlight language list</a></p>
+  </li>
+</ul>
+
+<h3 id="section-10">更新记录</h3>
+
+<p>2014年7月25日</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[My First Post]]></title>
+    <link href="http://yulongniu.github.io/blog/2014/07/04/my-first-post/"/>
+    <updated>2014-07-04T22:04:38-04:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/07/04/my-first-post</id>
+    <content type="html"><![CDATA[<p>This is my first post. I want to say something. Then say something.</p>
+
+<p>This is a piece of html code <code class="language-html">&lt;html&gt;</code></p>
+
+<pre><code class="language-ruby">def what?
+  42
+end
+</code></pre>
+<!-- more -->
+
+<ol>
+  <li>
+    <p>Mathjax supports.</p>
+
+    <script type="math/tex; mode=display">% &lt;![CDATA[
+
+ \begin{align*}
+   & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
+   = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
+   & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
+   \phi(e_1, e_1) & \cdots & \phi(e_1, e_n) \\
+   \vdots & \ddots & \vdots \\
+   \phi(e_n, e_1) & \cdots & \phi(e_n, e_n)
+ \end{array} \right)
+   \left( \begin{array}{c}
+   y_1 \\
+   \vdots \\
+   y_n
+ \end{array} \right)
+ \end{align*}
+  %]]&gt;</script>
+  </li>
+  <li>
+    <p>Colorful mathjax euqation.</p>
+
+    <script type="math/tex; mode=display">
+ \definecolor{energy}{RGB}{114,0,172}
+ \definecolor{freq}{RGB}{45,177,93}
+ \definecolor{spin}{RGB}{251,0,29}
+ \definecolor{signal}{RGB}{18,110,213}
+ \definecolor{circle}{RGB}{217,86,16}
+ \definecolor{average}{RGB}{203,23,206}
+ \color{energy} X_{\color{freq} k} \color{black} =
+ \color{average} \frac{1}{N} \sum_{n=0}^{N-1}
+ \color{signal}x_n \color{spin}
+ e^{\mathrm{i} \color{circle} 2\pi \color{freq}k
+ \color{average} \frac{n}{N}}
+ </script>
+
+    <p>To find <font color="#7200AC">the energy</font>
+ <font color="2DB15D">at a particular frequency</font>,
+ <font color="#FB001D">spin</font> <font color="#126ED5">your
+ signal</font> <font color="#D04400">around a circle</font>
+ <font color="2DB15D">at that frequency</font>, and
+ <font color="#CB17CE">average a bunch of points along that
+ path</font>.</p>
+  </li>
+</ol>
+
+<ul>
+  <li>Show the block.</li>
+</ul>
+
+<blockquote>
+  <p>This is the block</p>
+</blockquote>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[R使用parallel包并行计算]]></title>
+    <link href="http://yulongniu.github.io/blog/2014/06/24/parallel-package/"/>
+    <updated>2014-06-24T22:10:20-04:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/06/24/parallel-package</id>
+    <content type="html"><![CDATA[<p>最新版本的R已经内置<span style="color: blue">parallel</span>包，<span style="color: blue">parallel</span>包是从<span style="color: blue"><a href="http://cran.r-project.org/web/packages/snow/index.html">snow</a></span>包和<span style="color: blue"><a href="http://cran.r-project.org/web/packages/multicore/index.html">multicore</a></span>包继承而来，包含了很多非常好用的函数。<span style="color: blue">parallel</span>包可以通过PVM（<span style="color: blue">rpvm</span>包）、MPI（<span style="color: blue"><a href="http://cran.r-project.org/web/packages/Rmpi/index.html">Rmpi</a></span>包）、NetWorkSpaces（<span style="color: blue"><a href="http://cran.r-project.org/web/packages/nws/index.html">nws</a></span>包）和raw sockets（如果以上3种都不能使用）平台进行分布计算，支持cluster和多核个人/服务器计算机。在Linux系统上，通常使用<a href="http://www.open-mpi.org/">openMPI</a>。</p>
+
+<h2 id="span-stylecolor-bluermpispan">1. 安装<span style="color: blue">Rmpi</span>包</h2>
+
+<p>因为使用openMPI，所以<span style="color: blue">parallel</span>包需要<span style="color: blue">Rmpi</span>包来设定节点，所以首先需要在计算机上安装openMPI。</p>
+
+<!--more-->
+
+<h3 id="linuxopenmpi">1.1 Linux系统下安装openMPI环境</h3>
+
+<pre><code class="language-bash"># 安装openmpi环境
+# yum install openmpi openmpi-devel
+
+# 配置环境（安装时执行，可能之后运行也要执行）
+# ldconfig /usr/lib64/openmpi/lib/
+</code></pre>
+
+<p>在<code class="language-bash">~/.bashrc</code>下写入</p>
+
+<pre><code class="language-bash">export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}${LD_LIBRARY_PATH:+:}/usr/lib64/openmpi/lib/"
+</code></pre>
+
+<p>载入<code class="language-bash">~/.bashrc</code></p>
+
+<pre><code class="language-bash">$ source ~/.bashrc
+</code></pre>
+
+<h3 id="rmpi">1.2 安装Rmpi包</h3>
+
+<p>在启动的R窗口中输入：</p>
+
+<pre><code class="language-r">install.packages("Rmpi",
+                 configure.args =
+                 c("--with-Rmpi-include=/usr/include/openmpi-x86_64/",
+                   "--with-Rmpi-libpath=/usr/lib64/openmpi/lib/",
+                   "--with-Rmpi-type=OPENMPI"))
+</code></pre>
+
+<h2 id="span-stylecolor-blueparallelspan">2. 使用<span style="color: blue">parallel</span>包</h2>
+
+<h3 id="section">2.1 设定节点数</h3>
+
+<p>首先，需要设定cluster的节点（nodes）数目</p>
+
+<pre><code class="language-r">cl &lt;- makeCluster(2, type = "MPI")
+</code></pre>
+
+<p>这里对“节点数”设定做一些解释，如果使用cluster，可以直接设定cluster数据即可；如果是在小型服务器或者个人电脑上使用，最大节点数可以设定为“线程数（processor）-1”。比如一个双核四线程计算机，节点数目最大可以设定为3。这是因为<span style="color: blue">snow</span>包（<span style="color: blue">parallel</span>包的主要依赖包）在设计时，总是要保留一个<strong>“主线程”</strong>来处理和整合数据。</p>
+
+<p>在linux系统下，线程数可以通过 <code class="language-bash">$ nproc</code> 查看。</p>
+
+<h3 id="section-1">2.2 内置函数</h3>
+
+<p>使用<span style="color: blue">parallel</span>包中的内置并行运算函数
+比如使用<code class="language-r">parApply()</code>、<code class="language-r">parCapply()</code>、<code class="language-r">parRapply()</code>、<code class="language-r">parLapply()</code>和<code class="language-r">parSapply()</code>（如果返回矩阵，使用
+<code class="language-r">cbind()</code>）等函数。其中文档中指出，<code class="language-r">parApply()</code>函数对于<strong>二维矩阵</strong>的每一个单元进行操作，因此要慢一些。如果可能，使用<code class="language-r">parCapply()</code>和<code class="language-r">parRapply()</code>对列和行进行操作，以加快运行速度。</p>
+
+<h3 id="section-2">2.3 回收节点</h3>
+
+<pre><code class="language-r">stopCluster(cl)
+</code></pre>
+
+<h3 id="section-3">3. 并行计算的包依赖问题</h3>
+
+<p>在并行计算过程中，不可避免地会用到其他包辅助。这里涉及到<span style="color: blue">snow</span>包的一个设计原理：并行运算多个R进程，只有一个主进程载入完整的依赖包环境。这就意味着其他并行的R进程中也要载入依赖的包环境。</p>
+
+<p>有两个思路，第一个思路是修改<code class="language-bash">Rprofile.site</code>文件，让任意R进程在启动时都载入依赖的包。但是，不推荐这种做法，因为这样会增加R载入的速度；并且如果不同的代码用了不同的依赖包，就要不停地修改<code class="language-bash">Rprofile.site</code>文件。</p>
+
+<p>第二个思路是在新开的R进程中“动态”加载需要的包。所谓<strong>“动态”</strong>，没有什么高深的意思，就是“需要的时候加载即可”。根据需要，可以选择以下两种方法。</p>
+
+<ul>
+  <li>第一种方法是在直接在启动的R进程中加载包。</li>
+</ul>
+
+<p>这种方法非常直观，推荐。</p>
+
+<pre><code class="language-r"># 以下代码摘抄自Parallel R，其中packages
+# 是一个要选择加载的package列表，
+# 比如c('bigmemory', 'foreach', 'doMC')
+worker.init &lt;- function(packages) {
+  for (p in packages) {
+    library(p, character.only=TRUE)
+  }
+  NULL
+}
+</code></pre>
+
+<ul>
+  <li>第二种方法是在调用函数中加入。</li>
+</ul>
+
+<p>这种方法不推荐，因为我们将看到这种方法是“投机”了<span style="color: blue">parallel</span>包的并行<code>apply</code>家族函数。原理是：<span style="color: blue">parallel</span>包中最主要的就是<code>apply</code>家族函数，比如<code class="language-r">parApply(cl = NULL, X, MARGIN, FUN, ...)</code>函数，是<span style="color: blue">base</span>包中<code class="language-r">apply()</code>的并行版本。其中会用到一个<code>FUN</code>函数，我们可以在这个函数中加载包，比如写入<code class="language-r">require('bigmemory')</code>等。这样，并行的R进程就会载入需要的包。举例如下：</p>
+
+<pre><code class="language-r">Getft &lt;- function(i, arg1, arg2){
+  require(packages)
+  ...
+}
+
+adft &lt;- parSapply(cl, 1:10, Getft, argInput1, argInput2)
+</code></pre>
+
+<h2 id="span-stylecolor-bluebigmemoryspan">4. 与<span style="color: blue">bigmemory</span>包结合</h2>
+
+<p><span style="color: blue">parallel</span>包可以很好地与<span style="color: blue">bigmemory</span>包结合，进而进一步提升R操作大数据的能力。</p>
+
+<p>但是，有一个问题是<code class="language-r">parApply()</code>、<code class="language-r">parCapply()</code>、<code class="language-r">parRapply()</code>函数是不能直接调用<span style="color: blue">bigmemory</span>包的<code>big.memory</code>这种S4对象。当然也可以使用<code>mat[, ]</code>之类语句引用big.matrix对象。但是这会把矩阵全部载入内存，也就失去了<code>big.matrix</code>对象的意义，只有在内存允许的情况下这样操作。</p>
+
+<p>解决办法：</p>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>将<code>big.matrix</code>对象的操作放在一个函数中，函数传入的是<code>big.matrix</code>的<code>description file</code>（描述文件），而不是<code>big.matrix</code>对象本身。</p>
+    </li>
+    <li>
+      <p>把这个函数作为<code class="language-r">parLapply()</code>和<code class="language-r">parSapply()</code>的<code>FUN</code>，达到分布计算，而又不直接引用<code>big.matrix</code>对象的目的。</p>
+    </li>
+    <li>
+      <p>这个思路的前提是：创建的<code>big.matrix</code>对象必须是“<strong>内存共享</strong>”的，否则不能将其分布到不同的节点计算。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<p>举一个例子，完整版本见<a href="#final_version">补充材料：Final version</a>，这个例子中首先创建一个<code class="language-r">Getft()</code>函数，接受<code>adAllRowColDesc</code>和<code>adMatDesc</code>两个变量是<code>big.matrix</code>对象的描述文件。在这个函数中，<code class="language-r">attach.big.matrix()</code>通过描述文件引用<code>big.matrix</code>对象，并完成相关操作。</p>
+
+<pre><code class="language-r">Getft &lt;- function(i, adAllRowColDesc, adMatDesc){
+  adAllRowColData &lt;- attach.big.matrix(adAllRowColDesc)
+  adMatData &lt;- attach.big.matrix(adMatDesc)
+  rowIndex &lt;- adAllRowColData[i, 1]
+  colIndex &lt;- adAllRowColData[i, 2]
+  linkData &lt;- c(rowNames[rowIndex], rowNames[colIndex], adMatData[rowIndex, colIndex])
+  return(linkData)
+}
+</code></pre>
+<p>之后，使用<code class="language-r">parSapply()</code>函数调用<code class="language-r">Getft()</code>函数，使用<code>1:nrow(adAllRowCol)</code>作为“<strong>计数器</strong>”。</p>
+
+<pre><code class="language-r">adft &lt;- parSapply(cl, 1:nrow(adAllRowCol), Getft, adAllRowColDescFile, adMatDescFile)
+</code></pre>
+
+<p>如果需要处理的<code>big.matrix</code>对象不大，也可以直接使用<code class="language-r">parSapply()</code>函数，详细参考<a href="#bigmatrix_direct">补充材料：Bigmatrix direct version</a>。</p>
+
+<h2 id="span-stylecolor-blueforeachspan">5. 与<span style="color: blue">foreach</span>包比较</h2>
+
+<p>另外一个支持并行计算的包是<span style="color: blue">foreach</span>包，它天生与<code>big.matrix</code>对象匹配。所以，我也提供了使用<code class="language-r">foreach</code>版本，详细参考<a href="#foreach">补充材料：Foreach version</a>。</p>
+
+<p>通过测试可以发现，在数据量较少时（1000行左右），<code class="language-r">foreach</code><a href="#foreach">版本</a>和<code class="language-r">parSapply()</code><a href="#final_version">版本</a>速度基本持平。但是，数据量增大时（百万行），<code class="language-r">foreach</code><a href="#foreach">版本</a>速度明显减慢。原因是在使用<code class="language-r">foreach</code>并行计算时，计算开始时候需要建立索引。这个过程在循环数变大时，会变得非常缓慢。</p>
+
+<p>因此，我们可以看到，如果使用<span style="color: blue">foreach</span>包，会减少代码量，而且程序逻辑也非常清晰，但是遇到超大循环数，速度明显减慢。同时，如果使用<span style="color: blue">parallel</span>包，那么需要一些“技巧”才能与<code>big.matrix</code>对象有效融合。所以，我们的结论是原生态的R（包括提供的一些包）不适合做并行大数据计算。</p>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li>
+    <p><a href="http://cran.r-project.org/web/views/HighPerformanceComputing.html">R task: High-Performance and Parallel Computing with R</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.jstatsoft.org/v31/i01/paper">State of the Art in Parallel Computing with R</a>，这篇文章详细介绍了很多R并行计算的平台</p>
+  </li>
+  <li>
+    <p>Rmpi安装：<a href="http://www.stats.uwo.ca/faculty/yu/Rmpi/">1</a>, <a href="https://www.sharcnet.ca/help/index.php/Using_R_and_MPI">2</a>, <a href="http://www.cybaea.net/Blogs/R-tips-Installing-Rmpi-on-Fedora-Linux.html">3</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.sfu.ca/~sblay/R/snow.html">snow包介绍</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.stat.yale.edu/~mjk56/temp/bigmemory-vignette.pdf">The R Package bigmemory: Supporting Efficient Computation and Concurrent Programming with Large Data Sets.</a></p>
+  </li>
+  <li>
+    <p>书籍<a href="http://shop.oreilly.com/product/0636920021421.do">Parallel R</a></p>
+  </li>
+</ul>
+
+<h3 id="a-idappendixa"><a id="appendix">补充材料</a></h3>
+
+<ul>
+  <li><a id="final_version">Final version</a></li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>combine parSapply and big.matrix </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line">adj2ftBig <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>adMat<span class="p">,</span> adAllRowCol<span class="p">,</span> n <span class="o">=</span> <span class="m">2</span><span class="p">){</span>
+</span><span class="line">
+</span><span class="line">  <span class="c1"># INPUT: &#39;adMat&#39; should be a bigmatrix. &#39;adAllRowCol&#39; is the row and column combination, also is a bigmatrix</span>
+</span><span class="line">
+</span><span class="line">  <span class="kn">require</span><span class="p">(</span>bigmemory<span class="p">)</span>
+</span><span class="line">  <span class="kn">require</span><span class="p">(</span>parallel<span class="p">)</span>
+</span><span class="line">  cl <span class="o">&lt;-</span> makeCluster<span class="p">(</span>n<span class="p">,</span> type <span class="o">=</span> <span class="s">&quot;MPI&quot;</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">  adMatDescFile <span class="o">&lt;-</span> describe<span class="p">(</span>adMat<span class="p">)</span>
+</span><span class="line">  adAllRowColDescFile <span class="o">&lt;-</span> describe<span class="p">(</span>adAllRowCol<span class="p">)</span>
+</span><span class="line">
+</span><span class="line">  rowNames <span class="o">&lt;-</span> <span class="kp">rownames</span><span class="p">(</span>adMat<span class="p">)</span>
+</span><span class="line">  colNames <span class="o">&lt;-</span> <span class="kp">colnames</span><span class="p">(</span>adMat<span class="p">)</span>
+</span><span class="line">
+</span><span class="line">  ignore <span class="o">&lt;-</span> clusterEvalQ<span class="p">(</span>cl<span class="p">,</span> <span class="p">{</span><span class="kn">library</span><span class="p">(</span>bigmemory<span class="p">);</span> <span class="kc">NULL</span><span class="p">})</span>
+</span><span class="line">
+</span><span class="line">  Getft <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>i<span class="p">,</span> adAllRowColDesc<span class="p">,</span> adMatDesc<span class="p">){</span>
+</span><span class="line">    adAllRowColData <span class="o">&lt;-</span> attach.big.matrix<span class="p">(</span>adAllRowColDesc<span class="p">)</span>
+</span><span class="line">    adMatData <span class="o">&lt;-</span> attach.big.matrix<span class="p">(</span>adMatDesc<span class="p">)</span>
+</span><span class="line">    rowIndex <span class="o">&lt;-</span> adAllRowColData<span class="p">[</span>i<span class="p">,</span> <span class="m">1</span><span class="p">]</span>
+</span><span class="line">    colIndex <span class="o">&lt;-</span> adAllRowColData<span class="p">[</span>i<span class="p">,</span> <span class="m">2</span><span class="p">]</span>
+</span><span class="line">    linkData <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>rowNames<span class="p">[</span>rowIndex<span class="p">],</span> rowNames<span class="p">[</span>colIndex<span class="p">],</span> adMatData<span class="p">[</span>rowIndex<span class="p">,</span> colIndex<span class="p">])</span>
+</span><span class="line">    <span class="kr">return</span><span class="p">(</span>linkData<span class="p">)</span>
+</span><span class="line">  <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">  adft <span class="o">&lt;-</span> parSapply<span class="p">(</span>cl<span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="kp">nrow</span><span class="p">(</span>adAllRowCol<span class="p">),</span> Getft<span class="p">,</span> adAllRowColDescFile<span class="p">,</span> adMatDescFile<span class="p">)</span>
+</span><span class="line">
+</span><span class="line">  stopCluster<span class="p">(</span>cl<span class="p">)</span>
+</span><span class="line">
+</span><span class="line">  <span class="kr">return</span><span class="p">(</span>adft<span class="p">)</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li><a id="bigmatrix_direct">Bigmatrix direct version</a></li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>directly use the big.matrix </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line">adj2ftBig3 <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>adMat<span class="p">,</span> adAllRowCol<span class="p">,</span> n <span class="o">=</span> <span class="m">2</span><span class="p">){</span>
+</span><span class="line">
+</span><span class="line">  <span class="c1"># INPUT: &#39;adMat&#39; is a matrix. &#39;adAllRowCol&#39; is the row and column combination, also a matrix.</span>
+</span><span class="line">
+</span><span class="line">  <span class="kn">library</span><span class="p">(</span>parallel<span class="p">)</span>
+</span><span class="line">  cl <span class="o">&lt;-</span> makeCluster<span class="p">(</span>n<span class="p">,</span> type <span class="o">=</span> <span class="s">&quot;MPI&quot;</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">  rowNames <span class="o">&lt;-</span> <span class="kp">rownames</span><span class="p">(</span>adMat<span class="p">)</span>
+</span><span class="line">  colNames <span class="o">&lt;-</span> <span class="kp">colnames</span><span class="p">(</span>adMat<span class="p">)</span>
+</span><span class="line">
+</span><span class="line">  adft <span class="o">&lt;-</span> parRapply<span class="p">(</span>cl <span class="o">=</span> cl<span class="p">,</span> adAllRowCol<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="p">{</span>
+</span><span class="line">    linkData <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>rowNames<span class="p">[</span>x<span class="p">[</span><span class="m">1</span><span class="p">]],</span> colNames<span class="p">[</span>x<span class="p">[</span><span class="m">2</span><span class="p">]],</span> adMat<span class="p">[</span>x<span class="p">[</span><span class="m">1</span><span class="p">],</span> x<span class="p">[</span><span class="m">2</span><span class="p">]])</span>
+</span><span class="line">    <span class="kr">return</span><span class="p">(</span>linkData<span class="p">)</span>
+</span><span class="line">  <span class="p">})</span>
+</span><span class="line">
+</span><span class="line">  stopCluster<span class="p">(</span>cl<span class="p">)</span>
+</span><span class="line">
+</span><span class="line">  <span class="kr">return</span><span class="p">(</span>adft<span class="p">)</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li><a id="foreach">Foreach version</a></li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>apply foreach to big.matrix </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line">adj2ftBig2 <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>adMat<span class="p">,</span> adAllRowCol<span class="p">,</span> n <span class="o">=</span> <span class="m">4</span><span class="p">){</span>
+</span><span class="line">
+</span><span class="line">  <span class="c1"># INPUT: &#39;adMat&#39; should be a bigmatrix. &#39;adAllRowCol&#39; is the row and column combination, also a bigmatrix.</span>
+</span><span class="line">
+</span><span class="line">  <span class="kn">library</span><span class="p">(</span>bigmemory<span class="p">)</span>
+</span><span class="line">  <span class="kn">library</span><span class="p">(</span>foreach<span class="p">)</span>
+</span><span class="line">  <span class="kn">library</span><span class="p">(</span>doMC<span class="p">)</span>
+</span><span class="line">  registerDoMC<span class="p">(</span>n<span class="p">)</span>
+</span><span class="line">
+</span><span class="line">  rowNames <span class="o">&lt;-</span> <span class="kp">rownames</span><span class="p">(</span>adMat<span class="p">)</span>
+</span><span class="line">  colNames <span class="o">&lt;-</span> <span class="kp">colnames</span><span class="p">(</span>adMat<span class="p">)</span>
+</span><span class="line">
+</span><span class="line">  adft <span class="o">&lt;-</span> foreach <span class="p">(</span>i <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="kp">nrow</span><span class="p">(</span>adAllRowCol<span class="p">),</span> <span class="m">.</span>combine <span class="o">=</span> <span class="kp">rbind</span><span class="p">,</span> <span class="m">.i</span>norder<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span> <span class="o">%dopar%</span> <span class="p">{</span>
+</span><span class="line">    <span class="kp">print</span><span class="p">(</span><span class="kp">paste</span><span class="p">(</span><span class="s">&#39;It is running &#39;</span><span class="p">,</span> i<span class="p">,</span> <span class="s">&#39; in total of &#39;</span><span class="p">,</span> <span class="kp">nrow</span><span class="p">(</span>adAllRowCol<span class="p">),</span> <span class="s">&#39;.&#39;</span><span class="p">,</span> sep <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="p">))</span>
+</span><span class="line">    linkData <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>rowNames<span class="p">[</span>adAllRowCol<span class="p">[</span>i<span class="p">,</span> <span class="m">1</span><span class="p">]],</span> colNames<span class="p">[</span>adAllRowCol<span class="p">[</span>i<span class="p">,</span> <span class="m">2</span><span class="p">]],</span> adMat<span class="p">[</span>adAllRowCol<span class="p">[</span>i<span class="p">,</span> <span class="m">1</span><span class="p">],</span> adAllRowCol<span class="p">[</span>i<span class="p">,</span> <span class="m">2</span><span class="p">]])</span>
+</span><span class="line">    <span class="kr">return</span><span class="p">(</span>linkData<span class="p">)</span>
+</span><span class="line">  <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">  <span class="kr">return</span><span class="p">(</span>adft<span class="p">)</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-4">更新记录</h3>
+
+<p>2014年7月22日</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[构建和展示进化树软件使用心得]]></title>
+    <link href="http://yulongniu.github.io/blog/2014/05/01/phylo-tool-summary/"/>
+    <updated>2014-05-01T17:13:59-04:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/05/01/phylo-tool-summary</id>
+    <content type="html"><![CDATA[<h2 id="section">构建进化树</h2>
+
+<h3 id="phyml">1. PhyML</h3>
+
+<p><strong>构建进化树方法</strong>：Maximum Likelihood</p>
+
+<p><strong>评估</strong>：选择bootstrap或者Likelihood-ratio test</p>
+
+<p><strong>运行方式</strong>：所有平台和<a href="http://atgc.lirmm.fr/phyml/">网页</a></p>
+
+<p><strong>心得</strong>：理论上支持4000条序列，小于2000000个字符。但是，对于个人电脑，通常100-200条序列比较合适。命令行运行时，可以选择非常简介的默认模式运行。在默认模式下，bootstrap需要手动开启。安装和使用非常方便，直接下载后可以直接使用。同时，bootstrap可以通过MPI分布计算，但是需要从源代码安装。</p>
+
+<p><strong>快速运行</strong>：</p>
+
+<pre><code class="language-bash">phyml -i align_file.phy --no_memory_check
+</code></pre>
+
+<!--more-->
+
+<ul>
+  <li><code>-i</code>：后跟需要Phylip格式文件</li>
+  <li><code>--no_memory_check</code>：不用检查内存，防止程序运行时跳出</li>
+</ul>
+
+<h3 id="raxml">2. RAxML</h3>
+
+<p><strong>构建进化树方法</strong>：Maximum Likelihood</p>
+
+<p><strong>运行方式</strong>：所有<a href="http://www.exelixis-lab.org/">平台</a>和网页。</p>
+
+<p><strong>心得</strong>：推荐<a href="http://www.phylo.org/portal2/login!input.action">网页运行</a>，支持数据的存放和其他构建进化树的方法。本地安装支持MPI和PThreads的分布计算，但是安装有些复杂，需要仔细阅读文档。</p>
+
+<p><strong>快速运行1</strong>：</p>
+
+<pre><code class="language-bash">raxmlHPC-PTHREADS-AVX -x 12345 -p 12345 -# 100 -m GTRGAMMA -T 4 -s align_file.phy -n TEST
+</code></pre>
+
+<ul>
+  <li><code>-x</code>：bootstrap运行时设定随机数，用于结果重现</li>
+  <li><code>-p</code>：parsimony推断时设定随机数，用于结果重现</li>
+  <li><code>-#</code>：bootstrap次数。也可以设定为autoMRE，最大次数是1000。</li>
+  <li><code>-m</code>：设定使用的模型，GTRGAMMA为核苷酸序列适用模型</li>
+  <li><code>-T</code>：设定线程数，不要超过最大线程</li>
+  <li><code>-s</code>：输入文件，Phylip或者fasta文件</li>
+  <li><code>-n</code>：输入文件记号</li>
+</ul>
+
+<p><strong>快速运行2</strong>：</p>
+
+<pre><code class="language-bash">raxmlHPC-PTHREADS-AVX -f a -x 12345 -p 12345 -# autoMRE -m GTRCAT -T 4 -s align_file.phy -n TEST
+</code></pre>
+
+<ul>
+  <li><code>-f a</code>：选定算法，快速bootstrap</li>
+</ul>
+
+<h2 id="section-1">展示进化树</h2>
+
+<h3 id="itol">1. iTOL</h3>
+
+<p><strong>运行方式</strong>：<a href="http://itol.embl.de/">网页</a></p>
+
+<p><strong>心得</strong>：</p>
+
+<ul>
+  <li>
+    <p>用户可以添加很多自定义的项目，丰富和完善自己的进化树，比如添加柱状图、蛋白结构域、heatmap、基因平行转移（horizontal gene transfer）等；</p>
+  </li>
+  <li>
+    <p>如果输入NCBI taxonomy编号，能够自动转化成物种名称；支持鼠标点击交互式运行，非常方便。
+心得：可以在网站上建立自己的帐号，之后设定不同的project展示和存放自己的项目。尝试构建了2000条左右的序列，显示完全没有问题。</p>
+  </li>
+</ul>
+
+<h3 id="section-2">更新记录</h3>
+
+<p>2014年5月1日</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[创建R包的最简流程]]></title>
+    <link href="http://yulongniu.github.io/blog/2014/03/27/creat-r-package/"/>
+    <updated>2014-03-27T14:53:05-04:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/03/27/creat-r-package</id>
+    <content type="html"><![CDATA[<p>一个最简单创建R包的流程。</p>
+
+<h2 id="section">1. 载入工具包</h2>
+
+<p>安装并载入<span style="color: blue">devtools</span>包和<span style="color: blue">roxygen2</span>包。<span style="color: blue">devtools</span>包提供了一些包的检查、安装和打包的基本工具。<span style="color: blue">roxygen2</span>包则使得书写R帮助文档变得轻松简单。如果习惯使用Emacs，可以结合<a href="http://ess.r-project.org/">ESS</a>建立R包，可以将R代码和帮助文档有效组合在一起，便于管理。当然，也可以使用<a href="http://www.rstudio.com/">Rstudio</a>。</p>
+
+<pre><code class="language-r">library(devtools)
+library(roxygen2)
+</code></pre>
+
+<!--more-->
+
+<h2 id="description">2. 创建DESCRIPTION文件模板</h2>
+
+<pre><code class="language-r">load_all()
+</code></pre>
+<p>其中<code class="language-bash">import</code>栏目，在源代码中使用了哪些包，需要逐步在import项目中添加和修改。</p>
+
+<h2 id="section-1">3. 检查包</h2>
+
+<pre><code class="language-r">check()
+</code></pre>
+
+<h2 id="section-2">4. 安装包</h2>
+
+<pre><code class="language-r">install()
+</code></pre>
+
+<h2 id="targzlanguage-bash">5. 生成<code class="language-bash">.tar.gz</code>压缩文件</h2>
+
+<pre><code class="language-r">build()
+</code></pre>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li><a href="https://www.youtube.com/watch?v=9PyQlbAEujY">创建R包视频</a></li>
+</ul>
+
+<h3 id="section-3">更新记录</h3>
+
+<p>2014年9月5日</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Circos Notes]]></title>
+    <link href="http://yulongniu.github.io/blog/2014/03/17/circos-notes/"/>
+    <updated>2014-03-17T15:37:45-04:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/03/17/circos-notes</id>
+    <content type="html"><![CDATA[<p>Mapping data onto a Circos figure requires that you identify what patterns in your data are (a) likely to be important and (b) likely to be present, and create a figure that exposes such patterns. Remember, if the pattern exists, you can’t afford to miss it. If it doesn’t exist, you can’t afford to be fooled into thinking that it’s there, or left wondering whether it’s occluded by other data.</p>
+
+<h2 id="run-circos">1. Run circos</h2>
+
+<pre><code class="language-bash">bin/circos
+-png
+-svg
+-conf etc/circos.conf
+-outputdir /path/to/your/output/directory
+-outputfile yourimage.png
+</code></pre>
+<!--more-->
+
+<ul>
+  <li>
+    <p><code class="language-bash">-debug</code> is used for debugging</p>
+  </li>
+  <li>
+    <p><code class="language-bash">-cdump</code> is used for check the parsing file.</p>
+  </li>
+</ul>
+
+<pre><code class="language-bash"># store all debug output in circos.debug.txt and display only karyotype
+&gt; circos ... -group_debug _all | tee circos.debug.txt | egrep "debuggroup karyotype"
+# extract other debug reports
+&gt; egrep "debuggroup rule" circos.debug.txt
+&gt; egrep "debuggroup (rule|scale)" circos.debug.txt
+</code></pre>
+
+<h2 id="syntax-and-configure-files">2. Syntax and configure files</h2>
+
+<p>Configuration syntax is like:</p>
+
+<pre><code class="language-html">&lt;ideogram&gt;
+ thickness = 30p
+ fill      = yes
+ ...
+&lt;/ideogram&gt;
+</code></pre>
+<p>Usefule syntax: hierarchical structure <code class="language-html">&lt;ideogram&gt;</code>; all data points in all plot tracks <code class="language-html">&lt;links&gt;</code> and <code class="language-html">&lt;plots&gt;</code>; local data points in a given track <code class="language-html">&lt;link&gt;</code> and <code class="language-html">&lt;plot&gt;</code>; rules <code class="language-html">&lt;rules&gt;</code> and <code class="language-html">&lt;rule&gt;</code>; highlight<code class="language-html">&lt;hightlight&gt;</code>.</p>
+
+<p>Extermal imports</p>
+
+<pre><code class="language-html">&lt;image&gt;
+# Included from Circos distribution.
+&lt;&lt;include etc/image.conf&gt;&gt;
+&lt;/image&gt;
+
+# colors, fonts and fill patterns
+&lt;&lt;include etc/colors_fonts_patterns.conf&gt;&gt;
+# system and debug parameters
+&lt;&lt;include etc/housekeeping.conf&gt;&gt;
+</code></pre>
+
+<p>Accessing configuration values<code class="language-html">parameter2 = conf(parameter1)</code> or <code class="language-html">parameter2 = conf(block1,block2,parameter1)</code> for:</p>
+
+<pre><code class="language-html">&lt;block1&gt;
+&lt;block2&gt;
+parameter1 = ...
+&lt;/block2&gt;
+&lt;/block1&gt;
+</code></pre>
+
+<p>Eval</p>
+
+<pre><code class="language-html">track_color = blue
+track_width = 100
+track_start = 0.5
+
+&lt;plots&gt;
+&lt;plot&gt;
+# color=blue
+color = conf(track_color)
+# r0 = 0.5r
+r0    = eval(conf(track_start) . "r")
+# r1 = 0.5r+100p
+r1    = eval(conf(track_start) . "r" + conf(track_width) . "p")
+&lt;/plot&gt;
+&lt;/plots&gt;
+</code></pre>
+
+<p>Color</p>
+
+<p>Use the color name given, like <code class="language-html">red</code>, <code class="language-html">lred</code>, <code class="language-html">vlred</code>, <code class="language-html">vvlred</code>, <code class="language-html">dred</code>, <code class="language-html">vdred</code>, <code class="language-html">vvdred</code>. If a pure color is need, use <code class="language-html">pred</code>. For the transparent color, <code class="language-html">red_a1</code>, <code class="language-html">red_a2</code>, and to <code class="language-html">red_a5</code>. <code class="language-html">red_a1</code> has a 17% tansparency and <code class="language-html">red_a5</code> have a 83% transparency.</p>
+
+<h2 id="ideogram">3. Ideogram</h2>
+
+<p>One of the most common used ideogram is the karyotypes plot. The chromosome is marked as:</p>
+
+<pre><code class="language-perl">chr - id label start end color
+</code></pre>
+<p>for example</p>
+
+<pre><code class="language-perl">chr - hs1 1 0 249250621 chr1
+</code></pre>
+
+<p>The cytogenetic bands data is like:</p>
+
+<pre><code class="language-perl">band hs1 p36.33 p36.33 0 2300000 gneg
+</code></pre>
+<ul>
+  <li>Choose a subset of chromosomes</li>
+</ul>
+
+<pre><code class="language-perl">chromosomes_display_default = no
+
+chromosomes = hs1;hs2;hs3;h4
+chromosomes = /hs[1-4]$/
+chromosomes = /hs[1-4]$/;hs10;hs11
+chromosomes = /hs[1-4]$/;-hs3
+chromosomes = hs1:(-100,120-);hs2;hs3;h4
+</code></pre>
+
+<ul>
+  <li>Order</li>
+</ul>
+
+<pre><code class="language-perl">chromosomes_order = hs2,hs3,hs1,hs5,hs4,hs8,hs7,hs6
+</code></pre>
+
+<ul>
+  <li>Scale</li>
+</ul>
+
+<pre><code class="language-perl">chromosomes_scale = hs1=0.25,hs2=2.0
+# 25% and 50%
+chromosomes_scale = hs1=0.25r,hs2=0.50r
+# each is 25%
+chromosomes_scale = /hs[12]/=0.5rn
+# all ideograms distributed evenly within entire figure
+chromosomes_scale   = /./=1rn
+</code></pre>
+
+<ul>
+  <li>Rotation</li>
+</ul>
+
+<pre><code class="language-html">&lt;image&gt;
+angle_orientation* = counterclockwise
+&lt;&lt;include etc/image&gt;&gt;
+&lt;/image&gt;
+</code></pre>
+
+<pre><code class="language-perl">chromosomes_reverse = /hs[234]/
+</code></pre>
+
+<ul>
+  <li>Chromosome color</li>
+</ul>
+
+<pre><code class="language-perl">chromosomes_color = hs1=red,hs2=orange,hs3=green,hs4=blue
+</code></pre>
+<p>Also, the color could be redefined as</p>
+
+<pre><code class="language-perl">chr1* = red
+chr2* = orange
+chr3* = green
+chr4* = blue
+</code></pre>
+
+<ul>
+  <li>Position</li>
+</ul>
+
+<pre><code class="language-perl">chromosomes_radius = hs4:0.9r
+</code></pre>
+
+<ul>
+  <li>Show bands</li>
+</ul>
+
+<pre><code class="language-perl">band_transparency = 0
+</code></pre>
+
+<ul>
+  <li>Add chromosome</li>
+</ul>
+
+<p>For example, add the human mitochondria chromosome.</p>
+
+<p>Add the following to the file <code class="language-bash">data/karyotype/karyotype.human.txt</code></p>
+
+<pre><code class="language-perl">chr - hsMT MT 0 16569 chrMT
+</code></pre>
+
+<p>Add “hsMT” color in the file <code class="language-bash">etc/colors.ucsc.conf</code></p>
+
+<pre><code class="language-perl">chrMT = 121,204,61
+</code></pre>
+
+<h2 id="highlight">4. Highlight</h2>
+
+<h3 id="data-type">4.1 Data type</h3>
+
+<p>Data type of highlight is</p>
+
+<pre><code class="language-perl">chr start end
+</code></pre>
+<p>for exmaple,</p>
+
+<pre><code class="language-perl">hs1 1298972 1300443
+</code></pre>
+
+<p>We can also add the highlight information into the data file, for example:</p>
+
+<pre><code class="language-perl">hs1 100433463 100487964 fill_color=red,r0=0.6r,r1=0.6r+50p
+hs1 232817594 240828534 fill_color=chr9,z=61,r0=0.4r-78.7058p,r1=0.4r+78.7058p
+</code></pre>
+
+<h3 id="conf-format">4.2 Conf format</h3>
+
+<pre><code class="language-html">
+&lt;highlights&gt;
+
+&lt;highlight&gt;
+...
+&lt;/highlight&gt;
+
+&lt;highlight&gt;
+...
+&lt;/highlight&gt;
+
+&lt;highlight&gt;
+...
+&lt;/highlight&gt;
+
+&lt;/highlights&gt;
+</code></pre>
+
+<h3 id="parameters">4.3 Parameters</h3>
+
+<p><code>r0</code>: inner radius of highlight</p>
+
+<p><code>r1</code>: outer radius of highlight</p>
+
+<p><code>offset</code>:  an offset applied to both r0 and r1 (useful for overriding default r0,r1 values defined at lower precedence)</p>
+
+<p><code>fill_color</code>: color of the highlight slice</p>
+
+<p><code>stroke_color</code>: color of the highlight border, drawn if stroke_thickness is set</p>
+
+<p><code>stroke_thickness</code>: border thickness, if any, of the highlight slice</p>
+
+<p><code>z</code>: z-depth of the highlight, controlling the order in which highlights are drawn</p>
+
+<p><code>ideogram</code>: toggles the position of the highlight to be within the ideogram extent</p>
+
+<h3 id="plot-hightlight">4.4 Plot hightlight</h3>
+
+<pre><code class="language-html">&lt;plots&gt;
+&lt;plot&gt;
+type = highlight
+file = data/3/chr.highlights.txt
+r0   = 0.3r
+r1   = 0.35r
+z    = 10
+&lt;/plot&gt;
+&lt;/plots&gt;
+</code></pre>
+
+<h2 id="links">5. Links</h2>
+
+<h3 id="data-type-1">5.1 Data type</h3>
+
+<pre><code class="language-perl">hs1 100 200 hs2 250 300
+</code></pre>
+<p>or</p>
+
+<pre><code class="language-perl">segdup00010 hs1 100 200
+segdup00010 hs2 250 300
+</code></pre>
+
+<p>with link options</p>
+
+<pre><code class="language-perl">hs1 100 200 hs2 250 300 color=blue
+hs1 400 550 hs3 500 750 color=red,thickness=5p
+hs1 600 800 hs4 150 350 color=black
+</code></pre>
+
+<h3 id="conf-format-1">5.2 Conf format</h3>
+
+<pre><code class="language-html">&lt;links&gt;
+&lt;link&gt;
+file          = data/5/segdup.txt
+radius        = 0.8r
+bezier_radius = 0r
+color         = black_a4
+thickness     = 2
+&lt;/link&gt;
+&lt;/links&gt;
+</code></pre>
+
+<h3 id="parameters-1">5.3 Parameters</h3>
+
+<p><code>radius</code>: this is the radial position of the termination of the link; for relative values, if radius &lt; 1 then it is defined in terms of the inner ideogram radius, otherwise it is defined in terms of the outer ideogram radius</p>
+
+<p><code>bezier_radius</code>: the radial position of the third control point (in addition to the two positions defined by the link coordinates) used to draw the Bezier curve; if this parameter is not defined then straight lines will be used</p>
+
+<p><code>color</code>: color of the link line</p>
+
+<p><code>thickness</code>: thickness of the link line (note that this is not stroke_thickness, since the line isn’t technically stroked)</p>
+
+<p><code>record_limit</code>: if this is defined, the number of records read from the file is capped; coordinate records are sampled from the start of the file; useful for debugging</p>
+
+<p>In each <code class="language-html">&lt;link&gt;</code>, <code class="language-html">&lt;rules&gt;</code> and <code class="language-html">&lt;rule&gt;</code> can be applied to special ruls. Each <code class="language-html">&lt;rule&gt;</code> contains three parts: <em>a condition</em>, <em>formatting statements</em> and <em>an optional ‘flow’ statement</em>.</p>
+
+<p>Marker the priority of rules</p>
+
+<pre><code class="language-html">&lt;rule&gt;
+# 1st
+importance = 10
+&lt;/rule&gt;
+</code></pre>
+
+<p>Add a tag</p>
+
+<pre><code class="language-html">&lt;rule&gt;
+flow = goto special_rule if true
+...
+&lt;/rule&gt;
+
+&lt;rule&gt;
+tag = special_rule
+...
+&lt;/rule&gt;
+</code></pre>
+
+<h2 id="histograms">6. Histograms</h2>
+
+<p>Histogram, line plot, scatter plot, and heat map share the same data format</p>
+
+<pre><code class="language-perl">chr start end value [options]
+</code></pre>
+<p>for exmaple</p>
+
+<pre><code class="language-perl">hs3 196000000 197999999 71.0000 fill_color=blue
+</code></pre>
+<pre><code class="language-perl"># in data file
+hs3 196000000 197999999 71.0000 id=abc
+
+# in rule block
+&lt;rule&gt;
+condition  = var(id) eq "abc"
+fill_color = blue
+&lt;/rule&gt;
+</code></pre>
+<p>Another data format has multiple values</p>
+
+<pre><code class="language-perl">chr start end value,value,value,... [options]
+</code></pre>
+<p>for example</p>
+
+<pre><code class="language-perl">hs3 196000000 197999999 0.0000,7.0000,64.0000,0.0000
+</code></pre>
+
+<ul>
+  <li>Plot histogram</li>
+</ul>
+
+<pre><code class="language-html">&lt;plots&gt;
+&lt;plot&gt;
+type = histogram
+file = data/5/segdup.hs1234.hist.txt
+r1   = 0.88r
+r0   = 0.81r
+
+fill_color = vdgrey
+extend_bin = no
+&lt;/plot&gt;
+</code></pre>
+
+<p>For multiple values, <code class="language-bash">fill_color</code> is used to set the different colors.</p>
+
+<ul>
+  <li>Orientation</li>
+</ul>
+
+<pre><code class="language-html">orientation = in
+</code></pre>
+
+<ul>
+  <li>Rules</li>
+</ul>
+
+<pre><code class="language-html">&lt;rules&gt;
+&lt;&lt;include exclude.hs1.rule&gt;&gt;
+&lt;/rules&gt;
+</code></pre>
+
+<ul>
+  <li>Backgrounds and axes</li>
+</ul>
+
+<pre><code class="language-html">&lt;plot&gt;
+...
+
+&lt;axes&gt;
+ &lt;axis&gt;
+ ...
+ &lt;/axis&gt;
+ &lt;axis&gt;
+ ...
+ &lt;/axis&gt;
+ ...
+&lt;/axes&gt;
+
+&lt;backgrounds&gt;
+ &lt;background&gt;
+ ...
+ &lt;/background&gt;
+ &lt;background&gt;
+ ...
+ &lt;/background&gt;
+ ...
+&lt;/backgrounds&gt;
+
+&lt;/plot&gt;
+</code></pre>
+
+<ul>
+  <li>text</li>
+</ul>
+
+<p>text data format is</p>
+
+<pre><code class="language-perl">chr start end value
+</code></pre>
+
+<p>for exmaple</p>
+
+<pre><code class="language-perl">hs1 100425066 100487997 DBT
+</code></pre>
+
+<pre><code class="language-html">&lt;plots&gt;
+&lt;plot&gt;
+type             = text
+color            = black
+file             = data/phylo/labelGene.txt
+&lt;/plot&gt;
+&lt;/plots&gt;
+</code></pre>
+
+<p>apply rules</p>
+
+<pre><code class="language-html">&lt;rules&gt;
+&lt;rule&gt;
+importance = 90
+condition  = var(value) eq "GeneName"
+color = blue
+&lt;/rule&gt;
+&lt;/rules&gt;
+</code></pre>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+  <li><a href="http://circos.ca/images/scientific_literature/">Ciros grocery of published pictures</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ggplot2 Notes]]></title>
+    <link href="http://yulongniu.github.io/blog/2013/10/02/ggplot2-notes/"/>
+    <updated>2013-10-02T00:00:00-04:00</updated>
+    <id>http://yulongniu.github.io/blog/2013/10/02/ggplot2-notes</id>
+    <content type="html"><![CDATA[<p>gi—
+layout: post
+title: “R ggplot2 notes”
+date: 2013-10-02 02:47:11 -0400
+comments: true
+categories: R
+—</p>
+
+<h1 id="r-package-span-stylecolor-blueggplot2span-notes">R Package <span style="color: blue">ggplot2</span> Notes</h1>
+
+<h2 id="basic-grammar">1. Basic grammar</h2>
+
+<h3 id="plot-types">1.1 Plot types</h3>
+
+<p>The R package <span style="color: blue">ggplot2</span> is a famous plot tool for high quality scientific figures. The <span style="color: blue">ggplot2</span> style figures are widely seen in papers published in high quality journals such as <em>PNAS</em>, <em>Nature</em> and <em>Cell</em>.</p>
+
+<p>The input data should be in <strong>data frame</strong> form, and it is easily to use the function <code class="language-r">as.data.frame()</code>. “<span style="color:red"><strong>+</strong></span>” is used to connect different plot statement. A typical <span style="color: blue">ggplot2</span> plot statement is like:</p>
+
+<!--more-->
+
+<pre><code class="language-r">require('ggplot2')
+ggplot(data=mpg, mapping=aes(x=cty, y=hwy, colour=factor(year))) +
+geom_point() + stat_smooth()
+</code></pre>
+<p><code class="language-r">ggplot()</code>: <strong>data</strong> is a <span style="color:blue">data.frame</span> class object. <strong>mapping</strong> is an <code class="language-r">aes()</code> function to specify the X-axis and Y-axis. When a <code class="language-r">aes()</code> is used, a figure legend will be added. If we do not want the legends appear, use <code class="language-r">show_guide = FALSE</code> in <em>geom_XXX</em> or <em>stat_XXX</em></p>
+
+<p><code class="language-r">geom_point()</code>: is used to plot points with the attributes <strong>x</strong>, <strong>y</strong>, alpha, colour, fill, shape, size.</p>
+
+<p><code class="language-r">geom_line()</code>: is used to plot points with the attributes <strong>x</strong>, <strong>y</strong>, alpha, colour, fill, shape, size.</p>
+
+<p><code class="language-r">geom_bar()</code>: bar plot. <code class="language-r">stat = 'identity'</code> for draw the identical, <code class="language-r">hjust</code> and <code class="language-r">vjust</code> is to adjust the x and y axis distance. <code class="language-r">coord_flip()</code> to reverse X and Y axis. <code class="language-r">position = 'dodge'</code> to set position of two bars, can be set as ‘dodge’, ‘stack’, ‘fill’ and ‘identity’.</p>
+
+<p><code class="language-r">geom_box()</code>: boxplot.</p>
+
+<pre><code class="language-r"># example
+require('ggplot2')
+p &lt;- ggplot(mtcars, aes(factor(cyl), mpg))
+# basic plot
+p + geom_boxplot()
+# add colors to boxes
+p + geom_boxplot(aes(fill = factor(cyl)))
+# change default colors
+p + geom_boxplot(aes(fill = factor(cyl))) + scale_fill_manual(values = c('red', 'green', 'blue'))
+</code></pre>
+<p><code class="language-r">geom_rect(mapping = NULL, data = NULL, stat = "identity", position = "identity", ...)</code>: plot rectangles. 
+In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, <code class="language-r">xmax</code>, <code class="language-r">ymin</code>, and <code class="language-r">ymax</code> are necessary. 
+<code class="language-r">inherit.aes = FALSE</code> may be used if new <code class="language-r">data</code> is applied.</p>
+
+<pre><code class="language-r"># example
+ggplot(mtcars) +
+  geom_density(aes(x=disp, group=cyl, fill=cyl), alpha=0.6, adjust=0.75) + 
+  geom_rect(data=mtcars[1,], aes(xmin=100, xmax=200, ymin=0,ymax=Inf), fill="red", alpha=0.2)
+</code></pre>
+
+<h3 id="statistics">1.2 Statistics</h3>
+
+<p><code class="language-r">geom_smooth()</code>: is used for the add smooth line with the <strong>method</strong> lm, glm, gam, loess and rlm. <code class="language-r">se = TRUE</code> is to display the confident region. The following aesthetics <strong>x</strong>, <strong>y</strong>, alpha, colour, fill, linetype, size, weight could be added.</p>
+
+<p><code class="language-r">stat_boxplot()</code>: plot error lines in boxplot.</p>
+
+<h3 id="add-elements">1.3 Add elements</h3>
+
+<p><code class="language-r">xlab()</code>: change X axis label, set <code>xlab('')</code> to remove the X axis label; <code class="language-r">ylab()</code>: change Y axis label; <code class="language-r">ggtitle()</code>: add figure title; <code class="language-r">scale_y_continuous(limits=c(0, 20))</code> and <code class="language-r">scale_x_continuous(limits=c(0, 20))</code> to adjust range of X and Y axis.</p>
+
+<p><code class="language-r">geom_abline(intercept = 37, slope = -5)</code>: to add line.</p>
+
+<p><code class="language-r">geom_hline</code> and <code class="language-r">geom_vline</code>: to add horizontal and vertical lines.</p>
+
+<pre><code class="language-r"># example 
+p &lt;- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
+geom_vline(xintercept = 1:5, colour="green", linetype = "longdash")
+</code></pre>
+
+<pre><code class="language-r"># ggplot2 line type
+d &lt;- data.frame(lt=c('blank', 'solid', 'dashed', 'dotted', 'dotdash', 'longdash', 'twodash', '1F', 'F1', '4C88C488', '12345678'))
+ggplot() +
+  scale_x_continuous(name='', limits=c(0,1), breaks=NULL) +
+  scale_y_discrete(name='linetype') +
+  scale_linetype_identity() +
+  geom_segment(data=d, mapping=aes(x=0, xend=1, y=lt, yend=lt, linetype=lt))
+</code></pre>
+
+<p><code class="language-r">geom_text()</code>: to add text. Set <code>parse = TRUE</code> to use expression and greek letters.</p>
+
+<p><code class="language-r">scale_fill_discrete(..., values)</code>: change labels. <code class="language-r">name</code> to reset label names, <code class="language-r">labels</code> to reset labels.</p>
+
+<p><code class="language-r">scale_shape_manual(..., values)</code>: change the shape of points.</p>
+
+<p><code class="language-r">scale_linetype_manual(..., values)</code>: change the types of lines. line referring <a href="http://www.cookbook-r.com/Graphs/Shapes_and_line_types/">R plot</a>.<code>name</code>, <code>value</code>, <code>labels</code> are used to change value.</p>
+
+<p><code class="language-r">scale_color_manual</code> is used for change the colors. Please refer to <a href="http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/">Useful color palette</a>, and <a href="http://blog.ggplot2.org/post/24607351280/choosing-colour-palettes-part-ii-educated-choices">Introduction of ggplot2 colors</a>. The default ggplot2 colors are generated from the “<em>scales</em>” package, for example the default “hue pallet” could be view as <code class="language-r">show_col(hue_pal(h = c(0, 360) + 15, c = 100, l = 65, h.start = 0, direction = 1)(9))</code></p>
+
+<p><code class="language-r">scale_fill_manual(..., alues)</code> to change filled colors.</p>
+
+<p><code class="language-r">theme</code> is used for exact control. <code>legend.position='none'</code> to remove the side legend.</p>
+
+<h2 id="save-plot">2. Save plot</h2>
+
+<p>The function <code class="language-r">ggsave()</code> is used to save the screen plot to file. <code class="language-r">print()</code> is also applied like:</p>
+
+<pre><code class="language-r">pdf('testfile.pdf')
+q &lt;- ggplot()
+print(q)
+dev.off()
+</code></pre>
+
+<h2 id="other-issues">3. Other issues</h2>
+
+<h3 id="plot-mutiple-ggplot2">3.1 Plot mutiple ggplot2</h3>
+
+<p>Use <span style="color: blue">gridExtra</span> package to plot multiple ggplot2 figures in the one figure. </p>
+
+<pre><code class="language-r"># example
+require('gridExtra')
+# save ggplot object into a list like "plotList"
+do.call(grid.arrange, plotList)
+</code></pre>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li><a href="http://directlabels.r-forge.r-project.org/examples.html">Better labels</a></li>
+  <li><a href="http://docs.ggplot2.org/current/">ggplot2 doc</a></li>
+</ul>
+
+<h3 id="section">更新记录</h3>
+
+<p>2014年8月28日</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[生物信息学工具网址]]></title>
+    <link href="http://yulongniu.github.io/blog/2013/06/18/bioinfor-tools/"/>
+    <updated>2013-06-18T16:42:10-04:00</updated>
+    <id>http://yulongniu.github.io/blog/2013/06/18/bioinfor-tools</id>
+    <content type="html"><![CDATA[<h2 id="section">1. 基因组注释信息</h2>
+
+<ul>
+  <li>
+    <p><a href="ftp://ftp.ncbi.nih.gov/genomes/">NCBI ftp 下载基因组</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.jcvi.org/cms/home/">Craig Venter Institute</a></p>
+  </li>
+  <li>
+    <p><a href="http://useast.ensembl.org/info/data/ftp/index.html">Ensembl</a></p>
+  </li>
+</ul>
+
+<h2 id="section-1">2. 进化树</h2>
+
+<ul>
+  <li>
+    <p>进化树展示</p>
+
+    <ul>
+      <li>
+        <p><a href="http://en.wikipedia.org/wiki/List_of_phylogenetic_tree_visualization_software">Wiki software list</a></p>
+      </li>
+      <li>
+        <p><a href="https://www.biostars.org/p/2438/">Biostats总结</a></p>
+      </li>
+      <li>
+        <p><a href="http://itol.embl.de/index.shtml">iTOL</a></p>
+      </li>
+      <li>
+        <p><a href="http://ab.inf.uni-tuebingen.de/software/dendroscope/welcome.html">Dendroscope</a></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<!--more-->
+
+<ul>
+  <li>
+    <p>进化树构建</p>
+
+    <ul>
+      <li>
+        <p><a href="http://sco.h-its.org/exelixis/web/software/raxml/index.html">RAxML</a></p>
+      </li>
+      <li>
+        <p><a href="http://www.atgc-montpellier.fr/phyml/">PhyML</a></p>
+      </li>
+      <li>
+        <p><a href="http://evolution.genetics.washington.edu/phylip.html">PHYLIP</a>，在PHYLIP的<a href="http://evolution.genetics.washington.edu/phylip/general.html">介绍</a>中，列出了六个高使用率的构建进化树的软件，MrBayes、PAUP*、RAxML、PhyML、MEGA和PHYLIP。</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>sRNA数据库</p>
+
+    <ul>
+      <li>
+        <p><a href="http://www.arb-silva.de/">16S/23S数据库</a></p>
+      </li>
+      <li>
+        <p><a href="http://greengenes.lbl.gov/cgi-bin/nph-index.cgi">细菌16S数据库</a></p>
+      </li>
+      <li>
+        <p><a href="http://rdp.cme.msu.edu/index.jsp">真核生物rRNA</a></p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>数据格式转换</p>
+
+    <ul>
+      <li>
+        <p><a href="http://sco.h-its.org/exelixis/web/software/raxml/index.html">fasta转换为Phylip</a></p>
+      </li>
+      <li>
+        <p>进化树newick和nexus格式转换</p>
+
+        <ol>
+          <li>R package <span style="color: blue">ape</span>，提供了函数<code class="language-r">read.tree()</code>/<code class="language-r">write.tree()</code>，<code class="language-r">read.nexus()</code>/<code class="language-r">read.nexus()</code>。</li>
+        </ol>
+      </li>
+      <li>
+        <p><a href="http://www.phylogeny.fr/version2_cgi/data_converter.cgi">通用格式转换工具</a></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="section-2">3. 网络可视化</h2>
+
+<ul>
+  <li>
+    <p><a href="http://www.cytoscape.org/">Cytoscape</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.biolayout.org/">3D网络BioLayout Expression3D</a></p>
+  </li>
+  <li>
+    <p><a href="http://visant.bu.edu/">VisAnt</a></p>
+  </li>
+  <li>
+    <p><a href="http://circos.ca/">Circos</a></p>
+  </li>
+</ul>
+
+<h2 id="section-3">4. 序列比对</h2>
+
+<ul>
+  <li>
+    <p><a href="http://www.clustal.org/">Clustal</a></p>
+  </li>
+  <li>
+    <p><a href="ftp://ftp.ncbi.nlm.nih.gov/blast/executables/LATEST/">Blast</a></p>
+  </li>
+  <li>
+    <p><a href="http://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&amp;DOC_TYPE=Download">Blast+</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.ebi.ac.uk/Tools/msa/">EBI总结</a></p>
+  </li>
+  <li>
+    <p><a href="http://mafft.cbrc.jp/alignment/server/">MAFFT</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.drive5.com/muscle/">MUSCLE</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.tcoffee.org/">T-Coffee</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.megasoftware.net/">MEGA</a></p>
+  </li>
+</ul>
+
+<h2 id="section-4">5. 质谱分析</h2>
+
+<ul>
+  <li>
+    <p><a href="http://www.thegpm.org/TANDEM/">X!Tandem</a></p>
+  </li>
+  <li>
+    <p><a href="http://bacteria.thegpm.org/tandem/thegpm_tandem.html">X!Tandem bacterial</a></p>
+  </li>
+  <li>
+    <p><a href="http://prospector2.ucsf.edu/prospector/mshome.htm">ProteinProspector</a></p>
+  </li>
+  <li>
+    <p><a href="http://strimmerlab.org/notes/mass-spectrometry.html">R packages list</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.matrixscience.com/">Mascot</a></p>
+  </li>
+</ul>
+
+<h2 id="section-5">6. 基因注释</h2>
+
+<ul>
+  <li>
+    <p><a href="http://www.ncbi.nlm.nih.gov/IEB/Research/Acembly/index.html">Acembly</a></p>
+  </li>
+  <li>
+    <p><a href="http://rest.kegg.jp/list/hsa">KEGG</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.pantherdb.org/">PANTHER</a></p>
+  </li>
+</ul>
+
+<h2 id="section-6">7. 基因名转换</h2>
+
+<ul>
+  <li>
+    <p><a href="http://biodbnet.abcc.ncifcrf.gov/db/db2db.php">bioDBnet</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.ncbi.nlm.nih.gov/COG/">COG</a></p>
+  </li>
+  <li>
+    <p><a href="http://idconverter.bioinfo.cnio.es/IDconverter.php">IDconverter</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.uniprot.org/">uniprot</a></p>
+  </li>
+  <li>
+    <p><a href="http://david.abcc.ncifcrf.gov/home.jsp">DAVID</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.ncbi.nlm.nih.gov/books/NBK179288/">NCBI E-utilities</a></p>
+  </li>
+</ul>
+
+<h2 id="section-7">8. 结构域分析</h2>
+
+<ul>
+  <li>
+    <p><a href="http://www.ncbi.nlm.nih.gov/Structure/bwrpsb/bwrpsb.cgi">CDD</a></p>
+  </li>
+  <li>
+    <p><a href="http://pfam.sanger.ac.uk/">pfam</a></p>
+  </li>
+</ul>
+
+<h2 id="transcription-unit">9. 原核生物Transcription Unit查询</h2>
+
+<ul>
+  <li>
+    <p><a href="http://biocyc.org/">BioCyc</a></p>
+  </li>
+  <li>
+    <p><a href="http://operons.ibt.unam.mx/OperonPredictor/">ProOpDB</a></p>
+  </li>
+</ul>
+
+<h2 id="section-8">10. 探针设计</h2>
+
+<ul>
+  <li><a href="http://www.arb-home.de/">ARB</a></li>
+</ul>
+
+<h2 id="section-9">11. 统计学网址</h2>
+
+<p><a href="http://www.math.uah.edu/stat/bernoulli/Binomial.html">Virtual Laboratories in Probability and Statistics</a></p>
+
+<h2 id="section-10">12. 生物学通路数据库</h2>
+
+<ul>
+  <li>
+    <p><a href="http://www.genome.jp/kegg/">KEGG</a></p>
+  </li>
+  <li>
+    <p><a href="http://biocyc.org/">BioCyc</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.reactome.org/">Reactome</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.grenoble.prabi.fr/obiwarehouse/unipathway">Unipathway</a></p>
+  </li>
+  <li>
+    <p><a href="http://pid.nci.nih.gov/">PID</a></p>
+  </li>
+  <li>
+    <p><a href="http://biochemical-pathways.com/">Biochemical-pathways</a></p>
+  </li>
+  <li>
+    <p><a href="http://lsresearch.thomsonreuters.com/maps/">Pathway Maps</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.biocarta.com/genes/index.asp">BioCarta</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.genmapp.org/">GenMAPP</a></p>
+  </li>
+</ul>
+
+<h2 id="section-11">13. 转录调控数据库</h2>
+
+<ul>
+  <li>
+    <p><a href="http://regprecise.lbl.gov/RegPrecise/index.jsp">RegPrecise</a> 原核生物“转录因子–下游基因”数据库。</p>
+  </li>
+  <li>
+    <p><a href="http://dbtbs.hgc.jp/">DBTBS</a> 转录因子和相应的DNA结合保守（DNA binding motif）数据库。</p>
+  </li>
+</ul>
+
+<h2 id="section-12">文章介绍</h2>
+
+<ul>
+  <li>
+    <p><a href="http://www.nature.com/nrm/journal/v8/n12/abs/nrm2281.html">未知蛋白功能研究流程</a></p>
+  </li>
+  <li>
+    <p>蛋白质相互作用 <a href="http://www.ploscompbiol.org/article/info:doi/10.1371/journal.pcbi.0030042">1</a>, <a href="http://www.ploscompbiol.org/article/info:doi/10.1371/journal.pcbi.0030043">2</a></p>
+  </li>
+  <li>
+    <p><a href="http://cshprotocols.cshlp.org/content/2008/4/pdb.ip49.full">进化树方法选择</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.plosone.org/article/info:doi/10.1371/journal.pone.0002566">构建进化树</a></p>
+  </li>
+</ul>
+
+<h2 id="section-13">书籍推荐</h2>
+
+<ul>
+  <li><a href="http://a-little-book-of-r-for-bioinformatics.readthedocs.org/en/latest/index.html">a Little Book of R for Bioinformatics</a> 一本使用R语言介绍生物信息学书，提供源代码和示例。</li>
+</ul>
+
+<h3 id="section-14">更新记录</h3>
+
+<p>2014年9月19日</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[R包制作和roxygen2使用说明]]></title>
+    <link href="http://yulongniu.github.io/blog/2012/05/29/r-package-and-roxygen2/"/>
+    <updated>2012-05-29T19:46:59-04:00</updated>
+    <id>http://yulongniu.github.io/blog/2012/05/29/r-package-and-roxygen2</id>
+    <content type="html"><![CDATA[<p>查看创建R包的各种细节，权威的文献是<a href="http://cran.r-project.org/doc/manuals/r-release/R-exts.html">Writing R Extensions</a>。</p>
+
+<h2 id="r">1. 创建R包目录</h2>
+
+<p>像盖房子一样，创建R包需要先搭建一个骨架，这个骨架往往是固定的，即一些文件夹（如<code>R</code>，<code>man</code>等）和文件（如<code>DESCRIPTION</code>，<code>NAMESPACE</code>）是必须的，而另外一些则可选择性添加。一个典型的R包目录,比如<span style="color: blue">Biobase</span>包，如下图：</p>
+
+<!--more-->
+
+<p><img class="middle" src="http://yulongniu.github.io/images/r_catalog.png" width="350" height="300" title="Biobase catalog #1" alt="a snap of Biobase catalog" /></p>
+
+<h3 id="description">1.1 <code>DESCRIPTION</code>文件</h3>
+
+<p>一个纯文本ASCII文件，其中Package, Version, License, Description, Title, Author和Maintainer是必备条目，一个例子<span style="color: blue">knitr</span>包的<code>DESCRIPTION</code>文件：</p>
+
+<ul>
+  <li>
+    <p>Package：由字母、数字和“点”构成的，至少含有两个字符，第一个必须是字母，结束不能用“点”（这也是包名称的命名规范）。</p>
+  </li>
+  <li>
+    <p>Version：版本号，经典的命名方式比如0.1-0。</p>
+  </li>
+  <li>
+    <p>License：GPL。</p>
+  </li>
+  <li>
+    <p>Description：一段话描述包主要的功能。</p>
+  </li>
+  <li>
+    <p>Title：包的一句话解释。</p>
+  </li>
+  <li>
+    <p>Author和Maintainer：包的作者和维护者，姓+名 （比如Karl Pearson ）。也可以使使用Author@R描述作者，使用R函数<code class="language-r">person()</code>，其中变量<code>role</code>的选项<code>aut</code>表示author，<code>cre</code>表示creator（维护者），<code>ctb</code>表示contributor。一个例子：</p>
+  </li>
+</ul>
+
+<pre><code class="language-r">c(person("Hadley", "Wickham", email = "hadley@rice.edu", role ="ctb"),  
+person("Yihui", "Xie", email = "xie@yihui.name", role = c("aut", "cre")))
+</code></pre>
+
+<ul>
+  <li>
+    <p>Date（可选）：当前版本包日期，格式yyyy-mm-dd。</p>
+  </li>
+  <li>
+    <p>Depends（可选）：依赖的R环境版本和包名称，比如 <code>R (&gt;= 2.14.1)</code>。</p>
+  </li>
+</ul>
+
+<p><span style="color: blue">注意：</span></p>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>加上版本号，没有版本号等于没用，因为版本之间可能差异很大；</p>
+    </li>
+    <li>
+      <p>对于<span style="color: blue">base</span>等这样的包就不用写了，因为是必然依赖的，同时也是R启动自动载入的。对于依赖的包名称，在R 2.14.0之后完全没有必要写，因为从这个版本后，所有包都有<code>NAMESPACE</code>，直接使用<code>Imports</code>就可以了。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li>
+    <p>Imports（可选）：如果只是使用某些包中类、方法或者（一般）函数，而不用完全载入包，可以在此栏列出包的名称，最好加上版本号（在<code class="language-bash">R CMD check</code>会检查版本）。在代码中，引用其他包的namespace可以使用<code>::</code>或者<code>:::</code>操作符。与之对应的，需要在<code>NAMESPACE</code>文件中指明引用（见后）。</p>
+  </li>
+  <li>
+    <p>Suggests（可选）：如果只是在帮助文档的<code>examples</code>，<code>tests</code>或者vignettes中用到了一些包，那么没有必要“依赖”或者“引用”，只用“建议”安装即可。版本号同样也要加上，在<code class="language-bash">R CMD check</code>时会用到。当然，我们要考虑到如果读者也想重现一下<code class="language-bash">examples/tests/vignettes</code>的例子，最好使用<code class="languag-r">if(require(pkgname)))</code>的条件句控制：<code class="languag-r">TRUE</code>执行，<code class="languag-r">FALSE</code>返回错误。</p>
+  </li>
+  <li>
+    <p>Enhances（可选）：这个条目中的包可以被这个正在创建的包“增强”功能，比如我们创建的这个包为（对列表中的包）提供了更好的方法、更优秀的处理手段等。</p>
+  </li>
+  <li>
+    <p>URL（可选）：一系列相关的网址，使用“逗号”或者空格隔开。链接可能是作者的主页、包的补充材料等。</p>
+  </li>
+  <li>
+    <p>BugReports（可选）：一个网址，用于提交bug，代替了向作者发邮件。一个好的想法是使用<a href="https://github.com/">Github</a>，在项目的issures版块提交bug。</p>
+  </li>
+  <li>
+    <p>Collate（可选）：看不懂。</p>
+  </li>
+  <li>
+    <p>KeepSource（可选）：逻辑值，设定为<code class="languag-r">TRUE</code>，表示包是源码。</p>
+  </li>
+  <li>
+    <p>ByteCompile（可选）：逻辑值，目前默认设置为否；如果性能确实可以得到提升，可以选择<code class="languag-r">TRUE</code>，但这可能增加安装时间和体积。</p>
+  </li>
+  <li>
+    <p>BuildVignettes（可选）：如果设定位<code class="languag-r">FALSE</code>，<code class="languag-bash">R CMD build</code>不会重新编辑vignette，同时<code class="languag-bash">R CMD check</code>也不会检查。</p>
+  </li>
+</ul>
+
+<h3 id="section">1.2 包目录下的各种文件夹说明</h3>
+
+<ul>
+  <li>
+    <p>R文件夹：这个文件夹下放置用R语言写成的源代码，文件最好使用后缀<code>*.R</code>。</p>
+  </li>
+  <li>
+    <p>man文件夹：man文件夹下放置<code>*.Rd</code>结尾的文档，这写文档详细描述的函数的用途。如果使用roxygen2，就不需要建立这个文件夹。</p>
+  </li>
+  <li>
+    <p>src文件夹：放置用其他语言写成的代码，比如C/C++/Fortran等。</p>
+  </li>
+  <li>
+    <p>data文件夹：放置一些data文件，比如R代码、表格（<code>*txt</code>/<code>*.tab</code>/<code>*.csv</code>）文件或者是用<code class="language-r">save()</code>函数保存的镜像（<code>*.RData</code>/<code>*.rda</code>）。这些文件必须是“自给自足”的，即不用调用包也能使用这些data。如果这些data比较大，可以将其压缩为<code>*.gzip</code>/<code>*.bzip2</code>/<code>*.xz</code>格式，或者在保存镜像时，使用<code class="language-r">save(, compress = TRUE)</code>。这些方法可以有效地减少包的体积和安装时间，以方便用户使用。</p>
+  </li>
+  <li>
+    <p>demo文件夹：放置一些包的示例，通过<code>demo()</code>函数访问。（需要有一个00Index文件？不能自动生成？）</p>
+  </li>
+  <li>
+    <p>exec文件夹：放置脚本文件比如shell、Perl、Python、Tcl等。</p>
+  </li>
+  <li>
+    <p>inst文件夹：包在编译安装中，会将这个文件下的文件放入包的根目录下，所以可以放包的更新文件NEWS（或者CHANGELOG）文件、用于引用的CITATION文件等。还有很重要的子文件夹是doc，vignette文件就放在此处，格式为*.Rnw，这个文件会进一步被编程成LaTeX文件，最后生成常见的PDF文档。现在Swear过时了，用<span style="color: blue">knitr</span>吧。</p>
+  </li>
+</ul>
+
+<h2 id="namespace">2. <code>NAMESPACE</code>文件</h2>
+
+<h3 id="section-1">2.1 文件说明</h3>
+
+<p><code>NAMESPACE</code>文件非常重要，因为它指明哪些函数是“输出（export）”给用户使用，哪些又是从其他包中“输入（import）”的。如果作者没有指明这个文件，那么在创建包时会被自动创建，此时所有的对象都被输出，在<code>Imports</code>和<code>Depends</code>下的包全部被输入。</p>
+
+<p><strong>“输出”格式</strong>：<code class="language-r">export(f, g)</code>，其中<code class="language-r">f</code>和<code class="language-r">g</code>是变量名，一般不用引号括起。也可以使用正则表达式批量输出，比如 <code class="language-r">exportPattern("^[^\\.]")</code>。</p>
+
+<p><strong>“输入”格式</strong>：<code class="language-r">import(for, bar)</code>，其中<code class="language-r">for</code>和<code class="language-r">bar</code>是包名称，这样做会导致<code class="language-r">for</code>和<code class="language-r">bar</code>中所有的输出对象都被引用。如果我们只想引用其中的某几个对象， 可以使用<code class="language-r">importFrom(foo, f, g)</code>，其中<code class="language-r">f</code>和<code class="language-r">g</code>是<code class="language-r">foo</code>包的变量名。<span style="color: blue">Base</span>包的命名空间被默认引用。当然，也可以输出其他包的变量，前提是这些变量需要先被输入。</p>
+
+<h3 id="s3">2.2 S3类</h3>
+
+<p><code class="language-r">S3method(Mymethod, Myclass)</code></p>
+
+<h3 id="s4">2.3 S4类</h3>
+
+<p><strong>“输出”格式</strong>：如果创建的S4类需要被外部调用，使用<code class="language-r">exportClasses(Myclass1, Myclass2)</code>，同样可以使用<code class="language-r">exportClassPattern()</code>批量输出。对于S4，输出“方法（methods）”也会输出“泛函（generic）”，输出泛函同样也会输出方法。如果一个方法，在要创建的包中没有找到对应的方法，有两种可能的情况：</p>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>泛函已经从别的包中输入，比如<code class="language-r">importMethods()</code>；</p>
+    </li>
+    <li>
+      <p>从别的包中输入函数，但被转换为默认方法，比如<code class="language-r">importFrom("graphics", plot)</code>，<code class="language-r">plot()</code>函数又被分配其他的方法，这种情况下输入自己包的<code class="language-r">plot()</code>函数，使用<code class="language-r">exportMethods(plot)</code>。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<p><strong>“输入”格式</strong>：输入某个包的全部类或者特定的类，<code class="language-r">ImportClasses(pkg)</code>或者<code class="language-r">ImportClassesFrom(pkg, class1)</code>；输入某个包全部方法或者特定方法，<code class="language-r">ImportMethods(pkg)</code>或者<code class="language-r">ImportMethodsFrom(pkg, method1)</code>。</p>
+
+<p><span style="color: blue">stats4</span>给出的例子非常好，R 2.15.0之后，对隐式泛函要求严格，必须先输入显示函数：</p>
+
+<pre><code class="language-r">  export(mle) 
+  importFrom("graphics", plot) 
+  importFrom("stats", optim, qchisq) 
+  ## For these, we define methods or (AIC, BIC, nobs) an implicit generic: 
+  importFrom("stats", AIC, BIC, coef, confint, logLik, nobs, profile, update, vcov)   exportClasses(mle, profile.mle, summary.mle) 
+  ## All methods for imported generics: 
+  exportMethods(coef, confint, logLik, plot, profile, summary, show, update, vcov)
+  ## implicit generics which do not have any methods here 
+  export(AIC, BIC, nobs)
+</code></pre>
+
+<h2 id="r-1">3. 书写R函数帮助文档</h2>
+
+<p>书写函数文档的利器当属Emacs+ESS+<span style="color: blue">roxygen2</span>包。Emacs+ESS搭建了一个非常棒的统计学软件（R、SAS、S-Plus等）的代码编辑和运行环境，从ESS命名Emacs Speaks Statistics上就可以感受到它外漏的霸气。而<a href="http://roxygen.org/">roxygen2</a>是R的一个包，仿照Doxygen构建的工具，实现了文档和源码用一个文件共同管理的想法。</p>
+
+<p>这个想法相当棒：</p>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>在写代码时，方便“就地”编写文档（函数功能、参数解释、实现功能、注意事项、依赖关系和例子等）；</p>
+    </li>
+    <li>
+      <p>在源码修改时，及时地更新文档。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<p>对于编辑R包来说，对应的文档是<code>*.Rd</code>（R documentation）格式的文件，以下是一个框架示意图：</p>
+
+<p><img class="middle" src="http://yulongniu.github.io/images/r_rd.png" width="600" height="600" title="Rd file #1" alt="a snap of Rd file framework" /></p>
+
+<h3 id="span-stylecolor-blueroxygen2span">3.1 <span style="color: blue">roxygen2</span>使用注释</h3>
+
+<ul>
+  <li>
+    <p><code>@title</code>：文档标题，通常是函数名缩写（比如首字母缩写）的解释。出现在该函数文档的标题位置和检索（index）目录。</p>
+  </li>
+  <li>
+    <p><code>@aliases</code>：函数别名。这个函数的别名，如果使用，在HTML帮助文档中将出现这个别名，链接的文档还是原来函数文档；同样，<code class="language-r">?“别名”</code>也能调出帮助文件。具体参考<span style="color: blue">stats</span>包中，“Normal”是<code class="language-r">dnorm()</code>，<code class="language-r">pnorm()</code>，<code class="language-r">qnorm()</code>，<code class="language-r">rnorm()</code>三个函数的别名。</p>
+  </li>
+  <li>
+    <p><code>@description</code>：描述，对函数进行稍微详细的描述，可以讲解函数的功能，不能有空行。出现在文档开始位置。</p>
+  </li>
+  <li>
+    <p><code>@details</code>：函数的具体描述，啰嗦各种细节，比如在运行过程中的注意事项、输入结果解释、运用的公式等。</p>
+  </li>
+  <li>
+    <p><code>@param</code>：各个变量（argument）的解释。</p>
+  </li>
+  <li>
+    <p><code>@inheritParams</code>：用于需要重复解释的变量，防止过多“剪切”“复制”。比如一些变量已经在foo1解释了，而foo2需要用foo1的一些变量，就可以使用这个字段。这里的foo1可以是当前包的函数，也可以是其他包函数，比如pkg::foo1。</p>
+  </li>
+  <li>
+    <p><code>@return</code>：函数返回的结果。如果想具体解释返回的结果，格式<code class="language-html">\item{name a}{description a}</code>。</p>
+  </li>
+  <li>
+    <p><code>@author</code>：作者，加上作者邮件地址，格式：<code class="language-html">\email{MrR@@stat.cn}</code>。</p>
+  </li>
+  <li>
+    <p><code>@examples</code>：给出函数使用的例子。例子非常重要，很多用户对例子的关注要远远高于其他的部分，啰啰嗦嗦说了一大堆，不如来两个漂亮的例子。我认为好的例子应该包括（但不限于）：</p>
+  </li>
+</ul>
+
+<blockquote>
+  <ul>
+    <li>
+      <p>重要参数的演示；</p>
+    </li>
+    <li>
+      <p>参数之间的协调控制；</p>
+    </li>
+    <li>
+      <p>特殊参数（用语言描述困难）的演示；</p>
+    </li>
+    <li>
+      <p>可能的错误使用；</p>
+    </li>
+    <li>
+      <p>来几张漂亮图。</p>
+    </li>
+  </ul>
+</blockquote>
+
+<p>这些例子可以直接使用R代码编排、“#”注释、多行也问题。这些例子可以用函数<code class="language-r">example()</code>运行。如果不想运行某些例子（比如演示错误使用等），格式：<code class="language-html">\dontrun{Rcode}</code>。如果例子中依赖其他包，使用<code class="language-r">if(require(pkg)){ }</code>格式。</p>
+
+<p>也可以在包的根目录下建立文件，通过<code class="language-r">@example path/relative/to/packge/root</code>引用。如果函数不需要输出，则不用添加<code>@example</code>，否则在R包检查中会报错。</p>
+
+<ul>
+  <li>
+    <p><code>@references</code>： 参考文献，比如算法出处、函数编写思路、例子的参考文献等。如果想多行出现，只需再用一次<code>@references</code>即可。如果要网址，格式为<code class="language-html">\url{http://www.google.com}</code>。</p>
+  </li>
+  <li>
+    <p><code>@seealso</code>：其他可供参考或者有联系的对象，并说明可供参考的原因。如果想在HTML中有超链接，格式为<code class="language-html">\code{\link{function}}</code>。</p>
+  </li>
+  <li>
+    <p><code>@family</code>：为<code>@seealso</code>提供了另外一种解决方法，将需要相互引用函数编排成一个“家族（family）”，之后同一个家族的函数自动出现在see-also中。同一个函数可以属于多个不同家族。</p>
+  </li>
+  <li>
+    <p><code>@note</code>：添加一些注释信息。</p>
+  </li>
+  <li>
+    <p><code>@section</code>：用户自定义一个注释区（包括名称和内容）。</p>
+  </li>
+  <li>
+    <p><code>@rdname</code>：解决了多个文档合并的问题。可以将多个函数标记为一个共同的<code class="language-html">@rdname（override name）</code>，这样在最后的HTML文档中，就可以将多个功能相似或者一个系列的函数总结在一个文档中。如果使用了<code>@rdname</code>，那么<code>@description</code>和<code>@details</code>需要在第一个函数中全部写完，<code>@title</code>也只在第一个函数中出现。</p>
+  </li>
+  <li>
+    <p><code>@keywords internal</code>：隐藏函数，不在help文档中显示，在其他包中可以正常使用。</p>
+  </li>
+  <li>
+    <p><code>@aliases</code>：命名一个函数的别名，将指向同一个文档；<code>@family</code>：如果几个函数共用一个family name，它们将在seealso中交叉链接；<code>@seealso</code>：其他函数的超链接；<code>@rdname</code>：将多个函数合并在一个文档中。这些标记用于在HTML帮助文档中，可能出现这些超级链接或者文档合并。</p>
+  </li>
+  <li>
+    <p>对data文件夹下的R data file进行注释。R data file通常以.RData或者.rda作为文件名扩展。<a href="http://r-pkgs.had.co.nz/data.html#documenting-data">参考数据注释</a>。</p>
+  </li>
+</ul>
+
+<h2 id="vignittes">4. 写vignittes文件</h2>
+
+<p>推荐使用<a href="https://github.com/yihui/knitr"><span style="color: blue">knitr</span>包</a>。</p>
+
+<h2 id="section-2">5. 检查和压缩包</h2>
+
+<p>在提交代码之前，首先需要检查自己的代码，运行命名</p>
+
+<pre><code class="language-bash">R CMD check Mypkg
+
+</code></pre>
+
+<p>之后，因为R源码包（source package）的发布都是采用压缩文件（<code>*.tar.gz</code>）形式，所以需要将源代码打包，方法是运行命令</p>
+
+<pre><code class="language-bash">R CMD build Mypkg
+
+</code></pre>
+
+<p>当然，有时我们需要发布二进制包（binary packages）,操作方法是</p>
+
+<pre><code class="language-bash">R CMD INSTALL --build Mypkg
+</code></pre>
+
+<p>具体执行过程是：首先，在默认目录树下安装包；之后，将成功安装的包转化成（平台依赖的）二进制代码，再将二进制代码打包输出。所以，默认安装目录要有“可写”权限，如果没有，执行<code class="language-bash">R CMD INSTALL -l location --build Mypkg</code>，指定一个“可写”权限目录（location）安装。</p>
+
+<p>CRAN很体贴地考虑了Window以外平台的作者，通过<a href="http://win-builder.r-project.org/">网站</a>上传源码包，之后编译成window平台二进制包。</p>
+
+<p>最后是提交代码，依次执行以下命名或者操作:</p>
+
+<pre><code class="language-bash">R CMD build Mypkg
+# 检查例子（example）、检查（test）和文档输出，如果有报错或者警告，需要仔细阅读提示，原则上消除所有报错和警告
+R CMD check --as-cran
+</code></pre>
+
+<p>使用 ftp://CRAN.R-project.org/incoming/ （用户名： anonymous；密码：自己邮箱地址）上传自己的包，并向CRAN@R-project.org发邮件通知自己上传了包（名称、版本等）。</p>
+
+<h2 id="section-3">注意事项</h2>
+
+<h3 id="section-4">1. 命名</h3>
+
+<p>给自己的包起一个漂亮的名字，注意大小写，因为一些操作系统可能对大小写不敏感。因此，为了平台兼容性，包的命名尽量不要用大小写区分；不仅如此，在包源代码文件夹下，文件命名也要注意这个问题。起了名字之后，最好到<a href="http://cran.r-project.org/web/packages/available_packages_by_name.html">R包列表</a>去看看，检查下自己包的名字是否与其他人的冲突。</p>
+
+<h3 id="section-5">2. 名称符号</h3>
+
+<blockquote>
+  <ul>
+    <li>
+      <p>文件名中不允许出现如下符号<code>"</code>、 <code>*</code>、 <code>:</code>、<code>/</code>、<code>&lt;&lt;/font&gt;</code>、 <code>&gt;</code>、 <code>?</code>、 <code>\</code> 和 <code>|</code>；</p>
+    </li>
+    <li>
+      <p>文件命名使用的字符包括 <code>A-Za-z0-9._!#$%&amp;+,;=@^(){}'[]</code>，但是不推荐使用 <code>(){}'[]$</code>；</p>
+    </li>
+    <li>
+      <p><code>*.Rd</code>文件可以包括URL，但必须是ASCII，不能出现<code>%</code>。</p>
+    </li>
+  </ul>
+</blockquote>
+
+<h3 id="gnu">3. GNU版本号</h3>
+
+<p>GNU版本命名规则：Major_Version_Number.Minor_Version_Number[.Revision_Number[.Build_Number]]。</p>
+
+<h3 id="namespace-1">4. 关于“命名空间（namespace）”的讨论</h3>
+
+<p>在制作R包时候，有两种方法可以引用其他包的变量：</p>
+
+<blockquote>
+  <p><strong>第一种方法</strong>：只需要在<code>NAMESPACE</code>中声明引用<code>import()</code>或者<code>importFrom()</code>，同时在<code>DESCRIPTION</code>中<code>Imports</code>添加需引用的包即可。这样，在编写代码时不用加上<code class="language-r">require(pkg)</code>之类载入包的语句。在安装过程中，通过引用可以很方便地获取其他包的变量（比如函数），因而避免了载入整个包；对应的，这很大程度上保证了代码的简洁，一个非常不错的设计。</p>
+
+  <p>这里需要再多啰嗦两句，<code class="language-r">require(pkg)</code>和<code>NAMESPACE</code>声明<code>import()</code>有不同，前一个函数载入包，并将其添加（attach）到搜索目录下；而后一个则只载入包，并有添加搜索目录。这有两点好处：1. 用户只将注意力集中在载入的包，如果import()的包中有与载入包命名冲突的函数，只会调用载入的包；2. 设计简洁。</p>
+
+  <p><strong>第二种方法</strong>：也可以通过操作符<code>::</code>和<code>:::</code>获得命名空间的“显变量（exported variables）和“隐变量（internal variables）”。需要注意的是，不推荐使用<code>:::</code>，这可能暗示这一个自己设计不足。因为“隐变量”之所以要隐藏起来，作者是有着充分的考虑；而且，这些“隐变量”可能随着作者对包的更新而改名。可以使用函数<code class="language-r">loadedNamespaces()</code>查看已经载入的命名空间，<code>unloadNamespace(name)</code>卸载命名空间。</p>
+</blockquote>
+
+<p>对于这两种方法，不推荐第二种方法，原因很简单：要多写包名+两个冒号。第二中方法适合在终端操作时，遇到函数名称冲突（见后）使用。</p>
+
+<p>如果变量命名有冲突，R将采取“就近”策略应对，考虑两种特殊情况:</p>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>假定自己包的名称是Mypkg，如果在<code>NAMESPACE</code>中声明输入<code>export(f)</code>，但是又从另外一包foo输入同名函数f，比如<code>importFrom(foo, f)</code>。这时，“就近”策略发挥作用，即在载入包Mypkg时，默认f函数是自己编写的，即声明输出的函数f，而不是foo中的f函数。总体而言，命名空间的查找顺序是：<strong>包的命名空间 –&gt; import声明 –&gt; Base包的命名空间 –&gt; 最后是搜索路径</strong>。</p>
+    </li>
+    <li>
+      <p>假定pkg1和pkg2两个包，都有命名空间，而且输出同名函数f。这是，R会怎么处理呢？同样是“就近”原则，哪个包后载入，先用哪个包的函数f。不过，如果函数命名有冲突，后载入的包会给出一个警告“marsked from package: ***”。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li>
+    <p><a href="https://github.com/yihui/knitr/blob/master/DESCRIPTION">knitr包的DESCRIPTION文件</a></p>
+  </li>
+  <li>
+    <p>命名空间讨论：<a href="https://github.com/hadley/devtools/wiki/Namespaces">1</a>、<a href="http://www.r-bloggers.com/namespaces-and-name-conflicts/">2</a>、<a href="http://r-pkgs.had.co.nz/namespace.html">3</a></p>
+  </li>
+  <li>
+    <p>其他帮助文档：<a href="http://cos.name/2011/05/write-r-packages-like-a-ninja/">1</a>、<a href="http://yihui.name/knitr/">2</a>、<a href="http://cran.r-project.org/doc/manuals/R-exts.html#Dynamic-pages">3</a>、<a href="http://sjp.co.nz/posts/emacs-ess-knitr/">4</a>、<a href="https://github.com/yihui/knitr/issues/252">5</a>、<a href="http://cos.name/cn/topic/106644">6</a></p>
+  </li>
+</ul>
+
+<h3 id="section-6">更新记录</h3>
+
+<p>2014年9月5日</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[R小技巧集锦]]></title>
+    <link href="http://yulongniu.github.io/blog/2012/05/02/r-tricks/"/>
+    <updated>2012-05-02T22:17:02-04:00</updated>
+    <id>http://yulongniu.github.io/blog/2012/05/02/r-tricks</id>
+    <content type="html"><![CDATA[<p>持续更新R语言编程中的一些小技巧，包括一些易错点。
+但是，需要注意的，<strong>一旦需要使用一些非常稀奇古怪的技巧时，可以尝试反思是否是自己数据结构或者算法出了问题。</strong></p>
+
+<h2 id="iflanguage-relselanguage-r">1. <code class="language-r">if</code>爱你，<code class="language-r">else</code>就要和你在一起，又要给你一些距离</h2>
+
+<pre><code class="language-r">if (con){
+  expr
+  } else{
+  expr2
+  }
+</code></pre>
+
+<p><code class="language-r">if...else..</code>结构中，<code class="language-r">}</code>与<code class="language-r">else</code>必须在同一行。</p>
+
+<!--more-->
+
+<p>简易形式（<span style="color: blue">不推荐</span>）：</p>
+
+<pre><code class="language-r"># else不能与expr在同一行
+if (con) expr
+else expr2
+</code></pre>
+
+<p>建议将所有<code class="language-r">if ... else ...</code>结构写成第一种形式，如果没有<code class="language-r">else</code>，用<code class="language-r">else {}</code>代替。</p>
+
+<h2 id="nulllanguage-rnulllanguage-rnulllanguage-rr">2. <code class="language-r">NULL</code>是空，<code class="language-r">NULL</code>是气，<code class="language-r">NULL</code>在R中就是空气。</h2>
+
+<p>如果表达式（expression）或者函数（function）的值没有定义，那么将返回<code class="language-r">NULL</code>。在R中，<code class="language-r">NULL</code>与很多对象合并在一起时，都被忽略掉。比如以下例子：</p>
+
+<pre><code class="language-r"># NULL is neglected in vector
+&gt; c(1, NA, NULL, FALSE)
+[1]  1 NA  0
+
+# also in matrix
+&gt; matrix(c(1, NA, NULL, 2), c(2, 2))
+     [,1] [,2]
+[1,]    1    2
+[2,]   NA    1
+警告信息：
+In matrix(c(1, NA, NULL, 2), c(2, 2)) : 数据长度[3]不是矩阵行数[2]的整倍
+
+# also in list
+&gt; tmp &lt;- list(1, 2)
+&gt; tmp[1] &lt;- NULL
+&gt; tmp
+[[1]]
+[1] 2
+&gt; tmp[[1]] &lt;- NULL
+&gt; tmp
+list()
+</code></pre>
+
+<p>如果一定要将列表中的某个个元素赋值为NULL，可以使用list(NULL)，比如：</p>
+
+<pre><code class="language-r">&gt; tmp &lt;- list()
+&gt; tmp[1] &lt;- list(NULL)
+&gt; tmp
+[[1]]
+NULL
+&gt; is.null(tmp[[1]])
+[1] TRUE
+</code></pre>
+
+<h2 id="listlist">3. list不是万能的，但没有list是万万不能的</h2>
+
+<p>列表（list）在R中是个全能选手、无所不“包”；list还是金箍棒，别看它丫的开始长度（<code class="language-r">length()</code>）短，之后想变长就变长，多长都行。</p>
+
+<p>这暗示list可以这样用：在循环开始时，我们不知道会产生多少个元素，可以事先规定输出结果为<code class="language-r">a &lt;- list()</code>，之后赋值；甚至可以按照名字赋值，比如<code class="language-r">a$add &lt;- exprs</code>。</p>
+
+<ul>
+  <li>创建</li>
+</ul>
+
+<blockquote>
+  <p>如果要创建一个长度为n的、每个元素都为<code class="language-r">NULL</code>的list，可以使用<code class="language-r">vector("list", n)</code>。</p>
+</blockquote>
+
+<ul>
+  <li>插入</li>
+</ul>
+
+<blockquote>
+  <p>如果要在list中插入元素，可以使用<code class="language-r">append(x, values, after = length(x))</code>函数。<code class="language-r">append()</code>函数原本是对vector设计的，但是list也能使用。</p>
+</blockquote>
+
+<ul>
+  <li>取值</li>
+</ul>
+
+<blockquote>
+  <p>对list进行取值，不能直接使用<code class="language-r">TRUE</code>/<code class="language-r">FALSE</code>向量，而是使用下标进行，可以使用<code class="language-r">which()</code>函数转换。</p>
+</blockquote>
+
+<h2 id="section">4. 创建“空”值很淡定，要么空来要么0</h2>
+
+<p>如果要创建一个空的对象（对象的长度是0）很容易，比如：</p>
+
+<ul>
+  <li>创建一个长度为0的数值向量</li>
+</ul>
+
+<blockquote>
+  <p><code class="language-r">numeric()</code>或者<code class="language-r">numeric(0)</code></p>
+
+  <p><code class="language-r">character()</code>或者<code class="language-r">character(0)</code></p>
+
+  <p><code class="language-r">integer()</code>或者<code class="language-r">integer(0)</code>可以起到同样的效果</p>
+
+  <p><code class="language-r">factor()</code>创建一个长度为0的因子</p>
+
+  <p><span style="color: blue">注意</span>：<code class="language-r">factor(0)</code>的长度是1</p>
+</blockquote>
+
+<ul>
+  <li>创建一个长度为0的矩阵</li>
+</ul>
+
+<blockquote>
+  <p><code>matrix(0, 0, 0)</code></p>
+
+  <p><span style="color: blue">注意</span>：<code class="language-r">array()</code>创建的对象长度为1。</p>
+</blockquote>
+
+<ul>
+  <li>创建一个长度为0的列表</li>
+</ul>
+
+<blockquote>
+  <p><code class="language-r">list()</code></p>
+</blockquote>
+
+<ul>
+  <li>创建一个长度为0的data.frame</li>
+</ul>
+
+<blockquote>
+  <p><code class="language-r">data.frame()</code></p>
+</blockquote>
+
+<h2 id="dataframe">5. 对象转换要小心，data.frame是陷阱</h2>
+
+<p>R中一些对象转换要格外小心，特别是牵扯到data.frame类型。以下是几个常见的陷阱：</p>
+
+<h3 id="section-1">5.1 “字符型因子”转换为“数值型向量”</h3>
+
+<p>需要先转成字符串向量过渡一下：</p>
+
+<pre><code class="language-r">as.numeric(as.character(MyFactor))
+</code></pre>
+
+<h3 id="dataframe-1">5.2 字符和数值因子混搭data.frame</h3>
+
+<p>每一列是按照字符型因子保存。留意表面上是数值的一列，它非常危险，特别是排序。一个例子：</p>
+
+<pre><code class="language-r">&gt; a1 &lt;- as.factor(as.character(a1))
+&gt; a1
+ [1] 5  6  7  8  9  10 11 12 13 14 15
+Levels: 10 11 12 13 14 15 5 6 7 8 9
+&gt; sort(a1)
+ [1] 10 11 12 13 14 15 5  6  7  8  9 
+Levels: 10 11 12 13 14 15 5 6 7 8 9
+</code></pre>
+
+<h2 id="elselanguage-riflanguage-rswitchlanguage-r">6. 多个<code class="language-r">else</code>/<code class="language-r">if</code>别担心，<code class="language-r">switch()</code>函数来帮助</h2>
+
+<p>如果需要在不同情况下，对变量进行不同的处理，自然会联想到使用多个多个<code class="language-r">else</code>/<code class="language-r">if</code>。如果<code class="language-r">else</code>/<code class="language-r">if</code>是用来处理的简单的赋值，可以使用<code class="language-r">switch(EXPR, ...)</code>函数。其中，<code class="language-r">EXPR</code>是一个表达式，生成一个数字或者字符串；接下来，使用生成的数字和字符串匹配<code class="language-r">...</code>中的内容。</p>
+
+<p>所以，我们很容易想到，如果<code class="language-r">EXPR</code>生成的数字，则对应匹配<code class="language-r">...</code>的第几个元素，此时<code class="language-r">...</code>中的变量可以没有名字；如果是字符串，就会严格地匹配<code class="language-r">...</code>中相同名字的变量；如果<code class="language-r">EXPR</code>生成是字符串，<code class="language-r">...</code>中没有相匹配的变量名，则返回<code class="language-r">NULL</code>；如果<code class="language-r">...</code>中有一个“无名”变量（即没有对变量赋值），上一种情况下返回该无名变量，相当于最后一个<code class="language-r">else</code>。比如：</p>
+
+<pre><code class="language-r">&gt; switch(1, a = 3, b = 2)
+[1] 3
+&gt; switch(2, aa = 'red', bb = 'blue', cc = 'yellow', 'No value')
+[1] "blue"
+&gt; switch('aa', aa = 'red', bb = 'blue', cc = 'yellow', 'No value')
+[1] "red"
+&gt; switch('dd', aa = 'red', bb = 'blue', cc = 'yellow', 'No value')
+[1] "No value"
+&gt; switch('bb', aa = 'red', bb = , cc = 'yellow')
+[1] "yellow"
+&gt; switch(2, aa = 'red', bb = , cc = 'yellow')
+Error: empty alternative in numeric switch
+&gt; switch('dd', aa = 'red', bb = , cc = 'yellow', 'no', 'value')
+Error: duplicate switch defaults: '"no"' and '"value"'
+</code></pre>
+
+<p><span style="color: blue">注意</span>：</p>
+
+<ul>
+  <li>
+    <p>如果<code class="language-r">EXPR</code>是数字，范围不能超过<code class="language-r">...</code>的长度。同时，虽然此时<code class="language-r">...</code>变量可以名字，但是有名字的变量必须有数值，不能学习以上例子中倒数第二种情况，否则会报错。</p>
+  </li>
+  <li>
+    <p>如果<code class="language-r">EXPR</code>是字符串，那么会进行自动继承，即前者继承后者。</p>
+  </li>
+  <li>
+    <p>虽然<code class="language-r">EXPR</code>是字符串情况可以自动继承，甚至继承一个无名变量，但是无名变量只能有一个。</p>
+  </li>
+  <li>
+    <p>最后将<code>EXPR</code>明确写出，为了R的版本兼容。</p>
+  </li>
+</ul>
+
+<p><strong>总结</strong>：
+<code class="language-r">swich()</code>函数是一个好玩却又危险的函数，一个没有歧义的使用方法是：<code class="language-r">EXPR</code>明确写出，且返回字符串，<code class="language-r">...</code>中每一个变量都有确切的值，无名变量只有一个，比如：<code class="language-r">switch(EXPR='dd', aa = 'red', bb = 'blue', cc = 'yellow', 'no value')</code>。</p>
+
+<h2 id="rdroplanguage-r">7. R取值有技巧，<code class="language-r">drop</code>选项巧帮助</h2>
+
+<p>当对象是一个矩阵的时候，通常我们要获取其中一些元素。如果取出的正好是一行或者一列，此时，R会返回给我们一个向量，而不是矩阵。这会带来很大的麻烦，因为我们必须判断返回对象是向量，还是矩阵，才能继续下面的操作。此时，<code class="language-r">drop</code>可以帮助我们，如果设置<code class="language-r">drop = FALSE</code>，就会保持原样返回结果。</p>
+
+<pre><code class="language-r">&gt; b &lt;- matrix(1:6, nrow = 2, ncol = 3)
+&gt; b
+     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6
+&gt; b[, 3]
+[1] 5 6
+&gt; b[, 3, drop = FALSE]
+     [,1]
+[1,]    5
+[2,]    6
+&gt; b[1, , drop = FALSE]
+     [,1] [,2] [,3]
+[1,]    1    3    5
+</code></pre>
+
+<h2 id="language-r--language-r-">8. <code class="language-r">|</code> 和 <code class="language-r">||</code> 有区别，返回向量与单值</h2>
+
+<p>R中的逻辑运算符号有两组，<code class="language-r">|</code>或者<code class="language-r">||</code>（<code class="language-r">&amp;</code>或者<code class="language-r">&amp;&amp;</code>），看起来觉得有些多余。其实，这是为了R独特的“<strong>向量运算</strong>”考虑的。<code class="language-r">|</code>或者<code class="language-r">&amp;</code>首先考虑返回一个向量，而<code class="language-r">||</code>和<code class="language-r">&amp;&amp;</code>则只返回最后一个值。比如：</p>
+
+<pre><code class="language-r">&gt; c(FALSE, TRUE) | c(FALSE, FALSE)
+[1] FALSE  TRUE
+&gt; c(FALSE, TRUE) || c(FALSE, FALSE)
+[1] FALSE
+</code></pre>
+
+<h2 id="section-2">9. 递归</h2>
+
+<p>R在解释代码时，不支持尾递归优化，所以在R中不要写递归。</p>
+
+<h2 id="r0language-rnalanguage-r">10. R图例空元素，<code class="language-r">0</code>和<code class="language-r">NA</code>来代替</h2>
+
+<p>在R绘图的图例中，通常需要“线条”和“点”分开单独表示，这里用到<code class="language-r">0</code>和<code class="language-r">NA</code>的小技巧。如果在<code class="language-r">legend()</code>函数函数中，<code class="language-r">pch = NA</code>表示没有点，<code class="language-r">lty=0</code>表示没有线条。</p>
+
+<h2 id="evallanguage-rparselanguage-r">11. 字符串转代码很容易，<code class="language-r">eval()</code>/<code class="language-r">parse()</code>很随意</h2>
+
+<p>如果我们有一个字符字符串，现在需要将其转为可执行代码。方法如下：</p>
+
+<pre><code class="language-r">&gt; test1 = '1:3'
+&gt; test1
+[1] "1:3"
+&gt; eval(parse(text = test1))
+[1] 1 2 3
+</code></pre>
+
+<h2 id="factorclanguage-r">12. factor如需换标签，<code class="language-r">c()</code>函数有妙招</h2>
+
+<p>如果我们需要对一个factor的标签（label）进行转换，并且返回一个向量，有两种方法可以使用:</p>
+
+<ul>
+  <li>第一种方法，使用<code>c()</code>函数</li>
+</ul>
+
+<pre><code>&gt; tmp1 &lt;- factor(rep(1:3, each = 3))
+&gt; tmp1
+[1] 1 1 1 2 2 2 3 3 3
+Levels: 1 2 3
+&gt; c(letters[1:3])[tmp1]
+[1] "a" "a" "a" "b" "b" "b" "c" "c" "c"
+</code></pre>
+
+<ul>
+  <li>第二种方法，先转换标签，之后再使用<code class="language-r">as.character()</code>函数。</li>
+</ul>
+
+<pre><code class="language-r">&gt; tmp2 &lt;- factor(tmp1, labels = letters[1:3])
+&gt; tmp2
+[1] a a a b b b c c c
+Levels: a b c
+&gt; as.character(tmp2)
+[1] "a" "a" "a" "b" "b" "b" "c" "c" "c"
+</code></pre>
+
+<h2 id="section-3">13. 操作符也是函数，使用起来有妙招</h2>
+
+<pre><code class="language-r">&gt; "+"(1, 2)
+[1] 3
+&gt; '&gt;'(1, 2)
+[1] FALSE
+&gt; tmp1 = list()
+&gt; for(i in 1:10)
+  tmp1[[i]] = i:(i+1)
+&gt; tmp1
+[[1]]
+[1] 1 2
+
+[[2]]
+[1] 2 3
+
+[[3]]
+[1] 3 4
+
+[[4]]
+[1] 4 5
+
+[[5]]
+[1] 5 6
+
+[[6]]
+[1] 6 7
+
+[[7]]
+[1] 7 8
+
+[[8]]
+[1] 8 9
+
+[[9]]
+[1]  9 10
+
+[[10]]
+[1] 10 11
+&gt; sapply(tmp1, '[[', 2)
+ [1]  2  3  4  5  6  7  8  9 10 11
+</code></pre>
+
+<p>最后一个例子中，使用了<code class="language-r">[[</code>，巧妙地取得了第二个元素。</p>
+
+<h2 id="tablequotelanguage-r">14. 输出table有引号，<code class="language-r">quote</code>参数来帮忙</h2>
+
+<p>在使用<code class="language-r">write.table()</code>命令输入一个data.frame对象时候，输入文件会加引号。这时，设定<code class="language-r">quote</code>参数，<code class="language-r">write.table(..., quote = FALSE)</code>。</p>
+
+<h2 id="identicallanguage-r">15. 比较两个元素<code class="language-r">identical()</code></h2>
+
+<h2 id="listdocalllanguage-r">16. 压缩list用<code class="language-r">do.call()</code></h2>
+
+<pre><code class="language-r">do.call(rbind, list)
+</code></pre>
+
+<h2 id="splitlanguage-r">17. 分割数据使用<code class="language-r">split()</code></h2>
+
+<pre><code class="language-r">&gt; test1 &lt;- rep(c('a', 'b'), c(3, 4))
+&gt; test1
+[1] "a" "a" "a" "b" "b" "b" "b"
+&gt; split(test1, factor(test1))
+$a
+[1] "a" "a" "a"
+
+$b
+[1] "b" "b" "b" "b"
+</code></pre>
+
+<h2 id="txtsinklanguage-r">18. 输出txt文档找<code class="language-r">sink()</code></h2>
+
+<p><code>sink()</code>可以将R的对象输出到外部文档中，第一遍可能包括了系统信息，需要输出第二遍。一个典型的流程如下：</p>
+
+<pre><code class="language-r">&gt; sink(filename)
+&gt; test1
+&gt; sink()
+</code></pre>
+
+<h2 id="rfor">19. R中循环for妙用</h2>
+
+<p>R中for循环中，需要指定一个计数器，比如i in 1:10之类。R可以直接将一个向量用于计数，返回向量中对应的值，比如:</p>
+
+<pre><code class="language-r">&gt; tmp1 &lt;- letters[1:10]
+for (i in tmp1) {
+  print(i)
+}
+&gt; [1] "a"
+[1] "b"
+[1] "c"
+[1] "d"
+[1] "e"
+[1] "f"
+[1] "g"
+[1] "h"
+[1] "i"
+[1] "j"
+</code></pre>
+
+<h2 id="reducelanguage-r">20. 多个序列取交集并集用<code class="language-r">Reduce()</code></h2>
+
+<pre><code class="language-r">&gt; Reduce(union, list(letters[1:3], letters[1:4], letters[1:5]))
+[1] "a" "b" "c" "d" "e"
+</code></pre>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li>
+    <p><a href="https://stat.ethz.ch/pipermail/r-help/attachments/20030506/ba1b4515/attachment.pl">R中的if/else</a></p>
+  </li>
+  <li>
+    <p>建立长度为0的对象：<a href="http://cos.name/cn/topic/105751">1</a>, <a href="http://cran.r-project.org/doc/contrib/Genolini-S4tutorialV0-5en.pdf">2</a></p>
+  </li>
+  <li>
+    <p>R中其他令人迷惑的地方：<a href="http://ygc.name/2012/07/10/tricky-things-in-r/">1</a>，<a href="http://cos.name/cn/topic/17000#post-17000">2</a></p>
+  </li>
+</ul>
+
+<h3 id="section-4">更新记录</h3>
+
+<p>2014年9月29日</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Emacs和ESS的使用技巧]]></title>
+    <link href="http://yulongniu.github.io/blog/2011/08/12/emacs-ess-tips/"/>
+    <updated>2011-08-12T17:20:57-04:00</updated>
+    <id>http://yulongniu.github.io/blog/2011/08/12/emacs-ess-tips</id>
+    <content type="html"><![CDATA[<p>进入GNU Emacs界面之后，输入<code>M-X R</code> 即可进入R界面。在这个过程中，会询问是否在当前运行目录下运行R，可以选择在不同目录下运行。</p>
+
+<ul>
+  <li><code>M-x R</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>启动R。R运行的buffer因为是在Emacs编辑器下运行，所以称为inferior（Emacs文档中称之为iESS buffer）。</p>
+    </li>
+    <li>
+      <p><code>C-u M-x R RET --no-save RET</code>：启动R并且不保存。</p>
+    </li>
+    <li>
+      <p><code>M-x ess-transcript-clean-region</code>：清理R界面。</p>
+    </li>
+    <li>
+      <p><code>C-c C-z</code>：强制停止运行的R进程。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<!--more-->
+
+<ul>
+  <li><code>C-c C-x</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>代替<code class="language-r">ls()</code>函数。</p>
+    </li>
+    <li>
+      <p><code>C-c C-s</code>：代替<code class="language-r">search()</code>函数。</p>
+    </li>
+    <li>
+      <p><code>C-c C-d</code>：修改已经建立的对象，非常实用。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li><code>C-c C-n</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>把当前行送到R。</p>
+    </li>
+    <li>
+      <p><code>C-c C-c</code>：把当前段送到R。</p>
+    </li>
+    <li>
+      <p><code>C-c C-b</code>：把当前整个文件送到R。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li>
+    <p><code>C-c tab</code>：自动补全R代码。</p>
+  </li>
+  <li>
+    <p><code>C-x o</code>：滚动屏幕。</p>
+  </li>
+  <li>
+    <p><code>C--</code>：</p>
+  </li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>自动给出R语言中特有的 <code>&lt;-</code>。</p>
+    </li>
+    <li>
+      <p><code>C---</code>：连按两下–，则可以显示下划线。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li><code>C-c C-o</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>在函数头按下会激活ESS对R代码的注释功能。</p>
+    </li>
+    <li>
+      <p><code>M-x customize-group RET ess RET</code>：配置默认模板，如果需要插入空行，回车没用，猛戳空格。</p>
+    </li>
+    <li>
+      <p><code>C-c C-e C-c</code>：将代码注释为roxygen的<code>##'</code>开头格式，特别是注释example的时候很好用。</p>
+    </li>
+    <li>
+      <p><code>C-c C-e p</code>：光标跳转到注释段落开头。</p>
+    </li>
+    <li>
+      <p><code>C-c C-e n</code>：光标跳转到注释所在函数段落结尾。</p>
+    </li>
+    <li>
+      <p><code>M-q</code>：整理roxygen注释，将多行注释压缩整理。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<p><img class="middle" src="http://yulongniu.github.io/images/Emacs_ESS_snap.jpg" width="700" height="700" title="Emacs ESS #1" alt="a snap of Emacs ESS" /></p>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li>
+    <p><a href="http://cos.name/2011/05/write-r-packages-like-a-ninja/">像忍者一样写R包</a></p>
+  </li>
+  <li>
+    <p><a href="http://google-styleguide.googlecode.com/svn/trunk/google-r-style.html">google code R stype</a></p>
+  </li>
+  <li>
+    <p><a href="http://joysofprogramming.com/install-emacs-ess-el-fedora-rhel/">记载ESS的博客</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.damtp.cam.ac.uk/user/sje30/ess11/ess-slides.pdf">ESS幻灯片</a></p>
+  </li>
+  <li>
+    <p><a href="http://ess.r-project.org/Manual/ess.html">ESS文档</a></p>
+  </li>
+</ul>
+
+<h3 id="section">更新记录</h3>
+
+<p>2014年9月10日</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Emacs使用技巧]]></title>
+    <link href="http://yulongniu.github.io/blog/2011/08/12/emacs-tips/"/>
+    <updated>2011-08-12T14:57:17-04:00</updated>
+    <id>http://yulongniu.github.io/blog/2011/08/12/emacs-tips</id>
+    <content type="html"><![CDATA[<h2 id="section">1. 安装</h2>
+
+<pre><code class="language-bash"># 安装Emacs
+# yum install emacs 
+</code></pre>
+
+<h2 id="section-1">2. 窗口和文件操作</h2>
+
+<p>Emacs的按键操作，约定<code>C</code>代表<code>Ctrl</code>键，<code>M</code>代表<code>Alt</code>键，<code>RET</code>表示Enter键。<code>C-x</code>对应字符扩展，比如<code>C-x C-b</code>表示列出所有buffer；<code>M-x</code>对应命令扩展，比如<code>M-x replace-string</code>（可以用TAB补全）表示字符替换。</p>
+
+<ul>
+  <li><code>C-x 2</code>或<code>C-x 3</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>将窗口分割成两个或者三个。</p>
+    </li>
+    <li>
+      <p><code>C-x 1</code>：只保留一个窗口。</p>
+    </li>
+    <li>
+      <p><code>C-x n</code>：开n个窗口</p>
+    </li>
+  </ol>
+</blockquote>
+
+<!--more-->
+
+<ul>
+  <li><code>C-x C-f</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>读入文件，如果没有该文件，则自动创建这个文件，这个命令在mini buffer中呼出路径。</p>
+    </li>
+    <li>
+      <p>对于Emacs minibuffer的路径，在Emacs中可以使用<code class="language-r">～/</code>表示当前登录的用户，可以替代<code class="language-r">/home/usr</code>。同时，可以在当前路径下直接输入<code>/home//median/TOOL</code>或者<code>/home//~/</code>进入需要的目录，因为Emacs会自动忽略<code>//</code>或者<code>/～</code>之前的内容（不能在终端使用它）。</p>
+    </li>
+    <li>
+      <p>输入/su:root@localhost Mypassword：用以打开root权限文件。</p>
+    </li>
+    <li>
+      <p><code>M-x ffap</code>（find-file-at-point）：如果光标停留在一个路径上，可以直接打开这个路径对应目录的文件。</p>
+    </li>
+    <li>
+      <p>一个更加酷的命令是Ido模式（Interactively Do Things），可以实现智能化的交互。打开方式：<code>M-x ido-mode</code>。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li>补充Dired文件操作（Directory Editor）</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>在Dired buffer下，光标所在处<code>+</code>新建文件夹。</p>
+    </li>
+    <li>
+      <p><code>f</code>或<code>e</code>或者<code>RET</code>在当前buffer下打开文件。<code>o</code>在另一个buffer中打开文件，并且光标跳转到另一个buffer。<code>C-o</code>在另一个buffer下打开文件，光标保留在Dired buffer中。<code>v</code>在新的buffer打开文件，只读权限。<code>^</code>在新的buffer打开上层目录的Dired buffer。<code>i</code>在Dired buffer下打开文件夹。<code>g</code>更新状态。</p>
+    </li>
+    <li>
+      <p><code>m</code>标记文件。<code>%m</code>标记文件名符合正则规则的文件。<code>%g</code>标记内容符合正则规则的文件。<code>u</code>删除当前光标所在文件的标记。<code>M-DEL</code>删除所有标记的文件。</p>
+    </li>
+    <li>
+      <p>以下操作针对标记的文件；如果没有标记的文件，将操作光标所在处文件。<code>C</code>拷贝文件，<code>R</code>移动或者重命名文件，<code>H</code>创建硬链接，<code>C</code>创建软链接，<code>M</code>更改文件执行权限（比如777），<code>D</code>删除文件。</p>
+    </li>
+    <li>
+      <p><code>d</code>标记要删除的文件。<code>～</code>标记所有Emacs备份文件。<code>#</code>标记所有自动保存文件。<code>%d</code>标记文件名符合正则表达式的文件，以供删除。<code>x</code>执行删除操作。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li><code>C-x C-s</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>保存文件，经常使用这个命令存盘，避免文件丢失。 </p>
+    </li>
+    <li>
+      <p><code>C-x s</code>：把所有的buffer存盘。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li><code>C-x C-w</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>文件另存为。</p>
+    </li>
+    <li>
+      <p><code>M-x recover Myfilename</code> 之后输入文件名和yes：用来恢复自动保存的文件。Emacs自动保存的文件一般以<code>#Myfilename#</code>来命名。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li><code>C-x C-b</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>列出所有buffer。</p>
+    </li>
+    <li>
+      <p><code>C-x b</code>：回到某一个buffer，需要在minibuffer中输入需要跳转的buffer名字。</p>
+    </li>
+    <li>
+      <p><code>C-x o</code>（other）：在不同的buffer间切换。</p>
+    </li>
+    <li>
+      <p><code>C-x k</code>：kill一个buffer。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li>ibuffer模式：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>ibuffer模式是<code>C-x C-b</code>的功能更加强大版本。可以在<code>～/.emacs</code>文件中写入<code>(global-set-key (kbd "C-x C-b") 'ibuffer)</code>，将原始的模式替换成ibuffer形式。</p>
+    </li>
+    <li>
+      <p><code>/m</code>（mode）：查找符合某个模式的buffer。</p>
+    </li>
+    <li>
+      <p><code>/g</code>（group）：对某个类型的buffer进行分组命名。光标停留在组名上，<code>RET</code>展开和压缩buffer。<code>TAB</code>向下一个组跳转。<code>M-p</code>向上一个组跳转。<code>//</code>返回列出所有buffer的状态。<code>/\</code>清除所有分类。</p>
+    </li>
+    <li>
+      <p><code>g</code>：更新buffer列表状态。比如，当一个buffer被修改后（但未保存），会有星号标记。</p>
+    </li>
+    <li>
+      <p>各种操作：<code>o</code>或者<code>RET</code>打开光标所在处buffer；<code>=</code>比较当前buffer和已保存文件的区别，<code>,</code>对buffer进行各种排序的切换；<code>q</code>退出ibuffer。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li>寄存器（Registers）</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>Emacs的寄存器相关命令使用<code>C-x r</code>作为前缀，可以使用<code>C-x r C-h</code>查看帮助。所谓“寄存器”是指Emacs可以保存某个窗口（windows）状态、框架（frame，即多个打开的Emacs窗口）状态或者文字内容。</p>
+    </li>
+    <li>
+      <p><code>C-x r w REG</code>（window-configuration-to-register）：寄存当前窗口为“REG”，“REG”即设定的寄存器名称，可以是数字1、2、3，也可以是字母a、B等。<code>C-x r f REG</code>（frame-configuration-to-register）：寄存当前框架，这些框架不能关闭。<code>C-x r SPC REG</code>（point-to-register）：寄存某个光标位置。<code>C-x r j REG</code>（jump-to-register）：调转到对应的寄存器（框架、窗口或者位置信息）。</p>
+    </li>
+    <li>
+      <p><code>C-x r s REG</code>（copy-to-register）：寄存某个区域。<code>C-x r r REG</code>：寄存某个选中的区域。<code>C-x r i REG</code>（insert-register）：召回（即粘贴）某个区域。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li><code>C-g</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>终止一条命令，通常是写了一半未完成。</p>
+    </li>
+    <li>
+      <p><code>C-x u</code>：撤销上一步操作。</p>
+    </li>
+    <li>
+      <p><code>C-/</code>（Emacs文档上是<code>C-_</code>）：撤销命令，持续按键可以执行多次撤销。比较有意思的是<code>M-/</code>对应的是自动不全，可以连续按键已获得多个候选补全。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li><code>C-x C-c</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>退出close Emacs。</p>
+    </li>
+    <li>
+      <p><code>C-z</code>：跳出Emacs窗口，但不关闭。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="section-2">3. 光标移动</h2>
+
+<ul>
+  <li><code>C-v</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>向前移动一屏，可以用于清屏（右手C-，左手v）。</p>
+    </li>
+    <li>
+      <p><code>C-u 8 C-v</code>：屏幕向下滚动8行。</p>
+    </li>
+    <li>
+      <p><code>M-v</code>：向后移动一屏（右手M-，左手v）。</p>
+    </li>
+    <li>
+      <p><code>C-u 8 M-v</code>：屏幕向上滚动8行。</p>
+    </li>
+    <li>
+      <p><code>C-l</code>：重绘屏幕，并将光标所在行置于屏幕的中央。如果连续按键盘，光标会带动屏幕在上、中、下跳动。<code>M-r</code>光标在该屏幕</p>
+    </li>
+    <li>
+      <p><code>C-v</code>和<code>M-v</code>两个命令中的C-和V-用右手操作，正好C-在更靠右，表示向前；而M-偏左，表示向后。</p>
+    </li>
+    <li>
+      <p><code>M-g</code>：跳转到第n行</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li><code>C-p</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>移动到上(previous)一行。<code>C-n</code>：移动到下(next)一行。</p>
+    </li>
+    <li>
+      <p><code>M-p</code>：搜索先前命令。<code>M-n</code>：搜索先前命令（后翻）。<code>M-p</code>和<code>M-n</code>可以用于Emacs-ESS R界面的上翻下翻。</p>
+    </li>
+    <li>
+      <p><code>C-a</code>：移动到行首（ahead）。<code>C-e</code>：移动到行尾（end）。</p>
+    </li>
+    <li>
+      <p><code>M-a</code>：移动到句首。<code>M-e</code>：移动到句尾。持续按<code>M-a</code>和<code>M-e</code>会跳行，<code>C-a</code>和<code>C-e</code>不会。<code>M-a</code>和<code>M-e</code>会跳转到语义相关的句首或句尾。</p>
+    </li>
+    <li>
+      <p><code>M-&lt;</code>或者<code>C-x [</code>：移动到文档最开头。<code>M-&gt;</code>或者<code>C-x ]</code>：移动到文档最末尾。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li><code>C-f</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>右移（forward）一个字符。</p>
+    </li>
+    <li>
+      <p><code>C-b</code>：左移（back）一个字符。</p>
+    </li>
+    <li>
+      <p><code>M-f</code>：右移一个单词。以单词为单位移动，更快并且准确。</p>
+    </li>
+    <li>
+      <p><code>M-b</code>：左移一个单词。</p>
+    </li>
+    <li>
+      <p>左手控制C-和M-。以上操作可以配合<code>C-u Number</code> 作定量Number的移动，如<code>C-u 10 C-b</code>表示左移10个字符； 同时<code>C-u</code> 也可以用作插入同样字符，比如<code>C-u 10 i</code>将插入iiiiiiiiii。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li><code>C-M-f</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>跳转到下一个匹配的括号，<code>C-M-b</code>：跳转到上一个匹配括号。</p>
+    </li>
+    <li>
+      <p><code>C-M-a</code>：跳到函数头部，<code>C-M-e</code>：跳到函数的尾部。</p>
+    </li>
+    <li>
+      <p><code>C-M-t</code>：向前移动整个匹配括号的内容。<code>C-M-k</code>：删除匹配括号内容（光标停留在匹配括号处）。</p>
+    </li>
+    <li>
+      <p><code>C-M-h</code>：选中当前函数（光标停留在函数中的任意位置）。<code>C-M-SPC</code>：选中匹配括号包括的所有内容（光标停留在匹配括号处）。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li><code>C-M-v</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>在其他的buffer中向下滚动内容，光标依然停留到当前buffer。</p>
+    </li>
+    <li>
+      <p><code>C-M-S-v</code>：在其他的buffer中向上滚动内容。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="section-3">4. 删除剪切复制粘贴</h2>
+
+<ul>
+  <li><code>C-@</code>（at）：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>标记起始为点（之后用<code>C-f</code>，<code>M-b</code>等移动命令）。</p>
+    </li>
+    <li>
+      <p><code>M-@</code>：选择光标后的一个单词。</p>
+    </li>
+    <li>
+      <p><code>C-x h</code>（whole发音）：将整个buffer都标记起来。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li><code>C-x C-x</code>（exchange-point-and-mark）：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>快速选中上次选中标记的代码块。</p>
+    </li>
+    <li>
+      <p>连续按键，光标可以在选中的代码块头部和尾部跳转。因此，可以实现代码向前或或者向后继续高亮；与其他选中命令如<code>C-M-SPC</code>连用。</p>
+    </li>
+    <li>
+      <p><code>C-u C-@</code>：在<code>C-y</code>插入一段代码后，光标返回插入前的位置。同时，这个命令也可以跳转光标到上一个标记的地方。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li><code>DEL</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>删除光标前一个字符。</p>
+    </li>
+    <li>
+      <p><code>M-DEL</code>：删除光标前一个单词。</p>
+    </li>
+    <li>
+      <p><code>C-d</code>（delete）：删除光标后一个字符。</p>
+    </li>
+    <li>
+      <p><code>M-d</code>：删除光标后一单词。</p>
+    </li>
+    <li>
+      <p><code>C-S-DEL</code>：删除一整行。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li><code>C-k</code>（kill）：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>从光标处剪切至行尾。</p>
+    </li>
+    <li>
+      <p><code>M-k</code>：从光标处剪切至句尾，用于删除一个行或句子。</p>
+    </li>
+    <li>
+      <p>配合<code>C-u</code>使用，<code>C-k</code>只能删除指定的行数，而<code>M-k</code>可以删除句子。所以，<code>M-k</code>可以删除句子间的空白行。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li><code>M-w</code>（write）：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>标记选定范围后复制。</p>
+    </li>
+    <li>
+      <p><code>C-w</code>：标记选定范围后剪切。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li><code>C-y</code>（yank）：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>粘贴。</p>
+    </li>
+    <li>
+      <p>连续<code>M-y</code>可以召回之前的剪切板中的内容。</p>
+    </li>
+    <li>
+      <p><code>C-j</code>：插入空白行。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="section-4">5. 查找和替换</h2>
+
+<ul>
+  <li><code>C-s</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>搜索（search）。</p>
+    </li>
+    <li>
+      <p><code>C-r</code>：反向搜索（research）。</p>
+    </li>
+    <li>
+      <p><code>C-s C-w</code>：自动搜索光标到临近的第一个词结尾，可以反复按<code>C-w</code>以扩充选中范围。</p>
+    </li>
+    <li>
+      <p><code>C-u C-s</code>：正则匹配选择。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li>Occur模式：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p><code>M-s o</code>：打开occur窗口，支持正则搜索的位置信息提纲式显示。在原始文本buffer，可以使用<code>M-g n</code>和<code>M-g p</code>进行上下跳转到符合区域。</p>
+    </li>
+    <li>
+      <p>在Occur buffer下使用<code>C-p</code>和<code>C-n</code>进行上下跳转。<code>&lt;</code>和<code>&gt;</code>跳转到Occur头部和尾部。</p>
+    </li>
+    <li>
+      <p>在Occur buffer下使用<code>o</code>跳转到对应文本位置，并且光标跳转到文本buffer。<code>C-o</code>跳转到对应文本位置，光标继续停留在Occur buffer。</p>
+    </li>
+    <li>
+      <p>在Occur buffer下使用<code>e</code>，启动在文本匹配位置的编辑。编辑完成后使用<code>C-c C-c</code>退出编辑模式。使用<code>g</code>更新搜索。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li>正则搜索</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p><code>M-x rgrep</code>进入正则搜索，可以搜索多个文件，搜索结果会在一个新的buffer中显示搜索结果。在原始文本buffer，可以使用<code>M-g n</code>和<code>M-g p</code>进行上下跳转到符合区域。</p>
+    </li>
+    <li>
+      <p>在新打开的搜索buffer中，使用<code>TAB</code>和<code>S-TAB</code>上下移动，但不显示对应搜索的文本。使用<code>p</code>和<code>n</code>上下移动，同时对应搜索内容。使用<code>{</code>和<code>}</code>移动到上个文件和下个文件。</p>
+    </li>
+    <li>
+      <p>使用<code>C-v</code>和<code>M-v</code>进行上下翻页。</p>
+    </li>
+    <li>
+      <p>使用<code>g</code>更新搜索。使用<code>q</code>退出。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li><code>M-x replace-string RET stringA RET newstring RET</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>将buffer中所有的A替换成B。</p>
+    </li>
+    <li>
+      <p><code>M-x replace-regexp RET regexp RET newstring RET</code>：正则匹配。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="section-5">6. 代码整理</h2>
+
+<ul>
+  <li>
+    <p><code>C-M-\</code>：整理（indent）选定代码块后。</p>
+  </li>
+  <li>
+    <p><code>M-x hs-minor-mode</code>：</p>
+  </li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>进入折叠代码模式，以下输入在函数的前大括号处。</p>
+    </li>
+    <li>
+      <p><code>C-c @ C-h</code>：隐藏（hide）代码。</p>
+    </li>
+    <li>
+      <p><code>C-c @ C-s</code>：显示（show）代码。</p>
+    </li>
+    <li>
+      <p><code>C-c @ C-c</code>：隐藏/显示代码的切换。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li><code>M+x comment-region</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>注释选中的代码。</p>
+    </li>
+    <li>
+      <p><code>M+x uncomment-region</code>：反注释选中代码。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="macro">7. 宏（Macro）</h2>
+
+<p>Emacs主持宏，用于记录操作的动作。</p>
+
+<ul>
+  <li><code>C-x (</code></li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>或者<code>f3</code>开始录入宏。</p>
+    </li>
+    <li>
+      <p><code>C-x )</code>或者<code>f4</code>结束宏录入。</p>
+    </li>
+    <li>
+      <p><code>C-x e</code>或者<code>f4</code>放映宏。使用<code>C-u 0 f4</code>，对整个文件执行宏。使用<code>C-x C-k r</code>（apply-macro-to-region-lines）对选中区域执行宏。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="emacs">8. Emacs与系统交互</h2>
+
+<ul>
+  <li><code>M-x !</code>：</li>
+</ul>
+
+<blockquote>
+  <p>执行单条的shell命令。</p>
+
+  <p><code>M-x shell RET</code>：进入系统交互界面。</p>
+</blockquote>
+
+<h2 id="emacs-1">9. Emacs帮助信息</h2>
+
+<ul>
+  <li><code>C-h</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p><code>C-h m</code>（mode）：返回当前所有Emacs主要和次要模式（mode）的快捷键。</p>
+    </li>
+    <li>
+      <p><code>C-h c</code>：解释某个命令，后跟命令比如<code>C-x C-f</code>。</p>
+    </li>
+    <li>
+      <p>如果需要查找某个命令，尽可能输入该命令，之后跟随<code>C-h</code>查询帮助信息。</p>
+    </li>
+    <li>
+      <p><code>C-h i</code>：列出Emacs的所有帮助信息。</p>
+    </li>
+    <li>
+      <p><code>C-h r</code>：Emacs帮助文档。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li><code>M-x man</code>：之后跟随UNIX的命令，比如<code>ls</code>，查询该命令帮助文档。</li>
+</ul>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li><a href="http://tuhdo.github.io/emacs-tutor.html">Emacs Mini Manual</a>: a very good Emacs manual including a configure of C/C++. </li>
+</ul>
+
+<h3 id="section-6">更新记录</h3>
+
+<p>2014年12月1日</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux常用命令集锦]]></title>
+    <link href="http://yulongniu.github.io/blog/2010/11/08/linux-command/"/>
+    <updated>2010-11-08T17:00:40-05:00</updated>
+    <id>http://yulongniu.github.io/blog/2010/11/08/linux-command</id>
+    <content type="html"><![CDATA[<h2 id="section">1. 压缩与解压缩</h2>
+
+<p><code class="language-bash">.tar.gz</code>格式文件</p>
+
+<pre><code class="language-bash"># 解压 
+$ tar -zxvf /filePath/filename.tar.gz
+
+# 压缩 
+$ tar -zcvf /filePath/filename.tar.gz /filePath/filename
+
+# 解压到特定文件夹  
+$ tar -zxvf /filePath/filename.tar.gz -C /filePath/filename 
+
+# 压缩到特定文件夹  
+$ tar -zcvf /filePath/filename.tar.gz -C /filePath/filename 
+
+# 压缩所有txt类型文件 
+$ gzip *.txt
+</code></pre>
+
+<p><code class="language-bash">.tar.bz2</code>格式文件</p>
+
+<pre><code class="language-bash"># 解压 
+$ tar -jxvf /filePath/filename.taz.bz2
+
+# 压缩
+$ tar -jcvf /filePath/filename.tar.bz2 /filePath/filename
+</code></pre>
+
+<!--more-->
+
+<p><code class="language-bash">.rar</code>格式文件</p>
+
+<p>需要安装<a href="http://www.rarsoft.com/download.html">rar工具</a>, 下载对应的linux版本，解压，<code class="language-bash">make</code>即可。</p>
+
+<pre><code class="language-bash"># 解压
+$ rar e /filePath/filename.rar /filePath/filename
+
+# 压缩
+$ rar a -m5 /filePath/filename.rar /filePath/filename
+</code></pre>
+
+<p><code class="language-bash">.zip</code>格式文件</p>
+
+<p>需要安装zip和unzip工具</p>
+
+<pre><code class="language-bash"># yum install zip
+# yum install unzip
+</code></pre>
+
+<pre><code class="language-bash"># 解压
+$ unzip filename.zip
+
+# 只打印最简短解压信息，并不解压
+$ unzip -tq filename.zip
+
+# 解压其中一个文件
+$ unzip filename.zip onefile
+
+# 解压到特定目录
+$ unzip filename.zip -d /filePath/filename
+
+# 压缩当前目录
+$ zip filename *
+
+# 压缩当前目录包括所有子目录
+$ zip -r filename *
+</code></pre>
+
+<h2 id="section-1">2. 文件夹操作</h2>
+
+<pre><code class="language-bash"># 创建 
+$ mkdir
+
+# 删除 
+$ rm  
+
+# 删除整个文件夹 
+$ rm -rf
+
+# 复制 
+$ cp   
+
+# 复制文件夹  
+$ cp -r
+</code></pre>
+
+<h2 id="section-2">3. 目录</h2>
+
+<pre><code class="language-bash"># 显示 
+$ ls
+
+# 列表显示文件和相关权限 
+$ ls -l
+
+# 列表显示文件并按照文件名逆序排列
+$ ls -rl
+
+# 显示隐藏文件 
+$ ls -a      
+
+# 可以配合使用
+$ ls -al
+
+# 查看文件夹大小 
+$ ls -lhs
+
+# 查看目录树 
+$ tree
+</code></pre>
+
+<h2 id="sh">4. 运行 *.sh文件</h2>
+
+<pre><code class="language-bash"># 将sh文件赋予可执行权限
+$ chomd 777 filename.sh
+$ sh /filePath/filename.sh
+</code></pre>
+
+<h2 id="section-3">5. 更改文件名</h2>
+
+<pre><code class="language-bash">$ mv oldfile newfile
+</code></pre>
+
+<h2 id="md5">6. md5报文摘要算法</h2>
+
+<p>md5（Message-Digest Algorithm 5）报文摘要，可以用来验证网络文件传输的完整性。</p>
+
+<pre><code class="language-bash">$ md5sum file
+</code></pre>
+
+<h2 id="java">7. java类型文件</h2>
+
+<p>Java Control Panel位置<code class="language-bash">/usr/java/jdk1.7.0_45/bin/ControlPanel</code></p>
+
+<pre><code class="language-bash"># 执行.jar格式文件
+$ java -jar filename.jar
+
+# 执行.jnlp格式文件
+$ javaws filename.jnlp
+</code></pre>
+
+<h2 id="section-4">8. 查看文件</h2>
+
+<pre><code class="language-bash"># 将文件直接打印在屏幕上
+$ cat filename    
+</code></pre>
+
+<h2 id="section-5">9. 查看自己系统32位还是64位</h2>
+
+<pre><code class="language-bash">$ uname -a
+</code></pre>
+
+<h2 id="section-6">10. 查看当前路径</h2>
+
+<pre><code class="language-bash">$ pwd
+</code></pre>
+
+<h2 id="section-7">11. 查看某个程序/库的安装路径</h2>
+
+<pre><code class="language-bash"># 比如查看R的安装位置
+$ which R
+
+# 查看某个文件的位置
+$ whereis filename
+</code></pre>
+
+<h2 id="section-8">12. 查看一个命令的文档帮助</h2>
+
+<pre><code class="language-bash"># 比如man R
+$ man commandname
+</code></pre>
+
+<h2 id="section-9">13. 批量处理文件</h2>
+
+<pre><code class="language-bash"># 删除满足条件的数据
+$ find ./ -iname '*' | xargs rm -rf 
+
+# 移动大数据量的文件.
+$ find ./ -name "*.gif" | xargs -i mv {} /filePath/ 
+</code></pre>
+
+<h2 id="path">14. 修改PATH</h2>
+
+<p>假设我们程序的绝对路径是<code class="language-bash">/opt/arbtest/arb</code>
+两种方法: </p>
+
+<ul>
+  <li>直接命令行运行</li>
+</ul>
+
+<pre><code class="language-bash"># export PATH=$PATH:/opt/arbtest
+</code></pre>
+
+<p>这种方法当前有效，重启之后就失效了。</p>
+
+<pre><code class="language-bash"># 查看修改该好的PATH
+$ export
+</code></pre>
+<ul>
+  <li>修改<code class="language-bash">/etc/profile</code>（系统设置，任何用户都可使用）或者<code class="language-bash">~/.bashrc</code>（当前用户）文件。
+向这两个文件中添加<code class="language-bash">export PATH=$PATH:/opt/arbtest</code></li>
+</ul>
+
+<pre><code class="language-bash"># 载入修改好的文件 
+
+# 载入root权限profile
+# source /etc/profile
+
+# 载入当前用户.bashrc文件
+$ source ~/.bashrc
+
+# 查看修改好的路径
+$ echo $PATH
+</code></pre>
+
+<h2 id="section-10">15. 定向输入输出</h2>
+
+<p>禁止屏幕输出，即将屏幕输出导入Linux的无底洞 <code class="language-bash">/dev/null</code>，比如 </p>
+
+<pre><code class="language-bash">$ cat myFile &gt; /dev/null
+</code></pre>
+
+<p>此时，导入的是标准屏幕输出（标号为1）stdout。如果要导入标准错误输出（标号为2）stderr，执行</p>
+
+<pre><code class="language-bash">$ cat myFile 2 &gt; /dev/null
+</code></pre>
+
+<p>如果将两种输出全部导入<code class="language-bash">/dev/null</code>，执行</p>
+
+<pre><code class="language-bash"># 最后的"2&gt;$1"表示2的操作等同于1
+$ cat myFile &gt; /dev/null 2&gt;$1
+</code></pre>
+
+<h2 id="section-11">16. 更改文件权限和所有者</h2>
+
+<p>使用命令<code class="language-bash">chmod</code>更改文件权限。</p>
+
+<ul>
+  <li>
+    <p><code class="language-bash">u</code>：所有者（user）</p>
+  </li>
+  <li>
+    <p><code class="language-bash">g</code>：群组（group）</p>
+  </li>
+  <li>
+    <p><code class="language-bash">o</code>：其他人（others）</p>
+  </li>
+  <li>
+    <p><code class="language-bash">a</code>：所有人（all）</p>
+  </li>
+  <li>
+    <p><code class="language-bash">r</code>：表示可读（read），对应数值4</p>
+  </li>
+  <li>
+    <p><code class="language-bash">w</code>：表示可写（write），对应数值2</p>
+  </li>
+  <li>
+    <p><code class="language-bash">x</code>：表示可执行（excute），对应数值1</p>
+  </li>
+  <li>
+    <p><code class="language-bash">-</code>：表示什么操作都不行，对应数值0</p>
+  </li>
+</ul>
+
+<pre><code class="language-bash"># 比如rw-rw-r--对应664
+$ chomd 664 filename
+</code></pre>
+
+<p>使用命令<code class="language-bash">chown</code>更改文件所有者</p>
+
+<h2 id="section-12">17.更改文件时间戳</h2>
+
+<pre><code class="language-bash"># 更新myfile的存取和修改时间；如果myfile不存在，则创建该文件
+$ touch filename
+</code></pre>
+
+<h2 id="ntfs">18. 挂载NTFS分区</h2>
+
+<p>CentOS需要手动挂在NTFS分区，下载并安装<a href="http://www.tuxera.com/community/ntfs-3g-download/">NTFS-3G</a>，安装方法：</p>
+
+<pre><code class="language-bash"># ./configure 
+# make
+# make install 
+</code></pre>
+
+<p>查找NTFS分区路径，此处假定为<code class="language-bash">/dev/sta1</code>：</p>
+
+<pre><code class="language-bash"># 查看硬盘分区
+# fdisk -l
+
+# 挂载NTFS分区
+# mkdir /mnt/NTFStest
+# mount -t ntfs-3g /dev/sta1 /mnt/NTFStest
+
+# 卸载分区
+# umount /mnt/NTFStest
+</code></pre>
+
+<p>如果需要自动挂载ntfs分区，首先要查看分区信息，比如uuid</p>
+
+<pre><code class="language-bash"># blkid
+</code></pre>
+
+<p>之后修改<code class="language-bash">/etc/fstab</code>，添加需要挂载的分区</p>
+
+<pre><code class="language-bash">UUID=12D345251F34 /media/D ntfs defaults 0 0
+</code></pre>
+
+<h2 id="yum">19. yum服务相关</h2>
+
+<p>以下命令都可以配合<code class="language-bash">grep</code>使用</p>
+
+<pre><code class="language-bash"># 终止yum安装
+# rm -f /var/run/yum.pid
+
+# 查询包
+# yum search pkg
+
+# 重新安装包
+# yum reinstall pkg
+
+# 升级包
+# yum update pkg
+
+# 卸载包
+# yum remove pkg
+
+# 查询已安装包信息
+# yum info pkg
+
+# 查看已安装的包
+# yum list installed
+</code></pre>
+
+<h2 id="section-13">20. 修改配置文件</h2>
+
+<p>可以使用多种文本编辑器，最常用的是<a href="http://www.gnu.org/software/emacs/">Emacs</a>和<a href="http://www.vim.org/">Vim</a>，使用方法直<code class="language-bash">emacs</code>或者<code class="language-bash">vim</code>和文件名即可。</p>
+
+<pre><code class="language-bash"># 修改Apache服务器配制文件
+$ vim httpd.conf
+$ emacs httpd.conf
+</code></pre>
+
+<h2 id="section-14">21. 用户管理</h2>
+
+<pre><code class="language-bash"># 查看用户 
+$ w 
+$ who
+# 超过500为后建用户
+$ cat /etc/passwd
+
+# 新建用户 
+$ useradd usrname
+
+# 新建用户设置密码 
+$ passwd usrname newpasswd
+
+# 删除用户 
+$ userdel -r usrname
+
+# 查看当前任务 
+$ top
+</code></pre>
+
+<h2 id="debrpm">22. deb和rpm包互转</h2>
+
+<ul>
+  <li>第一种方法是使用<a href="http://joeyh.name/code/alien/">alien</a></li>
+</ul>
+
+<pre><code class="language-bash"># deb转换为rpm
+$ alien -r filename.deb
+
+# rpm转换成deb
+$ alien -d filename.rpm
+</code></pre>
+
+<ul>
+  <li>第二种方法是直接使用<code class="language-bash">apt</code>，非常方便，配置方法如下</li>
+</ul>
+
+<pre><code class="language-bash"># yum install apt
+# apt-get update
+# apt-get pkg
+</code></pre>
+
+<h2 id="section-15">23. 查看和终止进程</h2>
+
+<pre><code class="language-bash"># 查看进程树
+$ pstree -p
+
+# 看全部进程
+$ ps -A
+
+# 强制终止进程
+$ kill -9 7473
+
+# 释放内存
+$ free -m
+</code></pre>
+
+<h2 id="section-16">24. 查看网络有监听的端口</h2>
+
+<pre><code class="language-bash">$ netstat -lntp
+</code></pre>
+
+<h2 id="ssh">25. 断开SSH终端，程序后台执行</h2>
+
+<p>使用<code class="language-bash">nohup</code>命令</p>
+
+<pre><code class="language-bash">$ nohup /filepath/testScript.py 
+</code></pre>
+
+<h2 id="section-17">26. 查看某一个库文件的位置</h2>
+
+<pre><code class="language-bash">$ locate libGLU.so
+</code></pre>
+
+<h2 id="rpm">27. rpm包</h2>
+
+<pre><code class="language-bash"># 安装rpm包 
+# rpm -ivh pkg.rpm
+
+# 查看已经安装的包 
+# rpm -qa | grep pkg.rpm
+
+# 卸载rpm包 
+# rpm -e pkg
+</code></pre>
+
+<h2 id="centos-6--python-27">28. Centos 6 升级 python 2.7</h2>
+
+<p>参考网址 <a href="https://github.com/0xdata/h2o/wiki/Installing-python-2.7-on-centos-6.3.-Follow-this-sequence-exactly-for-centos-machine-only">1</a>, <a href="http://toomuchdata.com/2012/06/25/how-to-install-python-2-7-3-on-centos-6-2/">2</a></p>
+
+<h2 id="cpu">29. CPU信息</h2>
+
+<pre><code class="language-bash"># 查询CPU信息
+$ lscpu
+
+# 物理CPU个数
+$ grep 'physical id' /proc/cpuinfo | sort -u | wc -l
+
+# 核心个数
+$ grep 'core id' /proc/cpuinfo | sort -u | wc -l
+
+# 线程个数
+$ grep 'processor' /proc/cpuinfo | sort -u | wc -l
+$ nproc
+</code></pre>
+
+<p>查看CPU温度</p>
+
+<pre><code class="language-bash"># 安装lm_sensors工具
+# yum install lm_sensors
+$ sensors
+</code></pre>
+
+<h2 id="section-18">30. 查询文件和文件夹大小</h2>
+
+<pre><code class="language-bash">$ du -h myfile
+$ du -h filepath
+</code></pre>
+
+<h2 id="section-19">31. 查看内存情况</h2>
+
+<pre><code class="language-bash"># 查看内存使用情况
+$ free
+
+# 物理内存
+# dmidecode -t memory | grep Size
+</code></pre>
+
+<h2 id="section-20">32. 查看文件头部和尾部</h2>
+
+<pre><code class="language-bash"># 头部
+$ head -5 file
+
+# 尾部
+$ tail -7 file
+</code></pre>
+
+<h2 id="section-21">33. 下载命令</h2>
+
+<pre><code class="language-bash">$ wget -c -t 0 -w 30 httplink
+</code></pre>
+
+<ul>
+  <li>
+    <p><code class="language-bash">-c</code>：表示接着下载没下载的文件</p>
+  </li>
+  <li>
+    <p><code class="language-bash">-t</code>：表示尝试连接次数</p>
+  </li>
+  <li>
+    <p><code>0</code>：表示不停尝试</p>
+  </li>
+  <li>
+    <p><code class="language-bash">-w</code>：表示每两次尝试的时间间隔</p>
+  </li>
+</ul>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li>
+    <p><a href="http://blog.csdn.net/dqswuyundong/article/details/5970004">大量文件操作</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.cnblogs.com/amboyna/archive/2008/03/08/1096024.html">修改PATH</a></p>
+  </li>
+  <li>
+    <p>挂载NTFS分区：<a href="http://www.ha97.com/2832.html">1</a>, <a href="http://blog.csdn.net/zouyongjin/article/details/6439232">2</a></p>
+  </li>
+  <li>
+    <p>rpm下的apt：<a href="http://wiki.debian.org.hk/w/Install_APT_in_Fedora_Linux">1</a>, <a href="http://yinbiao.blog.51cto.com/2765456/511542">2</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.liukai.cn/in-linux-setup-rar-for-linux/">Linux使用rar</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.ibm.com/developerworks/cn/linux/l-cn-nohup/">后台执行程序</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.dayuer.com/freebsd-tooltips/wget_help">wget使用</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.cyberciti.biz/tips/how-can-i-zipping-and-unzipping-files-under-linux.html">zip/unzip</a></p>
+  </li>
+</ul>
+
+<h3 id="section-22">更新记录</h3>
+
+<p>2014年7月25日</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux安装R语言包]]></title>
+    <link href="http://yulongniu.github.io/blog/2010/09/04/linux-install-r/"/>
+    <updated>2010-09-04T10:21:38-04:00</updated>
+    <id>http://yulongniu.github.io/blog/2010/09/04/linux-install-r</id>
+    <content type="html"><![CDATA[<h2 id="r">1. R包介绍</h2>
+
+<p>R的包（package）通常有两种:</p>
+
+<ul>
+  <li>
+    <p>二进制代码包（Binary package）：这种包属于即得即用型（ready-to-use），但是依赖与平台，比如Windows和Linux平台下不同。</p>
+  </li>
+  <li>
+    <p>源代码包（Source package）: 此类包可以跨平台使用，但用之前需要处理或者编译（compiled）。同时，源代码包可以查看到程序源代码，便于查找、修改和引用。</p>
+  </li>
+</ul>
+
+<h2 id="r-1">2. R包安装</h2>
+
+<h3 id="section">2.1 源代码安装</h3>
+
+<pre><code class="language-bash"># R CMD INSTALL /.../myPackage.tar.gz
+</code></pre>
+
+<p>使用此方法，需要解决包依赖问题，即安装此包所依赖的包，安装过程有提示。</p>
+
+<!--more-->
+
+<h3 id="installpackageslanguage-bash">2.2 内置<code class="language-bash">install.packages()</code>函数安装</h3>
+
+<p>使用<code>install.packages()</code>安装，比较简便，联网即可装，装了就可用。使用这种方法安装包时，R会自动安装依赖的包。如果出现安装报错，可能的原因是缺少依赖的系统文件。同时，需要注意的是，一些R包只能在特定的平台上使用。比如<a href="http://www.bioconductor.org/packages/release/bioc/html/Rsubread.html">Rsubread</a>不能在Windows操作系统下使用。</p>
+
+<pre><code class="language-r">install.packages('myPackage')
+</code></pre>
+
+<p>同时，可以使用<code class="language-bash">install.packages()</code>安装本地下载的包，尤其适用于在服务器上安装包</p>
+
+<pre><code class="language-r">install.packages(
+  c('XML_0.99-5.tar.gz', '../../Interfaces/Perl/RSPerl_0.8-0.tar.gz'),
+  repos = NULL,
+  configure.args = c(XML = '--with-xml-config=xml-config', RSPerl = '--with-modules= "IO Fcntl"')) 
+</code></pre>
+
+<h2 id="r-2">3. R包版本查询和更新</h2>
+
+<p>R和R包版本查询</p>
+
+<pre><code class="language-r"># 在启动的R中执行
+R.version
+
+# R包版本
+packageVersion('myPackage')
+
+# 查询当前R的详细信息，包括R版本、R包版本、命名空间等
+sessionInfo()
+</code></pre>
+
+<p><a href="http://cran.r-project.org/">CRAN</a>包更新</p>
+
+<pre><code class="language-r"># 可以定期执行以下
+update.packages()  
+</code></pre>
+
+<p><a href="http://www.bioconductor.org/">Bioconductor</a>的安装和更新方法</p>
+
+<pre><code class="language-r">source('http://bioconductor.org/biocLite.R')
+biocLite('myPackage')
+</code></pre>
+
+<h2 id="r-3">4. 卸载R包</h2>
+
+<pre><code class="language-r">remove.packages('myPackage')
+</code></pre>
+
+<h2 id="r-4">5. R包相关函数</h2>
+
+<pre><code class="language-r"># 查看包的安装目录
+.libPaths()
+
+# 查看已经安装的包目录
+library()
+
+# 查看已安装包信息
+installed.packages()
+
+# 载入myPackage包
+library(myPackage)
+require(myPackage)
+
+# 查看当前载入的包
+search()
+
+# 查看启动R时自动载入的包。
+getOption('defaultPackages')
+</code></pre>
+
+<h2 id="section-1">6. 帮助信息查询</h2>
+
+<h3 id="rr">6.1 R和R包帮助信息</h3>
+
+<pre><code class="language-r"># 查询R HOME安装地址
+Sys.getenv('R_HOME')
+
+# 查询用户HOME地址
+Sys.getenv('HOME')
+
+# 查看某个“函数”或者“方法”的详细内容
+?myFunction
+?myMethod
+
+# 关键词查询
+??myKeyword
+
+# 查看已经安装包的详细HTML文档
+help.start()
+
+# 搜索R网站上的“helpinfor”相关信息
+RSiteSearch('helpinputinfor')
+
+# 查看“myPackage”的帮助
+help(package = 'myPackage')
+
+# 有的包，特别是bioconductor的包有vignette，用函数查看
+vignette('myPackage')
+
+# 这个函数也可以查看vignette，更好用一些
+openVignette('myPackage')
+
+# 展示一些包中demostration
+demo('package')
+</code></pre>
+
+<h3 id="section-2">6.2 查询对象信息</h3>
+
+<pre><code class="language-r"># 查看"myPackage"中的所有对象
+ls('package:myPackage')
+
+# 查看函数的参数
+args(myFunction)
+
+# 自动运行该函数帮助文档中的例子
+example(myFunction)
+
+# 查看某个对象的模式（mode）
+mode(myObject)
+
+# 查看某个对象的属性（attribute）
+attributes(myObject)
+
+# 快速查看某个对象的信息
+# 尤其适用于对象有很多行/列
+str(myObject)
+
+# 查看某个对象的类
+class(myObject)
+
+# 查询某个中某个类的帮助信息，举例如下
+class?graph::graph
+
+# 查看某个S3泛型函数中所有的方法或者一个类中所有的方法（S3：S version 3）
+methods('myMethods')
+
+# 查看S4类的方法
+showMethods(class = 'myClass')
+
+# 查看某个类或者包的具体内容
+getClass('class/package')
+
+# 查看某个类的slot
+getSlots('class')
+
+# 查看某个对象的slot
+slotNames(myObject)
+
+# 访问对象的slot值使用@，可以连续用
+Myobject@slotNames
+</code></pre>
+
+<h2 id="section-3">7. 查看函数源代码</h2>
+
+<h3 id="section-4">7.1 普通函数源代码</h3>
+
+<p>直接输入函数名称，不加后面的括号。比如:</p>
+
+<pre><code class="language-r">&gt; fivenum
+</code></pre>
+
+<h3 id="s3s4">7.2 查询S3/S4函数源代码</h3>
+
+<p>因为如果使用了R的S3和S4方法，可能一个函数名称对应的多个不同的方法（对应不同的对象）。这时，采用的策略是：</p>
+
+<ol>
+  <li>
+    <p>查询函数对应的方法</p>
+  </li>
+  <li>
+    <p>查询具体方法对应的源代码</p>
+  </li>
+</ol>
+
+<p>比如<code class="language-r">t.test</code>的源代码</p>
+
+<pre><code class="language-r">&gt; t.test
+function (x, ...) 
+UseMethod("t.test")
+&lt;bytecode: 0x244a248&gt;
+&lt;environment: namespace:stats&gt;
+
+# 查询S3对象的方法
+&gt; methods('t.test')
+[1] t.test.default* t.test.formula*
+
+   Non-visible functions are asterisked
+   
+
+# 查看源代码，三种方法
+&gt; getAnywhere('t.test.default')
+&gt; getS3method('t.test','default')
+&gt; stats:::t.test.default
+</code></pre>
+
+<p>另外一个例子，查询<span style="color: blue">affy</span>包中<code class="language-r">pm()</code>的源代码：</p>
+
+<pre><code class="language-r">&gt; library(affy)
+&gt; pm
+standardGeneric for "pm" defined from package "affy"
+
+function (object, ...) 
+standardGeneric("pm")
+&lt;environment: 0x4496f10&gt;
+Methods may be defined for arguments: object
+Use  showMethods("pm")  for currently available ones.
+
+&gt; findMethods('pm')
+</code></pre>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li>
+    <p><a href="http://yanping.me/cn/blog/2012/01/09/customizing-the-startup-environment/">R包安装</a></p>
+  </li>
+  <li>
+    <p>《R语言编程技术》(The Art of R Programming)</p>
+  </li>
+</ul>
+
+<h3 id="section-5">更新记录</h3>
+
+<p>2014年11月25日</p>
+]]></content>
+  </entry>
+  
+</feed>
