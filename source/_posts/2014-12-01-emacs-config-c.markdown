@@ -24,7 +24,7 @@ categories: lisp
 
 <a id="c-mode-config">Emacs configure for C/C++</a>
 
-{% codeblock Emacs configure lang:lisp %}
+{% codeblock Emacs configure lang:emacs-lisp %}
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;set up helm

@@ -92,7 +92,7 @@ footer: false
 
 Octopress提供了隐藏博文的功能，即使文章已经推送到了github，也可以不在博客主页显示。具体方法是在每篇markdown文件头部添加：
 
-{% codeblock lang:ruby %} 
+{% codeblock lang:ruby %}
 published: false
 {% endcodeblock %}
 
@@ -106,14 +106,14 @@ published: true
 
 安装`coderay`和`kramdown`
 
-{% codeblock lang:bash %} 
+{% codeblock lang:bash %}
 $ gem install coderay
 $ gem install kramdown
 {% endcodeblock %}
 
 在`_config.yml`{:.language-bash}文件中写入：
 
-{% codeblock lang:bash %} 
+{% codeblock lang:bash %}
 markdown: kramdown
 kramdown:
   use_coderay: true
