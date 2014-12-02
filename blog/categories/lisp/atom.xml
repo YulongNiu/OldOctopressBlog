@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Lisp | My Octopress Blog]]></title>
+  <title><![CDATA[Category: Lisp | 牛牛龙]]></title>
   <link href="http://yulongniu.github.io/blog/categories/lisp/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-02T02:15:46-05:00</updated>
+  <updated>2014-12-02T18:01:44-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Yulong Niu]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -460,9 +460,11 @@
     <id>http://yulongniu.github.io/blog/2011/08/12/emacs-tips</id>
     <content type="html"><![CDATA[<h2 id="section">1. 安装</h2>
 
-<pre><code class="language-bash"># 安装Emacs
-# yum install emacs 
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 安装Emacs</span>
+</span><span class='line'><span class="c"># yum install emacs </span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="section-1">2. 窗口和文件操作</h2>
 

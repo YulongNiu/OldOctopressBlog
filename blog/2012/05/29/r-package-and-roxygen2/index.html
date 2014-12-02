@@ -1,15 +1,11 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<html class="no-js" lang="en">
 <head>
   <meta charset="utf-8">
-  <title>R包制作和roxygen2使用说明 - My Octopress Blog</title>
-  <meta name="author" content="Your Name">
+  <title>R包制作和roxygen2使用说明 - 牛牛龙</title>
+  <meta name="author" content="Yulong Niu">
 
   
-  <meta name="description" content="查看创建R包的各种细节，权威的文献是Writing R Extensions。 1. 创建R包目录 像盖房子一样，创建R包需要先搭建一个骨架，这个骨架往往是固定的，即一些文件夹（如R，man等）和文件（如DESCRIPTION，NAMESPACE）是必须的，而另外一些则可选择性添加。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,20 +15,17 @@
 
   
   <link rel="canonical" href="http://yulongniu.github.io/blog/2012/05/29/r-package-and-roxygen2">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+  <link href="/favicon.ico" type="image/png" rel="icon">
+  <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
 
-<!-- mathjax config similar to math.stackexchange -->
+  <!-- http://opengraphprotocol.org/ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://yulongniu.github.io/blog/2012/05/29/r-package-and-roxygen2">
+  <meta property="og:title" content="R包制作和roxygen2使用说明 - 牛牛龙">
+  
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
-</script>
+  <!-- mathjax config similar to math.stackexchange -->
 
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
@@ -41,6 +34,10 @@
       processEscapes: true
     }
   });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 </script>
 
 <script type="text/x-mathjax-config">
@@ -64,77 +61,105 @@
    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-<!-- link open with new tab  -->
-<script>
-function addBlankTargetForLinks () {
-  $('a[href^="http"]').each(function(){
-  $(this).attr('target', '_blank');
-  });
-}
+<script src="/javascripts/libs/jquery/jquery-2.0.3.min.js"></script>
 
-$(document).bind('DOMNodeInserted', function(event) {
-  addBlankTargetForLinks();
-});
-</script>
+<link href="/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="/assets/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
 
-<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 
   
 
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">My Octopress Blog</a></h1>
-  
-    <h2>A blogging framework for hackers.</h2>
-  
-</hgroup>
+  <body   >
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div id="wrap">
+      <header role="banner">
+        <nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">牛牛龙</a>
+        </div>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="https://www.google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:yulongniu.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a rel="index" href="/">Blog</a>
+                </li>
+                <li >
+                    <a href="/blog/archives">Archives</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="subscribe-rss" href="/atom.xml" title="subscribe via RSS">
+                        <span class="visible-xs">RSS</span>
+                        <img class="hidden-xs" src="/images/rss.png" alt="RSS">
+                    </a>
+                </li>
+                
+            </ul>
+            
+                <form class="search navbar-form navbar-right" action="https://www.google.com/search" method="GET">
+                    <input type="hidden" name="q" value="site:yulongniu.github.io">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="q" placeholder="Search">
+                    </div>
+                </form>
+            
+        </div>
+    </div>
 </nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
+
+
+      </header>
+      <div id="main" role="main" class="container">
+        <div id="content">
+          <div class="row">
+  <div class="page-content col-md-9" itemscope itemtype="http://schema.org/Blog">
+    <meta itemprop="name" content="牛牛龙" />
     
-      <h1 class="entry-title">R包制作和roxygen2使用说明</h1>
+    <meta itemprop="url" content="http://yulongniu.github.io" />
+    <article class="hentry" role="article" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+      
+  <header class="page-header">
     
-    
-      <p class="meta">
+      <p class="meta text-muted text-uppercase">
         
 
 
 
 
-<time class='entry-date' datetime='2012-05-29T19:46:59-04:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>7:46 pm</span></time>
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2012-05-29T19:46:59-04:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
       </p>
+    
+    
+    <h1 class="entry-title" itemprop="name headline">
+        R包制作和roxygen2使用说明
+        
+    </h1>
     
   </header>
 
 
-<div class="entry-content"><p>查看创建R包的各种细节，权威的文献是<a href="http://cran.r-project.org/doc/manuals/r-release/R-exts.html">Writing R Extensions</a>。</p>
+<div class="entry-content clearfix" itemprop="articleBody description"><p>查看创建R包的各种细节，权威的文献是<a href="http://cran.r-project.org/doc/manuals/r-release/R-exts.html">Writing R Extensions</a>。</p>
 
 <h2 id="r">1. 创建R包目录</h2>
 
@@ -169,9 +194,11 @@ $(document).bind('DOMNodeInserted', function(event) {
   </li>
 </ul>
 
-<pre><code class="language-r">c(person("Hadley", "Wickham", email = "hadley@rice.edu", role ="ctb"),  
-person("Yihui", "Xie", email = "xie@yihui.name", role = c("aut", "cre")))
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="kt">c</span><span class="p">(</span>person<span class="p">(</span><span class="s">&quot;Hadley&quot;</span><span class="p">,</span> <span class="s">&quot;Wickham&quot;</span><span class="p">,</span> email <span class="o">=</span> <span class="s">&quot;hadley@rice.edu&quot;</span><span class="p">,</span> role <span class="o">=</span><span class="s">&quot;ctb&quot;</span><span class="p">),</span>
+</span><span class="line">person<span class="p">(</span><span class="s">&quot;Yihui&quot;</span><span class="p">,</span> <span class="s">&quot;Xie&quot;</span><span class="p">,</span> email <span class="o">=</span> <span class="s">&quot;xie@yihui.name&quot;</span><span class="p">,</span> role <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;aut&quot;</span><span class="p">,</span> <span class="s">&quot;cre&quot;</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <ul>
   <li>
@@ -284,16 +311,25 @@ person("Yihui", "Xie", email = "xie@yihui.name", role = c("aut", "cre")))
 
 <p><span style="color: blue">stats4</span>给出的例子非常好，R 2.15.0之后，对隐式泛函要求严格，必须先输入显示函数：</p>
 
-<pre><code class="language-r">  export(mle) 
-  importFrom("graphics", plot) 
-  importFrom("stats", optim, qchisq) 
-  ## For these, we define methods or (AIC, BIC, nobs) an implicit generic: 
-  importFrom("stats", AIC, BIC, coef, confint, logLik, nobs, profile, update, vcov)   exportClasses(mle, profile.mle, summary.mle) 
-  ## All methods for imported generics: 
-  exportMethods(coef, confint, logLik, plot, profile, summary, show, update, vcov)
-  ## implicit generics which do not have any methods here 
-  export(AIC, BIC, nobs)
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line">  export<span class="p">(</span>mle<span class="p">)</span>
+</span><span class="line">  importFrom<span class="p">(</span><span class="s">&quot;graphics&quot;</span><span class="p">,</span> plot<span class="p">)</span>
+</span><span class="line">  importFrom<span class="p">(</span><span class="s">&quot;stats&quot;</span><span class="p">,</span> optim<span class="p">,</span> qchisq<span class="p">)</span>
+</span><span class="line">  <span class="c1">## For these, we define methods or (AIC, BIC, nobs) an implicit generic: </span>
+</span><span class="line">  importFrom<span class="p">(</span><span class="s">&quot;stats&quot;</span><span class="p">,</span> AIC<span class="p">,</span> BIC<span class="p">,</span> coef<span class="p">,</span> confint<span class="p">,</span> logLik<span class="p">,</span> nobs<span class="p">,</span> profile<span class="p">,</span> update<span class="p">,</span> vcov<span class="p">)</span>   exportClasses<span class="p">(</span>mle<span class="p">,</span> profile.mle<span class="p">,</span> summary.mle<span class="p">)</span>
+</span><span class="line">  <span class="c1">## All methods for imported generics: </span>
+</span><span class="line">  exportMethods<span class="p">(</span>coef<span class="p">,</span> confint<span class="p">,</span> logLik<span class="p">,</span> plot<span class="p">,</span> profile<span class="p">,</span> <span class="kp">summary</span><span class="p">,</span> show<span class="p">,</span> update<span class="p">,</span> vcov<span class="p">)</span>
+</span><span class="line">  <span class="c1">## implicit generics which do not have any methods here </span>
+</span><span class="line">  export<span class="p">(</span>AIC<span class="p">,</span> BIC<span class="p">,</span> nobs<span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h2 id="r-1">3. 书写R函数帮助文档</h2>
 
@@ -410,20 +446,21 @@ person("Yihui", "Xie", email = "xie@yihui.name", role = c("aut", "cre")))
 
 <p>在提交代码之前，首先需要检查自己的代码，运行命名</p>
 
-<pre><code class="language-bash">R CMD check Mypkg
-
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line">R CMD check Mypkg
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>之后，因为R源码包（source package）的发布都是采用压缩文件（<code>*.tar.gz</code>）形式，所以需要将源代码打包，方法是运行命令</p>
 
-<pre><code class="language-bash">R CMD build Mypkg
-
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line">R CMD build Mypkg
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>当然，有时我们需要发布二进制包（binary packages）,操作方法是</p>
 
-<pre><code class="language-bash">R CMD INSTALL --build Mypkg
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line">R CMD INSTALL --build Mypkg
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>具体执行过程是：首先，在默认目录树下安装包；之后，将成功安装的包转化成（平台依赖的）二进制代码，再将二进制代码打包输出。所以，默认安装目录要有“可写”权限，如果没有，执行<code class="language-bash">R CMD INSTALL -l location --build Mypkg</code>，指定一个“可写”权限目录（location）安装。</p>
 
@@ -431,10 +468,13 @@ person("Yihui", "Xie", email = "xie@yihui.name", role = c("aut", "cre")))
 
 <p>最后是提交代码，依次执行以下命名或者操作:</p>
 
-<pre><code class="language-bash">R CMD build Mypkg
-# 检查例子（example）、检查（test）和文档输出，如果有报错或者警告，需要仔细阅读提示，原则上消除所有报错和警告
-R CMD check --as-cran
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line">R CMD build Mypkg
+</span><span class="line"><span class="c"># 检查例子（example）、检查（test）和文档输出，如果有报错或者警告，需要仔细阅读提示，原则上消除所有报错和警告</span>
+</span><span class="line">R CMD check --as-cran
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>使用 ftp://CRAN.R-project.org/incoming/ （用户名： anonymous；密码：自己邮箱地址）上传自己的包，并向CRAN@R-project.org发邮件通知自己上传了包（名称、版本等）。</p>
 
@@ -511,21 +551,30 @@ R CMD check --as-cran
 </div>
 
 
-  <footer>
-    <p class="meta">
-      
+      <footer>
+        <p class="meta text-muted">
+          
   
 
-<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+<span class="glyphicon glyphicon-user"></span> <span class="byline author vcard" itemprop="author" itemscope itemtype="http://schema.org/Person">Posted by <span class="fn" itemprop="name">Yulong Niu</span></span>
 
-      
-
-
+          
 
 
-<time class='entry-date' datetime='2012-05-29T19:46:59-04:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>7:46 pm</span></time>
-      
 
+
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2012-05-29T19:46:59-04:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+          
+
+<span class="glyphicon glyphicon-tags"></span>&nbsp;
 <span class="categories">
   
     <a class='category' href='/blog/categories/r/'>r</a>
@@ -533,9 +582,9 @@ R CMD check --as-cran
 </span>
 
 
-    </p>
-    
-      <div class="sharing">
+        </p>
+        
+          <div class="sharing">
   
   <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.github.io/blog/2012/05/29/r-package-and-roxygen2/" data-via="" data-counturl="http://yulongniu.github.io/blog/2012/05/29/r-package-and-roxygen2/" >Tweet</a>
   
@@ -543,66 +592,70 @@ R CMD check --as-cran
   
 </div>
 
+        
+        
+          <ul class="meta text-muted pager">
+            
+            <li class="previous"><a href="/blog/2012/05/02/r-tricks/" title="Previous Post: R小技巧集锦">&laquo; R小技巧集锦</a></li>
+            
+            
+            <li class="next"><a href="/blog/2013/06/18/bioinfor-tools/" title="Next Post: 生物信息学工具网址">生物信息学工具网址 &raquo;</a></li>
+            
+          </ul>
+        
+      </footer>
+    </article>
     
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2012/05/02/r-tricks/" title="Previous Post: R小技巧集锦">&laquo; R小技巧集锦</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2013/06/18/bioinfor-tools/" title="Next Post: 生物信息学工具网址">生物信息学工具网址 &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
+  </div>
 
-</div>
-
-<aside class="sidebar">
   
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
+  <aside class="sidebar col-md-3">
     
-      <li class="post">
-        <a href="/blog/2014/12/01/emacs-config-c/">Emacs配置C语言编程环境</a>
-      </li>
+      <section class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Recent Posts</h3>
+  </div>
+  
+  <div id="recent_posts" class="list-group">
     
-      <li class="post">
-        <a href="/blog/2014/07/28/next-seqence-tools/">二代测序中的常用工具介绍</a>
-      </li>
+    <a class="list-group-item " href="/blog/2014/12/01/emacs-config-c/">Emacs配置C语言编程环境</a>
     
-      <li class="post">
-        <a href="/blog/2014/07/25/short-sequence-alignment/">二代测序中的短序列比对</a>
-      </li>
+    <a class="list-group-item " href="/blog/2014/07/28/next-seqence-tools/">二代测序中的常用工具介绍</a>
     
-      <li class="post">
-        <a href="/blog/2014/07/22/octopress-install/">Octopress安装和使用</a>
-      </li>
+    <a class="list-group-item " href="/blog/2014/07/25/short-sequence-alignment/">二代测序中的短序列比对</a>
     
-      <li class="post">
-        <a href="/blog/2014/07/04/my-first-post/">My First Post</a>
-      </li>
+    <a class="list-group-item " href="/blog/2014/07/22/octopress-install/">Octopress安装和使用</a>
     
-  </ul>
+    <a class="list-group-item " href="/blog/2014/07/04/my-first-post/">My First Post</a>
+    
+  </div>
 </section>
 
 
 
 
 
+
+    
+  </aside>
   
-</aside>
+</div>
 
-
+        </div>
+      </div>
     </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Your Name -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+    <footer role="contentinfo"><div class="container">
+    <p class="text-muted credits">
+  Copyright &copy; 2014 - Yulong Niu<br>
+  <small>
+      <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>,
+      <span class="credit">customized with <a href="https://github.com/kAworu/octostrap3">octostrap3</a></span>.
+  </small>
 </p>
 
+</div>
 </footer>
-  
+    
 
 
 
@@ -621,8 +674,9 @@ R CMD check --as-cran
   </script>
 
 
+<script src="/assets/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/javascripts/modernizr-2.0.js"></script>
 
 
-
-</body>
+  </body>
 </html>

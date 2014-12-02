@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Ppr | My Octopress Blog]]></title>
+  <title><![CDATA[Category: Ppr | 牛牛龙]]></title>
   <link href="http://yulongniu.github.io/blog/categories/ppr/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-02T02:15:46-05:00</updated>
+  <updated>2014-12-02T18:01:44-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Yulong Niu]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -26,48 +26,63 @@
 
 <p>常用命令:</p>
 
-<pre><code class="language-bash"># 预览，可自动更新。使用Ctrl+c终止。
-$ rake preview
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 预览，可自动更新。使用Ctrl+c终止。</span>
+</span><span class='line'><span class="nv">$ </span>rake preview
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="ruby">2. Ruby版本调整</h2>
 
 <p>因为Octopress需要使用Ruby旧版本，推荐使用<a href="https://rvm.io/">RVM</a>安装Ruby 1.9.3版本。在安转过程中可能会出现<code>"gpg: Can't check signature: public key not found"</code>的错误提示，需要执行一下类似命名，添加公用匙。</p>
 
-<pre><code class="language-bash">$ gpg2 --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>gpg2 –keyserver hkp://keys.gnupg.net –recv-keys D39DC0E3
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>使用以下操作设定ruby版本：</p>
 
-<pre><code class="language-bash">$ source ~/.rvm/scripts/rvm
-$ rvm use 1.9.3
-</code></pre>
-<!--more-->
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">source</span> ~/.rvm/scripts/rvm
+</span><span class='line'><span class="nv">$ </span>rvm use 1.9.3
+</span></code></pre></td></tr></table></div></figure>
+<!--more-->    </p>
 
 <h2 id="section-1">3. 预览错误</h2>
 
 <p>如果在预览博文时出现<code class="language-bash">TCPServer Error: Address already in use - bind(2)</code>的错误，表示端口（Octopress默认4000）被占，解决办法:</p>
 
-<pre><code class="language-bash"># 获取占据4000端口程序的PID
-$ lsof -wni tcp:4000
-$ kill -9 PID
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 获取占据4000端口程序的PID</span>
+</span><span class='line'><span class="nv">$ </span>lsof -wni tcp:4000
+</span><span class='line'><span class="nv">$ </span><span class="nb">kill</span> -9 PID
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="section-2">4. 更新博文</h2>
 
 <p>博文放置在<code class="language-bash">source/_posts</code>目录下。</p>
 
-<pre><code class="language-bash">$ rake new_post["new post"]
-$ rake generate
-$ git add .
-$ git commit -m "my comment" 
-$ git push origin source
-$ rake deploy
-</code></pre>
-<p>如果需要在首页显示部分博文，在需要隔断的地方（博文markdown文件）加入：</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake new_post<span class="o">[</span>“new post”<span class="o">]</span>
+</span><span class='line'><span class="nv">$ </span>rake generate
+</span><span class='line'><span class="nv">$ </span>git add .
+</span><span class='line'><span class="nv">$ </span>git commit -m “my comment”
+</span><span class='line'><span class="nv">$ </span>git push origin <span class="nb">source</span>
+</span><span class='line'><span class="nv">$ </span>rake deploy
+</span></code></pre></td></tr></table></div></figure>
+如果需要在首页显示部分博文，在需要隔断的地方（博文markdown文件）加入：</p>
 
-<pre><code class="language-html">&lt;!--more--&gt;
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!--more--&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="section-3">5. 使用主题</h2>
 
@@ -81,81 +96,162 @@ $ rake deploy
 
 <p>在<code class="language-bash">source</code>文件夹下添加<em>404.markdown</em>文件，之后写入</p>
 
-<pre><code class="language-javascript">---
-layout: page
-title: "404 Error"
-date: 2014-07-22
-comments: false
-sharing: false
-footer: false
----
-
-&lt;script type="text/javascript" src="http://www.qq.com/404/search_children.js?edition=small" charset="utf-8"&gt;&lt;/script&gt;
-</code></pre>
+<h2 id="codeblock-langjavascript-"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="err">/h2&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">layout</span><span class="o">:</span> <span class="nx">page</span>
+</span><span class='line'><span class="nx">title</span><span class="o">:</span> <span class="err">“</span><span class="mi">404</span> <span class="nb">Error</span><span class="err">”</span>
+</span><span class='line'><span class="nx">date</span><span class="o">:</span> <span class="mi">2014</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">22</span>
+</span><span class='line'><span class="nx">comments</span><span class="o">:</span> <span class="kc">false</span>
+</span><span class='line'><span class="nx">sharing</span><span class="o">:</span> <span class="kc">false</span>
+</span><span class='line'><span class="nx">footer</span><span class="o">:</span> <span class="kc">false</span>
+</span><span class='line'><span class="err">—</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;http://www.qq.com/404/search_children.js?edition=small&quot;</span> <span class="nx">charset</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="section-6">8. 私密博文</h2>
 
 <p>Octopress提供了隐藏博文的功能，即使文章已经推送到了github，也可以不在博客主页显示。具体方法是在每篇markdown文件头部添加：</p>
 
-<pre><code class="language-ruby">published: false
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>
+</span><span class='line'><span class="ss">published</span><span class="p">:</span> <span class="kp">false</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>如果需要公开发表，将其删除或者改为：</p>
 
-<pre><code class="language-ruby">published: true
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">published</span><span class="p">:</span> <span class="kp">true</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="kramdown">9. Kramdown语法小技巧</h2>
+<h2 id="section-7">9. 代码高亮设置</h2>
+
+<p>安装<code>coderay</code>和<code>kramdown</code></p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>
+</span><span class='line'><span class="nv">$ </span>gem install coderay
+</span><span class='line'><span class="nv">$ </span>gem install kramdown
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>在<code class="language-bash">_config.yml</code>文件中写入：</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>
+</span><span class='line'>markdown: kramdown
+</span><span class='line'>kramdown:
+</span><span class='line'>  use_coderay: <span class="nb">true</span>
+</span><span class='line'><span class="nb">  </span>coderay:
+</span><span class='line'>    coderay_line_numbers: table
+</span><span class='line'>    coderay_css: class
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2 id="kramdown">10. Kramdown语法小技巧</h2>
 
 <ul>
-  <li>
-    <p>代码片段高亮使用三对<code class="language-bash">~</code>，行内引用代码使用一对`</p>
-  </li>
-  <li>
-    <p>四个空格或者个一个Tab可以生成一个文本块</p>
-  </li>
+  <li>代码高亮</li>
 </ul>
 
-<h2 id="section-7">10. 链接在新的选择卡中打开</h2>
+<p>代码段高亮参考<a href="http://octopress.org/docs/plugins/codeblock/">Octopress codeblock</a></p>
+
+<p>行内引用代码使用
+<code>`source/_includes/custom/head.html`{:.language-bash}</code></p>
+
+<ul>
+  <li>四个空格或者个一个Tab可以生成一个文本块</li>
+</ul>
+
+<h2 id="section-8">11. 链接在新的选择卡中打开</h2>
 
 <p>在<code class="language-bash">source/_includes/custom/head.html</code>中添加：</p>
 
-<pre><code class="language-html">&lt;!-- link open with new tab  --&gt;
-&lt;script&gt;
-function addBlankTargetForLinks () {
-  $('a[href^="http"]').each(function(){
-  $(this).attr('target', '_blank');
-  });
-}
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- link open with new tab  --&gt;</span>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'><span class="kd">function</span> <span class="nx">addBlankTargetForLinks</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;a[href^=&quot;http&quot;]&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="s1">&#39;_blank&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">}</span><span class="nt">&lt;/script&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>$(document).bind(‘DOMNodeInserted’, function(event) {
+</span><span class='line'>  addBlankTargetForLinks();
+</span><span class='line'>});
+</span><span class='line'><span class="ni">&amp;lt;</span>/script<span class="ni">&amp;gt;</span><span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
-$(document).bind('DOMNodeInserted', function(event) {
-  addBlankTargetForLinks();
-});
-&lt;/script&gt;
-
-</code></pre>
-
-<h2 id="section-8">11. 修改分页数</h2>
+<h2 id="section-9">12. 修改分页数</h2>
 
 <p>修改<code class="language-bash">_config.yml</code>文件</p>
 
-<pre><code class="language-bash"># 每页最多展示的博文数目
-paginate: 5
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 每页最多展示的博文数目</span>
+</span><span class='line'>paginate: 5&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-10&quot;</span>&gt;分页后博文地址&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;paginate_path: “posts/:num”
+</span></code></pre></td></tr></table></div></figure></p>
 
-# 分页后博文地址
-paginate_path: "posts/:num"
-</code></pre>
-
-<h2 id="section-9">12. 添加图片</h2>
+<h2 id="section-11">13. 添加图片</h2>
 
 <p>将需要添加的图片移动到目录<code class="language-bash">source/images/</code>，之后在正文中添加：</p>
 
-<pre><code class="language-bash"><img class="[class names]" src="/path/to/image" title="[width] [height] [title text [alt text]]" >
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;img <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;[class names]&quot;</span> <span class="nv">src</span><span class="o">=</span><span class="s2">&quot;/path/to/image&quot;</span> <span class="nv">title</span><span class="o">=</span><span class="s2">&quot;[width] [height] [title text [alt text]]&quot;</span> &gt;&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-12&quot;</span>&gt;例子&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;&lt;img <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;left&quot;</span> <span class="nv">src</span><span class="o">=</span><span class="s2">&quot;/images/testimg.png&quot;</span> <span class="nv">width</span><span class="o">=</span><span class="s2">&quot;350&quot;</span> <span class="nv">height</span><span class="o">=</span><span class="s2">&quot;350&quot;</span> <span class="nv">title</span><span class="o">=</span><span class="s2">&quot;‘image’ ‘images’&quot;</span> &gt;
+</span><span class='line'>&lt;img <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;right&quot;</span> <span class="nv">src</span><span class="o">=</span><span class="s2">&quot;http://placekitten.com/300/500&quot;</span> <span class="nv">width</span><span class="o">=</span><span class="s2">&quot;150&quot;</span> <span class="nv">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span> <span class="nv">title</span><span class="o">=</span><span class="s2">&quot;Place Kitten #3&quot;</span> &gt;
+</span></code></pre></td></tr></table></div></figure></p>
 
-# 例子
-<img class="left" src="/images/testimg.png" width="350" height="350" title="image" alt="images">
-<img class="right" src="http://placekitten.com/300/500" width="150" height="250" title="Place Kitten #3" >
-</code></pre>
+<h2 id="favicon">14. 修改favicon</h2>
+
+<p>需要修改的favicon文件，比如<code>favicon.ico</code>移动到<code class="language-bash">source/</code>目录下。之后修改文件<code class="language-bash">source/_includes/head.html</code>，找到<code>favicon.png</code>将其改为<code>favicon.ico</code>。</p>
 
 <h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
 
@@ -179,14 +275,14 @@ paginate_path: "posts/:num"
     <p><a href="http://kramdown.gettalong.org/quickref.html">Kramdown演示</a></p>
   </li>
   <li>
-    <p><a href="http://yibao.buertec.net/blog/2013/12/03/set-up-favicon-dot-png-slash-favicon-dot-ico-on-octopress/">修改标签图标</a></p>
+    <p><a href="http://i.rexdf.org/blog/2014/09/26/octopressbo-ke-geng-xin-ri-zhi/">pygments错误详细提示</a></p>
   </li>
   <li>
     <p><a href="http://pygments.org/docs/lexers/">Octopress highlight language list</a></p>
   </li>
 </ul>
 
-<h3 id="section-10">更新记录</h3>
+<h3 id="section-13">更新记录</h3>
 
 <p>2014年7月25日</p>
 

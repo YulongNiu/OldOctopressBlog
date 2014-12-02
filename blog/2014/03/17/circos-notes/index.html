@@ -1,15 +1,11 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<html class="no-js" lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Circos Notes - My Octopress Blog</title>
-  <meta name="author" content="Your Name">
+  <title>Circos Notes - 牛牛龙</title>
+  <meta name="author" content="Yulong Niu">
 
   
-  <meta name="description" content="Mapping data onto a Circos figure requires that you identify what patterns in your data are (a) likely to be important and (b) likely to be present, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,20 +15,17 @@
 
   
   <link rel="canonical" href="http://yulongniu.github.io/blog/2014/03/17/circos-notes">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+  <link href="/favicon.ico" type="image/png" rel="icon">
+  <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
 
-<!-- mathjax config similar to math.stackexchange -->
+  <!-- http://opengraphprotocol.org/ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://yulongniu.github.io/blog/2014/03/17/circos-notes">
+  <meta property="og:title" content="Circos Notes - 牛牛龙">
+  
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
-</script>
+  <!-- mathjax config similar to math.stackexchange -->
 
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
@@ -41,6 +34,10 @@
       processEscapes: true
     }
   });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 </script>
 
 <script type="text/x-mathjax-config">
@@ -64,87 +61,121 @@
    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-<!-- link open with new tab  -->
-<script>
-function addBlankTargetForLinks () {
-  $('a[href^="http"]').each(function(){
-  $(this).attr('target', '_blank');
-  });
-}
+<script src="/javascripts/libs/jquery/jquery-2.0.3.min.js"></script>
 
-$(document).bind('DOMNodeInserted', function(event) {
-  addBlankTargetForLinks();
-});
-</script>
+<link href="/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="/assets/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
 
-<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 
   
 
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">My Octopress Blog</a></h1>
-  
-    <h2>A blogging framework for hackers.</h2>
-  
-</hgroup>
+  <body   >
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div id="wrap">
+      <header role="banner">
+        <nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">牛牛龙</a>
+        </div>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="https://www.google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:yulongniu.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a rel="index" href="/">Blog</a>
+                </li>
+                <li >
+                    <a href="/blog/archives">Archives</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="subscribe-rss" href="/atom.xml" title="subscribe via RSS">
+                        <span class="visible-xs">RSS</span>
+                        <img class="hidden-xs" src="/images/rss.png" alt="RSS">
+                    </a>
+                </li>
+                
+            </ul>
+            
+                <form class="search navbar-form navbar-right" action="https://www.google.com/search" method="GET">
+                    <input type="hidden" name="q" value="site:yulongniu.github.io">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="q" placeholder="Search">
+                    </div>
+                </form>
+            
+        </div>
+    </div>
 </nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
+
+
+      </header>
+      <div id="main" role="main" class="container">
+        <div id="content">
+          <div class="row">
+  <div class="page-content col-md-9" itemscope itemtype="http://schema.org/Blog">
+    <meta itemprop="name" content="牛牛龙" />
     
-      <h1 class="entry-title">Circos Notes</h1>
+    <meta itemprop="url" content="http://yulongniu.github.io" />
+    <article class="hentry" role="article" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+      
+  <header class="page-header">
     
-    
-      <p class="meta">
+      <p class="meta text-muted text-uppercase">
         
 
 
 
 
-<time class='entry-date' datetime='2014-03-17T15:37:45-04:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>3:37 pm</span></time>
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-03-17T15:37:45-04:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
       </p>
+    
+    
+    <h1 class="entry-title" itemprop="name headline">
+        Circos Notes
+        
+    </h1>
     
   </header>
 
 
-<div class="entry-content"><p>Mapping data onto a Circos figure requires that you identify what patterns in your data are (a) likely to be important and (b) likely to be present, and create a figure that exposes such patterns. Remember, if the pattern exists, you can’t afford to miss it. If it doesn’t exist, you can’t afford to be fooled into thinking that it’s there, or left wondering whether it’s occluded by other data.</p>
+<div class="entry-content clearfix" itemprop="articleBody description"><p>Mapping data onto a Circos figure requires that you identify what patterns in your data are (a) likely to be important and (b) likely to be present, and create a figure that exposes such patterns. Remember, if the pattern exists, you can’t afford to miss it. If it doesn’t exist, you can’t afford to be fooled into thinking that it’s there, or left wondering whether it’s occluded by other data.</p>
 
 <h2 id="run-circos">1. Run circos</h2>
 
-<pre><code class="language-bash">bin/circos
--png
--svg
--conf etc/circos.conf
--outputdir /path/to/your/output/directory
--outputfile yourimage.png
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line">bin/circos
+</span><span class="line">-png
+</span><span class="line">-svg
+</span><span class="line">-conf etc/circos.conf
+</span><span class="line">-outputdir /path/to/your/output/directory
+</span><span class="line">-outputfile yourimage.png
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 <!--more-->
 
 <ul>
@@ -156,64 +187,102 @@ $(document).bind('DOMNodeInserted', function(event) {
   </li>
 </ul>
 
-<pre><code class="language-bash"># store all debug output in circos.debug.txt and display only karyotype
-&gt; circos ... -group_debug _all | tee circos.debug.txt | egrep "debuggroup karyotype"
-# extract other debug reports
-&gt; egrep "debuggroup rule" circos.debug.txt
-&gt; egrep "debuggroup (rule|scale)" circos.debug.txt
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># store all debug output in circos.debug.txt and display only karyotype</span>
+</span><span class="line">&gt; circos ... -group_debug _all <span class="p">|</span> tee circos.debug.txt <span class="p">|</span> egrep <span class="s2">&quot;debuggroup karyotype&quot;</span>
+</span><span class="line"><span class="c"># extract other debug reports</span>
+</span><span class="line">&gt; egrep <span class="s2">&quot;debuggroup rule&quot;</span> circos.debug.txt
+</span><span class="line">&gt; egrep <span class="s2">&quot;debuggroup (rule|scale)&quot;</span> circos.debug.txt
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h2 id="syntax-and-configure-files">2. Syntax and configure files</h2>
 
 <p>Configuration syntax is like:</p>
 
-<pre><code class="language-html">&lt;ideogram&gt;
- thickness = 30p
- fill      = yes
- ...
-&lt;/ideogram&gt;
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;ideogram&gt;</span>
+</span><span class="line"> thickness = 30p
+</span><span class="line"> fill      = yes
+</span><span class="line"> ...
+</span><span class="line"><span class="nt">&lt;/ideogram&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 <p>Usefule syntax: hierarchical structure <code class="language-html">&lt;ideogram&gt;</code>; all data points in all plot tracks <code class="language-html">&lt;links&gt;</code> and <code class="language-html">&lt;plots&gt;</code>; local data points in a given track <code class="language-html">&lt;link&gt;</code> and <code class="language-html">&lt;plot&gt;</code>; rules <code class="language-html">&lt;rules&gt;</code> and <code class="language-html">&lt;rule&gt;</code>; highlight<code class="language-html">&lt;hightlight&gt;</code>.</p>
 
 <p>Extermal imports</p>
 
-<pre><code class="language-html">&lt;image&gt;
-# Included from Circos distribution.
-&lt;&lt;include etc/image.conf&gt;&gt;
-&lt;/image&gt;
-
-# colors, fonts and fill patterns
-&lt;&lt;include etc/colors_fonts_patterns.conf&gt;&gt;
-# system and debug parameters
-&lt;&lt;include etc/housekeeping.conf&gt;&gt;
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;image&gt;</span>
+</span><span class="line"># Included from Circos distribution.
+</span><span class="line"><span class="err">&lt;</span><span class="nt">&lt;include</span> <span class="na">etc</span><span class="err">/</span><span class="na">image</span><span class="err">.</span><span class="na">conf</span><span class="nt">&gt;</span>&gt;
+</span><span class="line"><span class="nt">&lt;/image&gt;</span>
+</span><span class="line">
+</span><span class="line"># colors, fonts and fill patterns
+</span><span class="line"><span class="err">&lt;</span><span class="nt">&lt;include</span> <span class="na">etc</span><span class="err">/</span><span class="na">colors_fonts_patterns</span><span class="err">.</span><span class="na">conf</span><span class="nt">&gt;</span>&gt;
+</span><span class="line"># system and debug parameters
+</span><span class="line"><span class="err">&lt;</span><span class="nt">&lt;include</span> <span class="na">etc</span><span class="err">/</span><span class="na">housekeeping</span><span class="err">.</span><span class="na">conf</span><span class="nt">&gt;</span>&gt;
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Accessing configuration values<code class="language-html">parameter2 = conf(parameter1)</code> or <code class="language-html">parameter2 = conf(block1,block2,parameter1)</code> for:</p>
 
-<pre><code class="language-html">&lt;block1&gt;
-&lt;block2&gt;
-parameter1 = ...
-&lt;/block2&gt;
-&lt;/block1&gt;
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;block1&gt;</span>
+</span><span class="line"><span class="nt">&lt;block2&gt;</span>
+</span><span class="line">parameter1 = ...
+</span><span class="line"><span class="nt">&lt;/block2&gt;</span>
+</span><span class="line"><span class="nt">&lt;/block1&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Eval</p>
 
-<pre><code class="language-html">track_color = blue
-track_width = 100
-track_start = 0.5
-
-&lt;plots&gt;
-&lt;plot&gt;
-# color=blue
-color = conf(track_color)
-# r0 = 0.5r
-r0    = eval(conf(track_start) . "r")
-# r1 = 0.5r+100p
-r1    = eval(conf(track_start) . "r" + conf(track_width) . "p")
-&lt;/plot&gt;
-&lt;/plots&gt;
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line">track_color = blue
+</span><span class="line">track_width = 100
+</span><span class="line">track_start = 0.5
+</span><span class="line">
+</span><span class="line"><span class="nt">&lt;plots&gt;</span>
+</span><span class="line"><span class="nt">&lt;plot&gt;</span>
+</span><span class="line"># color=blue
+</span><span class="line">color = conf(track_color)
+</span><span class="line"># r0 = 0.5r
+</span><span class="line">r0    = eval(conf(track_start) . &quot;r&quot;)
+</span><span class="line"># r1 = 0.5r+100p
+</span><span class="line">r1    = eval(conf(track_start) . &quot;r&quot; + conf(track_width) . &quot;p&quot;)
+</span><span class="line"><span class="nt">&lt;/plot&gt;</span>
+</span><span class="line"><span class="nt">&lt;/plots&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Color</p>
 
@@ -223,90 +292,122 @@ r1    = eval(conf(track_start) . "r" + conf(track_width) . "p")
 
 <p>One of the most common used ideogram is the karyotypes plot. The chromosome is marked as:</p>
 
-<pre><code class="language-perl">chr - id label start end color
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line">
+</span><span class="line"><span class="nb">chr</span> <span class="o">-</span> <span class="n">id</span> <span class="n">label</span> <span class="n">start</span> <span class="n">end</span> <span class="n">color</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 <p>for example</p>
 
-<pre><code class="language-perl">chr - hs1 1 0 249250621 chr1
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="nb">chr</span> <span class="o">-</span> <span class="n">hs1</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">249250621</span> <span class="n">chr1</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>The cytogenetic bands data is like:</p>
 
-<pre><code class="language-perl">band hs1 p36.33 p36.33 0 2300000 gneg
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="n">band</span> <span class="n">hs1</span> <span class="n">p36</span><span class="mf">.33</span> <span class="n">p36</span><span class="mf">.33</span> <span class="mi">0</span> <span class="mi">2300000</span> <span class="n">gneg</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 <ul>
   <li>Choose a subset of chromosomes</li>
 </ul>
 
-<pre><code class="language-perl">chromosomes_display_default = no
-
-chromosomes = hs1;hs2;hs3;h4
-chromosomes = /hs[1-4]$/
-chromosomes = /hs[1-4]$/;hs10;hs11
-chromosomes = /hs[1-4]$/;-hs3
-chromosomes = hs1:(-100,120-);hs2;hs3;h4
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="n">chromosomes_display_default</span> <span class="o">=</span> <span class="nb">no</span>
+</span><span class="line">
+</span><span class="line"><span class="n">chromosomes</span> <span class="o">=</span> <span class="n">hs1</span><span class="p">;</span><span class="n">hs2</span><span class="p">;</span><span class="n">hs3</span><span class="p">;</span><span class="n">h4</span>
+</span><span class="line"><span class="n">chromosomes</span> <span class="o">=</span> <span class="sr">/hs[1-4]$/</span>
+</span><span class="line"><span class="n">chromosomes</span> <span class="o">=</span> <span class="sr">/hs[1-4]$/</span><span class="p">;</span><span class="n">hs10</span><span class="p">;</span><span class="n">hs11</span>
+</span><span class="line"><span class="n">chromosomes</span> <span class="o">=</span> <span class="sr">/hs[1-4]$/</span><span class="p">;</span><span class="o">-</span><span class="n">hs3</span>
+</span><span class="line"><span class="n">chromosomes</span> <span class="o">=</span> <span class="n">hs1:</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="mi">120</span><span class="o">-</span><span class="p">);</span><span class="n">hs2</span><span class="p">;</span><span class="n">hs3</span><span class="p">;</span><span class="n">h4</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <ul>
   <li>Order</li>
 </ul>
 
-<pre><code class="language-perl">chromosomes_order = hs2,hs3,hs1,hs5,hs4,hs8,hs7,hs6
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="n">chromosomes_order</span> <span class="o">=</span> <span class="n">hs2</span><span class="p">,</span><span class="n">hs3</span><span class="p">,</span><span class="n">hs1</span><span class="p">,</span><span class="n">hs5</span><span class="p">,</span><span class="n">hs4</span><span class="p">,</span><span class="n">hs8</span><span class="p">,</span><span class="n">hs7</span><span class="p">,</span><span class="n">hs6</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <ul>
   <li>Scale</li>
 </ul>
 
-<pre><code class="language-perl">chromosomes_scale = hs1=0.25,hs2=2.0
-# 25% and 50%
-chromosomes_scale = hs1=0.25r,hs2=0.50r
-# each is 25%
-chromosomes_scale = /hs[12]/=0.5rn
-# all ideograms distributed evenly within entire figure
-chromosomes_scale   = /./=1rn
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="n">chromosomes_scale</span> <span class="o">=</span> <span class="n">hs1</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span><span class="n">hs2</span><span class="o">=</span><span class="mf">2.0</span>
+</span><span class="line"><span class="c1"># 25% and 50%</span>
+</span><span class="line"><span class="n">chromosomes_scale</span> <span class="o">=</span> <span class="n">hs1</span><span class="o">=</span><span class="mf">0.25</span><span class="n">r</span><span class="p">,</span><span class="n">hs2</span><span class="o">=</span><span class="mf">0.50</span><span class="n">r</span>
+</span><span class="line"><span class="c1"># each is 25%</span>
+</span><span class="line"><span class="n">chromosomes_scale</span> <span class="o">=</span> <span class="sr">/hs[12]/</span><span class="o">=</span><span class="mf">0.5</span><span class="n">rn</span>
+</span><span class="line"><span class="c1"># all ideograms distributed evenly within entire figure</span>
+</span><span class="line"><span class="n">chromosomes_scale</span>   <span class="o">=</span> <span class="sr">/./</span><span class="o">=</span><span class="mi">1</span><span class="n">rn</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <ul>
   <li>Rotation</li>
 </ul>
 
-<pre><code class="language-html">&lt;image&gt;
-angle_orientation* = counterclockwise
-&lt;&lt;include etc/image&gt;&gt;
-&lt;/image&gt;
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;image&gt;</span>
+</span><span class="line">angle_orientation* = counterclockwise
+</span><span class="line"><span class="err">&lt;</span><span class="nt">&lt;include</span> <span class="na">etc</span><span class="err">/</span><span class="na">image</span><span class="nt">&gt;</span>&gt;
+</span><span class="line"><span class="nt">&lt;/image&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<pre><code class="language-perl">chromosomes_reverse = /hs[234]/
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="n">chromosomes_reverse</span> <span class="o">=</span> <span class="sr">/hs[234]/</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <ul>
   <li>Chromosome color</li>
 </ul>
 
-<pre><code class="language-perl">chromosomes_color = hs1=red,hs2=orange,hs3=green,hs4=blue
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="n">chromosomes_color</span> <span class="o">=</span> <span class="n">hs1</span><span class="o">=</span><span class="n">red</span><span class="p">,</span><span class="n">hs2</span><span class="o">=</span><span class="n">orange</span><span class="p">,</span><span class="n">hs3</span><span class="o">=</span><span class="n">green</span><span class="p">,</span><span class="n">hs4</span><span class="o">=</span><span class="n">blue</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 <p>Also, the color could be redefined as</p>
 
-<pre><code class="language-perl">chr1* = red
-chr2* = orange
-chr3* = green
-chr4* = blue
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="n">chr1</span><span class="o">*</span> <span class="o">=</span> <span class="n">red</span>
+</span><span class="line"><span class="n">chr2</span><span class="o">*</span> <span class="o">=</span> <span class="n">orange</span>
+</span><span class="line"><span class="n">chr3</span><span class="o">*</span> <span class="o">=</span> <span class="n">green</span>
+</span><span class="line"><span class="n">chr4</span><span class="o">*</span> <span class="o">=</span> <span class="n">blue</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <ul>
   <li>Position</li>
 </ul>
 
-<pre><code class="language-perl">chromosomes_radius = hs4:0.9r
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="n">chromosomes_radius</span> <span class="o">=</span> <span class="n">hs4:0</span><span class="mf">.9</span><span class="n">r</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <ul>
   <li>Show bands</li>
 </ul>
 
-<pre><code class="language-perl">band_transparency = 0
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="n">band_transparency</span> <span class="o">=</span> <span class="mi">0</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <ul>
   <li>Add chromosome</li>
@@ -316,13 +417,15 @@ chr4* = blue
 
 <p>Add the following to the file <code class="language-bash">data/karyotype/karyotype.human.txt</code></p>
 
-<pre><code class="language-perl">chr - hsMT MT 0 16569 chrMT
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="nb">chr</span> <span class="o">-</span> <span class="n">hsMT</span> <span class="n">MT</span> <span class="mi">0</span> <span class="mi">16569</span> <span class="n">chrMT</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Add “hsMT” color in the file <code class="language-bash">etc/colors.ucsc.conf</code></p>
 
-<pre><code class="language-perl">chrMT = 121,204,61
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="n">chrMT</span> <span class="o">=</span> <span class="mi">121</span><span class="p">,</span><span class="mi">204</span><span class="p">,</span><span class="mi">61</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h2 id="highlight">4. Highlight</h2>
 
@@ -330,38 +433,56 @@ chr4* = blue
 
 <p>Data type of highlight is</p>
 
-<pre><code class="language-perl">chr start end
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="nb">chr</span> <span class="n">start</span> <span class="n">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 <p>for exmaple,</p>
 
-<pre><code class="language-perl">hs1 1298972 1300443
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="n">hs1</span> <span class="mi">1298972</span> <span class="mi">1300443</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>We can also add the highlight information into the data file, for example:</p>
 
-<pre><code class="language-perl">hs1 100433463 100487964 fill_color=red,r0=0.6r,r1=0.6r+50p
-hs1 232817594 240828534 fill_color=chr9,z=61,r0=0.4r-78.7058p,r1=0.4r+78.7058p
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="n">hs1</span> <span class="mi">100433463</span> <span class="mi">100487964</span> <span class="n">fill_color</span><span class="o">=</span><span class="n">red</span><span class="p">,</span><span class="n">r0</span><span class="o">=</span><span class="mf">0.6</span><span class="n">r</span><span class="p">,</span><span class="n">r1</span><span class="o">=</span><span class="mf">0.6</span><span class="n">r</span><span class="o">+</span><span class="mi">50</span><span class="n">p</span>
+</span><span class="line"><span class="n">hs1</span> <span class="mi">232817594</span> <span class="mi">240828534</span> <span class="n">fill_color</span><span class="o">=</span><span class="n">chr9</span><span class="p">,</span><span class="n">z</span><span class="o">=</span><span class="mi">61</span><span class="p">,</span><span class="n">r0</span><span class="o">=</span><span class="mf">0.4</span><span class="n">r</span><span class="o">-</span><span class="mf">78.7058</span><span class="n">p</span><span class="p">,</span><span class="n">r1</span><span class="o">=</span><span class="mf">0.4</span><span class="n">r</span><span class="o">+</span><span class="mf">78.7058</span><span class="n">p</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="conf-format">4.2 Conf format</h3>
 
-<pre><code class="language-html">
-&lt;highlights&gt;
-
-&lt;highlight&gt;
-...
-&lt;/highlight&gt;
-
-&lt;highlight&gt;
-...
-&lt;/highlight&gt;
-
-&lt;highlight&gt;
-...
-&lt;/highlight&gt;
-
-&lt;/highlights&gt;
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;highlights&gt;</span>
+</span><span class="line">
+</span><span class="line"><span class="nt">&lt;highlight&gt;</span>
+</span><span class="line">...
+</span><span class="line"><span class="nt">&lt;/highlight&gt;</span>
+</span><span class="line">
+</span><span class="line"><span class="nt">&lt;highlight&gt;</span>
+</span><span class="line">...
+</span><span class="line"><span class="nt">&lt;/highlight&gt;</span>
+</span><span class="line">
+</span><span class="line"><span class="nt">&lt;highlight&gt;</span>
+</span><span class="line">...
+</span><span class="line"><span class="nt">&lt;/highlight&gt;</span>
+</span><span class="line">
+</span><span class="line"><span class="nt">&lt;/highlights&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="parameters">4.3 Parameters</h3>
 
@@ -383,48 +504,72 @@ hs1 232817594 240828534 fill_color=chr9,z=61,r0=0.4r-78.7058p,r1=0.4r+78.7058p
 
 <h3 id="plot-hightlight">4.4 Plot hightlight</h3>
 
-<pre><code class="language-html">&lt;plots&gt;
-&lt;plot&gt;
-type = highlight
-file = data/3/chr.highlights.txt
-r0   = 0.3r
-r1   = 0.35r
-z    = 10
-&lt;/plot&gt;
-&lt;/plots&gt;
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;plots&gt;</span>
+</span><span class="line"><span class="nt">&lt;plot&gt;</span>
+</span><span class="line">type = highlight
+</span><span class="line">file = data/3/chr.highlights.txt
+</span><span class="line">r0   = 0.3r
+</span><span class="line">r1   = 0.35r
+</span><span class="line">z    = 10
+</span><span class="line"><span class="nt">&lt;/plot&gt;</span>
+</span><span class="line"><span class="nt">&lt;/plots&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h2 id="links">5. Links</h2>
 
 <h3 id="data-type-1">5.1 Data type</h3>
 
-<pre><code class="language-perl">hs1 100 200 hs2 250 300
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="n">hs1</span> <span class="mi">100</span> <span class="mi">200</span> <span class="n">hs2</span> <span class="mi">250</span> <span class="mi">300</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 <p>or</p>
 
-<pre><code class="language-perl">segdup00010 hs1 100 200
-segdup00010 hs2 250 300
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="n">segdup00010</span> <span class="n">hs1</span> <span class="mi">100</span> <span class="mi">200</span>
+</span><span class="line"><span class="n">segdup00010</span> <span class="n">hs2</span> <span class="mi">250</span> <span class="mi">300</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>with link options</p>
 
-<pre><code class="language-perl">hs1 100 200 hs2 250 300 color=blue
-hs1 400 550 hs3 500 750 color=red,thickness=5p
-hs1 600 800 hs4 150 350 color=black
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="n">hs1</span> <span class="mi">100</span> <span class="mi">200</span> <span class="n">hs2</span> <span class="mi">250</span> <span class="mi">300</span> <span class="n">color</span><span class="o">=</span><span class="n">blue</span>
+</span><span class="line"><span class="n">hs1</span> <span class="mi">400</span> <span class="mi">550</span> <span class="n">hs3</span> <span class="mi">500</span> <span class="mi">750</span> <span class="n">color</span><span class="o">=</span><span class="n">red</span><span class="p">,</span><span class="n">thickness</span><span class="o">=</span><span class="mi">5</span><span class="n">p</span>
+</span><span class="line"><span class="n">hs1</span> <span class="mi">600</span> <span class="mi">800</span> <span class="n">hs4</span> <span class="mi">150</span> <span class="mi">350</span> <span class="n">color</span><span class="o">=</span><span class="n">black</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="conf-format-1">5.2 Conf format</h3>
 
-<pre><code class="language-html">&lt;links&gt;
-&lt;link&gt;
-file          = data/5/segdup.txt
-radius        = 0.8r
-bezier_radius = 0r
-color         = black_a4
-thickness     = 2
-&lt;/link&gt;
-&lt;/links&gt;
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;links&gt;</span>
+</span><span class="line"><span class="nt">&lt;link&gt;</span>
+</span><span class="line">file          = data/5/segdup.txt
+</span><span class="line">radius        = 0.8r
+</span><span class="line">bezier_radius = 0r
+</span><span class="line">color         = black_a4
+</span><span class="line">thickness     = 2
+</span><span class="line"><span class="nt">&lt;/link&gt;</span>
+</span><span class="line"><span class="nt">&lt;/links&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="parameters-1">5.3 Parameters</h3>
 
@@ -442,68 +587,103 @@ thickness     = 2
 
 <p>Marker the priority of rules</p>
 
-<pre><code class="language-html">&lt;rule&gt;
-# 1st
-importance = 10
-&lt;/rule&gt;
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;rule&gt;</span>
+</span><span class="line"># 1st
+</span><span class="line">importance = 10
+</span><span class="line"><span class="nt">&lt;/rule&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Add a tag</p>
 
-<pre><code class="language-html">&lt;rule&gt;
-flow = goto special_rule if true
-...
-&lt;/rule&gt;
-
-&lt;rule&gt;
-tag = special_rule
-...
-&lt;/rule&gt;
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;rule&gt;</span>
+</span><span class="line">flow = goto special_rule if true
+</span><span class="line">...
+</span><span class="line"><span class="nt">&lt;/rule&gt;</span>
+</span><span class="line">
+</span><span class="line"><span class="nt">&lt;rule&gt;</span>
+</span><span class="line">tag = special_rule
+</span><span class="line">...
+</span><span class="line"><span class="nt">&lt;/rule&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h2 id="histograms">6. Histograms</h2>
 
 <p>Histogram, line plot, scatter plot, and heat map share the same data format</p>
 
-<pre><code class="language-perl">chr start end value [options]
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="nb">chr</span> <span class="n">start</span> <span class="n">end</span> <span class="n">value</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 <p>for exmaple</p>
 
-<pre><code class="language-perl">hs3 196000000 197999999 71.0000 fill_color=blue
-</code></pre>
-<pre><code class="language-perl"># in data file
-hs3 196000000 197999999 71.0000 id=abc
-
-# in rule block
-&lt;rule&gt;
-condition  = var(id) eq "abc"
-fill_color = blue
-&lt;/rule&gt;
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="n">hs3</span> <span class="mi">196000000</span> <span class="mi">197999999</span> <span class="mf">71.0000</span> <span class="n">fill_color</span><span class="o">=</span><span class="n">blue</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="c1"># in data file</span>
+</span><span class="line"><span class="n">hs3</span> <span class="mi">196000000</span> <span class="mi">197999999</span> <span class="mf">71.0000</span> <span class="n">id</span><span class="o">=</span><span class="n">abc</span>
+</span><span class="line">
+</span><span class="line"><span class="c1"># in rule block</span>
+</span><span class="line"><span class="sr">&lt;rule&gt;</span>
+</span><span class="line"><span class="n">condition</span>  <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="ow">eq</span> <span class="s">&quot;abc&quot;</span>
+</span><span class="line"><span class="n">fill_color</span> <span class="o">=</span> <span class="n">blue</span>
+</span><span class="line"><span class="sr">&lt;/rule&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 <p>Another data format has multiple values</p>
 
-<pre><code class="language-perl">chr start end value,value,value,... [options]
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="nb">chr</span> <span class="n">start</span> <span class="n">end</span> <span class="n">value</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="o">...</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 <p>for example</p>
 
-<pre><code class="language-perl">hs3 196000000 197999999 0.0000,7.0000,64.0000,0.0000
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="n">hs3</span> <span class="mi">196000000</span> <span class="mi">197999999</span> <span class="mf">0.0000</span><span class="p">,</span><span class="mf">7.0000</span><span class="p">,</span><span class="mf">64.0000</span><span class="p">,</span><span class="mf">0.0000</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <ul>
   <li>Plot histogram</li>
 </ul>
 
-<pre><code class="language-html">&lt;plots&gt;
-&lt;plot&gt;
-type = histogram
-file = data/5/segdup.hs1234.hist.txt
-r1   = 0.88r
-r0   = 0.81r
-
-fill_color = vdgrey
-extend_bin = no
-&lt;/plot&gt;
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;plots&gt;</span>
+</span><span class="line"><span class="nt">&lt;plot&gt;</span>
+</span><span class="line">type = histogram
+</span><span class="line">file = data/5/segdup.hs1234.hist.txt
+</span><span class="line">r1   = 0.88r
+</span><span class="line">r0   = 0.81r
+</span><span class="line">
+</span><span class="line">fill_color = vdgrey
+</span><span class="line">extend_bin = no
+</span><span class="line"><span class="nt">&lt;/plot&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>For multiple values, <code class="language-bash">fill_color</code> is used to set the different colors.</p>
 
@@ -511,47 +691,75 @@ extend_bin = no
   <li>Orientation</li>
 </ul>
 
-<pre><code class="language-html">orientation = in
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line">orientation = in
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <ul>
   <li>Rules</li>
 </ul>
 
-<pre><code class="language-html">&lt;rules&gt;
-&lt;&lt;include exclude.hs1.rule&gt;&gt;
-&lt;/rules&gt;
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;rules&gt;</span>
+</span><span class="line"><span class="err">&lt;</span><span class="nt">&lt;include</span> <span class="na">exclude</span><span class="err">.</span><span class="na">hs1</span><span class="err">.</span><span class="na">rule</span><span class="nt">&gt;</span>&gt;
+</span><span class="line"><span class="nt">&lt;/rules&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <ul>
   <li>Backgrounds and axes</li>
 </ul>
 
-<pre><code class="language-html">&lt;plot&gt;
-...
-
-&lt;axes&gt;
- &lt;axis&gt;
- ...
- &lt;/axis&gt;
- &lt;axis&gt;
- ...
- &lt;/axis&gt;
- ...
-&lt;/axes&gt;
-
-&lt;backgrounds&gt;
- &lt;background&gt;
- ...
- &lt;/background&gt;
- &lt;background&gt;
- ...
- &lt;/background&gt;
- ...
-&lt;/backgrounds&gt;
-
-&lt;/plot&gt;
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;plot&gt;</span>
+</span><span class="line">...
+</span><span class="line">
+</span><span class="line"><span class="nt">&lt;axes&gt;</span>
+</span><span class="line"> <span class="nt">&lt;axis&gt;</span>
+</span><span class="line"> ...
+</span><span class="line"> <span class="nt">&lt;/axis&gt;</span>
+</span><span class="line"> <span class="nt">&lt;axis&gt;</span>
+</span><span class="line"> ...
+</span><span class="line"> <span class="nt">&lt;/axis&gt;</span>
+</span><span class="line"> ...
+</span><span class="line"><span class="nt">&lt;/axes&gt;</span>
+</span><span class="line">
+</span><span class="line"><span class="nt">&lt;backgrounds&gt;</span>
+</span><span class="line"> <span class="nt">&lt;background&gt;</span>
+</span><span class="line"> ...
+</span><span class="line"> <span class="nt">&lt;/background&gt;</span>
+</span><span class="line"> <span class="nt">&lt;background&gt;</span>
+</span><span class="line"> ...
+</span><span class="line"> <span class="nt">&lt;/background&gt;</span>
+</span><span class="line"> ...
+</span><span class="line"><span class="nt">&lt;/backgrounds&gt;</span>
+</span><span class="line">
+</span><span class="line"><span class="nt">&lt;/plot&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <ul>
   <li>text</li>
@@ -559,33 +767,49 @@ extend_bin = no
 
 <p>text data format is</p>
 
-<pre><code class="language-perl">chr start end value
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="nb">chr</span> <span class="n">start</span> <span class="n">end</span> <span class="n">value</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>for exmaple</p>
 
-<pre><code class="language-perl">hs1 100425066 100487997 DBT
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="perl"><span class="line"><span class="n">hs1</span> <span class="mi">100425066</span> <span class="mi">100487997</span> <span class="n">DBT</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<pre><code class="language-html">&lt;plots&gt;
-&lt;plot&gt;
-type             = text
-color            = black
-file             = data/phylo/labelGene.txt
-&lt;/plot&gt;
-&lt;/plots&gt;
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;plots&gt;</span>
+</span><span class="line"><span class="nt">&lt;plot&gt;</span>
+</span><span class="line">type             = text
+</span><span class="line">color            = black
+</span><span class="line">file             = data/phylo/labelGene.txt
+</span><span class="line"><span class="nt">&lt;/plot&gt;</span>
+</span><span class="line"><span class="nt">&lt;/plots&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>apply rules</p>
 
-<pre><code class="language-html">&lt;rules&gt;
-&lt;rule&gt;
-importance = 90
-condition  = var(value) eq "GeneName"
-color = blue
-&lt;/rule&gt;
-&lt;/rules&gt;
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;rules&gt;</span>
+</span><span class="line"><span class="nt">&lt;rule&gt;</span>
+</span><span class="line">importance = 90
+</span><span class="line">condition  = var(value) eq &quot;GeneName&quot;
+</span><span class="line">color = blue
+</span><span class="line"><span class="nt">&lt;/rule&gt;</span>
+</span><span class="line"><span class="nt">&lt;/rules&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h2 id="reference">Reference</h2>
 
@@ -596,21 +820,30 @@ color = blue
 </div>
 
 
-  <footer>
-    <p class="meta">
-      
+      <footer>
+        <p class="meta text-muted">
+          
   
 
-<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+<span class="glyphicon glyphicon-user"></span> <span class="byline author vcard" itemprop="author" itemscope itemtype="http://schema.org/Person">Posted by <span class="fn" itemprop="name">Yulong Niu</span></span>
 
-      
-
-
+          
 
 
-<time class='entry-date' datetime='2014-03-17T15:37:45-04:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>3:37 pm</span></time>
-      
 
+
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-03-17T15:37:45-04:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+          
+
+<span class="glyphicon glyphicon-tags"></span>&nbsp;
 <span class="categories">
   
     <a class='category' href='/blog/categories/bioinfor/'>bioinfor</a>
@@ -618,9 +851,9 @@ color = blue
 </span>
 
 
-    </p>
-    
-      <div class="sharing">
+        </p>
+        
+          <div class="sharing">
   
   <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.github.io/blog/2014/03/17/circos-notes/" data-via="" data-counturl="http://yulongniu.github.io/blog/2014/03/17/circos-notes/" >Tweet</a>
   
@@ -628,66 +861,70 @@ color = blue
   
 </div>
 
+        
+        
+          <ul class="meta text-muted pager">
+            
+            <li class="previous"><a href="/blog/2013/10/02/ggplot2-notes/" title="Previous Post: R ggplot2 notes">&laquo; R ggplot2 notes</a></li>
+            
+            
+            <li class="next"><a href="/blog/2014/03/27/creat-r-package/" title="Next Post: 创建R包的最简流程">创建R包的最简流程 &raquo;</a></li>
+            
+          </ul>
+        
+      </footer>
+    </article>
     
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2013/10/02/ggplot2-notes/" title="Previous Post: Ggplot2 Notes">&laquo; Ggplot2 Notes</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2014/03/27/creat-r-package/" title="Next Post: 创建R包的最简流程">创建R包的最简流程 &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
+  </div>
 
-</div>
-
-<aside class="sidebar">
   
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
+  <aside class="sidebar col-md-3">
     
-      <li class="post">
-        <a href="/blog/2014/12/01/emacs-config-c/">Emacs配置C语言编程环境</a>
-      </li>
+      <section class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Recent Posts</h3>
+  </div>
+  
+  <div id="recent_posts" class="list-group">
     
-      <li class="post">
-        <a href="/blog/2014/07/28/next-seqence-tools/">二代测序中的常用工具介绍</a>
-      </li>
+    <a class="list-group-item " href="/blog/2014/12/01/emacs-config-c/">Emacs配置C语言编程环境</a>
     
-      <li class="post">
-        <a href="/blog/2014/07/25/short-sequence-alignment/">二代测序中的短序列比对</a>
-      </li>
+    <a class="list-group-item " href="/blog/2014/07/28/next-seqence-tools/">二代测序中的常用工具介绍</a>
     
-      <li class="post">
-        <a href="/blog/2014/07/22/octopress-install/">Octopress安装和使用</a>
-      </li>
+    <a class="list-group-item " href="/blog/2014/07/25/short-sequence-alignment/">二代测序中的短序列比对</a>
     
-      <li class="post">
-        <a href="/blog/2014/07/04/my-first-post/">My First Post</a>
-      </li>
+    <a class="list-group-item " href="/blog/2014/07/22/octopress-install/">Octopress安装和使用</a>
     
-  </ul>
+    <a class="list-group-item " href="/blog/2014/07/04/my-first-post/">My First Post</a>
+    
+  </div>
 </section>
 
 
 
 
 
+
+    
+  </aside>
   
-</aside>
+</div>
 
-
+        </div>
+      </div>
     </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Your Name -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+    <footer role="contentinfo"><div class="container">
+    <p class="text-muted credits">
+  Copyright &copy; 2014 - Yulong Niu<br>
+  <small>
+      <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>,
+      <span class="credit">customized with <a href="https://github.com/kAworu/octostrap3">octostrap3</a></span>.
+  </small>
 </p>
 
+</div>
 </footer>
-  
+    
 
 
 
@@ -706,8 +943,9 @@ color = blue
   </script>
 
 
+<script src="/assets/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/javascripts/modernizr-2.0.js"></script>
 
 
-
-</body>
+  </body>
 </html>

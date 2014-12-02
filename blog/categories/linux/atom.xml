@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Linux | My Octopress Blog]]></title>
+  <title><![CDATA[Category: Linux | 牛牛龙]]></title>
   <link href="http://yulongniu.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-02T02:15:46-05:00</updated>
+  <updated>2014-12-02T18:01:44-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Yulong Niu]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -22,30 +22,49 @@
 
 <p><code class="language-bash">.tar.gz</code>格式文件</p>
 
-<pre><code class="language-bash"># 解压 
-$ tar -zxvf /filePath/filename.tar.gz
-
-# 压缩 
-$ tar -zcvf /filePath/filename.tar.gz /filePath/filename
-
-# 解压到特定文件夹  
-$ tar -zxvf /filePath/filename.tar.gz -C /filePath/filename 
-
-# 压缩到特定文件夹  
-$ tar -zcvf /filePath/filename.tar.gz -C /filePath/filename 
-
-# 压缩所有txt类型文件 
-$ gzip *.txt
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 解压 </span>
+</span><span class='line'><span class="nv">$ </span>tar -zxvf /filePath/filename.tar.gz&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-1&quot;</span>&gt;压缩&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>tar -zcvf /filePath/filename.tar.gz /filePath/filename&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-2&quot;</span>&gt;解压到特定文件夹&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>tar -zxvf /filePath/filename.tar.gz -C /filePath/filename &lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-3&quot;</span>&gt;压缩到特定文件夹&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>tar -zcvf /filePath/filename.tar.gz -C /filePath/filename &lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;txt&quot;</span>&gt;压缩所有txt类型文件&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>gzip *.txt
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p><code class="language-bash">.tar.bz2</code>格式文件</p>
 
-<pre><code class="language-bash"># 解压 
-$ tar -jxvf /filePath/filename.taz.bz2
-
-# 压缩
-$ tar -jcvf /filePath/filename.tar.bz2 /filePath/filename
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 解压 </span>
+</span><span class='line'><span class="nv">$ </span>tar -jxvf /filePath/filename.taz.bz2&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-4&quot;</span>&gt;压缩&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>tar -jcvf /filePath/filename.tar.bz2 /filePath/filename
+</span></code></pre></td></tr></table></div></figure></p>
 
 <!--more-->
 
@@ -53,151 +72,235 @@ $ tar -jcvf /filePath/filename.tar.bz2 /filePath/filename
 
 <p>需要安装<a href="http://www.rarsoft.com/download.html">rar工具</a>, 下载对应的linux版本，解压，<code class="language-bash">make</code>即可。</p>
 
-<pre><code class="language-bash"># 解压
-$ rar e /filePath/filename.rar /filePath/filename
-
-# 压缩
-$ rar a -m5 /filePath/filename.rar /filePath/filename
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 解压</span>
+</span><span class='line'><span class="nv">$ </span>rar e /filePath/filename.rar /filePath/filename&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-5&quot;</span>&gt;压缩&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>rar a -m5 /filePath/filename.rar /filePath/filename
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p><code class="language-bash">.zip</code>格式文件</p>
 
 <p>需要安装zip和unzip工具</p>
 
-<pre><code class="language-bash"># yum install zip
-# yum install unzip
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># yum install zip</span>
+</span><span class='line'><span class="c"># yum install unzip</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
-<pre><code class="language-bash"># 解压
-$ unzip filename.zip
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 解压</span>
+</span><span class='line'><span class="nv">$ </span>unzip filename.zip&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-6&quot;</span>&gt;只打印最简短解压信息，并不解压&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>unzip -tq filename.zip&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-7&quot;</span>&gt;解压其中一个文件&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>unzip filename.zip onefile&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-8&quot;</span>&gt;解压到特定目录&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>unzip filename.zip -d /filePath/filename&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-9&quot;</span>&gt;压缩当前目录&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>zip filename *&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-10&quot;</span>&gt;压缩当前目录包括所有子目录&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>zip -r filename *
+</span></code></pre></td></tr></table></div></figure></p>
 
-# 只打印最简短解压信息，并不解压
-$ unzip -tq filename.zip
+<h2 id="section-11">2. 文件夹操作</h2>
 
-# 解压其中一个文件
-$ unzip filename.zip onefile
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 创建 </span>
+</span><span class='line'><span class="nv">$ </span>mkdir&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-12&quot;</span>&gt;删除&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>rm  &lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-13&quot;</span>&gt;删除整个文件夹&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>rm -rf&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-14&quot;</span>&gt;复制&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>cp   &lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-15&quot;</span>&gt;复制文件夹&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>cp -r
+</span></code></pre></td></tr></table></div></figure></p>
 
-# 解压到特定目录
-$ unzip filename.zip -d /filePath/filename
+<h2 id="section-16">3. 目录</h2>
 
-# 压缩当前目录
-$ zip filename *
-
-# 压缩当前目录包括所有子目录
-$ zip -r filename *
-</code></pre>
-
-<h2 id="section-1">2. 文件夹操作</h2>
-
-<pre><code class="language-bash"># 创建 
-$ mkdir
-
-# 删除 
-$ rm  
-
-# 删除整个文件夹 
-$ rm -rf
-
-# 复制 
-$ cp   
-
-# 复制文件夹  
-$ cp -r
-</code></pre>
-
-<h2 id="section-2">3. 目录</h2>
-
-<pre><code class="language-bash"># 显示 
-$ ls
-
-# 列表显示文件和相关权限 
-$ ls -l
-
-# 列表显示文件并按照文件名逆序排列
-$ ls -rl
-
-# 显示隐藏文件 
-$ ls -a      
-
-# 可以配合使用
-$ ls -al
-
-# 查看文件夹大小 
-$ ls -lhs
-
-# 查看目录树 
-$ tree
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 显示 </span>
+</span><span class='line'><span class="nv">$ </span>ls&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-17&quot;</span>&gt;列表显示文件和相关权限&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>ls -l&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-18&quot;</span>&gt;列表显示文件并按照文件名逆序排列&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>ls -rl&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-19&quot;</span>&gt;显示隐藏文件&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>ls -a      &lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-20&quot;</span>&gt;可以配合使用&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>ls -al&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-21&quot;</span>&gt;查看文件夹大小&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>ls -lhs&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-22&quot;</span>&gt;查看目录树&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>tree
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="sh">4. 运行 *.sh文件</h2>
 
-<pre><code class="language-bash"># 将sh文件赋予可执行权限
-$ chomd 777 filename.sh
-$ sh /filePath/filename.sh
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 将sh文件赋予可执行权限</span>
+</span><span class='line'><span class="nv">$ </span>chomd <span class="m">777</span> filename.sh
+</span><span class='line'><span class="nv">$ </span>sh /filePath/filename.sh
+</span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="section-3">5. 更改文件名</h2>
+<h2 id="section-23">5. 更改文件名</h2>
 
-<pre><code class="language-bash">$ mv oldfile newfile
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>mv oldfile newfile
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="md5">6. md5报文摘要算法</h2>
 
 <p>md5（Message-Digest Algorithm 5）报文摘要，可以用来验证网络文件传输的完整性。</p>
 
-<pre><code class="language-bash">$ md5sum file
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>md5sum file
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="java">7. java类型文件</h2>
 
 <p>Java Control Panel位置<code class="language-bash">/usr/java/jdk1.7.0_45/bin/ControlPanel</code></p>
 
-<pre><code class="language-bash"># 执行.jar格式文件
-$ java -jar filename.jar
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 执行.jar格式文件</span>
+</span><span class='line'><span class="nv">$ </span>java -jar filename.jar&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;jnlp&quot;</span>&gt;执行.jnlp格式文件&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>javaws filename.jnlp
+</span></code></pre></td></tr></table></div></figure></p>
 
-# 执行.jnlp格式文件
-$ javaws filename.jnlp
-</code></pre>
+<h2 id="section-24">8. 查看文件</h2>
 
-<h2 id="section-4">8. 查看文件</h2>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 将文件直接打印在屏幕上</span>
+</span><span class='line'><span class="nv">$ </span>cat filename  &lt;br /&gt;
+</span></code></pre></td></tr></table></div></figure></p>
 
-<pre><code class="language-bash"># 将文件直接打印在屏幕上
-$ cat filename    
-</code></pre>
+<h2 id="section-25">9. 查看自己系统32位还是64位</h2>
 
-<h2 id="section-5">9. 查看自己系统32位还是64位</h2>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>uname -a
+</span></code></pre></td></tr></table></div></figure></p>
 
-<pre><code class="language-bash">$ uname -a
-</code></pre>
+<h2 id="section-26">10. 查看当前路径</h2>
 
-<h2 id="section-6">10. 查看当前路径</h2>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">pwd</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
-<pre><code class="language-bash">$ pwd
-</code></pre>
+<h2 id="section-27">11. 查看某个程序/库的安装路径</h2>
 
-<h2 id="section-7">11. 查看某个程序/库的安装路径</h2>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 比如查看R的安装位置</span>
+</span><span class='line'><span class="nv">$ </span>which R&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-28&quot;</span>&gt;查看某个文件的位置&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>whereis filename
+</span></code></pre></td></tr></table></div></figure></p>
 
-<pre><code class="language-bash"># 比如查看R的安装位置
-$ which R
+<h2 id="section-29">12. 查看一个命令的文档帮助</h2>
 
-# 查看某个文件的位置
-$ whereis filename
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 比如man R</span>
+</span><span class='line'><span class="nv">$ </span>man commandname
+</span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="section-8">12. 查看一个命令的文档帮助</h2>
+<h2 id="section-30">13. 批量处理文件</h2>
 
-<pre><code class="language-bash"># 比如man R
-$ man commandname
-</code></pre>
-
-<h2 id="section-9">13. 批量处理文件</h2>
-
-<pre><code class="language-bash"># 删除满足条件的数据
-$ find ./ -iname '*' | xargs rm -rf 
-
-# 移动大数据量的文件.
-$ find ./ -name "*.gif" | xargs -i mv {} /filePath/ 
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 删除满足条件的数据</span>
+</span><span class='line'><span class="nv">$ </span>find ./ -iname ‘*’ <span class="p">|</span> xargs rm -rf &lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-31&quot;</span>&gt;移动大数据量的文件.&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>find ./ -name “*.gif” <span class="p">|</span> xargs -i mv <span class="o">{}</span> /filePath/
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="path">14. 修改PATH</h2>
 
@@ -208,50 +311,65 @@ $ find ./ -name "*.gif" | xargs -i mv {} /filePath/
   <li>直接命令行运行</li>
 </ul>
 
-<pre><code class="language-bash"># export PATH=$PATH:/opt/arbtest
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># export PATH=$PATH:/opt/arbtest</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>这种方法当前有效，重启之后就失效了。</p>
 
-<pre><code class="language-bash"># 查看修改该好的PATH
-$ export
-</code></pre>
-<ul>
-  <li>修改<code class="language-bash">/etc/profile</code>（系统设置，任何用户都可使用）或者<code class="language-bash">~/.bashrc</code>（当前用户）文件。
-向这两个文件中添加<code class="language-bash">export PATH=$PATH:/opt/arbtest</code></li>
-</ul>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 查看修改该好的PATH</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">export</span>
+</span></code></pre></td></tr></table></div></figure>
+* 修改<code class="language-bash">/etc/profile</code>（系统设置，任何用户都可使用）或者<code class="language-bash">~/.bashrc</code>（当前用户）文件。
+向这两个文件中添加<code class="language-bash">export PATH=$PATH:/opt/arbtest</code></p>
 
-<pre><code class="language-bash"># 载入修改好的文件 
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 载入修改好的文件 &lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;rootprofile&quot;</span>&gt;载入root权限profile&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# <span class="nb">source</span> /etc/profile&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;bashrc&quot;</span>&gt;载入当前用户.bashrc文件&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span><span class="nb">source</span> ~/.bashrc&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-32&quot;</span>&gt;查看修改好的路径&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$PATH</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
-# 载入root权限profile
-# source /etc/profile
-
-# 载入当前用户.bashrc文件
-$ source ~/.bashrc
-
-# 查看修改好的路径
-$ echo $PATH
-</code></pre>
-
-<h2 id="section-10">15. 定向输入输出</h2>
+<h2 id="section-33">15. 定向输入输出</h2>
 
 <p>禁止屏幕输出，即将屏幕输出导入Linux的无底洞 <code class="language-bash">/dev/null</code>，比如 </p>
 
-<pre><code class="language-bash">$ cat myFile &gt; /dev/null
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat myFile <span class="p">&amp;</span>gt<span class="p">;</span> /dev/null
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>此时，导入的是标准屏幕输出（标号为1）stdout。如果要导入标准错误输出（标号为2）stderr，执行</p>
 
-<pre><code class="language-bash">$ cat myFile 2 &gt; /dev/null
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat myFile <span class="m">2</span> <span class="p">&amp;</span>gt<span class="p">;</span> /dev/null
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>如果将两种输出全部导入<code class="language-bash">/dev/null</code>，执行</p>
 
-<pre><code class="language-bash"># 最后的"2&gt;$1"表示2的操作等同于1
-$ cat myFile &gt; /dev/null 2&gt;$1
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 最后的”2&amp;gt;$1”表示2的操作等同于1</span>
+</span><span class='line'><span class="nv">$ </span>cat myFile <span class="p">&amp;</span>gt<span class="p">;</span> /dev/null 2<span class="p">&amp;</span>gt<span class="p">;</span><span class="nv">$1</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="section-11">16. 更改文件权限和所有者</h2>
+<h2 id="section-34">16. 更改文件权限和所有者</h2>
 
 <p>使用命令<code class="language-bash">chmod</code>更改文件权限。</p>
 
@@ -282,105 +400,163 @@ $ cat myFile &gt; /dev/null 2&gt;$1
   </li>
 </ul>
 
-<pre><code class="language-bash"># 比如rw-rw-r--对应664
-$ chomd 664 filename
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 比如rw-rw-r–对应664</span>
+</span><span class='line'><span class="nv">$ </span>chomd <span class="m">664</span> filename
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>使用命令<code class="language-bash">chown</code>更改文件所有者</p>
 
-<h2 id="section-12">17.更改文件时间戳</h2>
+<h2 id="section-35">17.更改文件时间戳</h2>
 
-<pre><code class="language-bash"># 更新myfile的存取和修改时间；如果myfile不存在，则创建该文件
-$ touch filename
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 更新myfile的存取和修改时间；如果myfile不存在，则创建该文件</span>
+</span><span class='line'><span class="nv">$ </span>touch filename
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="ntfs">18. 挂载NTFS分区</h2>
 
 <p>CentOS需要手动挂在NTFS分区，下载并安装<a href="http://www.tuxera.com/community/ntfs-3g-download/">NTFS-3G</a>，安装方法：</p>
 
-<pre><code class="language-bash"># ./configure 
-# make
-# make install 
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># ./configure </span>
+</span><span class='line'><span class="c"># make</span>
+</span><span class='line'><span class="c"># make install </span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>查找NTFS分区路径，此处假定为<code class="language-bash">/dev/sta1</code>：</p>
 
-<pre><code class="language-bash"># 查看硬盘分区
-# fdisk -l
-
-# 挂载NTFS分区
-# mkdir /mnt/NTFStest
-# mount -t ntfs-3g /dev/sta1 /mnt/NTFStest
-
-# 卸载分区
-# umount /mnt/NTFStest
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 查看硬盘分区</span>
+</span><span class='line'><span class="c"># fdisk -l&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;ntfs-1&quot;</span>&gt;挂载NTFS分区&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# mkdir /mnt/NTFStest
+</span><span class='line'><span class="c"># mount -t ntfs-3g /dev/sta1 /mnt/NTFStest&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-36&quot;</span>&gt;卸载分区&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# umount /mnt/NTFStest
+</span></code></pre></td></tr></table></div></figure> </p>
 
 <p>如果需要自动挂载ntfs分区，首先要查看分区信息，比如uuid</p>
 
-<pre><code class="language-bash"># blkid
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># blkid</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>之后修改<code class="language-bash">/etc/fstab</code>，添加需要挂载的分区</p>
 
-<pre><code class="language-bash">UUID=12D345251F34 /media/D ntfs defaults 0 0
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">UUID</span><span class="o">=</span>12D345251F34 /media/D ntfs defaults <span class="m">0</span> 0
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="yum">19. yum服务相关</h2>
 
 <p>以下命令都可以配合<code class="language-bash">grep</code>使用</p>
 
-<pre><code class="language-bash"># 终止yum安装
-# rm -f /var/run/yum.pid
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 终止yum安装</span>
+</span><span class='line'><span class="c"># rm -f /var/run/yum.pid&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-37&quot;</span>&gt;查询包&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# yum search pkg&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-38&quot;</span>&gt;重新安装包&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# yum reinstall pkg&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-39&quot;</span>&gt;升级包&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# yum update pkg&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-40&quot;</span>&gt;卸载包&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# yum remove pkg&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-41&quot;</span>&gt;查询已安装包信息&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# yum info pkg&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-42&quot;</span>&gt;查看已安装的包&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# yum list installed
+</span></code></pre></td></tr></table></div></figure></p>
 
-# 查询包
-# yum search pkg
-
-# 重新安装包
-# yum reinstall pkg
-
-# 升级包
-# yum update pkg
-
-# 卸载包
-# yum remove pkg
-
-# 查询已安装包信息
-# yum info pkg
-
-# 查看已安装的包
-# yum list installed
-</code></pre>
-
-<h2 id="section-13">20. 修改配置文件</h2>
+<h2 id="section-43">20. 修改配置文件</h2>
 
 <p>可以使用多种文本编辑器，最常用的是<a href="http://www.gnu.org/software/emacs/">Emacs</a>和<a href="http://www.vim.org/">Vim</a>，使用方法直<code class="language-bash">emacs</code>或者<code class="language-bash">vim</code>和文件名即可。</p>
 
-<pre><code class="language-bash"># 修改Apache服务器配制文件
-$ vim httpd.conf
-$ emacs httpd.conf
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 修改Apache服务器配制文件</span>
+</span><span class='line'><span class="nv">$ </span>vim httpd.conf
+</span><span class='line'><span class="nv">$ </span>emacs httpd.conf
+</span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="section-14">21. 用户管理</h2>
+<h2 id="section-44">21. 用户管理</h2>
 
-<pre><code class="language-bash"># 查看用户 
-$ w 
-$ who
-# 超过500为后建用户
-$ cat /etc/passwd
-
-# 新建用户 
-$ useradd usrname
-
-# 新建用户设置密码 
-$ passwd usrname newpasswd
-
-# 删除用户 
-$ userdel -r usrname
-
-# 查看当前任务 
-$ top
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 查看用户 </span>
+</span><span class='line'><span class="nv">$ </span>w
+</span><span class='line'><span class="nv">$ </span>who
+</span><span class='line'><span class="c"># 超过500为后建用户</span>
+</span><span class='line'><span class="nv">$ </span>cat /etc/passwd&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-45&quot;</span>&gt;新建用户&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>useradd usrname&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-46&quot;</span>&gt;新建用户设置密码&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>passwd usrname newpasswd&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-47&quot;</span>&gt;删除用户&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>userdel -r usrname&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-48&quot;</span>&gt;查看当前任务&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>top
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="debrpm">22. deb和rpm包互转</h2>
 
@@ -388,65 +564,95 @@ $ top
   <li>第一种方法是使用<a href="http://joeyh.name/code/alien/">alien</a></li>
 </ul>
 
-<pre><code class="language-bash"># deb转换为rpm
-$ alien -r filename.deb
-
-# rpm转换成deb
-$ alien -d filename.rpm
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># deb转换为rpm</span>
+</span><span class='line'><span class="nv">$ </span>alien -r filename.deb&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;rpmdeb&quot;</span>&gt;rpm转换成deb&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>alien -d filename.rpm
+</span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
   <li>第二种方法是直接使用<code class="language-bash">apt</code>，非常方便，配置方法如下</li>
 </ul>
 
-<pre><code class="language-bash"># yum install apt
-# apt-get update
-# apt-get pkg
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># yum install apt</span>
+</span><span class='line'><span class="c"># apt-get update</span>
+</span><span class='line'><span class="c"># apt-get pkg</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="section-15">23. 查看和终止进程</h2>
+<h2 id="section-49">23. 查看和终止进程</h2>
 
-<pre><code class="language-bash"># 查看进程树
-$ pstree -p
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 查看进程树</span>
+</span><span class='line'><span class="nv">$ </span>pstree -p&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-50&quot;</span>&gt;看全部进程&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>ps -A&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-51&quot;</span>&gt;强制终止进程&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span><span class="nb">kill</span> -9 7473&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-52&quot;</span>&gt;释放内存&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>free -m
+</span></code></pre></td></tr></table></div></figure></p>
 
-# 看全部进程
-$ ps -A
+<h2 id="section-53">24. 查看网络有监听的端口</h2>
 
-# 强制终止进程
-$ kill -9 7473
-
-# 释放内存
-$ free -m
-</code></pre>
-
-<h2 id="section-16">24. 查看网络有监听的端口</h2>
-
-<pre><code class="language-bash">$ netstat -lntp
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>netstat -lntp
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="ssh">25. 断开SSH终端，程序后台执行</h2>
 
 <p>使用<code class="language-bash">nohup</code>命令</p>
 
-<pre><code class="language-bash">$ nohup /filepath/testScript.py 
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>nohup /filepath/testScript.py
+</span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="section-17">26. 查看某一个库文件的位置</h2>
+<h2 id="section-54">26. 查看某一个库文件的位置</h2>
 
-<pre><code class="language-bash">$ locate libGLU.so
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>locate libGLU.so
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="rpm">27. rpm包</h2>
 
-<pre><code class="language-bash"># 安装rpm包 
-# rpm -ivh pkg.rpm
-
-# 查看已经安装的包 
-# rpm -qa | grep pkg.rpm
-
-# 卸载rpm包 
-# rpm -e pkg
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 安装rpm包 </span>
+</span><span class='line'><span class="c"># rpm -ivh pkg.rpm&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-55&quot;</span>&gt;查看已经安装的包&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# rpm -qa <span class="p">|</span> grep pkg.rpm&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;rpm-1&quot;</span>&gt;卸载rpm包&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# rpm -e pkg
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="centos-6--python-27">28. Centos 6 升级 python 2.7</h2>
 
@@ -454,55 +660,83 @@ $ free -m
 
 <h2 id="cpu">29. CPU信息</h2>
 
-<pre><code class="language-bash"># 查询CPU信息
-$ lscpu
-
-# 物理CPU个数
-$ grep 'physical id' /proc/cpuinfo | sort -u | wc -l
-
-# 核心个数
-$ grep 'core id' /proc/cpuinfo | sort -u | wc -l
-
-# 线程个数
-$ grep 'processor' /proc/cpuinfo | sort -u | wc -l
-$ nproc
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 查询CPU信息</span>
+</span><span class='line'><span class="nv">$ </span>lscpu&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;cpu-1&quot;</span>&gt;物理CPU个数&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>grep ‘physical id’ /proc/cpuinfo <span class="p">|</span> sort -u <span class="p">|</span> wc -l&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-56&quot;</span>&gt;核心个数&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>grep ‘core id’ /proc/cpuinfo <span class="p">|</span> sort -u <span class="p">|</span> wc -l&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-57&quot;</span>&gt;线程个数&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>grep ‘processor’ /proc/cpuinfo <span class="p">|</span> sort -u <span class="p">|</span> wc -l
+</span><span class='line'><span class="nv">$ </span>nproc
+</span></code></pre></td></tr></table></div></figure> </p>
 
 <p>查看CPU温度</p>
 
-<pre><code class="language-bash"># 安装lm_sensors工具
-# yum install lm_sensors
-$ sensors
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 安装lm_sensors工具</span>
+</span><span class='line'><span class="c"># yum install lm_sensors</span>
+</span><span class='line'><span class="nv">$ </span>sensors
+</span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="section-18">30. 查询文件和文件夹大小</h2>
+<h2 id="section-58">30. 查询文件和文件夹大小</h2>
 
-<pre><code class="language-bash">$ du -h myfile
-$ du -h filepath
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>du -h myfile
+</span><span class='line'><span class="nv">$ </span>du -h filepath
+</span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="section-19">31. 查看内存情况</h2>
+<h2 id="section-59">31. 查看内存情况</h2>
 
-<pre><code class="language-bash"># 查看内存使用情况
-$ free
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 查看内存使用情况</span>
+</span><span class='line'><span class="nv">$ </span>free&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-60&quot;</span>&gt;物理内存&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# dmidecode -t memory <span class="p">|</span> grep Size
+</span></code></pre></td></tr></table></div></figure></p>
 
-# 物理内存
-# dmidecode -t memory | grep Size
-</code></pre>
+<h2 id="section-61">32. 查看文件头部和尾部</h2>
 
-<h2 id="section-20">32. 查看文件头部和尾部</h2>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 头部</span>
+</span><span class='line'><span class="nv">$ </span>head -5 file&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-62&quot;</span>&gt;尾部&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>tail -7 file
+</span></code></pre></td></tr></table></div></figure></p>
 
-<pre><code class="language-bash"># 头部
-$ head -5 file
+<h2 id="section-63">33. 下载命令</h2>
 
-# 尾部
-$ tail -7 file
-</code></pre>
-
-<h2 id="section-21">33. 下载命令</h2>
-
-<pre><code class="language-bash">$ wget -c -t 0 -w 30 httplink
-</code></pre>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>wget -c -t <span class="m">0</span> -w <span class="m">30</span> httplink
+</span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
   <li>
@@ -548,7 +782,7 @@ $ tail -7 file
   </li>
 </ul>
 
-<h3 id="section-22">更新记录</h3>
+<h3 id="section-64">更新记录</h3>
 
 <p>2014年7月25日</p>
 ]]></content>
