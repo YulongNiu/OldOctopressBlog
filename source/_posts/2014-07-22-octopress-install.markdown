@@ -104,7 +104,7 @@ published: true
 
 ## 9. Kramdown语法小技巧##
 
-* 代码片段高亮使用三对\`，行内引用代码使用一对\`
+* 代码片段高亮使用三对`~`{:.language-bash}，行内引用代码使用一对\`
 
 * 四个空格或者个一个Tab可以生成一个文本块
 
@@ -160,7 +160,7 @@ paginate_path: "posts/:num"
 
 * 添加多说：[1](http://havee.me/internet/2013-02/add-duoshuo-commemt-system-into-octopress.html), [2](http://kaiimeng.cn/my-first-octopress-blog/), [3](http://cn.soulmachine.me/blog/20130402/)
 
-* 添加Mathjax支持：[1](http://yanping.me/cn/blog/2012/03/10/octopress-with-latex/), [2](http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/), [Mathjax彩色公式](http://yanping.me/cn/blog/2012/03/10/octopress-with-latex/)
+* 添加Mathjax支持：[1](http://yanping.me/cn/blog/2012/03/10/octopress-with-latex/), [2](http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/), [Mathjax彩色公式](http://adereth.github.io/blog/2013/11/29/colorful-equations/)
 
 * [Kramdown语法](http://kramdown.gettalong.org/syntax.html)
 
