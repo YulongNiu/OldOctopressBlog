@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.github.io/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-02T18:23:12-05:00</updated>
+  <updated>2014-12-02T18:42:31-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -161,7 +161,7 @@
 <span class="line-number">123</span>
 <span class="line-number">124</span>
 <span class="line-number">125</span>
-</pre></td><td class="code"><pre><code class="lisp"><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+</pre></td><td class="code"><pre><code class="emacs-lisp"><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 </span><span class="line"><span class="c1">;set up helm</span>
 </span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 </span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;helm-config</span><span class="p">)</span>
@@ -535,9 +535,7 @@
 <p>Octopress提供了隐藏博文的功能，即使文章已经推送到了github，也可以不在博客主页显示。具体方法是在每篇markdown文件头部添加：</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="ruby"><span class="line">
-</span><span class="line"><span class="ss">published</span><span class="p">:</span> <span class="kp">false</span>
+</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="ss">published</span><span class="p">:</span> <span class="kp">false</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>如果需要公开发表，将其删除或者改为：</p>
@@ -552,9 +550,7 @@
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">
-</span><span class="line"><span class="nv">$ </span>gem install coderay
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>gem install coderay
 </span><span class="line"><span class="nv">$ </span>gem install kramdown
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
@@ -566,9 +562,7 @@
 <span class="line-number">4</span>
 <span class="line-number">5</span>
 <span class="line-number">6</span>
-<span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">
-</span><span class="line">markdown: kramdown
+</pre></td><td class="code"><pre><code class="bash"><span class="line">markdown: kramdown
 </span><span class="line">kramdown:
 </span><span class="line">  use_coderay: <span class="nb">true</span>
 </span><span class="line"><span class="nb">  </span>coderay:

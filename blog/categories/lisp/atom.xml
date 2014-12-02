@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Lisp | 牛牛龙]]></title>
   <link href="http://yulongniu.github.io/blog/categories/lisp/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-02T18:23:12-05:00</updated>
+  <updated>2014-12-02T18:42:31-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -165,7 +165,7 @@
 <span class='line-number'>127</span>
 <span class='line-number'>128</span>
 <span class='line-number'>129</span>
-</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="nv">&lt;/p&gt;</span>
+</pre></td><td class='code'><pre><code class='emacs-lisp'><span class='line'><span class="nv">&lt;/p&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="nv">&lt;p&gt;</span><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 </span><span class='line'><span class="c1">;set up helm</span>
