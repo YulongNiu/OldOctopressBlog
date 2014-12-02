@@ -21,21 +21,21 @@ categories: Bioinfor
 
 * 安装依赖的Ncurse库
 
-~~~ bash
+{% codeblock lang:bash %}
 # yum install ncurses*
-~~~
+{% endcodeblock %}
 
 * 添加SAMtools到PATH（[设置参考](http://yulongniu.bionutshell.org/blog/2010/11/08/linux-command/)）
 
 **快速运行**
 
-~~~ bash
+{% codeblock lang:bash %}
 # 将sam格式文件转换为bam格式文件
 $ samtools view -bS samFile > bamFile
 
 # 将bam格式文件转换为sorted bam格式文件，用于长期储存和后续分析 
 $ samtools sort bamFile sortedBamFile
-~~~
+{% endcodeblock %}
 
 ### 更新记录 ###
 

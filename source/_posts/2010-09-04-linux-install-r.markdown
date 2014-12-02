@@ -18,9 +18,9 @@ R的包（package）通常有两种:
 
 ### 2.1 源代码安装 ###
 
-~~~ bash
+{% codeblock lang:bash %}
 # R CMD INSTALL /.../myPackage.tar.gz
-~~~
+{% endcodeblock %}
 
 使用此方法，需要解决包依赖问题，即安装此包所依赖的包，安装过程有提示。
 
@@ -30,24 +30,24 @@ R的包（package）通常有两种:
 
 使用`install.packages()`安装，比较简便，联网即可装，装了就可用。使用这种方法安装包时，R会自动安装依赖的包。如果出现安装报错，可能的原因是缺少依赖的系统文件。同时，需要注意的是，一些R包只能在特定的平台上使用。比如[Rsubread](http://www.bioconductor.org/packages/release/bioc/html/Rsubread.html)不能在Windows操作系统下使用。
 
-~~~ r
+{% codeblock lang:r %}
 install.packages('myPackage')
-~~~
+{% endcodeblock %}
 
 同时，可以使用`install.packages()`{:.language-bash}安装本地下载的包，尤其适用于在服务器上安装包
 
-~~~ r
+{% codeblock lang:r %}
 install.packages(
   c('XML_0.99-5.tar.gz', '../../Interfaces/Perl/RSPerl_0.8-0.tar.gz'),
   repos = NULL,
   configure.args = c(XML = '--with-xml-config=xml-config', RSPerl = '--with-modules= "IO Fcntl"')) 
-~~~
+{% endcodeblock %}
 
 ## 3. R包版本查询和更新 ##
 
 R和R包版本查询
 
-~~~ r
+{% codeblock lang:r %}
 # 在启动的R中执行
 R.version
 
@@ -56,32 +56,32 @@ packageVersion('myPackage')
 
 # 查询当前R的详细信息，包括R版本、R包版本、命名空间等
 sessionInfo()
-~~~
+{% endcodeblock %}
 
 
 [CRAN](http://cran.r-project.org/)包更新
 
-~~~ r
+{% codeblock lang:r %}
 # 可以定期执行以下
 update.packages()  
-~~~
+{% endcodeblock %}
 
 [Bioconductor](http://www.bioconductor.org/)的安装和更新方法
 
-~~~ r
+{% codeblock lang:r %}
 source('http://bioconductor.org/biocLite.R')
 biocLite('myPackage')
-~~~
+{% endcodeblock %}
 
 ## 4. 卸载R包##
 
-~~~ r
+{% codeblock lang:r %}
 remove.packages('myPackage')
-~~~
+{% endcodeblock %}
 
 ## 5. R包相关函数 ##
 
-~~~ r
+{% codeblock lang:r %}
 # 查看包的安装目录
 .libPaths()
 
@@ -100,13 +100,13 @@ search()
 
 # 查看启动R时自动载入的包。
 getOption('defaultPackages')
-~~~
+{% endcodeblock %}
 
 ## 6. 帮助信息查询 ##
 
 ### 6.1 R和R包帮助信息 ###
 
-~~~ r
+{% codeblock lang:r %}
 # 查询R HOME安装地址
 Sys.getenv('R_HOME')
 
@@ -137,11 +137,11 @@ openVignette('myPackage')
 
 # 展示一些包中demostration
 demo('package')
-~~~
+{% endcodeblock %}
 
 ### 6.2 查询对象信息 ###
 
-~~~ r
+{% codeblock lang:r %}
 # 查看"myPackage"中的所有对象
 ls('package:myPackage')
 
@@ -184,7 +184,7 @@ slotNames(myObject)
 
 # 访问对象的slot值使用@，可以连续用
 Myobject@slotNames
-~~~
+{% endcodeblock %}
 
 ## 7. 查看函数源代码 ##
 
@@ -192,9 +192,9 @@ Myobject@slotNames
 
 直接输入函数名称，不加后面的括号。比如:
 
-~~~ r
+{% codeblock lang:r %}
 > fivenum
-~~~
+{% endcodeblock %}
 
 ### 7.2 查询S3/S4函数源代码 ###
 
@@ -206,7 +206,7 @@ Myobject@slotNames
 
 比如`t.test`{:.language-r}的源代码
 
-~~~ r
+{% codeblock lang:r %}
 > t.test
 function (x, ...) 
 UseMethod("t.test")
@@ -224,11 +224,11 @@ UseMethod("t.test")
 > getAnywhere('t.test.default')
 > getS3method('t.test','default')
 > stats:::t.test.default
-~~~
+{% endcodeblock %}
 
 另外一个例子，查询<span style="color: blue">affy</span>包中`pm()`{:.language-r}的源代码：
 
-~~~ r
+{% codeblock lang:r %}
 > library(affy)
 > pm
 standardGeneric for "pm" defined from package "affy"
@@ -240,7 +240,7 @@ Methods may be defined for arguments: object
 Use  showMethods("pm")  for currently available ones.
 
 > findMethods('pm')
-~~~
+{% endcodeblock %}
 
 ### <a id="Ref">参考网址</a> ###
 

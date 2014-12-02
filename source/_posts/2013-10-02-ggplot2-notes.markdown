@@ -1,4 +1,4 @@
-gi---
+---
 layout: post
 title: "R ggplot2 notes"
 date: 2013-10-02 02:47:11 -0400
@@ -18,11 +18,11 @@ The input data should be in **data frame** form, and it is easily to use the fun
 
 <!--more-->
 
-~~~ r
+{% codeblock lang:r %}
 require('ggplot2')
 ggplot(data=mpg, mapping=aes(x=cty, y=hwy, colour=factor(year))) +
 geom_point() + stat_smooth()
-~~~
+{% endcodeblock %}
 `ggplot()`{:.language-r}: **data** is a <span style="color:blue">data.frame</span> class object. **mapping** is an `aes()`{:.language-r} function to specify the X-axis and Y-axis. When a `aes()`{:.language-r} is used, a figure legend will be added. If we do not want the legends appear, use `show_guide = FALSE`{:.language-r} in *geom_XXX* or *stat_XXX*
 
 `geom_point()`{:.language-r}: is used to plot points with the attributes **x**, **y**, alpha, colour, fill, shape, size.
@@ -33,7 +33,7 @@ geom_point() + stat_smooth()
 
 `geom_box()`{:.language-r}: boxplot.
 
-~~~ r
+{% codeblock lang:r %}
 # example
 require('ggplot2')
 p <- ggplot(mtcars, aes(factor(cyl), mpg))
@@ -43,17 +43,17 @@ p + geom_boxplot()
 p + geom_boxplot(aes(fill = factor(cyl)))
 # change default colors
 p + geom_boxplot(aes(fill = factor(cyl))) + scale_fill_manual(values = c('red', 'green', 'blue'))
-~~~
+{% endcodeblock %}
 `geom_rect(mapping = NULL, data = NULL, stat = "identity", position = "identity", ...)`{:.language-r}: plot rectangles. 
 In `aes()`{:.language-r}, `xmin`{:.language-r}, `xmax`{:.language-r}, `ymin`{:.language-r}, and `ymax`{:.language-r} are necessary. 
 `inherit.aes = FALSE`{:.language-r} may be used if new `data`{:.language-r} is applied.
 
-~~~ r
+{% codeblock lang:r %}
 # example
 ggplot(mtcars) +
   geom_density(aes(x=disp, group=cyl, fill=cyl), alpha=0.6, adjust=0.75) + 
   geom_rect(data=mtcars[1,], aes(xmin=100, xmax=200, ymin=0,ymax=Inf), fill="red", alpha=0.2)
-~~~
+{% endcodeblock %}
 
 ### 1.2 Statistics ###
 
@@ -69,13 +69,13 @@ ggplot(mtcars) +
 
 `geom_hline`{:.language-r} and `geom_vline`{:.language-r}: to add horizontal and vertical lines.
 
-~~~ r
+{% codeblock lang:r %}
 # example 
 p <- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
 geom_vline(xintercept = 1:5, colour="green", linetype = "longdash")
-~~~
+{% endcodeblock %}
 
-~~~ r
+{% codeblock lang:r %}
 # ggplot2 line type
 d <- data.frame(lt=c('blank', 'solid', 'dashed', 'dotted', 'dotdash', 'longdash', 'twodash', '1F', 'F1', '4C88C488', '12345678'))
 ggplot() +
@@ -83,7 +83,7 @@ ggplot() +
   scale_y_discrete(name='linetype') +
   scale_linetype_identity() +
   geom_segment(data=d, mapping=aes(x=0, xend=1, y=lt, yend=lt, linetype=lt))
-~~~
+{% endcodeblock %}
 
 `geom_text()`{:.language-r}: to add text. Set `parse = TRUE` to use expression and greek letters.
 
@@ -103,12 +103,12 @@ ggplot() +
 
 The function `ggsave()`{:.language-r} is used to save the screen plot to file. `print()`{:.language-r} is also applied like:
 
-~~~r
+{% codeblock lang:r %}
 pdf('testfile.pdf')
 q <- ggplot()
 print(q)
 dev.off()
-~~~
+{% endcodeblock %}
 
 ## 3. Other issues ###
 
@@ -116,12 +116,12 @@ dev.off()
 
 Use <span style="color: blue">gridExtra</span> package to plot multiple ggplot2 figures in the one figure. 
 
-~~~ r
+{% codeblock lang:r %}
 # example
 require('gridExtra')
 # save ggplot object into a list like "plotList"
 do.call(grid.arrange, plotList)
-~~~
+{% endcodeblock %}
 
 ### <a id="Ref">参考网址</a> ###
 

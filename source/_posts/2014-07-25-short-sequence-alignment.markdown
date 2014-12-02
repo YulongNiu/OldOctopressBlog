@@ -23,7 +23,7 @@ categories: Bioinfor
 
 **快速运行**：
 
-~~~ bash
+{% codeblock lang:bash %}
 # 建立一系列FASTA文件目录
 $ bowtie2-build /filePath/fastaFile indexName
 
@@ -32,7 +32,7 @@ $ bowtie2 -p 4 -x indexName -U readFiles -S samFileName
 
 # paired序列比对
 $ bowtie2 -p 4 -x indexName  -1 readFiles1 -2 readFiles2 -S eg2.sam
-~~~
+{% endcodeblock %}
 
 * `-p`：多线程
 

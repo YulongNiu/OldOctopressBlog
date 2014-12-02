@@ -20,9 +20,9 @@ categories: Bioinfor
 
 **快速运行**：
 
-~~~ bash
+{% codeblock lang:bash %}
 phyml -i align_file.phy --no_memory_check
-~~~
+{% endcodeblock %}
 
 <!--more-->
 
@@ -39,9 +39,9 @@ phyml -i align_file.phy --no_memory_check
 
 **快速运行1**：
 
-~~~ bash
+{% codeblock lang:bash %}
 raxmlHPC-PTHREADS-AVX -x 12345 -p 12345 -# 100 -m GTRGAMMA -T 4 -s align_file.phy -n TEST
-~~~
+{% endcodeblock %}
 
 * `-x`：bootstrap运行时设定随机数，用于结果重现
 * `-p`：parsimony推断时设定随机数，用于结果重现
@@ -53,9 +53,9 @@ raxmlHPC-PTHREADS-AVX -x 12345 -p 12345 -# 100 -m GTRGAMMA -T 4 -s align_file.ph
 
 **快速运行2**：
 
-~~~ bash
+{% codeblock lang:bash %}
 raxmlHPC-PTHREADS-AVX -f a -x 12345 -p 12345 -# autoMRE -m GTRCAT -T 4 -s align_file.phy -n TEST
-~~~
+{% endcodeblock %}
 
 * `-f a`：选定算法，快速bootstrap
 

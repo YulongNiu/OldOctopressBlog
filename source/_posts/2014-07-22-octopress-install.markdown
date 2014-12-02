@@ -14,54 +14,54 @@ categories: PPR
 
 常用命令:
 
-~~~ bash
+{% codeblock lang:bash %}
 # 预览，可自动更新。使用Ctrl+c终止。
 $ rake preview
-~~~
+{% endcodeblock %}
     
 ## 2. Ruby版本调整 ##
 
 因为Octopress需要使用Ruby旧版本，推荐使用[RVM](https://rvm.io/)安装Ruby 1.9.3版本。在安转过程中可能会出现`"gpg: Can't check signature: public key not found"`的错误提示，需要执行一下类似命名，添加公用匙。
 
-~~~ bash
+{% codeblock lang:bash %}
 $ gpg2 --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
-~~~
+{% endcodeblock %}
 
 使用以下操作设定ruby版本：
 
-~~~ bash
+{% codeblock lang:bash %}
 $ source ~/.rvm/scripts/rvm
 $ rvm use 1.9.3
-~~~
+{% endcodeblock %}
 <!--more-->    
 
 ## 3. 预览错误 ##
 
 如果在预览博文时出现`TCPServer Error: Address already in use - bind(2)`{:.language-bash}的错误，表示端口（Octopress默认4000）被占，解决办法:
 
-~~~bash
+{% codeblock lang:bash %}
 # 获取占据4000端口程序的PID
 $ lsof -wni tcp:4000
 $ kill -9 PID
-~~~
+{% endcodeblock %}
 
 ## 4. 更新博文 ##
 
 博文放置在`source/_posts`{:.language-bash}目录下。
 
-~~~ bash
+{% codeblock lang:bash %}
 $ rake new_post["new post"]
 $ rake generate
 $ git add .
 $ git commit -m "my comment" 
 $ git push origin source
 $ rake deploy
-~~~
+{% endcodeblock %}
 如果需要在首页显示部分博文，在需要隔断的地方（博文markdown文件）加入：
 
-~~~ html
+{% codeblock lang:html%}
 <!--more-->
-~~~
+{% endcodeblock %}
 
 ## 5. 使用主题 ##
 
@@ -75,7 +75,7 @@ $ rake deploy
 
 在`source`{:.language-bash}文件夹下添加*404.markdown*文件，之后写入
 
-~~~ javascript
+{% codeblock lang:javascript %}
 ---
 layout: page
 title: "404 Error"
@@ -86,33 +86,59 @@ footer: false
 ---
 
 <script type="text/javascript" src="http://www.qq.com/404/search_children.js?edition=small" charset="utf-8"></script>
-~~~
+{% endcodeblock %}
 
 ## 8. 私密博文 ##
 
 Octopress提供了隐藏博文的功能，即使文章已经推送到了github，也可以不在博客主页显示。具体方法是在每篇markdown文件头部添加：
 
-~~~ ruby
+{% codeblock lang:ruby %} 
 published: false
-~~~
+{% endcodeblock %}
 
 如果需要公开发表，将其删除或者改为：
 
-~~~ ruby
+{% codeblock lang:ruby %}
 published: true
-~~~
+{% endcodeblock %}
 
-## 9. Kramdown语法小技巧##
+## 9. 代码高亮设置 ##
 
-* 代码片段高亮使用三对`~`{:.language-bash}，行内引用代码使用一对\`
+安装`coderay`和`kramdown`
+
+{% codeblock lang:bash %} 
+$ gem install coderay
+$ gem install kramdown
+{% endcodeblock %}
+
+在`_config.yml`{:.language-bash}文件中写入：
+
+{% codeblock lang:bash %} 
+markdown: kramdown
+kramdown:
+  use_coderay: true
+  coderay:
+    coderay_line_numbers: table
+    coderay_css: class
+{% endcodeblock %}
+
+## 10. Kramdown语法小技巧##
+
+* 代码高亮
+
+代码段高亮参考[Octopress codeblock](http://octopress.org/docs/plugins/codeblock/)
+
+行内引用代码使用
+`` `source/_includes/custom/head.html`{:.language-bash} ``
+
 
 * 四个空格或者个一个Tab可以生成一个文本块
 
-## 10. 链接在新的选择卡中打开##
+## 11. 链接在新的选择卡中打开##
 
 在`source/_includes/custom/head.html`{:.language-bash}中添加：
 
-~~~ html
+{% codeblock lang:html%}
 <!-- link open with new tab  -->
 <script>
 function addBlankTargetForLinks () {
@@ -126,31 +152,36 @@ $(document).bind('DOMNodeInserted', function(event) {
 });
 </script>
 
-~~~
+{% endcodeblock %}
 
-## 11. 修改分页数 ##
+## 12. 修改分页数 ##
 
 修改`_config.yml`{:.language-bash}文件
 
-~~~ bash
+{% codeblock lang:bash %}
 # 每页最多展示的博文数目
 paginate: 5
 
 # 分页后博文地址
 paginate_path: "posts/:num"
-~~~
+{% endcodeblock %}
 
-## 12. 添加图片 ##
+## 13. 添加图片 ##
 
 将需要添加的图片移动到目录`source/images/`{:.language-bash}，之后在正文中添加：
 
-~~~ bash
+{% codeblock lang:bash %}
 {% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
 
 # 例子
 {% img left /images/testimg.png 350 350 'image' 'images' %}
 {% img right http://placekitten.com/300/500 150 250 Place Kitten #3 %}
-~~~
+{% endcodeblock %}
+
+
+## 14. 修改favicon ##
+
+需要修改的favicon文件，比如`favicon.ico`移动到`source/`{:.language-bash}目录下。之后修改文件`source/_includes/head.html`{:.language-bash}，找到`favicon.png`将其改为`favicon.ico`。
 
 ### <a id="Ref">参考网址</a> ###
 
@@ -166,7 +197,7 @@ paginate_path: "posts/:num"
 
 * [Kramdown演示](http://kramdown.gettalong.org/quickref.html)
 
-* [修改标签图标](http://yibao.buertec.net/blog/2013/12/03/set-up-favicon-dot-png-slash-favicon-dot-ico-on-octopress/)
+* [pygments错误详细提示](http://i.rexdf.org/blog/2014/09/26/octopressbo-ke-geng-xin-ri-zhi/)
 
 * [Octopress highlight language list](http://pygments.org/docs/lexers/)
 

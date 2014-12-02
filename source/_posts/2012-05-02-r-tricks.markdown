@@ -11,13 +11,13 @@ categories: r
 
 ## 1. `if`{:.language-r}爱你，`else`{:.language-r}就要和你在一起，又要给你一些距离 ##
 
-~~~ r
+{% codeblock lang:r %}
 if (con){
   expr
   } else{
   expr2
   }
-~~~
+{% endcodeblock %}
 
 `if...else..`{:.language-r}结构中，`}`{:.language-r}与`else`{:.language-r}必须在同一行。
 
@@ -25,11 +25,11 @@ if (con){
 
 简易形式（<span style="color: blue">不推荐</span>）：
 
-~~~ r
+{% codeblock lang:r %}
 # else不能与expr在同一行
 if (con) expr
 else expr2
-~~~
+{% endcodeblock %}
 
 建议将所有`if ... else ...`{:.language-r}结构写成第一种形式，如果没有`else`{:.language-r}，用`else {}`{:.language-r}代替。
 
@@ -39,7 +39,7 @@ else expr2
 
 如果表达式（expression）或者函数（function）的值没有定义，那么将返回`NULL`{:.language-r}。在R中，`NULL`{:.language-r}与很多对象合并在一起时，都被忽略掉。比如以下例子：
 
-~~~ r
+{% codeblock lang:r %}
 # NULL is neglected in vector
 > c(1, NA, NULL, FALSE)
 [1]  1 NA  0
@@ -61,11 +61,11 @@ In matrix(c(1, NA, NULL, 2), c(2, 2)) : 数据长度[3]不是矩阵行数[2]的�
 > tmp[[1]] <- NULL
 > tmp
 list()
-~~~
+{% endcodeblock %}
 
 如果一定要将列表中的某个个元素赋值为NULL，可以使用list(NULL)，比如：
 
-~~~ r
+{% codeblock lang:r %}
 > tmp <- list()
 > tmp[1] <- list(NULL)
 > tmp
@@ -73,7 +73,7 @@ list()
 NULL
 > is.null(tmp[[1]])
 [1] TRUE
-~~~
+{% endcodeblock %}
 
 ## 3. list不是万能的，但没有list是万万不能的 ##
 
@@ -132,15 +132,15 @@ R中一些对象转换要格外小心，特别是牵扯到data.frame类型。以
 
 需要先转成字符串向量过渡一下：
 
-~~~ r
+{% codeblock lang:r %}
 as.numeric(as.character(MyFactor))
-~~~
+{% endcodeblock %}
 
 ### 5.2 字符和数值因子混搭data.frame ###
 
 每一列是按照字符型因子保存。留意表面上是数值的一列，它非常危险，特别是排序。一个例子：
 
-~~~ r
+{% codeblock lang:r %}
 > a1 <- as.factor(as.character(a1))
 > a1
  [1] 5  6  7  8  9  10 11 12 13 14 15
@@ -148,7 +148,7 @@ Levels: 10 11 12 13 14 15 5 6 7 8 9
 > sort(a1)
  [1] 10 11 12 13 14 15 5  6  7  8  9 
 Levels: 10 11 12 13 14 15 5 6 7 8 9
-~~~
+{% endcodeblock %}
 
 ## 6. 多个`else`{:.language-r}/`if`{:.language-r}别担心，`switch()`{:.language-r}函数来帮助 ##
 
@@ -156,7 +156,7 @@ Levels: 10 11 12 13 14 15 5 6 7 8 9
 
 所以，我们很容易想到，如果`EXPR`{:.language-r}生成的数字，则对应匹配`...`{:.language-r}的第几个元素，此时`...`{:.language-r}中的变量可以没有名字；如果是字符串，就会严格地匹配`...`{:.language-r}中相同名字的变量；如果`EXPR`{:.language-r}生成是字符串，`...`{:.language-r}中没有相匹配的变量名，则返回`NULL`{:.language-r}；如果`...`{:.language-r}中有一个“无名”变量（即没有对变量赋值），上一种情况下返回该无名变量，相当于最后一个`else`{:.language-r}。比如：
 
-~~~ r
+{% codeblock lang:r %}
 > switch(1, a = 3, b = 2)
 [1] 3
 > switch(2, aa = 'red', bb = 'blue', cc = 'yellow', 'No value')
@@ -171,7 +171,7 @@ Levels: 10 11 12 13 14 15 5 6 7 8 9
 Error: empty alternative in numeric switch
 > switch('dd', aa = 'red', bb = , cc = 'yellow', 'no', 'value')
 Error: duplicate switch defaults: '"no"' and '"value"'
-~~~
+{% endcodeblock %}
 
 <span style="color: blue">注意</span>：
 
@@ -190,7 +190,7 @@ Error: duplicate switch defaults: '"no"' and '"value"'
 
 当对象是一个矩阵的时候，通常我们要获取其中一些元素。如果取出的正好是一行或者一列，此时，R会返回给我们一个向量，而不是矩阵。这会带来很大的麻烦，因为我们必须判断返回对象是向量，还是矩阵，才能继续下面的操作。此时，`drop`{:.language-r}可以帮助我们，如果设置`drop = FALSE`{:.language-r}，就会保持原样返回结果。
 
-~~~ r
+{% codeblock lang:r %}
 > b <- matrix(1:6, nrow = 2, ncol = 3)
 > b
      [,1] [,2] [,3]
@@ -205,18 +205,18 @@ Error: duplicate switch defaults: '"no"' and '"value"'
 > b[1, , drop = FALSE]
      [,1] [,2] [,3]
 [1,]    1    3    5
-~~~
+{% endcodeblock %}
 
 ## 8. `|`{:.language-r} 和 `||`{:.language-r} 有区别，返回向量与单值 ##
 
 R中的逻辑运算符号有两组，`|`{:.language-r}或者`||`{:.language-r}（`&`{:.language-r}或者`&&`{:.language-r}），看起来觉得有些多余。其实，这是为了R独特的“**向量运算**”考虑的。`|`{:.language-r}或者`&`{:.language-r}首先考虑返回一个向量，而`||`{:.language-r}和`&&`{:.language-r}则只返回最后一个值。比如：
 
-~~~ r
+{% codeblock lang:r %}
 > c(FALSE, TRUE) | c(FALSE, FALSE)
 [1] FALSE  TRUE
 > c(FALSE, TRUE) || c(FALSE, FALSE)
 [1] FALSE
-~~~ 
+{% endcodeblock %} 
 
 ## 9. 递归 ##
 
@@ -230,13 +230,13 @@ R在解释代码时，不支持尾递归优化，所以在R中不要写递归。
 
 如果我们有一个字符字符串，现在需要将其转为可执行代码。方法如下：
 
-~~~ r
+{% codeblock lang:r %}
 > test1 = '1:3'
 > test1
 [1] "1:3"
 > eval(parse(text = test1))
 [1] 1 2 3
-~~~
+{% endcodeblock %}
 
 ## 12. factor如需换标签，`c()`{:.language-r}函数有妙招 ##
 
@@ -245,29 +245,29 @@ R在解释代码时，不支持尾递归优化，所以在R中不要写递归。
 
 * 第一种方法，使用`c()`函数
 
-~~~
+{% codeblock lang:r %}
 > tmp1 <- factor(rep(1:3, each = 3))
 > tmp1
 [1] 1 1 1 2 2 2 3 3 3
 Levels: 1 2 3
 > c(letters[1:3])[tmp1]
 [1] "a" "a" "a" "b" "b" "b" "c" "c" "c"
-~~~
+{% endcodeblock %}
 
 * 第二种方法，先转换标签，之后再使用`as.character()`{:.language-r}函数。
 
-~~~ r
+{% codeblock lang:r %}
 > tmp2 <- factor(tmp1, labels = letters[1:3])
 > tmp2
 [1] a a a b b b c c c
 Levels: a b c
 > as.character(tmp2)
 [1] "a" "a" "a" "b" "b" "b" "c" "c" "c"
-~~~
+{% endcodeblock %}
 
 ## 13. 操作符也是函数，使用起来有妙招 ##
 
-~~~ r
+{% codeblock lang:r %}
 > "+"(1, 2)
 [1] 3
 > '>'(1, 2)
@@ -307,7 +307,7 @@ Levels: a b c
 [1] 10 11
 > sapply(tmp1, '[[', 2)
  [1]  2  3  4  5  6  7  8  9 10 11
-~~~
+{% endcodeblock %}
 
 最后一个例子中，使用了`[[`{:.language-r}，巧妙地取得了第二个元素。
 
@@ -319,13 +319,13 @@ Levels: a b c
 
 ## 16. 压缩list用`do.call()`{:.language-r} ##
 
-~~~ r
+{% codeblock lang:r %}
 do.call(rbind, list)
-~~~
+{% endcodeblock %}
 
 ## 17. 分割数据使用`split()`{:.language-r} ##
 
-~~~ r
+{% codeblock lang:r %}
 > test1 <- rep(c('a', 'b'), c(3, 4))
 > test1
 [1] "a" "a" "a" "b" "b" "b" "b"
@@ -335,23 +335,23 @@ $a
 
 $b
 [1] "b" "b" "b" "b"
-~~~
+{% endcodeblock %}
 
 ## 18. 输出txt文档找`sink()`{:.language-r} ##
 
 `sink()`可以将R的对象输出到外部文档中，第一遍可能包括了系统信息，需要输出第二遍。一个典型的流程如下：
 
-~~~ r
+{% codeblock lang:r %}
 > sink(filename)
 > test1
 > sink()
-~~~
+{% endcodeblock %}
 
 ## 19. R中循环for妙用 ##
 
 R中for循环中，需要指定一个计数器，比如i in 1:10之类。R可以直接将一个向量用于计数，返回向量中对应的值，比如:
 
-~~~ r
+{% codeblock lang:r %}
 > tmp1 <- letters[1:10]
 for (i in tmp1) {
   print(i)
@@ -366,14 +366,14 @@ for (i in tmp1) {
 [1] "h"
 [1] "i"
 [1] "j"
-~~~
+{% endcodeblock %}
 
 ## 20. 多个序列取交集并集用`Reduce()`{:.language-r} ##
 
-~~~r
+{% codeblock lang:r %}
 > Reduce(union, list(letters[1:3], letters[1:4], letters[1:5]))
 [1] "a" "b" "c" "d" "e"
-~~~
+{% endcodeblock %}
 
 
 ### <a id="Ref">参考网址</a> ###

@@ -17,37 +17,37 @@ categories: R
 
 ### 1.1 Linux系统下安装openMPI环境 ###
 
-~~~ bash
+{% codeblock lang:bash %}
 # 安装openmpi环境
 # yum install openmpi openmpi-devel
 
 # 配置环境（安装时执行，可能之后运行也要执行）
 # ldconfig /usr/lib64/openmpi/lib/
-~~~
+{% endcodeblock %}
 
 在`~/.bashrc`{:.language-bash}下写入
 
-~~~ bash
+{% codeblock lang:bash %} 
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}${LD_LIBRARY_PATH:+:}/usr/lib64/openmpi/lib/"
-~~~
+{% endcodeblock %}
 
 载入`~/.bashrc`{:.language-bash}
 
-~~~ bash
+{% codeblock lang:bash %} 
 $ source ~/.bashrc
-~~~
+{% endcodeblock %}
 
 ### 1.2 安装Rmpi包 ###
 
 在启动的R窗口中输入：
 
-~~~ r
+{% codeblock lang:r %}
 install.packages("Rmpi",
                  configure.args =
                  c("--with-Rmpi-include=/usr/include/openmpi-x86_64/",
                    "--with-Rmpi-libpath=/usr/lib64/openmpi/lib/",
                    "--with-Rmpi-type=OPENMPI"))
-~~~
+{% endcodeblock %}
 
 ## 2. 使用<span style="color: blue">parallel</span>包 ##
 
@@ -55,9 +55,9 @@ install.packages("Rmpi",
 
 首先，需要设定cluster的节点（nodes）数目
 
-~~~ r
+{% codeblock lang:r %}
 cl <- makeCluster(2, type = "MPI")
-~~~
+{% endcodeblock %}
 
 这里对“节点数”设定做一些解释，如果使用cluster，可以直接设定cluster数据即可；如果是在小型服务器或者个人电脑上使用，最大节点数可以设定为“线程数（processor）-1”。比如一个双核四线程计算机，节点数目最大可以设定为3。这是因为<span style="color: blue">snow</span>包（<span style="color: blue">parallel</span>包的主要依赖包）在设计时，总是要保留一个**“主线程”**来处理和整合数据。
 
@@ -71,9 +71,9 @@ cl <- makeCluster(2, type = "MPI")
 
 ### 2.3 回收节点 ###
 
-~~~ r
+{% codeblock lang:r %}
 stopCluster(cl)
-~~~
+{% endcodeblock %}
 
 ### 3. 并行计算的包依赖问题 ###
 
@@ -87,7 +87,7 @@ stopCluster(cl)
 
 这种方法非常直观，推荐。
 
-~~~ r
+{% codeblock lang:r %}
 # 以下代码摘抄自Parallel R，其中packages
 # 是一个要选择加载的package列表，
 # 比如c('bigmemory', 'foreach', 'doMC')
@@ -97,20 +97,20 @@ worker.init <- function(packages) {
   }
   NULL
 }
-~~~
+{% endcodeblock %}
 
 * 第二种方法是在调用函数中加入。
 
 这种方法不推荐，因为我们将看到这种方法是“投机”了<span style="color: blue">parallel</span>包的并行`apply`家族函数。原理是：<span style="color: blue">parallel</span>包中最主要的就是`apply`家族函数，比如`parApply(cl = NULL, X, MARGIN, FUN, ...)`{:.language-r}函数，是<span style="color: blue">base</span>包中`apply()`{:.language-r}的并行版本。其中会用到一个`FUN`函数，我们可以在这个函数中加载包，比如写入`require('bigmemory')`{:.language-r}等。这样，并行的R进程就会载入需要的包。举例如下：
 
-~~~ r
+{% codeblock lang:r %}
 Getft <- function(i, arg1, arg2){
   require(packages)
   ...
 }
 
 adft <- parSapply(cl, 1:10, Getft, argInput1, argInput2)
-~~~
+{% endcodeblock %}
 
 
 ## 4. 与<span style="color: blue">bigmemory</span>包结合 ##
@@ -129,7 +129,7 @@ adft <- parSapply(cl, 1:10, Getft, argInput1, argInput2)
 
 举一个例子，完整版本见[补充材料：Final version](#final_version)，这个例子中首先创建一个`Getft()`{:.language-r}函数，接受`adAllRowColDesc`和`adMatDesc`两个变量是`big.matrix`对象的描述文件。在这个函数中，`attach.big.matrix()`{:.language-r}通过描述文件引用`big.matrix`对象，并完成相关操作。
 
-~~~ r
+{% codeblock lang:r %}
 Getft <- function(i, adAllRowColDesc, adMatDesc){
   adAllRowColData <- attach.big.matrix(adAllRowColDesc)
   adMatData <- attach.big.matrix(adMatDesc)
@@ -138,12 +138,12 @@ Getft <- function(i, adAllRowColDesc, adMatDesc){
   linkData <- c(rowNames[rowIndex], rowNames[colIndex], adMatData[rowIndex, colIndex])
   return(linkData)
 }
-~~~
+{% endcodeblock %}
 之后，使用`parSapply()`{:.language-r}函数调用`Getft()`{:.language-r}函数，使用`1:nrow(adAllRowCol)`作为“**计数器**”。
 
-~~~r
+{% codeblock lang:r %}
 adft <- parSapply(cl, 1:nrow(adAllRowCol), Getft, adAllRowColDescFile, adMatDescFile)
-~~~
+{% endcodeblock %}
 
 如果需要处理的`big.matrix`对象不大，也可以直接使用`parSapply()`{:.language-r}函数，详细参考[补充材料：Bigmatrix direct version](#bigmatrix_direct)。
 

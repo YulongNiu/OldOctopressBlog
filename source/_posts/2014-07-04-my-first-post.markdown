@@ -10,11 +10,12 @@ This is my first post. I want to say something. Then say something.
 
 This is a piece of html code `<html>`{:.language-html}
 
-~~~ ruby
+{% codeblock lang:ruby %}
 def what?
   42
 end
-~~~
+{% endcodeblock %}
+
 <!-- more -->
 
 1. Mathjax supports.

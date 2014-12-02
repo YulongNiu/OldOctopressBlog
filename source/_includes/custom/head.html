@@ -1,10 +1,4 @@
-<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-
 <!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
-</script>
 
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
@@ -13,6 +7,10 @@
       processEscapes: true
     }
   });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 </script>
 
 <script type="text/x-mathjax-config">
@@ -36,18 +34,7 @@
    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-<!-- link open with new tab  -->
-<script>
-function addBlankTargetForLinks () {
-  $('a[href^="http"]').each(function(){
-  $(this).attr('target', '_blank');
-  });
-}
+<script src="{{ root_url }}/javascripts/libs/jquery/jquery-2.0.3.min.js"></script>
 
-$(document).bind('DOMNodeInserted', function(event) {
-  addBlankTargetForLinks();
-});
-</script>
-
-<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="{{ root_url }}/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="{{ root_url }}/assets/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">

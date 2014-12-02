@@ -33,10 +33,10 @@ categories: r
 
 * Author和Maintainer：包的作者和维护者，姓+名 （比如Karl Pearson ）。也可以使使用Author@R描述作者，使用R函数`person()`{:.language-r}，其中变量`role`的选项`aut`表示author，`cre`表示creator（维护者），`ctb`表示contributor。一个例子：
 
-~~~ r
+{% codeblock lang:r %}
 c(person("Hadley", "Wickham", email = "hadley@rice.edu", role ="ctb"),  
 person("Yihui", "Xie", email = "xie@yihui.name", role = c("aut", "cre")))
-~~~
+{% endcodeblock %}
 
 * Date（可选）：当前版本包日期，格式yyyy-mm-dd。
 
@@ -108,7 +108,7 @@ person("Yihui", "Xie", email = "xie@yihui.name", role = c("aut", "cre")))
 
 <span style="color: blue">stats4</span>给出的例子非常好，R 2.15.0之后，对隐式泛函要求严格，必须先输入显示函数：
 
-~~~ r
+{% codeblock lang:r %}
   export(mle) 
   importFrom("graphics", plot) 
   importFrom("stats", optim, qchisq) 
@@ -118,7 +118,7 @@ person("Yihui", "Xie", email = "xie@yihui.name", role = c("aut", "cre")))
   exportMethods(coef, confint, logLik, plot, profile, summary, show, update, vcov)
   ## implicit generics which do not have any methods here 
   export(AIC, BIC, nobs)
-~~~
+{% endcodeblock %}
 
 
 ## 3. 书写R函数帮助文档 ##
@@ -197,23 +197,23 @@ person("Yihui", "Xie", email = "xie@yihui.name", role = c("aut", "cre")))
 
 在提交代码之前，首先需要检查自己的代码，运行命名
 
-~~~ bash
+{% codeblock lang:bash %}
 R CMD check Mypkg
 
-~~~
+{% endcodeblock %}
 
 之后，因为R源码包（source package）的发布都是采用压缩文件（`*.tar.gz`）形式，所以需要将源代码打包，方法是运行命令
 
-~~~ bash
+{% codeblock lang:bash %}
 R CMD build Mypkg
 
-~~~
+{% endcodeblock %}
 
 当然，有时我们需要发布二进制包（binary packages）,操作方法是
 
-~~~ bash
+{% codeblock lang:bash %}
 R CMD INSTALL --build Mypkg
-~~~
+{% endcodeblock %}
 
 具体执行过程是：首先，在默认目录树下安装包；之后，将成功安装的包转化成（平台依赖的）二进制代码，再将二进制代码打包输出。所以，默认安装目录要有“可写”权限，如果没有，执行`R CMD INSTALL -l location --build Mypkg`{:.language-bash}，指定一个“可写”权限目录（location）安装。
 
@@ -221,11 +221,11 @@ CRAN很体贴地考虑了Window以外平台的作者，通过[网站](http://win
 
 最后是提交代码，依次执行以下命名或者操作:
 
-~~~ bash
+{% codeblock lang:bash %}
 R CMD build Mypkg
 # 检查例子（example）、检查（test）和文档输出，如果有报错或者警告，需要仔细阅读提示，原则上消除所有报错和警告
 R CMD check --as-cran
-~~~
+{% endcodeblock %}
 
 使用 ftp://CRAN.R-project.org/incoming/ （用户名： anonymous；密码：自己邮箱地址）上传自己的包，并向CRAN@R-project.org发邮件通知自己上传了包（名称、版本等）。
 

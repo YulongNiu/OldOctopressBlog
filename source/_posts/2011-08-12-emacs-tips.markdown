@@ -9,10 +9,10 @@ categories: lisp
 
 ## 1. 安装  ##
 
-~~~ bash
+{% codeblock lang:bash %}
 # 安装Emacs
 # yum install emacs 
-~~~
+{% endcodeblock %}
 
 
 ## 2. 窗口和文件操作 ##
