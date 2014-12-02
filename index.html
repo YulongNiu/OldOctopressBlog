@@ -27,6 +27,56 @@
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- link open with new tab  -->
+<script>
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+  $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+
 <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
@@ -283,228 +333,6 @@ end
   
     <footer>
       <a rel="full-article" href="/blog/2014/07/04/my-first-post/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/24/parallel-package/">R使用parallel包并行计算</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-06-24T22:10:20-04:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:10 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最新版本的R已经内置<span style="color: blue">parallel</span>包，<span style="color: blue">parallel</span>包是从<span style="color: blue"><a href="http://cran.r-project.org/web/packages/snow/index.html">snow</a></span>包和<span style="color: blue"><a href="http://cran.r-project.org/web/packages/multicore/index.html">multicore</a></span>包继承而来，包含了很多非常好用的函数。<span style="color: blue">parallel</span>包可以通过PVM（<span style="color: blue">rpvm</span>包）、MPI（<span style="color: blue"><a href="http://cran.r-project.org/web/packages/Rmpi/index.html">Rmpi</a></span>包）、NetWorkSpaces（<span style="color: blue"><a href="http://cran.r-project.org/web/packages/nws/index.html">nws</a></span>包）和raw sockets（如果以上3种都不能使用）平台进行分布计算，支持cluster和多核个人/服务器计算机。在Linux系统上，通常使用<a href="http://www.open-mpi.org/">openMPI</a>。</p>
-
-<h2 id="span-stylecolor-bluermpispan">1. 安装<span style="color: blue">Rmpi</span>包</h2>
-
-<p>因为使用openMPI，所以<span style="color: blue">parallel</span>包需要<span style="color: blue">Rmpi</span>包来设定节点，所以首先需要在计算机上安装openMPI。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/06/24/parallel-package/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/01/phylo-tool-summary/">构建和展示进化树软件使用心得</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-05-01T17:13:59-04:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2014</span></span> <span class='time'>5:13 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2 id="section">构建进化树</h2>
-
-<h3 id="phyml">1. PhyML</h3>
-
-<p><strong>构建进化树方法</strong>：Maximum Likelihood</p>
-
-<p><strong>评估</strong>：选择bootstrap或者Likelihood-ratio test</p>
-
-<p><strong>运行方式</strong>：所有平台和<a href="http://atgc.lirmm.fr/phyml/">网页</a></p>
-
-<p><strong>心得</strong>：理论上支持4000条序列，小于2000000个字符。但是，对于个人电脑，通常100-200条序列比较合适。命令行运行时，可以选择非常简介的默认模式运行。在默认模式下，bootstrap需要手动开启。安装和使用非常方便，直接下载后可以直接使用。同时，bootstrap可以通过MPI分布计算，但是需要从源代码安装。</p>
-
-<p><strong>快速运行</strong>：</p>
-
-<pre><code class="language-bash">phyml -i align_file.phy --no_memory_check
-</code></pre>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/05/01/phylo-tool-summary/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/27/creat-r-package/">创建R包的最简流程</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-03-27T14:53:05-04:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>2:53 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>一个最简单创建R包的流程。</p>
-
-<h2 id="section">1. 载入工具包</h2>
-
-<p>安装并载入<span style="color: blue">devtools</span>包和<span style="color: blue">roxygen2</span>包。<span style="color: blue">devtools</span>包提供了一些包的检查、安装和打包的基本工具。<span style="color: blue">roxygen2</span>包则使得书写R帮助文档变得轻松简单。如果习惯使用Emacs，可以结合<a href="http://ess.r-project.org/">ESS</a>建立R包，可以将R代码和帮助文档有效组合在一起，便于管理。当然，也可以使用<a href="http://www.rstudio.com/">Rstudio</a>。</p>
-
-<pre><code class="language-r">library(devtools)
-library(roxygen2)
-</code></pre>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/03/27/creat-r-package/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/17/circos-notes/">Circos Notes</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-03-17T15:37:45-04:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>3:37 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Mapping data onto a Circos figure requires that you identify what patterns in your data are (a) likely to be important and (b) likely to be present, and create a figure that exposes such patterns. Remember, if the pattern exists, you can’t afford to miss it. If it doesn’t exist, you can’t afford to be fooled into thinking that it’s there, or left wondering whether it’s occluded by other data.</p>
-
-<h2 id="run-circos">1. Run circos</h2>
-
-<pre><code class="language-bash">bin/circos
--png
--svg
--conf etc/circos.conf
--outputdir /path/to/your/output/directory
--outputfile yourimage.png
-</code></pre>
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/03/17/circos-notes/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/02/ggplot2-notes/">Ggplot2 Notes</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2013-10-02T00:00:00-04:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2013</span></span> <span class='time'>12:00 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>gi—
-layout: post
-title: “R ggplot2 notes”
-date: 2013-10-02 02:47:11 -0400
-comments: true
-categories: R
-—</p>
-
-<h1 id="r-package-span-stylecolor-blueggplot2span-notes">R Package <span style="color: blue">ggplot2</span> Notes</h1>
-
-<h2 id="basic-grammar">1. Basic grammar</h2>
-
-<h3 id="plot-types">1.1 Plot types</h3>
-
-<p>The R package <span style="color: blue">ggplot2</span> is a famous plot tool for high quality scientific figures. The <span style="color: blue">ggplot2</span> style figures are widely seen in papers published in high quality journals such as <em>PNAS</em>, <em>Nature</em> and <em>Cell</em>.</p>
-
-<p>The input data should be in <strong>data frame</strong> form, and it is easily to use the function <code class="language-r">as.data.frame()</code>. “<span style="color:red"><strong>+</strong></span>” is used to connect different plot statement. A typical <span style="color: blue">ggplot2</span> plot statement is like:</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/02/ggplot2-notes/">Read on &rarr;</a>
     </footer>
   
 

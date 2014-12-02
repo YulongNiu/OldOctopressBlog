@@ -28,6 +28,56 @@ $ rake preview 2. Ruby版本调整 因为Octopress需要使用Ruby旧版本， &
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- link open with new tab  -->
+<script>
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+  $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+
 <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
@@ -176,7 +226,7 @@ footer: false
 
 <ul>
   <li>
-    <p>代码片段高亮使用三对`，行内引用代码使用一对`</p>
+    <p>代码片段高亮使用三对<code class="language-bash">~</code>，行内引用代码使用一对`</p>
   </li>
   <li>
     <p>四个空格或者个一个Tab可以生成一个文本块</p>
@@ -237,7 +287,7 @@ paginate_path: "posts/:num"
     <p>添加多说：<a href="http://havee.me/internet/2013-02/add-duoshuo-commemt-system-into-octopress.html">1</a>, <a href="http://kaiimeng.cn/my-first-octopress-blog/">2</a>, <a href="http://cn.soulmachine.me/blog/20130402/">3</a></p>
   </li>
   <li>
-    <p>添加Mathjax支持：<a href="http://yanping.me/cn/blog/2012/03/10/octopress-with-latex/">1</a>, <a href="http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/">2</a>, <a href="http://yanping.me/cn/blog/2012/03/10/octopress-with-latex/">Mathjax彩色公式</a></p>
+    <p>添加Mathjax支持：<a href="http://yanping.me/cn/blog/2012/03/10/octopress-with-latex/">1</a>, <a href="http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/">2</a>, <a href="http://adereth.github.io/blog/2013/11/29/colorful-equations/">Mathjax彩色公式</a></p>
   </li>
   <li>
     <p><a href="http://kramdown.gettalong.org/syntax.html">Kramdown语法</a></p>
