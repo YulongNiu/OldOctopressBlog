@@ -201,7 +201,7 @@ rake new_page[ANewPage]
 
 这会生成一个新的文件`source/anewpage/index.markdown`{:.language-bash}。之后，修改`source/_includes/custom/navigation.html`{:.language-bash}文件，根据自己主题，添加如下类似内容
 
-{% codeblock lang:html %}
+{% codeblock %}
 <li {% if page.navbar == 'ANewPage' %}class="active"{% endif %}>
   <a href="{{ root_url }}/anewpage">ANewPage</a>
 </li>

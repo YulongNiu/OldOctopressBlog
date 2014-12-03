@@ -1,5 +1,17 @@
-<!-- mathjax config similar to math.stackexchange -->
+<!-- link open with new tab  -->
+<script>
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+  $(this).attr('target', '_blank');
+  });
+}
 
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+
+<!-- mathjax config similar to math.stackexchange -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     tex2jax: {
@@ -36,8 +48,7 @@
 
 <script src="{{ root_url }}/javascripts/libs/jquery/jquery-2.0.3.min.js"></script>
 
-<!-- ... -->
-
+<!--enable to choose theme in octostrap-->
 {% if page.bootstrap_theme_url %}
   <link href="{{ page.bootstrap_theme_url }}" rel="stylesheet" type="text/css">
 {% else %}
@@ -45,4 +56,4 @@
   <link href="{{ root_url }}/assets/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
 {% endif %}
 
-<!-- ... -->
+
