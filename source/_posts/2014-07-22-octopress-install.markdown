@@ -65,7 +65,7 @@ $ rake deploy
 
 ## 5. 使用主题 ##
 
-当前博客使用的是[octostrap](http://kaworu.github.io/octopress/)主题。
+当前博客使用的是[octostrap](http://kaworu.github.io/octopress/)主题，[添加Category侧边栏](http://kaworu.github.io/octostrap3/blog/2013/10/03/category-list-aside/)。
 
 ## 6. 修改标签图标记 ##
 
