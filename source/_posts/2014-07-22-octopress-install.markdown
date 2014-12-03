@@ -68,7 +68,7 @@ $ rake deploy
 
 当前博客使用的是[octostrap](http://kaworu.github.io/octopress/)主题。
 
-* [添加Category侧边栏](http://kaworu.github.io/octostrap3/blog/2013/10/03/category-list-aside/)。
+* [添加Category侧边栏](http://kaworu.github.io/octostrap3/blog/2013/10/03/category-list-aside/)
 
 * [每个页面更换主题](http://kaworu.github.io/octostrap3/blog/2013/10/02/pick-a-theme-for-only-one-page/)
 
@@ -189,6 +189,23 @@ paginate_path: "posts/:num"
 ## 14. 修改favicon ##
 
 需要修改的favicon文件，比如`favicon.ico`移动到`source/`{:.language-bash}目录下。之后修改文件`source/_includes/head.html`{:.language-bash}，找到`favicon.png`将其改为`favicon.ico`。
+
+
+## 15. 添加新页面 ##
+
+首先，添加新的页面：
+{% codeblock lang:bash %}
+rake new_page[ANewPage]
+{% endcodeblock %}
+
+这会生成一个新的文件`source/anewpage/index.markdown`{:.language-bash}。之后，修改`source/_includes/custom/navigation.html`{:.language-bash}文件，根据自己主题，添加如下类似内容
+
+{% codeblock lang:html %}
+<li {% if page.navbar == 'ANewPage' %}class="active"{% endif %}>
+  <a href="{{ root_url }}/anewpage">ANewPage</a>
+</li>
+{% endcodeblock %}
+
 
 ### <a id="Ref">参考网址</a> ###
 
