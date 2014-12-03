@@ -143,19 +143,21 @@ kramdown:
 
 ## 11. 链接在新的选择卡中打开##
 
-在`source/_includes/custom/head.html`{:.language-bash}中添加：
+在`source/_includes/custom/head.html`{:.language-bash}的末尾添加：
 
-{% codeblock lang:html%}
+{% codeblock lang:html %}
 <!-- link open with new tab  -->
-function addBlankTargetForLinks () {
+<script>
+  function addBlankTargetForLinks () {
   $('a[href^="http"]').each(function(){
   $(this).attr('target', '_blank');
   });
-}
-
-$(document).bind('DOMNodeInserted', function(event) {
+  }
+  
+  $(document).bind('DOMNodeInserted', function(event) {
   addBlankTargetForLinks();
-});
+  });
+</script>
 {% endcodeblock %}
 
 ## 12. 修改分页数 ##
