@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ppr | 牛牛龙]]></title>
   <link href="http://yulongniu.github.io/blog/categories/ppr/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-02T22:38:30-05:00</updated>
+  <updated>2014-12-02T22:41:47-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -191,7 +191,7 @@
 
 <h2 id="section-8">11. 链接在新的选择卡中打开</h2>
 
-<p>在<code class="language-bash">source/_includes/custom/head.html</code>中添加：</p>
+<p>在<code class="language-bash">source/_includes/custom/head.html</code>的末尾添加：</p>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -203,16 +203,20 @@
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- link open with new tab  --&gt;</span>
-</span><span class='line'>function addBlankTargetForLinks () {
-</span><span class='line'>  $(‘a[href^=”http”]’).each(function(){
-</span><span class='line'>  $(this).attr(‘target’, ‘_blank’);
-</span><span class='line'>  });
-</span><span class='line'>}<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'>  <span class="kd">function</span> <span class="nx">addBlankTargetForLinks</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;a[href^=&quot;http&quot;]&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="s1">&#39;_blank&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>  <span class="p">}</span><span class="nt">&lt;/script&gt;&lt;/p&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="nt">&lt;p&gt;</span>$(document).bind(‘DOMNodeInserted’, function(event) {
 </span><span class='line'>  addBlankTargetForLinks();
-</span><span class='line'>});
+</span><span class='line'>  });
+</span><span class='line'><span class="ni">&amp;lt;</span>/script<span class="ni">&amp;gt;</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="section-9">12. 修改分页数</h2>
