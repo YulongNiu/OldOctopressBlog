@@ -194,6 +194,7 @@ paginate_path: "posts/:num"
 ## 15. 添加新页面 ##
 
 首先，添加新的页面：
+
 {% codeblock lang:bash %}
 rake new_page[ANewPage]
 {% endcodeblock %}
