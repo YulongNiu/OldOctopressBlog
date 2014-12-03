@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.github.io/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-02T20:01:24-05:00</updated>
+  <updated>2014-12-02T20:37:58-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -498,7 +498,19 @@
 
 <h2 id="section-3">5. 使用主题</h2>
 
-<p>当前博客使用的是<a href="http://kaworu.github.io/octopress/">octostrap</a>主题，<a href="http://kaworu.github.io/octostrap3/blog/2013/10/03/category-list-aside/">添加Category侧边栏</a>。</p>
+<p>当前博客使用的是<a href="http://kaworu.github.io/octopress/">octostrap</a>主题。</p>
+
+<ul>
+  <li>
+    <p><a href="http://kaworu.github.io/octostrap3/blog/2013/10/03/category-list-aside/">添加Category侧边栏</a>。</p>
+  </li>
+  <li>
+    <p><a href="http://kaworu.github.io/octostrap3/blog/2013/10/02/pick-a-theme-for-only-one-page/">每个页面更换主题</a></p>
+  </li>
+  <li>
+    <p><a href="http://kaworu.github.io/octostrap3/setup/pick-a-theme/">选择Bootstrap主题</a></p>
+  </li>
+</ul>
 
 <h2 id="section-4">6. 修改标签图标记</h2>
 
