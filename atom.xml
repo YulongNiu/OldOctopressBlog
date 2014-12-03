@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.github.io/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-02T22:02:23-05:00</updated>
+  <updated>2014-12-02T22:28:46-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -676,10 +676,9 @@
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;li</span> <span class="nt">&gt;</span>
-</span><span class="line">  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/anewpage&quot;</span><span class="nt">&gt;</span>ANewPage<span class="nt">&lt;/a&gt;</span>
-</span><span class="line"><span class="nt">&lt;/li&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class=""><span class="line">&lt;li &gt;
+</span><span class="line">  &lt;a href="http://yulongniu.github.io/anewpage"&gt;ANewPage&lt;/a&gt;
+</span><span class="line">&lt;/li&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
 

@@ -25,8 +25,20 @@
   <meta property="og:title" content="Blog Archive - 牛牛龙">
   
 
-  <!-- mathjax config similar to math.stackexchange -->
+  <!-- link open with new tab  -->
+<script>
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+  $(this).attr('target', '_blank');
+  });
+}
 
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+
+<!-- mathjax config similar to math.stackexchange -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     tex2jax: {
@@ -63,14 +75,13 @@
 
 <script src="/javascripts/libs/jquery/jquery-2.0.3.min.js"></script>
 
-<!-- ... -->
-
+<!--enable to choose theme in octostrap-->
 
   <link href="/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="/assets/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
 
 
-<!-- ... -->
+
 
 
   
