@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ppr | 牛牛龙]]></title>
   <link href="http://yulongniu.github.io/blog/categories/ppr/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-02T22:43:56-05:00</updated>
+  <updated>2014-12-03T13:27:33-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -102,7 +102,7 @@
 
 <h2 id="section-4">6. 修改标签图标记</h2>
 
-<p>可以使用<a href="http://converticon.com/">在线转换工具</a>，将png格式图片转换为ico格式（比如32*32）。之后将ico图片直接放置在<code class="language-bash">souce</code>文件夹下。最后，修改对应<code class="language-bash">source/_includes/head.html</code>文件即可。</p>
+<p>可以使用<a href="http://converticon.com/">在线转换工具</a>，将png格式图片转换为ico格式（比如32*32），例如文件<code>favicon.ico</code>。之后，将<code>favicon.ico</code>移动到<code class="language-bash">source/</code>目录下。之后修改文件<code class="language-bash">source/_includes/head.html</code>，找到<code>favicon.png</code>将其改为<code>favicon.ico</code>。</p>
 
 <h2 id="section-5">7. 404公益</h2>
 
@@ -186,7 +186,7 @@
 <code>`source/_includes/custom/head.html`{:.language-bash}</code></p>
 
 <ul>
-  <li>四个空格或者个一个Tab可以生成一个文本块</li>
+  <li>四个空格或者一个Tab可以生成一个文本块</li>
 </ul>
 
 <h2 id="section-8">11. 链接在新的选择卡中打开</h2>
@@ -251,11 +251,7 @@
 </span><span class='line'>&lt;img <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;right&quot;</span> <span class="nv">src</span><span class="o">=</span><span class="s2">&quot;http://placekitten.com/300/500&quot;</span> <span class="nv">width</span><span class="o">=</span><span class="s2">&quot;150&quot;</span> <span class="nv">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span> <span class="nv">title</span><span class="o">=</span><span class="s2">&quot;Place Kitten #3&quot;</span> &gt;
 </span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="favicon">14. 修改favicon</h2>
-
-<p>需要修改的favicon文件，比如<code>favicon.ico</code>移动到<code class="language-bash">source/</code>目录下。之后修改文件<code class="language-bash">source/_includes/head.html</code>，找到<code>favicon.png</code>将其改为<code>favicon.ico</code>。</p>
-
-<h2 id="section-13">15. 添加新页面</h2>
+<h2 id="section-13">14. 添加新页面</h2>
 
 <p>首先，添加新的页面：</p>
 
