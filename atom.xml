@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.github.io/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-02T22:28:46-05:00</updated>
+  <updated>2014-12-02T22:38:30-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -611,20 +611,16 @@
 <span class="line-number">8</span>
 <span class="line-number">9</span>
 <span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
 </pre></td><td class="code"><pre><code class="html"><span class="line"><span class="c">&lt;!-- link open with new tab  --&gt;</span>
-</span><span class="line"><span class="nt">&lt;script&gt;</span>
-</span><span class="line"><span class="kd">function</span> <span class="nx">addBlankTargetForLinks</span> <span class="p">()</span> <span class="p">{</span>
-</span><span class="line">  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;a[href^=&quot;http&quot;]&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-</span><span class="line">  <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="s1">&#39;_blank&#39;</span><span class="p">);</span>
-</span><span class="line">  <span class="p">});</span>
-</span><span class="line"><span class="p">}</span>
+</span><span class="line">function addBlankTargetForLinks () {
+</span><span class="line">  $(&#39;a[href^=&quot;http&quot;]&#39;).each(function(){
+</span><span class="line">  $(this).attr(&#39;target&#39;, &#39;_blank&#39;);
+</span><span class="line">  });
+</span><span class="line">}
 </span><span class="line">
-</span><span class="line"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;DOMNodeInserted&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-</span><span class="line">  <span class="nx">addBlankTargetForLinks</span><span class="p">();</span>
-</span><span class="line"><span class="p">});</span>
-</span><span class="line"><span class="nt">&lt;/script&gt;</span>
+</span><span class="line">$(document).bind(&#39;DOMNodeInserted&#39;, function(event) {
+</span><span class="line">  addBlankTargetForLinks();
+</span><span class="line">});
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h2 id="section-9">12. 修改分页数</h2>

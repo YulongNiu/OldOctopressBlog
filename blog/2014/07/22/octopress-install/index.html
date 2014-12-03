@@ -25,20 +25,7 @@
   <meta property="og:title" content="Octopress安装和使用 - 牛牛龙">
   
 
-  <!-- link open with new tab  -->
-<script>
-function addBlankTargetForLinks () {
-  $('a[href^="http"]').each(function(){
-  $(this).attr('target', '_blank');
-  });
-}
-
-$(document).bind('DOMNodeInserted', function(event) {
-  addBlankTargetForLinks();
-});
-</script>
-
-<!-- mathjax config similar to math.stackexchange -->
+  <!-- mathjax config similar to math.stackexchange -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     tex2jax: {
@@ -81,6 +68,16 @@ $(document).bind('DOMNodeInserted', function(event) {
 
 
 
+<!-- link open with new tab  -->
+function addBlankTargetForLinks () {
+  $(&#8216;a[href^=&#8221;http&#8221;]&#8217;).each(function(){
+  $(this).attr(&#8216;target&#8217;, &#8216;_blank&#8217;);
+  });
+}
+
+$(document).bind(&#8216;DOMNodeInserted&#8217;, function(event) {
+  addBlankTargetForLinks();
+});
 
 
   
@@ -373,20 +370,16 @@ $(document).bind('DOMNodeInserted', function(event) {
 <span class="line-number">8</span>
 <span class="line-number">9</span>
 <span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
 </pre></td><td class="code"><pre><code class="html"><span class="line"><span class="c">&lt;!-- link open with new tab  --&gt;</span>
-</span><span class="line"><span class="nt">&lt;script&gt;</span>
-</span><span class="line"><span class="kd">function</span> <span class="nx">addBlankTargetForLinks</span> <span class="p">()</span> <span class="p">{</span>
-</span><span class="line">  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;a[href^=&quot;http&quot;]&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-</span><span class="line">  <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="s1">&#39;_blank&#39;</span><span class="p">);</span>
-</span><span class="line">  <span class="p">});</span>
-</span><span class="line"><span class="p">}</span>
+</span><span class="line">function addBlankTargetForLinks () {
+</span><span class="line">  $(&#39;a[href^=&quot;http&quot;]&#39;).each(function(){
+</span><span class="line">  $(this).attr(&#39;target&#39;, &#39;_blank&#39;);
+</span><span class="line">  });
+</span><span class="line">}
 </span><span class="line">
-</span><span class="line"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;DOMNodeInserted&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-</span><span class="line">  <span class="nx">addBlankTargetForLinks</span><span class="p">();</span>
-</span><span class="line"><span class="p">});</span>
-</span><span class="line"><span class="nt">&lt;/script&gt;</span>
+</span><span class="line">$(document).bind(&#39;DOMNodeInserted&#39;, function(event) {
+</span><span class="line">  addBlankTargetForLinks();
+</span><span class="line">});
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h2 id="section-9">12. 修改分页数</h2>

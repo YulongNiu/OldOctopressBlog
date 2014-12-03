@@ -25,20 +25,7 @@
   <meta property="og:title" content="R Ggplot2 Notes - 牛牛龙">
   
 
-  <!-- link open with new tab  -->
-<script>
-function addBlankTargetForLinks () {
-  $('a[href^="http"]').each(function(){
-  $(this).attr('target', '_blank');
-  });
-}
-
-$(document).bind('DOMNodeInserted', function(event) {
-  addBlankTargetForLinks();
-});
-</script>
-
-<!-- mathjax config similar to math.stackexchange -->
+  <!-- mathjax config similar to math.stackexchange -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     tex2jax: {
@@ -82,6 +69,16 @@ $(document).bind('DOMNodeInserted', function(event) {
 
 
 
+<!-- link open with new tab  -->
+function addBlankTargetForLinks () {
+  $(&#8216;a[href^=&#8221;http&#8221;]&#8217;).each(function(){
+  $(this).attr(&#8216;target&#8217;, &#8216;_blank&#8217;);
+  });
+}
+
+$(document).bind(&#8216;DOMNodeInserted&#8217;, function(event) {
+  addBlankTargetForLinks();
+});
 
 
   
