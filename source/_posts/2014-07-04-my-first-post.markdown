@@ -1,5 +1,6 @@
 ---
 layout: post
+bootstrap_theme_url: http://bootswatch.com/united/bootstrap.css
 title: "My first post"
 date: 2014-07-04 22:04:38 -0400
 comments: true

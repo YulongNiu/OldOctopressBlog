@@ -1,5 +1,6 @@
 ---
 layout: post
+bootstrap_theme_url: http://bootswatch.com/flatly/bootstrap.min.css
 title: "Octopress安装和使用"
 date: 2014-07-22 13:45:46 -0400
 comments: true
@@ -65,7 +66,13 @@ $ rake deploy
 
 ## 5. 使用主题 ##
 
-当前博客使用的是[octostrap](http://kaworu.github.io/octopress/)主题，[添加Category侧边栏](http://kaworu.github.io/octostrap3/blog/2013/10/03/category-list-aside/)。
+当前博客使用的是[octostrap](http://kaworu.github.io/octopress/)主题。
+
+* [添加Category侧边栏](http://kaworu.github.io/octostrap3/blog/2013/10/03/category-list-aside/)。
+
+* [每个页面更换主题](http://kaworu.github.io/octostrap3/blog/2013/10/02/pick-a-theme-for-only-one-page/)
+
+* [选择Bootstrap主题](http://kaworu.github.io/octostrap3/setup/pick-a-theme/)
 
 ## 6. 修改标签图标记 ##
 
