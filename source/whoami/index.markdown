@@ -21,6 +21,6 @@ In real life, I am also a:
 * science fiction writer
 
 
-Now I am seeking a postdoc position in `bioinformatics` and `computational biology` from 2015 September. If you are interested, please contact with me `niuylscu@gmail.com`. 
+Now I am seeking a postdoc position in `bioinformatics` and `computational biology` from September 2015. If you are interested, please contact with me `niuylscu@gmail.com`. 
  
 Want to know me more? Just click my [linkedin](http://cn.linkedin.com/pub/yulong-niu/86/bb0/840) profile.

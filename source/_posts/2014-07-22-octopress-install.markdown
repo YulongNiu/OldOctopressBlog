@@ -76,7 +76,7 @@ $ rake deploy
 
 ## 6. 修改标签图标记 ##
 
-可以使用[在线转换工具](http://converticon.com/)，将png格式图片转换为ico格式（比如32*32）。之后将ico图片直接放置在`souce`{:.language-bash}文件夹下。最后，修改对应`source/_includes/head.html`{:.language-bash}文件即可。
+可以使用[在线转换工具](http://converticon.com/)，将png格式图片转换为ico格式（比如32*32），例如文件`favicon.ico`。之后，将`favicon.ico`移动到`source/`{:.language-bash}目录下。之后修改文件`source/_includes/head.html`{:.language-bash}，找到`favicon.png`将其改为`favicon.ico`。
 
 ## 7. 404公益 ##
 
@@ -139,7 +139,7 @@ kramdown:
 `` `source/_includes/custom/head.html`{:.language-bash} ``
 
 
-* 四个空格或者个一个Tab可以生成一个文本块
+* 四个空格或者一个Tab可以生成一个文本块
 
 ## 11. 链接在新的选择卡中打开##
 
@@ -184,13 +184,7 @@ paginate_path: "posts/:num"
 {% img right http://placekitten.com/300/500 150 250 Place Kitten #3 %}
 {% endcodeblock %}
 
-
-## 14. 修改favicon ##
-
-需要修改的favicon文件，比如`favicon.ico`移动到`source/`{:.language-bash}目录下。之后修改文件`source/_includes/head.html`{:.language-bash}，找到`favicon.png`将其改为`favicon.ico`。
-
-
-## 15. 添加新页面 ##
+## 14. 添加新页面 ##
 
 首先，添加新的页面：
 

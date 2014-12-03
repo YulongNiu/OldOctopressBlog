@@ -13,16 +13,34 @@ categories: lisp
 
 ## 1. 安装和基本配置 ##
 
-1. 安装Emacs的helm、helm-swoop、helm-gtags包。
+### 1.1. 安装需求 ###
+
+* 安装[GNU Global](http://www.gnu.org/software/global/)
+
+{% codeblock lang:bash %}
+# yum install global
+{% endcodeblock %}
+
+* 安装Emacs的`helm`、`helm-swoop`、`helm-gtags`包。
+
+### 1.2. Emacs配置 ###
+
+将[附加环境设置](#c-mode-config)添加到Emacs设置文件，比如`~/.emacs`{:.language-bash}，此环境配置参考[tuhdo](https://github.com/tuhdo/emacs-c-ide-demo/blob/master/custom/setup-helm.el)。
 
 
-2. Emacs配置。将
+## 2. 基本操作##
+
+* 查找函数、类的定义
+
+> `C-c h i`（helm-semantic-or-imenu）：可以输入部分关键词、空格等，以快速搜索。
 
 
 
 
 
-<a id="c-mode-config">Emacs configure for C/C++</a>
+
+## 附加内容 ##
+<a id="c-mode-config">C/C++的Emacs编程环境设置</a>
 
 {% codeblock Emacs configure lang:emacs-lisp %}
 
@@ -150,7 +168,7 @@ categories: lisp
 (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
 (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
 (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
-(define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history
+(define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
 
 {% endcodeblock %}
 
