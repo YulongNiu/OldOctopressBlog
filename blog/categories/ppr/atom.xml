@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ppr | 牛牛龙]]></title>
   <link href="http://yulongniu.github.io/blog/categories/ppr/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-02T22:00:14-05:00</updated>
+  <updated>2014-12-02T22:02:23-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -261,8 +261,9 @@
 
 <h2 id="section-13">15. 添加新页面</h2>
 
-<p>首先，添加新的页面：
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>首先，添加新的页面：</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>rake new_page<span class="o">[</span>ANewPage<span class="o">]</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
