@@ -21,7 +21,7 @@ categories: lisp
 # yum install global
 {% endcodeblock %}
 
-* 安装Emacs的`helm`、`helm-swoop`、`helm-gtags`包。
+* 安装Emacs的`helm`、`helm-swoop`、`helm-gtags`、`sr-speedbar`包。
 
 ### 1.2. Emacs配置 ###
 
@@ -30,12 +30,45 @@ categories: lisp
 
 ## 2. 基本操作##
 
-* 查找函数、类的定义
+### 2.1. 查找 ###
+
+* 当前buffer查找函数、类的定义
 
 > `C-c h i`（helm-semantic-or-imenu）：可以输入部分关键词、空格等，以快速搜索。
 
+* 当前project查找定义
 
+> 1. `M-.`（helm-gtags-dwim）：输入查找内容。`M-,`（tags-loop-continue）：返回上一个buffer。
+>
+> 2. `C-j`（helm-gtags-select）：列出当前project所有定义，并且查找。
 
+* 查找引用
+
+> 1. `C-c g r`（helm-gtags-find-rtags）：光标停留在函数内部，查找该函数名；如果光标停留在函数名，查找该函数的所有引用。
+>
+> 2. `C-c g s`（helm-gtags-find-symbol）：光标停留在变量时的查找。
+
+* 查找当前函数引用的函数
+
+> `C-c g a`（helm-gtags-tags-in-this-function）
+
+* 查找文件
+
+> `C-c g P`（elm-gtags-find-files）
+
+### 2.2. 列出源码树 ###
+
+* 开启和关闭
+
+> `M-x sr-speedbar-open RET`：开启。`M-x sr-speedbar-close RET`：关闭。
+
+* 操作
+
+> 1. `b`和`f`切换到当前buffer和所有文件列表。
+>
+> 2. `=`：展开。`g`：收回。
+>
+> 3. `U`：上一级目录。
 
 
 
