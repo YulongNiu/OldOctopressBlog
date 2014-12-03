@@ -147,7 +147,6 @@ kramdown:
 
 {% codeblock lang:html%}
 <!-- link open with new tab  -->
-<script>
 function addBlankTargetForLinks () {
   $('a[href^="http"]').each(function(){
   $(this).attr('target', '_blank');
@@ -157,8 +156,6 @@ function addBlankTargetForLinks () {
 $(document).bind('DOMNodeInserted', function(event) {
   addBlankTargetForLinks();
 });
-</script>
-
 {% endcodeblock %}
 
 ## 12. 修改分页数 ##

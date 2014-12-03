@@ -1,16 +1,3 @@
-<!-- link open with new tab  -->
-<script>
-function addBlankTargetForLinks () {
-  $('a[href^="http"]').each(function(){
-  $(this).attr('target', '_blank');
-  });
-}
-
-$(document).bind('DOMNodeInserted', function(event) {
-  addBlankTargetForLinks();
-});
-</script>
-
 <!-- mathjax config similar to math.stackexchange -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
@@ -57,3 +44,13 @@ $(document).bind('DOMNodeInserted', function(event) {
 {% endif %}
 
 
+<!-- link open with new tab  -->
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+  $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
