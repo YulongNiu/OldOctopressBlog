@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.github.io/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-03T18:33:49-05:00</updated>
+  <updated>2014-12-03T19:05:53-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -130,7 +130,7 @@
 
 <h3 id="section-5">2.3 代码补全</h3>
 
-<p>代码补全使用</p>
+<p>代码补全使用<code>company</code>、<code>company-c-headers</code>和<code>semantic</code>包。</p>
 
 <h2 id="section-6">附加内容</h2>
 <p><a id="c-mode-config">C/C++的Emacs编程环境设置</a></p>
@@ -283,6 +283,13 @@
 <span class="line-number">145</span>
 <span class="line-number">146</span>
 <span class="line-number">147</span>
+<span class="line-number">148</span>
+<span class="line-number">149</span>
+<span class="line-number">150</span>
+<span class="line-number">151</span>
+<span class="line-number">152</span>
+<span class="line-number">153</span>
+<span class="line-number">154</span>
 </pre></td><td class="code"><pre><code class="emacs-lisp"><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 </span><span class="line"><span class="c1">;set up helm</span>
 </span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
@@ -428,8 +435,15 @@
 </span><span class="line">
 </span><span class="line"><span class="p">(</span><span class="nv">global-semanticdb-minor-mode</span> <span class="mi">1</span><span class="p">)</span>
 </span><span class="line"><span class="p">(</span><span class="nv">global-semantic-idle-scheduler-mode</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">global-semantic-idle-summary-mode</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">global-semantic-stickyfunc-mode</span> <span class="mi">1</span><span class="p">)</span>
 </span><span class="line">
 </span><span class="line"><span class="p">(</span><span class="nv">semantic-mode</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="c1">;open hs-mode</span>
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;c-mode-common-hook</span>   <span class="ss">&#39;hs-minor-mode</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="section-7">参考网址</h3>
