@@ -216,7 +216,7 @@
 
 <p>将<a href="#c-mode-config">附加环境设置</a>添加到Emacs设置文件，比如<code class="language-bash">~/.emacs</code>，此环境配置参考<a href="https://github.com/tuhdo/emacs-c-ide-demo/blob/master/custom/setup-helm.el">tuhdo</a>。</p>
 
-<h2 id="section-2">2. 基本操作</h2>
+<h2 id="section-2">2. 文件操作</h2>
 
 <h3 id="section-3">2.1. 查找</h3>
 
@@ -305,6 +305,18 @@
 <h3 id="section-5">2.3 代码补全</h3>
 
 <p>代码补全使用<code>company</code>、<code>company-c-headers</code>和<code>semantic</code>包。</p>
+
+<h2 id="debug">3. 编译和debug</h2>
+
+<h3 id="gcc">3.1 使用gcc编译</h3>
+
+<p>使用<code>M-x compile</code>对源文件进行编译链接；或者开启ansi-term模式<code>M-x ansi-term</code>，进入shell操作。一个直接编译–汇编–链接的简单例子：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>gcc helloworld.c -o helloworld
+</span><span class="line"><span class="nv">$ </span>./helloworld
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h2 id="section-6">附加内容</h2>
 <p><a id="c-mode-config">C/C++的Emacs编程环境设置</a></p>
@@ -464,6 +476,11 @@
 <span class="line-number">152</span>
 <span class="line-number">153</span>
 <span class="line-number">154</span>
+<span class="line-number">155</span>
+<span class="line-number">156</span>
+<span class="line-number">157</span>
+<span class="line-number">158</span>
+<span class="line-number">159</span>
 </pre></td><td class="code"><pre><code class="emacs-lisp"><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 </span><span class="line"><span class="c1">;set up helm</span>
 </span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
@@ -618,6 +635,11 @@
 </span><span class="line"><span class="c1">;open hs-mode</span>
 </span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;</span>
 </span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;c-mode-common-hook</span>   <span class="ss">&#39;hs-minor-mode</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="c1">;indent</span>
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;RET&quot;</span><span class="p">)</span> <span class="ss">&#39;newline-and-indent</span><span class="p">)</span>  <span class="c1">; automatically indent when press RET</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="section-7">参考网址</h3>
