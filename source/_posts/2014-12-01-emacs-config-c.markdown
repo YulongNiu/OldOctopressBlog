@@ -28,7 +28,7 @@ categories: lisp
 将[附加环境设置](#c-mode-config)添加到Emacs设置文件，比如`~/.emacs`{:.language-bash}，此环境配置参考[tuhdo](https://github.com/tuhdo/emacs-c-ide-demo/blob/master/custom/setup-helm.el)。
 
 
-## 2. 基本操作##
+## 2. 文件操作##
 
 ### 2.1. 查找 ###
 
@@ -75,6 +75,16 @@ categories: lisp
 代码补全使用`company`、`company-c-headers`和`semantic`包。
 
 
+## 3. 编译和debug ##
+
+### 3.1 使用gcc编译 ###
+
+使用`M-x compile`对源文件进行编译链接；或者开启ansi-term模式`M-x ansi-term`，进入shell操作。一个直接编译--汇编--链接的简单例子：
+
+{% codeblock lang:bash %}
+$ gcc helloworld.c -o helloworld
+$ ./helloworld
+{% endcodeblock %}
 
 ## 附加内容 ##
 <a id="c-mode-config">C/C++的Emacs编程环境设置</a>
@@ -235,6 +245,11 @@ categories: lisp
 ;open hs-mode
 ;;;;;;;;;;;;;;;;;;;;;;;
 (add-hook 'c-mode-common-hook   'hs-minor-mode)
+
+;;;;;;;;;;;;;;;;;;
+;indent
+;;;;;;;;;;;;;;;;;;
+(global-set-key (kbd "RET") 'newline-and-indent)  ; automatically indent when press RET
 
 {% endcodeblock %}
 
