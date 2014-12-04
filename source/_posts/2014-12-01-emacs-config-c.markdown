@@ -72,7 +72,7 @@ categories: lisp
 
 ### 2.3 代码补全 ###
 
-代码补全使用
+代码补全使用`company`、`company-c-headers`和`semantic`包。
 
 
 
@@ -226,8 +226,15 @@ categories: lisp
 
 (global-semanticdb-minor-mode 1)
 (global-semantic-idle-scheduler-mode 1)
+(global-semantic-idle-summary-mode 1)
+(global-semantic-stickyfunc-mode 1)
 
 (semantic-mode 1)
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;open hs-mode
+;;;;;;;;;;;;;;;;;;;;;;;
+(add-hook 'c-mode-common-hook   'hs-minor-mode)
 
 {% endcodeblock %}
 
