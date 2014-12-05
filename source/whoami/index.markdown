@@ -8,7 +8,7 @@ sharing: true
 footer: true
 ---
 
-In this blog site, I am a bioinformatic nerd with particularly interests in:
+In this blog site, I am a bioinformatic nerd with particular interests in:
 
 * computational genome anlaysis
 
