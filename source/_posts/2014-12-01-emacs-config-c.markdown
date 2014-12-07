@@ -21,7 +21,7 @@ categories: lisp
 # yum install global
 {% endcodeblock %}
 
-* 安装Emacs的`helm`、`helm-swoop`、`helm-gtags`、`sr-speedbar`、`company-c-headers`包。
+* 安装Emacs的`helm`、`helm-swoop`、`helm-gtags`、`sr-speedbar`、`company-c-headers`、`smartparens`包。
 
 ### 1.2. Emacs配置 ###
 
@@ -251,6 +251,13 @@ $ ./helloworld
 ;;;;;;;;;;;;;;;;;;
 (global-set-key (kbd "RET") 'newline-and-indent)  ; automatically indent when press RET
 
+;;;;;;;;;;;;;;;;;;;;;
+;smartparens
+;;;;;;;;;;;;;;;;;;;;;
+(require 'smartparens-config)
+(show-smartparens-global-mode t)
+(smartparens-global-mode t)
+
 {% endcodeblock %}
 
 ### 参考网址 ###
@@ -259,5 +266,5 @@ $ ./helloworld
 
 ### 更新记录 ###
 
-2014年12月1日
+2014年12月7日
 
