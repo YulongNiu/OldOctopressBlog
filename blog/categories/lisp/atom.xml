@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Lisp | 牛牛龙]]></title>
   <link href="http://yulongniu.github.io/blog/categories/lisp/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-04T19:44:20-05:00</updated>
+  <updated>2014-12-07T16:54:15-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -35,7 +35,7 @@
 </span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
-  <li>安装Emacs的<code>helm</code>、<code>helm-swoop</code>、<code>helm-gtags</code>、<code>sr-speedbar</code>、<code>company-c-headers</code>包。</li>
+  <li>安装Emacs的<code>helm</code>、<code>helm-swoop</code>、<code>helm-gtags</code>、<code>sr-speedbar</code>、<code>company-c-headers</code>、<code>smartparens</code>包。</li>
 </ul>
 
 <h3 id="emacs">1.2. Emacs配置</h3>
@@ -311,6 +311,13 @@
 <span class='line-number'>161</span>
 <span class='line-number'>162</span>
 <span class='line-number'>163</span>
+<span class='line-number'>164</span>
+<span class='line-number'>165</span>
+<span class='line-number'>166</span>
+<span class='line-number'>167</span>
+<span class='line-number'>168</span>
+<span class='line-number'>169</span>
+<span class='line-number'>170</span>
 </pre></td><td class='code'><pre><code class='emacs-lisp'><span class='line'><span class="nv">&lt;/p&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="nv">&lt;p&gt;</span><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
@@ -473,6 +480,13 @@
 </span><span class='line'><span class="c1">;;;;;;;;;;;;;;;;;;</span>
 </span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">RET</span><span class="err">”</span><span class="p">)</span> <span class="err">‘</span><span class="nv">newline-and-indent</span><span class="p">)</span>  <span class="c1">; automatically indent when press RET&lt;/p&gt;</span>
 </span><span class='line'>
+</span><span class='line'><span class="nv">&lt;p&gt;</span><span class="c1">;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class='line'><span class="c1">;smartparens</span>
+</span><span class='line'><span class="c1">;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="err">‘</span><span class="nv">smartparens-config</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">show-smartparens-global-mode</span> <span class="no">t</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">smartparens-global-mode</span> <span class="no">t</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+</span><span class='line'>
 </span><span class='line'><span class="nv">&lt;p&gt;</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
@@ -484,7 +498,7 @@
 
 <h3 id="section-8">更新记录</h3>
 
-<p>2014年12月1日</p>
+<p>2014年12月7日</p>
 
 ]]></content>
   </entry>
