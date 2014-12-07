@@ -2,10 +2,10 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Category: Saysomething - 牛牛龙</title>
+  <title>C语言学习记录 - 牛牛龙</title>
   <meta name="author" content="Yulong Niu">
 
-  <meta name="description" content="Category: saysomething">
+  
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -14,16 +14,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yulongniu.github.io/blog/categories/saysomething">
+  <link rel="canonical" href="http://yulongniu.github.io/blog/2014/12/07/c-program-note">
   <link href="/favicon.ico" type="image/png" rel="icon">
   <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
 
   <!-- http://opengraphprotocol.org/ -->
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="http://yulongniu.github.io/blog/categories/saysomething">
-  <meta property="og:title" content="Category: Saysomething - 牛牛龙">
-  <meta property="og:description" content="Category: saysomething">
+  <meta property="og:url" content="http://yulongniu.github.io/blog/2014/12/07/c-program-note">
+  <meta property="og:title" content="C语言学习记录 - 牛牛龙">
+  
 
   <!-- mathjax config similar to math.stackexchange -->
 <script type="text/x-mathjax-config">
@@ -118,10 +118,10 @@
 
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li >
+                <li class="active">
                     <a rel="index" href="/">Blog</a>
                 </li>
-                <li class="active">
+                <li >
                     <a href="/blog/archives">Archives</a>
                 </li>
 		<li >
@@ -154,81 +154,226 @@
       <div id="main" role="main" class="container">
         <div id="content">
           <div class="row">
-  <div class="page-content col-md-9">
-    <article role="article">
+  <div class="page-content col-md-9" itemscope itemtype="http://schema.org/Blog">
+    <meta itemprop="name" content="牛牛龙" />
+    
+    <meta itemprop="url" content="http://yulongniu.github.io" />
+    <article class="hentry" role="article" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
       
-        <header class="page-header">
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-12-07T18:23:16-05:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.github.io">Comments</a>
+        
+      </p>
+    
+    
+    <h1 class="entry-title" itemprop="name headline">
+        C语言学习记录
+        
+    </h1>
+    
+  </header>
+
+
+<div class="entry-content clearfix" itemprop="articleBody description"><h2 id="section">1. 基本数据类型</h2>
+
+<h3 id="section-1">1.1 数字形式</h3>
+
+<p>数字的位数是多少？</p>
+
+<ul>
+  <li>
+    <p><code>int</code>：整数</p>
+  </li>
+  <li>
+    <p><code>short</code>：短整数</p>
+  </li>
+  <li>
+    <p><code>long</code>：长整数</p>
+  </li>
+  <li>
+    <p><code>float</code>：浮点数</p>
+  </li>
+  <li>
+    <p><code>double</code>：双浮点数</p>
+  </li>
+  <li>
+    <p><code>char</code>：字符</p>
+  </li>
+</ul>
+
+<!--more-->
+
+<h3 id="section-2">1.2 其他形式</h3>
+
+<ul>
+  <li>
+    <p><code>arrays</code></p>
+  </li>
+  <li>
+    <p><code>structures</code></p>
+  </li>
+  <li>
+    <p><code>unions</code></p>
+  </li>
+  <li>
+    <p><code>pointers</code></p>
+  </li>
+  <li>
+    <p><code>functions</code></p>
+  </li>
+</ul>
+
+<h2 id="section-3">2. 语法注意事项</h2>
+
+<h2 id="section-4">3. 标准库</h2>
+
+<h3 id="include-stdiohlanguage-c">3.1 <code class="language-c">#include &lt;stdio.h&gt;</code></h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%3.0f %6.1f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">fahr</span><span class="p">,</span> <span class="n">celsius</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>
+    <p><code>%d</code>：十进制整数</p>
+  </li>
+  <li>
+    <p><code>%6d</code>：十进制整数，至少6位宽</p>
+  </li>
+  <li>
+    <p><code>%f</code>：浮点数</p>
+  </li>
+  <li>
+    <p><code>%6f</code>：浮点数，至少6位宽</p>
+  </li>
+  <li>
+    <p><code>%6.0f</code>：浮点树，至少6位宽，无小数点而且无小数位</p>
+  </li>
+  <li>
+    <p><code>%.2f</code>：浮点数，小数点后两位</p>
+  </li>
+  <li>
+    <p><code>%6.2f</code>：浮点数，至少6位宽，小数点后两位</p>
+  </li>
+  <li>
+    <p><code>%o</code>：八进制</p>
+  </li>
+  <li>
+    <p><code>%x</code>：六进制</p>
+  </li>
+  <li>
+    <p><code>%c</code>：字符</p>
+  </li>
+  <li>
+    <p><code>%s</code>：字符串</p>
+  </li>
+  <li>
+    <p><code>%%</code>：<code>%</code>自身</p>
+  </li>
+</ul>
+
+<h3 id="section-5">参考资料</h3>
+
+<ul>
+  <li>BW Kernighan and DM Ritchie: <a href="http://www.amazon.com/The-Programming-Language-2nd-Edition/dp/0131103628">The C Programming Language, 2nd Edition (2nd Edition)</a>, 1988.</li>
+</ul>
+
+<h3 id="section-6">更新记录</h3>
+
+<p>2014年12月7日</p>
+</div>
+
+
+      <footer>
+        <p class="meta text-muted">
           
+  
+
+<span class="glyphicon glyphicon-user"></span> <span class="byline author vcard" itemprop="author" itemscope itemtype="http://schema.org/Person">Posted by <span class="fn" itemprop="name">Yulong Niu</span></span>
+
           
-            <h1 class="entry-title">
-              Category: Saysomething
-              
-            </h1>
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-12-07T18:23:16-05:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
           
-        </header>
-      
-      <div class="entry-content">
-        <div id="blog-archives" class="category" itemscope itemtype="http://schema.org/Blog">
-<meta itemprop="name" content="牛牛龙" />
-
-<meta itemprop="url" content="http://yulongniu.github.io" />
-
-
-
-  
-  <h2 class="year">2014</h2>
-
-<article class="page-header" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-  
-<h2 class="post-title" itemprop="name headline"><a href="/blog/2014/07/04/my-first-post/" itemprop="url">My First Post</a></h2>
-<p class="meta text-muted">
-  
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-07-04T22:04:38-04:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-  
 
 <span class="glyphicon glyphicon-tags"></span>&nbsp;
 <span class="categories">
   
-    <a class='category' href='/blog/categories/saysomething/'>saysomething</a>
+    <a class='category' href='/blog/categories/c/'>c</a>
   
 </span>
 
 
-</p>
-
-</article>
-
+        </p>
+        
+          <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.github.io/blog/2014/12/07/c-program-note/" data-via="" data-counturl="http://yulongniu.github.io/blog/2014/12/07/c-program-note/" >Tweet</a>
+  
+  
+  
 </div>
 
-      </div>
-      
+        
+        
+          <ul class="meta text-muted pager">
+            
+            <li class="previous"><a href="/blog/2014/12/01/emacs-config-c/" title="Previous Post: Emacs配置C语言编程环境">&laquo; Emacs配置C语言编程环境</a></li>
+            
+            
+          </ul>
+        
+      </footer>
     </article>
+    
+      <section>
+        <h2>Comments</h2>
+        <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+      </section>
     
   </div>
 
   
-    <aside class="sidebar col-md-3">
-      
-        <section class="panel panel-default">
+  <aside class="sidebar col-md-3">
+    
+      <section class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Recent Posts</h3>
   </div>
   
   <div id="recent_posts" class="list-group">
     
-    <a class="list-group-item " href="/blog/2014/12/07/c-program-note/">C语言学习记录</a>
+    <a class="list-group-item active" href="/blog/2014/12/07/c-program-note/">C语言学习记录</a>
     
     <a class="list-group-item " href="/blog/2014/12/01/emacs-config-c/">Emacs配置C语言编程环境</a>
     
@@ -271,7 +416,7 @@
       </a>
     
     
-    <a class="list-group-item active" href="/blog/categories/saysomething/index.html">
+    <a class="list-group-item " href="/blog/categories/saysomething/index.html">
         <span class="badge">1</span>
         saysomething
       </a>
@@ -296,8 +441,8 @@
 
 
 
-      
-    </aside>
+    
+  </aside>
   
 </div>
 
@@ -321,7 +466,10 @@
       var disqus_shortname = 'yulongniu';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://yulongniu.github.io/blog/2014/12/07/c-program-note/';
+        var disqus_url = 'http://yulongniu.github.io/blog/2014/12/07/c-program-note/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

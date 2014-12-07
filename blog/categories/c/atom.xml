@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: C | 牛牛龙]]></title>
+  <link href="http://yulongniu.github.io/blog/categories/c/atom.xml" rel="self"/>
+  <link href="http://yulongniu.github.io/"/>
+  <updated>2014-12-07T18:53:11-05:00</updated>
+  <id>http://yulongniu.github.io/</id>
+  <author>
+    <name><![CDATA[Yulong Niu]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[C语言学习记录]]></title>
+    <link href="http://yulongniu.github.io/blog/2014/12/07/c-program-note/"/>
+    <updated>2014-12-07T18:23:16-05:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/12/07/c-program-note</id>
+    <content type="html"><![CDATA[<h2 id="section">1. 基本数据类型</h2>
+
+<h3 id="section-1">1.1 数字形式</h3>
+
+<p>数字的位数是多少？</p>
+
+<ul>
+  <li>
+    <p><code>int</code>：整数</p>
+  </li>
+  <li>
+    <p><code>short</code>：短整数</p>
+  </li>
+  <li>
+    <p><code>long</code>：长整数</p>
+  </li>
+  <li>
+    <p><code>float</code>：浮点数</p>
+  </li>
+  <li>
+    <p><code>double</code>：双浮点数</p>
+  </li>
+  <li>
+    <p><code>char</code>：字符</p>
+  </li>
+</ul>
+
+<!--more-->
+
+<h3 id="section-2">1.2 其他形式</h3>
+
+<ul>
+  <li>
+    <p><code>arrays</code></p>
+  </li>
+  <li>
+    <p><code>structures</code></p>
+  </li>
+  <li>
+    <p><code>unions</code></p>
+  </li>
+  <li>
+    <p><code>pointers</code></p>
+  </li>
+  <li>
+    <p><code>functions</code></p>
+  </li>
+</ul>
+
+<h2 id="section-3">2. 语法注意事项</h2>
+
+<h2 id="section-4">3. 标准库</h2>
+
+<h3 id="include-stdiohlanguage-c">3.1 <code class="language-c">#include &lt;stdio.h&gt;</code></h3>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="o">%</span><span class="mf">3.0f</span> <span class="o">%</span><span class="mf">6.1f</span><span class="err">\</span><span class="n">n</span><span class="err">”</span><span class="p">,</span> <span class="n">fahr</span><span class="p">,</span> <span class="n">celsius</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+  <li>
+    <p><code>%d</code>：十进制整数</p>
+  </li>
+  <li>
+    <p><code>%6d</code>：十进制整数，至少6位宽</p>
+  </li>
+  <li>
+    <p><code>%f</code>：浮点数</p>
+  </li>
+  <li>
+    <p><code>%6f</code>：浮点数，至少6位宽</p>
+  </li>
+  <li>
+    <p><code>%6.0f</code>：浮点树，至少6位宽，无小数点而且无小数位</p>
+  </li>
+  <li>
+    <p><code>%.2f</code>：浮点数，小数点后两位</p>
+  </li>
+  <li>
+    <p><code>%6.2f</code>：浮点数，至少6位宽，小数点后两位</p>
+  </li>
+  <li>
+    <p><code>%o</code>：八进制</p>
+  </li>
+  <li>
+    <p><code>%x</code>：六进制</p>
+  </li>
+  <li>
+    <p><code>%c</code>：字符</p>
+  </li>
+  <li>
+    <p><code>%s</code>：字符串</p>
+  </li>
+  <li>
+    <p><code>%%</code>：<code>%</code>自身</p>
+  </li>
+</ul>
+
+<h3 id="section-5">参考资料</h3>
+
+<ul>
+  <li>BW Kernighan and DM Ritchie: <a href="http://www.amazon.com/The-Programming-Language-2nd-Edition/dp/0131103628">The C Programming Language, 2nd Edition (2nd Edition)</a>, 1988.</li>
+</ul>
+
+<h3 id="section-6">更新记录</h3>
+
+<p>2014年12月7日</p>
+]]></content>
+  </entry>
+  
+</feed>
