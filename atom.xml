@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.github.io/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-07T18:53:11-05:00</updated>
+  <updated>2014-12-08T23:40:37-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -897,7 +897,14 @@
   <li>代码高亮</li>
 </ul>
 
-<p>代码段高亮参考<a href="http://octopress.org/docs/plugins/codeblock/">Octopress codeblock</a></p>
+<p>代码段高亮参考<a href="http://octopress.org/docs/plugins/codeblock/">Octopress codeblock</a>，其中<code>[lang:language]</code>设置高亮语言种类。<code>[url]</code>和<code>[linktext]</code>非必须。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">{% codeblock [lang:language] [title] [url] [link text] %}
+</span><span class="line">code snippet
+</span><span class="line">{% endcodeblock %}</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>行内引用代码使用
 <code>`source/_includes/custom/head.html`{:.language-bash}</code></p>
@@ -981,8 +988,8 @@
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&lt;li &gt;
-</span><span class="line">  &lt;a href="http://yulongniu.github.io/anewpage"&gt;ANewPage&lt;/a&gt;
+</pre></td><td class="code"><pre><code class=""><span class="line">&lt;li {% if page.navbar == 'ANewPage' %}class="active"{% endif %}&gt;
+</span><span class="line">  &lt;a href="{{ root_url }}/anewpage"&gt;ANewPage&lt;/a&gt;
 </span><span class="line">&lt;/li&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
@@ -1011,6 +1018,9 @@
   </li>
   <li>
     <p><a href="http://pygments.org/docs/lexers/">Octopress highlight language list</a></p>
+  </li>
+  <li>
+    <p>标记Octopress自身语法：<a href="http://stackoverflow.com/questions/15786144/how-to-escape-in-markdown-on-octopress">1</a>，<a href="http://stackoverflow.com/questions/3426182/how-to-escape-liquid-template-tags/13582517#13582517">2</a></p>
   </li>
 </ul>
 
@@ -2761,6 +2771,110 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 
 <p>2014年9月19日</p>
 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Emacs高级使用技巧]]></title>
+    <link href="http://yulongniu.github.io/blog/2012/06/24/emacs-extend-skills/"/>
+    <updated>2012-06-24T20:01:36-04:00</updated>
+    <id>http://yulongniu.github.io/blog/2012/06/24/emacs-extend-skills</id>
+    <content type="html"><![CDATA[<h2 id="emacs">1. Emacs配置文件位置</h2>
+
+<p>在Fedora系统下，Emacs的配置文件位置是<code class="language-bash">~/.emacs</code>。在Emacs配置文件中添加内容后，使用<code class="language-emacs-lisp">M-x eval-buffer</code>，使当前配置生效。编译代码以加快加载速度，<code class="language-eamcs-lisp">M-x byte-compile-file</code>。</p>
+
+<h2 id="emacs-1">2. Emacs自带的包管理系统</h2>
+
+<p>在Emacs24之后，自带包管理系统，使用<code class="language-bash">M-x eval-buffer</code>进入。可以添加<a href="http://melpa.org/">MELPA源</a>、<a href="https://marmalade-repo.org/">marmalade源</a>、<a href="http://elpa.gnu.org/packages/">GNU源</a>。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Add repositories of Emacs packages</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="emacs-lisp"><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;package</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
+</span><span class="line">	     <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;marmalade&quot;</span> <span class="o">.</span> <span class="s">&quot;http://marmalade-repo.org/packages/&quot;</span><span class="p">))</span>
+</span><span class="line"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
+</span><span class="line">	     <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;melpa&quot;</span> <span class="o">.</span> <span class="s">&quot;http://melpa.milkbox.net/packages/&quot;</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
+</span><span class="line">	     <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;gnu&quot;</span> <span class="o">.</span> <span class="s">&quot;http://elpa.gnu.org/packages/&quot;</span><span class="p">)))</span>
+</span><span class="line"><span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<!--more-->
+
+<p>这样设置之后，就不需要类似<code class="language-emacs-lisp">(add-to-list 'load-path "~/.emacs.d/elpa/popup-20140207.1702/")</code>的语句了，因为Emacs会自动识别安装的包。但是，如果需要对某个包进行进一步设置，需要加上<code class="language-bash">(require 'popup)</code>之类的语句。</p>
+
+<h2 id="section">3. 显示行号</h2>
+
+<p>使用<code class="language-eamcs-lisp">M-x linum-mode</code>添加行号。如果需要永久显示，在Emacs配置文件中添加一下内容。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Show line number</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="emacs-lisp"><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="c1">;open linum mode</span>
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="p">(</span><span class="nv">global-linum-mode</span> <span class="no">t</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="shell">4. 进入Shell</h2>
+
+<p>三种方法：</p>
+
+<ul>
+  <li>
+    <p><code class="language-eamcs-lisp">M-x shell</code></p>
+  </li>
+  <li>
+    <p><code class="language-eamcs-lisp">M-x ansi-term</code></p>
+  </li>
+  <li>
+    <p><code class="language-eamcs-lisp">M-x eshell</code></p>
+  </li>
+</ul>
+
+<h2 id="root">5. root权限</h2>
+
+<p><code class="language-eamcs-lisp">C-x C-f</code> 之后输入root密码<code class="language-eamcs-lisp">/su:root@usrname password</code></p>
+
+<h2 id="section-1">6. 移动整体代码块</h2>
+
+<p>选中代码块后：
+向左移动2个字符：<code class="language-eamcs-lisp">C-u -2 C-x TAB</code>
+向右移动4个字符：<code class="language-eamcs-lisp">C-u 4 C-x TAB</code></p>
+
+<h2 id="section-2">7. 添加彩虹猫</h2>
+
+<p>添加<code>nyan-mode</code>包，之后在Emacs配置文档中写入：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Add nyan in modeline</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="emacs-lisp"><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="c1">;nyan-mode</span>
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="p">(</span><span class="nv">nyan-mode</span> <span class="no">t</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-3">参考资料</h3>
+
+<ul>
+  <li><a href="http://mad4a.me/2012/08/02/emacs-summary-cont/">YASnippet添加模板</a></li>
+</ul>
+
+<h3 id="section-4">更新记录</h3>
+
+<p>2014年12月8日</p>
 ]]></content>
   </entry>
   

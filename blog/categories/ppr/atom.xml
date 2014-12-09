@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ppr | 牛牛龙]]></title>
   <link href="http://yulongniu.github.io/blog/categories/ppr/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-07T18:53:11-05:00</updated>
+  <updated>2014-12-08T23:40:37-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -180,7 +180,15 @@
   <li>代码高亮</li>
 </ul>
 
-<p>代码段高亮参考<a href="http://octopress.org/docs/plugins/codeblock/">Octopress codeblock</a></p>
+<p>代码段高亮参考<a href="http://octopress.org/docs/plugins/codeblock/">Octopress codeblock</a>，其中<code>[lang:language]</code>设置高亮语言种类。<code>[url]</code>和<code>[linktext]</code>非必须。</p>
+
+<p>
+<code>
+{% codeblock [lang:language] [title] [url] [link text] %}
+code snippet
+{% endcodeblock %}
+</code>
+</p>
 
 <p>行内引用代码使用
 <code>`source/_includes/custom/head.html`{:.language-bash}</code></p>
@@ -261,12 +269,13 @@
 
 <p>这会生成一个新的文件<code class="language-bash">source/anewpage/index.markdown</code>。之后，修改<code class="language-bash">source/_includes/custom/navigation.html</code>文件，根据自己主题，添加如下类似内容</p>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;li class=”active”&gt;
-</span><span class='line'>  &lt;a href="/anewpage">ANewPage&lt;/a>
-</span><span class='line'>&lt;/li&gt;</span></code></pre></td></tr></table></div></figure></p>
+<p>
+<code>
+&lt;li {% if page.navbar == 'ANewPage' %}class="active"{% endif %}&gt;
+  &lt;a href="{{ root_url }}/anewpage"&gt;ANewPage&lt;/a&gt;
+&lt;/li&gt;
+</code>
+</p>
 
 <h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
 
@@ -294,6 +303,9 @@
   </li>
   <li>
     <p><a href="http://pygments.org/docs/lexers/">Octopress highlight language list</a></p>
+  </li>
+  <li>
+    <p>标记Octopress自身语法：<a href="http://stackoverflow.com/questions/15786144/how-to-escape-in-markdown-on-octopress">1</a>，<a href="http://stackoverflow.com/questions/3426182/how-to-escape-liquid-template-tags/13582517#13582517">2</a></p>
   </li>
 </ul>
 

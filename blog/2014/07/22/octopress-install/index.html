@@ -349,7 +349,14 @@
   <li>代码高亮</li>
 </ul>
 
-<p>代码段高亮参考<a href="http://octopress.org/docs/plugins/codeblock/">Octopress codeblock</a></p>
+<p>代码段高亮参考<a href="http://octopress.org/docs/plugins/codeblock/">Octopress codeblock</a>，其中<code>[lang:language]</code>设置高亮语言种类。<code>[url]</code>和<code>[linktext]</code>非必须。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">{% codeblock [lang:language] [title] [url] [link text] %}
+</span><span class="line">code snippet
+</span><span class="line">{% endcodeblock %}</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>行内引用代码使用
 <code>`source/_includes/custom/head.html`{:.language-bash}</code></p>
@@ -433,8 +440,8 @@
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&lt;li &gt;
-</span><span class="line">  &lt;a href="/anewpage"&gt;ANewPage&lt;/a&gt;
+</pre></td><td class="code"><pre><code class=""><span class="line">&lt;li {% if page.navbar == 'ANewPage' %}class="active"{% endif %}&gt;
+</span><span class="line">  &lt;a href="{{ root_url }}/anewpage"&gt;ANewPage&lt;/a&gt;
 </span><span class="line">&lt;/li&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
@@ -463,6 +470,9 @@
   </li>
   <li>
     <p><a href="http://pygments.org/docs/lexers/">Octopress highlight language list</a></p>
+  </li>
+  <li>
+    <p>标记Octopress自身语法：<a href="http://stackoverflow.com/questions/15786144/how-to-escape-in-markdown-on-octopress">1</a>，<a href="http://stackoverflow.com/questions/3426182/how-to-escape-liquid-template-tags/13582517#13582517">2</a></p>
   </li>
 </ul>
 
@@ -578,7 +588,7 @@
     
     
     <a class="list-group-item " href="/blog/categories/lisp/index.html">
-        <span class="badge">3</span>
+        <span class="badge">4</span>
         lisp
       </a>
     
