@@ -133,7 +133,15 @@ kramdown:
 
 * 代码高亮
 
-代码段高亮参考[Octopress codeblock](http://octopress.org/docs/plugins/codeblock/)
+代码段高亮参考[Octopress codeblock](http://octopress.org/docs/plugins/codeblock/)，其中`[lang:language]`设置高亮语言种类。`[url]`和`[linktext]`非必须。
+
+{% raw %}
+```
+{% codeblock [lang:language] [title] [url] [link text] %}
+code snippet
+{% endcodeblock %}
+```
+{% endraw %}
 
 行内引用代码使用
 `` `source/_includes/custom/head.html`{:.language-bash} ``
@@ -194,11 +202,13 @@ rake new_page[ANewPage]
 
 这会生成一个新的文件`source/anewpage/index.markdown`{:.language-bash}。之后，修改`source/_includes/custom/navigation.html`{:.language-bash}文件，根据自己主题，添加如下类似内容
 
-{% codeblock %}
+{% raw %}
+```
 <li {% if page.navbar == 'ANewPage' %}class="active"{% endif %}>
   <a href="{{ root_url }}/anewpage">ANewPage</a>
 </li>
-{% endcodeblock %}
+```
+{% endraw %}
 
 
 ### <a id="Ref">参考网址</a> ###
@@ -218,6 +228,8 @@ rake new_page[ANewPage]
 * [pygments错误详细提示](http://i.rexdf.org/blog/2014/09/26/octopressbo-ke-geng-xin-ri-zhi/)
 
 * [Octopress highlight language list](http://pygments.org/docs/lexers/)
+
+* 标记Octopress自身语法：[1](http://stackoverflow.com/questions/15786144/how-to-escape-in-markdown-on-octopress)，[2](http://stackoverflow.com/questions/3426182/how-to-escape-liquid-template-tags/13582517#13582517)
 
 ### 更新记录 ###
 
