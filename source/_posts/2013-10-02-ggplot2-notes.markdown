@@ -33,6 +33,10 @@ geom_point() + stat_smooth()
 
 `geom_box()`{:.language-r}: boxplot.
 
+`geom_tile()`{:.language-r}: fill blocks.
+
+
+
 {% codeblock lang:r %}
 # example
 require('ggplot2')
@@ -127,6 +131,7 @@ do.call(grid.arrange, plotList)
 
 * [Better labels](http://directlabels.r-forge.r-project.org/examples.html)
 * [ggplot2 doc](http://docs.ggplot2.org/current/)
+* [ggplot2 cheatsheet](http://zevross.com/blog/2014/08/04/beautiful-plotting-in-r-a-ggplot2-cheatsheet-3/#working-with-colors)
 
 ### 更新记录 ###
 
