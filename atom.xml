@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.github.io/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-08T23:40:37-05:00</updated>
+  <updated>2014-12-10T20:36:33-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -2342,6 +2342,8 @@
 
 <p><code class="language-r">geom_box()</code>: boxplot.</p>
 
+<p><code class="language-r">geom_tile()</code>: fill blocks.</p>
+
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -2462,6 +2464,7 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 <ul>
   <li><a href="http://directlabels.r-forge.r-project.org/examples.html">Better labels</a></li>
   <li><a href="http://docs.ggplot2.org/current/">ggplot2 doc</a></li>
+  <li><a href="http://zevross.com/blog/2014/08/04/beautiful-plotting-in-r-a-ggplot2-cheatsheet-3/#working-with-colors">ggplot2 cheatsheet</a></li>
 </ul>
 
 <h3 id="section">更新记录</h3>
