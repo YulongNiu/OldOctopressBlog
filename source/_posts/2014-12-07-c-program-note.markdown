@@ -77,7 +77,7 @@ printf("%3.0f %6.1f\n", fahr, celsius);
 
 ### 参考资料 ###
 
-* BW Kernighan and DM Ritchie: [The C Programming Language, 2nd Edition (2nd Edition)](http://www.amazon.com/The-Programming-Language-2nd-Edition/dp/0131103628), 1988.
+* BW Kernighan and DM Ritchie: [The C Programming Language (2nd Edition)](http://www.amazon.com/The-Programming-Language-2nd-Edition/dp/0131103628), 1988.
 
 ### 更新记录 ###
 
