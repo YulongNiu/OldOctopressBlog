@@ -10,6 +10,8 @@ categories: lisp
 
 在Fedora系统下，Emacs的配置文件位置是`~/.emacs`{:.language-bash}。在Emacs配置文件中添加内容后，使用`M-x eval-buffer`{:.language-emacs-lisp}，使当前配置生效。编译代码以加快加载速度，`M-x byte-compile-file`{:.language-eamcs-lisp}。
 
+使用Eamcs解释器`M-x ielm`{:.language-emacs-lisp}。
+
 
 ## 2. Emacs自带的包管理系统 ##
 

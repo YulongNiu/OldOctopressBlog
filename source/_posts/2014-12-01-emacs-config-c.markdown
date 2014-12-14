@@ -21,7 +21,7 @@ categories: lisp
 # yum install global
 {% endcodeblock %}
 
-* 安装Emacs的`helm`、`helm-swoop`、`helm-gtags`、`sr-speedbar`、`company-c-headers`、`smartparens`包。
+* 安装Emacs的`helm`、`helm-swoop`、`helm-gtags`、`sr-speedbar`、`smartparens`包。
 
 ### 1.2. Emacs配置 ###
 
@@ -217,17 +217,6 @@ $ ./helloworld
 (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
 (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
 
-;;;;;;;;;;;;;;;;;;;;;;;;
-;company mode
-;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'company)
-(add-hook 'after-init-hook 'global-company-mode)
-
-;;;;;;;;;;;;;;;;;;;;;;;
-;company-c-headers
-;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'company-backends 'company-c-headers)
-
 ;;;;;;;;;;;;;;;;;;;;;
 ;enable semantic mode
 ;;;;;;;;;;;;;;;;;;;;;
@@ -263,6 +252,8 @@ $ ./helloworld
 ### 参考网址 ###
 
 * [C/C++ Development Environment for Emacs](http://tuhdo.github.io/c-ide.html#sec-1-3)
+
+* [YouTube Vedio](https://www.youtube.com/watch?v=HTUE03LnaXA)
 
 ### 更新记录 ###
 
