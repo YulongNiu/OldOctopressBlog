@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.github.io/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-14T17:43:15-05:00</updated>
+  <updated>2014-12-14T19:08:28-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -6018,6 +6018,18 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 </span><span class="line"><span class="c"># 设置像素，比如转换的是500px</span>
 </span><span class="line"><span class="nv">$ </span>convert -density <span class="m">500</span> input.pdf output.jpg
 </span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>TeX文本编辑器</li>
+</ul>
+
+<p><a href="http://texstudio.sourceforge.net/">TeXstudio</a>支持自动补全、代码高亮、错误提示、文档预览、图片表格公式生成、LaTeX/PDFLaTeX/XeLaTeX。甚至还有一个“放大镜”，放大观察生成文档字体和公式细节。TeXstudio仍然保持持续更新的态势，以下是安装方法和一个阅览图。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install texstudio</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><img src="http://yulongniu.github.io/images/linux_software_texstudio.jpg" width="500" height="700" title="image" alt="images" /></p>
 
 <h2 id="windows">5. 模拟Windows程序</h2>
 
