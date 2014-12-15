@@ -182,6 +182,16 @@ $ convert -quality 100 input.pdf output.jpg
 $ convert -density 500 input.pdf output.jpg
 {% endcodeblock %}
 
+* TeX文本编辑器
+
+[TeXstudio](http://texstudio.sourceforge.net/)支持自动补全、代码高亮、错误提示、文档预览、图片表格公式生成、LaTeX/PDFLaTeX/XeLaTeX。甚至还有一个“放大镜”，放大观察生成文档字体和公式细节。TeXstudio仍然保持持续更新的态势，以下是安装方法和一个阅览图。
+
+{% codeblock lang:bash %}
+# yum install texstudio
+{% endcodeblock %}
+
+<img src="/images/linux_software_texstudio.jpg" width="500" height="700" title="image" alt="images">
+
 
 ## 5. 模拟Windows程序 ##
 
