@@ -13,7 +13,7 @@ In this page, I record some useful linkages including academic collaboration and
 
 ## Academic collaboration ##
 
-* My current lab: [Alavian Lab](http://alavianlab.org/about-us/)
+* My current lab: [Alavian Lab](http://alavianlab.org/)
 
 * My supervisors
 
