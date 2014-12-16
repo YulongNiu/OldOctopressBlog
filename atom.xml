@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.github.io/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-16T04:04:10-05:00</updated>
+  <updated>2014-12-16T16:58:05-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -2493,6 +2493,8 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 
 <hr />
 
+<!--more-->
+
 <p>Typically, here we give the example of two discrete variables, the mutual information between $x_1$ and $y_1$ is</p>
 
 <script type="math/tex; mode=display">% &lt;![CDATA[
@@ -2547,7 +2549,7 @@ I(X; Y) &= \frac{a}{n}\log\frac{na}{(a+b)(a+c)} + \frac{b}{n}\log\frac{nc}{(a+d)
 \end{align}
  %]]&gt;</script>
 
-<h2 id="example">Example</h2>
+<h3 id="example">Example</h3>
 
 <p>We can use R to directly calculate the MI between two gene vectors mentioned above.</p>
 
