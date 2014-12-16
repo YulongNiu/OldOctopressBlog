@@ -36,6 +36,7 @@ $\newcommand{\entropfrac}[2]{\frac{#1}{#2} \log \left( \frac{#1}{#2} \right)}$
 
 ----------------------
 
+<!--more-->
 
 Typically, here we give the example of two discrete variables, the mutual information between $x_1$ and $y_1$ is
 
@@ -88,7 +89,7 @@ I(X; Y) &= \frac{a}{n}\log\frac{na}{(a+b)(a+c)} + \frac{b}{n}\log\frac{nc}{(a+d)
 \end{align}
 $$
 
-## Example ##
+### Example ###
 
 We can use R to directly calculate the MI between two gene vectors mentioned above.
 
