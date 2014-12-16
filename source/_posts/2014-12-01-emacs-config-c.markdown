@@ -87,6 +87,7 @@ $ ./helloworld
 {% endcodeblock %}
 
 ## 附加内容 ##
+
 <a id="c-mode-config">C/C++的Emacs编程环境设置</a>
 
 {% codeblock Emacs configure lang:emacs-lisp %}

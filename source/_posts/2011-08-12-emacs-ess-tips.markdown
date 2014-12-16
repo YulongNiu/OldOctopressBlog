@@ -6,6 +6,19 @@ comments: true
 categories: lisp
 ---
 
+## 1. 安装ESS ##
+
+有两种方法可以安装，一种是直接使用系统自带的包安装系统，比如`yum`：
+
+{% codeblock lang:bash %}
+# yum install emacs-ess
+{% endcodeblock %}
+
+但是，有时可能不是ESS最新版本。所以，推荐第二种方法，使用Emacs自带的包系统，方便、更新及时，设置方法[参考](http://yulongniu.bionutshell.org/blog/2012/06/24/emacs-extend-skills/)，安装`ess`包。
+
+
+## 2. 使用ESS ##
+
 进入GNU Emacs界面之后，输入`M-X R` 即可进入R界面。在这个过程中，会询问是否在当前运行目录下运行R，可以选择在不同目录下运行。
 
 
@@ -66,6 +79,71 @@ categories: lisp
 {% img middle /images/Emacs_ESS_snap.jpg 700 700 'Emacs ESS #1' 'a snap of Emacs ESS' %}
 
 
+## 3. 高级设置 ##
+
+结合Emacs的自动补全、补全括号、颜色显示等功能，设置更加强大的ESS编辑环境。将[附加环境设置](#c-mode-config)添加到Emacs设置文件，比如`~/.emacs`{:.language-bash}。所需要的包使用`M-x list-package`{:.language-emacs-lisp}安装。
+
+* 自动补全：`auto-complete`包
+
+<img src="/images/emacs_ess_tipes_autocomplete.png" width="700" height="700" title="image" alt="images">
+
+* 代码折叠：`hs-minor-mode`（系统自带）
+
+* 括号补全：`smartparens`
+
+* 括号颜色：`rainbow-mode`
+
+* 颜色显示：`rainbow-delimiters`
+
+<img src="/images/emacs_ess_tipes_parent.png" width="500" height="500" title="image" alt="images">
+
+
+## 附加内容 ##
+
+<a id="c-mode-config">ESS的Emacs编程环境设置</a>
+
+{% codeblock Emacs configure lang:emacs-lisp %}
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; auto-completion
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'auto-complete)
+(require 'auto-complete-config)
+(ac-config-default)
+
+;;;;;;;;;;;;;;;;;;;;;;;
+; ESS set
+;;;;;;;;;;;;;;;;;;;;;;;
+(require 'ess-site)
+(setq ess-use-auto-complete t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;open hs-mode
+;;;;;;;;;;;;;;;;;;;;;;;
+(add-hook 'ess-mode-hook 'hs-minor-mode)
+
+;;;;;;;;;;;;;;;;;;;;;
+;smartparens
+;;;;;;;;;;;;;;;;;;;;;
+(require 'smartparens-config)
+(show-smartparens-global-mode t)
+(smartparens-global-mode t)
+
+;;;;;;;;;;;;;;;;;;;;;
+;rainbow mode 
+;;;;;;;;;;;;;;;;;;;;;
+(require 'rainbow-mode)
+(dolist (hook '(ess-mode-hook inferior-ess-mode-hook))
+(add-hook hook 'rainbow-turn-on))
+
+;;;;;;;;;;;;;;
+;rainbow-delimiters
+;;;;;;;;;;;;;;
+(require 'rainbow-delimiters)
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'ess-mode-hook 'rainbow-delimiters-mode)
+{% endcodeblock %}
+
+
 ### <a id="Ref">参考网址</a> ###
 
 * [像忍者一样写R包](http://cos.name/2011/05/write-r-packages-like-a-ninja/)
@@ -78,6 +156,9 @@ categories: lisp
 
 * [ESS文档](http://ess.r-project.org/Manual/ess.html)
 
+* [YGC auto-complete in ESS](http://ygc.name/2014/12/07/auto-complete-in-ess/) 
+
+
 ### 更新记录 ###
 
-2014年9月10日
+2014年12月15日
