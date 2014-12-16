@@ -4,6 +4,7 @@ bootstrap_theme_url: http://bootswatch.com/flatly/bootstrap.min.css
 title: "Octopress安装和使用"
 date: 2014-07-22 13:45:46 -0400
 comments: true
+styles: [data-table]
 categories: PPR
 ---
 
@@ -210,6 +211,84 @@ rake new_page[ANewPage]
 ```
 {% endraw %}
 
+## 15. 添加表格 ##
+
+建立新文件`source/stylesheets/data-table.css`，写入以下内容，其中`#00B9E3`是表头的背景颜色，可以更改为自己喜欢的颜色：
+
+{% codeblock data-table lang:css %}
+* + table {
+  border-style:solid;
+  border-width:1px;
+  border-color:#e7e3e7;
+}
+ 
+* + table th, * + table td {
+  border-style:dashed;
+  border-width:1px;
+  border-color:#e7e3e7;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+ 
+* + table th {
+  border-style:solid;
+  font-weight:bold;
+  background: url("/images/noise.png?1330434582") repeat scroll left top #00B9E3;
+}
+ 
+* + table th[align="left"], * + table td[align="left"] {
+  text-align:left;
+}
+ 
+* + table th[align="right"], * + table td[align="right"] {
+  text-align:right;
+}
+ 
+* + table th[align="center"], * + table td[align="center"] {
+  text-align:center;
+}
+{% endcodeblock %}
+
+之后，在`source/_includes/head.html`中修改或者添加：
+
+{% raw %}
+```
+<link href="{{ root_url }}/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+{% if page.styles contains 'data-table' %}
+<link href="{{ root_url }}/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+{% endif %}
+```
+{% endraw %}
+
+使用方法，在每篇博客头部位置添加`styles: [data-table]`，之后使用表格样式即可。如果使用Kramdown，表格对其方法如下：
+
+------------------
+
+|---------------+---------------+--------------+---------|
+|**X/Y**        |**1(Presence)**|**0(Absence)**|**Sum**  |
+|:--------------|:-------------:|:------------:|--------:|
+|**1(Presence)**|a              |b             |a+b      |
+|---------------|---------------|--------------|---------|
+|**0(Absence)** |c              |d             |c+d      |
+|---------------|---------------|--------------|---------|
+|**Sum**        |a+c            |b+d           |n=a+b+c+d|
+|---------------|---------------|--------------|---------|
+
+---------------------
+
+{% raw %}
+```
+|---------------+---------------+--------------+---------|
+|**X/Y**        |**1(Presence)**|**0(Absence)**|**Sum**  |
+|:--------------|:-------------:|:------------:|--------:|
+|**1(Presence)**|a              |b             |a+b      |
+|---------------|---------------|--------------|---------|
+|**0(Absence)** |c              |d             |c+d      |
+|---------------|---------------|--------------|---------|
+|**Sum**        |a+c            |b+d           |n=a+b+c+d|
+|---------------|---------------|--------------|---------|
+```
+{% endraw %}
 
 ### <a id="Ref">参考网址</a> ###
 
@@ -231,8 +310,10 @@ rake new_page[ANewPage]
 
 * 标记Octopress自身语法：[1](http://stackoverflow.com/questions/15786144/how-to-escape-in-markdown-on-octopress)，[2](http://stackoverflow.com/questions/3426182/how-to-escape-liquid-template-tags/13582517#13582517)
 
+* [Octopress添加表格](http://programus.github.io/blog/2012/03/07/add-table-data-css-for-octopress/)
+
 ### 更新记录 ###
 
-2014年7月25日
+2014年12月16日
 
 
