@@ -196,7 +196,19 @@
   </header>
 
 
-  <div class="entry-content clearfix" itemprop="articleBody description"><p>进入GNU Emacs界面之后，输入<code>M-X R</code> 即可进入R界面。在这个过程中，会询问是否在当前运行目录下运行R，可以选择在不同目录下运行。</p>
+  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="ess">1. 安装ESS</h2>
+
+<p>有两种方法可以安装，一种是直接使用系统自带的包安装系统，比如<code>yum</code>：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install emacs-ess</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>但是，有时可能不是ESS最新版本。所以，推荐第二种方法，使用Emacs自带的包系统，方便、更新及时，设置方法<a href="http://yulongniu.bionutshell.org/blog/2012/06/24/emacs-extend-skills/">参考</a>，安装<code>ess</code>包。</p>
+
+<h2 id="ess-1">2. 使用ESS</h2>
+
+<p>进入GNU Emacs界面之后，输入<code>M-X R</code> 即可进入R界面。在这个过程中，会询问是否在当前运行目录下运行R，可以选择在不同目录下运行。</p>
 
 <ul>
   <li><code>M-x R</code>：</li>

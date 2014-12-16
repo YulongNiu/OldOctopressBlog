@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.github.io/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-15T18:34:59-05:00</updated>
+  <updated>2014-12-15T20:32:48-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -260,6 +260,7 @@
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h2 id="section-6">附加内容</h2>
+
 <p><a id="c-mode-config">C/C++的Emacs编程环境设置</a></p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Emacs configure </span></figcaption>
@@ -3840,7 +3841,19 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
     <link href="http://yulongniu.github.io/blog/2011/08/12/emacs-ess-tips/"/>
     <updated>2011-08-12T17:20:57-04:00</updated>
     <id>http://yulongniu.github.io/blog/2011/08/12/emacs-ess-tips</id>
-    <content type="html"><![CDATA[<p>进入GNU Emacs界面之后，输入<code>M-X R</code> 即可进入R界面。在这个过程中，会询问是否在当前运行目录下运行R，可以选择在不同目录下运行。</p>
+    <content type="html"><![CDATA[<h2 id="ess">1. 安装ESS</h2>
+
+<p>有两种方法可以安装，一种是直接使用系统自带的包安装系统，比如<code>yum</code>：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install emacs-ess</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>但是，有时可能不是ESS最新版本。所以，推荐第二种方法，使用Emacs自带的包系统，方便、更新及时，设置方法<a href="http://yulongniu.bionutshell.org/blog/2012/06/24/emacs-extend-skills/">参考</a>，安装<code>ess</code>包。</p>
+
+<h2 id="ess-1">2. 使用ESS</h2>
+
+<p>进入GNU Emacs界面之后，输入<code>M-X R</code> 即可进入R界面。在这个过程中，会询问是否在当前运行目录下运行R，可以选择在不同目录下运行。</p>
 
 <ul>
   <li><code>M-x R</code>：</li>
@@ -3953,6 +3966,116 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 
 <p><img class="middle" src="http://yulongniu.github.io/images/Emacs_ESS_snap.jpg" width="700" height="700" title="Emacs ESS #1" alt="a snap of Emacs ESS" /></p>
 
+<h2 id="section">3. 高级设置</h2>
+
+<p>结合Emacs的自动补全、补全括号、颜色显示等功能，设置更加强大的ESS编辑环境。将<a href="#c-mode-config">附加环境设置</a>添加到Emacs设置文件，比如<code class="language-bash">~/.emacs</code>。所需要的包使用<code class="language-emacs-lisp">M-x list-package</code>安装。</p>
+
+<ul>
+  <li>自动补全：<code>auto-complete</code>包</li>
+</ul>
+
+<p><img src="http://yulongniu.github.io/images/emacs_ess_tipes_autocomplete.png" width="700" height="700" title="image" alt="images" /></p>
+
+<ul>
+  <li>
+    <p>代码折叠：<code>hs-minor-mode</code>（系统自带）</p>
+  </li>
+  <li>
+    <p>括号补全：<code>smartparens</code></p>
+  </li>
+  <li>
+    <p>括号颜色：<code>rainbow-mode</code></p>
+  </li>
+  <li>
+    <p>颜色显示：<code>rainbow-delimiters</code></p>
+  </li>
+</ul>
+
+<p><img src="http://yulongniu.github.io/images/emacs_ess_tipes_parent.png" width="500" height="500" title="image" alt="images" /></p>
+
+<h2 id="section-1">附加内容</h2>
+
+<p><a id="c-mode-config">ESS的Emacs编程环境设置</a></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Emacs configure </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+</pre></td><td class="code"><pre><code class="emacs-lisp"><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="c1">; auto-completion</span>
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;auto-complete</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;auto-complete-config</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">ac-config-default</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="c1">; ESS set</span>
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;ess-site</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="k">setq</span> <span class="nv">ess-use-auto-complete</span> <span class="no">t</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="c1">;open hs-mode</span>
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;ess-mode-hook</span> <span class="ss">&#39;hs-minor-mode</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="c1">;smartparens</span>
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;smartparens-config</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">show-smartparens-global-mode</span> <span class="no">t</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">smartparens-global-mode</span> <span class="no">t</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="c1">;rainbow mode </span>
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;rainbow-mode</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">hook</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">ess-mode-hook</span> <span class="nv">inferior-ess-mode-hook</span><span class="p">))</span>
+</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="nv">hook</span> <span class="ss">&#39;rainbow-turn-on</span><span class="p">))</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="c1">;rainbow-delimiters</span>
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;rainbow-delimiters</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;prog-mode-hook</span> <span class="ss">&#39;rainbow-delimiters-mode</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;ess-mode-hook</span> <span class="ss">&#39;rainbow-delimiters-mode</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
 <h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
 
 <ul>
@@ -3971,11 +4094,14 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
   <li>
     <p><a href="http://ess.r-project.org/Manual/ess.html">ESS文档</a></p>
   </li>
+  <li>
+    <p><a href="http://ygc.name/2014/12/07/auto-complete-in-ess/">YGC auto-complete in ESS</a> </p>
+  </li>
 </ul>
 
-<h3 id="section">更新记录</h3>
+<h3 id="section-2">更新记录</h3>
 
-<p>2014年9月10日</p>
+<p>2014年12月15日</p>
 ]]></content>
   </entry>
   
