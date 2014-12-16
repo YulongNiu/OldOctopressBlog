@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8">
-  <title>牛牛龙</title>
+  <title>A Brief Intruction of Mutual Information and Demonstration With R - 牛牛龙</title>
   <meta name="author" content="Yulong Niu">
 
   
@@ -14,15 +14,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yulongniu.github.io/posts/3">
+  <link rel="canonical" href="http://yulongniu.github.io/blog/2013/11/10/mutual-information">
   <link href="/favicon.ico" type="image/png" rel="icon">
   <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
 
   <!-- http://opengraphprotocol.org/ -->
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="http://yulongniu.github.io/posts/3">
-  <meta property="og:title" content="牛牛龙">
+  <meta property="og:url" content="http://yulongniu.github.io/blog/2013/11/10/mutual-information">
+  <meta property="og:title" content="A Brief Intruction of Mutual Information and Demonstration With R - 牛牛龙">
   
 
   <!-- mathjax config similar to math.stackexchange -->
@@ -85,6 +85,8 @@
 
   
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
   
 
   
@@ -158,16 +160,12 @@
       <div id="main" role="main" class="container">
         <div id="content">
           <div class="row">
-  <div class="page-content col-md-9">
-    <div class="blog-index" itemscope itemtype="http://schema.org/Blog">
+  <div class="page-content col-md-9" itemscope itemtype="http://schema.org/Blog">
     <meta itemprop="name" content="牛牛龙" />
     
     <meta itemprop="url" content="http://yulongniu.github.io" />
+    <article class="hentry" role="article" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
       
-      
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
   <header class="page-header">
     
       <p class="meta text-muted text-uppercase">
@@ -186,18 +184,21 @@
 
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2013-11-10T01:21:16-05:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
-           | <a href="/blog/2013/11/10/mutual-information/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.github.io/blog/2013/11/10/mutual-information/">Comments</a>
+           | <a href="#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.github.io">Comments</a>
         
       </p>
     
     
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2013/11/10/mutual-information/" itemprop="url">A Brief Intruction of Mutual Information and Demonstration With R</a></h2>
+    <h1 class="entry-title" itemprop="name headline">
+        A Brief Intruction of Mutual Information and Demonstration With R
+        
+    </h1>
     
   </header>
 
 
-  <div class="entry-content clearfix" itemprop="articleBody description"><script type="text/x-mathjax-config">
+<div class="entry-content clearfix" itemprop="articleBody description"><script type="text/x-mathjax-config">
 MathJax.Hub.Config({
 TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
@@ -384,72 +385,16 @@ I(X; Y) &= \frac{a}{n}\log\frac{na}{(a+b)(a+c)} + \frac{b}{n}\log\frac{nc}{(a+d)
 
 <p>12/16/2014</p>
 </div>
-  
-  
 
 
-        </article>
-      
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+      <footer>
+        <p class="meta text-muted">
           
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2013-10-02T02:47:11-04:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2013/10/02/ggplot2-notes/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.github.io/blog/2013/10/02/ggplot2-notes/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2013/10/02/ggplot2-notes/" itemprop="url">R Ggplot2 Notes</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><h1 id="r-package-span-stylecolor-blueggplot2span-notes">R Package <span style="color: blue">ggplot2</span> Notes</h1>
-
-<h2 id="basic-grammar">1. Basic grammar</h2>
-
-<h3 id="plot-types">1.1 Plot types</h3>
-
-<p>The R package <span style="color: blue">ggplot2</span> is a famous plot tool for high quality scientific figures. The <span style="color: blue">ggplot2</span> style figures are widely seen in papers published in high quality journals such as <em>PNAS</em>, <em>Nature</em> and <em>Cell</em>.</p>
-
-<p>The input data should be in <strong>data frame</strong> form, and it is easily to use the function <code class="language-r">as.data.frame()</code>. “<span style="color:red"><strong>+</strong></span>” is used to connect different plot statement. A typical <span style="color: blue">ggplot2</span> plot statement is like:</p>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2013/10/02/ggplot2-notes/">Read on &rarr;</a>
-    </footer>
   
 
+<span class="glyphicon glyphicon-user"></span> <span class="byline author vcard" itemprop="author" itemscope itemtype="http://schema.org/Person">Posted by <span class="fn" itemprop="name">Yulong Niu</span></span>
 
-        </article>
-      
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
           
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
 
 
 
@@ -462,205 +407,53 @@ I(X; Y) &= \frac{a}{n}\log\frac{na}{(a+b)(a+c)} + \frac{b}{n}\log\frac{nc}{(a+d)
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2013-06-18T16:42:10-04:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2013/06/18/bioinfor-tools/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.github.io/blog/2013/06/18/bioinfor-tools/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2013/06/18/bioinfor-tools/" itemprop="url">生物信息学工具网址</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="section">1. 基因组注释信息</h2>
-
-<ul>
-  <li>
-    <p><a href="ftp://ftp.ncbi.nih.gov/genomes/">NCBI ftp 下载基因组</a></p>
-  </li>
-  <li>
-    <p><a href="http://www.jcvi.org/cms/home/">Craig Venter Institute</a></p>
-  </li>
-  <li>
-    <p><a href="http://useast.ensembl.org/info/data/ftp/index.html">Ensembl</a></p>
-  </li>
-</ul>
-
-<h2 id="section-1">2. 进化树</h2>
-
-<ul>
-  <li>
-    <p>进化树展示</p>
-
-    <ul>
-      <li>
-        <p><a href="http://en.wikipedia.org/wiki/List_of_phylogenetic_tree_visualization_software">Wiki software list</a></p>
-      </li>
-      <li>
-        <p><a href="https://www.biostars.org/p/2438/">Biostats总结</a></p>
-      </li>
-      <li>
-        <p><a href="http://itol.embl.de/index.shtml">iTOL</a></p>
-      </li>
-      <li>
-        <p><a href="http://ab.inf.uni-tuebingen.de/software/dendroscope/welcome.html">Dendroscope</a></p>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2013/06/18/bioinfor-tools/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2013-11-10T01:21:16-05:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
           
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
+
+<span class="glyphicon glyphicon-tags"></span>&nbsp;
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/bioinfor/'>bioinfor</a>
+  
+</span>
+
+
+        </p>
         
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2012-06-24T20:01:36-04:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2012/06/24/emacs-extend-skills/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.github.io/blog/2012/06/24/emacs-extend-skills/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2012/06/24/emacs-extend-skills/" itemprop="url">Emacs高级使用技巧</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="emacs">1. Emacs配置文件位置</h2>
-
-<p>在Fedora系统下，Emacs的配置文件位置是<code class="language-bash">~/.emacs</code>。在Emacs配置文件中添加内容后，使用<code class="language-emacs-lisp">M-x eval-buffer</code>，使当前配置生效。编译代码以加快加载速度，<code class="language-eamcs-lisp">M-x byte-compile-file</code>。</p>
-
-<p>使用Eamcs解释器<code class="language-emacs-lisp">M-x ielm</code>。</p>
-
-<h2 id="emacs-1">2. Emacs自带的包管理系统</h2>
-
-<p>在Emacs24之后，自带包管理系统，使用<code class="language-bash">M-x eval-buffer</code>进入。可以添加<a href="http://melpa.org/">MELPA源</a>、<a href="https://marmalade-repo.org/">marmalade源</a>、<a href="http://elpa.gnu.org/packages/">GNU源</a>。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Add repositories of Emacs packages</span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-</pre></td><td class="code"><pre><code class="emacs-lisp"><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;package</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
-</span><span class="line">	     <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;marmalade&quot;</span> <span class="o">.</span> <span class="s">&quot;http://marmalade-repo.org/packages/&quot;</span><span class="p">))</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
-</span><span class="line">	     <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;melpa&quot;</span> <span class="o">.</span> <span class="s">&quot;http://melpa.milkbox.net/packages/&quot;</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
-</span><span class="line">	     <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;gnu&quot;</span> <span class="o">.</span> <span class="s">&quot;http://elpa.gnu.org/packages/&quot;</span><span class="p">)))</span>
-</span><span class="line"><span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
+          <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.github.io/blog/2013/11/10/mutual-information/" data-via="" data-counturl="http://yulongniu.github.io/blog/2013/11/10/mutual-information/" >Tweet</a>
+  
+  
+  
 </div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2012/06/24/emacs-extend-skills/">Read on &rarr;</a>
-    </footer>
-  
 
-
-        </article>
-      
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
         
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2012-05-29T19:46:59-04:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
-           | <a href="/blog/2012/05/29/r-package-and-roxygen2/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.github.io/blog/2012/05/29/r-package-and-roxygen2/">Comments</a>
+          <ul class="meta text-muted pager">
+            
+            <li class="previous"><a href="/blog/2013/10/02/ggplot2-notes/" title="Previous Post: R ggplot2 notes">&laquo; R ggplot2 notes</a></li>
+            
+            
+            <li class="next"><a href="/blog/2014/03/17/circos-notes/" title="Next Post: Circos Notes">Circos Notes &raquo;</a></li>
+            
+          </ul>
         
-      </p>
+      </footer>
+    </article>
     
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2012/05/29/r-package-and-roxygen2/" itemprop="url">R包制作和roxygen2使用说明</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><p>查看创建R包的各种细节，权威的文献是<a href="http://cran.r-project.org/doc/manuals/r-release/R-exts.html">Writing R Extensions</a>。</p>
-
-<h2 id="r">1. 创建R包目录</h2>
-
-<p>像盖房子一样，创建R包需要先搭建一个骨架，这个骨架往往是固定的，即一些文件夹（如<code>R</code>，<code>man</code>等）和文件（如<code>DESCRIPTION</code>，<code>NAMESPACE</code>）是必须的，而另外一些则可选择性添加。一个典型的R包目录,比如<span style="color: blue">Biobase</span>包，如下图：</p>
-
+      <section>
+        <h2>Comments</h2>
+        <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2012/05/29/r-package-and-roxygen2/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
-    </div>
-
-    <ul class="pager">
-      
-        <li class="previous"><a href="/posts/4">&larr;&nbsp;Older</a></li>
-      
-      <li><a href="/blog/archives">Blog Archives</a></li>
-      
-        <li class="next"><a href="/posts/2">Newer&nbsp;&rarr;</a></li>
-      
-    </ul>
+      </section>
+    
   </div>
 
   
-    <aside class="sidebar col-md-3">
-      
-        <section class="panel panel-default">
+  <aside class="sidebar col-md-3">
+    
+      <section class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Recent Posts</h3>
   </div>
@@ -735,8 +528,8 @@ I(X; Y) &= \frac{a}{n}\log\frac{na}{(a+b)(a+c)} + \frac{b}{n}\log\frac{nc}{(a+d)
 
 
 
-      
-    </aside>
+    
+  </aside>
   
 </div>
 
@@ -760,7 +553,10 @@ I(X; Y) &= \frac{a}{n}\log\frac{na}{(a+b)(a+c)} + \frac{b}{n}\log\frac{nc}{(a+d)
       var disqus_shortname = 'yulongniu';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://yulongniu.github.io/blog/2013/11/10/mutual-information/';
+        var disqus_url = 'http://yulongniu.github.io/blog/2013/11/10/mutual-information/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

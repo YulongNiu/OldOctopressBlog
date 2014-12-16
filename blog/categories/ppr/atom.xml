@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ppr | 牛牛龙]]></title>
   <link href="http://yulongniu.github.io/blog/categories/ppr/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-15T20:32:48-05:00</updated>
+  <updated>2014-12-16T04:04:10-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -277,6 +277,174 @@ code snippet
 </code>
 </p>
 
+<h2 id="section-14">15. 添加表格</h2>
+
+<p>建立新文件<code>source/stylesheets/data-table.css</code>，写入以下内容，其中<code>#00B9E3</code>是表头的背景颜色，可以更改为自己喜欢的颜色：</p>
+
+<p><figure class='code'><figcaption><span>data-table </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">border-style</span><span class="o">:</span><span class="k">solid</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">border-width</span><span class="o">:</span><span class="m">1px</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">border-color</span><span class="o">:</span><span class="m">#e7e3e7</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span><span class="o">,</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span> <span class="p">{</span>
+</span><span class='line'><span class="k">border-style</span><span class="o">:</span><span class="k">dashed</span><span class="p">;</span>
+</span><span class='line'><span class="k">border-width</span><span class="o">:</span><span class="m">1px</span><span class="p">;</span>
+</span><span class='line'><span class="k">border-color</span><span class="o">:</span><span class="m">#e7e3e7</span><span class="p">;</span>
+</span><span class='line'><span class="k">padding-left</span><span class="o">:</span> <span class="m">3px</span><span class="p">;</span>
+</span><span class='line'><span class="k">padding-right</span><span class="o">:</span> <span class="m">3px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;/</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span> <span class="p">{</span>
+</span><span class='line'><span class="k">border-style</span><span class="o">:</span><span class="k">solid</span><span class="p">;</span>
+</span><span class='line'><span class="k">font-weight</span><span class="o">:</span><span class="k">bold</span><span class="p">;</span>
+</span><span class='line'><span class="k">background</span><span class="o">:</span> <span class="sx">url(“/images/noise.png?1330434582”)</span> <span class="k">repeat</span> <span class="k">scroll</span> <span class="k">left</span> <span class="k">top</span> <span class="m">#00B9E3</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;/</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">left</span><span class="err">”</span><span class="o">],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">left</span><span class="err">”</span><span class="o">]</span> <span class="p">{</span>
+</span><span class='line'><span class="k">text-align</span><span class="o">:</span><span class="k">left</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;/</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">right</span><span class="err">”</span><span class="o">],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">right</span><span class="err">”</span><span class="o">]</span> <span class="p">{</span>
+</span><span class='line'><span class="k">text-align</span><span class="o">:</span><span class="k">right</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;/</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">center</span><span class="err">”</span><span class="o">],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">center</span><span class="err">”</span><span class="o">]</span> <span class="p">{</span>
+</span><span class='line'><span class="k">text-align</span><span class="o">:</span><span class="k">center</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></li>
+    </ul>
+  </li>
+</ul>
+
+<p>之后，在<code>source/_includes/head.html</code>中修改或者添加：</p>
+
+<p>
+<code>
+&lt;link href="{{ root_url }}/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css"&gt;
+{% if page.styles contains 'data-table' %}
+&lt;link href="{{ root_url }}/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" /&gt;
+{% endif %}
+</code>
+</p>
+
+<p>使用方法，在每篇博客头部位置添加<code>styles: [data-table]</code>，之后使用表格样式即可。如果使用Kramdown，表格对其方法如下：</p>
+
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"><strong>X/Y</strong></th>
+      <th style="text-align: center"><strong>1(Presence)</strong></th>
+      <th style="text-align: center"><strong>0(Absence)</strong></th>
+      <th style="text-align: right"><strong>Sum</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>1(Presence)</strong></td>
+      <td style="text-align: center">a</td>
+      <td style="text-align: center">b</td>
+      <td style="text-align: right">a+b</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>0(Absence)</strong></td>
+      <td style="text-align: center">c</td>
+      <td style="text-align: center">d</td>
+      <td style="text-align: right">c+d</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Sum</strong></td>
+      <td style="text-align: center">a+c</td>
+      <td style="text-align: center">b+d</td>
+      <td style="text-align: right">n=a+b+c+d</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<p>
+<code>
+|---------------+---------------+--------------+---------|
+|**X/Y**        |**1(Presence)**|**0(Absence)**|**Sum**  |
+|:--------------|:-------------:|:------------:|--------:|
+|**1(Presence)**|a              |b             |a+b      |
+|---------------|---------------|--------------|---------|
+|**0(Absence)** |c              |d             |c+d      |
+|---------------|---------------|--------------|---------|
+|**Sum**        |a+c            |b+d           |n=a+b+c+d|
+|---------------|---------------|--------------|---------|
+</code>
+</p>
+
 <h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
 
 <ul>
@@ -307,11 +475,14 @@ code snippet
   <li>
     <p>标记Octopress自身语法：<a href="http://stackoverflow.com/questions/15786144/how-to-escape-in-markdown-on-octopress">1</a>，<a href="http://stackoverflow.com/questions/3426182/how-to-escape-liquid-template-tags/13582517#13582517">2</a></p>
   </li>
+  <li>
+    <p><a href="http://programus.github.io/blog/2012/03/07/add-table-data-css-for-octopress/">Octopress添加表格</a></p>
+  </li>
 </ul>
 
-<h3 id="section-14">更新记录</h3>
+<h3 id="section-15">更新记录</h3>
 
-<p>2014年7月25日</p>
+<p>2014年12月16日</p>
 
 ]]></content>
   </entry>
