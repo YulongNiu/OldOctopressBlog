@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Lisp | 牛牛龙]]></title>
   <link href="http://yulongniu.github.io/blog/categories/lisp/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-18T01:51:00-05:00</updated>
+  <updated>2014-12-18T04:09:46-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -35,7 +35,7 @@
 </span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
-  <li>安装Emacs的<code>helm</code>、<code>helm-swoop</code>、<code>helm-gtags</code>、<code>sr-speedbar</code>、<code>smartparens</code>、<code>google-c-style</code>、<code>auto-complete-c-headers</code>包。</li>
+  <li>安装Emacs的<code>helm</code>、<code>helm-swoop</code>、<code>helm-gtags</code>、<code>sr-speedbar</code>、<code>smartparens</code>、<code>google-c-style</code>、<code>auto-complete</code>、<code>auto-complete-c-headers</code>、<code>auto-complete-clang</code>包。</li>
 </ul>
 
 <h3 id="emacs">1.2. Emacs配置</h3>
@@ -137,6 +137,8 @@
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>gcc -xc -E -v -
 </span><span class='line'><span class="nv">$ </span>gcc -xc++ -E -v -
 </span></code></pre></td></tr></table></div></figure></p>
+
+<p><img src="http://yulongniu.github.io/images/emacs_config_c_autocomplete.png" width="900" height="900" title="image" alt="images" /></p>
 
 <h2 id="debug">3. 编译和debug</h2>
 
@@ -329,6 +331,47 @@
 <span class='line-number'>172</span>
 <span class='line-number'>173</span>
 <span class='line-number'>174</span>
+<span class='line-number'>175</span>
+<span class='line-number'>176</span>
+<span class='line-number'>177</span>
+<span class='line-number'>178</span>
+<span class='line-number'>179</span>
+<span class='line-number'>180</span>
+<span class='line-number'>181</span>
+<span class='line-number'>182</span>
+<span class='line-number'>183</span>
+<span class='line-number'>184</span>
+<span class='line-number'>185</span>
+<span class='line-number'>186</span>
+<span class='line-number'>187</span>
+<span class='line-number'>188</span>
+<span class='line-number'>189</span>
+<span class='line-number'>190</span>
+<span class='line-number'>191</span>
+<span class='line-number'>192</span>
+<span class='line-number'>193</span>
+<span class='line-number'>194</span>
+<span class='line-number'>195</span>
+<span class='line-number'>196</span>
+<span class='line-number'>197</span>
+<span class='line-number'>198</span>
+<span class='line-number'>199</span>
+<span class='line-number'>200</span>
+<span class='line-number'>201</span>
+<span class='line-number'>202</span>
+<span class='line-number'>203</span>
+<span class='line-number'>204</span>
+<span class='line-number'>205</span>
+<span class='line-number'>206</span>
+<span class='line-number'>207</span>
+<span class='line-number'>208</span>
+<span class='line-number'>209</span>
+<span class='line-number'>210</span>
+<span class='line-number'>211</span>
+<span class='line-number'>212</span>
+<span class='line-number'>213</span>
+<span class='line-number'>214</span>
+<span class='line-number'>215</span>
 </pre></td><td class='code'><pre><code class='emacs-lisp'><span class='line'><span class="nv">&lt;/p&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="nv">&lt;p&gt;</span><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
@@ -488,6 +531,13 @@
 </span><span class='line'><span class="p">(</span><span class="nv">show-smartparens-global-mode</span> <span class="no">t</span><span class="p">)</span>
 </span><span class='line'><span class="p">(</span><span class="nv">smartparens-global-mode</span> <span class="no">t</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
 </span><span class='line'>
+</span><span class='line'><span class="nv">&lt;p&gt;</span><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class='line'><span class="c1">; auto-complete</span>
+</span><span class='line'><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="err">‘</span><span class="nv">auto-complete</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="err">‘</span><span class="nv">auto-complete-config</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">ac-config-default</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+</span><span class='line'>
 </span><span class='line'><span class="nv">&lt;p&gt;</span><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 </span><span class='line'><span class="c1">;; auto-complete-c-headers </span>
 </span><span class='line'><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
@@ -502,7 +552,41 @@
 </span><span class='line'>  <span class="p">(</span><span class="nv">add-to-list</span> <span class="err">‘</span><span class="nv">achead:include-directories</span> <span class="err">‘“</span><span class="nv">/usr/include</span><span class="err">”</span><span class="p">)</span>
 </span><span class='line'>  <span class="p">)</span>
 </span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">c++-mode-hook</span> <span class="err">‘</span><span class="nv">my:ac-c-header-init</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">c-mode-hook</span> <span class="err">‘</span><span class="nv">my:ac-c-header-init</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">c-mode-hook</span> <span class="err">‘</span><span class="nv">my:ac-c-header-init</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">&lt;p&gt;</span><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class='line'><span class="c1">;; auto-complete-clang </span>
+</span><span class='line'><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="err">‘</span><span class="nv">auto-complete-clang</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">ac-auto-start</span> <span class="no">t</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">ac-quick-help-delay</span> <span class="mf">0.5</span><span class="p">)</span>
+</span><span class='line'><span class="c1">;; (ac-set-trigger-key “TAB”)</span>
+</span><span class='line'><span class="c1">;; (define-key ac-mode-map  [(control tab)] ‘auto-complete)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">ac-mode-map</span>  <span class="nv">[</span><span class="p">(</span><span class="nv">control</span> <span class="nv">tab</span><span class="p">)</span><span class="nv">]</span> <span class="err">‘</span><span class="nv">auto-complete</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-ac-config</span> <span class="p">()</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">setq</span> <span class="nv">ac-clang-flags</span>
+</span><span class='line'>	<span class="p">(</span><span class="nb">mapcar</span><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">item</span><span class="p">)(</span><span class="nv">concat</span> <span class="err">“</span><span class="nv">-I</span><span class="err">”</span> <span class="nv">item</span><span class="p">))</span>
+</span><span class='line'>	       <span class="p">(</span><span class="nv">split-string</span>
+</span><span class='line'>		<span class="err">“</span>
+</span><span class='line'><span class="nv">/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2</span>
+</span><span class='line'><span class="nv">/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/x86_64-redhat-linux</span>
+</span><span class='line'><span class="nv">/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/backward</span>
+</span><span class='line'><span class="nv">/usr/lib/gcc/x86_64-redhat-linux/4.9.2/include</span>
+</span><span class='line'><span class="nv">/usr/local/include</span>
+</span><span class='line'><span class="nv">/usr/include</span><span class="err">”</span>
+</span><span class='line'>		<span class="p">)))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">setq-default</span> <span class="nv">ac-sources</span> <span class="err">‘</span><span class="p">(</span><span class="nv">ac-source-abbrev</span> <span class="nv">ac-source-dictionary</span> <span class="nv">ac-source-words-in-same-mode-buffers</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">emacs-lisp-mode-hook</span> <span class="err">‘</span><span class="nv">ac-emacs-lisp-mode-setup</span><span class="p">)</span>
+</span><span class='line'>  <span class="c1">;; (add-hook ‘c-mode-common-hook ‘ac-cc-mode-setup)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">ruby-mode-hook</span> <span class="err">‘</span><span class="nv">ac-ruby-mode-setup</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">css-mode-hook</span> <span class="err">‘</span><span class="nv">ac-css-mode-setup</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">auto-complete-mode-hook</span> <span class="err">‘</span><span class="nv">ac-common-setup</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">global-auto-complete-mode</span> <span class="no">t</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-ac-cc-mode-setup</span> <span class="p">()</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">setq</span> <span class="nv">ac-sources</span> <span class="p">(</span><span class="nb">append</span> <span class="err">‘</span><span class="p">(</span><span class="nv">ac-source-clang</span> <span class="nv">ac-source-yasnippet</span><span class="p">)</span> <span class="nv">ac-sources</span><span class="p">)))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">c-mode-common-hook</span> <span class="err">‘</span><span class="nv">my-ac-cc-mode-setup</span><span class="p">)</span>
+</span><span class='line'><span class="c1">;; ac-source-gtags</span>
+</span><span class='line'><span class="p">(</span><span class="nv">my-ac-config</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
 <h3 id="section-7">参考网址</h3>
@@ -761,7 +845,7 @@
   </ol>
 </blockquote>
 
-<p><img class="middle" src="/images/Emacs_ESS_snap.jpg" width="700" height="700" title="‘Emacs ESS #1’ ‘a snap of Emacs ESS’" ></p>
+<p><img class="middle" src="/images/Emacs_ESS_snap.jpg" width="900" height="900" title="‘Emacs ESS #1’ ‘a snap of Emacs ESS’" ></p>
 
 <h2 id="section">3. 高级设置</h2>
 
@@ -771,7 +855,7 @@
   <li>自动补全：<code>auto-complete</code>包</li>
 </ul>
 
-<p><img src="http://yulongniu.github.io/images/emacs_ess_tipes_autocomplete.png" width="700" height="700" title="image" alt="images" /></p>
+<p><img src="http://yulongniu.github.io/images/emacs_ess_tipes_autocomplete.png" width="900" height="900" title="image" alt="images" /></p>
 
 <ul>
   <li>
