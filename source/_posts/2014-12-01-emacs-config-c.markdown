@@ -21,7 +21,7 @@ categories: lisp
 # yum install global
 {% endcodeblock %}
 
-* 安装Emacs的`helm`、`helm-swoop`、`helm-gtags`、`sr-speedbar`、`smartparens`包。
+* 安装Emacs的`helm`、`helm-swoop`、`helm-gtags`、`sr-speedbar`、`smartparens`、`google-c-style`、`auto-complete-c-headers`包。
 
 ### 1.2. Emacs配置 ###
 
@@ -72,7 +72,12 @@ categories: lisp
 
 ### 2.3 代码补全 ###
 
-代码补全使用`company`、`company-c-headers`和`semantic`包。
+代码补全使用`auto-complete`、`auto-complete-c-headers`、`semantic`包。在使用`auto-complete-c-headers`自动补全头文件名称时，使用以下命令获得头文件路径：
+
+{% codeblock lang:bash %}
+$ gcc -xc -E -v -
+$ gcc -xc++ -E -v -
+{% endcodeblock %}
 
 
 ## 3. 编译和debug ##
@@ -237,9 +242,10 @@ $ ./helloworld
 (add-hook 'c-mode-common-hook   'hs-minor-mode)
 
 ;;;;;;;;;;;;;;;;;;
-;indent
+;google-c-style
 ;;;;;;;;;;;;;;;;;;
-(global-set-key (kbd "RET") 'newline-and-indent)  ; automatically indent when press RET
+(add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook 'google-make-newline-indent)
 
 ;;;;;;;;;;;;;;;;;;;;;
 ;smartparens
@@ -248,6 +254,21 @@ $ ./helloworld
 (show-smartparens-global-mode t)
 (smartparens-global-mode t)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; auto-complete-c-headers 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun my:ac-c-header-init()
+  (require 'auto-complete-c-headers)
+  (add-to-list 'ac-sources 'ac-source-c-headers)
+  (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2")
+  (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/x86_64-redhat-linux")
+  (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/backward")
+  (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-redhat-linux/4.9.2/include")
+  (add-to-list 'achead:include-directories '"/usr/local/include")
+  (add-to-list 'achead:include-directories '"/usr/include")
+  )
+(add-hook 'c++-mode-hook 'my:ac-c-header-init)
+(add-hook 'c-mode-hook 'my:ac-c-header-init)
 {% endcodeblock %}
 
 ### 参考网址 ###

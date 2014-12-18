@@ -40,7 +40,9 @@ categories: lisp
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;open linum mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;
-(global-linum-mode t)
+(setq linum-format "%4d \u2502")
+(add-hook 'prog-mode-hook 'linum-mode)
+(add-hook 'ess-mode-hook 'linum-mode)
 {% endcodeblock %}
 
 ## 4. 进入Shell ##
