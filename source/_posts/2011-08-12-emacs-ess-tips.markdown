@@ -76,7 +76,7 @@ categories: lisp
 > 
 > 6. `M-q`：整理roxygen注释，将多行注释压缩整理。
 
-{% img middle /images/Emacs_ESS_snap.jpg 700 700 'Emacs ESS #1' 'a snap of Emacs ESS' %}
+{% img middle /images/Emacs_ESS_snap.jpg 900 900 'Emacs ESS #1' 'a snap of Emacs ESS' %}
 
 
 ## 3. 高级设置 ##
@@ -85,7 +85,7 @@ categories: lisp
 
 * 自动补全：`auto-complete`包
 
-<img src="/images/emacs_ess_tipes_autocomplete.png" width="700" height="700" title="image" alt="images">
+<img src="/images/emacs_ess_tipes_autocomplete.png" width="900" height="900" title="image" alt="images">
 
 * 代码折叠：`hs-minor-mode`（系统自带）
 

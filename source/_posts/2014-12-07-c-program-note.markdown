@@ -42,6 +42,10 @@ categories: c
 
 ## 2. 语法注意事项 ##
 
+* `#define LOWER 0`定义常量的语句之后，没有分号`;`
+
+
+
 ## 3. 标准库 ##
 
 ### 3.1 `#include <stdio.h>`{:.language-c} ###
