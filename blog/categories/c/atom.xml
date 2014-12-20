@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C | 牛牛龙]]></title>
   <link href="http://yulongniu.github.io/blog/categories/c/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-18T04:09:46-05:00</updated>
+  <updated>2014-12-19T22:03:13-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -70,7 +70,30 @@
 <h2 id="section-3">2. 语法注意事项</h2>
 
 <ul>
-  <li><code>#define LOWER 0</code>定义常量的语句之后，没有分号<code>;</code></li>
+  <li>
+    <p><code>#define LOWER 0</code>定义常量的语句之后，没有分号<code>;</code></p>
+  </li>
+  <li>
+    <p><code>EOF</code>是文档结束的标志（End of File），在<code class="language-c">&lt;stdio.h&gt;</code>定义为一个整数<code>-1</code>，代码如下：</p>
+  </li>
+</ul>
+
+<p><figure class='code'><figcaption><span>definition of EOF in C </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#ifndef EOF</span>
+</span><span class='line'><span class="cp"># define EOF (-1)</span>
+</span><span class='line'><span class="cp">#endif</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+  <li>
+    <p>用引号<code>''</code>标记的字符串，对应的是ASCII的数字值</p>
+  </li>
+  <li>
+    <p>赋值例如<code class="language-c">c = getchar()</code>也有值，其值等于赋值后等号左侧赋值操作后的值</p>
+  </li>
 </ul>
 
 <h2 id="section-4">3. 标准库</h2>
@@ -84,6 +107,9 @@
 <ul>
   <li>
     <p><code>%d</code>：十进制整数</p>
+  </li>
+  <li>
+    <p><code>%ld</code>：长十进制整数</p>
   </li>
   <li>
     <p><code>%6d</code>：十进制整数，至少6位宽</p>
