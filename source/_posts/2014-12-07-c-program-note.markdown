@@ -44,6 +44,23 @@ categories: c
 
 * `#define LOWER 0`定义常量的语句之后，没有分号`;`
 
+* `EOF`是文档结束的标志（End of File），在`<stdio.h>`{:.language-c}定义为一个整数`-1`，代码如下：
+
+{% codeblock definition of EOF in C lang:c %}
+#ifndef EOF
+# define EOF (-1)
+#endif
+{% endcodeblock %}
+
+* 用引号`''`标记的字符串，对应的是ASCII的数字值
+
+* 赋值例如`c = getchar()`{:.language-c}也有值，其值等于赋值后等号左侧赋值操作后的值
+
+
+
+
+
+
 
 
 ## 3. 标准库 ##
@@ -55,6 +72,8 @@ printf("%3.0f %6.1f\n", fahr, celsius);
 {% endcodeblock %}
 
 * `%d`：十进制整数
+
+* `%ld`：长十进制整数
 
 * `%6d`：十进制整数，至少6位宽
 
