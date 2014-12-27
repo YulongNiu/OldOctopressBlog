@@ -40,7 +40,16 @@ categories: c
 * `functions`
 
 
-## 2. 语法注意事项 ##
+## 2. 操作类型和顺序 ##
+
+* 赋值操作`=`：从右向左
+
+* 或操作`||`、且操作`&&`：从左向右，遇到第一个`true`即停止
+
+
+
+
+## 3. 语法注意事项 ##
 
 * `#define LOWER 0`定义常量的语句之后，没有分号`;`
 
@@ -54,18 +63,16 @@ categories: c
 
 * 用引号`''`标记的字符串，对应的是ASCII的数字值
 
-* 赋值例如`c = getchar()`{:.language-c}也有值，其值等于赋值后等号左侧赋值操作后的值
+* 赋值例如`c = getchar()`{:.language-c}也有值，其值等于等号左侧赋值操作后的值
+
+* `for`循环声明需要有主体，如无，在`for`语句后添加`;`作“无效声明（null statement）”
+
+* 矩阵计数从0开始
 
 
+## 4. 标准库 ##
 
-
-
-
-
-
-## 3. 标准库 ##
-
-### 3.1 `#include <stdio.h>`{:.language-c} ###
+### 4.1 `#include <stdio.h>`{:.language-c} ###
 
 {% codeblock lang:c %}
 printf("%3.0f %6.1f\n", fahr, celsius);
