@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C | 牛牛龙]]></title>
   <link href="http://yulongniu.github.io/blog/categories/c/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-19T22:03:13-05:00</updated>
+  <updated>2014-12-27T09:38:15-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -67,7 +67,18 @@
   </li>
 </ul>
 
-<h2 id="section-3">2. 语法注意事项</h2>
+<h2 id="section-3">2. 操作类型和顺序</h2>
+
+<ul>
+  <li>
+    <p>赋值操作<code>=</code>：从右向左</p>
+  </li>
+  <li>
+    <p>或操作<code>||</code>、且操作<code>&amp;&amp;</code>：从左向右，遇到第一个<code>true</code>即停止</p>
+  </li>
+</ul>
+
+<h2 id="section-4">3. 语法注意事项</h2>
 
 <ul>
   <li>
@@ -92,13 +103,19 @@
     <p>用引号<code>''</code>标记的字符串，对应的是ASCII的数字值</p>
   </li>
   <li>
-    <p>赋值例如<code class="language-c">c = getchar()</code>也有值，其值等于赋值后等号左侧赋值操作后的值</p>
+    <p>赋值例如<code class="language-c">c = getchar()</code>也有值，其值等于等号左侧赋值操作后的值</p>
+  </li>
+  <li>
+    <p><code>for</code>循环声明需要有主体，如无，在<code>for</code>语句后添加<code>;</code>作“无效声明（null statement）”</p>
+  </li>
+  <li>
+    <p>矩阵计数从0开始</p>
   </li>
 </ul>
 
-<h2 id="section-4">3. 标准库</h2>
+<h2 id="section-5">4. 标准库</h2>
 
-<h3 id="include-stdiohlanguage-c">3.1 <code class="language-c">#include &lt;stdio.h&gt;</code></h3>
+<h3 id="include-stdiohlanguage-c">4.1 <code class="language-c">#include &lt;stdio.h&gt;</code></h3>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="o">%</span><span class="mf">3.0f</span> <span class="o">%</span><span class="mf">6.1f</span><span class="err">\</span><span class="n">n</span><span class="err">”</span><span class="p">,</span> <span class="n">fahr</span><span class="p">,</span> <span class="n">celsius</span><span class="p">);</span>
@@ -146,13 +163,13 @@
   </li>
 </ul>
 
-<h3 id="section-5">参考资料</h3>
+<h3 id="section-6">参考资料</h3>
 
 <ul>
   <li>BW Kernighan and DM Ritchie: <a href="http://www.amazon.com/The-Programming-Language-2nd-Edition/dp/0131103628">The C Programming Language (2nd Edition)</a>, 1988.</li>
 </ul>
 
-<h3 id="section-6">更新记录</h3>
+<h3 id="section-7">更新记录</h3>
 
 <p>2014年12月7日</p>
 ]]></content>
