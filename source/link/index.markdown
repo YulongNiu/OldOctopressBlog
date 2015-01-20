@@ -32,3 +32,7 @@ In this page, I record some useful linkages including academic collaboration and
 
 * [Wei Shen](http://blog.shenwei.me/)
 
+* [BJI俱乐部](http://bio985.com/)：一个生物信息学的圈子
+
+* [塞迩斯](http://www.cellyse.com/) 
+

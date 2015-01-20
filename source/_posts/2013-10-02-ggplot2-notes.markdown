@@ -97,7 +97,8 @@ ggplot() +
 
 `scale_linetype_manual(..., values)`{:.language-r}: change the types of lines. line referring [R plot](http://www.cookbook-r.com/Graphs/Shapes_and_line_types/).`name`, `value`, `labels` are used to change value.
 
-`scale_color_manual`{:.language-r} is used for change the colors. Please refer to [Useful color palette](http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/), and [Introduction of ggplot2 colors](http://blog.ggplot2.org/post/24607351280/choosing-colour-palettes-part-ii-educated-choices). The default ggplot2 colors are generated from the "*scales*" package, for example the default "hue pallet" could be view as `show_col(hue_pal(h = c(0, 360) + 15, c = 100, l = 65, h.start = 0, direction = 1)(9))`{:.language-r}
+`scale_color_manual`{:.language-r} is used for change the colors. Please refer to [Useful color palette](http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/), [Introduction of ggplot2 colors](http://blog.ggplot2.org/post/24607351280/choosing-colour-palettes-part-ii-educated-choices), and [R Color Chart](http://research.stowers-institute.org/efg/R/Color/Chart/) 
+. The default ggplot2 colors are generated from the "*scales*" package, for example the default "hue pallet" could be view as `show_col(hue_pal(h = c(0, 360) + 15, c = 100, l = 65, h.start = 0, direction = 1)(9))`{:.language-r}
 
 `scale_fill_manual(..., alues)`{:.language-r} to change filled colors.
 

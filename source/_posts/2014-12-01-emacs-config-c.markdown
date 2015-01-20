@@ -314,7 +314,7 @@ $ ./helloworld
 (my-ac-config)
 {% endcodeblock %}
 
-### 参考网址 ###
+### 参考资料 ###
 
 * [C/C++ Development Environment for Emacs](http://tuhdo.github.io/c-ide.html#sec-1-3)
 

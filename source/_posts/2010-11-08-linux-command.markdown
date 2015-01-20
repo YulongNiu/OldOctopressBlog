@@ -528,6 +528,20 @@ $ wget -c -t 0 -w 30 httplink
 
 * `-w`{:.language-bash}：表示每两次尝试的时间间隔
 
+## 34. 开机启动 ##
+
+{% codeblock lang:bash %}
+# 开机启动httpd
+# chkconfig httpd on
+# 关闭httpd
+# chkconfig httpd off
+# 开启启动列表
+# chkconfig --list
+{% endcodeblock %}
+
+
+
+
 ### <a id="Ref">参考网址</a> ###
 
 * [大量文件操作](http://blog.csdn.net/dqswuyundong/article/details/5970004)
