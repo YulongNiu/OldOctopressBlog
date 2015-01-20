@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.github.io/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2014-12-31T10:39:09-05:00</updated>
+  <updated>2015-01-19T23:31:41-05:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -747,7 +747,7 @@
 </span><span class="line"><span class="p">(</span><span class="nv">my-ac-config</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h3 id="section-7">参考网址</h3>
+<h3 id="section-7">参考资料</h3>
 
 <ul>
   <li>
@@ -2917,7 +2917,8 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 
 <p><code class="language-r">scale_linetype_manual(..., values)</code>: change the types of lines. line referring <a href="http://www.cookbook-r.com/Graphs/Shapes_and_line_types/">R plot</a>.<code>name</code>, <code>value</code>, <code>labels</code> are used to change value.</p>
 
-<p><code class="language-r">scale_color_manual</code> is used for change the colors. Please refer to <a href="http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/">Useful color palette</a>, and <a href="http://blog.ggplot2.org/post/24607351280/choosing-colour-palettes-part-ii-educated-choices">Introduction of ggplot2 colors</a>. The default ggplot2 colors are generated from the “<em>scales</em>” package, for example the default “hue pallet” could be view as <code class="language-r">show_col(hue_pal(h = c(0, 360) + 15, c = 100, l = 65, h.start = 0, direction = 1)(9))</code></p>
+<p><code class="language-r">scale_color_manual</code> is used for change the colors. Please refer to <a href="http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/">Useful color palette</a>, <a href="http://blog.ggplot2.org/post/24607351280/choosing-colour-palettes-part-ii-educated-choices">Introduction of ggplot2 colors</a>, and <a href="http://research.stowers-institute.org/efg/R/Color/Chart/">R Color Chart</a> 
+. The default ggplot2 colors are generated from the “<em>scales</em>” package, for example the default “hue pallet” could be view as <code class="language-r">show_col(hue_pal(h = c(0, 360) + 15, c = 100, l = 65, h.start = 0, direction = 1)(9))</code></p>
 
 <p><code class="language-r">scale_fill_manual(..., alues)</code> to change filled colors.</p>
 
@@ -6001,6 +6002,22 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
   </li>
 </ul>
 
+<h2 id="section-22">34. 开机启动</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 开机启动httpd</span>
+</span><span class="line"><span class="c"># chkconfig httpd on</span>
+</span><span class="line"><span class="c"># 关闭httpd</span>
+</span><span class="line"><span class="c"># chkconfig httpd off</span>
+</span><span class="line"><span class="c"># 开启启动列表</span>
+</span><span class="line"><span class="c"># chkconfig --list</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
 <h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
 
 <ul>
@@ -6030,7 +6047,7 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
   </li>
 </ul>
 
-<h3 id="section-22">更新记录</h3>
+<h3 id="section-23">更新记录</h3>
 
 <p>2014年7月25日</p>
 ]]></content>
