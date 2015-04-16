@@ -53,11 +53,14 @@ $ kill -9 PID
 
 {% codeblock lang:bash %}
 $ rake new_post["new post"]
-$ rake generate
 $ git add .
 $ git commit -m "my comment" 
 $ git push origin source
+$ rake generate
 $ rake deploy
+
+# 或者generate和deploy一步执行
+$ rake gen_deploy
 {% endcodeblock %}
 如果需要在首页显示部分博文，在需要隔断的地方（博文markdown文件）加入：
 
