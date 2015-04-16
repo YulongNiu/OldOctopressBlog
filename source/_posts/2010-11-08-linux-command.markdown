@@ -384,6 +384,10 @@ $ passwd usrname newpasswd
 # 删除用户 
 $ userdel -r usrname
 
+# 查看用户登陆
+$ last
+$ last usrname
+
 # 查看当前任务 
 $ top
 {% endcodeblock %}
@@ -449,6 +453,9 @@ $ locate libGLU.so
 {% codeblock lang:bash %}
 # 安装rpm包 
 # rpm -ivh pkg.rpm
+
+# 更新rpm包
+# rpm -Uvh pkg.rpm
 
 # 查看已经安装的包 
 # rpm -qa | grep pkg.rpm
@@ -538,6 +545,14 @@ $ wget -c -t 0 -w 30 httplink
 # 开启启动列表
 # chkconfig --list
 {% endcodeblock %}
+
+## 35. 系统运行日志 ##
+
+{% codeblock lang:bash %}
+# cat /var/log/messages
+{% endcodeblock %}
+
+
 
 
 
