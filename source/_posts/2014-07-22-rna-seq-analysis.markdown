@@ -4,6 +4,7 @@ published: true
 title: "RNA-seq数据分析的基本概念和流程"
 date: 2014-07-22 17:03:15 -0400
 comments: true
+published: false
 categories: bioinfor
 ---
 

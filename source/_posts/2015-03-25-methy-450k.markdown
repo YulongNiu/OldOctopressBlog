@@ -3,7 +3,7 @@ layout: post
 title: "Illumina的甲基化450K芯片分析"
 date: 2015-03-25 22:07:39 +0800
 comments: true
-published: true
+published: false
 categories: bioinfor
 ---
 
