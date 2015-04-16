@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.github.io/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2015-01-19T23:39:36-05:00</updated>
+  <updated>2015-04-16T18:20:10+08:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[C语言学习记录]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/12/07/c-program-note/"/>
-    <updated>2014-12-07T18:23:16-05:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/12/07/c-program-note</id>
+    <link href="http://yulongniu.github.io/blog/2014/12/08/c-program-note/"/>
+    <updated>2014-12-08T07:23:16+08:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/12/08/c-program-note</id>
     <content type="html"><![CDATA[<h2 id="section">1. 基本数据类型</h2>
 
 <h3 id="section-1">1.1 数字形式</h3>
@@ -177,9 +177,9 @@
   
   <entry>
     <title type="html"><![CDATA[Emacs配置C语言编程环境]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/12/01/emacs-config-c/"/>
-    <updated>2014-12-01T17:36:41-05:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/12/01/emacs-config-c</id>
+    <link href="http://yulongniu.github.io/blog/2014/12/02/emacs-config-c/"/>
+    <updated>2014-12-02T06:36:41+08:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/12/02/emacs-config-c</id>
     <content type="html"><![CDATA[<p>有很多优秀的C语言IDE用来实现高效的编程，比如<a href="https://www.jetbrains.com/clion/">CLion</a>。目前，CLion还在处于公开测试阶段，可以下载试用。本文介绍在Emacs下配置C/C++编程环境。</p>
 
 <!--more-->
@@ -766,62 +766,10 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[二代测序中的常用工具介绍]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/07/28/next-seqence-tools/"/>
-    <updated>2014-07-28T12:23:42-04:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/07/28/next-seqence-tools</id>
-    <content type="html"><![CDATA[<h2 id="samtools">1. SAMtools</h2>
-
-<p><a href="http://samtools.sourceforge.net/">SAMtools</a>是用于处理SAM (Sequence Alignment/Map)格式文件的一系列工具，主要用来储存大容量的核酸测序结果。
-<strong>简介</strong>：BAM是SAM文件的binary格式文件。SAMtools的主要作者是<a href="http://lh3lh3.users.sourceforge.net/">Heng Li</a>，Heng Li在2012年因为对二代测序领域的贡献获得<a href="http://en.wikipedia.org/wiki/Benjamin_Franklin_Award_(Bioinformatics)">Benjamin Franklin Award</a>。</p>
-
-<p><strong>平台</strong>：Mac OS/Linux</p>
-
-<p><strong>安装</strong>: </p>
-
-<ul>
-  <li><a href="http://sourceforge.net/projects/samtools/files/">下载</a>SAMtools</li>
-</ul>
-
-<!--more-->
-
-<ul>
-  <li>安装依赖的Ncurse库</li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install ncurses*</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>添加SAMtools到PATH（<a href="http://yulongniu.bionutshell.org/blog/2010/11/08/linux-command/">设置参考</a>）</li>
-</ul>
-
-<p><strong>快速运行</strong></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 将sam格式文件转换为bam格式文件</span>
-</span><span class="line"><span class="nv">$ </span>samtools view -bS samFile &gt; bamFile
-</span><span class="line">
-</span><span class="line"><span class="c"># 将bam格式文件转换为sorted bam格式文件，用于长期储存和后续分析 </span>
-</span><span class="line"><span class="nv">$ </span>samtools sort bamFile sortedBamFile
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h3 id="section">更新记录</h3>
-
-<p>2014年7月28日</p>
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[二代测序中的短序列比对]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/07/25/short-sequence-alignment/"/>
-    <updated>2014-07-25T14:04:25-04:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/07/25/short-sequence-alignment</id>
+    <link href="http://yulongniu.github.io/blog/2014/07/26/short-sequence-alignment/"/>
+    <updated>2014-07-26T02:04:25+08:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/07/26/short-sequence-alignment</id>
     <content type="html"><![CDATA[<p>在二代测序数据分析中，非常重要的一步是将测得的短序列“对应”到基因组上。所使用的工具被称为“短序列比对工具（short sequence aligners）”。以下是一些常用工具的介绍。</p>
 
 <h2 id="bowtie">1. Bowtie</h2>
@@ -891,9 +839,9 @@
   
   <entry>
     <title type="html"><![CDATA[Octopress安装和使用]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/07/22/octopress-install/"/>
-    <updated>2014-07-22T13:45:46-04:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/07/22/octopress-install</id>
+    <link href="http://yulongniu.github.io/blog/2014/07/23/octopress-install/"/>
+    <updated>2014-07-23T01:45:46+08:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/07/23/octopress-install</id>
     <content type="html"><![CDATA[<p>安装和使用Octopress的一些注意事项，详细的内容可以<a href="#Ref">参考网址</a>。</p>
 
 <h2 id="section">1. 安装</h2>
@@ -1331,9 +1279,9 @@
   
   <entry>
     <title type="html"><![CDATA[My First Post]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/07/04/my-first-post/"/>
-    <updated>2014-07-04T22:04:38-04:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/07/04/my-first-post</id>
+    <link href="http://yulongniu.github.io/blog/2014/07/05/my-first-post/"/>
+    <updated>2014-07-05T10:04:38+08:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/07/05/my-first-post</id>
     <content type="html"><![CDATA[<p>This is my first post. I want to say something. Then say something.</p>
 
 <p>This is a piece of html code <code class="language-html">&lt;html&gt;</code></p>
@@ -1410,9 +1358,9 @@
   
   <entry>
     <title type="html"><![CDATA[R使用parallel包并行计算]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/06/24/parallel-package/"/>
-    <updated>2014-06-24T22:10:20-04:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/06/24/parallel-package</id>
+    <link href="http://yulongniu.github.io/blog/2014/06/25/parallel-package/"/>
+    <updated>2014-06-25T10:10:20+08:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/06/25/parallel-package</id>
     <content type="html"><![CDATA[<p>最新版本的R已经内置<span style="color: blue">parallel</span>包，<span style="color: blue">parallel</span>包是从<span style="color: blue"><a href="http://cran.r-project.org/web/packages/snow/index.html">snow</a></span>包和<span style="color: blue"><a href="http://cran.r-project.org/web/packages/multicore/index.html">multicore</a></span>包继承而来，包含了很多非常好用的函数。<span style="color: blue">parallel</span>包可以通过PVM（<span style="color: blue">rpvm</span>包）、MPI（<span style="color: blue"><a href="http://cran.r-project.org/web/packages/Rmpi/index.html">Rmpi</a></span>包）、NetWorkSpaces（<span style="color: blue"><a href="http://cran.r-project.org/web/packages/nws/index.html">nws</a></span>包）和raw sockets（如果以上3种都不能使用）平台进行分布计算，支持cluster和多核个人/服务器计算机。在Linux系统上，通常使用<a href="http://www.open-mpi.org/">openMPI</a>。</p>
 
 <h2 id="span-stylecolor-bluermpispan">1. 安装<span style="color: blue">Rmpi</span>包</h2>
@@ -1798,9 +1746,9 @@
   
   <entry>
     <title type="html"><![CDATA[构建和展示进化树软件使用心得]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/05/01/phylo-tool-summary/"/>
-    <updated>2014-05-01T17:13:59-04:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/05/01/phylo-tool-summary</id>
+    <link href="http://yulongniu.github.io/blog/2014/05/02/phylo-tool-summary/"/>
+    <updated>2014-05-02T05:13:59+08:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/05/02/phylo-tool-summary</id>
     <content type="html"><![CDATA[<h2 id="section">构建进化树</h2>
 
 <h3 id="phyml">1. PhyML</h3>
@@ -1886,9 +1834,9 @@
   
   <entry>
     <title type="html"><![CDATA[创建R包的最简流程]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/03/27/creat-r-package/"/>
-    <updated>2014-03-27T14:53:05-04:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/03/27/creat-r-package</id>
+    <link href="http://yulongniu.github.io/blog/2014/03/28/creat-r-package/"/>
+    <updated>2014-03-28T02:53:05+08:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/03/28/creat-r-package</id>
     <content type="html"><![CDATA[<p>一个最简单创建R包的流程。</p>
 
 <h2 id="section">1. 载入工具包</h2>
@@ -1942,9 +1890,9 @@
   
   <entry>
     <title type="html"><![CDATA[Circos Notes]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/03/17/circos-notes/"/>
-    <updated>2014-03-17T15:37:45-04:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/03/17/circos-notes</id>
+    <link href="http://yulongniu.github.io/blog/2014/03/18/circos-notes/"/>
+    <updated>2014-03-18T03:37:45+08:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/03/18/circos-notes</id>
     <content type="html"><![CDATA[<p>Mapping data onto a Circos figure requires that you identify what patterns in your data are (a) likely to be important and (b) likely to be present, and create a figure that exposes such patterns. Remember, if the pattern exists, you can’t afford to miss it. If it doesn’t exist, you can’t afford to be fooled into thinking that it’s there, or left wondering whether it’s occluded by other data.</p>
 
 <h2 id="run-circos">1. Run circos</h2>
@@ -2609,7 +2557,7 @@
   <entry>
     <title type="html"><![CDATA[A Brief Intruction of Mutual Information and Demonstration With R]]></title>
     <link href="http://yulongniu.github.io/blog/2013/11/10/mutual-information/"/>
-    <updated>2013-11-10T01:21:16-05:00</updated>
+    <updated>2013-11-10T14:21:16+08:00</updated>
     <id>http://yulongniu.github.io/blog/2013/11/10/mutual-information</id>
     <content type="html"><![CDATA[<script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -2805,7 +2753,7 @@ I(X; Y) &= \frac{a}{n}\log\frac{na}{(a+b)(a+c)} + \frac{b}{n}\log\frac{nc}{(a+d)
   <entry>
     <title type="html"><![CDATA[R Ggplot2 Notes]]></title>
     <link href="http://yulongniu.github.io/blog/2013/10/02/ggplot2-notes/"/>
-    <updated>2013-10-02T02:47:11-04:00</updated>
+    <updated>2013-10-02T14:47:11+08:00</updated>
     <id>http://yulongniu.github.io/blog/2013/10/02/ggplot2-notes</id>
     <content type="html"><![CDATA[<h1 id="r-package-span-stylecolor-blueggplot2span-notes">R Package <span style="color: blue">ggplot2</span> Notes</h1>
 
@@ -2970,9 +2918,9 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
   
   <entry>
     <title type="html"><![CDATA[生物信息学工具网址]]></title>
-    <link href="http://yulongniu.github.io/blog/2013/06/18/bioinfor-tools/"/>
-    <updated>2013-06-18T16:42:10-04:00</updated>
-    <id>http://yulongniu.github.io/blog/2013/06/18/bioinfor-tools</id>
+    <link href="http://yulongniu.github.io/blog/2013/06/19/bioinfor-tools/"/>
+    <updated>2013-06-19T04:42:10+08:00</updated>
+    <id>http://yulongniu.github.io/blog/2013/06/19/bioinfor-tools</id>
     <content type="html"><![CDATA[<h2 id="section">1. 基因组注释信息</h2>
 
 <ul>
@@ -3274,9 +3222,9 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
   
   <entry>
     <title type="html"><![CDATA[Emacs高级使用技巧]]></title>
-    <link href="http://yulongniu.github.io/blog/2012/06/24/emacs-extend-skills/"/>
-    <updated>2012-06-24T20:01:36-04:00</updated>
-    <id>http://yulongniu.github.io/blog/2012/06/24/emacs-extend-skills</id>
+    <link href="http://yulongniu.github.io/blog/2012/06/25/emacs-extend-skills/"/>
+    <updated>2012-06-25T08:01:36+08:00</updated>
+    <id>http://yulongniu.github.io/blog/2012/06/25/emacs-extend-skills</id>
     <content type="html"><![CDATA[<h2 id="emacs">1. Emacs配置文件位置</h2>
 
 <p>在Fedora系统下，Emacs的配置文件位置是<code class="language-bash">~/.emacs</code>。在Emacs配置文件中添加内容后，使用<code class="language-emacs-lisp">M-x eval-buffer</code>，使当前配置生效。编译代码以加快加载速度，<code class="language-eamcs-lisp">M-x byte-compile-file</code>。</p>
@@ -3384,9 +3332,9 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
   
   <entry>
     <title type="html"><![CDATA[R包制作和roxygen2使用说明]]></title>
-    <link href="http://yulongniu.github.io/blog/2012/05/29/r-package-and-roxygen2/"/>
-    <updated>2012-05-29T19:46:59-04:00</updated>
-    <id>http://yulongniu.github.io/blog/2012/05/29/r-package-and-roxygen2</id>
+    <link href="http://yulongniu.github.io/blog/2012/05/30/r-package-and-roxygen2/"/>
+    <updated>2012-05-30T07:46:59+08:00</updated>
+    <id>http://yulongniu.github.io/blog/2012/05/30/r-package-and-roxygen2</id>
     <content type="html"><![CDATA[<p>查看创建R包的各种细节，权威的文献是<a href="http://cran.r-project.org/doc/manuals/r-release/R-exts.html">Writing R Extensions</a>。</p>
 
 <h2 id="r">1. 创建R包目录</h2>
@@ -3781,9 +3729,9 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
   
   <entry>
     <title type="html"><![CDATA[R小技巧集锦]]></title>
-    <link href="http://yulongniu.github.io/blog/2012/05/02/r-tricks/"/>
-    <updated>2012-05-02T22:17:02-04:00</updated>
-    <id>http://yulongniu.github.io/blog/2012/05/02/r-tricks</id>
+    <link href="http://yulongniu.github.io/blog/2012/05/03/r-tricks/"/>
+    <updated>2012-05-03T10:17:02+08:00</updated>
+    <id>http://yulongniu.github.io/blog/2012/05/03/r-tricks</id>
     <content type="html"><![CDATA[<p>持续更新R语言编程中的一些小技巧，包括一些易错点。
 但是，需要注意的，<strong>一旦需要使用一些非常稀奇古怪的技巧时，可以尝试反思是否是自己数据结构或者算法出了问题。</strong></p>
 
@@ -4353,9 +4301,9 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
   
   <entry>
     <title type="html"><![CDATA[Emacs和ESS的使用技巧]]></title>
-    <link href="http://yulongniu.github.io/blog/2011/08/12/emacs-ess-tips/"/>
-    <updated>2011-08-12T17:20:57-04:00</updated>
-    <id>http://yulongniu.github.io/blog/2011/08/12/emacs-ess-tips</id>
+    <link href="http://yulongniu.github.io/blog/2011/08/13/emacs-ess-tips/"/>
+    <updated>2011-08-13T05:20:57+08:00</updated>
+    <id>http://yulongniu.github.io/blog/2011/08/13/emacs-ess-tips</id>
     <content type="html"><![CDATA[<h2 id="ess">1. 安装ESS</h2>
 
 <p>有两种方法可以安装，一种是直接使用系统自带的包安装系统，比如<code>yum</code>：</p>
@@ -4622,9 +4570,9 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
   
   <entry>
     <title type="html"><![CDATA[Emacs使用技巧]]></title>
-    <link href="http://yulongniu.github.io/blog/2011/08/12/emacs-tips/"/>
-    <updated>2011-08-12T14:57:17-04:00</updated>
-    <id>http://yulongniu.github.io/blog/2011/08/12/emacs-tips</id>
+    <link href="http://yulongniu.github.io/blog/2011/08/13/emacs-tips/"/>
+    <updated>2011-08-13T02:57:17+08:00</updated>
+    <id>http://yulongniu.github.io/blog/2011/08/13/emacs-tips</id>
     <content type="html"><![CDATA[<h2 id="section">1. 安装</h2>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
@@ -5262,9 +5210,9 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
   
   <entry>
     <title type="html"><![CDATA[Linux常用命令集锦]]></title>
-    <link href="http://yulongniu.github.io/blog/2010/11/08/linux-command/"/>
-    <updated>2010-11-08T17:00:40-05:00</updated>
-    <id>http://yulongniu.github.io/blog/2010/11/08/linux-command</id>
+    <link href="http://yulongniu.github.io/blog/2010/11/09/linux-command/"/>
+    <updated>2010-11-09T06:00:40+08:00</updated>
+    <id>http://yulongniu.github.io/blog/2010/11/09/linux-command</id>
     <content type="html"><![CDATA[<h2 id="section">1. 压缩与解压缩</h2>
 
 <p><code class="language-bash">.tar.gz</code>格式文件</p>
@@ -5788,6 +5736,10 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 <span class="line-number">15</span>
 <span class="line-number">16</span>
 <span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 查看用户 </span>
 </span><span class="line"><span class="nv">$ </span>w
 </span><span class="line"><span class="nv">$ </span>who
@@ -5802,6 +5754,10 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 </span><span class="line">
 </span><span class="line"><span class="c"># 删除用户 </span>
 </span><span class="line"><span class="nv">$ </span>userdel -r usrname
+</span><span class="line">
+</span><span class="line"><span class="c"># 查看用户登陆</span>
+</span><span class="line"><span class="nv">$ </span>last
+</span><span class="line"><span class="nv">$ </span>last usrname
 </span><span class="line">
 </span><span class="line"><span class="c"># 查看当前任务 </span>
 </span><span class="line"><span class="nv">$ </span>top
@@ -5893,8 +5849,14 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 <span class="line-number">6</span>
 <span class="line-number">7</span>
 <span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 安装rpm包 </span>
 </span><span class="line"><span class="c"># rpm -ivh pkg.rpm</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 更新rpm包</span>
+</span><span class="line"><span class="c"># rpm -Uvh pkg.rpm</span>
 </span><span class="line">
 </span><span class="line"><span class="c"># 查看已经安装的包 </span>
 </span><span class="line"><span class="c"># rpm -qa | grep pkg.rpm</span>
@@ -6018,6 +5980,12 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 </span><span class="line"><span class="c"># chkconfig --list</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<h2 id="section-23">35. 系统运行日志</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># cat /var/log/messages</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
 <h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
 
 <ul>
@@ -6047,7 +6015,7 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
   </li>
 </ul>
 
-<h3 id="section-23">更新记录</h3>
+<h3 id="section-24">更新记录</h3>
 
 <p>2014年7月25日</p>
 ]]></content>
@@ -6056,7 +6024,7 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
   <entry>
     <title type="html"><![CDATA[Linux安装R语言包]]></title>
     <link href="http://yulongniu.github.io/blog/2010/09/04/linux-install-r/"/>
-    <updated>2010-09-04T10:21:38-04:00</updated>
+    <updated>2010-09-04T22:21:38+08:00</updated>
     <id>http://yulongniu.github.io/blog/2010/09/04/linux-install-r</id>
     <content type="html"><![CDATA[<h2 id="r">1. R包介绍</h2>
 
@@ -6442,6 +6410,300 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 <h3 id="section-5">更新记录</h3>
 
 <p>2014年11月25日</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux常用软件集锦]]></title>
+    <link href="http://yulongniu.github.io/blog/2010/07/08/linux-software/"/>
+    <updated>2010-07-08T11:09:31+08:00</updated>
+    <id>http://yulongniu.github.io/blog/2010/07/08/linux-software</id>
+    <content type="html"><![CDATA[<p>本文收集了一些好用或者好玩的Linux软件，安装方法使用<a href="https://getfedora.org/">Fedora</a>系统示例。</p>
+
+<h2 id="section">1. 添加常用源</h2>
+
+<p>添加<a href="http://rpmfusion.org/Configuration">rpmfusion</a>的free和nonfree源。</p>
+
+<h2 id="section-1">2. 互联网</h2>
+
+<ul>
+  <li>Skype</li>
+</ul>
+
+<blockquote>
+  <p><a href="http://www.skype.com/">Skype</a>提供了常用Linux发行版的安装包，可以直接下载使用。</p>
+</blockquote>
+
+<!--more-->
+
+<h2 id="section-2">3. 影音</h2>
+
+<ul>
+  <li>VLC</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install vlc</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>Mplayer</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install mplayer-gui xine smplayer</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>录音工具Audacity</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install audacity</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>屏幕录制RecordMyDesktop</li>
+</ul>
+
+<p>Linux下有很多录制屏幕的软件，推荐RecordMyDesktop。可以自己选定屏幕区域和大小，也可以把界面缩小到屏幕的下方，变成一个小的按钮，以方便操作。录制的文件为ogv格式，推荐使用VLC打开。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 安装方法</span>
+</span><span class="line"><span class="c"># yum install recordmydesktop</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 使用方法</span>
+</span><span class="line"><span class="nv">$ </span>qt-recordMyDesktop
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-3">4. 办公</h2>
+
+<ul>
+  <li>字典GoldenDict</li>
+</ul>
+
+<p>Linux下曾经风靡一时的字典StarDict，现在有了更加先进和方便的接班人<a href="http://goldendict.org/">GoldenDict</a> 。GoldenDict的主要特点有：</p>
+
+<ol>
+  <li>
+    <p>字典库丰富;</p>
+  </li>
+  <li>
+    <p>直接查询维基百科和其他网络字典;</p>
+  </li>
+  <li>
+    <p>支持字典分类、发音（字典库包括发音）、光标取词等。</p>
+  </li>
+</ol>
+
+<p><strong>安装方法：</strong></p>
+
+<p>参考GoldenDict的<a href="https://github.com/goldendict/goldendict">GitHub安装介绍</a>，字典发音需要安装Mplayer，Fedora安装可能依赖的库如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install bzip2-devel gcc-c++ git hunspell-devel \</span>
+</span><span class="line">libvorbis-devel libXtst-devel phonon-devel <span class="se">\</span>
+</span><span class="line">qt-devel qtwebkit ffmpeg ffmpeg-devel <span class="se">\</span>
+</span><span class="line">lzo lzo-devel eb eb-devel
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>添加离线字典</strong></p>
+
+<ul>
+  <li>安装dictd-server</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install dictd-server</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>dsl文件处理</li>
+</ul>
+
+<p>GoldenDict只能识别dsl格式的字典文件，所以先进行处理。一般得到dsl文件内容如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">mydict.dsl
+</span><span class="line">mydict.bmp
+</span><span class="line">mydict.ann
+</span><span class="line">mydict.images.rar
+</span><span class="line">mydict.sounds.rar</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<blockquote>
+  <p>压缩dsl文件：</p>
+</blockquote>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># dictzip mydict.dsl </span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<blockquote>
+  <p>解压images和sounds的所有文件到同一个文件夹，之后将其<a href="http://forum.ubuntu.org.cn/viewtopic.php?f=48&amp;t=316122&amp;start=0">全部压缩到一个文件夹中</a>：</p>
+</blockquote>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># find . -name &quot;*&quot; -print | zip -9 ../mydict.dsl.dz.files.zip -@</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<blockquote>
+  <p>最后，得到如下文件，使用GoldenDict载入即可，注意文件的命名都统一为<code>mydict</code>：</p>
+</blockquote>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">mydict.dsl.dz
+</span><span class="line">mydict.dsl.dz.files.zip
+</span><span class="line">mydict.ann
+</span><span class="line">mydict.bmp</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>以下是两张在GoldenDict中查询维基百科和大英百科的效果图。</p>
+
+<p><img src="http://yulongniu.github.io/images/linux_software_goldendict1.png" width="500" height="700" title="image" alt="images" /></p>
+
+<p><img src="http://yulongniu.github.io/images/linux_software_goldendict2.png" width="500" height="700" title="image" alt="images" /></p>
+
+<ul>
+  <li>chm阅读器</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install kchmviewer</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>文档注释工具Xournal</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install xournal</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>ePub文件阅读器</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install fbreader</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>djvu文件阅读器</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install djvulibre</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>unrar解压工具</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install unrar</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>截屏工具KSnapshot</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install ksnapshot</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>图片转换工具<a href="http://www.imagemagick.org/">ImageMagick</a></li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install ImageMagick</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 设置转换图片质量，1质量最低，100质量最高</span>
+</span><span class="line"><span class="nv">$ </span>convert -quality <span class="m">100</span> input.pdf output.jpg
+</span><span class="line">
+</span><span class="line"><span class="c"># 设置像素，比如转换的是500px</span>
+</span><span class="line"><span class="nv">$ </span>convert -density <span class="m">500</span> input.pdf output.jpg
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>TeX文本编辑器</li>
+</ul>
+
+<p><a href="http://texstudio.sourceforge.net/">TeXstudio</a>支持自动补全、代码高亮、错误提示、文档预览、图片表格公式生成、LaTeX/PDFLaTeX/XeLaTeX。甚至还有一个“放大镜”，放大观察生成文档字体和公式细节。TeXstudio仍然保持持续更新的态势，以下是安装方法和一个阅览图。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install texstudio</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><img src="http://yulongniu.github.io/images/linux_software_texstudio.jpg" width="500" height="700" title="image" alt="images" /></p>
+
+<h2 id="windows">5. 模拟Windows程序</h2>
+
+<ul>
+  <li>Wine</li>
+</ul>
+
+<p>Wine可以尽可能模拟Window软件</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install wine</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>同时可能需要Winetricks辅助</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># wget http://www.kegel.com/wine/winetricks</span>
+</span><span class="line"><span class="c"># chmod +x winetricks</span>
+</span><span class="line"><span class="c"># mv winetricks /usr/local/bin</span>
+</span><span class="line"><span class="c"># winetricks mfc42 </span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>PlayOnLinux</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># wget http://rpm.playonlinux.com/playonlinux.repo</span>
+</span><span class="line"><span class="c"># mv playonlinux.repo /etc/yum.repos.d/</span>
+</span><span class="line"><span class="c"># yum update</span>
+</span><span class="line"><span class="c"># yum install playonlinux</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li><a href="http://xmodulo.com/convert-pdf-files-to-jpg-format-on-linux.html">pdf转换jpg/jpeg文件</a></li>
+</ul>
+
+<h3 id="section-4">更新记录</h3>
+
+<p>2014年12月11日</p>
+
 ]]></content>
   </entry>
   
