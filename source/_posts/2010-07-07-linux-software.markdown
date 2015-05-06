@@ -222,6 +222,20 @@ Wine可以尽可能模拟Window软件
 {% endcodeblock %}
 
 
+## 6. 驱动程序 ##
+
+* Fedora安装NVIDIA显卡驱动
+
+安装过程参考[Fedora 20安装Nvidia 显卡驱动](http://blog.csdn.net/icemango1209/article/details/18766353)。需要注意关闭窗口界面，从而进入完全字符界面操作。
+
+{% codeblock lang:bash %}
+# 进入字符界面
+# init 3
+
+# 进入图形界面
+# init 5
+{% endcodeblock %}
+
 
 ### <a id="Ref">参考网址</a> ###
 
@@ -229,7 +243,7 @@ Wine可以尽可能模拟Window软件
 
 ### 更新记录 ###
 
-2014年12月11日
+2015年4月6日
 
 
 
