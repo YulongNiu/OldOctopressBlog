@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.github.io/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2015-05-06T23:27:07+08:00</updated>
+  <updated>2015-05-08T18:47:32+08:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -12,6 +12,67 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Fedora安装与使用postgresql]]></title>
+    <link href="http://yulongniu.github.io/blog/2015/05/08/install-use-postgresql/"/>
+    <updated>2015-05-08T18:30:54+08:00</updated>
+    <id>http://yulongniu.github.io/blog/2015/05/08/install-use-postgresql</id>
+    <content type="html"><![CDATA[<h2 id="postgresql">安装和开启postgresql</h2>
+
+<p>Fedora直接使用<code class="language-bash">yum</code>安装相关组件。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 安装PostgreSQL</span>
+</span><span class="line"><span class="c"># yum install postgresql postgresql-server postgresql-contrib postgresql-devel pgadmin3</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<!--more-->
+
+<p>初始化（只需要执行一次）。如果出现类似<code class="language-bash">Data directory is not empty!</code>报错，可以尝试执行删除操作<code>rm -f -r /usr/local/pgsql/data</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 初始化</span>
+</span><span class="line"><span class="c"># postgresql-setup initdb</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 开启服务</span>
+</span><span class="line"><span class="c"># service postgresql start</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 查询工作状态</span>
+</span><span class="line"><span class="c"># service postgresql status</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 关闭服务</span>
+</span><span class="line"><span class="c"># service postgresql stop</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 开机启动</span>
+</span><span class="line"><span class="c"># chkconfig postgresql on</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li><a href="http://www.heatware.net/linux-unix/how-install-postgresql-8-4-centos-5/">初始化错误</a></li>
+</ul>
+
+<h3 id="section">更新记录</h3>
+
+<p>2015年5月8日</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[C语言学习记录]]></title>
@@ -5689,6 +5750,9 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 <span class="line-number">18</span>
 <span class="line-number">19</span>
 <span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 终止yum安装</span>
 </span><span class="line"><span class="c"># rm -f /var/run/yum.pid</span>
 </span><span class="line">
@@ -5706,6 +5770,9 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 </span><span class="line">
 </span><span class="line"><span class="c"># 查询已安装包信息</span>
 </span><span class="line"><span class="c"># yum info pkg</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 查看仓库包列表</span>
+</span><span class="line"><span class="c"># yum list pkg*</span>
 </span><span class="line">
 </span><span class="line"><span class="c"># 查看已安装的包</span>
 </span><span class="line"><span class="c"># yum list installed</span>
@@ -6023,7 +6090,7 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 
 <h3 id="section-24">更新记录</h3>
 
-<p>2014年7月25日</p>
+<p>2015年5月8日</p>
 ]]></content>
   </entry>
   
@@ -6416,320 +6483,6 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 <h3 id="section-5">更新记录</h3>
 
 <p>2014年11月25日</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Linux常用软件集锦]]></title>
-    <link href="http://yulongniu.github.io/blog/2010/07/08/linux-software/"/>
-    <updated>2010-07-08T11:09:31+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2010/07/08/linux-software</id>
-    <content type="html"><![CDATA[<p>本文收集了一些好用或者好玩的Linux软件，安装方法使用<a href="https://getfedora.org/">Fedora</a>系统示例。</p>
-
-<h2 id="section">1. 添加常用源</h2>
-
-<p>添加<a href="http://rpmfusion.org/Configuration">rpmfusion</a>的free和nonfree源。</p>
-
-<h2 id="section-1">2. 互联网</h2>
-
-<ul>
-  <li>Skype</li>
-</ul>
-
-<blockquote>
-  <p><a href="http://www.skype.com/">Skype</a>提供了常用Linux发行版的安装包，可以直接下载使用。</p>
-</blockquote>
-
-<!--more-->
-
-<h2 id="section-2">3. 影音</h2>
-
-<ul>
-  <li>VLC</li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install vlc</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>Mplayer</li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install mplayer-gui xine smplayer</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>录音工具Audacity</li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install audacity</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>屏幕录制RecordMyDesktop</li>
-</ul>
-
-<p>Linux下有很多录制屏幕的软件，推荐RecordMyDesktop。可以自己选定屏幕区域和大小，也可以把界面缩小到屏幕的下方，变成一个小的按钮，以方便操作。录制的文件为ogv格式，推荐使用VLC打开。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 安装方法</span>
-</span><span class="line"><span class="c"># yum install recordmydesktop</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># 使用方法</span>
-</span><span class="line"><span class="nv">$ </span>qt-recordMyDesktop
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-3">4. 办公</h2>
-
-<ul>
-  <li>字典GoldenDict</li>
-</ul>
-
-<p>Linux下曾经风靡一时的字典StarDict，现在有了更加先进和方便的接班人<a href="http://goldendict.org/">GoldenDict</a> 。GoldenDict的主要特点有：</p>
-
-<ol>
-  <li>
-    <p>字典库丰富;</p>
-  </li>
-  <li>
-    <p>直接查询维基百科和其他网络字典;</p>
-  </li>
-  <li>
-    <p>支持字典分类、发音（字典库包括发音）、光标取词等。</p>
-  </li>
-</ol>
-
-<p><strong>安装方法：</strong></p>
-
-<p>参考GoldenDict的<a href="https://github.com/goldendict/goldendict">GitHub安装介绍</a>，字典发音需要安装Mplayer，Fedora安装可能依赖的库如下：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install bzip2-devel gcc-c++ git hunspell-devel \</span>
-</span><span class="line">libvorbis-devel libXtst-devel phonon-devel <span class="se">\</span>
-</span><span class="line">qt-devel qtwebkit ffmpeg ffmpeg-devel <span class="se">\</span>
-</span><span class="line">lzo lzo-devel eb eb-devel
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><strong>添加离线字典</strong></p>
-
-<ul>
-  <li>安装dictd-server</li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install dictd-server</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>dsl文件处理</li>
-</ul>
-
-<p>GoldenDict只能识别dsl格式的字典文件，所以先进行处理。一般得到dsl文件内容如下：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">mydict.dsl
-</span><span class="line">mydict.bmp
-</span><span class="line">mydict.ann
-</span><span class="line">mydict.images.rar
-</span><span class="line">mydict.sounds.rar</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<blockquote>
-  <p>压缩dsl文件：</p>
-</blockquote>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># dictzip mydict.dsl </span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<blockquote>
-  <p>解压images和sounds的所有文件到同一个文件夹，之后将其<a href="http://forum.ubuntu.org.cn/viewtopic.php?f=48&amp;t=316122&amp;start=0">全部压缩到一个文件夹中</a>：</p>
-</blockquote>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># find . -name &quot;*&quot; -print | zip -9 ../mydict.dsl.dz.files.zip -@</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<blockquote>
-  <p>最后，得到如下文件，使用GoldenDict载入即可，注意文件的命名都统一为<code>mydict</code>：</p>
-</blockquote>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">mydict.dsl.dz
-</span><span class="line">mydict.dsl.dz.files.zip
-</span><span class="line">mydict.ann
-</span><span class="line">mydict.bmp</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>以下是两张在GoldenDict中查询维基百科和大英百科的效果图。</p>
-
-<p><img src="http://yulongniu.github.io/images/linux_software_goldendict1.png" width="500" height="700" title="image" alt="images" /></p>
-
-<p><img src="http://yulongniu.github.io/images/linux_software_goldendict2.png" width="500" height="700" title="image" alt="images" /></p>
-
-<ul>
-  <li>chm阅读器</li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install kchmviewer</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>文档注释工具Xournal</li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install xournal</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>ePub文件阅读器</li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install fbreader</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>djvu文件阅读器</li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install djvulibre</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>unrar解压工具</li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install unrar</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>截屏工具KSnapshot</li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install ksnapshot</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>图片转换工具<a href="http://www.imagemagick.org/">ImageMagick</a></li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install ImageMagick</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># 设置转换图片质量，1质量最低，100质量最高</span>
-</span><span class="line"><span class="nv">$ </span>convert -quality <span class="m">100</span> input.pdf output.jpg
-</span><span class="line">
-</span><span class="line"><span class="c"># 设置像素，比如转换的是500px</span>
-</span><span class="line"><span class="nv">$ </span>convert -density <span class="m">500</span> input.pdf output.jpg
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>TeX文本编辑器</li>
-</ul>
-
-<p><a href="http://texstudio.sourceforge.net/">TeXstudio</a>支持自动补全、代码高亮、错误提示、文档预览、图片表格公式生成、LaTeX/PDFLaTeX/XeLaTeX。甚至还有一个“放大镜”，放大观察生成文档字体和公式细节。TeXstudio仍然保持持续更新的态势，以下是安装方法和一个阅览图。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install texstudio</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><img src="http://yulongniu.github.io/images/linux_software_texstudio.jpg" width="500" height="700" title="image" alt="images" /></p>
-
-<h2 id="windows">5. 模拟Windows程序</h2>
-
-<ul>
-  <li>Wine</li>
-</ul>
-
-<p>Wine可以尽可能模拟Window软件</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install wine</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>同时可能需要Winetricks辅助</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># wget http://www.kegel.com/wine/winetricks</span>
-</span><span class="line"><span class="c"># chmod +x winetricks</span>
-</span><span class="line"><span class="c"># mv winetricks /usr/local/bin</span>
-</span><span class="line"><span class="c"># winetricks mfc42 </span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>PlayOnLinux</li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># wget http://rpm.playonlinux.com/playonlinux.repo</span>
-</span><span class="line"><span class="c"># mv playonlinux.repo /etc/yum.repos.d/</span>
-</span><span class="line"><span class="c"># yum update</span>
-</span><span class="line"><span class="c"># yum install playonlinux</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-4">6. 驱动程序</h2>
-
-<ul>
-  <li>Fedora安装NVIDIA显卡驱动</li>
-</ul>
-
-<p>安装过程参考<a href="http://blog.csdn.net/icemango1209/article/details/18766353">Fedora 20安装Nvidia 显卡驱动</a>。需要注意关闭窗口界面，从而进入完全字符界面操作。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 进入字符界面</span>
-</span><span class="line"><span class="c"># init 3</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># 进入图形界面</span>
-</span><span class="line"><span class="c"># init 5</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
-
-<ul>
-  <li><a href="http://xmodulo.com/convert-pdf-files-to-jpg-format-on-linux.html">pdf转换jpg/jpeg文件</a></li>
-</ul>
-
-<h3 id="section-5">更新记录</h3>
-
-<p>2015年4月6日</p>
-
 ]]></content>
   </entry>
   
