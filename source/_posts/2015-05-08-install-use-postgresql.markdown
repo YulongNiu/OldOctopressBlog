@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Fedora安装与使用postgresql"
+title: "Fedora安装与使用PostgreSQL"
 date: 2015-05-08 18:30:54 +0800
 comments: true
 categories: Linux
