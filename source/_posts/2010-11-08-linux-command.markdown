@@ -352,6 +352,9 @@ UUID=12D345251F34 /media/D ntfs defaults 0 0
 # 查询已安装包信息
 # yum info pkg
 
+# 查看仓库包列表
+# yum list pkg*
+
 # 查看已安装的包
 # yum list installed
 {% endcodeblock %}
@@ -577,4 +580,4 @@ $ wget -c -t 0 -w 30 httplink
 
 ### 更新记录 ###
 
-2014年7月25日
+2015年5月8日
