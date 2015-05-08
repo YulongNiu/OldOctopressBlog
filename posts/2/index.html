@@ -184,6 +184,78 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-07-23T01:45:46+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2014/07/23/octopress-install/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.github.io/blog/2014/07/23/octopress-install/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2014/07/23/octopress-install/" itemprop="url">Octopress安装和使用</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><p>安装和使用Octopress的一些注意事项，详细的内容可以<a href="#Ref">参考网址</a>。</p>
+
+<h2 id="section">1. 安装</h2>
+
+<p>请参考<a href="http://octopress.org/">官网</a>，其他的博客介绍的安装已经失效或者错误。</p>
+
+<p>常用命令:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 预览，可自动更新。使用Ctrl+c终止。</span>
+</span><span class="line"><span class="nv">$ </span>rake preview
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="ruby">2. Ruby版本调整</h2>
+
+<p>因为Octopress需要使用Ruby旧版本，推荐使用<a href="https://rvm.io/">RVM</a>安装Ruby 1.9.3版本。在安转过程中可能会出现<code>"gpg: Can't check signature: public key not found"</code>的错误提示，需要执行一下类似命名，添加公用匙。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>gpg2 --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>使用以下操作设定ruby版本：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span><span class="nb">source</span> ~/.rvm/scripts/rvm
+</span><span class="line"><span class="nv">$ </span>rvm use 1.9.3
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2014/07/23/octopress-install/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-07-05T10:04:38+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2014/07/05/my-first-post/#disqus_thread" itemprop="discussionUrl"
@@ -385,66 +457,6 @@
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-03-18T03:37:45+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2014/03/18/circos-notes/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.github.io/blog/2014/03/18/circos-notes/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2014/03/18/circos-notes/" itemprop="url">Circos Notes</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><p>Mapping data onto a Circos figure requires that you identify what patterns in your data are (a) likely to be important and (b) likely to be present, and create a figure that exposes such patterns. Remember, if the pattern exists, you can’t afford to miss it. If it doesn’t exist, you can’t afford to be fooled into thinking that it’s there, or left wondering whether it’s occluded by other data.</p>
-
-<h2 id="run-circos">1. Run circos</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">bin/circos
-</span><span class="line">-png
-</span><span class="line">-svg
-</span><span class="line">-conf etc/circos.conf
-</span><span class="line">-outputdir /path/to/your/output/directory
-</span><span class="line">-outputfile yourimage.png
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2014/03/18/circos-notes/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -468,6 +480,8 @@
   
   <div id="recent_posts" class="list-group">
     
+    <a class="list-group-item " href="/blog/2015/05/09/python-different-version/">使用多个版本Python</a>
+    
     <a class="list-group-item " href="/blog/2015/05/08/install-use-postgresql/">Fedora安装与使用PostgreSQL</a>
     
     <a class="list-group-item " href="/blog/2014/12/08/c-program-note/">C语言学习记录</a>
@@ -475,8 +489,6 @@
     <a class="list-group-item " href="/blog/2014/12/02/emacs-config-c/">Emacs配置C语言编程环境</a>
     
     <a class="list-group-item " href="/blog/2014/07/26/short-sequence-alignment/">二代测序中的短序列比对</a>
-    
-    <a class="list-group-item " href="/blog/2014/07/23/octopress-install/">Octopress安装和使用</a>
     
   </div>
 </section>
@@ -518,7 +530,7 @@
     
     
     <a class="list-group-item " href="/blog/categories/ppr/index.html">
-        <span class="badge">1</span>
+        <span class="badge">2</span>
         ppr
       </a>
     

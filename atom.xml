@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.github.io/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2015-05-08T23:10:28+08:00</updated>
+  <updated>2015-05-09T00:43:40+08:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -12,6 +12,107 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[使用多个版本Python]]></title>
+    <link href="http://yulongniu.github.io/blog/2015/05/09/python-different-version/"/>
+    <updated>2015-05-09T00:14:10+08:00</updated>
+    <id>http://yulongniu.github.io/blog/2015/05/09/python-different-version</id>
+    <content type="html"><![CDATA[<p>同时在一台电脑上使用多个版本的Python，可以通过<a href="https://github.com/yyuu/pyenv">pyenv</a>控制和管理。</p>
+
+<h2 id="section">1. 安装方法</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>git clone git://github.com/yyuu/pyenv.git ~/.pyenv
+</span><span class="line">
+</span><span class="line"><span class="c"># 写入路径信息</span>
+</span><span class="line"><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;export PYENV_ROOT=&quot;$HOME/.pyenv&quot;&#39;</span> &gt;&gt; ~/.bashrc
+</span><span class="line"><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;export PATH=&quot;$PYENV_ROOT/bin:$PATH&quot;&#39;</span> &gt;&gt; ~/.bashrc
+</span><span class="line"><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;eval &quot;$(pyenv init -)&quot;&#39;</span> &gt;&gt; ~/.bashrc
+</span><span class="line">
+</span><span class="line"><span class="c"># 重新载入</span>
+</span><span class="line"><span class="nv">$ </span><span class="nb">source</span> ~/.bashrc
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="python">2. 安装多个版本Python和对应包</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 查看可提供的Python版本列表</span>
+</span><span class="line"><span class="nv">$ </span>pyenv install --list
+</span><span class="line">
+</span><span class="line"><span class="c"># 安装Python所依赖包</span>
+</span><span class="line"><span class="c"># yum install readline readline-devel readline-static openssl openssl-devel openssl-static sqlite-devel bzip2-devel bzip2-libs</span>
+</span><span class="line"><span class="c"># 安装其他版本Python</span>
+</span><span class="line"><span class="nv">$ </span>pyenv install 3.4.3
+</span><span class="line"><span class="nv">$ </span>pyenv rehash
+</span><span class="line">
+</span><span class="line"><span class="c"># 查看已安装Python版本</span>
+</span><span class="line"><span class="nv">$ </span>pyenv versions
+</span><span class="line">
+</span><span class="line"><span class="c"># 全局切换Python版本</span>
+</span><span class="line"><span class="nv">$ </span>pyenv global 3.4.3
+</span><span class="line">
+</span><span class="line"><span class="c"># 安装对应版本Python包。</span>
+</span><span class="line"><span class="c"># 每次安装包之后，都要执行rehash。</span>
+</span><span class="line"><span class="nv">$ </span>pip install ipython
+</span><span class="line"><span class="nv">$ </span>pyenv rehash
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="pyenv">3. 更新pyenv</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span><span class="nb">cd</span> ~/.pyenv
+</span><span class="line"><span class="nv">$ </span>git pull
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="python-1">4. 删除特定版本Python</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 查找特定版本Python文件夹位置，之后直接删除即可。</span>
+</span><span class="line"><span class="nv">$ </span>pyenv prefix 3.4.3
+</span><span class="line"><span class="nv">$ </span>rm -rf ~/.pyenv/versions/3.4.3
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li><a href="http://seisman.info/python-pyenv.html">Python多版本共存之pyenv</a></li>
+</ul>
+
+<h3 id="section-1">更新记录</h3>
+
+<p>2015年5月9日</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Fedora安装与使用PostgreSQL]]></title>
@@ -145,6 +246,9 @@
 <span class="line-number">19</span>
 <span class="line-number">20</span>
 <span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 登录testdb数据库控制台</span>
 </span><span class="line"><span class="nv">$ </span>psql testdb
 </span><span class="line">
@@ -160,6 +264,9 @@
 </span><span class="line">
 </span><span class="line"><span class="c"># 查看所有用户</span>
 </span><span class="line"><span class="nv">testdb</span><span class="o">=</span><span class="c"># \du</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 查看表格（table）</span>
+</span><span class="line"><span class="nv">testdb</span><span class="o">=</span><span class="c"># \dt</span>
 </span><span class="line">
 </span><span class="line"><span class="c"># 查看所有数据库</span>
 </span><span class="line"><span class="nv">testdb</span><span class="o">=</span><span class="c"># \l</span>
@@ -184,7 +291,7 @@
 
 <h3 id="section-1">更新记录</h3>
 
-<p>2015年5月8日</p>
+<p>2015年5月9日</p>
 ]]></content>
   </entry>
   
@@ -6205,398 +6312,6 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 <h3 id="section-24">更新记录</h3>
 
 <p>2015年5月8日</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Linux安装R语言包]]></title>
-    <link href="http://yulongniu.github.io/blog/2010/09/04/linux-install-r/"/>
-    <updated>2010-09-04T22:21:38+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2010/09/04/linux-install-r</id>
-    <content type="html"><![CDATA[<h2 id="r">1. R包介绍</h2>
-
-<p>R的包（package）通常有两种:</p>
-
-<ul>
-  <li>
-    <p>二进制代码包（Binary package）：这种包属于即得即用型（ready-to-use），但是依赖与平台，比如Windows和Linux平台下不同。</p>
-  </li>
-  <li>
-    <p>源代码包（Source package）: 此类包可以跨平台使用，但用之前需要处理或者编译（compiled）。同时，源代码包可以查看到程序源代码，便于查找、修改和引用。</p>
-  </li>
-</ul>
-
-<h2 id="r-1">2. R包安装</h2>
-
-<h3 id="section">2.1 源代码安装</h3>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># R CMD INSTALL /.../myPackage.tar.gz</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>使用此方法，需要解决包依赖问题，即安装此包所依赖的包，安装过程有提示。</p>
-
-<!--more-->
-
-<h3 id="installpackageslanguage-bash">2.2 内置<code class="language-bash">install.packages()</code>函数安装</h3>
-
-<p>使用<code>install.packages()</code>安装，比较简便，联网即可装，装了就可用。使用这种方法安装包时，R会自动安装依赖的包。如果出现安装报错，可能的原因是缺少依赖的系统文件。同时，需要注意的是，一些R包只能在特定的平台上使用。比如<a href="http://www.bioconductor.org/packages/release/bioc/html/Rsubread.html">Rsubread</a>不能在Windows操作系统下使用。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line">install.packages<span class="p">(</span><span class="s">&#39;myPackage&#39;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>同时，可以使用<code class="language-bash">install.packages()</code>安装本地下载的包，尤其适用于在服务器上安装包</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line">install.packages<span class="p">(</span>
-</span><span class="line">  <span class="kt">c</span><span class="p">(</span><span class="s">&#39;XML_0.99-5.tar.gz&#39;</span><span class="p">,</span> <span class="s">&#39;../../Interfaces/Perl/RSPerl_0.8-0.tar.gz&#39;</span><span class="p">),</span>
-</span><span class="line">  repos <span class="o">=</span> <span class="kc">NULL</span><span class="p">,</span>
-</span><span class="line">  configure.args <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>XML <span class="o">=</span> <span class="s">&#39;--with-xml-config=xml-config&#39;</span><span class="p">,</span> RSPerl <span class="o">=</span> <span class="s">&#39;--with-modules= &quot;IO Fcntl&quot;&#39;</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="r-2">3. R包版本查询和更新</h2>
-
-<p>R和R包版本查询</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="c1"># 在启动的R中执行</span>
-</span><span class="line"><span class="kp">R.version</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># R包版本</span>
-</span><span class="line">packageVersion<span class="p">(</span><span class="s">&#39;myPackage&#39;</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 查询当前R的详细信息，包括R版本、R包版本、命名空间等</span>
-</span><span class="line">sessionInfo<span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><a href="http://cran.r-project.org/">CRAN</a>包更新</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="c1"># 可以定期执行以下</span>
-</span><span class="line">update.packages<span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><a href="http://www.bioconductor.org/">Bioconductor</a>的安装和更新方法</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="kn">source</span><span class="p">(</span><span class="s">&#39;http://bioconductor.org/biocLite.R&#39;</span><span class="p">)</span>
-</span><span class="line">biocLite<span class="p">(</span><span class="s">&#39;myPackage&#39;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="r-3">4. 卸载R包</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line">remove.packages<span class="p">(</span><span class="s">&#39;myPackage&#39;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="r-4">5. R包相关函数</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="c1"># 查看包的安装目录</span>
-</span><span class="line"><span class="m">.</span>libPaths<span class="p">()</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 查看已经安装的包目录</span>
-</span><span class="line"><span class="kn">library</span><span class="p">()</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 查看已安装包信息</span>
-</span><span class="line">installed.packages<span class="p">()</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 载入myPackage包</span>
-</span><span class="line"><span class="kn">library</span><span class="p">(</span>myPackage<span class="p">)</span>
-</span><span class="line"><span class="kn">require</span><span class="p">(</span>myPackage<span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 查看当前载入的包</span>
-</span><span class="line"><span class="kp">search</span><span class="p">()</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 查看启动R时自动载入的包。</span>
-</span><span class="line"><span class="kp">getOption</span><span class="p">(</span><span class="s">&#39;defaultPackages&#39;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-1">6. 帮助信息查询</h2>
-
-<h3 id="rr">6.1 R和R包帮助信息</h3>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="c1"># 查询R HOME安装地址</span>
-</span><span class="line"><span class="kp">Sys.getenv</span><span class="p">(</span><span class="s">&#39;R_HOME&#39;</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 查询用户HOME地址</span>
-</span><span class="line"><span class="kp">Sys.getenv</span><span class="p">(</span><span class="s">&#39;HOME&#39;</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 查看某个“函数”或者“方法”的详细内容</span>
-</span><span class="line"><span class="o">?</span>myFunction
-</span><span class="line"><span class="o">?</span>myMethod
-</span><span class="line">
-</span><span class="line"><span class="c1"># 关键词查询</span>
-</span><span class="line"><span class="o">??</span>myKeyword
-</span><span class="line">
-</span><span class="line"><span class="c1"># 查看已经安装包的详细HTML文档</span>
-</span><span class="line">help.start<span class="p">()</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 搜索R网站上的“helpinfor”相关信息</span>
-</span><span class="line">RSiteSearch<span class="p">(</span><span class="s">&#39;helpinputinfor&#39;</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 查看“myPackage”的帮助</span>
-</span><span class="line">help<span class="p">(</span>package <span class="o">=</span> <span class="s">&#39;myPackage&#39;</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 有的包，特别是bioconductor的包有vignette，用函数查看</span>
-</span><span class="line">vignette<span class="p">(</span><span class="s">&#39;myPackage&#39;</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 这个函数也可以查看vignette，更好用一些</span>
-</span><span class="line">openVignette<span class="p">(</span><span class="s">&#39;myPackage&#39;</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 展示一些包中demostration</span>
-</span><span class="line">demo<span class="p">(</span><span class="s">&#39;package&#39;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h3 id="section-2">6.2 查询对象信息</h3>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-<span class="line-number">41</span>
-<span class="line-number">42</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="c1"># 查看&quot;myPackage&quot;中的所有对象</span>
-</span><span class="line"><span class="kp">ls</span><span class="p">(</span><span class="s">&#39;package:myPackage&#39;</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 查看函数的参数</span>
-</span><span class="line"><span class="kp">args</span><span class="p">(</span>myFunction<span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 自动运行该函数帮助文档中的例子</span>
-</span><span class="line">example<span class="p">(</span>myFunction<span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 查看某个对象的模式（mode）</span>
-</span><span class="line"><span class="kp">mode</span><span class="p">(</span>myObject<span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 查看某个对象的属性（attribute）</span>
-</span><span class="line"><span class="kp">attributes</span><span class="p">(</span>myObject<span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 快速查看某个对象的信息</span>
-</span><span class="line"><span class="c1"># 尤其适用于对象有很多行/列</span>
-</span><span class="line">str<span class="p">(</span>myObject<span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 查看某个对象的类</span>
-</span><span class="line"><span class="kp">class</span><span class="p">(</span>myObject<span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 查询某个中某个类的帮助信息，举例如下</span>
-</span><span class="line"><span class="kp">class</span><span class="o">?</span>graph<span class="o">::</span>graph
-</span><span class="line">
-</span><span class="line"><span class="c1"># 查看某个S3泛型函数中所有的方法或者一个类中所有的方法（S3：S version 3）</span>
-</span><span class="line">methods<span class="p">(</span><span class="s">&#39;myMethods&#39;</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 查看S4类的方法</span>
-</span><span class="line">showMethods<span class="p">(</span>class <span class="o">=</span> <span class="s">&#39;myClass&#39;</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 查看某个类或者包的具体内容</span>
-</span><span class="line">getClass<span class="p">(</span><span class="s">&#39;class/package&#39;</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 查看某个类的slot</span>
-</span><span class="line">getSlots<span class="p">(</span><span class="s">&#39;class&#39;</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 查看某个对象的slot</span>
-</span><span class="line">slotNames<span class="p">(</span>myObject<span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 访问对象的slot值使用@，可以连续用</span>
-</span><span class="line">Myobject<span class="o">@</span>slotNames
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-3">7. 查看函数源代码</h2>
-
-<h3 id="section-4">7.1 普通函数源代码</h3>
-
-<p>直接输入函数名称，不加后面的括号。比如:</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="o">&gt;</span> fivenum
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h3 id="s3s4">7.2 查询S3/S4函数源代码</h3>
-
-<p>因为如果使用了R的S3和S4方法，可能一个函数名称对应的多个不同的方法（对应不同的对象）。这时，采用的策略是：</p>
-
-<ol>
-  <li>
-    <p>查询函数对应的方法</p>
-  </li>
-  <li>
-    <p>查询具体方法对应的源代码</p>
-  </li>
-</ol>
-
-<p>比如<code class="language-r">t.test</code>的源代码</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="o">&gt;</span> t.test
-</span><span class="line"><span class="kr">function</span> <span class="p">(</span>x<span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
-</span><span class="line"><span class="kp">UseMethod</span><span class="p">(</span><span class="s">&quot;t.test&quot;</span><span class="p">)</span>
-</span><span class="line"><span class="o">&lt;</span>bytecode<span class="o">:</span> <span class="mh">0x244a248</span><span class="o">&gt;</span>
-</span><span class="line"><span class="o">&lt;</span><span class="kp">environment</span><span class="o">:</span> namespace<span class="o">:</span>stats<span class="o">&gt;</span>
-</span><span class="line">
-</span><span class="line"><span class="c1"># 查询S3对象的方法</span>
-</span><span class="line"><span class="o">&gt;</span> methods<span class="p">(</span><span class="s">&#39;t.test&#39;</span><span class="p">)</span>
-</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> t.test.default<span class="o">*</span> t.test.formula<span class="o">*</span>
-</span><span class="line">
-</span><span class="line">   Non<span class="o">-</span>visible functions are asterisked
-</span><span class="line">
-</span><span class="line">
-</span><span class="line"><span class="c1"># 查看源代码，三种方法</span>
-</span><span class="line"><span class="o">&gt;</span> getAnywhere<span class="p">(</span><span class="s">&#39;t.test.default&#39;</span><span class="p">)</span>
-</span><span class="line"><span class="o">&gt;</span> getS3method<span class="p">(</span><span class="s">&#39;t.test&#39;</span><span class="p">,</span><span class="s">&#39;default&#39;</span><span class="p">)</span>
-</span><span class="line"><span class="o">&gt;</span> stats<span class="o">:::</span>t.test.default
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>另外一个例子，查询<span style="color: blue">affy</span>包中<code class="language-r">pm()</code>的源代码：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="o">&gt;</span> <span class="kn">library</span><span class="p">(</span>affy<span class="p">)</span>
-</span><span class="line"><span class="o">&gt;</span> pm
-</span><span class="line">standardGeneric <span class="kr">for</span> <span class="s">&quot;pm&quot;</span> defined from package <span class="s">&quot;affy&quot;</span>
-</span><span class="line">
-</span><span class="line"><span class="kr">function</span> <span class="p">(</span>object<span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
-</span><span class="line"><span class="kp">standardGeneric</span><span class="p">(</span><span class="s">&quot;pm&quot;</span><span class="p">)</span>
-</span><span class="line"><span class="o">&lt;</span><span class="kp">environment</span><span class="o">:</span> <span class="mh">0x4496f10</span><span class="o">&gt;</span>
-</span><span class="line">Methods may be defined <span class="kr">for</span> arguments<span class="o">:</span> object
-</span><span class="line">Use  showMethods<span class="p">(</span><span class="s">&quot;pm&quot;</span><span class="p">)</span>  <span class="kr">for</span> currently available ones.
-</span><span class="line">
-</span><span class="line"><span class="o">&gt;</span> findMethods<span class="p">(</span><span class="s">&#39;pm&#39;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
-
-<ul>
-  <li>
-    <p><a href="http://yanping.me/cn/blog/2012/01/09/customizing-the-startup-environment/">R包安装</a></p>
-  </li>
-  <li>
-    <p>《R语言编程技术》(The Art of R Programming)</p>
-  </li>
-</ul>
-
-<h3 id="section-5">更新记录</h3>
-
-<p>2014年11月25日</p>
 ]]></content>
   </entry>
   

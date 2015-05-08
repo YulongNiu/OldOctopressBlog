@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ppr | 牛牛龙]]></title>
   <link href="http://yulongniu.github.io/blog/categories/ppr/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2015-05-08T23:10:28+08:00</updated>
+  <updated>2015-05-09T00:43:40+08:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -12,6 +12,107 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[使用多个版本Python]]></title>
+    <link href="http://yulongniu.github.io/blog/2015/05/09/python-different-version/"/>
+    <updated>2015-05-09T00:14:10+08:00</updated>
+    <id>http://yulongniu.github.io/blog/2015/05/09/python-different-version</id>
+    <content type="html"><![CDATA[<p>同时在一台电脑上使用多个版本的Python，可以通过<a href="https://github.com/yyuu/pyenv">pyenv</a>控制和管理。</p>
+
+<h2 id="section">1. 安装方法</h2>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git clone git://github.com/yyuu/pyenv.git ~/.pyenv&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-1&quot;</span>&gt;写入路径信息&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span><span class="nb">echo</span> ‘export <span class="nv">PYENV_ROOT</span><span class="o">=</span>”<span class="nv">$HOME</span>/.pyenv”’ » ~/.bashrc
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> ‘export <span class="nv">PATH</span><span class="o">=</span>”<span class="nv">$PYENV_ROOT</span>/bin:<span class="nv">$PATH</span>”’ » ~/.bashrc
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> ‘eval “<span class="k">$(</span>pyenv init -<span class="k">)</span>”’ » ~/.bashrc&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-2&quot;</span>&gt;重新载入&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span><span class="nb">source</span> ~/.bashrc
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2 id="python">2. 安装多个版本Python和对应包</h2>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 查看可提供的Python版本列表</span>
+</span><span class='line'><span class="nv">$ </span>pyenv install –list&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;python-1&quot;</span>&gt;安装Python所依赖包&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# yum install readline readline-devel readline-static openssl openssl-devel openssl-static sqlite-devel bzip2-devel bzip2-libs
+</span><span class='line'><span class="c"># 安装其他版本Python</span>
+</span><span class='line'><span class="nv">$ </span>pyenv install 3.4.3
+</span><span class='line'><span class="nv">$ </span>pyenv rehash&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;python-2&quot;</span>&gt;查看已安装Python版本&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>pyenv versions&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;python-3&quot;</span>&gt;全局切换Python版本&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>pyenv global 3.4.3&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;python-4&quot;</span>&gt;安装对应版本Python包。&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# 每次安装包之后，都要执行rehash。
+</span><span class='line'><span class="nv">$ </span>pip install ipython
+</span><span class='line'><span class="nv">$ </span>pyenv rehash
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2 id="pyenv">3. 更新pyenv</h2>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/.pyenv
+</span><span class='line'><span class="nv">$ </span>git pull
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2 id="python-5">4. 删除特定版本Python</h2>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 查找特定版本Python文件夹位置，之后直接删除即可。</span>
+</span><span class='line'><span class="nv">$ </span>pyenv prefix 3.4.3
+</span><span class='line'><span class="nv">$ </span>rm -rf ~/.pyenv/versions/3.4.3
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li><a href="http://seisman.info/python-pyenv.html">Python多版本共存之pyenv</a></li>
+</ul>
+
+<h3 id="section-3">更新记录</h3>
+
+<p>2015年5月9日</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress安装和使用]]></title>

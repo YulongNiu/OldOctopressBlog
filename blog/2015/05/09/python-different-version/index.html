@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8">
-  <title>创建R包的最简流程 - 牛牛龙</title>
+  <title>使用多个版本Python - 牛牛龙</title>
   <meta name="author" content="Yulong Niu">
 
   
@@ -14,15 +14,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yulongniu.github.io/blog/2014/03/28/creat-r-package">
+  <link rel="canonical" href="http://yulongniu.github.io/blog/2015/05/09/python-different-version">
   <link href="/favicon.ico" type="image/png" rel="icon">
   <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
 
   <!-- http://opengraphprotocol.org/ -->
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="http://yulongniu.github.io/blog/2014/03/28/creat-r-package">
-  <meta property="og:title" content="创建R包的最简流程 - 牛牛龙">
+  <meta property="og:url" content="http://yulongniu.github.io/blog/2015/05/09/python-different-version">
+  <meta property="og:title" content="使用多个版本Python - 牛牛龙">
   
 
   <!-- mathjax config similar to math.stackexchange -->
@@ -180,7 +180,7 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-03-28T02:53:05+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-09T00:14:10+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="#disqus_thread" itemprop="discussionUrl"
              data-disqus-identifier="http://yulongniu.github.io">Comments</a>
@@ -189,61 +189,106 @@
     
     
     <h1 class="entry-title" itemprop="name headline">
-        创建R包的最简流程
+        使用多个版本Python
         
     </h1>
     
   </header>
 
 
-<div class="entry-content clearfix" itemprop="articleBody description"><p>一个最简单创建R包的流程。</p>
+<div class="entry-content clearfix" itemprop="articleBody description"><p>同时在一台电脑上使用多个版本的Python，可以通过<a href="https://github.com/yyuu/pyenv">pyenv</a>控制和管理。</p>
 
-<h2 id="section">1. 载入工具包</h2>
-
-<p>安装并载入<span style="color: blue">devtools</span>包和<span style="color: blue">roxygen2</span>包。<span style="color: blue">devtools</span>包提供了一些包的检查、安装和打包的基本工具。<span style="color: blue">roxygen2</span>包则使得书写R帮助文档变得轻松简单。如果习惯使用Emacs，可以结合<a href="http://ess.r-project.org/">ESS</a>建立R包，可以将R代码和帮助文档有效组合在一起，便于管理。当然，也可以使用<a href="http://www.rstudio.com/">Rstudio</a>。</p>
+<h2 id="section">1. 安装方法</h2>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="kn">library</span><span class="p">(</span>devtools<span class="p">)</span>
-</span><span class="line"><span class="kn">library</span><span class="p">(</span>roxygen2<span class="p">)</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>git clone git://github.com/yyuu/pyenv.git ~/.pyenv
+</span><span class="line">
+</span><span class="line"><span class="c"># 写入路径信息</span>
+</span><span class="line"><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;export PYENV_ROOT=&quot;$HOME/.pyenv&quot;&#39;</span> &gt;&gt; ~/.bashrc
+</span><span class="line"><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;export PATH=&quot;$PYENV_ROOT/bin:$PATH&quot;&#39;</span> &gt;&gt; ~/.bashrc
+</span><span class="line"><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;eval &quot;$(pyenv init -)&quot;&#39;</span> &gt;&gt; ~/.bashrc
+</span><span class="line">
+</span><span class="line"><span class="c"># 重新载入</span>
+</span><span class="line"><span class="nv">$ </span><span class="nb">source</span> ~/.bashrc
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<!--more-->
-
-<h2 id="description">2. 创建DESCRIPTION文件模板</h2>
+<h2 id="python">2. 安装多个版本Python和对应包</h2>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line">load_all<span class="p">()</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 查看可提供的Python版本列表</span>
+</span><span class="line"><span class="nv">$ </span>pyenv install --list
+</span><span class="line">
+</span><span class="line"><span class="c"># 安装Python所依赖包</span>
+</span><span class="line"><span class="c"># yum install readline readline-devel readline-static openssl openssl-devel openssl-static sqlite-devel bzip2-devel bzip2-libs</span>
+</span><span class="line"><span class="c"># 安装其他版本Python</span>
+</span><span class="line"><span class="nv">$ </span>pyenv install 3.4.3
+</span><span class="line"><span class="nv">$ </span>pyenv rehash
+</span><span class="line">
+</span><span class="line"><span class="c"># 查看已安装Python版本</span>
+</span><span class="line"><span class="nv">$ </span>pyenv versions
+</span><span class="line">
+</span><span class="line"><span class="c"># 全局切换Python版本</span>
+</span><span class="line"><span class="nv">$ </span>pyenv global 3.4.3
+</span><span class="line">
+</span><span class="line"><span class="c"># 安装对应版本Python包。</span>
+</span><span class="line"><span class="c"># 每次安装包之后，都要执行rehash。</span>
+</span><span class="line"><span class="nv">$ </span>pip install ipython
+</span><span class="line"><span class="nv">$ </span>pyenv rehash
 </span></code></pre></td></tr></table></div></figure></notextile></div>
-<p>其中<code class="language-bash">import</code>栏目，在源代码中使用了哪些包，需要逐步在import项目中添加和修改。</p>
 
-<h2 id="section-1">3. 检查包</h2>
+<h2 id="pyenv">3. 更新pyenv</h2>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line">check<span class="p">()</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span><span class="nb">cd</span> ~/.pyenv
+</span><span class="line"><span class="nv">$ </span>git pull
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h2 id="section-2">4. 安装包</h2>
+<h2 id="python-1">4. 删除特定版本Python</h2>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line">install<span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="targzlanguage-bash">5. 生成<code class="language-bash">.tar.gz</code>压缩文件</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line">build<span class="p">()</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 查找特定版本Python文件夹位置，之后直接删除即可。</span>
+</span><span class="line"><span class="nv">$ </span>pyenv prefix 3.4.3
+</span><span class="line"><span class="nv">$ </span>rm -rf ~/.pyenv/versions/3.4.3
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
 
 <ul>
-  <li><a href="https://www.youtube.com/watch?v=9PyQlbAEujY">创建R包视频</a></li>
+  <li><a href="http://seisman.info/python-pyenv.html">Python多版本共存之pyenv</a></li>
 </ul>
 
-<h3 id="section-3">更新记录</h3>
+<h3 id="section-1">更新记录</h3>
 
-<p>2014年9月5日</p>
+<p>2015年5月9日</p>
 </div>
 
 
@@ -267,13 +312,13 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-03-28T02:53:05+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-09T00:14:10+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
           
 
 <span class="glyphicon glyphicon-tags"></span>&nbsp;
 <span class="categories">
   
-    <a class='category' href='/blog/categories/r/'>r</a>
+    <a class='category' href='/blog/categories/ppr/'>ppr</a>
   
 </span>
 
@@ -282,7 +327,7 @@
         
           <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.github.io/blog/2014/03/28/creat-r-package/" data-via="" data-counturl="http://yulongniu.github.io/blog/2014/03/28/creat-r-package/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.github.io/blog/2015/05/09/python-different-version/" data-via="" data-counturl="http://yulongniu.github.io/blog/2015/05/09/python-different-version/" >Tweet</a>
   
   
   
@@ -292,10 +337,8 @@
         
           <ul class="meta text-muted pager">
             
-            <li class="previous"><a href="/blog/2014/03/18/circos-notes/" title="Previous Post: Circos Notes">&laquo; Circos Notes</a></li>
+            <li class="previous"><a href="/blog/2015/05/08/install-use-postgresql/" title="Previous Post: Fedora安装与使用PostgreSQL">&laquo; Fedora安装与使用PostgreSQL</a></li>
             
-            
-            <li class="next"><a href="/blog/2014/05/02/phylo-tool-summary/" title="Next Post: 构建和展示进化树软件使用心得">构建和展示进化树软件使用心得 &raquo;</a></li>
             
           </ul>
         
@@ -320,7 +363,7 @@
   
   <div id="recent_posts" class="list-group">
     
-    <a class="list-group-item " href="/blog/2015/05/09/python-different-version/">使用多个版本Python</a>
+    <a class="list-group-item active" href="/blog/2015/05/09/python-different-version/">使用多个版本Python</a>
     
     <a class="list-group-item " href="/blog/2015/05/08/install-use-postgresql/">Fedora安装与使用PostgreSQL</a>
     
@@ -414,8 +457,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://yulongniu.github.io/blog/2014/03/28/creat-r-package/';
-        var disqus_url = 'http://yulongniu.github.io/blog/2014/03/28/creat-r-package/';
+        var disqus_identifier = 'http://yulongniu.github.io/blog/2015/05/09/python-different-version/';
+        var disqus_url = 'http://yulongniu.github.io/blog/2015/05/09/python-different-version/';
         var disqus_script = 'embed.js';
       
     (function () {
