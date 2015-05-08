@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | 牛牛龙]]></title>
   <link href="http://yulongniu.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2015-05-08T18:49:21+08:00</updated>
+  <updated>2015-05-08T23:10:28+08:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -18,7 +18,7 @@
     <link href="http://yulongniu.github.io/blog/2015/05/08/install-use-postgresql/"/>
     <updated>2015-05-08T18:30:54+08:00</updated>
     <id>http://yulongniu.github.io/blog/2015/05/08/install-use-postgresql</id>
-    <content type="html"><![CDATA[<h2 id="postgresql">安装和开启postgresql</h2>
+    <content type="html"><![CDATA[<h2 id="postgresql">1. 安装和开启postgresql</h2>
 
 <p>Fedora直接使用<code class="language-bash">yum</code>安装相关组件。</p>
 
@@ -62,13 +62,131 @@
 </span><span class='line'>&lt;p&gt;# chkconfig postgresql on
 </span></code></pre></td></tr></table></div></figure></p>
 
+<h2 id="section-4">2. 创建用户和数据库</h2>
+
+<p>为了方便使用，可以在PostgreSQL中创建一个与当前系统用户名相同的用户，比如目前系统登陆用户为Kitty。</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 进入home路径</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd</span> <span class="se">\h</span>ome&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;postgresroot&quot;</span>&gt;进入默认postgres用户，需要输入root密码。&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# 之后系统命令提示符会变成类似“bash-4.3<span class="nv">$”</span>。
+</span><span class='line'><span class="nv">$ </span>su postgres&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-5&quot;</span>&gt;创建用户&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# -P：创建用户后立即创建密码
+</span><span class='line'><span class="c"># -s：用户为superuser</span>
+</span><span class='line'><span class="c"># -e：打印消息</span>
+</span><span class='line'>bash-4.3<span class="nv">$ </span>createuser -P -s -e Kitty&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-6&quot;</span>&gt;创建数据库&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# -O：制定用户
+</span><span class='line'>bash-4.3<span class="nv">$ </span>createdb -O Kitty testdb&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-7&quot;</span>&gt;退出&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;bash-4.3<span class="nv">$ </span><span class="nb">exit</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;postgres&quot;</span>&gt;再创建新的数据库时，不需要进入postgres。&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# 直接在当前登录用户下创建即可。
+</span><span class='line'><span class="c"># 由于PostgreSQL用户与系统登录用户相同，不需要指定PostgreSQL用户</span>
+</span><span class='line'><span class="nv">$ </span>creatdb testdb2&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-8&quot;</span>&gt;删除数据库&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>dropdb testdb2
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>创建完用户和对应数据库后，可以登录数据库控制台。登录后，系统命令提示符会变成类似“testdb=#”。</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;testdb&quot;</span>&gt;登录testdb数据库控制台&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>psql testdb&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-9&quot;</span>&gt;完整登录命令&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# -U：用户名
+</span><span class='line'><span class="c"># -d：数据库</span>
+</span><span class='line'><span class="c"># -h：host，默认为local socket</span>
+</span><span class='line'><span class="c"># -p：端口</span>
+</span><span class='line'><span class="nv">$ </span>psql -U Yulong -d testdb -h /var/run/postgresql -p 5432&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;postgresql-1&quot;</span>&gt;查看PostgreSQL配制文件路径&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;testdb<span class="o">=</span><span class="c"># SHOW config_file;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-10&quot;</span>&gt;查看所有用户&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;testdb<span class="o">=</span><span class="c"># \du&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-11&quot;</span>&gt;查看所有数据库&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;testdb<span class="o">=</span><span class="c"># \l&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-12&quot;</span>&gt;退出&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;testdb<span class="o">=</span><span class="c"># \q</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
 <h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
 
 <ul>
-  <li><a href="http://www.heatware.net/linux-unix/how-install-postgresql-8-4-centos-5/">初始化错误</a></li>
+  <li>
+    <p><a href="http://www.postgresql.org/docs/9.4/interactive/index.html">PostgreSQL 9.4 Manuals</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html">PostgreSQL新手入门</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.heatware.net/linux-unix/how-install-postgresql-8-4-centos-5/">初始化错误</a></p>
+  </li>
 </ul>
 
-<h3 id="section-4">更新记录</h3>
+<h3 id="section-13">更新记录</h3>
 
 <p>2015年5月8日</p>
 ]]></content>
