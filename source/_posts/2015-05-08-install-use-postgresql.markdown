@@ -93,6 +93,9 @@ testdb=# SHOW config_file;
 # 查看所有用户
 testdb=# \du
 
+# 查看表格（table）
+testdb=# \dt
+
 # 查看所有数据库
 testdb=# \l
 
@@ -120,4 +123,4 @@ testdb=# \q
 
 ### 更新记录 ###
 
-2015年5月8日
+2015年5月9日
