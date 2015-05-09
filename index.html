@@ -184,6 +184,67 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-09T13:42:15+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2015/05/09/django-tutorial/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.github.io/blog/2015/05/09/django-tutorial/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2015/05/09/django-tutorial/" itemprop="url">Django使用介绍</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><p>本文是学习<a href="https://docs.djangoproject.com/en/1.8/intro/tutorial01/">Django Tutorial</a>的记录，目的为了帮助快速浏览和查找Django使用细节。</p>
+
+<h2 id="django">1. 安装Django</h2>
+
+<p>本文使用<a href="https://www.python.org/">Python 3.3.6</a>和<a href="http://www.postgresql.org/">PostgreSQL 9.3.6</a>学习Django。可以参考<a href="http://yulongniu.bionutshell.org/blog/2015/05/09/python-different-version/">“使用Pyevn控制多个版本Python”</a>和 <a href="http://yulongniu.bionutshell.org/blog/2015/05/08/install-use-postgresql/">“Fedora安装与使用PostgreSQL”</a>，安装对应版本Python和PostgreSQL。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 安装Django</span>
+</span><span class="line"><span class="nv">$ </span>pip install django
+</span><span class="line">
+</span><span class="line"><span class="c"># 安装PostgreSQL支持psycopg2 </span>
+</span><span class="line"><span class="nv">$ </span>pip install psycopg2
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2015/05/09/django-tutorial/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-09T00:14:10+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2015/05/09/python-different-version/#disqus_thread" itemprop="discussionUrl"
@@ -192,7 +253,7 @@
       </p>
     
     
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2015/05/09/python-different-version/" itemprop="url">使用多个版本Python</a></h2>
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2015/05/09/python-different-version/" itemprop="url">使用Pyevn控制多个版本Python</a></h2>
     
   </header>
 
@@ -221,77 +282,12 @@
 </span><span class="line"><span class="nv">$ </span><span class="nb">source</span> ~/.bashrc
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h2 id="python">2. 安装多个版本Python和对应包</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 查看可提供的Python版本列表</span>
-</span><span class="line"><span class="nv">$ </span>pyenv install --list
-</span><span class="line">
-</span><span class="line"><span class="c"># 安装Python所依赖包</span>
-</span><span class="line"><span class="c"># yum install readline readline-devel readline-static openssl openssl-devel openssl-static sqlite-devel bzip2-devel bzip2-libs</span>
-</span><span class="line"><span class="c"># 安装其他版本Python</span>
-</span><span class="line"><span class="nv">$ </span>pyenv install 3.4.3
-</span><span class="line"><span class="nv">$ </span>pyenv rehash
-</span><span class="line">
-</span><span class="line"><span class="c"># 查看已安装Python版本</span>
-</span><span class="line"><span class="nv">$ </span>pyenv versions
-</span><span class="line">
-</span><span class="line"><span class="c"># 全局切换Python版本</span>
-</span><span class="line"><span class="nv">$ </span>pyenv global 3.4.3
-</span><span class="line">
-</span><span class="line"><span class="c"># 安装对应版本Python包。</span>
-</span><span class="line"><span class="c"># 每次安装包之后，都要执行rehash。</span>
-</span><span class="line"><span class="nv">$ </span>pip install ipython
-</span><span class="line"><span class="nv">$ </span>pyenv rehash
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="pyenv">3. 更新pyenv</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span><span class="nb">cd</span> ~/.pyenv
-</span><span class="line"><span class="nv">$ </span>git pull
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="python-1">4. 删除特定版本Python</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 查找特定版本Python文件夹位置，之后直接删除即可。</span>
-</span><span class="line"><span class="nv">$ </span>pyenv prefix 3.4.3
-</span><span class="line"><span class="nv">$ </span>rm -rf ~/.pyenv/versions/3.4.3
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
-
-<ul>
-  <li><a href="http://seisman.info/python-pyenv.html">Python多版本共存之pyenv</a></li>
-</ul>
-
-<h3 id="section-1">更新记录</h3>
-
-<p>2015年5月9日</p>
 </div>
   
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2015/05/09/python-different-version/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -465,65 +461,6 @@
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-07-26T02:04:25+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2014/07/26/short-sequence-alignment/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.github.io/blog/2014/07/26/short-sequence-alignment/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2014/07/26/short-sequence-alignment/" itemprop="url">二代测序中的短序列比对</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><p>在二代测序数据分析中，非常重要的一步是将测得的短序列“对应”到基因组上。所使用的工具被称为“短序列比对工具（short sequence aligners）”。以下是一些常用工具的介绍。</p>
-
-<h2 id="bowtie">1. Bowtie</h2>
-
-<p><strong>简介</strong>：<a href="http://bowtie-bio.sourceforge.net/">Bowtie2</a>是现在广泛使用的序列比对工具。</p>
-
-<p><strong>运行方式</strong>：所有平台</p>
-
-<p><strong>特点</strong>：</p>
-
-<ul>
-  <li>
-    <p>相比较<a href="http://bowtie-bio.sourceforge.net/index.shtml">Bowtie1</a>，处理大于50bp的短序列，速度更快、也更敏感。Bowtie1在处理小于50bp的短序列上，效果更好。</p>
-  </li>
-  <li>
-    <p><a href="http://support.illumina.com/sequencing/sequencing_software/igenome.ilmn">iGenomes</a>提供一些事先编排（index）的基因组。
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2014/07/26/short-sequence-alignment/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -547,15 +484,15 @@
   
   <div id="recent_posts" class="list-group">
     
-    <a class="list-group-item " href="/blog/2015/05/09/python-different-version/">使用多个版本Python</a>
+    <a class="list-group-item " href="/blog/2015/05/09/django-tutorial/">Django使用介绍</a>
+    
+    <a class="list-group-item " href="/blog/2015/05/09/python-different-version/">使用Pyevn控制多个版本Python</a>
     
     <a class="list-group-item " href="/blog/2015/05/08/install-use-postgresql/">Fedora安装与使用PostgreSQL</a>
     
     <a class="list-group-item " href="/blog/2014/12/08/c-program-note/">C语言学习记录</a>
     
     <a class="list-group-item " href="/blog/2014/12/02/emacs-config-c/">Emacs配置C语言编程环境</a>
-    
-    <a class="list-group-item " href="/blog/2014/07/26/short-sequence-alignment/">二代测序中的短序列比对</a>
     
   </div>
 </section>
@@ -597,7 +534,7 @@
     
     
     <a class="list-group-item " href="/blog/categories/ppr/index.html">
-        <span class="badge">2</span>
+        <span class="badge">3</span>
         ppr
       </a>
     

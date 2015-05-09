@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8">
-  <title>My First Post - 牛牛龙</title>
+  <title>Django使用介绍 - 牛牛龙</title>
   <meta name="author" content="Yulong Niu">
 
   
@@ -14,15 +14,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yulongniu.github.io/blog/2014/07/05/my-first-post">
+  <link rel="canonical" href="http://yulongniu.github.io/blog/2015/05/09/django-tutorial">
   <link href="/favicon.ico" type="image/png" rel="icon">
   <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
 
   <!-- http://opengraphprotocol.org/ -->
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="http://yulongniu.github.io/blog/2014/07/05/my-first-post">
-  <meta property="og:title" content="My First Post - 牛牛龙">
+  <meta property="og:url" content="http://yulongniu.github.io/blog/2015/05/09/django-tutorial">
+  <meta property="og:title" content="Django使用介绍 - 牛牛龙">
   
 
   <!-- mathjax config similar to math.stackexchange -->
@@ -64,7 +64,8 @@
 
 <!--enable to choose theme in octostrap-->
 
-  <link href="http://bootswatch.com/united/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="/assets/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
 
 
 
@@ -179,7 +180,7 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-07-05T10:04:38+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-09T13:42:15+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="#disqus_thread" itemprop="discussionUrl"
              data-disqus-identifier="http://yulongniu.github.io">Comments</a>
@@ -188,84 +189,42 @@
     
     
     <h1 class="entry-title" itemprop="name headline">
-        My First Post
+        Django使用介绍
         
     </h1>
     
   </header>
 
 
-<div class="entry-content clearfix" itemprop="articleBody description"><p>This is my first post. I want to say something. Then say something.</p>
+<div class="entry-content clearfix" itemprop="articleBody description"><p>本文是学习<a href="https://docs.djangoproject.com/en/1.8/intro/tutorial01/">Django Tutorial</a>的记录，目的为了帮助快速浏览和查找Django使用细节。</p>
 
-<p>This is a piece of html code <code class="language-html">&lt;html&gt;</code></p>
+<h2 id="django">1. 安装Django</h2>
+
+<p>本文使用<a href="https://www.python.org/">Python 3.3.6</a>和<a href="http://www.postgresql.org/">PostgreSQL 9.3.6</a>学习Django。可以参考<a href="http://yulongniu.bionutshell.org/blog/2015/05/09/python-different-version/">“使用Pyevn控制多个版本Python”</a>和 <a href="http://yulongniu.bionutshell.org/blog/2015/05/08/install-use-postgresql/">“Fedora安装与使用PostgreSQL”</a>，安装对应版本Python和PostgreSQL。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="k">def</span> <span class="nf">what?</span>
-</span><span class="line">  <span class="mi">42</span>
-</span><span class="line"><span class="k">end</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 安装Django</span>
+</span><span class="line"><span class="nv">$ </span>pip install django
+</span><span class="line">
+</span><span class="line"><span class="c"># 安装PostgreSQL支持psycopg2 </span>
+</span><span class="line"><span class="nv">$ </span>pip install psycopg2
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<!-- more -->
+<!--more-->
 
-<ol>
-  <li>
-    <p>Mathjax supports.</p>
-
-    <script type="math/tex; mode=display">% <![CDATA[
-
- \begin{align*}
-   & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
-   = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
-   & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
-   \phi(e_1, e_1) & \cdots & \phi(e_1, e_n) \\
-   \vdots & \ddots & \vdots \\
-   \phi(e_n, e_1) & \cdots & \phi(e_n, e_n)
- \end{array} \right)
-   \left( \begin{array}{c}
-   y_1 \\
-   \vdots \\
-   y_n
- \end{array} \right)
- \end{align*}
-  %]]></script>
-  </li>
-  <li>
-    <p>Colorful mathjax euqation.</p>
-
-    <script type="math/tex; mode=display">
- \definecolor{energy}{RGB}{114,0,172}
- \definecolor{freq}{RGB}{45,177,93}
- \definecolor{spin}{RGB}{251,0,29}
- \definecolor{signal}{RGB}{18,110,213}
- \definecolor{circle}{RGB}{217,86,16}
- \definecolor{average}{RGB}{203,23,206}
- \color{energy} X_{\color{freq} k} \color{black} =
- \color{average} \frac{1}{N} \sum_{n=0}^{N-1}
- \color{signal}x_n \color{spin}
- e^{\mathrm{i} \color{circle} 2\pi \color{freq}k
- \color{average} \frac{n}{N}}
- </script>
-
-    <p>To find <font color="#7200AC">the energy</font>
- <font color="2DB15D">at a particular frequency</font>,
- <font color="#FB001D">spin</font> <font color="#126ED5">your
- signal</font> <font color="#D04400">around a circle</font>
- <font color="2DB15D">at that frequency</font>, and
- <font color="#CB17CE">average a bunch of points along that
- path</font>.</p>
-  </li>
-</ol>
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
 
 <ul>
-  <li>Show the block.</li>
+  <li><a href="https://docs.djangoproject.com/en/1.8/intro/tutorial01/">Django Tutorial</a></li>
 </ul>
 
-<blockquote>
-  <p>This is the block</p>
-</blockquote>
+<h3 id="section">更新记录</h3>
 
+<p>2015年5月9日</p>
 </div>
 
 
@@ -289,13 +248,13 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-07-05T10:04:38+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-09T13:42:15+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
           
 
 <span class="glyphicon glyphicon-tags"></span>&nbsp;
 <span class="categories">
   
-    <a class='category' href='/blog/categories/saysomething/'>saysomething</a>
+    <a class='category' href='/blog/categories/ppr/'>ppr</a>
   
 </span>
 
@@ -304,7 +263,7 @@
         
           <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.github.io/blog/2014/07/05/my-first-post/" data-via="" data-counturl="http://yulongniu.github.io/blog/2014/07/05/my-first-post/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.github.io/blog/2015/05/09/django-tutorial/" data-via="" data-counturl="http://yulongniu.github.io/blog/2015/05/09/django-tutorial/" >Tweet</a>
   
   
   
@@ -314,10 +273,8 @@
         
           <ul class="meta text-muted pager">
             
-            <li class="previous"><a href="/blog/2014/06/25/parallel-package/" title="Previous Post: R使用parallel包并行计算">&laquo; R使用parallel包并行计算</a></li>
+            <li class="previous"><a href="/blog/2015/05/09/python-different-version/" title="Previous Post: 使用Pyevn控制多个版本Python">&laquo; 使用Pyevn控制多个版本Python</a></li>
             
-            
-            <li class="next"><a href="/blog/2014/07/23/octopress-install/" title="Next Post: Octopress安装和使用">Octopress安装和使用 &raquo;</a></li>
             
           </ul>
         
@@ -342,7 +299,7 @@
   
   <div id="recent_posts" class="list-group">
     
-    <a class="list-group-item " href="/blog/2015/05/09/django-tutorial/">Django使用介绍</a>
+    <a class="list-group-item active" href="/blog/2015/05/09/django-tutorial/">Django使用介绍</a>
     
     <a class="list-group-item " href="/blog/2015/05/09/python-different-version/">使用Pyevn控制多个版本Python</a>
     
@@ -436,8 +393,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://yulongniu.github.io/blog/2014/07/05/my-first-post/';
-        var disqus_url = 'http://yulongniu.github.io/blog/2014/07/05/my-first-post/';
+        var disqus_identifier = 'http://yulongniu.github.io/blog/2015/05/09/django-tutorial/';
+        var disqus_url = 'http://yulongniu.github.io/blog/2015/05/09/django-tutorial/';
         var disqus_script = 'embed.js';
       
     (function () {

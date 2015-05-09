@@ -184,6 +184,61 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-03-28T02:53:05+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2014/03/28/creat-r-package/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.github.io/blog/2014/03/28/creat-r-package/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2014/03/28/creat-r-package/" itemprop="url">创建R包的最简流程</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><p>一个最简单创建R包的流程。</p>
+
+<h2 id="section">1. 载入工具包</h2>
+
+<p>安装并载入<span style="color: blue">devtools</span>包和<span style="color: blue">roxygen2</span>包。<span style="color: blue">devtools</span>包提供了一些包的检查、安装和打包的基本工具。<span style="color: blue">roxygen2</span>包则使得书写R帮助文档变得轻松简单。如果习惯使用Emacs，可以结合<a href="http://ess.r-project.org/">ESS</a>建立R包，可以将R代码和帮助文档有效组合在一起，便于管理。当然，也可以使用<a href="http://www.rstudio.com/">Rstudio</a>。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="kn">library</span><span class="p">(</span>devtools<span class="p">)</span>
+</span><span class="line"><span class="kn">library</span><span class="p">(</span>roxygen2<span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2014/03/28/creat-r-package/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-03-18T03:37:45+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2014/03/18/circos-notes/#disqus_thread" itemprop="discussionUrl"
@@ -454,78 +509,6 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2012-06-25T08:01:36+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2012/06/25/emacs-extend-skills/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.github.io/blog/2012/06/25/emacs-extend-skills/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2012/06/25/emacs-extend-skills/" itemprop="url">Emacs高级使用技巧</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="emacs">1. Emacs配置文件位置</h2>
-
-<p>在Fedora系统下，Emacs的配置文件位置是<code class="language-bash">~/.emacs</code>。在Emacs配置文件中添加内容后，使用<code class="language-emacs-lisp">M-x eval-buffer</code>，使当前配置生效。编译代码以加快加载速度，<code class="language-eamcs-lisp">M-x byte-compile-file</code>。</p>
-
-<p>使用Eamcs解释器<code class="language-emacs-lisp">M-x ielm</code>。</p>
-
-<h2 id="emacs-1">2. Emacs自带的包管理系统</h2>
-
-<p>在Emacs24之后，自带包管理系统，使用<code class="language-bash">M-x eval-buffer</code>进入。可以添加<a href="http://melpa.org/">MELPA源</a>、<a href="https://marmalade-repo.org/">marmalade源</a>、<a href="http://elpa.gnu.org/packages/">GNU源</a>。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Add repositories of Emacs packages</span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-</pre></td><td class="code"><pre><code class="emacs-lisp"><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;package</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
-</span><span class="line">	     <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;marmalade&quot;</span> <span class="o">.</span> <span class="s">&quot;http://marmalade-repo.org/packages/&quot;</span><span class="p">))</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
-</span><span class="line">	     <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;melpa&quot;</span> <span class="o">.</span> <span class="s">&quot;http://melpa.milkbox.net/packages/&quot;</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
-</span><span class="line">	     <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;gnu&quot;</span> <span class="o">.</span> <span class="s">&quot;http://elpa.gnu.org/packages/&quot;</span><span class="p">)))</span>
-</span><span class="line"><span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2012/06/25/emacs-extend-skills/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -549,15 +532,15 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
   
   <div id="recent_posts" class="list-group">
     
-    <a class="list-group-item " href="/blog/2015/05/09/python-different-version/">使用多个版本Python</a>
+    <a class="list-group-item " href="/blog/2015/05/09/django-tutorial/">Django使用介绍</a>
+    
+    <a class="list-group-item " href="/blog/2015/05/09/python-different-version/">使用Pyevn控制多个版本Python</a>
     
     <a class="list-group-item " href="/blog/2015/05/08/install-use-postgresql/">Fedora安装与使用PostgreSQL</a>
     
     <a class="list-group-item " href="/blog/2014/12/08/c-program-note/">C语言学习记录</a>
     
     <a class="list-group-item " href="/blog/2014/12/02/emacs-config-c/">Emacs配置C语言编程环境</a>
-    
-    <a class="list-group-item " href="/blog/2014/07/26/short-sequence-alignment/">二代测序中的短序列比对</a>
     
   </div>
 </section>
@@ -599,7 +582,7 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
     
     
     <a class="list-group-item " href="/blog/categories/ppr/index.html">
-        <span class="badge">2</span>
+        <span class="badge">3</span>
         ppr
       </a>
     

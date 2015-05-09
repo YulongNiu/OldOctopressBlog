@@ -184,6 +184,65 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-07-26T02:04:25+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2014/07/26/short-sequence-alignment/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.github.io/blog/2014/07/26/short-sequence-alignment/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2014/07/26/short-sequence-alignment/" itemprop="url">二代测序中的短序列比对</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><p>在二代测序数据分析中，非常重要的一步是将测得的短序列“对应”到基因组上。所使用的工具被称为“短序列比对工具（short sequence aligners）”。以下是一些常用工具的介绍。</p>
+
+<h2 id="bowtie">1. Bowtie</h2>
+
+<p><strong>简介</strong>：<a href="http://bowtie-bio.sourceforge.net/">Bowtie2</a>是现在广泛使用的序列比对工具。</p>
+
+<p><strong>运行方式</strong>：所有平台</p>
+
+<p><strong>特点</strong>：</p>
+
+<ul>
+  <li>
+    <p>相比较<a href="http://bowtie-bio.sourceforge.net/index.shtml">Bowtie1</a>，处理大于50bp的短序列，速度更快、也更敏感。Bowtie1在处理小于50bp的短序列上，效果更好。</p>
+  </li>
+  <li>
+    <p><a href="http://support.illumina.com/sequencing/sequencing_software/igenome.ilmn">iGenomes</a>提供一些事先编排（index）的基因组。
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2014/07/26/short-sequence-alignment/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-07-23T01:45:46+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2014/07/23/octopress-install/#disqus_thread" itemprop="discussionUrl"
@@ -402,61 +461,6 @@
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-03-28T02:53:05+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2014/03/28/creat-r-package/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.github.io/blog/2014/03/28/creat-r-package/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2014/03/28/creat-r-package/" itemprop="url">创建R包的最简流程</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><p>一个最简单创建R包的流程。</p>
-
-<h2 id="section">1. 载入工具包</h2>
-
-<p>安装并载入<span style="color: blue">devtools</span>包和<span style="color: blue">roxygen2</span>包。<span style="color: blue">devtools</span>包提供了一些包的检查、安装和打包的基本工具。<span style="color: blue">roxygen2</span>包则使得书写R帮助文档变得轻松简单。如果习惯使用Emacs，可以结合<a href="http://ess.r-project.org/">ESS</a>建立R包，可以将R代码和帮助文档有效组合在一起，便于管理。当然，也可以使用<a href="http://www.rstudio.com/">Rstudio</a>。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="kn">library</span><span class="p">(</span>devtools<span class="p">)</span>
-</span><span class="line"><span class="kn">library</span><span class="p">(</span>roxygen2<span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2014/03/28/creat-r-package/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -480,15 +484,15 @@
   
   <div id="recent_posts" class="list-group">
     
-    <a class="list-group-item " href="/blog/2015/05/09/python-different-version/">使用多个版本Python</a>
+    <a class="list-group-item " href="/blog/2015/05/09/django-tutorial/">Django使用介绍</a>
+    
+    <a class="list-group-item " href="/blog/2015/05/09/python-different-version/">使用Pyevn控制多个版本Python</a>
     
     <a class="list-group-item " href="/blog/2015/05/08/install-use-postgresql/">Fedora安装与使用PostgreSQL</a>
     
     <a class="list-group-item " href="/blog/2014/12/08/c-program-note/">C语言学习记录</a>
     
     <a class="list-group-item " href="/blog/2014/12/02/emacs-config-c/">Emacs配置C语言编程环境</a>
-    
-    <a class="list-group-item " href="/blog/2014/07/26/short-sequence-alignment/">二代测序中的短序列比对</a>
     
   </div>
 </section>
@@ -530,7 +534,7 @@
     
     
     <a class="list-group-item " href="/blog/categories/ppr/index.html">
-        <span class="badge">2</span>
+        <span class="badge">3</span>
         ppr
       </a>
     
