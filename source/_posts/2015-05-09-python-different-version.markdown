@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "使用多个版本Python"
+title: "使用Pyevn控制多个版本Python"
 date: 2015-05-09 00:14:10 +0800
 comments: true
 categories: PPR 
@@ -23,6 +23,7 @@ $ echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 $ source ~/.bashrc
 {% endcodeblock %}
 
+<!--more-->
 
 ## 2. 安装多个版本Python和对应包 ##
 
