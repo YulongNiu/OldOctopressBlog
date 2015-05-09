@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ppr | 牛牛龙]]></title>
   <link href="http://yulongniu.github.io/blog/categories/ppr/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2015-05-09T15:59:44+08:00</updated>
+  <updated>2015-05-09T17:21:56+08:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -44,13 +44,106 @@
 </span><span class='line'><span class="nv">$ </span>python -c “import django<span class="p">;</span> print<span class="o">(</span>django.get_version<span class="o">())</span>”
 </span></code></pre></td></tr></table></div></figure></p>
 
+<h2 id="section">2. 创建项目</h2>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 创建名为mysite的项目</span>
+</span><span class='line'><span class="nv">$ </span>django-admin startproject mysite
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>之后，配制数据库。修改<code class="language-bash">mysite/settings.py</code>对应位置。</p>
+
+<p><figure class='code'><figcaption><span>mysite/settings.py</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># Database</span>
+</span><span class='line'><span class="c"># https://docs.djangoproject.com/en/1.8/ref/settings/#databases&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="err">‘</span><span class="n">default</span><span class="err">’</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="err">‘</span><span class="n">ENGINE</span><span class="err">’</span><span class="p">:</span> <span class="err">‘</span><span class="n">django</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">postgresql_psycopg2</span><span class="err">’</span><span class="p">,</span>
+</span><span class='line'>        <span class="err">‘</span><span class="n">NAME</span><span class="err">’</span><span class="p">:</span> <span class="err">‘</span><span class="n">testdb</span><span class="err">’</span><span class="p">,</span>
+</span><span class='line'>        <span class="err">‘</span><span class="n">USER</span><span class="err">’</span><span class="p">:</span> <span class="err">‘</span><span class="n">userName</span><span class="err">’</span><span class="p">,</span>
+</span><span class='line'>        <span class="err">‘</span><span class="n">PASSWORD</span><span class="err">’</span><span class="p">:</span> <span class="err">‘</span><span class="n">passWord</span><span class="err">’</span><span class="p">,</span>
+</span><span class='line'>        <span class="err">‘</span><span class="n">HOST</span><span class="err">’</span><span class="p">:</span> <span class="err">‘</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">postgresql</span><span class="err">’</span><span class="p">,</span>
+</span><span class='line'>        <span class="err">‘</span><span class="n">PORT</span><span class="err">’</span><span class="p">:</span> <span class="err">‘</span><span class="mi">5432</span><span class="err">’</span><span class="p">,</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 配制好数据库后，链接数据库</span>
+</span><span class='line'><span class="nv">$ </span>python manage.py migrate
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>开启Django测试网络服务器</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>python manage.py runserver
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2 id="app">3. 创建app</h2>
+
+<ol>
+  <li>创建新的app，比如<code class="language-bash">polls</code></li>
+</ol>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>python manage.py startapp polls
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ol>
+  <li>修改app</li>
+</ol>
+
+<p>app文件位置<code class="language-bash">polls/models.py</code>，之后在项目配制文件<code class="language-bash">mysite/settings.py</code>中添加app，最后添加app。</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 添加app</span>
+</span><span class='line'><span class="nv">$ </span>python manage.py makemigrations polls&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-1&quot;</span>&gt;如果有数据库操作，可以打印具体的数据库操作脚本&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>python manage.py sqlmigrate polls 0001&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-2&quot;</span>&gt;也可以检查&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>python manage.py check
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ol>
+  <li>链接app与数据库</li>
+</ol>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>python manage.py migrate
+</span></code></pre></td></tr></table></div></figure></p>
+
 <h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
 
 <ul>
   <li><a href="https://docs.djangoproject.com/en/1.8/intro/tutorial01/">Django Tutorial</a></li>
 </ul>
 
-<h3 id="section">更新记录</h3>
+<h3 id="section-3">更新记录</h3>
 
 <p>2015年5月9日</p>
 ]]></content>
