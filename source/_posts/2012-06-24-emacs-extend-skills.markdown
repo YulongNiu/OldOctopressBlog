@@ -89,9 +89,9 @@ categories: lisp
 # contributor: Yulong Niu <yulong.niu@aol.com>
 # --
 
-{% highlight lang:${1:bash} %}
+{% codeblock lang:${1:bash} %}
 $0
-{% endhighlight %}
+{% endcodeblock %}
 {% endraw %}
 
 其中 `${1:bash}`{:.languag-emacs-lisp}表示光标跳转位置，编号从1开始。`$0`{:.language-emacs-lisp}表示光标最后停留位置。如果不需要插入空行，在模板中把多余空行去掉。

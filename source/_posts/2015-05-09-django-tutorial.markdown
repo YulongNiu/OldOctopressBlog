@@ -24,10 +24,10 @@ $ pip install psycopg2
 
 <!--more-->
 
-{% highlight lang:bash %}
+{% codeblock lang:bash %}
 # 检查Django版本
 $ python -c "import django; print(django.get_version())"
-{% endhighlight %}
+{% endcodeblock %}
 
 ### <a id="Ref">参考网址</a> ###
 
