@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.github.io/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2015-05-09T15:50:02+08:00</updated>
+  <updated>2015-05-09T15:59:44+08:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -3655,16 +3655,26 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 
 <p>使用<code class="language-emacs-lisp">M-x yas-new-snippet</code>，打开一个模板。比如，添加Octopress的语言高亮模板</p>
 
-<h1 id="mode-snippet-require-final-newline-nil---">-<em>- mode: snippet; require-final-newline: nil -</em>-</h1>
-<p># name: Highlight Language
-# key: hl
-# binding: direct-keybinding
-# contributor: Yulong Niu <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#121;&#117;&#108;&#111;&#110;&#103;&#046;&#110;&#105;&#117;&#064;&#097;&#111;&#108;&#046;&#099;&#111;&#109;">&#121;&#117;&#108;&#111;&#110;&#103;&#046;&#110;&#105;&#117;&#064;&#097;&#111;&#108;&#046;&#099;&#111;&#109;</a>
-# –</p>
-
-<p>{% codeblock lang:${1:bash} %}
-$0
-{% endcodeblock %}</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class=""><span class="line"># -*- mode: snippet; require-final-newline: nil -*-
+</span><span class="line"># name: Highlight Language
+</span><span class="line"># key: hl
+</span><span class="line"># binding: direct-keybinding
+</span><span class="line"># contributor: Yulong Niu &lt;yulong.niu@aol.com&gt;
+</span><span class="line"># --
+</span><span class="line">
+</span><span class="line">{% codeblock lang:${1:bash} %}
+</span><span class="line">$0
+</span><span class="line">{% endcodeblock %}</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>其中 <code class="languag-emacs-lisp">${1:bash}</code>表示光标跳转位置，编号从1开始。<code class="language-emacs-lisp">$0</code>表示光标最后停留位置。如果不需要插入空行，在模板中把多余空行去掉。</p>
 
