@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ppr | 牛牛龙]]></title>
   <link href="http://yulongniu.github.io/blog/categories/ppr/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2015-05-09T14:14:41+08:00</updated>
+  <updated>2015-05-09T15:46:43+08:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -22,21 +22,22 @@
 
 <h2 id="django">1. 安装Django</h2>
 
-<p>本文使用<a href="https://www.python.org/">Python 3.3.6</a>和<a href="http://www.postgresql.org/">PostgreSQL 9.3.6</a>学习Django。可以参考<a href="http://yulongniu.bionutshell.org/blog/2015/05/09/python-different-version/">“使用Pyevn控制多个版本Python”</a>和 <a href="http://yulongniu.bionutshell.org/blog/2015/05/08/install-use-postgresql/">“Fedora安装与使用PostgreSQL”</a>，安装对应版本Python和PostgreSQL。</p>
+<p>本文使用<a href="https://www.python.org/">Python 3.3.6</a>和<a href="http://www.postgresql.org/">PostgreSQL 9.3.6</a>学习Django。可以参考<a href="http://yulongniu.bionutshell.org/blog/2015/05/09/python-different-version/">“使用Pyenv控制多个版本Python”</a>和 <a href="http://yulongniu.bionutshell.org/blog/2015/05/08/install-use-postgresql/">“Fedora安装与使用PostgreSQL”</a>，安装对应版本Python和PostgreSQL。</p>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 安装Django</span>
-</span><span class='line'><span class="nv">$ </span>pip install django&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;postgresqlpsycopg2&quot;</span>&gt;安装PostgreSQL支持psycopg2&lt;/h1&gt;
-</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>pip install psycopg2
-</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock lang:bash %}
+# 安装Django
+$ pip install django</p>
+
+<h1 id="postgresqlpsycopg2">安装PostgreSQL支持psycopg2</h1>
+<p>$ pip install psycopg2 
+{% endcodeblock %}</p>
 
 <!--more-->
+
+<p>{% highlight lang:bash %}
+# 检查Django版本
+$ python -c “import django; print(django.get_version())”
+{% endhighlight %}</p>
 
 <h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
 
@@ -51,7 +52,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[使用Pyevn控制多个版本Python]]></title>
+    <title type="html"><![CDATA[使用Pyenv控制多个版本Python]]></title>
     <link href="http://yulongniu.github.io/blog/2015/05/09/python-different-version/"/>
     <updated>2015-05-09T00:14:10+08:00</updated>
     <id>http://yulongniu.github.io/blog/2015/05/09/python-different-version</id>
@@ -59,87 +60,58 @@
 
 <h2 id="section">1. 安装方法</h2>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git clone git://github.com/yyuu/pyenv.git ~/.pyenv&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-1&quot;</span>&gt;写入路径信息&lt;/h1&gt;
-</span><span class='line'>&lt;p&gt;<span class="nv">$ </span><span class="nb">echo</span> ‘export <span class="nv">PYENV_ROOT</span><span class="o">=</span>”<span class="nv">$HOME</span>/.pyenv”’ » ~/.bashrc
-</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> ‘export <span class="nv">PATH</span><span class="o">=</span>”<span class="nv">$PYENV_ROOT</span>/bin:<span class="nv">$PATH</span>”’ » ~/.bashrc
-</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> ‘eval “<span class="k">$(</span>pyenv init -<span class="k">)</span>”’ » ~/.bashrc&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-2&quot;</span>&gt;重新载入&lt;/h1&gt;
-</span><span class='line'>&lt;p&gt;<span class="nv">$ </span><span class="nb">source</span> ~/.bashrc
-</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock lang:bash %}
+$ git clone git://github.com/yyuu/pyenv.git ~/.pyenv</p>
+
+<h1 id="section-1">写入路径信息</h1>
+<p>$ echo ‘export PYENV_ROOT=”$HOME/.pyenv”’ » ~/.bashrc
+$ echo ‘export PATH=”$PYENV_ROOT/bin:$PATH”’ » ~/.bashrc
+$ echo ‘eval “$(pyenv init -)”’ » ~/.bashrc</p>
+
+<h1 id="section-2">重新载入</h1>
+<p>$ source ~/.bashrc
+{% endcodeblock %}</p>
 
 <!--more-->
 
 <h2 id="python">2. 安装多个版本Python和对应包</h2>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 查看可提供的Python版本列表</span>
-</span><span class='line'><span class="nv">$ </span>pyenv install –list&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;python-1&quot;</span>&gt;安装Python所依赖包&lt;/h1&gt;
-</span><span class='line'>&lt;p&gt;# yum install readline readline-devel readline-static openssl openssl-devel openssl-static sqlite-devel bzip2-devel bzip2-libs
-</span><span class='line'><span class="c"># 安装其他版本Python</span>
-</span><span class='line'><span class="nv">$ </span>pyenv install 3.4.3
-</span><span class='line'><span class="nv">$ </span>pyenv rehash&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;python-2&quot;</span>&gt;查看已安装Python版本&lt;/h1&gt;
-</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>pyenv versions&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;python-3&quot;</span>&gt;全局切换Python版本&lt;/h1&gt;
-</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>pyenv global 3.4.3&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;python-4&quot;</span>&gt;安装对应版本Python包。&lt;/h1&gt;
-</span><span class='line'>&lt;p&gt;# 每次安装包之后，都要执行rehash。
-</span><span class='line'><span class="nv">$ </span>pip install ipython
-</span><span class='line'><span class="nv">$ </span>pyenv rehash
-</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock lang:bash %}
+# 查看可提供的Python版本列表
+$ pyenv install –list</p>
+
+<h1 id="python-1">安装Python所依赖包</h1>
+<p># yum install readline readline-devel readline-static openssl openssl-devel openssl-static sqlite-devel bzip2-devel bzip2-libs
+# 安装其他版本Python
+$ pyenv install 3.4.3
+$ pyenv rehash</p>
+
+<h1 id="python-2">查看已安装Python版本</h1>
+<p>$ pyenv versions</p>
+
+<h1 id="python-3">全局切换Python版本</h1>
+<p>$ pyenv global 3.4.3</p>
+
+<h1 id="python-4">安装对应版本Python包。</h1>
+<p># 每次安装包之后，都要执行rehash。
+$ pip install ipython
+$ pyenv rehash
+{% endcodeblock %}</p>
 
 <h2 id="pyenv">3. 更新pyenv</h2>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/.pyenv
-</span><span class='line'><span class="nv">$ </span>git pull
-</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock lang:bash %}
+$ cd ~/.pyenv
+$ git pull
+{% endcodeblock %}</p>
 
 <h2 id="python-5">4. 删除特定版本Python</h2>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 查找特定版本Python文件夹位置，之后直接删除即可。</span>
-</span><span class='line'><span class="nv">$ </span>pyenv prefix 3.4.3
-</span><span class='line'><span class="nv">$ </span>rm -rf ~/.pyenv/versions/3.4.3
-</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock lang:bash %}
+# 查找特定版本Python文件夹位置，之后直接删除即可。
+$ pyenv prefix 3.4.3
+$ rm -rf ~/.pyenv/versions/3.4.3
+{% endcodeblock %}</p>
 
 <h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
 
@@ -166,69 +138,57 @@
 
 <p>常用命令:</p>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 预览，可自动更新。使用Ctrl+c终止。</span>
-</span><span class='line'><span class="nv">$ </span>rake preview
-</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock lang:bash %}
+# 预览，可自动更新。使用Ctrl+c终止。
+$ rake preview
+{% endcodeblock %}</p>
 
 <h2 id="ruby">2. Ruby版本调整</h2>
 
 <p>因为Octopress需要使用Ruby旧版本，推荐使用<a href="https://rvm.io/">RVM</a>安装Ruby 1.9.3版本。在安转过程中可能会出现<code>"gpg: Can't check signature: public key not found"</code>的错误提示，需要执行一下类似命名，添加公用匙。</p>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>gpg2 –keyserver hkp://keys.gnupg.net –recv-keys D39DC0E3
-</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock lang:bash %}
+$ gpg2 –keyserver hkp://keys.gnupg.net –recv-keys D39DC0E3
+{% endcodeblock %}</p>
 
 <p>使用以下操作设定ruby版本：</p>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">source</span> ~/.rvm/scripts/rvm
-</span><span class='line'><span class="nv">$ </span>rvm use 1.9.3
-</span></code></pre></td></tr></table></div></figure>
+<p>{% codeblock lang:bash %}
+$ source ~/.rvm/scripts/rvm
+$ rvm use 1.9.3
+{% endcodeblock %}
 <!--more-->    </p>
 
 <h2 id="section-1">3. 预览错误</h2>
 
 <p>如果在预览博文时出现<code class="language-bash">TCPServer Error: Address already in use - bind(2)</code>的错误，表示端口（Octopress默认4000）被占，解决办法:</p>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 获取占据4000端口程序的PID</span>
-</span><span class='line'><span class="nv">$ </span>lsof -wni tcp:4000
-</span><span class='line'><span class="nv">$ </span><span class="nb">kill</span> -9 PID
-</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock lang:bash %}
+# 获取占据4000端口程序的PID
+$ lsof -wni tcp:4000
+$ kill -9 PID
+{% endcodeblock %}</p>
 
 <h2 id="section-2">4. 更新博文</h2>
 
 <p>博文放置在<code class="language-bash">source/_posts</code>目录下。</p>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake new_post<span class="o">[</span>“new post”<span class="o">]</span>
-</span><span class='line'><span class="nv">$ </span>git add .
-</span><span class='line'><span class="nv">$ </span>git commit -m “my comment”
-</span><span class='line'><span class="nv">$ </span>git push origin <span class="nb">source</span>
-</span><span class='line'><span class="nv">$ </span>rake generate
-</span><span class='line'><span class="nv">$ </span>rake deploy&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;generatedeploy&quot;</span>&gt;或者generate和deploy一步执行&lt;/h1&gt;
-</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>rake gen_deploy
-</span></code></pre></td></tr></table></div></figure>
+<p>{% codeblock lang:bash %}
+$ rake new_post[“new post”]
+$ git add .
+$ git commit -m “my comment” 
+$ git push origin source
+$ rake generate
+$ rake deploy</p>
+
+<h1 id="generatedeploy">或者generate和deploy一步执行</h1>
+<p>$ rake gen_deploy
+{% endcodeblock %}
 如果需要在首页显示部分博文，在需要隔断的地方（博文markdown文件）加入：</p>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!--more--&gt;</span>
-</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock lang:html%}
+<!--more-->
+{% endcodeblock %}</p>
 
 <h2 id="section-3">5. 使用主题</h2>
 
@@ -254,71 +214,52 @@
 
 <p>在<code class="language-bash">source</code>文件夹下添加<em>404.markdown</em>文件，之后写入</p>
 
-<h2 id="codeblock-langjavascript-"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="err">/h2&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">layout</span><span class="o">:</span> <span class="nx">page</span>
-</span><span class='line'><span class="nx">title</span><span class="o">:</span> <span class="err">“</span><span class="mi">404</span> <span class="nb">Error</span><span class="err">”</span>
-</span><span class='line'><span class="nx">date</span><span class="o">:</span> <span class="mi">2014</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">22</span>
-</span><span class='line'><span class="nx">comments</span><span class="o">:</span> <span class="kc">false</span>
-</span><span class='line'><span class="nx">sharing</span><span class="o">:</span> <span class="kc">false</span>
-</span><span class='line'><span class="nx">footer</span><span class="o">:</span> <span class="kc">false</span>
-</span><span class='line'><span class="err">—</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;http://www.qq.com/404/search_children.js?edition=small&quot;</span> <span class="nx">charset</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure></p>
+<h2 id="codeblock-langjavascript-">{% codeblock lang:javascript %}</h2>
+<p>layout: page
+title: “404 Error”
+date: 2014-07-22
+comments: false
+sharing: false
+footer: false
+—</p>
+
+<script type="text/javascript" src="http://www.qq.com/404/search_children.js?edition=small" charset="utf-8"></script>
+
+<p>{% endcodeblock %}</p>
 
 <h2 id="section-6">8. 私密博文</h2>
 
 <p>Octopress提供了隐藏博文的功能，即使文章已经推送到了github，也可以不在博客主页显示。具体方法是在每篇markdown文件头部添加：</p>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">published</span><span class="p">:</span> <span class="kp">false</span>
-</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock lang:ruby %}
+published: false
+{% endcodeblock %}</p>
 
 <p>如果需要公开发表，将其删除或者改为：</p>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">published</span><span class="p">:</span> <span class="kp">true</span>
-</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock lang:ruby %}
+published: true
+{% endcodeblock %}</p>
 
 <h2 id="section-7">9. 代码高亮设置</h2>
 
 <p>安装<code>coderay</code>和<code>kramdown</code></p>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>gem install coderay
-</span><span class='line'><span class="nv">$ </span>gem install kramdown
-</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock lang:bash %}
+$ gem install coderay
+$ gem install kramdown
+{% endcodeblock %}</p>
 
 <p>在<code class="language-bash">_config.yml</code>文件中写入：</p>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>markdown: kramdown
-</span><span class='line'>kramdown:
-</span><span class='line'>  use_coderay: <span class="nb">true</span>
-</span><span class='line'><span class="nb">  </span>coderay:
-</span><span class='line'>    coderay_line_numbers: table
-</span><span class='line'>    coderay_css: class
-</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock lang:bash %}
+markdown: kramdown
+kramdown:
+  use_coderay: true
+  coderay:
+    coderay_line_numbers: table
+    coderay_css: class
+{% endcodeblock %}</p>
 
 <h2 id="kramdown">10. Kramdown语法小技巧</h2>
 
@@ -328,13 +269,13 @@
 
 <p>代码段高亮参考<a href="http://octopress.org/docs/plugins/codeblock/">Octopress codeblock</a>，其中<code>[lang:language]</code>设置高亮语言种类。<code>[url]</code>和<code>[linktext]</code>非必须。</p>
 
-<p>
+<p>{% raw %}
 <code>
 {% codeblock [lang:language] [title] [url] [link text] %}
 code snippet
 {% endcodeblock %}
 </code>
-</p>
+{% endraw %}</p>
 
 <p>行内引用代码使用
 <code>`source/_includes/custom/head.html`{:.language-bash}</code></p>
@@ -347,194 +288,129 @@ code snippet
 
 <p>在<code class="language-bash">source/_includes/custom/head.html</code>的末尾添加：</p>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- link open with new tab  --&gt;</span>
-</span><span class='line'><span class="nt">&lt;script&gt;</span>
-</span><span class='line'>  <span class="kd">function</span> <span class="nx">addBlankTargetForLinks</span> <span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;a[href^=&quot;http&quot;]&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="s1">&#39;_blank&#39;</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'>  <span class="p">}</span><span class="nt">&lt;/script&gt;&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;p&gt;</span>$(document).bind(‘DOMNodeInserted’, function(event) {
-</span><span class='line'>  addBlankTargetForLinks();
-</span><span class='line'>  });
-</span><span class='line'><span class="ni">&amp;lt;</span>/script<span class="ni">&amp;gt;</span>
-</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock lang:html %}
+<!-- link open with new tab  -->
+<script>
+  function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+  $(this).attr('target', '_blank');
+  });
+  }</script></p>
+
+<p>$(document).bind(‘DOMNodeInserted’, function(event) {
+  addBlankTargetForLinks();
+  });
+&lt;/script&gt;
+{% endcodeblock %}</p>
 
 <h2 id="section-9">12. 修改分页数</h2>
 
 <p>修改<code class="language-bash">_config.yml</code>文件</p>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 每页最多展示的博文数目</span>
-</span><span class='line'>paginate: 5&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-10&quot;</span>&gt;分页后博文地址&lt;/h1&gt;
-</span><span class='line'>&lt;p&gt;paginate_path: “posts/:num”
-</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock lang:bash %}
+# 每页最多展示的博文数目
+paginate: 5</p>
+
+<h1 id="section-10">分页后博文地址</h1>
+<p>paginate_path: “posts/:num”
+{% endcodeblock %}</p>
 
 <h2 id="section-11">13. 添加图片</h2>
 
 <p>将需要添加的图片移动到目录<code class="language-bash">source/images/</code>，之后在正文中添加：</p>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;img <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;[class names]&quot;</span> <span class="nv">src</span><span class="o">=</span><span class="s2">&quot;/path/to/image&quot;</span> <span class="nv">title</span><span class="o">=</span><span class="s2">&quot;[width] [height] [title text [alt text]]&quot;</span> &gt;&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-12&quot;</span>&gt;例子&lt;/h1&gt;
-</span><span class='line'>&lt;p&gt;&lt;img <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;left&quot;</span> <span class="nv">src</span><span class="o">=</span><span class="s2">&quot;/images/testimg.png&quot;</span> <span class="nv">width</span><span class="o">=</span><span class="s2">&quot;350&quot;</span> <span class="nv">height</span><span class="o">=</span><span class="s2">&quot;350&quot;</span> <span class="nv">title</span><span class="o">=</span><span class="s2">&quot;‘image’ ‘images’&quot;</span> &gt;
-</span><span class='line'>&lt;img <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;right&quot;</span> <span class="nv">src</span><span class="o">=</span><span class="s2">&quot;http://placekitten.com/300/500&quot;</span> <span class="nv">width</span><span class="o">=</span><span class="s2">&quot;150&quot;</span> <span class="nv">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span> <span class="nv">title</span><span class="o">=</span><span class="s2">&quot;Place Kitten #3&quot;</span> &gt;
-</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock lang:bash %}
+{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}</p>
+
+<h1 id="section-12">例子</h1>
+<p>{% img left /images/testimg.png 350 350 ‘image’ ‘images’ %}
+{% img right http://placekitten.com/300/500 150 250 Place Kitten #3 %}
+{% endcodeblock %}</p>
 
 <h2 id="section-13">14. 添加新页面</h2>
 
 <p>首先，添加新的页面：</p>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake new_page<span class="o">[</span>ANewPage<span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock lang:bash %}
+rake new_page[ANewPage]
+{% endcodeblock %}</p>
 
 <p>这会生成一个新的文件<code class="language-bash">source/anewpage/index.markdown</code>。之后，修改<code class="language-bash">source/_includes/custom/navigation.html</code>文件，根据自己主题，添加如下类似内容</p>
 
-<p>
+<p>{% raw %}
 <code>
 &lt;li {% if page.navbar == 'ANewPage' %}class="active"{% endif %}&gt;
   &lt;a href="{{ root_url }}/anewpage"&gt;ANewPage&lt;/a&gt;
 &lt;/li&gt;
 </code>
-</p>
+{% endraw %}</p>
 
 <h2 id="section-14">15. 添加表格</h2>
 
 <p>建立新文件<code>source/stylesheets/data-table.css</code>，写入以下内容，其中<code>#00B9E3</code>是表头的背景颜色，可以更改为自己喜欢的颜色：</p>
 
-<p><figure class='code'><figcaption><span>data-table </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">border-style</span><span class="o">:</span><span class="k">solid</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">border-width</span><span class="o">:</span><span class="m">1px</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">border-color</span><span class="o">:</span><span class="m">#e7e3e7</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
-</span><span class='line'>      <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span><span class="o">,</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span> <span class="p">{</span>
-</span><span class='line'><span class="k">border-style</span><span class="o">:</span><span class="k">dashed</span><span class="p">;</span>
-</span><span class='line'><span class="k">border-width</span><span class="o">:</span><span class="m">1px</span><span class="p">;</span>
-</span><span class='line'><span class="k">border-color</span><span class="o">:</span><span class="m">#e7e3e7</span><span class="p">;</span>
-</span><span class='line'><span class="k">padding-left</span><span class="o">:</span> <span class="m">3px</span><span class="p">;</span>
-</span><span class='line'><span class="k">padding-right</span><span class="o">:</span> <span class="m">3px</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;/</span><span class="nt">ul</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
-</span><span class='line'>      <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span> <span class="p">{</span>
-</span><span class='line'><span class="k">border-style</span><span class="o">:</span><span class="k">solid</span><span class="p">;</span>
-</span><span class='line'><span class="k">font-weight</span><span class="o">:</span><span class="k">bold</span><span class="p">;</span>
-</span><span class='line'><span class="k">background</span><span class="o">:</span> <span class="sx">url(“/images/noise.png?1330434582”)</span> <span class="k">repeat</span> <span class="k">scroll</span> <span class="k">left</span> <span class="k">top</span> <span class="m">#00B9E3</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;/</span><span class="nt">ul</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
-</span><span class='line'>      <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">left</span><span class="err">”</span><span class="o">],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">left</span><span class="err">”</span><span class="o">]</span> <span class="p">{</span>
-</span><span class='line'><span class="k">text-align</span><span class="o">:</span><span class="k">left</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;/</span><span class="nt">ul</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
-</span><span class='line'>      <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">right</span><span class="err">”</span><span class="o">],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">right</span><span class="err">”</span><span class="o">]</span> <span class="p">{</span>
-</span><span class='line'><span class="k">text-align</span><span class="o">:</span><span class="k">right</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;/</span><span class="nt">ul</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
-</span><span class='line'>      <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">center</span><span class="err">”</span><span class="o">],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">center</span><span class="err">”</span><span class="o">]</span> <span class="p">{</span>
-</span><span class='line'><span class="k">text-align</span><span class="o">:</span><span class="k">center</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></li>
+<p>{% codeblock data-table lang:css %}
+* + table {
+  border-style:solid;
+  border-width:1px;
+  border-color:#e7e3e7;
+}</p>
+
+<ul>
+  <li>
+    <ul>
+      <li>table th, * + table td {
+border-style:dashed;
+border-width:1px;
+border-color:#e7e3e7;
+padding-left: 3px;
+padding-right: 3px;
+}</li>
+    </ul>
+  </li>
+  <li>
+    <ul>
+      <li>table th {
+border-style:solid;
+font-weight:bold;
+background: url(“/images/noise.png?1330434582”) repeat scroll left top #00B9E3;
+}</li>
+    </ul>
+  </li>
+  <li>
+    <ul>
+      <li>table th[align=”left”], * + table td[align=”left”] {
+text-align:left;
+}</li>
+    </ul>
+  </li>
+  <li>
+    <ul>
+      <li>table th[align=”right”], * + table td[align=”right”] {
+text-align:right;
+}</li>
+    </ul>
+  </li>
+  <li>
+    <ul>
+      <li>table th[align=”center”], * + table td[align=”center”] {
+text-align:center;
+}
+{% endcodeblock %}</li>
     </ul>
   </li>
 </ul>
 
 <p>之后，在<code>source/_includes/head.html</code>中修改或者添加：</p>
 
-<p>
+<p>{% raw %}
 <code>
 &lt;link href="{{ root_url }}/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css"&gt;
 {% if page.styles contains 'data-table' %}
 &lt;link href="{{ root_url }}/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" /&gt;
 {% endif %}
 </code>
-</p>
+{% endraw %}</p>
 
 <p>使用方法，在每篇博客头部位置添加<code>styles: [data-table]</code>，之后使用表格样式即可。如果使用Kramdown，表格对其方法如下：</p>
 
@@ -577,7 +453,7 @@ code snippet
 
 <hr />
 
-<p>
+<p>{% raw %}
 <code>
 |---------------+---------------+--------------+---------|
 |**X/Y**        |**1(Presence)**|**0(Absence)**|**Sum**  |
@@ -589,7 +465,7 @@ code snippet
 |**Sum**        |a+c            |b+d           |n=a+b+c+d|
 |---------------|---------------|--------------|---------|
 </code>
-</p>
+{% endraw %}</p>
 
 <h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
 
