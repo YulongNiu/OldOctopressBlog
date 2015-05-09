@@ -77,11 +77,37 @@ categories: lisp
 {% endcodeblock %}
 
 
+## 8. 自定义YASnippet模板 ##
+
+使用`M-x yas-new-snippet`{:.language-emacs-lisp}，打开一个模板。比如，添加Octopress的语言高亮模板
+
+{% raw %}
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: Highlight Language
+# key: hl
+# binding: direct-keybinding
+# contributor: Yulong Niu <yulong.niu@aol.com>
+# --
+
+{% highlight lang:${1:bash} %}
+$0
+{% endhighlight %}
+{% endraw %}
+
+其中 `${1:bash}`{:.languag-emacs-lisp}表示光标跳转位置，编号从1开始。`$0`{:.language-emacs-lisp}表示光标最后停留位置。如果不需要插入空行，在模板中把多余空行去掉。
+
+自定义的模板建议存放与 `~/.emacs.d/snippets/`{:.language-bash}的对应mode文件夹下。比如在markdown模式下使用的模板，存放与 `~/.emacs.d/snippets/markdown-mode/`{:.language-bash}。
 
 ### 参考资料 ###
 
-* [YASnippet添加模板](http://mad4a.me/2012/08/02/emacs-summary-cont/)
+* [YASnippet Tutorial](http://capitaomorte.github.io/yasnippet/)
+
+* [自定义 Yasnippet 模板](http://www.cnblogs.com/ibgo/p/3900317.html)
+
+* [YASnippet添加模板](https://github.com/mad4alcohol/mad4a-blog/blob/master/_posts/2012-08-02-emacs-summary-cont.md)
+
+
 
 ### 更新记录 ###
 
-2014年12月8日
+2015年5月9日
