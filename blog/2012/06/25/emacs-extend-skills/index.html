@@ -289,15 +289,42 @@
 </span><span class="line"><span class="p">(</span><span class="nv">nyan-mode</span> <span class="no">t</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<h2 id="yasnippet">8. 自定义YASnippet模板</h2>
+
+<p>使用<code class="language-emacs-lisp">M-x yas-new-snippet</code>，打开一个模板。比如，添加Octopress的语言高亮模板</p>
+
+<h1 id="mode-snippet-require-final-newline-nil---">-<em>- mode: snippet; require-final-newline: nil -</em>-</h1>
+<p># name: Highlight Language
+# key: hl
+# binding: direct-keybinding
+# contributor: Yulong Niu <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#121;&#117;&#108;&#111;&#110;&#103;&#046;&#110;&#105;&#117;&#064;&#097;&#111;&#108;&#046;&#099;&#111;&#109;">&#121;&#117;&#108;&#111;&#110;&#103;&#046;&#110;&#105;&#117;&#064;&#097;&#111;&#108;&#046;&#099;&#111;&#109;</a>
+# –</p>
+
+<p>{% codeblock lang:${1:bash} %}
+$0
+{% endcodeblock %}</p>
+
+<p>其中 <code class="languag-emacs-lisp">${1:bash}</code>表示光标跳转位置，编号从1开始。<code class="language-emacs-lisp">$0</code>表示光标最后停留位置。如果不需要插入空行，在模板中把多余空行去掉。</p>
+
+<p>自定义的模板建议存放与 <code class="language-bash">~/.emacs.d/snippets/</code>的对应mode文件夹下。比如在markdown模式下使用的模板，存放与 <code class="language-bash">~/.emacs.d/snippets/markdown-mode/</code>。</p>
+
 <h3 id="section-3">参考资料</h3>
 
 <ul>
-  <li><a href="http://mad4a.me/2012/08/02/emacs-summary-cont/">YASnippet添加模板</a></li>
+  <li>
+    <p><a href="http://capitaomorte.github.io/yasnippet/">YASnippet Tutorial</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.cnblogs.com/ibgo/p/3900317.html">自定义 Yasnippet 模板</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/mad4alcohol/mad4a-blog/blob/master/_posts/2012-08-02-emacs-summary-cont.md">YASnippet添加模板</a></p>
+  </li>
 </ul>
 
 <h3 id="section-4">更新记录</h3>
 
-<p>2014年12月8日</p>
+<p>2015年5月9日</p>
 </div>
 
 
@@ -376,7 +403,7 @@
     
     <a class="list-group-item " href="/blog/2015/05/09/django-tutorial/">Django使用介绍</a>
     
-    <a class="list-group-item " href="/blog/2015/05/09/python-different-version/">使用Pyevn控制多个版本Python</a>
+    <a class="list-group-item " href="/blog/2015/05/09/python-different-version/">使用Pyenv控制多个版本Python</a>
     
     <a class="list-group-item " href="/blog/2015/05/08/install-use-postgresql/">Fedora安装与使用PostgreSQL</a>
     

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C | 牛牛龙]]></title>
   <link href="http://yulongniu.github.io/blog/categories/c/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2015-05-09T15:46:43+08:00</updated>
+  <updated>2015-05-09T15:50:02+08:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -89,11 +89,14 @@
   </li>
 </ul>
 
-<p>{% codeblock definition of EOF in C lang:c %}
-#ifndef EOF
-# define EOF (-1)
-#endif
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>definition of EOF in C </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#ifndef EOF</span>
+</span><span class='line'><span class="cp"># define EOF (-1)</span>
+</span><span class='line'><span class="cp">#endif</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
   <li>
@@ -114,9 +117,9 @@
 
 <h3 id="include-stdiohlanguage-c">4.1 <code class="language-c">#include &lt;stdio.h&gt;</code></h3>
 
-<p>{% codeblock lang:c %}
-printf(“%3.0f %6.1f\n”, fahr, celsius);
-{% endcodeblock %}</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="o">%</span><span class="mf">3.0f</span> <span class="o">%</span><span class="mf">6.1f</span><span class="err">\</span><span class="n">n</span><span class="err">”</span><span class="p">,</span> <span class="n">fahr</span><span class="p">,</span> <span class="n">celsius</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
   <li>
