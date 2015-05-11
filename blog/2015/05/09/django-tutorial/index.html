@@ -275,17 +275,13 @@
 
 <h2 id="app">3. 创建app</h2>
 
-<ol>
-  <li>创建新的app，比如<code class="language-bash">polls</code></li>
-</ol>
+<p>首先， 创建新的app，比如<code class="language-bash">polls</code></p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>python manage.py startapp polls
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<ol>
-  <li>修改app</li>
-</ol>
+<p>其次，修改app</p>
 
 <p>app文件位置<code class="language-bash">polls/models.py</code>，之后在项目配制文件<code class="language-bash">mysite/settings.py</code>中添加app，最后添加app。</p>
 
@@ -307,9 +303,7 @@
 </span><span class="line"><span class="nv">$ </span>python manage.py check
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<ol>
-  <li>链接app与数据库</li>
-</ol>
+<p>最后，链接app与数据库</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>python manage.py migrate

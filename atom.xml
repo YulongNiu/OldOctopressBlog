@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.github.io/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2015-05-09T17:21:56+08:00</updated>
+  <updated>2015-05-12T00:38:56+08:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -97,17 +97,13 @@
 
 <h2 id="app">3. 创建app</h2>
 
-<ol>
-  <li>创建新的app，比如<code class="language-bash">polls</code></li>
-</ol>
+<p>首先， 创建新的app，比如<code class="language-bash">polls</code></p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>python manage.py startapp polls
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<ol>
-  <li>修改app</li>
-</ol>
+<p>其次，修改app</p>
 
 <p>app文件位置<code class="language-bash">polls/models.py</code>，之后在项目配制文件<code class="language-bash">mysite/settings.py</code>中添加app，最后添加app。</p>
 
@@ -129,9 +125,7 @@
 </span><span class="line"><span class="nv">$ </span>python manage.py check
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<ol>
-  <li>链接app与数据库</li>
-</ol>
+<p>最后，链接app与数据库</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>python manage.py migrate
@@ -395,7 +389,7 @@
 </span><span class="line"><span class="c"># -d：数据库</span>
 </span><span class="line"><span class="c"># -h：host，默认为local socket</span>
 </span><span class="line"><span class="c"># -p：端口</span>
-</span><span class="line"><span class="nv">$ </span>psql -U Yulong -d testdb -h /var/run/postgresql -p 5432
+</span><span class="line"><span class="nv">$ </span>psql -U Kitty -d testdb -h /var/run/postgresql -p 5432
 </span><span class="line">
 </span><span class="line"><span class="c"># 查看PostgreSQL配制文件路径</span>
 </span><span class="line"><span class="nv">testdb</span><span class="o">=</span><span class="c"># SHOW config_file;</span>
@@ -429,7 +423,7 @@
 
 <h3 id="section-1">更新记录</h3>
 
-<p>2015年5月9日</p>
+<p>2015年5月11日</p>
 ]]></content>
   </entry>
   
