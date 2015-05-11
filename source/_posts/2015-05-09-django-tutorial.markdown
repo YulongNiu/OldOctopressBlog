@@ -68,13 +68,13 @@ $ python manage.py runserver
 
 ## 3. 创建app ##
 
-1. 创建新的app，比如`polls`{:.language-bash}
+首先， 创建新的app，比如`polls`{:.language-bash}
 
 {% codeblock lang:bash %}
 $ python manage.py startapp polls
 {% endcodeblock %}
 
-2. 修改app
+其次，修改app
 
 app文件位置`polls/models.py`{:.language-bash}，之后在项目配制文件`mysite/settings.py`{:.language-bash}中添加app，最后添加app。
 
@@ -89,7 +89,7 @@ $ python manage.py sqlmigrate polls 0001
 $ python manage.py check
 {% endcodeblock %}
 
-3. 链接app与数据库
+最后，链接app与数据库
 
 {% codeblock lang:bash %}
 $ python manage.py migrate

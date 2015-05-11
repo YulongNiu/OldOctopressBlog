@@ -85,7 +85,7 @@ $ psql testdb
 # -d：数据库
 # -h：host，默认为local socket
 # -p：端口
-$ psql -U Yulong -d testdb -h /var/run/postgresql -p 5432
+$ psql -U Kitty -d testdb -h /var/run/postgresql -p 5432
 
 # 查看PostgreSQL配制文件路径
 testdb=# SHOW config_file;
@@ -123,4 +123,4 @@ testdb=# \q
 
 ### 更新记录 ###
 
-2015年5月9日
+2015年5月11日
