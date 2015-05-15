@@ -334,6 +334,12 @@ UUID=12D345251F34 /media/D ntfs defaults 0 0
 以下命令都可以配合`grep`{:.language-bash}使用
 
 {% codeblock lang:bash %}
+# 安装最快源插件
+# yum install yum-plugin-fastestmirror
+
+# 安装并行下载工具
+# yum install yum-axelget
+
 # 终止yum安装
 # rm -f /var/run/yum.pid
 
@@ -437,12 +443,18 @@ $ free -m
 $ netstat -lntp
 {% endcodeblock %}
 
-## 25. 断开SSH终端，程序后台执行 ##
+## 25. SSH服务行 ##
 
-使用`nohup`{:.language-bash}命令
+断开SSH终端，仍需要程序后台执，则使用`nohup`{:.language-bash}命令
 
 {% codeblock lang:bash %}
 $ nohup /filepath/testScript.py 
+{% endcodeblock %}
+
+解决SSH终端链接一段时间后自动断开，修改文件`/etc/ssh/sshd_config`{:.language-bash}，找到`ServerAliveInterval`{:.language-bash}语句，将其注释去掉，改为
+
+{% codeblock lang:bash %}
+ServerAliveInterval 60
 {% endcodeblock %}
 
 ## 26. 查看某一个库文件的位置 ##
@@ -578,6 +590,11 @@ $ wget -c -t 0 -w 30 httplink
 
 * [zip/unzip](http://www.cyberciti.biz/tips/how-can-i-zipping-and-unzipping-files-under-linux.html)
 
+* [用CentOS 7打造合适的科研环境](http://seisman.info/linux-environment-for-seismology-research.html) 
+
+* [解决SSH闲置时间过长中断命令执行](http://blog.sina.com.cn/s/blog_c078bab701015sih.html) 
+
+
 ### 更新记录 ###
 
-2015年5月8日
+2015年5月14日

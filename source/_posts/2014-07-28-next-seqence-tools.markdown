@@ -3,15 +3,13 @@ layout: post
 title: "二代测序中的常用工具介绍"
 date: 2014-07-28 12:23:42 -0400
 comments: true
-published: false
+published: true
 categories: Bioinfor
 ---
 
 ## 1. SAMtools ##
 
-[SAMtools](http://samtools.sourceforge.net/)是用于处理SAM (Sequence Alignment/Map)格式文件的一系列工具，主要用来储存大容量的核酸测序结果。
-
-**简介**：BAM是SAM文件的binary格式文件。SAMtools的主要作者是[Heng Li](http://lh3lh3.users.sourceforge.net/)，Heng Li在2012年因为对二代测序领域的贡献获得[Benjamin Franklin Award](http://en.wikipedia.org/wiki/Benjamin_Franklin_Award_(Bioinformatics))。
+**简介**：[SAMtools](http://samtools.sourceforge.net/)是用于处理SAM (Sequence Alignment/Map)格式文件的一系列工具，主要用来储存大容量的核酸测序结果。BAM是SAM文件的binary格式文件。SAMtools的主要作者是[Heng Li](http://lh3lh3.users.sourceforge.net/)，Heng Li在2012年因为对二代测序领域的贡献获得[Benjamin Franklin Award](http://en.wikipedia.org/wiki/Benjamin_Franklin_Award_(Bioinformatics))。
 
 **平台**：Mac OS/Linux
 
@@ -43,12 +41,26 @@ $ samtools idxstats sortedIndexedBamFile
 {% endcodeblock %}
 
 
-## 2.  ##
+## 2.  Bowtie2 ##
 
+Bowtie使用介绍，详见[二代测序中的短序列比对](http://yulongniu.bionutshell.org/blog/2014/07/26/short-sequence-alignment/) 。
 
 
 ## 3. Tophat ##
 
+**简介**：[Tophat](http://ccb.jhu.edu/software/tophat/index.shtml)是快速将RNA测序片段“对应（mapping）”到基因组上的工具，优势在于处理外显子间的剪切。内部首先使用bowtie或bowtie2把RNA测序片段“比对（alignment）”到基因组，之后再分析和鉴定剪切连接区域。
+
+**平台**：Mac OS/Linux
+
+**快速运行**
+
+{% codeblock lang:bash %}
+# 双端测序
+$ tophat2 -p 8 -o human_1 hg19 human_1_1.fastq.gz human_1_2.fastq.gz
+
+# 单端测序
+$ tophat2 -p 8 -o human_1 hg19 human_1.fastq.gz
+{% endcodeblock %}
 
 
 
@@ -94,6 +106,13 @@ $ fastqc seqFile1 seqFile2 seqFileN
 # 查看帮助信息
 $ fastqc --help
 {% endcodeblock %}
+
+### 5.2 RNA-SeQC ###
+
+
+
+
+
 
 
 

@@ -158,6 +158,11 @@ mydict.bmp
 # yum install djvulibre
 {% endcodeblock %}
 
+
+* Fedora 安装搜狗输入法
+
+参考[fedora 21 安装sogoupinyin 安装搜狗拼音](http://www.8dlive.com/post/199.html)
+
 * unrar解压工具
 
 {% codeblock lang:bash %}
@@ -235,6 +240,9 @@ Wine可以尽可能模拟Window软件
 # 进入图形界面
 # init 5
 {% endcodeblock %}
+
+
+
 
 
 ### <a id="Ref">参考网址</a> ###
