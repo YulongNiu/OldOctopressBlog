@@ -25,13 +25,18 @@ categories: Bioinfor
 
 {% codeblock lang:bash %}
 # 建立一系列FASTA文件目录
-$ bowtie2-build /filePath/fastaFile indexName
+$ bowtie2-build /filePath/genomeFastaFile indexName
+
+# 从已经index文件中提取原始基因组
+$ bowtie2-inspect indexName > genomeFastaFile
 
 # unpaired序列比对
 $ bowtie2 -p 4 -x indexName -U readFiles -S samFileName
 
 # paired序列比对
 $ bowtie2 -p 4 -x indexName  -1 readFiles1 -2 readFiles2 -S eg2.sam
+
+
 {% endcodeblock %}
 
 * `-p`：多线程

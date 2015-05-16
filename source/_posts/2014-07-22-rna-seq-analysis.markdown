@@ -1,20 +1,28 @@
 ---
 layout: post
 published: true
-title: "RNA-seq数据分析的基本概念和流程"
+title: "RNA-seq基本概念和数据分析流程"
 date: 2014-07-22 17:03:15 -0400
 comments: true
 published: false
 categories: bioinfor
 ---
 
-RNA-Seq相比较基因芯片，价格虽然昂贵一些，但是效果可能会更好一些（在同样样本和重复基础上）。
+RNA-Seq相比较基因芯片，价格虽然昂贵一些，精度和灵敏度更高。同时，在测序深度足够时，也可以检测mRNA选择性剪切类型。
 
-## 1. 测序原理 ##
+## 1. 样品制备 ##
 
 
+<!--more-->
 
-## 2. 基本概念 ##
+
+## 2. 测序 ##
+
+Illumina双端测序[动画](http://www.illumina.com/technology/next-generation-sequencing/paired-end-sequencing_assay.html)
+
+## 3. 分析流程 ##
+
+## 4. 基本概念 ##
 
 * **Read**： 
 
@@ -30,16 +38,36 @@ RNA-Seq相比较基因芯片，价格虽然昂贵一些，但是效果可能会�
 
 * **Mapping**：确定aligned reads对应的转录本。
 
-## 3. 分析流程 ##
+* **Pair end (PE)**和**Mate-Pair (MP)**：
 
-<!--more-->
+> 两种双端测序的方法，主要区别在样品库制备和测序上。比如PE制备的库是adaptor在目标序列两端，而MP库中adaptor在目标序列中间。因此，在数据分析时，MP类型测序必须注意剔除adaptor。具体参考[论坛讨论](http://seqanswers.com/forums/showthread.php?t=503)和[Difference Between Paired-End and Mate-Pair Reads](http://scottmyourstone.blogspot.sg/2013/11/difference-between-paired-end-and-mate.html)。
+
+
+* **Adapter（接头）**、**Barcode（标签）**和**Insert（插入片段）**：
+
+> adapter是一段短的序列已知的核酸链，用于链接序列未知的目标测序片段。
+> 
+> barcode，也称为index，是一段很短的寡居核酸链，用于在多个样品混合测序时，标记不同的样品。
+> insert是用于测序的目标片段，因为是包括在两个adapter之间，所以被称为“插入”片段。
+>
+> 一个常见测序片段类似与`adapter--barcode--insert--adapter`{:.language-bash}。测序开始时前几个碱基无法测得，第一个adapter在数据输出时被去除；由于测序仪读长限制，第二个adapter通常无法测得。所以，经常得到类似 `barcode--部分insert`{:.language-bash}的read。最后，把barcode去除，只保留测度insert的片段，这个操作的术语是demultiplexing。
+>
+> 需要注意的是，[Illumina TruSeq](http://www.illumina.com/documents/products/datasheets/datasheet_truseq_sample_prep_kits.pdf)样品库制备方法中，barcode是在adaptor中部，而且是与insert分开测序。而[Illumina Nextera Mate Pair](http://res.illumina.com/documents/products/technotes/technote_nextera_matepair_data_processing.pdf)样品库制备中，adapter在目标序列中部。
+
+
+
+* **Discordant**和**Concordant**：
+
+
+
+
 
 
 ### 参考网址 ###
 
 * [Bioconductor详细流程](http://faculty.ucr.edu/~tgirke/HTML_Presentations/Manuals/Workshop_Dec_12_16_2013/Rrnaseq/Rrna)
 
-* RPKM和FPKM：[1](http://jefworks.com/rpkm-and-fpkm-explained/), [2](http://www.cureffi.org/2013/09/12/counts-vs-fpkms-in-rna-seq/)，[3 一个计算RPKM的例子](http://www.partek.com/Tutorials/microarray/User_Guides/UnderstandingReads.pdf)
+* RPKM和FPKM：[1](http://jefworks.com/rpkm-and-fpkm-explained/)、 [2](http://www.cureffi.org/2013/09/12/counts-vs-fpkms-in-rna-seq/)和[3一个计算RPKM的例子](http://www.partek.com/Tutorials/microarray/User_Guides/UnderstandingReads.pdf)
 
 * ENCODE推荐的RNA-seq数据分析指导 [The ENCODE Consortium: Standards, Guidelines and Best Practices for RNA-Seq](http://genome.ucsc.edu/ENCODE/protocols/dataStandards/ENCODE_RNAseq_Standards_V1.0.pdf)
 
@@ -47,9 +75,15 @@ RNA-Seq相比较基因芯片，价格虽然昂贵一些，但是效果可能会�
 
 * [多少个read才够](http://www.rna-seqblog.com/how-many-reads-are-enough/)
 
-* [高通量测序常用名词汇总](http://www.macrogencn.com/_d275872179.htm) 
+* [高通量测序常用名词汇总](http://www.macrogencn.com/_d275872179.htm)
+
+* [二代测序中barcodes index的介绍](http://www.plob.org/2014/11/09/8672.html) 
+
+
+
+* Illumina样品制备参考：[Illumina TruSeq DNA Adapters De-Mystified](https://www.med.unc.edu/pharm/calabreselab/files/tufts-sequencing-primer)和[Illumina adapter and primer sequences](http://bioinformatics.cvr.ac.uk/blog/illumina-adapter-and-primer-sequences/)
 
 
 ### 更新记录 ###
 
-2015年3月12日
+2015年5月25日
