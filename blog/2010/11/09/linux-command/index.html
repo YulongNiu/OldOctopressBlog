@@ -669,7 +669,19 @@
 <span class="line-number">21</span>
 <span class="line-number">22</span>
 <span class="line-number">23</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 终止yum安装</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 安装最快源插件</span>
+</span><span class="line"><span class="c"># yum install yum-plugin-fastestmirror</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 安装并行下载工具</span>
+</span><span class="line"><span class="c"># yum install yum-axelget</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 终止yum安装</span>
 </span><span class="line"><span class="c"># rm -f /var/run/yum.pid</span>
 </span><span class="line">
 </span><span class="line"><span class="c"># 查询包</span>
@@ -814,12 +826,18 @@
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>netstat -lntp
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h2 id="ssh">25. 断开SSH终端，程序后台执行</h2>
+<h2 id="ssh">25. SSH服务行</h2>
 
-<p>使用<code class="language-bash">nohup</code>命令</p>
+<p>断开SSH终端，仍需要程序后台执，则使用<code class="language-bash">nohup</code>命令</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>nohup /filepath/testScript.py
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>解决SSH终端链接一段时间后自动断开，修改文件<code class="language-bash">/etc/ssh/sshd_config</code>，找到<code class="language-bash">ServerAliveInterval</code>语句，将其注释去掉，改为</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line">ServerAliveInterval 60
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h2 id="section-17">26. 查看某一个库文件的位置</h2>
@@ -1002,11 +1020,17 @@
   <li>
     <p><a href="http://www.cyberciti.biz/tips/how-can-i-zipping-and-unzipping-files-under-linux.html">zip/unzip</a></p>
   </li>
+  <li>
+    <p><a href="http://seisman.info/linux-environment-for-seismology-research.html">用CentOS 7打造合适的科研环境</a> </p>
+  </li>
+  <li>
+    <p><a href="http://blog.sina.com.cn/s/blog_c078bab701015sih.html">解决SSH闲置时间过长中断命令执行</a> </p>
+  </li>
 </ul>
 
 <h3 id="section-24">更新记录</h3>
 
-<p>2015年5月8日</p>
+<p>2015年5月14日</p>
 </div>
 
 

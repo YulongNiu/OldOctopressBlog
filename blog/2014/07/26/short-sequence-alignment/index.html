@@ -226,8 +226,14 @@
 <span class="line-number">6</span>
 <span class="line-number">7</span>
 <span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 建立一系列FASTA文件目录</span>
-</span><span class="line"><span class="nv">$ </span>bowtie2-build /filePath/fastaFile indexName
+</span><span class="line"><span class="nv">$ </span>bowtie2-build /filePath/genomeFastaFile indexName
+</span><span class="line">
+</span><span class="line"><span class="c"># 从已经index文件中提取原始基因组</span>
+</span><span class="line"><span class="nv">$ </span>bowtie2-inspect indexName &gt; genomeFastaFile
 </span><span class="line">
 </span><span class="line"><span class="c"># unpaired序列比对</span>
 </span><span class="line"><span class="nv">$ </span>bowtie2 -p <span class="m">4</span> -x indexName -U readFiles -S samFileName

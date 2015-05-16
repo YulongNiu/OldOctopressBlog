@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | 牛牛龙]]></title>
   <link href="http://yulongniu.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2015-05-12T00:38:56+08:00</updated>
+  <updated>2015-05-16T20:58:52+08:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -674,32 +674,44 @@
 <span class='line-number'>21</span>
 <span class='line-number'>22</span>
 <span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 终止yum安装</span>
-</span><span class='line'><span class="c"># rm -f /var/run/yum.pid&lt;/p&gt;</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 安装最快源插件</span>
+</span><span class='line'><span class="c"># yum install yum-plugin-fastestmirror&lt;/p&gt;</span>
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-37&quot;</span>&gt;查询包&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-37&quot;</span>&gt;安装并行下载工具&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# yum install yum-axelget&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;yum-1&quot;</span>&gt;终止yum安装&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# rm -f /var/run/yum.pid&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-38&quot;</span>&gt;查询包&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;# yum search pkg&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-38&quot;</span>&gt;重新安装包&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-39&quot;</span>&gt;重新安装包&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;# yum reinstall pkg&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-39&quot;</span>&gt;升级包&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-40&quot;</span>&gt;升级包&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;# yum update pkg&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-40&quot;</span>&gt;卸载包&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-41&quot;</span>&gt;卸载包&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;# yum remove pkg&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-41&quot;</span>&gt;查询已安装包信息&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-42&quot;</span>&gt;查询已安装包信息&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;# yum info pkg&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-42&quot;</span>&gt;查看仓库包列表&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-43&quot;</span>&gt;查看仓库包列表&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;# yum list pkg*&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-43&quot;</span>&gt;查看已安装的包&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-44&quot;</span>&gt;查看已安装的包&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;# yum list installed
 </span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="section-44">20. 修改配置文件</h2>
+<h2 id="section-45">20. 修改配置文件</h2>
 
 <p>可以使用多种文本编辑器，最常用的是<a href="http://www.gnu.org/software/emacs/">Emacs</a>和<a href="http://www.vim.org/">Vim</a>，使用方法直<code class="language-bash">emacs</code>或者<code class="language-bash">vim</code>和文件名即可。</p>
 
@@ -711,7 +723,7 @@
 </span><span class='line'><span class="nv">$ </span>emacs httpd.conf
 </span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="section-45">21. 用户管理</h2>
+<h2 id="section-46">21. 用户管理</h2>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -740,20 +752,20 @@
 </span><span class='line'><span class="c"># 超过500为后建用户</span>
 </span><span class='line'><span class="nv">$ </span>cat /etc/passwd&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-46&quot;</span>&gt;新建用户&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-47&quot;</span>&gt;新建用户&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>useradd usrname&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-47&quot;</span>&gt;新建用户设置密码&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-48&quot;</span>&gt;新建用户设置密码&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>passwd usrname newpasswd&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-48&quot;</span>&gt;删除用户&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-49&quot;</span>&gt;删除用户&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>userdel -r usrname&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-49&quot;</span>&gt;查看用户登陆&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-50&quot;</span>&gt;查看用户登陆&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>last
 </span><span class='line'><span class="nv">$ </span>last usrname&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-50&quot;</span>&gt;查看当前任务&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-51&quot;</span>&gt;查看当前任务&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>top
 </span></code></pre></td></tr></table></div></figure></p>
 
@@ -787,7 +799,7 @@
 </span><span class='line'><span class="c"># apt-get pkg</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="section-51">23. 查看和终止进程</h2>
+<h2 id="section-52">23. 查看和终止进程</h2>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -803,31 +815,37 @@
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 查看进程树</span>
 </span><span class='line'><span class="nv">$ </span>pstree -p&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-52&quot;</span>&gt;看全部进程&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-53&quot;</span>&gt;看全部进程&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>ps -A&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-53&quot;</span>&gt;强制终止进程&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-54&quot;</span>&gt;强制终止进程&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span><span class="nb">kill</span> -9 7473&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-54&quot;</span>&gt;释放内存&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-55&quot;</span>&gt;释放内存&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>free -m
 </span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="section-55">24. 查看网络有监听的端口</h2>
+<h2 id="section-56">24. 查看网络有监听的端口</h2>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>netstat -lntp
 </span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="ssh">25. 断开SSH终端，程序后台执行</h2>
+<h2 id="ssh">25. SSH服务行</h2>
 
-<p>使用<code class="language-bash">nohup</code>命令</p>
+<p>断开SSH终端，仍需要程序后台执，则使用<code class="language-bash">nohup</code>命令</p>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>nohup /filepath/testScript.py
 </span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="section-56">26. 查看某一个库文件的位置</h2>
+<p>解决SSH终端链接一段时间后自动断开，修改文件<code class="language-bash">/etc/ssh/sshd_config</code>，找到<code class="language-bash">ServerAliveInterval</code>语句，将其注释去掉，改为</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>ServerAliveInterval 60
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2 id="section-57">26. 查看某一个库文件的位置</h2>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>locate libGLU.so
@@ -852,7 +870,7 @@
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;rpm-1&quot;</span>&gt;更新rpm包&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;# rpm -Uvh pkg.rpm&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-57&quot;</span>&gt;查看已经安装的包&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-58&quot;</span>&gt;查看已经安装的包&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;# rpm -qa <span class="p">|</span> grep pkg.rpm&lt;/p&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;rpm-2&quot;</span>&gt;卸载rpm包&lt;/h1&gt;
@@ -883,10 +901,10 @@
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;cpu-1&quot;</span>&gt;物理CPU个数&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>grep ‘physical id’ /proc/cpuinfo <span class="p">|</span> sort -u <span class="p">|</span> wc -l&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-58&quot;</span>&gt;核心个数&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-59&quot;</span>&gt;核心个数&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>grep ‘core id’ /proc/cpuinfo <span class="p">|</span> sort -u <span class="p">|</span> wc -l&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-59&quot;</span>&gt;线程个数&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-60&quot;</span>&gt;线程个数&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>grep ‘processor’ /proc/cpuinfo <span class="p">|</span> sort -u <span class="p">|</span> wc -l
 </span><span class='line'><span class="nv">$ </span>nproc
 </span></code></pre></td></tr></table></div></figure> </p>
@@ -901,7 +919,7 @@
 </span><span class='line'><span class="nv">$ </span>sensors
 </span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="section-60">30. 查询文件和文件夹大小</h2>
+<h2 id="section-61">30. 查询文件和文件夹大小</h2>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -909,7 +927,7 @@
 </span><span class='line'><span class="nv">$ </span>du -h filepath
 </span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="section-61">31. 查看内存情况</h2>
+<h2 id="section-62">31. 查看内存情况</h2>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -919,11 +937,11 @@
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 查看内存使用情况</span>
 </span><span class='line'><span class="nv">$ </span>free&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-62&quot;</span>&gt;物理内存&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-63&quot;</span>&gt;物理内存&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;# dmidecode -t memory <span class="p">|</span> grep Size
 </span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="section-63">32. 查看文件头部和尾部</h2>
+<h2 id="section-64">32. 查看文件头部和尾部</h2>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -933,11 +951,11 @@
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 头部</span>
 </span><span class='line'><span class="nv">$ </span>head -5 file&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-64&quot;</span>&gt;尾部&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-65&quot;</span>&gt;尾部&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>tail -7 file
 </span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="section-65">33. 下载命令</h2>
+<h2 id="section-66">33. 下载命令</h2>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>wget -c -t <span class="m">0</span> -w <span class="m">30</span> httplink
@@ -958,7 +976,7 @@
   </li>
 </ul>
 
-<h2 id="section-66">34. 开机启动</h2>
+<h2 id="section-67">34. 开机启动</h2>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -974,7 +992,7 @@
 </span><span class='line'><span class="c"># chkconfig –list</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="section-67">35. 系统运行日志</h2>
+<h2 id="section-68">35. 系统运行日志</h2>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># cat /var/log/messages</span>
@@ -1007,11 +1025,17 @@
   <li>
     <p><a href="http://www.cyberciti.biz/tips/how-can-i-zipping-and-unzipping-files-under-linux.html">zip/unzip</a></p>
   </li>
+  <li>
+    <p><a href="http://seisman.info/linux-environment-for-seismology-research.html">用CentOS 7打造合适的科研环境</a> </p>
+  </li>
+  <li>
+    <p><a href="http://blog.sina.com.cn/s/blog_c078bab701015sih.html">解决SSH闲置时间过长中断命令执行</a> </p>
+  </li>
 </ul>
 
-<h3 id="section-68">更新记录</h3>
+<h3 id="section-69">更新记录</h3>
 
-<p>2015年5月8日</p>
+<p>2015年5月14日</p>
 ]]></content>
   </entry>
   
@@ -1208,6 +1232,12 @@ mydict.bmp
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># yum install djvulibre</span>
 </span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+  <li>Fedora 安装搜狗输入法</li>
+</ul>
+
+<p>参考<a href="http://www.8dlive.com/post/199.html">fedora 21 安装sogoupinyin 安装搜狗拼音</a></p>
 
 <ul>
   <li>unrar解压工具</li>
