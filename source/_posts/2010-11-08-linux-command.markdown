@@ -284,7 +284,11 @@ $ cat myFile > /dev/null 2>$1
 $ chomd 664 filename
 {% endcodeblock %}
 
-使用命令`chown`{:.language-bash}更改文件所有者
+使用命令`chown`{:.language-bash}更改文件所有者：
+
+{% codeblock lang:bash An instance of using chown%}
+# chown -R myOwner:myGroup fileName
+{% endcodeblock %}
 
 ## 17.更改文件时间戳 ##
 

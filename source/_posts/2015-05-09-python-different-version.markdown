@@ -33,7 +33,9 @@ $ pyenv install --list
 
 # 安装Python所依赖包
 # yum install readline readline-devel readline-static openssl openssl-devel openssl-static sqlite-devel bzip2-devel bzip2-libs
+
 # 安装其他版本Python
+# 如果命令行下载安装Python太慢，可以将下载的安装包放入~/.pyenv/cache/文件夹中，之后安装
 $ pyenv install 3.4.3
 $ pyenv rehash
 
@@ -75,4 +77,4 @@ $ rm -rf ~/.pyenv/versions/3.4.3
 
 ### 更新记录 ###
 
-2015年5月9日
+2015年5月23日

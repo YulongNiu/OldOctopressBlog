@@ -1,9 +1,10 @@
 ---
 layout: post
 published: true
-title: "RNA-seq基本概念和数据分析流程"
+title: "RNA-Seq基本概念和数据分析流程"
 date: 2014-07-22 17:03:15 -0400
 comments: true
+styles: [data-table]
 published: false
 categories: bioinfor
 ---
@@ -13,14 +14,59 @@ RNA-Seq相比较基因芯片，价格虽然昂贵一些，精度和灵敏度更�
 ## 1. 样品制备 ##
 
 
+
 <!--more-->
 
 
 ## 2. 测序 ##
 
-Illumina双端测序[动画](http://www.illumina.com/technology/next-generation-sequencing/paired-end-sequencing_assay.html)
+Illumina双端测序[动画](http://www.illumina.com/technology/next-generation-sequencing/paired-end-sequencing_assay.html)和[图示](http://onetipperday.blogspot.sg/2013/12/illumina-hiseq2000-adaptor-and.html)。
 
 ## 3. 分析流程 ##
+
+RNA-Seq[主要分析流程](http://blog.qiuworld.com:8080/archives/2343)：
+
+
+{% codeblock lang:bash Workflow of RNA-seq data analysis %}
+原始数据质量评估 -->
+数据清洗（去除接头和低质量read） -->
+清洗数据质量评估 -->
+map测序结果至基因组（转录组） -->
+map数据质量评估 -->
+差异表达基因/选择性剪切/新基因/融合基因选择 -->
+GO和pathway分析 -->
+共表达网络分析
+{% endcodeblock %}
+
+
+
+### 3.1 序列清洗 ###
+
+序列清洗主要是去除测序结果中的[adaptor](http://onetipperday.blogspot.sg/2013/06/illumina-hiseq2000-adaptor.html)，
+
+以下使用Illumina HiSeq2000平台，对一个人类样本的RNA测序。统计各种序列清洗方法和选择后的reads数目。原始数据两端测序reads分别为54,492,228和54,492,228。
+
+-----------------------
+
+| Method                        | #Trimmed    | #Mapped*    | #Filtered  |
+|-------------------------------+-------------+-------------+------------|
+| r50-notrim                    | 108,984,456 | 109,278,388 | 79,143,942 |
+| r50-nomixed-notrim            | 108,984,456 | 103,548,800 | 79,143,942 |
+| r50-nomixed-trimmomatic-min20 | 104,164,622 | 116,315,394 | 80,337,256 |
+| r50-nomixed-trimmomatic-min36 | 101,548,172 | 110,778,108 | 79,248,896 |
+| r50-nomixed-trimmomatic-min50 | 98,525,312  | 106,659,988 | 77,779,424 |
+| r50-nomixed-galore-min20      | 107,097,862 | 114,943,386 | 83,039,928 |
+| r100-nomixed-galore-min20     | 107,097,862 | 114,944,672 | 87,899,316 |
+| r165sd45-nomixed-galore-min20 | 107,097,862 | 114,201,366 | 90,750,208 |
+| r165sd45-nomixed-galore-min50 | 104,869,208 | 109,258,544 | 89,329,672 |
+
+**\***：使用TopHat2把序列mapped到hs19基因组。TopHat2默认设置为，如果一个reads能mapped到多个位点，则都会报道。因此数目可能比原始数据多。
+
+-----------------------
+
+
+
+
 
 ## 4. 基本概念 ##
 
@@ -41,6 +87,8 @@ Illumina双端测序[动画](http://www.illumina.com/technology/next-generation-
 * **Pair end (PE)**和**Mate-Pair (MP)**：
 
 > 两种双端测序的方法，主要区别在样品库制备和测序上。比如PE制备的库是adaptor在目标序列两端，而MP库中adaptor在目标序列中间。因此，在数据分析时，MP类型测序必须注意剔除adaptor。具体参考[论坛讨论](http://seqanswers.com/forums/showthread.php?t=503)和[Difference Between Paired-End and Mate-Pair Reads](http://scottmyourstone.blogspot.sg/2013/11/difference-between-paired-end-and-mate.html)。
+>
+> 在序列软件软件中，有时也称呼一对测序reads（对同一个目标片段分别测得的正义链和反义链），它们互为mate，分别存在两个对应的测序结果文件中。
 
 
 * **Adapter（接头）**、**Barcode（标签）**和**Insert（插入片段）**：
@@ -54,9 +102,8 @@ Illumina双端测序[动画](http://www.illumina.com/technology/next-generation-
 >
 > 需要注意的是，[Illumina TruSeq](http://www.illumina.com/documents/products/datasheets/datasheet_truseq_sample_prep_kits.pdf)样品库制备方法中，barcode是在adaptor中部，而且是与insert分开测序。而[Illumina Nextera Mate Pair](http://res.illumina.com/documents/products/technotes/technote_nextera_matepair_data_processing.pdf)样品库制备中，adapter在目标序列中部。
 
+* **Concordant Pairs**和**Discordant Pairs**：根据[Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#paired-inputs)的解释，concordant pairs表示一对reads在alignment时，既方向匹配又有合适距离（Bowtie2中是200bp～500bp）。如果上述方向和距离，任意一个条件不满足，则称为discordant pairs。
 
-
-* **Discordant**和**Concordant**：
 
 
 
@@ -64,6 +111,8 @@ Illumina双端测序[动画](http://www.illumina.com/technology/next-generation-
 
 
 ### 参考网址 ###
+
+* 推荐幻灯片[RNA-seq quality control and pre-processing](http://www.slideshare.net/mikaelhuss/all-bio-rnaseqqc?from_action=save)
 
 * [Bioconductor详细流程](http://faculty.ucr.edu/~tgirke/HTML_Presentations/Manuals/Workshop_Dec_12_16_2013/Rrnaseq/Rrna)
 
@@ -77,13 +126,21 @@ Illumina双端测序[动画](http://www.illumina.com/technology/next-generation-
 
 * [高通量测序常用名词汇总](http://www.macrogencn.com/_d275872179.htm)
 
-* [二代测序中barcodes index的介绍](http://www.plob.org/2014/11/09/8672.html) 
+* [Bowtie2对一些常用名词解释](http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#paired-inputs) 
 
 
+* [二代测序中barcodes index的介绍](http://www.plob.org/2014/11/09/8672.html)
 
 * Illumina样品制备参考：[Illumina TruSeq DNA Adapters De-Mystified](https://www.med.unc.edu/pharm/calabreselab/files/tufts-sequencing-primer)和[Illumina adapter and primer sequences](http://bioinformatics.cvr.ac.uk/blog/illumina-adapter-and-primer-sequences/)
+
+* [Quality Control and Trimming of RNA-seq data](http://www.research.janahang.com/quality-control-and-trimming-of-rna-seq-data/)
+
+* [Best Practices and Suggestions for Read Alignment](http://cgrlucb.wikispaces.com/file/view/readMapping.pdf)
+
+
+
 
 
 ### 更新记录 ###
 
-2015年5月25日
+2015年5月19日
