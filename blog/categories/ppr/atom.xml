@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ppr | 牛牛龙]]></title>
   <link href="http://yulongniu.github.io/blog/categories/ppr/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2015-05-16T20:58:52+08:00</updated>
+  <updated>2015-05-23T18:16:51+08:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -195,22 +195,26 @@
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 查看可提供的Python版本列表</span>
 </span><span class='line'><span class="nv">$ </span>pyenv install –list&lt;/p&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;python-1&quot;</span>&gt;安装Python所依赖包&lt;/h1&gt;
-</span><span class='line'>&lt;p&gt;# yum install readline readline-devel readline-static openssl openssl-devel openssl-static sqlite-devel bzip2-devel bzip2-libs
-</span><span class='line'><span class="c"># 安装其他版本Python</span>
+</span><span class='line'>&lt;p&gt;# yum install readline readline-devel readline-static openssl openssl-devel openssl-static sqlite-devel bzip2-devel bzip2-libs&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;python-2&quot;</span>&gt;安装其他版本Python&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# 如果命令行下载安装Python太慢，可以将下载的安装包放入~/.pyenv/cache/文件夹中，之后安装
 </span><span class='line'><span class="nv">$ </span>pyenv install 3.4.3
 </span><span class='line'><span class="nv">$ </span>pyenv rehash&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;python-2&quot;</span>&gt;查看已安装Python版本&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;python-3&quot;</span>&gt;查看已安装Python版本&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>pyenv versions&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;python-3&quot;</span>&gt;全局切换Python版本&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;python-4&quot;</span>&gt;全局切换Python版本&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>pyenv global 3.4.3&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;python-4&quot;</span>&gt;安装对应版本Python包。&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;python-5&quot;</span>&gt;安装对应版本Python包。&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;# 每次安装包之后，都要执行rehash。
 </span><span class='line'><span class="nv">$ </span>pip install ipython
 </span><span class='line'><span class="nv">$ </span>pyenv rehash
@@ -224,7 +228,7 @@
 </span><span class='line'><span class="nv">$ </span>git pull
 </span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="python-5">4. 删除特定版本Python</h2>
+<h2 id="python-6">4. 删除特定版本Python</h2>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -242,7 +246,7 @@
 
 <h3 id="section-3">更新记录</h3>
 
-<p>2015年5月9日</p>
+<p>2015年5月23日</p>
 ]]></content>
   </entry>
   

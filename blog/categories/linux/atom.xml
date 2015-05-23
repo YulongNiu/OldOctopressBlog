@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | 牛牛龙]]></title>
   <link href="http://yulongniu.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2015-05-16T20:58:52+08:00</updated>
+  <updated>2015-05-23T18:16:51+08:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -591,7 +591,12 @@
 </span><span class='line'><span class="nv">$ </span>chomd <span class="m">664</span> filename
 </span></code></pre></td></tr></table></div></figure></p>
 
-<p>使用命令<code class="language-bash">chown</code>更改文件所有者</p>
+<p>使用命令<code class="language-bash">chown</code>更改文件所有者：</p>
+
+<p><figure class='code'><figcaption><span>An instance of using chown</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># chown -R myOwner:myGroup fileName</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="section-35">17.更改文件时间戳</h2>
 
