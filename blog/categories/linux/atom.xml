@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | 牛牛龙]]></title>
   <link href="http://yulongniu.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2015-05-23T18:16:51+08:00</updated>
+  <updated>2015-06-03T12:01:01+08:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -12,6 +12,87 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Bash简易编程]]></title>
+    <link href="http://yulongniu.github.io/blog/2015/05/28/bash-program/"/>
+    <updated>2015-05-28T21:24:32+08:00</updated>
+    <id>http://yulongniu.github.io/blog/2015/05/28/bash-program</id>
+    <content type="html"><![CDATA[<h2 id="section">1. 循环</h2>
+
+<p><code class="language-bash">for</code>循环体</p>
+
+<p><figure class='code'><figcaption><span>for in Bash</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">for</span> i in *.zip
+</span><span class='line'><span class="k">do</span>
+</span><span class='line'>    <span class="nb">echo</span> “<span class="nv">$i</span>”
+</span><span class='line'><span class="k">done</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<!--more-->
+
+<h2 id="section-1">2. 字符串分割</h2>
+
+<p><figure class='code'><figcaption><span>Split strings</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># write in file “testsplit.sh”</span>
+</span><span class='line'><span class="nv">IFS</span><span class="o">=</span>’,’ <span class="nb">read</span> -ra splitArray «<span class="p">&amp;</span>lt<span class="p">;</span> “This,is,a,test”
+</span><span class='line'><span class="k">for</span> i in “<span class="k">${</span><span class="nv">splitArray</span><span class="p">[@]</span><span class="k">}</span>”
+</span><span class='line'><span class="k">do</span>
+</span><span class='line'>    <span class="nb">echo</span> “<span class="nv">$i</span>”
+</span><span class='line'><span class="k">done</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>bash testsplit.sh
+</span><span class='line'>This
+</span><span class='line'>is
+</span><span class='line'>a
+</span><span class='line'><span class="nb">test</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2 id="section-2">3. 屏幕输出存入变量</h2>
+
+<p>某个bash命令，比如<code class="language-bash">ls -l</code>存入变量，之后引用变量。</p>
+
+<p><figure class='code'><figcaption><span>Save Command Output into Variables</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 注意等号前后不能加空格</span>
+</span><span class='line'><span class="nv">listOutput</span><span class="o">=</span>&lt;code&gt;ls -l&lt;/code&gt;
+</span><span class='line'><span class="nb">echo</span> “<span class="nv">$listOutput</span>”
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h3 id="section-3">参考网址</h3>
+
+<ul>
+  <li>
+    <p><a href="http://stackoverflow.com/questions/918886/how-do-i-split-a-string-on-a-delimiter-in-bash">How do I split a string on a delimiter in Bash?</a></p>
+  </li>
+  <li>
+    <p><a href="http://stackoverflow.com/questions/4651437/how-to-set-a-bash-variable-equal-to-the-output-from-a-command">How to set a BASH variable equal to the output from a command?</a> </p>
+  </li>
+</ul>
+
+<h3 id="section-4">更新记录</h3>
+
+<p>2015年5月27日</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Fedora安装与使用PostgreSQL]]></title>
@@ -424,8 +505,12 @@
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 执行.jar格式文件</span>
-</span><span class='line'><span class="nv">$ </span>java -jar filename.jar&lt;/p&gt;
+</span><span class='line'><span class="nv">$ </span>java -jar filename.jar
+</span><span class='line'><span class="c"># 指定内存运行.jar格式文件</span>
+</span><span class='line'><span class="nv">$ </span>java -Xmx2000M -jar filename.jar&lt;/p&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;jnlp&quot;</span>&gt;执行.jnlp格式文件&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>javaws filename.jnlp
@@ -481,7 +566,7 @@
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 删除满足条件的数据</span>
-</span><span class='line'><span class="nv">$ </span>find ./ -iname ‘*’ <span class="p">|</span> xargs rm -rf &lt;/p&gt;
+</span><span class='line'><span class="nv">$ </span>find ./ -name ‘*’ <span class="p">|</span> xargs rm -rf &lt;/p&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-31&quot;</span>&gt;移动大数据量的文件.&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>find ./ -name “*.gif” <span class="p">|</span> xargs -i mv <span class="o">{}</span> /filePath/
@@ -1040,7 +1125,7 @@
 
 <h3 id="section-69">更新记录</h3>
 
-<p>2015年5月14日</p>
+<p>2015年6月1日</p>
 ]]></content>
   </entry>
   

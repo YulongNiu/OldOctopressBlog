@@ -417,8 +417,12 @@
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 执行.jar格式文件</span>
 </span><span class="line"><span class="nv">$ </span>java -jar filename.jar
+</span><span class="line"><span class="c"># 指定内存运行.jar格式文件</span>
+</span><span class="line"><span class="nv">$ </span>java -Xmx2000M -jar filename.jar
 </span><span class="line">
 </span><span class="line"><span class="c"># 执行.jnlp格式文件</span>
 </span><span class="line"><span class="nv">$ </span>javaws filename.jnlp
@@ -474,7 +478,7 @@
 <span class="line-number">4</span>
 <span class="line-number">5</span>
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 删除满足条件的数据</span>
-</span><span class="line"><span class="nv">$ </span>find ./ -iname <span class="s1">&#39;*&#39;</span> <span class="p">|</span> xargs rm -rf
+</span><span class="line"><span class="nv">$ </span>find ./ -name <span class="s1">&#39;*&#39;</span> <span class="p">|</span> xargs rm -rf
 </span><span class="line">
 </span><span class="line"><span class="c"># 移动大数据量的文件.</span>
 </span><span class="line"><span class="nv">$ </span>find ./ -name <span class="s2">&quot;*.gif&quot;</span> <span class="p">|</span> xargs -i mv <span class="o">{}</span> /filePath/
@@ -1035,7 +1039,7 @@
 
 <h3 id="section-24">更新记录</h3>
 
-<p>2015年5月14日</p>
+<p>2015年6月1日</p>
 </div>
 
 
@@ -1112,15 +1116,15 @@
   
   <div id="recent_posts" class="list-group">
     
+    <a class="list-group-item " href="/blog/2015/06/02/download-ucsc-gene-mask/">UCSC Table下载注释文件</a>
+    
+    <a class="list-group-item " href="/blog/2015/05/28/bash-program/">Bash简易编程</a>
+    
     <a class="list-group-item " href="/blog/2015/05/16/filter-tophat2-output/">过滤TopHat分析双端测序的输出</a>
     
     <a class="list-group-item " href="/blog/2015/05/09/django-tutorial/">Django使用介绍</a>
     
     <a class="list-group-item " href="/blog/2015/05/09/python-different-version/">使用Pyenv控制多个版本Python</a>
-    
-    <a class="list-group-item " href="/blog/2015/05/08/install-use-postgresql/">Fedora安装与使用PostgreSQL</a>
-    
-    <a class="list-group-item " href="/blog/2014/12/08/c-program-note/">C语言学习记录</a>
     
   </div>
 </section>
@@ -1132,7 +1136,7 @@
     
     
     <a class="list-group-item " href="/blog/categories/linux/index.html">
-        <span class="badge">3</span>
+        <span class="badge">4</span>
         linux
       </a>
     
@@ -1150,7 +1154,7 @@
     
     
     <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
-        <span class="badge">6</span>
+        <span class="badge">7</span>
         bioinfor
       </a>
     

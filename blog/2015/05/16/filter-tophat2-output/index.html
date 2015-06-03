@@ -208,7 +208,7 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 
 <p>在使用TopHat2匹配双端测序结果后，建议根据成对reads的map基因组位置唯一、方向正确和距离合适的标准，筛选得到的匹配结果。比如，TopHat2可能生成<code class="language-bash">accepted_hits.bam</code>文件，处理方法如下：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Filter TopHat outputs</span></figcaption>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Filter TopHat Outputs</span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -226,7 +226,7 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 </span><span class="line">
 </span><span class="line"><span class="c"># 筛选成对且成功map到基因组唯一位置的reads，按照上一条输出结果，调整“NR &lt;= 86”</span>
 </span><span class="line"><span class="nv">$ </span>samtools view -h accepted_hits.bam <span class="p">|</span> <span class="se">\</span>
-</span><span class="line">    awk <span class="s1">&#39;{if (NR &lt;= 86 ) print $0}; {if($5 == 50 &amp;&amp; ($2 == 163 || $2 == 147 || $2 == 83 || $2 == 99)) print $0}&#39;</span> <span class="p">|</span> <span class="se">\</span>
+</span><span class="line">    awk <span class="s1">&#39;{if (NR &lt;= 86) print $0}; {if($5 == 50 &amp;&amp; ($2 == 163 || $2 == 147 || $2 == 83 || $2 == 99)) print $0}&#39;</span> <span class="p">|</span> <span class="se">\</span>
 </span><span class="line">    samtools view -b - &gt; accepted_filtered.bam
 </span><span class="line">
 </span><span class="line"><span class="nv">$ </span>samtools view accepted_filtered.bam <span class="p">|</span> wc -l
@@ -649,6 +649,8 @@ MAPQ = -10 \times log_{10}(pvalue)
             <li class="previous"><a href="/blog/2015/05/09/django-tutorial/" title="Previous Post: Django使用介绍">&laquo; Django使用介绍</a></li>
             
             
+            <li class="next"><a href="/blog/2015/05/28/bash-program/" title="Next Post: Bash简易编程">Bash简易编程 &raquo;</a></li>
+            
           </ul>
         
       </footer>
@@ -672,15 +674,15 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <div id="recent_posts" class="list-group">
     
+    <a class="list-group-item " href="/blog/2015/06/02/download-ucsc-gene-mask/">UCSC Table下载注释文件</a>
+    
+    <a class="list-group-item " href="/blog/2015/05/28/bash-program/">Bash简易编程</a>
+    
     <a class="list-group-item active" href="/blog/2015/05/16/filter-tophat2-output/">过滤TopHat分析双端测序的输出</a>
     
     <a class="list-group-item " href="/blog/2015/05/09/django-tutorial/">Django使用介绍</a>
     
     <a class="list-group-item " href="/blog/2015/05/09/python-different-version/">使用Pyenv控制多个版本Python</a>
-    
-    <a class="list-group-item " href="/blog/2015/05/08/install-use-postgresql/">Fedora安装与使用PostgreSQL</a>
-    
-    <a class="list-group-item " href="/blog/2014/12/08/c-program-note/">C语言学习记录</a>
     
   </div>
 </section>
@@ -692,7 +694,7 @@ MAPQ = -10 \times log_{10}(pvalue)
     
     
     <a class="list-group-item " href="/blog/categories/linux/index.html">
-        <span class="badge">3</span>
+        <span class="badge">4</span>
         linux
       </a>
     
@@ -710,7 +712,7 @@ MAPQ = -10 \times log_{10}(pvalue)
     
     
     <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
-        <span class="badge">6</span>
+        <span class="badge">7</span>
         bioinfor
       </a>
     

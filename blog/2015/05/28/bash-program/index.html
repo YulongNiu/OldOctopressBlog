@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Fedora安装与使用PostgreSQL - 牛牛龙</title>
+  <title>Bash简易编程 - 牛牛龙</title>
   <meta name="author" content="Yulong Niu">
 
   
@@ -14,15 +14,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yulongniu.github.io/blog/2015/05/08/install-use-postgresql">
+  <link rel="canonical" href="http://yulongniu.github.io/blog/2015/05/28/bash-program">
   <link href="/favicon.ico" type="image/png" rel="icon">
   <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
 
   <!-- http://opengraphprotocol.org/ -->
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="http://yulongniu.github.io/blog/2015/05/08/install-use-postgresql">
-  <meta property="og:title" content="Fedora安装与使用PostgreSQL - 牛牛龙">
+  <meta property="og:url" content="http://yulongniu.github.io/blog/2015/05/28/bash-program">
+  <meta property="og:title" content="Bash简易编程 - 牛牛龙">
   
 
   <!-- mathjax config similar to math.stackexchange -->
@@ -180,7 +180,7 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-08T18:30:54+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-28T21:24:32+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="#disqus_thread" itemprop="discussionUrl"
              data-disqus-identifier="http://yulongniu.github.io">Comments</a>
@@ -189,28 +189,34 @@
     
     
     <h1 class="entry-title" itemprop="name headline">
-        Fedora安装与使用PostgreSQL
+        Bash简易编程
         
     </h1>
     
   </header>
 
 
-<div class="entry-content clearfix" itemprop="articleBody description"><h2 id="postgresql">1. 安装和开启postgresql</h2>
+<div class="entry-content clearfix" itemprop="articleBody description"><h2 id="section">1. 循环</h2>
 
-<p>Fedora直接使用<code class="language-bash">yum</code>安装相关组件。</p>
+<p><code class="language-bash">for</code>循环体</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>for in Bash</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 安装PostgreSQL</span>
-</span><span class="line"><span class="c"># yum install postgresql postgresql-server postgresql-contrib postgresql-devel pgadmin3</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="k">for</span> i in *.zip
+</span><span class="line"><span class="k">do</span>
+</span><span class="line">    <span class="nb">echo</span> <span class="s2">&quot;$i&quot;</span>
+</span><span class="line"><span class="k">done</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <!--more-->
 
-<p>初始化（只需要执行一次）。如果出现类似<code class="language-bash">Data directory is not empty!</code>报错，可以尝试执行删除操作<code>rm -f -r /usr/local/pgsql/data</code></p>
+<h2 id="section-1">2. 字符串分割</h2>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Split strings</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -222,153 +228,47 @@
 <span class="line-number">10</span>
 <span class="line-number">11</span>
 <span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 初始化</span>
-</span><span class="line"><span class="c"># postgresql-setup initdb</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># write in file &quot;testsplit.sh&quot;</span>
+</span><span class="line"><span class="nv">IFS</span><span class="o">=</span><span class="s1">&#39;,&#39;</span> <span class="nb">read</span> -ra splitArray <span class="o">&lt;&lt;&lt;</span> <span class="s2">&quot;This,is,a,test&quot;</span>
+</span><span class="line"><span class="k">for</span> i in <span class="s2">&quot;${splitArray[@]}&quot;</span>
+</span><span class="line"><span class="k">do</span>
+</span><span class="line">    <span class="nb">echo</span> <span class="s2">&quot;$i&quot;</span>
+</span><span class="line"><span class="k">done</span>
 </span><span class="line">
-</span><span class="line"><span class="c"># 开启服务</span>
-</span><span class="line"><span class="c"># service postgresql start</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># 查询工作状态</span>
-</span><span class="line"><span class="c"># service postgresql status</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># 关闭服务</span>
-</span><span class="line"><span class="c"># service postgresql stop</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># 开机启动</span>
-</span><span class="line"><span class="c"># chkconfig postgresql on</span>
+</span><span class="line"><span class="nv">$ </span>bash testsplit.sh
+</span><span class="line">This
+</span><span class="line">is
+</span><span class="line">a
+</span><span class="line"><span class="nb">test</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h2 id="section">2. 创建用户和数据库</h2>
+<h2 id="section-2">3. 屏幕输出存入变量</h2>
 
-<p>为了方便使用，可以在PostgreSQL中创建一个与当前系统用户名相同的用户，比如目前系统登陆用户为Kitty。</p>
+<p>某个bash命令，比如<code class="language-bash">ls -l</code>存入变量，之后引用变量。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Save Command Output into Variables</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 进入home路径</span>
-</span><span class="line"><span class="nv">$ </span><span class="nb">cd</span> <span class="se">\h</span>ome
-</span><span class="line">
-</span><span class="line"><span class="c"># 进入默认postgres用户，需要输入root密码。</span>
-</span><span class="line"><span class="c"># 之后系统命令提示符会变成类似“bash-4.3$”。</span>
-</span><span class="line"><span class="nv">$ </span>su postgres
-</span><span class="line">
-</span><span class="line"><span class="c"># 创建用户</span>
-</span><span class="line"><span class="c"># -P：创建用户后立即创建密码</span>
-</span><span class="line"><span class="c"># -s：用户为superuser</span>
-</span><span class="line"><span class="c"># -e：打印消息</span>
-</span><span class="line">bash-4.3<span class="nv">$ </span>createuser -P -s -e Kitty
-</span><span class="line">
-</span><span class="line"><span class="c"># 创建数据库</span>
-</span><span class="line"><span class="c"># -O：制定用户</span>
-</span><span class="line">bash-4.3<span class="nv">$ </span>createdb -O Kitty testdb
-</span><span class="line">
-</span><span class="line"><span class="c"># 退出</span>
-</span><span class="line">bash-4.3<span class="nv">$ </span><span class="nb">exit</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># 再创建新的数据库时，不需要进入postgres。</span>
-</span><span class="line"><span class="c"># 直接在当前登录用户下创建即可。</span>
-</span><span class="line"><span class="c"># 由于PostgreSQL用户与系统登录用户相同，不需要指定PostgreSQL用户</span>
-</span><span class="line"><span class="nv">$ </span>creatdb testdb2
-</span><span class="line">
-</span><span class="line"><span class="c"># 删除数据库</span>
-</span><span class="line"><span class="nv">$ </span>dropdb testdb2
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 注意等号前后不能加空格</span>
+</span><span class="line"><span class="nv">listOutput</span><span class="o">=</span><span class="sb">`</span>ls -l<span class="sb">`</span>
+</span><span class="line"><span class="nb">echo</span> <span class="s2">&quot;$listOutput&quot;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>创建完用户和对应数据库后，可以登录数据库控制台。登录后，系统命令提示符会变成类似“testdb=#”。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 登录testdb数据库控制台</span>
-</span><span class="line"><span class="nv">$ </span>psql testdb
-</span><span class="line">
-</span><span class="line"><span class="c"># 完整登录命令</span>
-</span><span class="line"><span class="c"># -U：用户名</span>
-</span><span class="line"><span class="c"># -d：数据库</span>
-</span><span class="line"><span class="c"># -h：host，默认为local socket</span>
-</span><span class="line"><span class="c"># -p：端口</span>
-</span><span class="line"><span class="nv">$ </span>psql -U Kitty -d testdb -h /var/run/postgresql -p 5432
-</span><span class="line">
-</span><span class="line"><span class="c"># 查看PostgreSQL配制文件路径</span>
-</span><span class="line"><span class="nv">testdb</span><span class="o">=</span><span class="c"># SHOW config_file;</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># 查看所有用户</span>
-</span><span class="line"><span class="nv">testdb</span><span class="o">=</span><span class="c"># \du</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># 查看表格（table）</span>
-</span><span class="line"><span class="nv">testdb</span><span class="o">=</span><span class="c"># \dt</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># 查看所有数据库</span>
-</span><span class="line"><span class="nv">testdb</span><span class="o">=</span><span class="c"># \l</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># 退出</span>
-</span><span class="line"><span class="nv">testdb</span><span class="o">=</span><span class="c"># \q</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+<h3 id="section-3">参考网址</h3>
 
 <ul>
   <li>
-    <p><a href="http://www.postgresql.org/docs/9.4/interactive/index.html">PostgreSQL 9.4 Manuals</a></p>
+    <p><a href="http://stackoverflow.com/questions/918886/how-do-i-split-a-string-on-a-delimiter-in-bash">How do I split a string on a delimiter in Bash?</a></p>
   </li>
   <li>
-    <p><a href="http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html">PostgreSQL新手入门</a></p>
-  </li>
-  <li>
-    <p><a href="http://www.heatware.net/linux-unix/how-install-postgresql-8-4-centos-5/">初始化错误</a></p>
+    <p><a href="http://stackoverflow.com/questions/4651437/how-to-set-a-bash-variable-equal-to-the-output-from-a-command">How to set a BASH variable equal to the output from a command?</a> </p>
   </li>
 </ul>
 
-<h3 id="section-1">更新记录</h3>
+<h3 id="section-4">更新记录</h3>
 
-<p>2015年5月11日</p>
+<p>2015年5月27日</p>
 </div>
 
 
@@ -392,7 +292,7 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-08T18:30:54+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-28T21:24:32+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
           
 
 <span class="glyphicon glyphicon-tags"></span>&nbsp;
@@ -407,7 +307,7 @@
         
           <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.github.io/blog/2015/05/08/install-use-postgresql/" data-via="" data-counturl="http://yulongniu.github.io/blog/2015/05/08/install-use-postgresql/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.github.io/blog/2015/05/28/bash-program/" data-via="" data-counturl="http://yulongniu.github.io/blog/2015/05/28/bash-program/" >Tweet</a>
   
   
   
@@ -417,10 +317,10 @@
         
           <ul class="meta text-muted pager">
             
-            <li class="previous"><a href="/blog/2014/12/08/c-program-note/" title="Previous Post: C语言学习记录">&laquo; C语言学习记录</a></li>
+            <li class="previous"><a href="/blog/2015/05/16/filter-tophat2-output/" title="Previous Post: 过滤TopHat分析双端测序的输出">&laquo; 过滤TopHat分析双端测序的输出</a></li>
             
             
-            <li class="next"><a href="/blog/2015/05/09/python-different-version/" title="Next Post: 使用Pyenv控制多个版本Python">使用Pyenv控制多个版本Python &raquo;</a></li>
+            <li class="next"><a href="/blog/2015/06/02/download-ucsc-gene-mask/" title="Next Post: UCSC Table下载注释文件">UCSC Table下载注释文件 &raquo;</a></li>
             
           </ul>
         
@@ -447,7 +347,7 @@
     
     <a class="list-group-item " href="/blog/2015/06/02/download-ucsc-gene-mask/">UCSC Table下载注释文件</a>
     
-    <a class="list-group-item " href="/blog/2015/05/28/bash-program/">Bash简易编程</a>
+    <a class="list-group-item active" href="/blog/2015/05/28/bash-program/">Bash简易编程</a>
     
     <a class="list-group-item " href="/blog/2015/05/16/filter-tophat2-output/">过滤TopHat分析双端测序的输出</a>
     
@@ -539,8 +439,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://yulongniu.github.io/blog/2015/05/08/install-use-postgresql/';
-        var disqus_url = 'http://yulongniu.github.io/blog/2015/05/08/install-use-postgresql/';
+        var disqus_identifier = 'http://yulongniu.github.io/blog/2015/05/28/bash-program/';
+        var disqus_url = 'http://yulongniu.github.io/blog/2015/05/28/bash-program/';
         var disqus_script = 'embed.js';
       
     (function () {

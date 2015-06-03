@@ -2,10 +2,10 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Category: Ppr - 牛牛龙</title>
+  <title>UCSC Table下载注释文件 - 牛牛龙</title>
   <meta name="author" content="Yulong Niu">
 
-  <meta name="description" content="Category: ppr">
+  
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -14,16 +14,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yulongniu.github.io/blog/categories/ppr">
+  <link rel="canonical" href="http://yulongniu.github.io/blog/2015/06/02/download-ucsc-gene-mask">
   <link href="/favicon.ico" type="image/png" rel="icon">
   <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
 
   <!-- http://opengraphprotocol.org/ -->
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="http://yulongniu.github.io/blog/categories/ppr">
-  <meta property="og:title" content="Category: Ppr - 牛牛龙">
-  <meta property="og:description" content="Category: ppr">
+  <meta property="og:url" content="http://yulongniu.github.io/blog/2015/06/02/download-ucsc-gene-mask">
+  <meta property="og:title" content="UCSC Table下载注释文件 - 牛牛龙">
+  
 
   <!-- mathjax config similar to math.stackexchange -->
 <script type="text/x-mathjax-config">
@@ -119,10 +119,10 @@
 
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li >
+                <li class="active">
                     <a rel="index" href="/">Blog</a>
                 </li>
-                <li class="active">
+                <li >
                     <a href="/blog/archives">Archives</a>
                 </li>
 		<li >
@@ -158,35 +158,16 @@
       <div id="main" role="main" class="container">
         <div id="content">
           <div class="row">
-  <div class="page-content col-md-9">
-    <article role="article">
+  <div class="page-content col-md-9" itemscope itemtype="http://schema.org/Blog">
+    <meta itemprop="name" content="牛牛龙" />
+    
+    <meta itemprop="url" content="http://yulongniu.github.io" />
+    <article class="hentry" role="article" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
       
-        <header class="page-header">
-          
-          
-            <h1 class="entry-title">
-              Category: Ppr
-              
-            </h1>
-          
-        </header>
-      
-      <div class="entry-content">
-        <div id="blog-archives" class="category" itemscope itemtype="http://schema.org/Blog">
-<meta itemprop="name" content="牛牛龙" />
-
-<meta itemprop="url" content="http://yulongniu.github.io" />
-
-
-
-  
-  <h2 class="year">2015</h2>
-
-<article class="page-header" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-  
-<h2 class="post-title" itemprop="name headline"><a href="/blog/2015/05/09/django-tutorial/" itemprop="url">Django使用介绍</a></h2>
-<p class="meta text-muted">
-  
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
 
 
 
@@ -199,111 +180,165 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-09T13:42:15+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-  
-
-<span class="glyphicon glyphicon-tags"></span>&nbsp;
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/ppr/'>ppr</a>
-  
-</span>
-
-
-</p>
-
-</article>
-
-
-
-<article class="page-header" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-  
-<h2 class="post-title" itemprop="name headline"><a href="/blog/2015/05/09/python-different-version/" itemprop="url">使用Pyenv控制多个版本Python</a></h2>
-<p class="meta text-muted">
-  
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-06-02T16:49:41+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.github.io">Comments</a>
+        
+      </p>
+    
+    
+    <h1 class="entry-title" itemprop="name headline">
+        UCSC Table下载注释文件
+        
+    </h1>
+    
+  </header>
 
 
+<div class="entry-content clearfix" itemprop="articleBody description"><p>在进行RNA-seq数据分析时，需要从<a href="http://genome.ucsc.edu/cgi-bin/hgTables">UCSC Table</a>下载基因组注释信息。</p>
 
+<h2 id="section">1. 基因注释信息</h2>
 
+<p>下载转录组Ensembl注释文件：</p>
 
+<p><img src="/images/hg19_ensembl.png" title="image" alt="UCSC下载Ensembl注释" /></p>
 
+<!--more-->
 
+<p>在“table”选择中，<code class="language-bash">ensemblSource</code>表示Ensembl类型注释，<code class="language-bash">ensemblToGeneName</code>表示Ensembl到基因名注释对应。</p>
 
+<h2 id="rrna">2. rRNA注释信息</h2>
 
+<p>分为两步：</p>
 
+<p>第一步， “table”选择<code class="language-bash">wgEncodeGencodeBasicV19</code>。</p>
 
+<p><img src="/images/hg19_rRNA.png" title="image" alt="UCSC下载rRNA注释" /></p>
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-09T00:14:10+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-  
+<p>第二步，按照下图编辑“filter”。</p>
 
-<span class="glyphicon glyphicon-tags"></span>&nbsp;
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/ppr/'>ppr</a>
-  
-</span>
+<p><img src="/images/hg19_rRNA_maskTable.png" title="image" alt="UCSC下载rRNA注释Table" /></p>
 
+<p><img src="/images/hg19_rRNA_mask.png" title="image" alt="UCSC下载rRNA注释筛选" /></p>
 
-</p>
+<h2 id="trna">3. tRNA注释信息</h2>
 
-</article>
+<p>分为两步：</p>
 
+<p>第一步，“track”选择 <code class="language-bash">tRNA Genes</code>。</p>
 
+<p><img src="/images/hg19_tRNA.png" title="image" alt="UCSC下载tRNA注释" /></p>
 
-  
-  <h2 class="year">2014</h2>
+<p>第二步，保留pseudo tRNA注释。</p>
 
-<article class="page-header" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-  
-<h2 class="post-title" itemprop="name headline"><a href="/blog/2014/07/23/octopress-install/" itemprop="url">Octopress安装和使用</a></h2>
-<p class="meta text-muted">
-  
+<p><img src="/images/hg19_tRNA_mask.png" title="image" alt="UCSC下载tRNA注释" /></p>
 
+<h2 id="section-1">4. 线粒体基因组注释</h2>
 
+<p>分为两步：</p>
 
+<p>第一步， “table”选择<code class="language-bash">wgEncodeGencodeBasicV19</code>。</p>
 
+<p><img src="/images/hg19_chrM.png" title="image" alt="UCSC下载chrM注释" /></p>
 
+<p>第二步，按照下图编辑“filter”。</p>
 
+<p><img src="/images/hg19_chrM_mask.png" title="image" alt="UCSC下载chrM注释筛选" /></p>
 
+<h3 id="section-2">参考网址</h3>
 
+<ul>
+  <li>
+    <p>USCS Genome Browser的Google论坛：<a href="https://groups.google.com/a/soe.ucsc.edu/forum/#!topic/genome/IL_aeOuPYU0">1</a>、<a href="https://groups.google.com/a/soe.ucsc.edu/forum/#!msg/genome/jSAY8w1JVVo/P6lk4OJzDNEJ">2</a> </p>
+  </li>
+  <li>
+    <p>另一种选择rRNA、tRNA和线粒体组注释的方法<a href="http://onetipperday.blogspot.tw/2012/08/how-to-get-trnarrnamitochondrial-gene.html">How to get tRNA/rRNA/mitochondrial gene GTF file</a></p>
+  </li>
+  <li>
+    <p><a href="http://webappl.blogspot.tw/2015/02/extract-rrna-and-trna-features-from.html">Extract rRNA and tRNA features from UCSC Browser</a> </p>
+  </li>
+</ul>
 
+<h3 id="section-3">更新记录</h3>
 
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-07-23T01:45:46+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-  
-
-<span class="glyphicon glyphicon-tags"></span>&nbsp;
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/ppr/'>ppr</a>
-  
-</span>
-
-
-</p>
-
-</article>
+<p>2015年6月1日</p>
 
 </div>
 
-      </div>
-      
+
+      <footer>
+        <p class="meta text-muted">
+          
+  
+
+<span class="glyphicon glyphicon-user"></span> <span class="byline author vcard" itemprop="author" itemscope itemtype="http://schema.org/Person">Posted by <span class="fn" itemprop="name">Yulong Niu</span></span>
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-06-02T16:49:41+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+          
+
+<span class="glyphicon glyphicon-tags"></span>&nbsp;
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/bioinfor/'>bioinfor</a>
+  
+</span>
+
+
+        </p>
+        
+          <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.github.io/blog/2015/06/02/download-ucsc-gene-mask/" data-via="" data-counturl="http://yulongniu.github.io/blog/2015/06/02/download-ucsc-gene-mask/" >Tweet</a>
+  
+  
+  
+</div>
+
+        
+        
+          <ul class="meta text-muted pager">
+            
+            <li class="previous"><a href="/blog/2015/05/28/bash-program/" title="Previous Post: Bash简易编程">&laquo; Bash简易编程</a></li>
+            
+            
+          </ul>
+        
+      </footer>
     </article>
+    
+      <section>
+        <h2>Comments</h2>
+        <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+      </section>
     
   </div>
 
   
-    <aside class="sidebar col-md-3">
-      
-        <section class="panel panel-default">
+  <aside class="sidebar col-md-3">
+    
+      <section class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Recent Posts</h3>
   </div>
   
   <div id="recent_posts" class="list-group">
     
-    <a class="list-group-item " href="/blog/2015/06/02/download-ucsc-gene-mask/">UCSC Table下载注释文件</a>
+    <a class="list-group-item active" href="/blog/2015/06/02/download-ucsc-gene-mask/">UCSC Table下载注释文件</a>
     
     <a class="list-group-item " href="/blog/2015/05/28/bash-program/">Bash简易编程</a>
     
@@ -352,7 +387,7 @@
       </a>
     
     
-    <a class="list-group-item active" href="/blog/categories/ppr/index.html">
+    <a class="list-group-item " href="/blog/categories/ppr/index.html">
         <span class="badge">3</span>
         ppr
       </a>
@@ -371,8 +406,8 @@
 
 
 
-      
-    </aside>
+    
+  </aside>
   
 </div>
 
@@ -396,7 +431,10 @@
       var disqus_shortname = 'yulongniu';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://yulongniu.github.io/blog/2015/06/02/download-ucsc-gene-mask/';
+        var disqus_url = 'http://yulongniu.github.io/blog/2015/06/02/download-ucsc-gene-mask/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bioinfor | 牛牛龙]]></title>
   <link href="http://yulongniu.github.io/blog/categories/bioinfor/atom.xml" rel="self"/>
   <link href="http://yulongniu.github.io/"/>
-  <updated>2015-05-23T18:16:51+08:00</updated>
+  <updated>2015-06-03T12:01:01+08:00</updated>
   <id>http://yulongniu.github.io/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -12,6 +12,82 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[UCSC Table下载注释文件]]></title>
+    <link href="http://yulongniu.github.io/blog/2015/06/02/download-ucsc-gene-mask/"/>
+    <updated>2015-06-02T16:49:41+08:00</updated>
+    <id>http://yulongniu.github.io/blog/2015/06/02/download-ucsc-gene-mask</id>
+    <content type="html"><![CDATA[<p>在进行RNA-seq数据分析时，需要从<a href="http://genome.ucsc.edu/cgi-bin/hgTables">UCSC Table</a>下载基因组注释信息。</p>
+
+<h2 id="section">1. 基因注释信息</h2>
+
+<p>下载转录组Ensembl注释文件：</p>
+
+<p><img src="http://yulongniu.github.io/images/hg19_ensembl.png" title="image" alt="UCSC下载Ensembl注释" /></p>
+
+<!--more-->
+
+<p>在“table”选择中，<code class="language-bash">ensemblSource</code>表示Ensembl类型注释，<code class="language-bash">ensemblToGeneName</code>表示Ensembl到基因名注释对应。</p>
+
+<h2 id="rrna">2. rRNA注释信息</h2>
+
+<p>分为两步：</p>
+
+<p>第一步， “table”选择<code class="language-bash">wgEncodeGencodeBasicV19</code>。</p>
+
+<p><img src="http://yulongniu.github.io/images/hg19_rRNA.png" title="image" alt="UCSC下载rRNA注释" /></p>
+
+<p>第二步，按照下图编辑“filter”。</p>
+
+<p><img src="http://yulongniu.github.io/images/hg19_rRNA_maskTable.png" title="image" alt="UCSC下载rRNA注释Table" /></p>
+
+<p><img src="http://yulongniu.github.io/images/hg19_rRNA_mask.png" title="image" alt="UCSC下载rRNA注释筛选" /></p>
+
+<h2 id="trna">3. tRNA注释信息</h2>
+
+<p>分为两步：</p>
+
+<p>第一步，“track”选择 <code class="language-bash">tRNA Genes</code>。</p>
+
+<p><img src="http://yulongniu.github.io/images/hg19_tRNA.png" title="image" alt="UCSC下载tRNA注释" /></p>
+
+<p>第二步，保留pseudo tRNA注释。</p>
+
+<p><img src="http://yulongniu.github.io/images/hg19_tRNA_mask.png" title="image" alt="UCSC下载tRNA注释" /></p>
+
+<h2 id="section-1">4. 线粒体基因组注释</h2>
+
+<p>分为两步：</p>
+
+<p>第一步， “table”选择<code class="language-bash">wgEncodeGencodeBasicV19</code>。</p>
+
+<p><img src="http://yulongniu.github.io/images/hg19_chrM.png" title="image" alt="UCSC下载chrM注释" /></p>
+
+<p>第二步，按照下图编辑“filter”。</p>
+
+<p><img src="http://yulongniu.github.io/images/hg19_chrM_mask.png" title="image" alt="UCSC下载chrM注释筛选" /></p>
+
+<h3 id="section-2">参考网址</h3>
+
+<ul>
+  <li>
+    <p>USCS Genome Browser的Google论坛：<a href="https://groups.google.com/a/soe.ucsc.edu/forum/#!topic/genome/IL_aeOuPYU0">1</a>、<a href="https://groups.google.com/a/soe.ucsc.edu/forum/#!msg/genome/jSAY8w1JVVo/P6lk4OJzDNEJ">2</a> </p>
+  </li>
+  <li>
+    <p>另一种选择rRNA、tRNA和线粒体组注释的方法<a href="http://onetipperday.blogspot.tw/2012/08/how-to-get-trnarrnamitochondrial-gene.html">How to get tRNA/rRNA/mitochondrial gene GTF file</a></p>
+  </li>
+  <li>
+    <p><a href="http://webappl.blogspot.tw/2015/02/extract-rrna-and-trna-features-from.html">Extract rRNA and tRNA features from UCSC Browser</a> </p>
+  </li>
+</ul>
+
+<h3 id="section-3">更新记录</h3>
+
+<p>2015年6月1日</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[过滤TopHat分析双端测序的输出]]></title>
@@ -28,7 +104,7 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 
 <p>在使用TopHat2匹配双端测序结果后，建议根据成对reads的map基因组位置唯一、方向正确和距离合适的标准，筛选得到的匹配结果。比如，TopHat2可能生成<code class="language-bash">accepted_hits.bam</code>文件，处理方法如下：</p>
 
-<p><figure class='code'><figcaption><span>Filter TopHat outputs</span></figcaption>
+<p><figure class='code'><figcaption><span>Filter TopHat Outputs</span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -50,7 +126,7 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 </span><span class='line'>
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;mapreadsnr--86&quot;</span>&gt;筛选成对且成功map到基因组唯一位置的reads，按照上一条输出结果，调整“NR <span class="p">&amp;</span>lt<span class="p">;</span><span class="o">=</span> 86”&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>samtools view -h accepted_hits.bam <span class="p">|</span> <span class="se">\</span>
-</span><span class='line'>    awk ‘<span class="o">{</span><span class="k">if</span> <span class="o">(</span>NR <span class="p">&amp;</span>lt<span class="p">;</span><span class="o">=</span> <span class="m">86</span> <span class="o">)</span> print <span class="nv">$0</span><span class="o">}</span><span class="p">;</span> <span class="o">{</span><span class="k">if</span><span class="o">(</span><span class="nv">$5</span> <span class="o">==</span> <span class="m">50</span> <span class="p">&amp;</span>amp<span class="p">;&amp;</span>amp<span class="p">;</span> <span class="o">(</span><span class="nv">$2</span> <span class="o">==</span> <span class="m">163</span> <span class="o">||</span> <span class="nv">$2</span> <span class="o">==</span> <span class="m">147</span> <span class="o">||</span> <span class="nv">$2</span> <span class="o">==</span> <span class="m">83</span> <span class="o">||</span> <span class="nv">$2</span> <span class="o">==</span> 99<span class="o">))</span> print <span class="nv">$0</span><span class="o">}</span>’ <span class="p">|</span> <span class="se">\</span>
+</span><span class='line'>    awk ‘<span class="o">{</span><span class="k">if</span> <span class="o">(</span>NR <span class="p">&amp;</span>lt<span class="p">;</span><span class="o">=</span> 86<span class="o">)</span> print <span class="nv">$0</span><span class="o">}</span><span class="p">;</span> <span class="o">{</span><span class="k">if</span><span class="o">(</span><span class="nv">$5</span> <span class="o">==</span> <span class="m">50</span> <span class="p">&amp;</span>amp<span class="p">;&amp;</span>amp<span class="p">;</span> <span class="o">(</span><span class="nv">$2</span> <span class="o">==</span> <span class="m">163</span> <span class="o">||</span> <span class="nv">$2</span> <span class="o">==</span> <span class="m">147</span> <span class="o">||</span> <span class="nv">$2</span> <span class="o">==</span> <span class="m">83</span> <span class="o">||</span> <span class="nv">$2</span> <span class="o">==</span> 99<span class="o">))</span> print <span class="nv">$0</span><span class="o">}</span>’ <span class="p">|</span> <span class="se">\</span>
 </span><span class='line'>    samtools view -b - <span class="p">&amp;</span>gt<span class="p">;</span> accepted_filtered.bam&lt;/p&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>samtools view accepted_filtered.bam <span class="p">|</span> wc -l
@@ -1289,202 +1365,6 @@ apply rules
 * [Ciros grocery of published pictures](http://circos.ca/images/scientific_literature/)
 
 </include></rules></plots>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A Brief Intruction of Mutual Information and Demonstration With R]]></title>
-    <link href="http://yulongniu.github.io/blog/2013/11/10/mutual-information/"/>
-    <updated>2013-11-10T14:21:16+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2013/11/10/mutual-information</id>
-    <content type="html"><![CDATA[<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-TeX: { equationNumbers: { autoNumber: "AMS" } }
-});
-</script>
-
-<p>$\newcommand{\entropfrac}[2]{\frac{#1}{#2} \log \left( \frac{#1}{#2} \right)}$</p>
-
-<h2 id="mututal-information-mi">Mututal Information (MI)</h2>
-
-<h3 id="introduction">Introduction</h3>
-
-<p><a href="http://en.wikipedia.org/wiki/Mutual_information">Mutual Information (MI)</a> distance is used to measure the distance between two genes vectors, for example $x_1 = {1, 0, 1, 1, 1, 1, 0}$ and $y_1 = {0, 1, 1, 1, 1, 1, 0}$. It is easily to transfer the two vectors into a binary table:</p>
-
-<hr />
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center"><strong>X/Y</strong></th>
-      <th style="text-align: center"><strong>1(Presence)</strong></th>
-      <th style="text-align: center"><strong>0(Absence)</strong></th>
-      <th style="text-align: center"><strong>Sum</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center"><strong>1(Presence)</strong></td>
-      <td style="text-align: center">a</td>
-      <td style="text-align: center">b</td>
-      <td style="text-align: center">a+b</td>
-    </tr>
-  </tbody>
-  <tbody>
-    <tr>
-      <td style="text-align: center"><strong>0(Absence)</strong></td>
-      <td style="text-align: center">c</td>
-      <td style="text-align: center">d</td>
-      <td style="text-align: center">c+d</td>
-    </tr>
-  </tbody>
-  <tbody>
-    <tr>
-      <td style="text-align: center"><strong>Sum</strong></td>
-      <td style="text-align: center">a+c</td>
-      <td style="text-align: center">b+d</td>
-      <td style="text-align: center">n=a+b+c+d</td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<!--more-->
-
-<p>Typically, here we give the example of two discrete variables, the mutual information between $x_1$ and $y_1$ is</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-
-\begin{align}
-\begin{split}
-I(X;Y) &= H(X) + H(Y) - H(X,Y)\\
-&= -\sum_{x \in \{0, 1\}}p(x)\log(p(x)) - \sum_{y \in \{0, 1\}}p(y)\log(p(y))\\
-& \quad -\left( -\sum_{x \in \{0, 1\}}\sum_{y \in \{0, 1\}}p(x,y)\log(p(x,y)) \right)\\
-\end{split}
-\label{eq:1}
-\end{align}
- %]]&gt;</script>
-
-<p>The $\eqref{eq:1}$ is equal to</p>
-
-<script type="math/tex; mode=display">
-\begin{equation}
-I(X;Y) = \sum_{x \in \{1, 0\}}\sum_{y \in \{1, 0\}} p(x,y) \frac{\log(p(x,y))}{p(x)p(y)}
-\label{eq:2}
-\end{equation}
-</script>
-
-<p>$p(x)$ is the probability that a symbol (here is 0 or 1) appears in the gene vector X regardless that what the symbol is in gene vector Y. $p(y)$ has a similar definition of $p(x). $$p(x, y)$ is probability of a symbol combination appears in gene vector X and Y. In this example, there are four kinds of symbol combination $(1, 1)$, $(1, 0)$, $(0, 1)$ and $(1, 1)$.</p>
-
-<p>If we use the binary table to illustrate this equation, the $\eqref{eq:1}$ is:</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-
-\begin{align}
-\begin{split}
-I(X; Y) &= -\left( \entropfrac{a+c}{n} + \entropfrac{b+d}{n} \right)\\
-& \quad -\left( \entropfrac{a+b}{n} + \entropfrac{c+d}{n} \right)\\
-& \quad - \left( - \left(
-\entropfrac{a}{n} + \entropfrac{b}{n} + \entropfrac{c}{n} + \entropfrac{d}{n}
-\right) \right)\\
-\end{split}
-\label{eq:3}
-\end{align}
- %]]&gt;</script>
-
-<p>The $\eqref{eq:3}$ is mathmatically equal to:</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-
-\begin{align}
-\begin{split}
-I(X; Y) &= \frac{a}{n}\log\frac{na}{(a+b)(a+c)} + \frac{b}{n}\log\frac{nc}{(a+d)(b+d)}\\
-& \quad \frac{c}{n}\log\frac{nc}{(a+b)(a+c)} + \frac{d}{n}\log\frac{nd}{(d+c)(d+b)}
-\end{split}
-\label{eq:4}
-\end{align}
- %]]&gt;</script>
-
-<h3 id="example">Example</h3>
-
-<p>We can use R to directly calculate the MI between two gene vectors mentioned above.</p>
-
-<ol>
-  <li>Use basic R function</li>
-</ol>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='r'><span class='line'>x1 <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> <span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span>
-</span><span class='line'>y1 <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> <span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span>
-</span><span class='line'><span class="kp">table</span><span class="p">(</span>x1<span class="p">,</span> y1<span class="p">)</span>
-</span><span class='line'>   y1
-</span><span class='line'>x1  <span class="m">0</span> <span class="m">1</span>
-</span><span class='line'>  <span class="m">0</span> <span class="m">1</span> <span class="m">1</span>
-</span><span class='line'>  <span class="m">1</span> <span class="m">1</span> <span class="m">4</span>
-</span><span class='line'><span class="c1"># calculate MI</span>
-</span><span class='line'><span class="m">4</span><span class="o">/</span><span class="m">7</span> <span class="o">*</span> <span class="kp">log</span><span class="p">(</span><span class="m">28</span><span class="o">/</span><span class="m">25</span><span class="p">)</span> <span class="o">+</span> <span class="m">1</span><span class="o">/</span><span class="m">7</span> <span class="o">*</span> <span class="kp">log</span><span class="p">(</span><span class="m">7</span><span class="o">/</span><span class="m">10</span><span class="p">)</span> <span class="o">+</span> <span class="m">1</span><span class="o">/</span><span class="m">7</span> <span class="o">*</span> <span class="kp">log</span><span class="p">(</span><span class="m">7</span><span class="o">/</span><span class="m">10</span><span class="p">)</span> <span class="o">+</span> <span class="m">1</span><span class="o">/</span><span class="m">7</span> <span class="o">*</span> <span class="kp">log</span><span class="p">(</span><span class="m">7</span><span class="o">/</span><span class="m">4</span><span class="p">)</span>
-</span><span class='line'><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">0.04279723</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<ol>
-  <li>Use R package <span style="color: blue">bioDist</span></li>
-</ol>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="kn">library</span><span class="p">(</span>bioDist<span class="p">)</span>
-</span><span class='line'>mutualInfo<span class="p">(</span><span class="kp">rbind</span><span class="p">(</span>x1<span class="p">,</span> y1<span class="p">))</span>
-</span><span class='line'>           x1
-</span><span class='line'>y1 <span class="m">0.04279723</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<h3 id="reference">Reference</h3>
-
-<ul>
-  <li>
-    <p><a href="http://nlp.stanford.edu/IR-book/html/htmledition/mutual-information-1.html">An example of MI</a></p>
-  </li>
-  <li>
-    <p><a href="http://www1.ece.uic.edu/~devroye/courses/ECE534/lectures/ch2.pdf">Slices of MI</a></p>
-  </li>
-  <li>
-    <p><a href="http://people.cs.umass.edu/~elm/Teaching/Docs/mutInf.pdf">Entropy and Mutual Information</a></p>
-  </li>
-  <li>
-    <p><a href="http://www.scholarpedia.org/article/Mutual_information">Useful Websites 1</a></p>
-  </li>
-  <li>
-    <p><a href="http://montana.informatics.indiana.edu/LabWebPage/Presentations/Vikas_Nov02_2011.pdf">Slices about MI application in bioinformatics</a></p>
-  </li>
-  <li>
-    <p>Seung-Seok Choi, Sung-Hyuk Cha, Charles C. Tappert: <a href="http://www.iiisci.org/journal/sci/Abstract.asp?var=&amp;id=GS315JG">A Survey of Binary Similarity and Distance Measures</a>.</p>
-  </li>
-  <li>
-    <p>Huynen M, Snel B, Lathe W 3rd, Bork P: Predicting protein function by genomic context: quantitative evaluation and qualitative inferences.Genome Res. 2000;10(8):1204-10.</p>
-  </li>
-  <li>
-    <p>Korber BT, Farber RM, Wolpert DH, Lapedes AS: Covariation of mutations in the V3 loop of human immunodeficiency virus type 1 envelope protein: an information theoretic analysis. Proc Natl Acad Sci U S A. 1993;90(15):7176-80.</p>
-  </li>
-  <li>
-    <p>Kensche PR, van Noort V, Dutilh BE, Huynen MA: Practical and theoretical advances in predicting the function of a protein by its phylogenetic distribution. J R Soc Interface. 2008;5(19):151-70.</p>
-  </li>
-</ul>
-
-<h3 id="update-record">Update record</h3>
-
-<p>12/16/2014</p>
 ]]></content>
   </entry>
   

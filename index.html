@@ -184,6 +184,115 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-06-02T16:49:41+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2015/06/02/download-ucsc-gene-mask/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.github.io/blog/2015/06/02/download-ucsc-gene-mask/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2015/06/02/download-ucsc-gene-mask/" itemprop="url">UCSC Table下载注释文件</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><p>在进行RNA-seq数据分析时，需要从<a href="http://genome.ucsc.edu/cgi-bin/hgTables">UCSC Table</a>下载基因组注释信息。</p>
+
+<h2 id="section">1. 基因注释信息</h2>
+
+<p>下载转录组Ensembl注释文件：</p>
+
+<p><img src="/images/hg19_ensembl.png" title="image" alt="UCSC下载Ensembl注释" /></p>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2015/06/02/download-ucsc-gene-mask/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-28T21:24:32+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2015/05/28/bash-program/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.github.io/blog/2015/05/28/bash-program/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2015/05/28/bash-program/" itemprop="url">Bash简易编程</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="section">1. 循环</h2>
+
+<p><code class="language-bash">for</code>循环体</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>for in Bash</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="k">for</span> i in *.zip
+</span><span class="line"><span class="k">do</span>
+</span><span class="line">    <span class="nb">echo</span> <span class="s2">&quot;$i&quot;</span>
+</span><span class="line"><span class="k">done</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2015/05/28/bash-program/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-16T04:33:10+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2015/05/16/filter-tophat2-output/#disqus_thread" itemprop="discussionUrl"
@@ -207,7 +316,7 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 
 <p>在使用TopHat2匹配双端测序结果后，建议根据成对reads的map基因组位置唯一、方向正确和距离合适的标准，筛选得到的匹配结果。比如，TopHat2可能生成<code class="language-bash">accepted_hits.bam</code>文件，处理方法如下：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Filter TopHat outputs</span></figcaption>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Filter TopHat Outputs</span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -225,7 +334,7 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 </span><span class="line">
 </span><span class="line"><span class="c"># 筛选成对且成功map到基因组唯一位置的reads，按照上一条输出结果，调整“NR &lt;= 86”</span>
 </span><span class="line"><span class="nv">$ </span>samtools view -h accepted_hits.bam <span class="p">|</span> <span class="se">\</span>
-</span><span class="line">    awk <span class="s1">&#39;{if (NR &lt;= 86 ) print $0}; {if($5 == 50 &amp;&amp; ($2 == 163 || $2 == 147 || $2 == 83 || $2 == 99)) print $0}&#39;</span> <span class="p">|</span> <span class="se">\</span>
+</span><span class="line">    awk <span class="s1">&#39;{if (NR &lt;= 86) print $0}; {if($5 == 50 &amp;&amp; ($2 == 163 || $2 == 147 || $2 == 83 || $2 == 99)) print $0}&#39;</span> <span class="p">|</span> <span class="se">\</span>
 </span><span class="line">    samtools view -b - &gt; accepted_filtered.bam
 </span><span class="line">
 </span><span class="line"><span class="nv">$ </span>samtools view accepted_filtered.bam <span class="p">|</span> wc -l
@@ -382,129 +491,6 @@ MAPQ = -10 \times log_{10}(pvalue)
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-08T18:30:54+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2015/05/08/install-use-postgresql/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.github.io/blog/2015/05/08/install-use-postgresql/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2015/05/08/install-use-postgresql/" itemprop="url">Fedora安装与使用PostgreSQL</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="postgresql">1. 安装和开启postgresql</h2>
-
-<p>Fedora直接使用<code class="language-bash">yum</code>安装相关组件。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 安装PostgreSQL</span>
-</span><span class="line"><span class="c"># yum install postgresql postgresql-server postgresql-contrib postgresql-devel pgadmin3</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2015/05/08/install-use-postgresql/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-12-08T07:23:16+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2014/12/08/c-program-note/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.github.io/blog/2014/12/08/c-program-note/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2014/12/08/c-program-note/" itemprop="url">C语言学习记录</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="section">1. 基本数据类型</h2>
-
-<h3 id="section-1">1.1 数字形式</h3>
-
-<p>数字的位数是多少？</p>
-
-<ul>
-  <li>
-    <p><code>int</code>：整数</p>
-  </li>
-  <li>
-    <p><code>short</code>：短整数</p>
-  </li>
-  <li>
-    <p><code>long</code>：长整数</p>
-  </li>
-  <li>
-    <p><code>float</code>：浮点数</p>
-  </li>
-  <li>
-    <p><code>double</code>：双浮点数</p>
-  </li>
-  <li>
-    <p><code>char</code>：字符</p>
-  </li>
-</ul>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2014/12/08/c-program-note/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -528,15 +514,15 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <div id="recent_posts" class="list-group">
     
+    <a class="list-group-item " href="/blog/2015/06/02/download-ucsc-gene-mask/">UCSC Table下载注释文件</a>
+    
+    <a class="list-group-item " href="/blog/2015/05/28/bash-program/">Bash简易编程</a>
+    
     <a class="list-group-item " href="/blog/2015/05/16/filter-tophat2-output/">过滤TopHat分析双端测序的输出</a>
     
     <a class="list-group-item " href="/blog/2015/05/09/django-tutorial/">Django使用介绍</a>
     
     <a class="list-group-item " href="/blog/2015/05/09/python-different-version/">使用Pyenv控制多个版本Python</a>
-    
-    <a class="list-group-item " href="/blog/2015/05/08/install-use-postgresql/">Fedora安装与使用PostgreSQL</a>
-    
-    <a class="list-group-item " href="/blog/2014/12/08/c-program-note/">C语言学习记录</a>
     
   </div>
 </section>
@@ -548,7 +534,7 @@ MAPQ = -10 \times log_{10}(pvalue)
     
     
     <a class="list-group-item " href="/blog/categories/linux/index.html">
-        <span class="badge">3</span>
+        <span class="badge">4</span>
         linux
       </a>
     
@@ -566,7 +552,7 @@ MAPQ = -10 \times log_{10}(pvalue)
     
     
     <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
-        <span class="badge">6</span>
+        <span class="badge">7</span>
         bioinfor
       </a>
     
