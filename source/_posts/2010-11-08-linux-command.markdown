@@ -154,6 +154,8 @@ Java Control Panel位置`/usr/java/jdk1.7.0_45/bin/ControlPanel`{:.language-bash
 {% codeblock lang:bash %}
 # 执行.jar格式文件
 $ java -jar filename.jar
+# 指定内存运行.jar格式文件
+$ java -Xmx2000M -jar filename.jar
 
 # 执行.jnlp格式文件
 $ javaws filename.jnlp
@@ -199,7 +201,7 @@ $ man commandname
 
 {% codeblock lang:bash %}
 # 删除满足条件的数据
-$ find ./ -iname '*' | xargs rm -rf 
+$ find ./ -name '*' | xargs rm -rf 
 
 # 移动大数据量的文件.
 $ find ./ -name "*.gif" | xargs -i mv {} /filePath/ 
@@ -601,4 +603,4 @@ $ wget -c -t 0 -w 30 httplink
 
 ### 更新记录 ###
 
-2015年5月14日
+2015年6月1日

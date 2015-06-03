@@ -51,6 +51,17 @@ $ pip install ipython
 $ pyenv rehash
 {% endcodeblock %}
 
+如果在使用`pip`{:.language-bash}安装包时，下载速度过慢，可以考虑使用国内源。比如：
+
+* http://pypi.mirrors.ustc.edu.cn/
+
+* http://pypi.douban.com/
+
+使用方法为：
+
+{% codeblock lang:bash Using different pip mirror%}
+$ pip install --upgrade numpy -i http://pypi.mirrors.ustc.edu.cn/simple
+{% endcodeblock %}
 
 ## 3. 更新pyenv ##
 
@@ -74,6 +85,9 @@ $ rm -rf ~/.pyenv/versions/3.4.3
 ### <a id="Ref">参考网址</a> ###
 
 * [Python多版本共存之pyenv](http://seisman.info/python-pyenv.html)
+
+* [使用国内镜像源来加速python pypi包的安装](http://www.leadnt.com/2013/08/%E4%BD%BF%E7%94%A8%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90%E6%9D%A5%E5%8A%A0%E9%80%9Fpython-pypi%E5%8C%85%E7%9A%84%E5%AE%89%E8%A3%85/) 
+
 
 ### 更新记录 ###
 
