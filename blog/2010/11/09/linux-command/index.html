@@ -220,10 +220,10 @@
 </span><span class="line"><span class="c"># 压缩 </span>
 </span><span class="line"><span class="nv">$ </span>tar -zcvf /filePath/filename.tar.gz /filePath/filename
 </span><span class="line">
-</span><span class="line"><span class="c"># 解压到特定文件夹  </span>
+</span><span class="line"><span class="c"># 解压到特定文件夹</span>
 </span><span class="line"><span class="nv">$ </span>tar -zxvf /filePath/filename.tar.gz -C /filePath/filename
 </span><span class="line">
-</span><span class="line"><span class="c"># 压缩到特定文件夹  </span>
+</span><span class="line"><span class="c"># 压缩到特定文件夹</span>
 </span><span class="line"><span class="nv">$ </span>tar -zcvf /filePath/filename.tar.gz -C /filePath/filename
 </span><span class="line">
 </span><span class="line"><span class="c"># 压缩所有txt类型文件 </span>
@@ -306,6 +306,20 @@
 </span><span class="line">
 </span><span class="line"><span class="c"># 压缩当前目录包括所有子目录</span>
 </span><span class="line"><span class="nv">$ </span>zip -r filename *
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code class="language-bash">gzip</code>使用方法:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 保留源文件压缩</span>
+</span><span class="line"><span class="nv">$ </span>gzip -c filename.gz &gt; filename
+</span><span class="line">
+</span><span class="line"><span class="c"># 保留源文件解压</span>
+</span><span class="line"><span class="nv">$ </span>gunzip -c filename &gt; filename.gz
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h2 id="section-1">2. 文件夹操作</h2>
@@ -484,7 +498,7 @@
 </span><span class="line"><span class="nv">$ </span>find ./ -name <span class="s2">&quot;*.gif&quot;</span> <span class="p">|</span> xargs -i mv <span class="o">{}</span> /filePath/
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h2 id="path">14. 修改PATH</h2>
+<h2 id="pathldlibrarypath">14. 修改PATH和LD_LIBRARY_PATH</h2>
 
 <p>假设我们程序的绝对路径是<code class="language-bash">/opt/arbtest/arb</code>
 两种方法: </p>
@@ -506,7 +520,7 @@
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 <ul>
   <li>修改<code class="language-bash">/etc/profile</code>（系统设置，任何用户都可使用）或者<code class="language-bash">~/.bashrc</code>（当前用户）文件。
-向这两个文件中添加<code class="language-bash">export PATH=$PATH:/opt/arbtest</code></li>
+向这两个文件中添加<code class="language-bash">export PATH=$PATH:/opt/arbtest</code>或者<code class="language-bash">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/arbtest</code>。</li>
 </ul>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
@@ -1039,7 +1053,7 @@
 
 <h3 id="section-24">更新记录</h3>
 
-<p>2015年6月1日</p>
+<p>2015年6月5日</p>
 </div>
 
 
