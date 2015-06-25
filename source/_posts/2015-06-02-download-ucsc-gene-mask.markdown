@@ -6,7 +6,7 @@ comments: true
 categories: Bioinfor
 ---
 
-在进行RNA-seq数据分析时，需要从[UCSC Table](http://genome.ucsc.edu/cgi-bin/hgTables)下载基因组注释信息。
+在进行RNA-seq数据分析时，需要从[UCSC Table](http://genome.ucsc.edu/cgi-bin/hgTables)下载各种注释信息。比如Cufflinks等要求的转录组注释信息、Cufflinks建议去除的rRNA/tRNA/线粒体组注释。
 
 ## 1. 基因注释信息 ##
 

@@ -37,6 +37,11 @@ categories: Bioinfor
     * [PhyML](http://www.atgc-montpellier.fr/phyml/)
     
     * [PHYLIP](http://evolution.genetics.washington.edu/phylip.html)，在PHYLIP的[介绍](http://evolution.genetics.washington.edu/phylip/general.html)中，列出了六个高使用率的构建进化树的软件，MrBayes、PAUP*、RAxML、PhyML、MEGA和PHYLIP。
+
+* 时间尺度进化树
+
+* [TimeTree](http://www.timetree.org/about.php) 
+
     
 * sRNA数据库
 
@@ -164,6 +169,13 @@ categories: Bioinfor
 
 * [DBTBS](http://dbtbs.hgc.jp/) 转录因子和相应的DNA结合保守（DNA binding motif）数据库。
 
+## 14. 基因序列可视化 ##
+
+* [Illustrator for Biological Sequences (IBS)](http://ibs.biocuckoo.org/)
+
+* [DOG](http://dog.biocuckoo.org/) 可视化蛋白质结构域
+
+
 ## 文章介绍 ##
 
 * [未知蛋白功能研究流程](http://www.nature.com/nrm/journal/v8/n12/abs/nrm2281.html)
@@ -175,11 +187,17 @@ categories: Bioinfor
 * [构建进化树](http://www.plosone.org/article/info:doi/10.1371/journal.pone.0002566)
 
 
+
+
+
+
+
+
 ## 书籍推荐 ##
 
 * [a Little Book of R for Bioinformatics](http://a-little-book-of-r-for-bioinformatics.readthedocs.org/en/latest/index.html) 一本使用R语言介绍生物信息学书，提供源代码和示例。
 
 ### 更新记录 ###
 
-2014年9月19日
+2015年6月6日
 

@@ -96,84 +96,8 @@ Bowtie使用介绍，详见[二代测序中的短序列比对](http://yulongniu.
 
 ## 3. TopHat ##
 
-**简介**：[TopHat](http://ccb.jhu.edu/software/tophat/index.shtml)是快速将RNA测序片段“对应（mapping）”到基因组上的工具，优势在于处理外显子间的剪切。内部首先使用bowtie或bowtie2把RNA测序片段“比对（alignment）”到基因组，之后再分析和鉴定剪切连接区域。
-
-**平台**：Mac OS/Linux
-
-**快速运行**：
-
-{% codeblock lang:bash %}
-# 双端测序
-$ tophat2 -p 8 -o human_1 hg19 human_1_1.fastq.gz human_1_2.fastq.gz
-
-# 单端测序
-$ tophat2 -p 8 -o human_1 hg19 human_1.fastq.gz
-{% endcodeblock %}
-
-
-**重要参数解释**：
-
-* `-p`{:.language-bash}：设置线程数，用于多核计算。
-
-* `-o`{:.language-bash}：执行输入文件夹。
-
-* `-r/--mate-inner-dist`{:.language-bash}：一对reads的间隔长度的期望平均值，默认值为50bp。具体解释，参考[RNA-seq差异表达分析工作流程](http://blog.qiuworld.com:8080/archives/3007)和[Tophat中-r/–mate-inner-dist参数](http://www.plob.org/2012/12/04/4988.html)。
-
-* `--mate-std-dev`{:.language-bash}：一对reads的间隔长度分布的标准差，默认值为20bp。`-r/--mate-inner-dist`{:.language-bash}和`--mate-std-dev`{:.language-bash}的估计方法参考？？？？？？？
-
-* `--library-type`{:.language-bash}：
-
-> 测序仪器和方法，默认为标准Illumina平台的`fr-unstranded`{:.language-bash}。其他平台设置，详见[TopHat说明文档](http://ccb.jhu.edu/software/tophat/manual.shtml)、[How to tell which library type to use (fr-firststrand or fr-secondstrand)?](http://onetipperday.blogspot.sg/2012/07/how-to-tell-which-library-type-to-use.html)和[链特异性转录组原理](http://www.plob.org/2013/12/03/6731.html)。
->
-> 如果分不清楚`fr-firststrand`{:.language-bash}和`fr-secondstrand`{:.language-bash}，推荐两种方法：[第一种](http://ccb.jhu.edu/software/tophat/faq.shtml)用两个参数试运行一个有1M reads的小样本，之后比较`junction.bed`{:.language-bash}大小；[第二种](http://onetipperday.blogspot.sg/2012/07/how-to-tell-which-library-type-to-use.html)在两个双端测序文件（`fastq.gz`{:.language-bash}）中抽取一些reads，之后[Blat](http://genome.ucsc.edu/cgi-bin/hgBlat?org=human)到USCS genomes上观察。
-
-* `--no-discordant`{:.language-bash}：只对于paired reads，只报告concordant mappings。加入这个参数，tophat2在最后一步失败。也可以不加入这个参数，通过sam/bam文件第二列过滤discordant reads，方法参考[过滤TopHat分析双端测序的输出](http://yulongniu.bionutshell.org/blog/2015/05/16/filter-tophat2-output/)。
-
-* `--no-mixed`{:.language-bash}：只对于paired reads，只报告paired reads都成功map。TopHat默认不加这个参数，即如果对于一个read，如果没有找到alignment的concordant或者discordant mate，那么这一对read将分别寻找和报道各自的alignment。这个参数与`--no-discordant`{:.language-bash}不同，因为加上`--no-mixed`{:.language-bash}也可能报道discordant pairs（例如一对reads都成功alignment，但是方向或者之间距离不对）。
-
-**后续操作**：
-
-* TopHat2运行后查看`align_summary.txt`{:.language-bash}获得比对结果。
-
-* TopHat2会输出`accepted_hits.bam`{:.language-bash}（接受map的reads文件）和`unmapped.bam`{:.language-bash}（没有map上的reads文件）。对于后者，使用基因组浏览器，如[IGV](http://www.broadinstitute.org/igv/)或者[UCSC Genome Browser](http://genome.ucsc.edu/)大致看下是有无map，之后可以直接丢弃。
-
-* 过滤双端测序的TopHat结果，参考[过滤TopHat分析双端测序的输出](http://yulongniu.bionutshell.org/blog/2015/05/16/filter-tophat2-output/)。
-
-
-**补充**：
-
-* TopHat2运行时，可以将基因组的fasta格式文件（比如`hg19.fa`{:.language-bash}），一起放在index的文件夹中（如果没有，Bowtie2先生成一个），可以节省运行时间。具体生成方法，参考：[二代测序中的短序列比对](http://yulongniu.bionutshell.org/blog/2014/07/26/short-sequence-alignment/)。
-
-
-* [不加思考地使用默认参数的下场](http://www.acgt.me/blog/2015/4/27/the-dangers-of-default-parameters-in-bioinformatics-lessons-from-bowtie-and-tophat?utm_content=bufferb2c35&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer)
-
 
 ## 4. Cufflinks ##
-
-**简介**：[Cufflinks](http://cole-trapnell-lab.github.io/cufflinks/)是TopHat的下游工具，用于分析差异表达基因、差异转录起始位点、新基因和选择性剪切。一般可以分为三步：1. `cufflinks`{:.language-bash}对每个bam文件生成转录组；2. `cuffmerge`{:.language-bash}结合真实转录组和bam生成转录组，构建一个整合转录组；3. `cuffdiff`{:.language-bash}比较不同生物学样本，寻找差异表达基因。
-
-**平台**：Mac OS/Linux
-
-### 4.1 `cufflinks`{:.language-bash} 快速运行 ###
-
-{% codeblock lang:bash Example code for cufflinks%}
-$ cufflinks -p 8 -o outPutLinks accepted_filtered.bam
-{% endcodeblock %}
-
-**重要参数解释**：
-
-* `-p`{:.language-bash$}：设置线程数，用于多核计算。
-
-* `-o`{:.language-bash$}：执行输入文件夹。
-
-* `-g/--GTF-guide`{:.language-bash$}：使用参考转录组注释文件指导组装过程。加入这个参数和对应的注释文件，可以有效提高cufflinks转录本组装。输出的转录本是传入注释文件和cufflinks自行组装的联合。具体解释如下图[[Roberts et.al., 2011]](#Roberts et.al., 2011)：
-
-<img src="/images/faux_reads_cufflinks.png" title="image" alt="cufflinks原理图">
-
-* `-b/--frag-bias-correct`{:.language-bash$}：提供一个multifasta文件，可以提高转录丰度的准确度。
-
-* `-M/–mask-file`{:.language-bash$}：需要去除的转录本，比如tRNA、rRNA和线粒体转录本。在RNA-seq数据中，这些转录本量非常高。[cufflinks](http://cole-trapnell-lab.github.io/cufflinks/cufflinks/index.html)提示剔除这些转录本，有助于提高转录量估计的准确程度。tRNA、rRNA和线粒体基因组注释信息提取，参考？？？？？
-
 
 
 ## 5. Trinity ##
@@ -186,41 +110,6 @@ $ cufflinks -p 8 -o outPutLinks accepted_filtered.bam
 [miRDeep2](https://www.mdc-berlin.de/36105849/en/research/research_teams/systems_biology_of_gene_regulatory_elements/projects/miRDeep/documentation#mapper) 是用于高通量测序中检测[miRNA](http://en.wikipedia.org/wiki/MicroRNA) 的工具。
 
 ## 7. HTseq ##
-
-**简介**：[HTseq](http://www-huber.embl.de/users/anders/HTSeq/doc/index.html) 是用于Python平台写成的处理高通量测序的平台。`htseq-count`{:.language-bash}可以用来对转录本计数，具体计数规则参考[Counting reads in features with htseq-count](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html)。
-
-**平台**：Python跨平台使用。
-
-**快速运行**：
-
-{% codeblock lang:bash An Example of Running htseq-count%}
-# 对bam文件按照reads名称排序
-$ samtools sort -n accepted_filtered.bam accepted_sortname
-
-# 注意“=”前后无空格
-$ seq-count --mode=union --stranded=no --type=exon --idattr=gene_id \
-	        --format=bam accepted_sort.bam hg19USCS_ensembl.gtf > htseqcount_accepted.hsc
-{% endcodeblock %}
-
-**重要参数解释**：
-
-* `--mode`{:.language-bash$}：统计落在某个基因上的reads数目的模型，默认值为“union”（[图示](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html)）。作者认为“union”方法在绝大多数情况下都有很好的表现，建议使用。
-
-* `--stranded`{:.language-bash$}：测序方法，默认为“yes”。
-
-* `--type`{:.language-bash$}：计数单元类型，默认为[GTF](http://mblab.wustl.edu/GTF22.html)文件的`exon`{:.language-bash}。
-
-* `--idattr`{:.language-bash$}：计数单元归类，默认为`gene_id`{:.language-bash}。比如把合并汇报多个exon对应的一个gene。
-
-* `--format`{:.language-bash$}：可以输入bam或者sam文件，bam文件需要制定此参数。
-
-**补充**：
-
-* 如果输入的是bam文件，bam文件需要按照reads名称排序，操作方法为：
-
-{% codeblock lang:bash bam to name-sorted bam%}
-$ samtools sort -n accepted_filerted.bam acceted_sortname
-{% endcodeblock %}
 
 
 ## 8. MISO ##
@@ -417,9 +306,11 @@ $ zcat mySeq_1_1.fastq.gz | awk '{if(NR%4==2) print length($1)}' | sort -n | uni
 
 为了下游分析，高通量测序结果往往使用多种数据格式储存，详细参考[File Formats](http://www.broadinstitute.org/igv/?q=book/export/html/16)。
 
+* GTF格式文件，比如[Ensembl类型](http://mblab.wustl.edu/GTF22.html)的GTF文件，每一列[说明](http://www.gencodegenes.org/gencodeformat.html)、生物学序列分类[GENCODE解释](http://www.gencodegenes.org/gencode_biotypes.html)和[VEGA解释](http://vega.sanger.ac.uk/info/about/gene_and_transcript_types.html)。GTF文件的第二行中，有[CDS（Coding DNA Sequence）](http://en.wikipedia.org/wiki/Coding_region)也有[exon](http://en.wikipedia.org/wiki/Exon)，这两者概念不同：CDS只包括翻译成蛋白质的序列；exon也包括[UTR](http://en.wikipedia.org/wiki/Untranslated_region)区域和ployA区域；exon也可以用来指示非编码RNA。
+
 ### 11.1 GTF和GFF文件互转 ###
 
-使用[Cufflinks](http://cole-trapnell-lab.github.io/cufflinks/)的`gffread`{:.language-bash}直接进行转换。
+使用[Cufflinks](http://cole-trapnell-lab.github.io/cufflinks/file_formats/)的`gffread`{:.language-bash}直接进行转换。
 
 
 {% codeblock lang:bash Convert the File Format Between GTF and GFF%}
@@ -430,23 +321,36 @@ $ gffreads myGtfFile.gtf -o myGffFile.gff3
 $ gffread myGffFile.gff3 -T -o myGtfFile.gtf
 {% endcodeblock %}
 
+### 11.2 GTF文件提取序列信息 ###
+
+使用[Cufflinks](http://cole-trapnell-lab.github.io/cufflinks/file_formats/)的`gffread`{:.language-bash}直接进行转换。
+
+{% codeblock lang:bash Extract sequences from GTF files%}
+# 从GTF文件中提取序列信息
+$ gffread -w myFastaFile.fa -g myGenome.fa myGtfFile.gtf
+{% endcodeblock %}
+
+### 11.3 GTF文件提取序列长度信息 ###
+
+exon
 
 
 
 
 
 
-### 参考网址 ###
 
-* [一篇介绍cufflinks的中文博客](http://www.chenlianfu.com/?p=623)
 
-* [cufflinks安装介绍](http://cole-trapnell-lab.github.io/cufflinks/getting_started/#common-uses-of-the-cufflinks-package)
+
+
+
+
+### 参考资料 ###
 
 * [NGS分析入门：操作SAM/BAM文件](http://blog.qiuworld.com:8080/archives/3050)
 
 * [Essential AWK Commands for Next Generation Sequence Analysis](http://bioinformatics.cvr.ac.uk/blog/essential-awk-commands-for-next-generation-sequence-analysis/) 
 
-* <a id="Roberts et.al., 2011">Roberts A</a>, Pimentel H, Trapnell C, Pachter L: **Identification of novel transcripts in annotated genomes using RNA-Seq.** *Bioinformatics*. 2011, 27(17):2325-9. [pdf](http://bioinformatics.oxfordjournals.org/content/early/2011/06/21/bioinformatics.btr355.full.pdf) 
 
 
 

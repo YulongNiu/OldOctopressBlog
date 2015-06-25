@@ -17,10 +17,10 @@ $ tar -zxvf /filePath/filename.tar.gz
 # 压缩 
 $ tar -zcvf /filePath/filename.tar.gz /filePath/filename
 
-# 解压到特定文件夹  
+# 解压到特定文件夹
 $ tar -zxvf /filePath/filename.tar.gz -C /filePath/filename 
 
-# 压缩到特定文件夹  
+# 压缩到特定文件夹
 $ tar -zcvf /filePath/filename.tar.gz -C /filePath/filename 
 
 # 压缩所有txt类型文件 
@@ -78,6 +78,16 @@ $ zip filename *
 
 # 压缩当前目录包括所有子目录
 $ zip -r filename *
+{% endcodeblock %}
+
+`gzip`{:.language-bash}使用方法:
+
+{% codeblock lang:bash %}
+# 保留源文件压缩
+$ gzip -c filename.gz > filename
+
+# 保留源文件解压
+$ gunzip -c filename > filename.gz
 {% endcodeblock %}
 
 ## 2. 文件夹操作 ##
@@ -207,7 +217,7 @@ $ find ./ -name '*' | xargs rm -rf
 $ find ./ -name "*.gif" | xargs -i mv {} /filePath/ 
 {% endcodeblock %}
 
-## 14. 修改PATH ##
+## 14. 修改PATH和LD_LIBRARY_PATH ##
 
 假设我们程序的绝对路径是`/opt/arbtest/arb`{:.language-bash}
 两种方法: 
@@ -225,7 +235,7 @@ $ find ./ -name "*.gif" | xargs -i mv {} /filePath/
 $ export
 {% endcodeblock %}
 * 修改`/etc/profile`{:.language-bash}（系统设置，任何用户都可使用）或者`~/.bashrc`{:.language-bash}（当前用户）文件。
-向这两个文件中添加`export PATH=$PATH:/opt/arbtest`{:.language-bash}
+向这两个文件中添加`export PATH=$PATH:/opt/arbtest`{:.language-bash}或者`export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/arbtest`{:.language-bash}。
 
 {% codeblock lang:bash %}
 # 载入修改好的文件 
@@ -603,4 +613,4 @@ $ wget -c -t 0 -w 30 httplink
 
 ### 更新记录 ###
 
-2015年6月1日
+2015年6月5日

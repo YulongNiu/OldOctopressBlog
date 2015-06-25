@@ -197,6 +197,15 @@ $ convert -density 500 input.pdf output.jpg
 
 <img src="/images/linux_software_texstudio.jpg" width="500" height="700" title="image" alt="images">
 
+* PDF文件编辑工具
+
+[cpdf](http://community.coherentpdf.com/)用于对PDF文件执行分割、合并和压缩等操作。下载预编译版本使用。
+
+{% codeblock lang:bash Example of using cpdf%}
+# 选择第二页输出
+$ cpdf pdfFile.pdf 1 -o outPdfFile.pdf
+{% endcodeblock %}
+
 
 ## 5. 模拟Windows程序 ##
 
@@ -251,7 +260,7 @@ Wine可以尽可能模拟Window软件
 
 ### 更新记录 ###
 
-2015年4月6日
+2015年6月11日
 
 
 

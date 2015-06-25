@@ -65,11 +65,22 @@ GO和pathway分析 -->
 
 -----------------------
 
+## 4. 分析过程注意事项 ##
+
+1. 参考转录组注释文件（GFF/GTF）的染色体编号，与基因组信息一致。比如都用`chr1`{:.language-bash}，或者都用`1`{:.language-bash}标识1号染色体。可能出现问题地方：
+
+> * [TopHat](http://ccb.jhu.edu/software/tophat/manual.shtml)的`-G/--GTF`{:.language-bash}参数。
+>
+> * [MISO](http://miso.readthedocs.org/en/fastmiso/#human-mouse-gene-models-for-isoform-centric-analyses)程序`pe_utils`{:.language-bash}的传入转录组注释文件。
+>
 
 
 
 
-## 4. 基本概念 ##
+
+
+
+## 5. 基本概念 ##
 
 * **Read**：是组成测序的结果的基本单位。
 
@@ -107,10 +118,7 @@ GO和pathway分析 -->
 
 * **chrN_random**和**chrUn**：基因组文件中通常含有类似`chr9_gl000198_random`{:.language-bash}和`chrUn_gl000211`{:.language-bash}的基因组。根据[UCSC](https://genome.ucsc.edu/FAQ/FAQdownloads.html#download11)解释，`chrN_random`{:.language-bash}包括基因组已知但具体位置未知序列，或者位置已知但具体内容未完成序列。`ChrUn`{:.language-bash}中包括一些具体位置未知的序列。
 
-
-
-
-
+* **chrN_xxx_hap1**：转录组注释文件中会出现类似`chr6_apd_hap1`{:.language-bash}和`chr6_dbb_hap3`{:.language-bash}的基因组注释。根据[UCSC解释](http://genome.ucsc.edu/cgi-bin/hgGateway?org=Human&db=hg19)这些基因组是[单倍型(haplotype)]基因组(http://hapmap.ncbi.nlm.nih.gov/originhaplotype.html.en)。
 
 
 
