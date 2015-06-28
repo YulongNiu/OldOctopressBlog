@@ -311,6 +311,10 @@ $ git clone git@github.com:usrname/usrname.github.io.git _deploy
 # 安装bundle
 $ gem install bundler
 $ bundle install
+
+# 重新关联github账户
+# 按照提示输入github的地址
+$ rake setup_github_pages
 {% endcodeblock %}
 
 ## 17. 多台电脑共同编写博客 ##
