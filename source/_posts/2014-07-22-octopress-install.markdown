@@ -256,10 +256,12 @@ rake new_page[ANewPage]
 
 {% raw %}
 ```
+
 <link href="{{ root_url }}/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 {% if page.styles contains 'data-table' %}
 <link href="{{ root_url }}/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
 {% endif %}
+
 ```
 {% endraw %}
 
@@ -293,7 +295,38 @@ rake new_page[ANewPage]
 ```
 {% endraw %}
 
-### <a id="Ref">参考网址</a> ###
+如果使用Emacs，可以使用Emacs的[org模式](http://orgmode.org/)快速建立和编辑表格。
+
+## 16. 重新克隆github上的博文和设置 ##
+
+{% codeblock lang:bash Re-set Octopress on local computer %}
+# 注意切换到指定ruby版本
+# 克隆source分支到本地
+$ git clone -b source git@github.com:usrname/usrname.github.io.git octopress
+
+# 克隆master分支到_deploy文件夹
+$ cd octopress
+$ git clone git@github.com:usrname/usrname.github.io.git _deploy
+
+# 安装bundle
+$ gem install bundler
+$ bundle install
+{% endcodeblock %}
+
+## 17. 多台电脑共同编写博客 ##
+
+{% codeblock lang:bash Writing Octopress on more than one computer %}
+# 设定好Octopress，假定Octopress目录为octopress
+$ cd octopress
+$ git pull origin source
+$ cd ./_deploy
+$ git pull origin master
+{% endcodeblock %}
+
+
+
+
+### <a id="Ref">参考资料</a> ###
 
 * Octopress安装和域名设置：[1](http://tchen.me/posts/2012-12-16-first-blog.html), [2](http://beyondvincent.com/blog/2013/08/03/108-creating-a-github-blog-using-octopress/)
 
@@ -315,9 +348,13 @@ rake new_page[ANewPage]
 
 * [Octopress添加表格](http://programus.github.io/blog/2012/03/07/add-table-data-css-for-octopress/)
 
+* [Octopress重装或者多台电脑上并行写作同步](http://blog.csdn.net/hankai1024/article/details/12786201)和[在多台电脑上写Octopress博客](http://boboshone.com/blog/2013/06/05/write-octopress-blog-on-multiple-machines/)
+
+
+
 
 ### 更新记录 ###
 
-2014年12月16日
+2015年6月28日
 
 
