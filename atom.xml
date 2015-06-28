@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[牛牛龙]]></title>
-  <link href="http://yulongniu.github.io/atom.xml" rel="self"/>
-  <link href="http://yulongniu.github.io/"/>
-  <updated>2015-06-29T00:29:16+08:00</updated>
-  <id>http://yulongniu.github.io/</id>
+  <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
+  <link href="http://yulongniu.bionutshell.org/"/>
+  <updated>2015-06-29T00:49:33+08:00</updated>
+  <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
     
@@ -15,16 +15,16 @@
   
   <entry>
     <title type="html"><![CDATA[UCSC Table下载注释文件]]></title>
-    <link href="http://yulongniu.github.io/blog/2015/06/02/download-ucsc-gene-mask/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2015/06/02/download-ucsc-gene-mask/"/>
     <updated>2015-06-02T16:49:41+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2015/06/02/download-ucsc-gene-mask</id>
+    <id>http://yulongniu.bionutshell.org/blog/2015/06/02/download-ucsc-gene-mask</id>
     <content type="html"><![CDATA[<p>在进行RNA-seq数据分析时，需要从<a href="http://genome.ucsc.edu/cgi-bin/hgTables">UCSC Table</a>下载各种注释信息。比如Cufflinks等要求的转录组注释信息、Cufflinks建议去除的rRNA/tRNA/线粒体组注释。</p>
 
 <h2 id="section">1. 基因注释信息</h2>
 
 <p>下载转录组Ensembl注释文件：</p>
 
-<p><img src="http://yulongniu.github.io/images/hg19_ensembl.png" title="image" alt="UCSC下载Ensembl注释" /></p>
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_ensembl.png" title="image" alt="UCSC下载Ensembl注释" /></p>
 
 <!--more-->
 
@@ -36,13 +36,13 @@
 
 <p>第一步， “table”选择<code class="language-bash">wgEncodeGencodeBasicV19</code>。</p>
 
-<p><img src="http://yulongniu.github.io/images/hg19_rRNA.png" title="image" alt="UCSC下载rRNA注释" /></p>
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_rRNA.png" title="image" alt="UCSC下载rRNA注释" /></p>
 
 <p>第二步，按照下图编辑“filter”。</p>
 
-<p><img src="http://yulongniu.github.io/images/hg19_rRNA_maskTable.png" title="image" alt="UCSC下载rRNA注释Table" /></p>
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_rRNA_maskTable.png" title="image" alt="UCSC下载rRNA注释Table" /></p>
 
-<p><img src="http://yulongniu.github.io/images/hg19_rRNA_mask.png" title="image" alt="UCSC下载rRNA注释筛选" /></p>
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_rRNA_mask.png" title="image" alt="UCSC下载rRNA注释筛选" /></p>
 
 <h2 id="trna">3. tRNA注释信息</h2>
 
@@ -50,11 +50,11 @@
 
 <p>第一步，“track”选择 <code class="language-bash">tRNA Genes</code>。</p>
 
-<p><img src="http://yulongniu.github.io/images/hg19_tRNA.png" title="image" alt="UCSC下载tRNA注释" /></p>
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_tRNA.png" title="image" alt="UCSC下载tRNA注释" /></p>
 
 <p>第二步，保留pseudo tRNA注释。</p>
 
-<p><img src="http://yulongniu.github.io/images/hg19_tRNA_mask.png" title="image" alt="UCSC下载tRNA注释" /></p>
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_tRNA_mask.png" title="image" alt="UCSC下载tRNA注释" /></p>
 
 <h2 id="section-1">4. 线粒体基因组注释</h2>
 
@@ -62,11 +62,11 @@
 
 <p>第一步， “table”选择<code class="language-bash">wgEncodeGencodeBasicV19</code>。</p>
 
-<p><img src="http://yulongniu.github.io/images/hg19_chrM.png" title="image" alt="UCSC下载chrM注释" /></p>
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_chrM.png" title="image" alt="UCSC下载chrM注释" /></p>
 
 <p>第二步，按照下图编辑“filter”。</p>
 
-<p><img src="http://yulongniu.github.io/images/hg19_chrM_mask.png" title="image" alt="UCSC下载chrM注释筛选" /></p>
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_chrM_mask.png" title="image" alt="UCSC下载chrM注释筛选" /></p>
 
 <h3 id="section-2">参考网址</h3>
 
@@ -91,9 +91,9 @@
   
   <entry>
     <title type="html"><![CDATA[Bash简易编程]]></title>
-    <link href="http://yulongniu.github.io/blog/2015/05/28/bash-program/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2015/05/28/bash-program/"/>
     <updated>2015-05-28T21:24:32+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2015/05/28/bash-program</id>
+    <id>http://yulongniu.bionutshell.org/blog/2015/05/28/bash-program</id>
     <content type="html"><![CDATA[<h2 id="section">1. 循环</h2>
 
 <p><code class="language-bash">for</code>循环体</p>
@@ -172,9 +172,9 @@
   
   <entry>
     <title type="html"><![CDATA[过滤TopHat分析双端测序的输出]]></title>
-    <link href="http://yulongniu.github.io/blog/2015/05/16/filter-tophat2-output/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2015/05/16/filter-tophat2-output/"/>
     <updated>2015-05-16T04:33:10+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2015/05/16/filter-tophat2-output</id>
+    <id>http://yulongniu.bionutshell.org/blog/2015/05/16/filter-tophat2-output</id>
     <content type="html"><![CDATA[<script type="text/x-mathjax-config">
 MathJax.Hub.Config({
 TeX: { equationNumbers: { autoNumber: "AMS" } }
@@ -668,9 +668,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[Django使用介绍]]></title>
-    <link href="http://yulongniu.github.io/blog/2015/05/09/django-tutorial/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2015/05/09/django-tutorial/"/>
     <updated>2015-05-09T13:42:15+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2015/05/09/django-tutorial</id>
+    <id>http://yulongniu.bionutshell.org/blog/2015/05/09/django-tutorial</id>
     <content type="html"><![CDATA[<p>本文是学习<a href="https://docs.djangoproject.com/en/1.8/intro/tutorial01/">Django Tutorial</a>的记录，目的为了帮助快速浏览和查找Django使用细节。</p>
 
 <h2 id="django">1. 安装Django</h2>
@@ -798,9 +798,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[使用Pyenv控制多个版本Python]]></title>
-    <link href="http://yulongniu.github.io/blog/2015/05/09/python-different-version/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2015/05/09/python-different-version/"/>
     <updated>2015-05-09T00:14:10+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2015/05/09/python-different-version</id>
+    <id>http://yulongniu.bionutshell.org/blog/2015/05/09/python-different-version</id>
     <content type="html"><![CDATA[<p>同时在一台电脑上使用多个版本的Python，可以通过<a href="https://github.com/yyuu/pyenv">pyenv</a>控制和管理。</p>
 
 <h2 id="section">1. 安装方法</h2>
@@ -928,9 +928,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[Fedora安装与使用PostgreSQL]]></title>
-    <link href="http://yulongniu.github.io/blog/2015/05/08/install-use-postgresql/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2015/05/08/install-use-postgresql/"/>
     <updated>2015-05-08T18:30:54+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2015/05/08/install-use-postgresql</id>
+    <id>http://yulongniu.bionutshell.org/blog/2015/05/08/install-use-postgresql</id>
     <content type="html"><![CDATA[<h2 id="postgresql">1. 安装和开启postgresql</h2>
 
 <p>Fedora直接使用<code class="language-bash">yum</code>安装相关组件。</p>
@@ -1109,9 +1109,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[C语言学习记录]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/12/08/c-program-note/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2014/12/08/c-program-note/"/>
     <updated>2014-12-08T07:23:16+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/12/08/c-program-note</id>
+    <id>http://yulongniu.bionutshell.org/blog/2014/12/08/c-program-note</id>
     <content type="html"><![CDATA[<h2 id="section">1. 基本数据类型</h2>
 
 <h3 id="section-1">1.1 数字形式</h3>
@@ -1271,9 +1271,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[Emacs配置C语言编程环境]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/12/02/emacs-config-c/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2014/12/02/emacs-config-c/"/>
     <updated>2014-12-02T06:36:41+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/12/02/emacs-config-c</id>
+    <id>http://yulongniu.bionutshell.org/blog/2014/12/02/emacs-config-c</id>
     <content type="html"><![CDATA[<p>有很多优秀的C语言IDE用来实现高效的编程，比如<a href="https://www.jetbrains.com/clion/">CLion</a>。目前，CLion还在处于公开测试阶段，可以下载试用。本文介绍在Emacs下配置C/C++编程环境。</p>
 
 <!--more-->
@@ -1394,7 +1394,7 @@ MAPQ = -10 \times log_{10}(pvalue)
 </span><span class="line"><span class="nv">$ </span>gcc -xc++ -E -v -
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p><img src="http://yulongniu.github.io/images/emacs_config_c_autocomplete.png" width="900" height="900" title="image" alt="images" /></p>
+<p><img src="http://yulongniu.bionutshell.org/images/emacs_config_c_autocomplete.png" width="900" height="900" title="image" alt="images" /></p>
 
 <h2 id="debug">3. 编译和debug</h2>
 
@@ -1861,9 +1861,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[二代测序中的短序列比对]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/07/26/short-sequence-alignment/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2014/07/26/short-sequence-alignment/"/>
     <updated>2014-07-26T02:04:25+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/07/26/short-sequence-alignment</id>
+    <id>http://yulongniu.bionutshell.org/blog/2014/07/26/short-sequence-alignment</id>
     <content type="html"><![CDATA[<p>在二代测序数据分析中，非常重要的一步是将测得的短序列“对应”到基因组上。所使用的工具被称为“短序列比对工具（short sequence aligners）”。以下是一些常用工具的介绍。</p>
 
 <h2 id="bowtie">1. Bowtie</h2>
@@ -1939,9 +1939,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[Octopress安装和使用]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/07/23/octopress-install/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2014/07/23/octopress-install/"/>
     <updated>2014-07-23T01:45:46+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/07/23/octopress-install</id>
+    <id>http://yulongniu.bionutshell.org/blog/2014/07/23/octopress-install</id>
     <content type="html"><![CDATA[<p>安装和使用Octopress的一些注意事项，详细的内容可以<a href="#Ref">参考网址</a>。</p>
 
 <h2 id="section">1. 安装</h2>
@@ -2360,6 +2360,10 @@ MAPQ = -10 \times log_{10}(pvalue)
 <span class="line-number">9</span>
 <span class="line-number">10</span>
 <span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 注意切换到指定ruby版本</span>
 </span><span class="line"><span class="c"># 克隆source分支到本地</span>
 </span><span class="line"><span class="nv">$ </span>git clone -b <span class="nb">source </span>git@github.com:usrname/usrname.github.io.git octopress
@@ -2371,6 +2375,10 @@ MAPQ = -10 \times log_{10}(pvalue)
 </span><span class="line"><span class="c"># 安装bundle</span>
 </span><span class="line"><span class="nv">$ </span>gem install bundler
 </span><span class="line"><span class="nv">$ </span>bundle install
+</span><span class="line">
+</span><span class="line"><span class="c"># 重新关联github账户</span>
+</span><span class="line"><span class="c"># 按照提示输入github的地址</span>
+</span><span class="line"><span class="nv">$ </span>rake setup_github_pages
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h2 id="section-13">17. 多台电脑共同编写博客</h2>
@@ -2435,9 +2443,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[My First Post]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/07/05/my-first-post/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2014/07/05/my-first-post/"/>
     <updated>2014-07-05T10:04:38+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/07/05/my-first-post</id>
+    <id>http://yulongniu.bionutshell.org/blog/2014/07/05/my-first-post</id>
     <content type="html"><![CDATA[<p>This is my first post. I want to say something. Then say something.</p>
 
 <p>This is a piece of html code <code class="language-html">&lt;html&gt;</code></p>
@@ -2515,9 +2523,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[R使用parallel包并行计算]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/06/25/parallel-package/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2014/06/25/parallel-package/"/>
     <updated>2014-06-25T10:10:20+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/06/25/parallel-package</id>
+    <id>http://yulongniu.bionutshell.org/blog/2014/06/25/parallel-package</id>
     <content type="html"><![CDATA[<p>最新版本的R已经内置<span style="color: blue">parallel</span>包，<span style="color: blue">parallel</span>包是从<span style="color: blue"><a href="http://cran.r-project.org/web/packages/snow/index.html">snow</a></span>包和<span style="color: blue"><a href="http://cran.r-project.org/web/packages/multicore/index.html">multicore</a></span>包继承而来，包含了很多非常好用的函数。<span style="color: blue">parallel</span>包可以通过PVM（<span style="color: blue">rpvm</span>包）、MPI（<span style="color: blue"><a href="http://cran.r-project.org/web/packages/Rmpi/index.html">Rmpi</a></span>包）、NetWorkSpaces（<span style="color: blue"><a href="http://cran.r-project.org/web/packages/nws/index.html">nws</a></span>包）和raw sockets（如果以上3种都不能使用）平台进行分布计算，支持cluster和多核个人/服务器计算机。在Linux系统上，通常使用<a href="http://www.open-mpi.org/">openMPI</a>。</p>
 
 <h2 id="span-stylecolor-bluermpispan">1. 安装<span style="color: blue">Rmpi</span>包</h2>
@@ -2903,9 +2911,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[构建和展示进化树软件使用心得]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/05/02/phylo-tool-summary/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2014/05/02/phylo-tool-summary/"/>
     <updated>2014-05-02T05:13:59+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/05/02/phylo-tool-summary</id>
+    <id>http://yulongniu.bionutshell.org/blog/2014/05/02/phylo-tool-summary</id>
     <content type="html"><![CDATA[<h2 id="section">构建进化树</h2>
 
 <h3 id="phyml">1. PhyML</h3>
@@ -2991,9 +2999,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[创建R包的最简流程]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/03/28/creat-r-package/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2014/03/28/creat-r-package/"/>
     <updated>2014-03-28T02:53:05+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/03/28/creat-r-package</id>
+    <id>http://yulongniu.bionutshell.org/blog/2014/03/28/creat-r-package</id>
     <content type="html"><![CDATA[<p>一个最简单创建R包的流程。</p>
 
 <h2 id="section">1. 载入工具包</h2>
@@ -3047,9 +3055,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[Circos Notes]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/03/18/circos-notes/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2014/03/18/circos-notes/"/>
     <updated>2014-03-18T03:37:45+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/03/18/circos-notes</id>
+    <id>http://yulongniu.bionutshell.org/blog/2014/03/18/circos-notes</id>
     <content type="html"><![CDATA[<p>Mapping data onto a Circos figure requires that you identify what patterns in your data are (a) likely to be important and (b) likely to be present, and create a figure that exposes such patterns. Remember, if the pattern exists, you can’t afford to miss it. If it doesn’t exist, you can’t afford to be fooled into thinking that it’s there, or left wondering whether it’s occluded by other data.</p>
 
 <h2 id="run-circos">1. Run circos</h2>
@@ -3713,9 +3721,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[A Brief Intruction of Mutual Information and Demonstration With R]]></title>
-    <link href="http://yulongniu.github.io/blog/2013/11/10/mutual-information/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2013/11/10/mutual-information/"/>
     <updated>2013-11-10T14:21:16+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2013/11/10/mutual-information</id>
+    <id>http://yulongniu.bionutshell.org/blog/2013/11/10/mutual-information</id>
     <content type="html"><![CDATA[<script type="text/x-mathjax-config">
 MathJax.Hub.Config({
 TeX: { equationNumbers: { autoNumber: "AMS" } }
@@ -3901,9 +3909,9 @@ I(X; Y) &= \frac{a}{n}\log\frac{na}{(a+b)(a+c)} + \frac{b}{n}\log\frac{nc}{(a+d)
   
   <entry>
     <title type="html"><![CDATA[R Ggplot2 Notes]]></title>
-    <link href="http://yulongniu.github.io/blog/2013/10/02/ggplot2-notes/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2013/10/02/ggplot2-notes/"/>
     <updated>2013-10-02T14:47:11+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2013/10/02/ggplot2-notes</id>
+    <id>http://yulongniu.bionutshell.org/blog/2013/10/02/ggplot2-notes</id>
     <content type="html"><![CDATA[<h1 id="r-package-span-stylecolor-blueggplot2span-notes">R Package <span style="color: blue">ggplot2</span> Notes</h1>
 
 <h2 id="basic-grammar">1. Basic grammar</h2>
@@ -4067,9 +4075,9 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
   
   <entry>
     <title type="html"><![CDATA[生物信息学工具网址]]></title>
-    <link href="http://yulongniu.github.io/blog/2013/06/19/bioinfor-tools/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2013/06/19/bioinfor-tools/"/>
     <updated>2013-06-19T04:42:10+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2013/06/19/bioinfor-tools</id>
+    <id>http://yulongniu.bionutshell.org/blog/2013/06/19/bioinfor-tools</id>
     <content type="html"><![CDATA[<h2 id="section">1. 基因组注释信息</h2>
 
 <ul>
@@ -4388,9 +4396,9 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
   
   <entry>
     <title type="html"><![CDATA[Emacs高级使用技巧]]></title>
-    <link href="http://yulongniu.github.io/blog/2012/06/25/emacs-extend-skills/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2012/06/25/emacs-extend-skills/"/>
     <updated>2012-06-25T08:01:36+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2012/06/25/emacs-extend-skills</id>
+    <id>http://yulongniu.bionutshell.org/blog/2012/06/25/emacs-extend-skills</id>
     <content type="html"><![CDATA[<h2 id="emacs">1. Emacs配置文件位置</h2>
 
 <p>在Fedora系统下，Emacs的配置文件位置是<code class="language-bash">~/.emacs</code>。在Emacs配置文件中添加内容后，使用<code class="language-emacs-lisp">M-x eval-buffer</code>，使当前配置生效。编译代码以加快加载速度，<code class="language-eamcs-lisp">M-x byte-compile-file</code>。</p>
@@ -4535,9 +4543,9 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
   
   <entry>
     <title type="html"><![CDATA[R包制作和roxygen2使用说明]]></title>
-    <link href="http://yulongniu.github.io/blog/2012/05/30/r-package-and-roxygen2/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2012/05/30/r-package-and-roxygen2/"/>
     <updated>2012-05-30T07:46:59+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2012/05/30/r-package-and-roxygen2</id>
+    <id>http://yulongniu.bionutshell.org/blog/2012/05/30/r-package-and-roxygen2</id>
     <content type="html"><![CDATA[<p>查看创建R包的各种细节，权威的文献是<a href="http://cran.r-project.org/doc/manuals/r-release/R-exts.html">Writing R Extensions</a>。</p>
 
 <h2 id="r">1. 创建R包目录</h2>
@@ -4546,7 +4554,7 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 
 <!--more-->
 
-<p><img class="middle" src="http://yulongniu.github.io/images/r_catalog.png" width="350" height="300" title="Biobase catalog #1" alt="a snap of Biobase catalog" /></p>
+<p><img class="middle" src="http://yulongniu.bionutshell.org/images/r_catalog.png" width="350" height="300" title="Biobase catalog #1" alt="a snap of Biobase catalog" /></p>
 
 <h3 id="description">1.1 <code>DESCRIPTION</code>文件</h3>
 
@@ -4729,7 +4737,7 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 
 <p>对于编辑R包来说，对应的文档是<code>*.Rd</code>（R documentation）格式的文件，以下是一个框架示意图：</p>
 
-<p><img class="middle" src="http://yulongniu.github.io/images/r_rd.png" width="600" height="600" title="Rd file #1" alt="a snap of Rd file framework" /></p>
+<p><img class="middle" src="http://yulongniu.bionutshell.org/images/r_rd.png" width="600" height="600" title="Rd file #1" alt="a snap of Rd file framework" /></p>
 
 <h3 id="span-stylecolor-blueroxygen2span">3.1 <span style="color: blue">roxygen2</span>使用注释</h3>
 

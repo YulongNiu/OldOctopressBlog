@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Saysomething | 牛牛龙]]></title>
-  <link href="http://yulongniu.github.io/blog/categories/saysomething/atom.xml" rel="self"/>
-  <link href="http://yulongniu.github.io/"/>
-  <updated>2015-06-29T00:29:16+08:00</updated>
-  <id>http://yulongniu.github.io/</id>
+  <link href="http://yulongniu.bionutshell.org/blog/categories/saysomething/atom.xml" rel="self"/>
+  <link href="http://yulongniu.bionutshell.org/"/>
+  <updated>2015-06-29T00:49:33+08:00</updated>
+  <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[My First Post]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/07/05/my-first-post/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2014/07/05/my-first-post/"/>
     <updated>2014-07-05T10:04:38+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/07/05/my-first-post</id>
+    <id>http://yulongniu.bionutshell.org/blog/2014/07/05/my-first-post</id>
     <content type="html"><![CDATA[<p>This is my first post. I want to say something. Then say something.</p>
 
 <p>This is a piece of html code <code class="language-html">&lt;html&gt;</code></p>

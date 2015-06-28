@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Lisp | 牛牛龙]]></title>
-  <link href="http://yulongniu.github.io/blog/categories/lisp/atom.xml" rel="self"/>
-  <link href="http://yulongniu.github.io/"/>
-  <updated>2015-06-29T00:29:16+08:00</updated>
-  <id>http://yulongniu.github.io/</id>
+  <link href="http://yulongniu.bionutshell.org/blog/categories/lisp/atom.xml" rel="self"/>
+  <link href="http://yulongniu.bionutshell.org/"/>
+  <updated>2015-06-29T00:49:33+08:00</updated>
+  <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Emacs配置C语言编程环境]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/12/02/emacs-config-c/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2014/12/02/emacs-config-c/"/>
     <updated>2014-12-02T06:36:41+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/12/02/emacs-config-c</id>
+    <id>http://yulongniu.bionutshell.org/blog/2014/12/02/emacs-config-c</id>
     <content type="html"><![CDATA[<p>有很多优秀的C语言IDE用来实现高效的编程，比如<a href="https://www.jetbrains.com/clion/">CLion</a>。目前，CLion还在处于公开测试阶段，可以下载试用。本文介绍在Emacs下配置C/C++编程环境。</p>
 
 <!--more-->
@@ -138,7 +138,7 @@
 </span><span class='line'><span class="nv">$ </span>gcc -xc++ -E -v -
 </span></code></pre></td></tr></table></div></figure></p>
 
-<p><img src="http://yulongniu.github.io/images/emacs_config_c_autocomplete.png" width="900" height="900" title="image" alt="images" /></p>
+<p><img src="http://yulongniu.bionutshell.org/images/emacs_config_c_autocomplete.png" width="900" height="900" title="image" alt="images" /></p>
 
 <h2 id="debug">3. 编译和debug</h2>
 
@@ -609,9 +609,9 @@
   
   <entry>
     <title type="html"><![CDATA[Emacs高级使用技巧]]></title>
-    <link href="http://yulongniu.github.io/blog/2012/06/25/emacs-extend-skills/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2012/06/25/emacs-extend-skills/"/>
     <updated>2012-06-25T08:01:36+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2012/06/25/emacs-extend-skills</id>
+    <id>http://yulongniu.bionutshell.org/blog/2012/06/25/emacs-extend-skills</id>
     <content type="html"><![CDATA[<h2 id="emacs">1. Emacs配置文件位置</h2>
 
 <p>在Fedora系统下，Emacs的配置文件位置是<code class="language-bash">~/.emacs</code>。在Emacs配置文件中添加内容后，使用<code class="language-emacs-lisp">M-x eval-buffer</code>，使当前配置生效。编译代码以加快加载速度，<code class="language-eamcs-lisp">M-x byte-compile-file</code>。</p>
@@ -758,9 +758,9 @@
   
   <entry>
     <title type="html"><![CDATA[Emacs和ESS的使用技巧]]></title>
-    <link href="http://yulongniu.github.io/blog/2011/08/13/emacs-ess-tips/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2011/08/13/emacs-ess-tips/"/>
     <updated>2011-08-13T05:20:57+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2011/08/13/emacs-ess-tips</id>
+    <id>http://yulongniu.bionutshell.org/blog/2011/08/13/emacs-ess-tips</id>
     <content type="html"><![CDATA[<h2 id="ess">1. 安装ESS</h2>
 
 <p>有两种方法可以安装，一种是直接使用系统自带的包安装系统，比如<code>yum</code>：</p>
@@ -894,7 +894,7 @@
   <li>自动补全：<code>auto-complete</code>包</li>
 </ul>
 
-<p><img src="http://yulongniu.github.io/images/emacs_ess_tipes_autocomplete.png" width="900" height="900" title="image" alt="images" /></p>
+<p><img src="http://yulongniu.bionutshell.org/images/emacs_ess_tipes_autocomplete.png" width="900" height="900" title="image" alt="images" /></p>
 
 <ul>
   <li>
@@ -911,7 +911,7 @@
   </li>
 </ul>
 
-<p><img src="http://yulongniu.github.io/images/emacs_ess_tipes_parent.png" width="500" height="500" title="image" alt="images" /></p>
+<p><img src="http://yulongniu.bionutshell.org/images/emacs_ess_tipes_parent.png" width="500" height="500" title="image" alt="images" /></p>
 
 <h2 id="section-1">附加内容</h2>
 
@@ -1027,9 +1027,9 @@
   
   <entry>
     <title type="html"><![CDATA[Emacs使用技巧]]></title>
-    <link href="http://yulongniu.github.io/blog/2011/08/13/emacs-tips/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2011/08/13/emacs-tips/"/>
     <updated>2011-08-13T02:57:17+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2011/08/13/emacs-tips</id>
+    <id>http://yulongniu.bionutshell.org/blog/2011/08/13/emacs-tips</id>
     <content type="html"><![CDATA[<h2 id="section">1. 安装</h2>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Ppr | 牛牛龙]]></title>
-  <link href="http://yulongniu.github.io/blog/categories/ppr/atom.xml" rel="self"/>
-  <link href="http://yulongniu.github.io/"/>
-  <updated>2015-06-29T00:29:16+08:00</updated>
-  <id>http://yulongniu.github.io/</id>
+  <link href="http://yulongniu.bionutshell.org/blog/categories/ppr/atom.xml" rel="self"/>
+  <link href="http://yulongniu.bionutshell.org/"/>
+  <updated>2015-06-29T00:49:33+08:00</updated>
+  <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Django使用介绍]]></title>
-    <link href="http://yulongniu.github.io/blog/2015/05/09/django-tutorial/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2015/05/09/django-tutorial/"/>
     <updated>2015-05-09T13:42:15+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2015/05/09/django-tutorial</id>
+    <id>http://yulongniu.bionutshell.org/blog/2015/05/09/django-tutorial</id>
     <content type="html"><![CDATA[<p>本文是学习<a href="https://docs.djangoproject.com/en/1.8/intro/tutorial01/">Django Tutorial</a>的记录，目的为了帮助快速浏览和查找Django使用细节。</p>
 
 <h2 id="django">1. 安装Django</h2>
@@ -145,9 +145,9 @@
   
   <entry>
     <title type="html"><![CDATA[使用Pyenv控制多个版本Python]]></title>
-    <link href="http://yulongniu.github.io/blog/2015/05/09/python-different-version/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2015/05/09/python-different-version/"/>
     <updated>2015-05-09T00:14:10+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2015/05/09/python-different-version</id>
+    <id>http://yulongniu.bionutshell.org/blog/2015/05/09/python-different-version</id>
     <content type="html"><![CDATA[<p>同时在一台电脑上使用多个版本的Python，可以通过<a href="https://github.com/yyuu/pyenv">pyenv</a>控制和管理。</p>
 
 <h2 id="section">1. 安装方法</h2>
@@ -275,9 +275,9 @@
   
   <entry>
     <title type="html"><![CDATA[Octopress安装和使用]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/07/23/octopress-install/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2014/07/23/octopress-install/"/>
     <updated>2014-07-23T01:45:46+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/07/23/octopress-install</id>
+    <id>http://yulongniu.bionutshell.org/blog/2014/07/23/octopress-install</id>
     <content type="html"><![CDATA[<p>安装和使用Octopress的一些注意事项，详细的内容可以<a href="#Ref">参考网址</a>。</p>
 
 <h2 id="section">1. 安装</h2>
@@ -731,6 +731,10 @@ code snippet
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 注意切换到指定ruby版本</span>
 </span><span class='line'><span class="c"># 克隆source分支到本地</span>
 </span><span class='line'><span class="nv">$ </span>git clone -b <span class="nb">source </span>git@github.com:usrname/usrname.github.io.git octopress&lt;/p&gt;
@@ -741,7 +745,11 @@ code snippet
 </span><span class='line'>
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;bundle&quot;</span>&gt;安装bundle&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>gem install bundler
-</span><span class='line'><span class="nv">$ </span>bundle install
+</span><span class='line'><span class="nv">$ </span>bundle install&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;github-1&quot;</span>&gt;重新关联github账户&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# 按照提示输入github的地址
+</span><span class='line'><span class="nv">$ </span>rake setup_github_pages
 </span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="section-15">17. 多台电脑共同编写博客</h2>

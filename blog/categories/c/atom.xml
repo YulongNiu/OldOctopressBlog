@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: C | 牛牛龙]]></title>
-  <link href="http://yulongniu.github.io/blog/categories/c/atom.xml" rel="self"/>
-  <link href="http://yulongniu.github.io/"/>
-  <updated>2015-06-29T00:29:16+08:00</updated>
-  <id>http://yulongniu.github.io/</id>
+  <link href="http://yulongniu.bionutshell.org/blog/categories/c/atom.xml" rel="self"/>
+  <link href="http://yulongniu.bionutshell.org/"/>
+  <updated>2015-06-29T00:49:33+08:00</updated>
+  <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[C语言学习记录]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/12/08/c-program-note/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2014/12/08/c-program-note/"/>
     <updated>2014-12-08T07:23:16+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/12/08/c-program-note</id>
+    <id>http://yulongniu.bionutshell.org/blog/2014/12/08/c-program-note</id>
     <content type="html"><![CDATA[<h2 id="section">1. 基本数据类型</h2>
 
 <h3 id="section-1">1.1 数字形式</h3>

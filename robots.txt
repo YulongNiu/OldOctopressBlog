@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://yulongniu.github.io/sitemap.xml 
+Sitemap: http://yulongniu.bionutshell.org/sitemap.xml 

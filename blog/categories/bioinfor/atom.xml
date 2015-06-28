@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Bioinfor | 牛牛龙]]></title>
-  <link href="http://yulongniu.github.io/blog/categories/bioinfor/atom.xml" rel="self"/>
-  <link href="http://yulongniu.github.io/"/>
-  <updated>2015-06-29T00:29:16+08:00</updated>
-  <id>http://yulongniu.github.io/</id>
+  <link href="http://yulongniu.bionutshell.org/blog/categories/bioinfor/atom.xml" rel="self"/>
+  <link href="http://yulongniu.bionutshell.org/"/>
+  <updated>2015-06-29T00:49:33+08:00</updated>
+  <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
     
@@ -15,16 +15,16 @@
   
   <entry>
     <title type="html"><![CDATA[UCSC Table下载注释文件]]></title>
-    <link href="http://yulongniu.github.io/blog/2015/06/02/download-ucsc-gene-mask/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2015/06/02/download-ucsc-gene-mask/"/>
     <updated>2015-06-02T16:49:41+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2015/06/02/download-ucsc-gene-mask</id>
+    <id>http://yulongniu.bionutshell.org/blog/2015/06/02/download-ucsc-gene-mask</id>
     <content type="html"><![CDATA[<p>在进行RNA-seq数据分析时，需要从<a href="http://genome.ucsc.edu/cgi-bin/hgTables">UCSC Table</a>下载各种注释信息。比如Cufflinks等要求的转录组注释信息、Cufflinks建议去除的rRNA/tRNA/线粒体组注释。</p>
 
 <h2 id="section">1. 基因注释信息</h2>
 
 <p>下载转录组Ensembl注释文件：</p>
 
-<p><img src="http://yulongniu.github.io/images/hg19_ensembl.png" title="image" alt="UCSC下载Ensembl注释" /></p>
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_ensembl.png" title="image" alt="UCSC下载Ensembl注释" /></p>
 
 <!--more-->
 
@@ -36,13 +36,13 @@
 
 <p>第一步， “table”选择<code class="language-bash">wgEncodeGencodeBasicV19</code>。</p>
 
-<p><img src="http://yulongniu.github.io/images/hg19_rRNA.png" title="image" alt="UCSC下载rRNA注释" /></p>
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_rRNA.png" title="image" alt="UCSC下载rRNA注释" /></p>
 
 <p>第二步，按照下图编辑“filter”。</p>
 
-<p><img src="http://yulongniu.github.io/images/hg19_rRNA_maskTable.png" title="image" alt="UCSC下载rRNA注释Table" /></p>
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_rRNA_maskTable.png" title="image" alt="UCSC下载rRNA注释Table" /></p>
 
-<p><img src="http://yulongniu.github.io/images/hg19_rRNA_mask.png" title="image" alt="UCSC下载rRNA注释筛选" /></p>
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_rRNA_mask.png" title="image" alt="UCSC下载rRNA注释筛选" /></p>
 
 <h2 id="trna">3. tRNA注释信息</h2>
 
@@ -50,11 +50,11 @@
 
 <p>第一步，“track”选择 <code class="language-bash">tRNA Genes</code>。</p>
 
-<p><img src="http://yulongniu.github.io/images/hg19_tRNA.png" title="image" alt="UCSC下载tRNA注释" /></p>
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_tRNA.png" title="image" alt="UCSC下载tRNA注释" /></p>
 
 <p>第二步，保留pseudo tRNA注释。</p>
 
-<p><img src="http://yulongniu.github.io/images/hg19_tRNA_mask.png" title="image" alt="UCSC下载tRNA注释" /></p>
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_tRNA_mask.png" title="image" alt="UCSC下载tRNA注释" /></p>
 
 <h2 id="section-1">4. 线粒体基因组注释</h2>
 
@@ -62,11 +62,11 @@
 
 <p>第一步， “table”选择<code class="language-bash">wgEncodeGencodeBasicV19</code>。</p>
 
-<p><img src="http://yulongniu.github.io/images/hg19_chrM.png" title="image" alt="UCSC下载chrM注释" /></p>
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_chrM.png" title="image" alt="UCSC下载chrM注释" /></p>
 
 <p>第二步，按照下图编辑“filter”。</p>
 
-<p><img src="http://yulongniu.github.io/images/hg19_chrM_mask.png" title="image" alt="UCSC下载chrM注释筛选" /></p>
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_chrM_mask.png" title="image" alt="UCSC下载chrM注释筛选" /></p>
 
 <h3 id="section-2">参考网址</h3>
 
@@ -91,9 +91,9 @@
   
   <entry>
     <title type="html"><![CDATA[过滤TopHat分析双端测序的输出]]></title>
-    <link href="http://yulongniu.github.io/blog/2015/05/16/filter-tophat2-output/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2015/05/16/filter-tophat2-output/"/>
     <updated>2015-05-16T04:33:10+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2015/05/16/filter-tophat2-output</id>
+    <id>http://yulongniu.bionutshell.org/blog/2015/05/16/filter-tophat2-output</id>
     <content type="html"><![CDATA[<script type="text/x-mathjax-config">
 MathJax.Hub.Config({
 TeX: { equationNumbers: { autoNumber: "AMS" } }
@@ -592,9 +592,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[二代测序中的短序列比对]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/07/26/short-sequence-alignment/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2014/07/26/short-sequence-alignment/"/>
     <updated>2014-07-26T02:04:25+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/07/26/short-sequence-alignment</id>
+    <id>http://yulongniu.bionutshell.org/blog/2014/07/26/short-sequence-alignment</id>
     <content type="html"><![CDATA[<p>在二代测序数据分析中，非常重要的一步是将测得的短序列“对应”到基因组上。所使用的工具被称为“短序列比对工具（short sequence aligners）”。以下是一些常用工具的介绍。</p>
 
 <h2 id="bowtie">1. Bowtie</h2>
@@ -674,9 +674,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[构建和展示进化树软件使用心得]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/05/02/phylo-tool-summary/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2014/05/02/phylo-tool-summary/"/>
     <updated>2014-05-02T05:13:59+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/05/02/phylo-tool-summary</id>
+    <id>http://yulongniu.bionutshell.org/blog/2014/05/02/phylo-tool-summary</id>
     <content type="html"><![CDATA[<h2 id="section">构建进化树</h2>
 
 <h3 id="phyml">1. PhyML</h3>
@@ -762,9 +762,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[Circos Notes]]></title>
-    <link href="http://yulongniu.github.io/blog/2014/03/18/circos-notes/"/>
+    <link href="http://yulongniu.bionutshell.org/blog/2014/03/18/circos-notes/"/>
     <updated>2014-03-18T03:37:45+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/03/18/circos-notes</id>
+    <id>http://yulongniu.bionutshell.org/blog/2014/03/18/circos-notes</id>
     <content type="html"><![CDATA[<p>Mapping data onto a Circos figure requires that you identify what patterns in your data are (a) likely to be important and (b) likely to be present, and create a figure that exposes such patterns. Remember, if the pattern exists, you can’t afford to miss it. If it doesn’t exist, you can’t afford to be fooled into thinking that it’s there, or left wondering whether it’s occluded by other data.</p>
 
 <h2 id="run-circos">1. Run circos</h2>
