@@ -1,8 +1,4 @@
 User-agent: *
 Disallow: 
 
-<<<<<<< HEAD
 Sitemap: http://yulongniu.bionutshell.org/sitemap.xml 
-=======
-Sitemap: http://yulongniu.github.io/sitemap.xml 
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62

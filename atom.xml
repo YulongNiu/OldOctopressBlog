@@ -2,17 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[牛牛龙]]></title>
-<<<<<<< HEAD
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
   <updated>2015-06-29T00:54:06+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
-=======
-  <link href="http://yulongniu.github.io/atom.xml" rel="self"/>
-  <link href="http://yulongniu.github.io/"/>
-  <updated>2015-06-25T10:05:28+08:00</updated>
-  <id>http://yulongniu.github.io/</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
   <author>
     <name><![CDATA[Yulong Niu]]></name>
     
@@ -22,26 +15,16 @@
   
   <entry>
     <title type="html"><![CDATA[UCSC Table下载注释文件]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2015/06/02/download-ucsc-gene-mask/"/>
     <updated>2015-06-02T16:49:41+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2015/06/02/download-ucsc-gene-mask</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2015/06/02/download-ucsc-gene-mask/"/>
-    <updated>2015-06-02T16:49:41+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2015/06/02/download-ucsc-gene-mask</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<p>在进行RNA-seq数据分析时，需要从<a href="http://genome.ucsc.edu/cgi-bin/hgTables">UCSC Table</a>下载各种注释信息。比如Cufflinks等要求的转录组注释信息、Cufflinks建议去除的rRNA/tRNA/线粒体组注释。</p>
 
 <h2 id="section">1. 基因注释信息</h2>
 
 <p>下载转录组Ensembl注释文件：</p>
 
-<<<<<<< HEAD
 <p><img src="http://yulongniu.bionutshell.org/images/hg19_ensembl.png" title="image" alt="UCSC下载Ensembl注释" /></p>
-=======
-<p><img src="http://yulongniu.github.io/images/hg19_ensembl.png" title="image" alt="UCSC下载Ensembl注释" /></p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <!--more-->
 
@@ -53,7 +36,6 @@
 
 <p>第一步， “table”选择<code class="language-bash">wgEncodeGencodeBasicV19</code>。</p>
 
-<<<<<<< HEAD
 <p><img src="http://yulongniu.bionutshell.org/images/hg19_rRNA.png" title="image" alt="UCSC下载rRNA注释" /></p>
 
 <p>第二步，按照下图编辑“filter”。</p>
@@ -61,15 +43,6 @@
 <p><img src="http://yulongniu.bionutshell.org/images/hg19_rRNA_maskTable.png" title="image" alt="UCSC下载rRNA注释Table" /></p>
 
 <p><img src="http://yulongniu.bionutshell.org/images/hg19_rRNA_mask.png" title="image" alt="UCSC下载rRNA注释筛选" /></p>
-=======
-<p><img src="http://yulongniu.github.io/images/hg19_rRNA.png" title="image" alt="UCSC下载rRNA注释" /></p>
-
-<p>第二步，按照下图编辑“filter”。</p>
-
-<p><img src="http://yulongniu.github.io/images/hg19_rRNA_maskTable.png" title="image" alt="UCSC下载rRNA注释Table" /></p>
-
-<p><img src="http://yulongniu.github.io/images/hg19_rRNA_mask.png" title="image" alt="UCSC下载rRNA注释筛选" /></p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <h2 id="trna">3. tRNA注释信息</h2>
 
@@ -77,19 +50,11 @@
 
 <p>第一步，“track”选择 <code class="language-bash">tRNA Genes</code>。</p>
 
-<<<<<<< HEAD
 <p><img src="http://yulongniu.bionutshell.org/images/hg19_tRNA.png" title="image" alt="UCSC下载tRNA注释" /></p>
 
 <p>第二步，保留pseudo tRNA注释。</p>
 
 <p><img src="http://yulongniu.bionutshell.org/images/hg19_tRNA_mask.png" title="image" alt="UCSC下载tRNA注释" /></p>
-=======
-<p><img src="http://yulongniu.github.io/images/hg19_tRNA.png" title="image" alt="UCSC下载tRNA注释" /></p>
-
-<p>第二步，保留pseudo tRNA注释。</p>
-
-<p><img src="http://yulongniu.github.io/images/hg19_tRNA_mask.png" title="image" alt="UCSC下载tRNA注释" /></p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <h2 id="section-1">4. 线粒体基因组注释</h2>
 
@@ -97,39 +62,23 @@
 
 <p>第一步， “table”选择<code class="language-bash">wgEncodeGencodeBasicV19</code>。</p>
 
-<<<<<<< HEAD
 <p><img src="http://yulongniu.bionutshell.org/images/hg19_chrM.png" title="image" alt="UCSC下载chrM注释" /></p>
 
 <p>第二步，按照下图编辑“filter”。</p>
 
 <p><img src="http://yulongniu.bionutshell.org/images/hg19_chrM_mask.png" title="image" alt="UCSC下载chrM注释筛选" /></p>
-=======
-<p><img src="http://yulongniu.github.io/images/hg19_chrM.png" title="image" alt="UCSC下载chrM注释" /></p>
-
-<p>第二步，按照下图编辑“filter”。</p>
-
-<p><img src="http://yulongniu.github.io/images/hg19_chrM_mask.png" title="image" alt="UCSC下载chrM注释筛选" /></p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <h3 id="section-2">参考网址</h3>
 
 <ul>
   <li>
-<<<<<<< HEAD
     <p>USCS Genome Browser的Google论坛：<a href="https://groups.google.com/a/soe.ucsc.edu/forum/#!topic/genome/IL_aeOuPYU0">1</a>、<a href="https://groups.google.com/a/soe.ucsc.edu/forum/#!msg/genome/jSAY8w1JVVo/P6lk4OJzDNEJ">2</a></p>
-=======
-    <p>USCS Genome Browser的Google论坛：<a href="https://groups.google.com/a/soe.ucsc.edu/forum/#!topic/genome/IL_aeOuPYU0">1</a>、<a href="https://groups.google.com/a/soe.ucsc.edu/forum/#!msg/genome/jSAY8w1JVVo/P6lk4OJzDNEJ">2</a> </p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
   </li>
   <li>
     <p>另一种选择rRNA、tRNA和线粒体组注释的方法<a href="http://onetipperday.blogspot.tw/2012/08/how-to-get-trnarrnamitochondrial-gene.html">How to get tRNA/rRNA/mitochondrial gene GTF file</a></p>
   </li>
   <li>
-<<<<<<< HEAD
     <p><a href="http://webappl.blogspot.tw/2015/02/extract-rrna-and-trna-features-from.html">Extract rRNA and tRNA features from UCSC Browser</a></p>
-=======
-    <p><a href="http://webappl.blogspot.tw/2015/02/extract-rrna-and-trna-features-from.html">Extract rRNA and tRNA features from UCSC Browser</a> </p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
   </li>
 </ul>
 
@@ -142,15 +91,9 @@
   
   <entry>
     <title type="html"><![CDATA[Bash简易编程]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2015/05/28/bash-program/"/>
     <updated>2015-05-28T21:24:32+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2015/05/28/bash-program</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2015/05/28/bash-program/"/>
-    <updated>2015-05-28T21:24:32+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2015/05/28/bash-program</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<h2 id="section">1. 循环</h2>
 
 <p><code class="language-bash">for</code>循环体</p>
@@ -217,11 +160,7 @@
     <p><a href="http://stackoverflow.com/questions/918886/how-do-i-split-a-string-on-a-delimiter-in-bash">How do I split a string on a delimiter in Bash?</a></p>
   </li>
   <li>
-<<<<<<< HEAD
     <p><a href="http://stackoverflow.com/questions/4651437/how-to-set-a-bash-variable-equal-to-the-output-from-a-command">How to set a BASH variable equal to the output from a command?</a></p>
-=======
-    <p><a href="http://stackoverflow.com/questions/4651437/how-to-set-a-bash-variable-equal-to-the-output-from-a-command">How to set a BASH variable equal to the output from a command?</a> </p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
   </li>
 </ul>
 
@@ -233,15 +172,9 @@
   
   <entry>
     <title type="html"><![CDATA[过滤TopHat分析双端测序的输出]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2015/05/16/filter-tophat2-output/"/>
     <updated>2015-05-16T04:33:10+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2015/05/16/filter-tophat2-output</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2015/05/16/filter-tophat2-output/"/>
-    <updated>2015-05-16T04:33:10+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2015/05/16/filter-tophat2-output</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<script type="text/x-mathjax-config">
 MathJax.Hub.Config({
 TeX: { equationNumbers: { autoNumber: "AMS" } }
@@ -281,19 +214,10 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 
 <p><a href="http://ccb.jhu.edu/software/tophat/manual.shtml">TopHat文档</a>没有解释其输出bam文件（比如<code class="language-bash">accepted_hits.bam</code>）的第五列的意义。按照<a href="http://bowtie-bio.sourceforge.net/bowtie2/index.shtml">Bowtie2</a>输出结果来看，是表示映射质量指标Mapping Quality scores（MAPQ），具体计算参考公式$\eqref{eq:1}$。</p>
 
-<<<<<<< HEAD
 <script type="math/tex; mode=display">\begin{align}
 MAPQ = -10 \times log_{10}(pvalue)
 \label{eq:1}
 \end{align}</script>
-=======
-<script type="math/tex; mode=display">
-\begin{align}
-MAPQ = -10 \times log_{10}(pvalue)
-\label{eq:1}
-\end{align}
-</script>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <!--more-->
 
@@ -744,15 +668,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[Django使用介绍]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2015/05/09/django-tutorial/"/>
     <updated>2015-05-09T13:42:15+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2015/05/09/django-tutorial</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2015/05/09/django-tutorial/"/>
-    <updated>2015-05-09T13:42:15+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2015/05/09/django-tutorial</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<p>本文是学习<a href="https://docs.djangoproject.com/en/1.8/intro/tutorial01/">Django Tutorial</a>的记录，目的为了帮助快速浏览和查找Django使用细节。</p>
 
 <h2 id="django">1. 安装Django</h2>
@@ -880,15 +798,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[使用Pyenv控制多个版本Python]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2015/05/09/python-different-version/"/>
     <updated>2015-05-09T00:14:10+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2015/05/09/python-different-version</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2015/05/09/python-different-version/"/>
-    <updated>2015-05-09T00:14:10+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2015/05/09/python-different-version</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<p>同时在一台电脑上使用多个版本的Python，可以通过<a href="https://github.com/yyuu/pyenv">pyenv</a>控制和管理。</p>
 
 <h2 id="section">1. 安装方法</h2>
@@ -1004,11 +916,7 @@ MAPQ = -10 \times log_{10}(pvalue)
     <p><a href="http://seisman.info/python-pyenv.html">Python多版本共存之pyenv</a></p>
   </li>
   <li>
-<<<<<<< HEAD
     <p><a href="http://www.leadnt.com/2013/08/%E4%BD%BF%E7%94%A8%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90%E6%9D%A5%E5%8A%A0%E9%80%9Fpython-pypi%E5%8C%85%E7%9A%84%E5%AE%89%E8%A3%85/">使用国内镜像源来加速python pypi包的安装</a></p>
-=======
-    <p><a href="http://www.leadnt.com/2013/08/%E4%BD%BF%E7%94%A8%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90%E6%9D%A5%E5%8A%A0%E9%80%9Fpython-pypi%E5%8C%85%E7%9A%84%E5%AE%89%E8%A3%85/">使用国内镜像源来加速python pypi包的安装</a> </p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
   </li>
 </ul>
 
@@ -1020,15 +928,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[Fedora安装与使用PostgreSQL]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2015/05/08/install-use-postgresql/"/>
     <updated>2015-05-08T18:30:54+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2015/05/08/install-use-postgresql</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2015/05/08/install-use-postgresql/"/>
-    <updated>2015-05-08T18:30:54+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2015/05/08/install-use-postgresql</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<h2 id="postgresql">1. 安装和开启postgresql</h2>
 
 <p>Fedora直接使用<code class="language-bash">yum</code>安装相关组件。</p>
@@ -1207,15 +1109,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[C语言学习记录]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2014/12/08/c-program-note/"/>
     <updated>2014-12-08T07:23:16+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2014/12/08/c-program-note</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2014/12/08/c-program-note/"/>
-    <updated>2014-12-08T07:23:16+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/12/08/c-program-note</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<h2 id="section">1. 基本数据类型</h2>
 
 <h3 id="section-1">1.1 数字形式</h3>
@@ -1375,15 +1271,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[Emacs配置C语言编程环境]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2014/12/02/emacs-config-c/"/>
     <updated>2014-12-02T06:36:41+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2014/12/02/emacs-config-c</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2014/12/02/emacs-config-c/"/>
-    <updated>2014-12-02T06:36:41+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/12/02/emacs-config-c</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<p>有很多优秀的C语言IDE用来实现高效的编程，比如<a href="https://www.jetbrains.com/clion/">CLion</a>。目前，CLion还在处于公开测试阶段，可以下载试用。本文介绍在Emacs下配置C/C++编程环境。</p>
 
 <!--more-->
@@ -1504,11 +1394,7 @@ MAPQ = -10 \times log_{10}(pvalue)
 </span><span class="line"><span class="nv">$ </span>gcc -xc++ -E -v -
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<<<<<<< HEAD
 <p><img src="http://yulongniu.bionutshell.org/images/emacs_config_c_autocomplete.png" width="900" height="900" title="image" alt="images" /></p>
-=======
-<p><img src="http://yulongniu.github.io/images/emacs_config_c_autocomplete.png" width="900" height="900" title="image" alt="images" /></p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <h2 id="debug">3. 编译和debug</h2>
 
@@ -1975,15 +1861,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[二代测序中的短序列比对]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2014/07/26/short-sequence-alignment/"/>
     <updated>2014-07-26T02:04:25+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2014/07/26/short-sequence-alignment</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2014/07/26/short-sequence-alignment/"/>
-    <updated>2014-07-26T02:04:25+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/07/26/short-sequence-alignment</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<p>在二代测序数据分析中，非常重要的一步是将测得的短序列“对应”到基因组上。所使用的工具被称为“短序列比对工具（short sequence aligners）”。以下是一些常用工具的介绍。</p>
 
 <h2 id="bowtie">1. Bowtie</h2>
@@ -2059,15 +1939,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[Octopress安装和使用]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2014/07/23/octopress-install/"/>
     <updated>2014-07-23T01:45:46+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2014/07/23/octopress-install</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2014/07/23/octopress-install/"/>
-    <updated>2014-07-23T01:45:46+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/07/23/octopress-install</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<p>安装和使用Octopress的一些注意事项，详细的内容可以<a href="#Ref">参考网址</a>。</p>
 
 <h2 id="section">1. 安装</h2>
@@ -2402,7 +2276,6 @@ MAPQ = -10 \times log_{10}(pvalue)
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
-<<<<<<< HEAD
 <span class="line-number">5</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">
 </span><span class="line">&lt;link href="{{ root_url }}/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css"&gt;
@@ -2410,12 +2283,6 @@ MAPQ = -10 \times log_{10}(pvalue)
 </span><span class="line">&lt;link href="{{ root_url }}/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" /&gt;
 </span><span class="line">{% endif %}
 </span></code></pre></td></tr></table></div></figure></notextile></div>
-=======
-</pre></td><td class="code"><pre><code class=""><span class="line">&lt;link href="{{ root_url }}/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css"&gt;
-</span><span class="line">{% if page.styles contains 'data-table' %}
-</span><span class="line">&lt;link href="{{ root_url }}/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" /&gt;
-</span><span class="line">{% endif %}</span></code></pre></td></tr></table></div></figure></notextile></div>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <p>使用方法，在每篇博客头部位置添加<code>styles: [data-table]</code>，之后使用表格样式即可。如果使用Kramdown，表格对其方法如下：</p>
 
@@ -2477,7 +2344,6 @@ MAPQ = -10 \times log_{10}(pvalue)
 </span><span class="line">|**Sum**        |a+c            |b+d           |n=a+b+c+d|
 </span><span class="line">|---------------|---------------|--------------|---------|</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<<<<<<< HEAD
 <p>如果使用Emacs，可以使用Emacs的<a href="http://orgmode.org/">org模式</a>快速建立和编辑表格。</p>
 
 <h2 id="github">16. 重新克隆github上的博文和设置</h2>
@@ -2531,9 +2397,6 @@ MAPQ = -10 \times log_{10}(pvalue)
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="a-idrefa"><a id="Ref">参考资料</a></h3>
-=======
-<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <ul>
   <li>
@@ -2566,7 +2429,6 @@ MAPQ = -10 \times log_{10}(pvalue)
   <li>
     <p><a href="http://programus.github.io/blog/2012/03/07/add-table-data-css-for-octopress/">Octopress添加表格</a></p>
   </li>
-<<<<<<< HEAD
   <li>
     <p><a href="http://blog.csdn.net/hankai1024/article/details/12786201">Octopress重装或者多台电脑上并行写作同步</a>和<a href="http://boboshone.com/blog/2013/06/05/write-octopress-blog-on-multiple-machines/">在多台电脑上写Octopress博客</a></p>
   </li>
@@ -2575,28 +2437,15 @@ MAPQ = -10 \times log_{10}(pvalue)
 <h3 id="section-14">更新记录</h3>
 
 <p>2015年6月28日</p>
-=======
-</ul>
-
-<h3 id="section-13">更新记录</h3>
-
-<p>2014年12月16日</p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[My First Post]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2014/07/05/my-first-post/"/>
     <updated>2014-07-05T10:04:38+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2014/07/05/my-first-post</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2014/07/05/my-first-post/"/>
-    <updated>2014-07-05T10:04:38+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/07/05/my-first-post</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<p>This is my first post. I want to say something. Then say something.</p>
 
 <p>This is a piece of html code <code class="language-html">&lt;html&gt;</code></p>
@@ -2616,12 +2465,7 @@ MAPQ = -10 \times log_{10}(pvalue)
     <p>Mathjax supports.</p>
 
     <script type="math/tex; mode=display">% &lt;![CDATA[
-<<<<<<< HEAD
 \begin{align*}
-=======
-
- \begin{align*}
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
    & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
    = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
    & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
@@ -2634,22 +2478,12 @@ MAPQ = -10 \times log_{10}(pvalue)
    \vdots \\
    y_n
  \end{array} \right)
-<<<<<<< HEAD
  \end{align*} %]]&gt;</script>
-=======
- \end{align*}
-  %]]&gt;</script>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
   </li>
   <li>
     <p>Colorful mathjax euqation.</p>
 
-<<<<<<< HEAD
     <script type="math/tex; mode=display">\definecolor{energy}{RGB}{114,0,172}
-=======
-    <script type="math/tex; mode=display">
- \definecolor{energy}{RGB}{114,0,172}
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
  \definecolor{freq}{RGB}{45,177,93}
  \definecolor{spin}{RGB}{251,0,29}
  \definecolor{signal}{RGB}{18,110,213}
@@ -2659,7 +2493,6 @@ MAPQ = -10 \times log_{10}(pvalue)
  \color{average} \frac{1}{N} \sum_{n=0}^{N-1}
  \color{signal}x_n \color{spin}
  e^{\mathrm{i} \color{circle} 2\pi \color{freq}k
-<<<<<<< HEAD
  \color{average} \frac{n}{N}}</script>
 
     <p>To find <font color="#7200AC">the energy</font></p>
@@ -2674,18 +2507,6 @@ MAPQ = -10 \times log_{10}(pvalue)
     <font color="#CB17CE">average a bunch of points along that
  path</font>
     <p>.</p>
-=======
- \color{average} \frac{n}{N}}
- </script>
-
-    <p>To find <font color="#7200AC">the energy</font>
- <font color="2DB15D">at a particular frequency</font>,
- <font color="#FB001D">spin</font> <font color="#126ED5">your
- signal</font> <font color="#D04400">around a circle</font>
- <font color="2DB15D">at that frequency</font>, and
- <font color="#CB17CE">average a bunch of points along that
- path</font>.</p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
   </li>
 </ol>
 
@@ -2702,15 +2523,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[R使用parallel包并行计算]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2014/06/25/parallel-package/"/>
     <updated>2014-06-25T10:10:20+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2014/06/25/parallel-package</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2014/06/25/parallel-package/"/>
-    <updated>2014-06-25T10:10:20+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/06/25/parallel-package</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<p>最新版本的R已经内置<span style="color: blue">parallel</span>包，<span style="color: blue">parallel</span>包是从<span style="color: blue"><a href="http://cran.r-project.org/web/packages/snow/index.html">snow</a></span>包和<span style="color: blue"><a href="http://cran.r-project.org/web/packages/multicore/index.html">multicore</a></span>包继承而来，包含了很多非常好用的函数。<span style="color: blue">parallel</span>包可以通过PVM（<span style="color: blue">rpvm</span>包）、MPI（<span style="color: blue"><a href="http://cran.r-project.org/web/packages/Rmpi/index.html">Rmpi</a></span>包）、NetWorkSpaces（<span style="color: blue"><a href="http://cran.r-project.org/web/packages/nws/index.html">nws</a></span>包）和raw sockets（如果以上3种都不能使用）平台进行分布计算，支持cluster和多核个人/服务器计算机。在Linux系统上，通常使用<a href="http://www.open-mpi.org/">openMPI</a>。</p>
 
 <h2 id="span-stylecolor-bluermpispan">1. 安装<span style="color: blue">Rmpi</span>包</h2>
@@ -3096,15 +2911,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[构建和展示进化树软件使用心得]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2014/05/02/phylo-tool-summary/"/>
     <updated>2014-05-02T05:13:59+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2014/05/02/phylo-tool-summary</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2014/05/02/phylo-tool-summary/"/>
-    <updated>2014-05-02T05:13:59+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/05/02/phylo-tool-summary</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<h2 id="section">构建进化树</h2>
 
 <h3 id="phyml">1. PhyML</h3>
@@ -3190,15 +2999,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[创建R包的最简流程]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2014/03/28/creat-r-package/"/>
     <updated>2014-03-28T02:53:05+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2014/03/28/creat-r-package</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2014/03/28/creat-r-package/"/>
-    <updated>2014-03-28T02:53:05+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/03/28/creat-r-package</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<p>一个最简单创建R包的流程。</p>
 
 <h2 id="section">1. 载入工具包</h2>
@@ -3252,15 +3055,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[Circos Notes]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2014/03/18/circos-notes/"/>
     <updated>2014-03-18T03:37:45+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2014/03/18/circos-notes</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2014/03/18/circos-notes/"/>
-    <updated>2014-03-18T03:37:45+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/03/18/circos-notes</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<p>Mapping data onto a Circos figure requires that you identify what patterns in your data are (a) likely to be important and (b) likely to be present, and create a figure that exposes such patterns. Remember, if the pattern exists, you can’t afford to miss it. If it doesn’t exist, you can’t afford to be fooled into thinking that it’s there, or left wondering whether it’s occluded by other data.</p>
 
 <h2 id="run-circos">1. Run circos</h2>
@@ -3924,15 +3721,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <entry>
     <title type="html"><![CDATA[A Brief Intruction of Mutual Information and Demonstration With R]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2013/11/10/mutual-information/"/>
     <updated>2013-11-10T14:21:16+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2013/11/10/mutual-information</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2013/11/10/mutual-information/"/>
-    <updated>2013-11-10T14:21:16+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2013/11/10/mutual-information</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<script type="text/x-mathjax-config">
 MathJax.Hub.Config({
 TeX: { equationNumbers: { autoNumber: "AMS" } }
@@ -3991,10 +3782,6 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 <p>Typically, here we give the example of two discrete variables, the mutual information between $x_1$ and $y_1$ is</p>
 
 <script type="math/tex; mode=display">% &lt;![CDATA[
-<<<<<<< HEAD
-=======
-
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 \begin{align}
 \begin{split}
 I(X;Y) &= H(X) + H(Y) - H(X,Y)\\
@@ -4002,7 +3789,6 @@ I(X;Y) &= H(X) + H(Y) - H(X,Y)\\
 & \quad -\left( -\sum_{x \in \{0, 1\}}\sum_{y \in \{0, 1\}}p(x,y)\log(p(x,y)) \right)\\
 \end{split}
 \label{eq:1}
-<<<<<<< HEAD
 \end{align} %]]&gt;</script>
 
 <p>The $\eqref{eq:1}$ is equal to</p>
@@ -4011,29 +3797,12 @@ I(X;Y) &= H(X) + H(Y) - H(X,Y)\\
 I(X;Y) = \sum_{x \in \{1, 0\}}\sum_{y \in \{1, 0\}} p(x,y) \frac{\log(p(x,y))}{p(x)p(y)}
 \label{eq:2}
 \end{equation}</script>
-=======
-\end{align}
- %]]&gt;</script>
-
-<p>The $\eqref{eq:1}$ is equal to</p>
-
-<script type="math/tex; mode=display">
-\begin{equation}
-I(X;Y) = \sum_{x \in \{1, 0\}}\sum_{y \in \{1, 0\}} p(x,y) \frac{\log(p(x,y))}{p(x)p(y)}
-\label{eq:2}
-\end{equation}
-</script>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <p>$p(x)$ is the probability that a symbol (here is 0 or 1) appears in the gene vector X regardless that what the symbol is in gene vector Y. $p(y)$ has a similar definition of $p(x). $$p(x, y)$ is probability of a symbol combination appears in gene vector X and Y. In this example, there are four kinds of symbol combination $(1, 1)$, $(1, 0)$, $(0, 1)$ and $(1, 1)$.</p>
 
 <p>If we use the binary table to illustrate this equation, the $\eqref{eq:1}$ is:</p>
 
 <script type="math/tex; mode=display">% &lt;![CDATA[
-<<<<<<< HEAD
-=======
-
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 \begin{align}
 \begin{split}
 I(X; Y) &= -\left( \entropfrac{a+c}{n} + \entropfrac{b+d}{n} \right)\\
@@ -4043,32 +3812,18 @@ I(X; Y) &= -\left( \entropfrac{a+c}{n} + \entropfrac{b+d}{n} \right)\\
 \right) \right)\\
 \end{split}
 \label{eq:3}
-<<<<<<< HEAD
 \end{align} %]]&gt;</script>
-=======
-\end{align}
- %]]&gt;</script>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <p>The $\eqref{eq:3}$ is mathmatically equal to:</p>
 
 <script type="math/tex; mode=display">% &lt;![CDATA[
-<<<<<<< HEAD
-=======
-
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 \begin{align}
 \begin{split}
 I(X; Y) &= \frac{a}{n}\log\frac{na}{(a+b)(a+c)} + \frac{b}{n}\log\frac{nc}{(a+d)(b+d)}\\
 & \quad \frac{c}{n}\log\frac{nc}{(a+b)(a+c)} + \frac{d}{n}\log\frac{nd}{(d+c)(d+b)}
 \end{split}
 \label{eq:4}
-<<<<<<< HEAD
 \end{align} %]]&gt;</script>
-=======
-\end{align}
- %]]&gt;</script>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <h3 id="example">Example</h3>
 
@@ -4154,15 +3909,9 @@ I(X; Y) &= \frac{a}{n}\log\frac{na}{(a+b)(a+c)} + \frac{b}{n}\log\frac{nc}{(a+d)
   
   <entry>
     <title type="html"><![CDATA[R Ggplot2 Notes]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2013/10/02/ggplot2-notes/"/>
     <updated>2013-10-02T14:47:11+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2013/10/02/ggplot2-notes</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2013/10/02/ggplot2-notes/"/>
-    <updated>2013-10-02T14:47:11+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2013/10/02/ggplot2-notes</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<h1 id="r-package-span-stylecolor-blueggplot2span-notes">R Package <span style="color: blue">ggplot2</span> Notes</h1>
 
 <h2 id="basic-grammar">1. Basic grammar</h2>
@@ -4298,11 +4047,7 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 
 <h3 id="plot-mutiple-ggplot2">3.1 Plot mutiple ggplot2</h3>
 
-<<<<<<< HEAD
 <p>Use <span style="color: blue">gridExtra</span> package to plot multiple ggplot2 figures in the one figure.</p>
-=======
-<p>Use <span style="color: blue">gridExtra</span> package to plot multiple ggplot2 figures in the one figure. </p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -4330,15 +4075,9 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
   
   <entry>
     <title type="html"><![CDATA[生物信息学工具网址]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2013/06/19/bioinfor-tools/"/>
     <updated>2013-06-19T04:42:10+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2013/06/19/bioinfor-tools</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2013/06/19/bioinfor-tools/"/>
-    <updated>2013-06-19T04:42:10+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2013/06/19/bioinfor-tools</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<h2 id="section">1. 基因组注释信息</h2>
 
 <ul>
@@ -4398,11 +4137,7 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
     <p>时间尺度进化树</p>
   </li>
   <li>
-<<<<<<< HEAD
     <p><a href="http://www.timetree.org/about.php">TimeTree</a></p>
-=======
-    <p><a href="http://www.timetree.org/about.php">TimeTree</a> </p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
   </li>
   <li>
     <p>sRNA数据库</p>
@@ -4661,15 +4396,9 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
   
   <entry>
     <title type="html"><![CDATA[Emacs高级使用技巧]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2012/06/25/emacs-extend-skills/"/>
     <updated>2012-06-25T08:01:36+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2012/06/25/emacs-extend-skills</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2012/06/25/emacs-extend-skills/"/>
-    <updated>2012-06-25T08:01:36+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2012/06/25/emacs-extend-skills</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<h2 id="emacs">1. Emacs配置文件位置</h2>
 
 <p>在Fedora系统下，Emacs的配置文件位置是<code class="language-bash">~/.emacs</code>。在Emacs配置文件中添加内容后，使用<code class="language-emacs-lisp">M-x eval-buffer</code>，使当前配置生效。编译代码以加快加载速度，<code class="language-eamcs-lisp">M-x byte-compile-file</code>。</p>
@@ -4814,15 +4543,9 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
   
   <entry>
     <title type="html"><![CDATA[R包制作和roxygen2使用说明]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2012/05/30/r-package-and-roxygen2/"/>
     <updated>2012-05-30T07:46:59+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2012/05/30/r-package-and-roxygen2</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2012/05/30/r-package-and-roxygen2/"/>
-    <updated>2012-05-30T07:46:59+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2012/05/30/r-package-and-roxygen2</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<p>查看创建R包的各种细节，权威的文献是<a href="http://cran.r-project.org/doc/manuals/r-release/R-exts.html">Writing R Extensions</a>。</p>
 
 <h2 id="r">1. 创建R包目录</h2>
@@ -4831,11 +4554,7 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 
 <!--more-->
 
-<<<<<<< HEAD
 <p><img class="middle" src="http://yulongniu.bionutshell.org/images/r_catalog.png" width="350" height="300" title="Biobase catalog #1" alt="a snap of Biobase catalog" /></p>
-=======
-<p><img class="middle" src="http://yulongniu.github.io/images/r_catalog.png" width="350" height="300" title="Biobase catalog #1" alt="a snap of Biobase catalog" /></p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <h3 id="description">1.1 <code>DESCRIPTION</code>文件</h3>
 
@@ -5018,11 +4737,7 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 
 <p>对于编辑R包来说，对应的文档是<code>*.Rd</code>（R documentation）格式的文件，以下是一个框架示意图：</p>
 
-<<<<<<< HEAD
 <p><img class="middle" src="http://yulongniu.bionutshell.org/images/r_rd.png" width="600" height="600" title="Rd file #1" alt="a snap of Rd file framework" /></p>
-=======
-<p><img class="middle" src="http://yulongniu.github.io/images/r_rd.png" width="600" height="600" title="Rd file #1" alt="a snap of Rd file framework" /></p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <h3 id="span-stylecolor-blueroxygen2span">3.1 <span style="color: blue">roxygen2</span>使用注释</h3>
 

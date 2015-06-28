@@ -2,17 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Linux | 牛牛龙]]></title>
-<<<<<<< HEAD
   <link href="http://yulongniu.bionutshell.org/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
   <updated>2015-06-29T00:54:06+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
-=======
-  <link href="http://yulongniu.github.io/blog/categories/linux/atom.xml" rel="self"/>
-  <link href="http://yulongniu.github.io/"/>
-  <updated>2015-06-25T10:05:28+08:00</updated>
-  <id>http://yulongniu.github.io/</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
   <author>
     <name><![CDATA[Yulong Niu]]></name>
     
@@ -22,15 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Bash简易编程]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2015/05/28/bash-program/"/>
     <updated>2015-05-28T21:24:32+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2015/05/28/bash-program</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2015/05/28/bash-program/"/>
-    <updated>2015-05-28T21:24:32+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2015/05/28/bash-program</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<h2 id="section">1. 循环</h2>
 
 <p><code class="language-bash">for</code>循环体</p>
@@ -97,11 +84,7 @@
     <p><a href="http://stackoverflow.com/questions/918886/how-do-i-split-a-string-on-a-delimiter-in-bash">How do I split a string on a delimiter in Bash?</a></p>
   </li>
   <li>
-<<<<<<< HEAD
     <p><a href="http://stackoverflow.com/questions/4651437/how-to-set-a-bash-variable-equal-to-the-output-from-a-command">How to set a BASH variable equal to the output from a command?</a></p>
-=======
-    <p><a href="http://stackoverflow.com/questions/4651437/how-to-set-a-bash-variable-equal-to-the-output-from-a-command">How to set a BASH variable equal to the output from a command?</a> </p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
   </li>
 </ul>
 
@@ -113,15 +96,9 @@
   
   <entry>
     <title type="html"><![CDATA[Fedora安装与使用PostgreSQL]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2015/05/08/install-use-postgresql/"/>
     <updated>2015-05-08T18:30:54+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2015/05/08/install-use-postgresql</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2015/05/08/install-use-postgresql/"/>
-    <updated>2015-05-08T18:30:54+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2015/05/08/install-use-postgresql</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<h2 id="postgresql">1. 安装和开启postgresql</h2>
 
 <p>Fedora直接使用<code class="language-bash">yum</code>安装相关组件。</p>
@@ -304,15 +281,9 @@
   
   <entry>
     <title type="html"><![CDATA[Linux常用命令集锦]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2010/11/09/linux-command/"/>
     <updated>2010-11-09T06:00:40+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2010/11/09/linux-command</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2010/11/09/linux-command/"/>
-    <updated>2010-11-09T06:00:40+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2010/11/09/linux-command</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<h2 id="section">1. 压缩与解压缩</h2>
 
 <p><code class="language-bash">.tar.gz</code>格式文件</p>
@@ -338,17 +309,10 @@
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>tar -zcvf /filePath/filename.tar.gz /filePath/filename&lt;/p&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-2&quot;</span>&gt;解压到特定文件夹&lt;/h1&gt;
-<<<<<<< HEAD
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>tar -zxvf /filePath/filename.tar.gz -C /filePath/filename&lt;/p&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-3&quot;</span>&gt;压缩到特定文件夹&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>tar -zcvf /filePath/filename.tar.gz -C /filePath/filename&lt;/p&gt;
-=======
-</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>tar -zxvf /filePath/filename.tar.gz -C /filePath/filename &lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-3&quot;</span>&gt;压缩到特定文件夹&lt;/h1&gt;
-</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>tar -zcvf /filePath/filename.tar.gz -C /filePath/filename &lt;/p&gt;
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 </span><span class='line'>
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;txt&quot;</span>&gt;压缩所有txt类型文件&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>gzip *.txt
@@ -466,21 +430,13 @@
 </span><span class='line'><span class="nv">$ </span>mkdir&lt;/p&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-13&quot;</span>&gt;删除&lt;/h1&gt;
-<<<<<<< HEAD
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>rm&lt;/p&gt;
-=======
-</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>rm  &lt;/p&gt;
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 </span><span class='line'>
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-14&quot;</span>&gt;删除整个文件夹&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>rm -rf&lt;/p&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-15&quot;</span>&gt;复制&lt;/h1&gt;
-<<<<<<< HEAD
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>cp&lt;/p&gt;
-=======
-</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>cp   &lt;/p&gt;
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 </span><span class='line'>
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-16&quot;</span>&gt;复制文件夹&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>cp -r
@@ -518,11 +474,7 @@
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>ls -rl&lt;/p&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-20&quot;</span>&gt;显示隐藏文件&lt;/h1&gt;
-<<<<<<< HEAD
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>ls -a&lt;/p&gt;
-=======
-</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>ls -a      &lt;/p&gt;
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 </span><span class='line'>
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-21&quot;</span>&gt;可以配合使用&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>ls -al&lt;/p&gt;
@@ -628,11 +580,7 @@
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 删除满足条件的数据</span>
-<<<<<<< HEAD
 </span><span class='line'><span class="nv">$ </span>find ./ -name ‘*’ <span class="p">|</span> xargs rm -rf&lt;/p&gt;
-=======
-</span><span class='line'><span class="nv">$ </span>find ./ -name ‘*’ <span class="p">|</span> xargs rm -rf &lt;/p&gt;
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 </span><span class='line'>
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-32&quot;</span>&gt;移动大数据量的文件.&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>find ./ -name “*.gif” <span class="p">|</span> xargs -i mv <span class="o">{}</span> /filePath/
@@ -641,11 +589,7 @@
 <h2 id="pathldlibrarypath">14. 修改PATH和LD_LIBRARY_PATH</h2>
 
 <p>假设我们程序的绝对路径是<code class="language-bash">/opt/arbtest/arb</code>
-<<<<<<< HEAD
 两种方法:</p>
-=======
-两种方法: </p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <ul>
   <li>直接命令行运行</li>
@@ -675,11 +619,7 @@
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-<<<<<<< HEAD
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 载入修改好的文件&lt;/p&gt;</span>
-=======
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 载入修改好的文件 &lt;/p&gt;</span>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 </span><span class='line'>
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;rootprofile&quot;</span>&gt;载入root权限profile&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;# <span class="nb">source</span> /etc/profile&lt;/p&gt;
@@ -693,11 +633,7 @@
 
 <h2 id="section-34">15. 定向输入输出</h2>
 
-<<<<<<< HEAD
 <p>禁止屏幕输出，即将屏幕输出导入Linux的无底洞 <code class="language-bash">/dev/null</code>，比如</p>
-=======
-<p>禁止屏幕输出，即将屏幕输出导入Linux的无底洞 <code class="language-bash">/dev/null</code>，比如 </p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat myFile <span class="p">&amp;</span>gt<span class="p">;</span> /dev/null
@@ -801,11 +737,7 @@
 </span><span class='line'>
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-37&quot;</span>&gt;卸载分区&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;# umount /mnt/NTFStest
-<<<<<<< HEAD
 </span></code></pre></td></tr></table></div></figure></p>
-=======
-</span></code></pre></td></tr></table></div></figure> </p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <p>如果需要自动挂载ntfs分区，首先要查看分区信息，比如uuid</p>
 
@@ -1079,11 +1011,7 @@
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-61&quot;</span>&gt;线程个数&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>grep ‘processor’ /proc/cpuinfo <span class="p">|</span> sort -u <span class="p">|</span> wc -l
 </span><span class='line'><span class="nv">$ </span>nproc
-<<<<<<< HEAD
 </span></code></pre></td></tr></table></div></figure></p>
-=======
-</span></code></pre></td></tr></table></div></figure> </p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <p>查看CPU温度</p>
 
@@ -1202,17 +1130,10 @@
     <p><a href="http://www.cyberciti.biz/tips/how-can-i-zipping-and-unzipping-files-under-linux.html">zip/unzip</a></p>
   </li>
   <li>
-<<<<<<< HEAD
     <p><a href="http://seisman.info/linux-environment-for-seismology-research.html">用CentOS 7打造合适的科研环境</a></p>
   </li>
   <li>
     <p><a href="http://blog.sina.com.cn/s/blog_c078bab701015sih.html">解决SSH闲置时间过长中断命令执行</a></p>
-=======
-    <p><a href="http://seisman.info/linux-environment-for-seismology-research.html">用CentOS 7打造合适的科研环境</a> </p>
-  </li>
-  <li>
-    <p><a href="http://blog.sina.com.cn/s/blog_c078bab701015sih.html">解决SSH闲置时间过长中断命令执行</a> </p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
   </li>
 </ul>
 
@@ -1224,15 +1145,9 @@
   
   <entry>
     <title type="html"><![CDATA[Linux常用软件集锦]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2010/07/08/linux-software/"/>
     <updated>2010-07-08T11:09:31+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2010/07/08/linux-software</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2010/07/08/linux-software/"/>
-    <updated>2010-07-08T11:09:31+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2010/07/08/linux-software</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<p>本文收集了一些好用或者好玩的Linux软件，安装方法使用<a href="https://getfedora.org/">Fedora</a>系统示例。</p>
 
 <h2 id="section">1. 添加常用源</h2>
@@ -1386,15 +1301,9 @@ mydict.bmp
 
 <p>以下是两张在GoldenDict中查询维基百科和大英百科的效果图。</p>
 
-<<<<<<< HEAD
 <p><img src="http://yulongniu.bionutshell.org/images/linux_software_goldendict1.png" width="500" height="700" title="image" alt="images" /></p>
 
 <p><img src="http://yulongniu.bionutshell.org/images/linux_software_goldendict2.png" width="500" height="700" title="image" alt="images" /></p>
-=======
-<p><img src="http://yulongniu.github.io/images/linux_software_goldendict1.png" width="500" height="700" title="image" alt="images" /></p>
-
-<p><img src="http://yulongniu.github.io/images/linux_software_goldendict2.png" width="500" height="700" title="image" alt="images" /></p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <ul>
   <li>chm阅读器</li>
@@ -1480,11 +1389,7 @@ mydict.bmp
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># yum install texstudio</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
-<<<<<<< HEAD
 <p><img src="http://yulongniu.bionutshell.org/images/linux_software_texstudio.jpg" width="500" height="700" title="image" alt="images" /></p>
-=======
-<p><img src="http://yulongniu.github.io/images/linux_software_texstudio.jpg" width="500" height="700" title="image" alt="images" /></p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <ul>
   <li>PDF文件编辑工具</li>

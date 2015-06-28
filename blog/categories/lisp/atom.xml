@@ -2,17 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Lisp | 牛牛龙]]></title>
-<<<<<<< HEAD
   <link href="http://yulongniu.bionutshell.org/blog/categories/lisp/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
   <updated>2015-06-29T00:54:06+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
-=======
-  <link href="http://yulongniu.github.io/blog/categories/lisp/atom.xml" rel="self"/>
-  <link href="http://yulongniu.github.io/"/>
-  <updated>2015-06-25T10:05:28+08:00</updated>
-  <id>http://yulongniu.github.io/</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
   <author>
     <name><![CDATA[Yulong Niu]]></name>
     
@@ -22,15 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Emacs配置C语言编程环境]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2014/12/02/emacs-config-c/"/>
     <updated>2014-12-02T06:36:41+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2014/12/02/emacs-config-c</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2014/12/02/emacs-config-c/"/>
-    <updated>2014-12-02T06:36:41+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2014/12/02/emacs-config-c</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<p>有很多优秀的C语言IDE用来实现高效的编程，比如<a href="https://www.jetbrains.com/clion/">CLion</a>。目前，CLion还在处于公开测试阶段，可以下载试用。本文介绍在Emacs下配置C/C++编程环境。</p>
 
 <!--more-->
@@ -151,11 +138,7 @@
 </span><span class='line'><span class="nv">$ </span>gcc -xc++ -E -v -
 </span></code></pre></td></tr></table></div></figure></p>
 
-<<<<<<< HEAD
 <p><img src="http://yulongniu.bionutshell.org/images/emacs_config_c_autocomplete.png" width="900" height="900" title="image" alt="images" /></p>
-=======
-<p><img src="http://yulongniu.github.io/images/emacs_config_c_autocomplete.png" width="900" height="900" title="image" alt="images" /></p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <h2 id="debug">3. 编译和debug</h2>
 
@@ -626,15 +609,9 @@
   
   <entry>
     <title type="html"><![CDATA[Emacs高级使用技巧]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2012/06/25/emacs-extend-skills/"/>
     <updated>2012-06-25T08:01:36+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2012/06/25/emacs-extend-skills</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2012/06/25/emacs-extend-skills/"/>
-    <updated>2012-06-25T08:01:36+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2012/06/25/emacs-extend-skills</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<h2 id="emacs">1. Emacs配置文件位置</h2>
 
 <p>在Fedora系统下，Emacs的配置文件位置是<code class="language-bash">~/.emacs</code>。在Emacs配置文件中添加内容后，使用<code class="language-emacs-lisp">M-x eval-buffer</code>，使当前配置生效。编译代码以加快加载速度，<code class="language-eamcs-lisp">M-x byte-compile-file</code>。</p>
@@ -781,15 +758,9 @@
   
   <entry>
     <title type="html"><![CDATA[Emacs和ESS的使用技巧]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2011/08/13/emacs-ess-tips/"/>
     <updated>2011-08-13T05:20:57+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2011/08/13/emacs-ess-tips</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2011/08/13/emacs-ess-tips/"/>
-    <updated>2011-08-13T05:20:57+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2011/08/13/emacs-ess-tips</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<h2 id="ess">1. 安装ESS</h2>
 
 <p>有两种方法可以安装，一种是直接使用系统自带的包安装系统，比如<code>yum</code>：</p>
@@ -923,11 +894,7 @@
   <li>自动补全：<code>auto-complete</code>包</li>
 </ul>
 
-<<<<<<< HEAD
 <p><img src="http://yulongniu.bionutshell.org/images/emacs_ess_tipes_autocomplete.png" width="900" height="900" title="image" alt="images" /></p>
-=======
-<p><img src="http://yulongniu.github.io/images/emacs_ess_tipes_autocomplete.png" width="900" height="900" title="image" alt="images" /></p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <ul>
   <li>
@@ -944,11 +911,7 @@
   </li>
 </ul>
 
-<<<<<<< HEAD
 <p><img src="http://yulongniu.bionutshell.org/images/emacs_ess_tipes_parent.png" width="500" height="500" title="image" alt="images" /></p>
-=======
-<p><img src="http://yulongniu.github.io/images/emacs_ess_tipes_parent.png" width="500" height="500" title="image" alt="images" /></p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <h2 id="section-1">附加内容</h2>
 
@@ -1052,11 +1015,7 @@
     <p><a href="http://ess.r-project.org/Manual/ess.html">ESS文档</a></p>
   </li>
   <li>
-<<<<<<< HEAD
     <p><a href="http://ygc.name/2014/12/07/auto-complete-in-ess/">YGC auto-complete in ESS</a></p>
-=======
-    <p><a href="http://ygc.name/2014/12/07/auto-complete-in-ess/">YGC auto-complete in ESS</a> </p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
   </li>
 </ul>
 
@@ -1068,15 +1027,9 @@
   
   <entry>
     <title type="html"><![CDATA[Emacs使用技巧]]></title>
-<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2011/08/13/emacs-tips/"/>
     <updated>2011-08-13T02:57:17+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2011/08/13/emacs-tips</id>
-=======
-    <link href="http://yulongniu.github.io/blog/2011/08/13/emacs-tips/"/>
-    <updated>2011-08-13T02:57:17+08:00</updated>
-    <id>http://yulongniu.github.io/blog/2011/08/13/emacs-tips</id>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<h2 id="section">1. 安装</h2>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -1164,11 +1117,7 @@
 <blockquote>
   <ol>
     <li>
-<<<<<<< HEAD
       <p>保存文件，经常使用这个命令存盘，避免文件丢失。</p>
-=======
-      <p>保存文件，经常使用这个命令存盘，避免文件丢失。 </p>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     </li>
     <li>
       <p><code>C-x s</code>：把所有的buffer存盘。</p>
@@ -1706,11 +1655,7 @@
 <h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
 
 <ul>
-<<<<<<< HEAD
   <li><a href="http://tuhdo.github.io/emacs-tutor.html">Emacs Mini Manual</a>: a very good Emacs manual including a configure of C/C++.</li>
-=======
-  <li><a href="http://tuhdo.github.io/emacs-tutor.html">Emacs Mini Manual</a>: a very good Emacs manual including a configure of C/C++. </li>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 </ul>
 
 <h3 id="section-6">更新记录</h3>

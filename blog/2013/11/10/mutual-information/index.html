@@ -14,22 +14,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-<<<<<<< HEAD
   <link rel="canonical" href="http://yulongniu.bionutshell.org/blog/2013/11/10/mutual-information">
-=======
-  <link rel="canonical" href="http://yulongniu.github.io/blog/2013/11/10/mutual-information">
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
   <link href="/favicon.ico" type="image/png" rel="icon">
   <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
 
   <!-- http://opengraphprotocol.org/ -->
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:type" content="website">
-<<<<<<< HEAD
   <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2013/11/10/mutual-information">
-=======
-  <meta property="og:url" content="http://yulongniu.github.io/blog/2013/11/10/mutual-information">
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
   <meta property="og:title" content="A Brief Intruction of Mutual Information and Demonstration With R - 牛牛龙">
   
 
@@ -153,11 +145,7 @@
             </ul>
             
                 <form class="search navbar-form navbar-right" action="https://www.google.com/search" method="GET">
-<<<<<<< HEAD
                     <input type="hidden" name="q" value="site:yulongniu.bionutshell.org">
-=======
-                    <input type="hidden" name="q" value="site:yulongniu.github.io">
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
                     <div class="form-group">
                         <input class="form-control" type="text" name="q" placeholder="Search">
                     </div>
@@ -175,11 +163,7 @@
   <div class="page-content col-md-9" itemscope itemtype="http://schema.org/Blog">
     <meta itemprop="name" content="牛牛龙" />
     
-<<<<<<< HEAD
     <meta itemprop="url" content="http://yulongniu.bionutshell.org" />
-=======
-    <meta itemprop="url" content="http://yulongniu.github.io" />
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <article class="hentry" role="article" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
       
   <header class="page-header">
@@ -201,11 +185,7 @@
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2013-11-10T14:21:16+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="#disqus_thread" itemprop="discussionUrl"
-<<<<<<< HEAD
              data-disqus-identifier="http://yulongniu.bionutshell.org">Comments</a>
-=======
-             data-disqus-identifier="http://yulongniu.github.io">Comments</a>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
         
       </p>
     
@@ -276,10 +256,6 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 <p>Typically, here we give the example of two discrete variables, the mutual information between $x_1$ and $y_1$ is</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
-<<<<<<< HEAD
-=======
-
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 \begin{align}
 \begin{split}
 I(X;Y) &= H(X) + H(Y) - H(X,Y)\\
@@ -287,7 +263,6 @@ I(X;Y) &= H(X) + H(Y) - H(X,Y)\\
 & \quad -\left( -\sum_{x \in \{0, 1\}}\sum_{y \in \{0, 1\}}p(x,y)\log(p(x,y)) \right)\\
 \end{split}
 \label{eq:1}
-<<<<<<< HEAD
 \end{align} %]]></script>
 
 <p>The $\eqref{eq:1}$ is equal to</p>
@@ -296,29 +271,12 @@ I(X;Y) &= H(X) + H(Y) - H(X,Y)\\
 I(X;Y) = \sum_{x \in \{1, 0\}}\sum_{y \in \{1, 0\}} p(x,y) \frac{\log(p(x,y))}{p(x)p(y)}
 \label{eq:2}
 \end{equation}</script>
-=======
-\end{align}
- %]]></script>
-
-<p>The $\eqref{eq:1}$ is equal to</p>
-
-<script type="math/tex; mode=display">
-\begin{equation}
-I(X;Y) = \sum_{x \in \{1, 0\}}\sum_{y \in \{1, 0\}} p(x,y) \frac{\log(p(x,y))}{p(x)p(y)}
-\label{eq:2}
-\end{equation}
-</script>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <p>$p(x)$ is the probability that a symbol (here is 0 or 1) appears in the gene vector X regardless that what the symbol is in gene vector Y. $p(y)$ has a similar definition of $p(x). $$p(x, y)$ is probability of a symbol combination appears in gene vector X and Y. In this example, there are four kinds of symbol combination $(1, 1)$, $(1, 0)$, $(0, 1)$ and $(1, 1)$.</p>
 
 <p>If we use the binary table to illustrate this equation, the $\eqref{eq:1}$ is:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
-<<<<<<< HEAD
-=======
-
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 \begin{align}
 \begin{split}
 I(X; Y) &= -\left( \entropfrac{a+c}{n} + \entropfrac{b+d}{n} \right)\\
@@ -328,32 +286,18 @@ I(X; Y) &= -\left( \entropfrac{a+c}{n} + \entropfrac{b+d}{n} \right)\\
 \right) \right)\\
 \end{split}
 \label{eq:3}
-<<<<<<< HEAD
 \end{align} %]]></script>
-=======
-\end{align}
- %]]></script>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <p>The $\eqref{eq:3}$ is mathmatically equal to:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
-<<<<<<< HEAD
-=======
-
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 \begin{align}
 \begin{split}
 I(X; Y) &= \frac{a}{n}\log\frac{na}{(a+b)(a+c)} + \frac{b}{n}\log\frac{nc}{(a+d)(b+d)}\\
 & \quad \frac{c}{n}\log\frac{nc}{(a+b)(a+c)} + \frac{d}{n}\log\frac{nd}{(d+c)(d+b)}
 \end{split}
 \label{eq:4}
-<<<<<<< HEAD
 \end{align} %]]></script>
-=======
-\end{align}
- %]]></script>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
 
 <h3 id="example">Example</h3>
 
@@ -472,11 +416,7 @@ I(X; Y) &= \frac{a}{n}\log\frac{na}{(a+b)(a+c)} + \frac{b}{n}\log\frac{nc}{(a+d)
         
           <div class="sharing">
   
-<<<<<<< HEAD
   <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.bionutshell.org/blog/2013/11/10/mutual-information/" data-via="" data-counturl="http://yulongniu.bionutshell.org/blog/2013/11/10/mutual-information/" >Tweet</a>
-=======
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.github.io/blog/2013/11/10/mutual-information/" data-via="" data-counturl="http://yulongniu.github.io/blog/2013/11/10/mutual-information/" >Tweet</a>
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
   
   
   
@@ -608,13 +548,8 @@ I(X; Y) &= \frac{a}{n}\log\frac{na}{(a+b)(a+c)} + \frac{b}{n}\log\frac{nc}{(a+d)
       
         
         // var disqus_developer = 1;
-<<<<<<< HEAD
         var disqus_identifier = 'http://yulongniu.bionutshell.org/blog/2013/11/10/mutual-information/';
         var disqus_url = 'http://yulongniu.bionutshell.org/blog/2013/11/10/mutual-information/';
-=======
-        var disqus_identifier = 'http://yulongniu.github.io/blog/2013/11/10/mutual-information/';
-        var disqus_url = 'http://yulongniu.github.io/blog/2013/11/10/mutual-information/';
->>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
         var disqus_script = 'embed.js';
       
     (function () {
