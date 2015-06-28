@@ -2,10 +2,17 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Saysomething | 牛牛龙]]></title>
+<<<<<<< HEAD
   <link href="http://yulongniu.bionutshell.org/blog/categories/saysomething/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
   <updated>2015-06-29T00:54:06+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
+=======
+  <link href="http://yulongniu.github.io/blog/categories/saysomething/atom.xml" rel="self"/>
+  <link href="http://yulongniu.github.io/"/>
+  <updated>2015-06-25T10:05:28+08:00</updated>
+  <id>http://yulongniu.github.io/</id>
+>>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
   <author>
     <name><![CDATA[Yulong Niu]]></name>
     
@@ -15,9 +22,15 @@
   
   <entry>
     <title type="html"><![CDATA[My First Post]]></title>
+<<<<<<< HEAD
     <link href="http://yulongniu.bionutshell.org/blog/2014/07/05/my-first-post/"/>
     <updated>2014-07-05T10:04:38+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2014/07/05/my-first-post</id>
+=======
+    <link href="http://yulongniu.github.io/blog/2014/07/05/my-first-post/"/>
+    <updated>2014-07-05T10:04:38+08:00</updated>
+    <id>http://yulongniu.github.io/blog/2014/07/05/my-first-post</id>
+>>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
     <content type="html"><![CDATA[<p>This is my first post. I want to say something. Then say something.</p>
 
 <p>This is a piece of html code <code class="language-html">&lt;html&gt;</code></p>
@@ -37,7 +50,12 @@
     <p>Mathjax supports.</p>
 
     <script type="math/tex; mode=display">% &lt;![CDATA[
+<<<<<<< HEAD
 \begin{align*}
+=======
+
+ \begin{align*}
+>>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
    & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
    = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
    & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
@@ -50,12 +68,22 @@
    \vdots \\
    y_n
  \end{array} \right)
+<<<<<<< HEAD
  \end{align*} %]]&gt;</script>
+=======
+ \end{align*}
+  %]]&gt;</script>
+>>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
   </li>
   <li>
     <p>Colorful mathjax euqation.</p>
 
+<<<<<<< HEAD
     <script type="math/tex; mode=display">\definecolor{energy}{RGB}{114,0,172}
+=======
+    <script type="math/tex; mode=display">
+ \definecolor{energy}{RGB}{114,0,172}
+>>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
  \definecolor{freq}{RGB}{45,177,93}
  \definecolor{spin}{RGB}{251,0,29}
  \definecolor{signal}{RGB}{18,110,213}
@@ -65,6 +93,7 @@
  \color{average} \frac{1}{N} \sum_{n=0}^{N-1}
  \color{signal}x_n \color{spin}
  e^{\mathrm{i} \color{circle} 2\pi \color{freq}k
+<<<<<<< HEAD
  \color{average} \frac{n}{N}}</script>
 
     <p>To find <font color="#7200AC">the energy</font></p>
@@ -79,6 +108,18 @@
     <font color="#CB17CE">average a bunch of points along that
  path</font>
     <p>.</p>
+=======
+ \color{average} \frac{n}{N}}
+ </script>
+
+    <p>To find <font color="#7200AC">the energy</font>
+ <font color="2DB15D">at a particular frequency</font>,
+ <font color="#FB001D">spin</font> <font color="#126ED5">your
+ signal</font> <font color="#D04400">around a circle</font>
+ <font color="2DB15D">at that frequency</font>, and
+ <font color="#CB17CE">average a bunch of points along that
+ path</font>.</p>
+>>>>>>> 52db311e1c9ff30ea8e10f5321163f4fd7a85f62
   </li>
 </ol>
 
