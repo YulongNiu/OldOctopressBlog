@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ppr | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/ppr/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-06-29T00:54:06+08:00</updated>
+  <updated>2015-06-29T01:04:24+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -751,6 +751,8 @@ code snippet
 </span><span class='line'>&lt;p&gt;# 按照提示输入github的地址
 </span><span class='line'><span class="nv">$ </span>rake setup_github_pages
 </span></code></pre></td></tr></table></div></figure></p>
+
+<p>如何遇到类似<code class="language-bash">error: failed to push some refs to</code>的错误，参考 <a href="http://stackoverflow.com/questions/24114676/git-error-failed-to-push-some-refs-to">stackoverflow</a>解决。</p>
 
 <h2 id="section-15">17. 多台电脑共同编写博客</h2>
 
