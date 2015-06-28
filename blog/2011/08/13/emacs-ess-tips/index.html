@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Emacs和ESS的使用技巧 - 牛牛龙</title>
+  <meta name="author" content="Yulong Niu">
+
+  
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://yulongniu.github.io/blog/2011/08/13/emacs-ess-tips">
+  <link href="/favicon.ico" type="image/png" rel="icon">
+  <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
+
+  <!-- http://opengraphprotocol.org/ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://yulongniu.github.io/blog/2011/08/13/emacs-ess-tips">
+  <meta property="og:title" content="Emacs和ESS的使用技巧 - 牛牛龙">
+  
+
+  <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script src="/javascripts/libs/jquery/jquery-2.0.3.min.js"></script>
+
+<!--enable to choose theme in octostrap-->
+
+  <link href="/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="/assets/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+
+
+
+<!-- link open with new tab  -->
+<script>
+  function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+  $(this).attr('target', '_blank');
+  });
+  }
+  
+  $(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+  });
+</script>
+
+
+  
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  
+
+  
+   <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-53073828-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+  <body   >
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div id="wrap">
+      <header role="banner">
+        <nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">牛牛龙</a>
+        </div>
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a rel="index" href="/">Blog</a>
+                </li>
+                <li >
+                    <a href="/blog/archives">Archives</a>
+                </li>
+		<li >
+                  <a href="/whoami">WhoAmI</a>
+                </li>
+		<li >
+                  <a href="/link">Link</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="subscribe-rss" href="/atom.xml" title="subscribe via RSS">
+                        <span class="visible-xs">RSS</span>
+                        <img class="hidden-xs" src="/images/rss.png" alt="RSS">
+                    </a>
+                </li>
+                
+            </ul>
+            
+                <form class="search navbar-form navbar-right" action="https://www.google.com/search" method="GET">
+                    <input type="hidden" name="q" value="site:yulongniu.github.io">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="q" placeholder="Search">
+                    </div>
+                </form>
+            
+        </div>
+    </div>
+</nav>
+
+
+      </header>
+      <div id="main" role="main" class="container">
+        <div id="content">
+          <div class="row">
+  <div class="page-content col-md-9" itemscope itemtype="http://schema.org/Blog">
+    <meta itemprop="name" content="牛牛龙" />
+    
+    <meta itemprop="url" content="http://yulongniu.github.io" />
+    <article class="hentry" role="article" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+      
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2011-08-13T05:20:57+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.github.io">Comments</a>
+        
+      </p>
+    
+    
+    <h1 class="entry-title" itemprop="name headline">
+        Emacs和ESS的使用技巧
+        
+    </h1>
+    
+  </header>
+
+
+<div class="entry-content clearfix" itemprop="articleBody description"><h2 id="ess">1. 安装ESS</h2>
+
+<p>有两种方法可以安装，一种是直接使用系统自带的包安装系统，比如<code>yum</code>：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install emacs-ess</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>但是，有时可能不是ESS最新版本。所以，推荐第二种方法，使用Emacs自带的包系统，方便、更新及时，设置方法<a href="http://yulongniu.bionutshell.org/blog/2012/06/24/emacs-extend-skills/">参考</a>，安装<code>ess</code>包。</p>
+
+<h2 id="ess-1">2. 使用ESS</h2>
+
+<p>进入GNU Emacs界面之后，输入<code>M-X R</code> 即可进入R界面。在这个过程中，会询问是否在当前运行目录下运行R，可以选择在不同目录下运行。</p>
+
+<ul>
+  <li><code>M-x R</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>启动R。R运行的buffer因为是在Emacs编辑器下运行，所以称为inferior（Emacs文档中称之为iESS buffer）。</p>
+    </li>
+    <li>
+      <p><code>C-u M-x R RET --no-save RET</code>：启动R并且不保存。</p>
+    </li>
+    <li>
+      <p><code>M-x ess-transcript-clean-region</code>：清理R界面。</p>
+    </li>
+    <li>
+      <p><code>C-c C-z</code>：强制停止运行的R进程。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<!--more-->
+
+<ul>
+  <li><code>C-c C-x</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>代替<code class="language-r">ls()</code>函数。</p>
+    </li>
+    <li>
+      <p><code>C-c C-s</code>：代替<code class="language-r">search()</code>函数。</p>
+    </li>
+    <li>
+      <p><code>C-c C-d</code>：修改已经建立的对象，非常实用。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li><code>C-c C-n</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>把当前行送到R。</p>
+    </li>
+    <li>
+      <p><code>C-c C-c</code>：把当前段送到R。</p>
+    </li>
+    <li>
+      <p><code>C-c C-b</code>：把当前整个文件送到R。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li>
+    <p><code>C-c tab</code>：自动补全R代码。</p>
+  </li>
+  <li>
+    <p><code>C-x o</code>：滚动屏幕。</p>
+  </li>
+  <li>
+    <p><code>C--</code>：</p>
+  </li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>自动给出R语言中特有的 <code>&lt;-</code>。</p>
+    </li>
+    <li>
+      <p><code>C---</code>：连按两下–，则可以显示下划线。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li><code>C-c C-o</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>在函数头按下会激活ESS对R代码的注释功能。</p>
+    </li>
+    <li>
+      <p><code>M-x customize-group RET ess RET</code>：配置默认模板，如果需要插入空行，回车没用，猛戳空格。</p>
+    </li>
+    <li>
+      <p><code>C-c C-e C-c</code>：将代码注释为roxygen的<code>##'</code>开头格式，特别是注释example的时候很好用。</p>
+    </li>
+    <li>
+      <p><code>C-c C-e p</code>：光标跳转到注释段落开头。</p>
+    </li>
+    <li>
+      <p><code>C-c C-e n</code>：光标跳转到注释所在函数段落结尾。</p>
+    </li>
+    <li>
+      <p><code>M-q</code>：整理roxygen注释，将多行注释压缩整理。</p>
+    </li>
+  </ol>
+</blockquote>
+
+<p><img class="middle" src="/images/Emacs_ESS_snap.jpg" width="900" height="900" title="Emacs ESS #1" alt="a snap of Emacs ESS" /></p>
+
+<h2 id="section">3. 高级设置</h2>
+
+<p>结合Emacs的自动补全、补全括号、颜色显示等功能，设置更加强大的ESS编辑环境。将<a href="#c-mode-config">附加环境设置</a>添加到Emacs设置文件，比如<code class="language-bash">~/.emacs</code>。所需要的包使用<code class="language-emacs-lisp">M-x list-package</code>安装。</p>
+
+<ul>
+  <li>自动补全：<code>auto-complete</code>包</li>
+</ul>
+
+<p><img src="/images/emacs_ess_tipes_autocomplete.png" width="900" height="900" title="image" alt="images" /></p>
+
+<ul>
+  <li>
+    <p>代码折叠：<code>hs-minor-mode</code>（系统自带）</p>
+  </li>
+  <li>
+    <p>括号补全：<code>smartparens</code></p>
+  </li>
+  <li>
+    <p>括号颜色：<code>rainbow-mode</code></p>
+  </li>
+  <li>
+    <p>颜色显示：<code>rainbow-delimiters</code></p>
+  </li>
+</ul>
+
+<p><img src="/images/emacs_ess_tipes_parent.png" width="500" height="500" title="image" alt="images" /></p>
+
+<h2 id="section-1">附加内容</h2>
+
+<p><a id="c-mode-config">ESS的Emacs编程环境设置</a></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Emacs configure </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+</pre></td><td class="code"><pre><code class="emacs-lisp"><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="c1">; auto-completion</span>
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;auto-complete</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;auto-complete-config</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">ac-config-default</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="c1">; ESS set</span>
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;ess-site</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="k">setq</span> <span class="nv">ess-use-auto-complete</span> <span class="no">t</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="c1">;open hs-mode</span>
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;ess-mode-hook</span> <span class="ss">&#39;hs-minor-mode</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="c1">;smartparens</span>
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;smartparens-config</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">show-smartparens-global-mode</span> <span class="no">t</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">smartparens-global-mode</span> <span class="no">t</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="c1">;rainbow mode </span>
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;rainbow-mode</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">hook</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">ess-mode-hook</span> <span class="nv">inferior-ess-mode-hook</span><span class="p">))</span>
+</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="nv">hook</span> <span class="ss">&#39;rainbow-turn-on</span><span class="p">))</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="c1">;rainbow-delimiters</span>
+</span><span class="line"><span class="c1">;;;;;;;;;;;;;;</span>
+</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;rainbow-delimiters</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;prog-mode-hook</span> <span class="ss">&#39;rainbow-delimiters-mode</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;ess-mode-hook</span> <span class="ss">&#39;rainbow-delimiters-mode</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li>
+    <p><a href="http://cos.name/2011/05/write-r-packages-like-a-ninja/">像忍者一样写R包</a></p>
+  </li>
+  <li>
+    <p><a href="http://google-styleguide.googlecode.com/svn/trunk/google-r-style.html">google code R stype</a></p>
+  </li>
+  <li>
+    <p><a href="http://joysofprogramming.com/install-emacs-ess-el-fedora-rhel/">记载ESS的博客</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.damtp.cam.ac.uk/user/sje30/ess11/ess-slides.pdf">ESS幻灯片</a></p>
+  </li>
+  <li>
+    <p><a href="http://ess.r-project.org/Manual/ess.html">ESS文档</a></p>
+  </li>
+  <li>
+    <p><a href="http://ygc.name/2014/12/07/auto-complete-in-ess/">YGC auto-complete in ESS</a></p>
+  </li>
+</ul>
+
+<h3 id="section-2">更新记录</h3>
+
+<p>2014年12月15日</p>
+</div>
+
+
+      <footer>
+        <p class="meta text-muted">
+          
+  
+
+<span class="glyphicon glyphicon-user"></span> <span class="byline author vcard" itemprop="author" itemscope itemtype="http://schema.org/Person">Posted by <span class="fn" itemprop="name">Yulong Niu</span></span>
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2011-08-13T05:20:57+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+          
+
+<span class="glyphicon glyphicon-tags"></span>&nbsp;
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/lisp/'>lisp</a>
+  
+</span>
+
+
+        </p>
+        
+          <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.github.io/blog/2011/08/13/emacs-ess-tips/" data-via="" data-counturl="http://yulongniu.github.io/blog/2011/08/13/emacs-ess-tips/" >Tweet</a>
+  
+  
+  
+</div>
+
+        
+        
+          <ul class="meta text-muted pager">
+            
+            <li class="previous"><a href="/blog/2011/08/13/emacs-tips/" title="Previous Post: Emacs使用技巧">&laquo; Emacs使用技巧</a></li>
+            
+            
+            <li class="next"><a href="/blog/2012/05/03/r-tricks/" title="Next Post: R小技巧集锦">R小技巧集锦 &raquo;</a></li>
+            
+          </ul>
+        
+      </footer>
+    </article>
+    
+      <section>
+        <h2>Comments</h2>
+        <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+      </section>
+    
+  </div>
+
+  
+  <aside class="sidebar col-md-3">
+    
+      <section class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Recent Posts</h3>
+  </div>
+  
+  <div id="recent_posts" class="list-group">
+    
+    <a class="list-group-item " href="/blog/2015/06/02/download-ucsc-gene-mask/">UCSC Table下载注释文件</a>
+    
+    <a class="list-group-item " href="/blog/2015/05/28/bash-program/">Bash简易编程</a>
+    
+    <a class="list-group-item " href="/blog/2015/05/16/filter-tophat2-output/">过滤TopHat分析双端测序的输出</a>
+    
+    <a class="list-group-item " href="/blog/2015/05/09/django-tutorial/">Django使用介绍</a>
+    
+    <a class="list-group-item " href="/blog/2015/05/09/python-different-version/">使用Pyenv控制多个版本Python</a>
+    
+  </div>
+</section>
+<section class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Categories</h3>
+  </div>
+  <div class="list-group">
+    
+    
+    <a class="list-group-item " href="/blog/categories/linux/index.html">
+        <span class="badge">4</span>
+        linux
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/r/index.html">
+        <span class="badge">6</span>
+        r
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/lisp/index.html">
+        <span class="badge">4</span>
+        lisp
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
+        <span class="badge">7</span>
+        bioinfor
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/saysomething/index.html">
+        <span class="badge">1</span>
+        saysomething
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/ppr/index.html">
+        <span class="badge">3</span>
+        ppr
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/c/index.html">
+        <span class="badge">1</span>
+        c
+      </a>
+    
+  </div>
+</section>
+
+
+
+
+
+
+    
+  </aside>
+  
+</div>
+
+        </div>
+      </div>
+    </div>
+    <footer role="contentinfo"><div class="container">
+    <p class="text-muted credits">
+  Copyright &copy; 2015 - Yulong Niu<br>
+  <small>
+      <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>,
+      <span class="credit">customized with <a href="https://github.com/kAworu/octostrap3">octostrap3</a></span>.
+  </small>
+</p>
+
+</div>
+</footer>
+    
+
+<script type="text/javascript">
+      var disqus_shortname = 'yulongniu';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://yulongniu.github.io/blog/2011/08/13/emacs-ess-tips/';
+        var disqus_url = 'http://yulongniu.github.io/blog/2011/08/13/emacs-ess-tips/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+<script src="/assets/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/javascripts/modernizr-2.0.js"></script>
+
+
+  </body>
+</html>
