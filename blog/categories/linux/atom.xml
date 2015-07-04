@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-06-29T01:04:24+08:00</updated>
+  <updated>2015-07-04T20:23:24+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -1238,10 +1238,24 @@
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># yum install bzip2-devel gcc-c++ git hunspell-devel \</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># dnf install bzip2-devel gcc-c++ git hunspell-devel \</span>
 </span><span class='line'>libvorbis-devel libXtst-devel phonon-devel <span class="se">\</span>
 </span><span class='line'>qt-devel qtwebkit ffmpeg ffmpeg-devel <span class="se">\</span>
-</span><span class='line'>lzo lzo-devel eb eb-devel
+</span><span class='line'>lzo lzo-devel eb eb-devel libao libao-devel <span class="se">\</span>
+</span><span class='line'>qtwebkit-devel libtiff-devel lzma-devel&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-5&quot;</span>&gt;安装字典&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>git clone git://github.com/goldendict/goldendict.git
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>goldendict
+</span><span class='line'><span class="nv">$ </span>qmake-qt4 “CONFIG+<span class="o">=</span>zim_support” <span class="p">&amp;</span>amp<span class="p">;&amp;</span>amp<span class="p">;</span> make
+</span><span class='line'><span class="c"># make install</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
 <p><strong>添加离线字典</strong></p>
@@ -1372,7 +1386,7 @@ mydict.bmp
 <span class='line-number'>7</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># yum install ImageMagick&lt;/p&gt;</span>
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-5&quot;</span>&gt;设置转换图片质量，1质量最低，100质量最高&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-6&quot;</span>&gt;设置转换图片质量，1质量最低，100质量最高&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>convert -quality <span class="m">100</span> input.pdf output.jpg&lt;/p&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;px&quot;</span>&gt;设置像素，比如转换的是500px&lt;/h1&gt;
@@ -1442,7 +1456,7 @@ mydict.bmp
 </span><span class='line'><span class="c"># yum install playonlinux</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="section-6">6. 驱动程序</h2>
+<h2 id="section-7">6. 驱动程序</h2>
 
 <ul>
   <li>Fedora安装NVIDIA显卡驱动</li>
@@ -1458,7 +1472,7 @@ mydict.bmp
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 进入字符界面</span>
 </span><span class='line'><span class="c"># init 3&lt;/p&gt;</span>
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-7&quot;</span>&gt;进入图形界面&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-8&quot;</span>&gt;进入图形界面&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;# init 5
 </span></code></pre></td></tr></table></div></figure></p>
 
@@ -1468,7 +1482,7 @@ mydict.bmp
   <li><a href="http://xmodulo.com/convert-pdf-files-to-jpg-format-on-linux.html">pdf转换jpg/jpeg文件</a></li>
 </ul>
 
-<h3 id="section-8">更新记录</h3>
+<h3 id="section-9">更新记录</h3>
 
 <p>2015年6月11日</p>
 

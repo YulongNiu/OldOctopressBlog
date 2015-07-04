@@ -286,10 +286,24 @@
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install bzip2-devel gcc-c++ git hunspell-devel \</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># dnf install bzip2-devel gcc-c++ git hunspell-devel \</span>
 </span><span class="line">libvorbis-devel libXtst-devel phonon-devel <span class="se">\</span>
 </span><span class="line">qt-devel qtwebkit ffmpeg ffmpeg-devel <span class="se">\</span>
-</span><span class="line">lzo lzo-devel eb eb-devel
+</span><span class="line">lzo lzo-devel eb eb-devel libao libao-devel <span class="se">\</span>
+</span><span class="line">qtwebkit-devel libtiff-devel lzma-devel
+</span><span class="line">
+</span><span class="line"><span class="c"># 安装字典</span>
+</span><span class="line"><span class="nv">$ </span>git clone git://github.com/goldendict/goldendict.git
+</span><span class="line"><span class="nv">$ </span><span class="nb">cd </span>goldendict
+</span><span class="line"><span class="nv">$ </span>qmake-qt4 <span class="s2">&quot;CONFIG+=zim_support&quot;</span> <span class="o">&amp;&amp;</span> make
+</span><span class="line"><span class="c"># make install</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p><strong>添加离线字典</strong></p>
