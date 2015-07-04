@@ -73,10 +73,17 @@ Linux下曾经风靡一时的字典StarDict，现在有了更加先进和方便�
 参考GoldenDict的[GitHub安装介绍](https://github.com/goldendict/goldendict)，字典发音需要安装Mplayer，Fedora安装可能依赖的库如下：
 
 {% codeblock lang:bash %}
-# yum install bzip2-devel gcc-c++ git hunspell-devel \
+# dnf install bzip2-devel gcc-c++ git hunspell-devel \
 libvorbis-devel libXtst-devel phonon-devel \
 qt-devel qtwebkit ffmpeg ffmpeg-devel \
-lzo lzo-devel eb eb-devel
+lzo lzo-devel eb eb-devel libao libao-devel \
+qtwebkit-devel libtiff-devel lzma-devel
+
+# 安装字典
+$ git clone git://github.com/goldendict/goldendict.git
+$ cd goldendict
+$ qmake-qt4 "CONFIG+=zim_support" && make
+# make install
 {% endcodeblock %}
 
 **添加离线字典**

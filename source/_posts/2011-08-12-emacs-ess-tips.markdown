@@ -91,9 +91,9 @@ categories: lisp
 
 * 括号补全：`smartparens`
 
-* 括号颜色：`rainbow-mode`
+* 括号颜色：`rainbow-delimiters`
 
-* 颜色显示：`rainbow-delimiters`
+* 颜色显示：`rainbow-mode`
 
 <img src="/images/emacs_ess_tipes_parent.png" width="500" height="500" title="image" alt="images">
 
@@ -144,7 +144,7 @@ categories: lisp
 {% endcodeblock %}
 
 
-### <a id="Ref">参考网址</a> ###
+### <a id="Ref">参考资料</a> ###
 
 * [像忍者一样写R包](http://cos.name/2011/05/write-r-packages-like-a-ninja/)
 
@@ -161,4 +161,5 @@ categories: lisp
 
 ### 更新记录 ###
 
-2014年12月15日
+2015年6月30日
+
