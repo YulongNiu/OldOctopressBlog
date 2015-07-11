@@ -375,6 +375,17 @@ for (i in tmp1) {
 [1] "a" "b" "c" "d" "e"
 {% endcodeblock %}
 
+## 21. 载入github储存的R代码使用`source_url`{:.language-r} ##
+
+需要安装和调用[devtools](http://cran.r-project.org/web/packages/devtools/index.html)包
+
+{% codeblock lang:R Load the R code from web url %}
+> library(devtools)
+> source_url('https://raw.githubusercontent.com/YulongNiu/FunFunc/master/test_two_proportion.R')
+{% endcodeblock %}
+
+
+
 
 ### <a id="Ref">参考网址</a> ###
 
@@ -387,4 +398,4 @@ for (i in tmp1) {
 
 ### 更新记录 ###
 
-2014年9月29日
+2015年7月11日

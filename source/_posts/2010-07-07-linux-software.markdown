@@ -57,6 +57,10 @@ $ qt-recordMyDesktop
 
 ## 4. 办公 ##
 
+* fedy安装工具
+
+[fedy](https://satya164.github.io/fedy/)是一个辅助在Fedora系统下，更容易安装各种软件的工具。
+
 * 字典GoldenDict
 
 Linux下曾经风靡一时的字典StarDict，现在有了更加先进和方便的接班人[GoldenDict](http://goldendict.org/) 。GoldenDict的主要特点有：
@@ -256,6 +260,28 @@ Wine可以尽可能模拟Window软件
 # 进入图形界面
 # init 5
 {% endcodeblock %}
+
+
+## 7. Samsung SSD ##
+
+三星固态硬盘支持Linux版本的[Magician DC](http://www.samsung.com/global/business/semiconductor/minisite/SSD/global/html/support/server_downloads.html)。
+
+{% codeblock lang:bash Samsung SSD Magician %}
+# 列出SSD
+# magician -L
+
+# 列出指定SSD详细信息
+# magician -d 0 -I
+
+# 列出指定SSD的S.M.A.R.T信息
+# magician -d 0 -S
+# 列出制定SSD的温度
+# magician -d 0 -S -t
+
+# trim
+# magician -d 0 -T
+{% endcodeblock %}
+
 
 
 
