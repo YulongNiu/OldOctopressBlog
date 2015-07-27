@@ -73,6 +73,10 @@
     <lastmod>2013-06-19T04:42:10+08:00</lastmod>
   </url>
   <url>
+    <loc>http://yulongniu.bionutshell.org/blog/2012/08/21/python-r-rpy2/</loc>
+    <lastmod>2012-08-21T19:33:47+08:00</lastmod>
+  </url>
+  <url>
     <loc>http://yulongniu.bionutshell.org/blog/2012/06/25/emacs-extend-skills/</loc>
     <lastmod>2012-06-25T08:01:36+08:00</lastmod>
   </url>
@@ -108,16 +112,16 @@
     <loc>http://yulongniu.bionutshell.org/404.html</loc>
   </url>
   <url>
-    <loc>http://yulongniu.bionutshell.org/blog/archives/</loc>
-  </url>
-  <url>
     <loc>http://yulongniu.bionutshell.org/</loc>
   </url>
   <url>
-    <loc>http://yulongniu.bionutshell.org/link/</loc>
+    <loc>http://yulongniu.bionutshell.org/blog/archives/</loc>
   </url>
   <url>
     <loc>http://yulongniu.bionutshell.org/whoami/</loc>
+  </url>
+  <url>
+    <loc>http://yulongniu.bionutshell.org/link/</loc>
   </url>
   <url>
     <loc>http://yulongniu.bionutshell.org/blog/categories/linux/</loc>
@@ -129,30 +133,15 @@
     <loc>http://yulongniu.bionutshell.org/blog/categories/lisp/</loc>
   </url>
   <url>
+    <loc>http://yulongniu.bionutshell.org/blog/categories/ppr/</loc>
+  </url>
+  <url>
     <loc>http://yulongniu.bionutshell.org/blog/categories/bioinfor/</loc>
   </url>
   <url>
     <loc>http://yulongniu.bionutshell.org/blog/categories/saysomething/</loc>
   </url>
   <url>
-    <loc>http://yulongniu.bionutshell.org/blog/categories/ppr/</loc>
-  </url>
-  <url>
     <loc>http://yulongniu.bionutshell.org/blog/categories/c/</loc>
-  </url>
-  <url>
-    <loc>http://yulongniu.bionutshell.org/posts/2/</loc>
-  </url>
-  <url>
-    <loc>http://yulongniu.bionutshell.org/posts/3/</loc>
-  </url>
-  <url>
-    <loc>http://yulongniu.bionutshell.org/posts/4/</loc>
-  </url>
-  <url>
-    <loc>http://yulongniu.bionutshell.org/posts/5/</loc>
-  </url>
-  <url>
-    <loc>http://yulongniu.bionutshell.org/posts/6/</loc>
   </url>
 </urlset>
