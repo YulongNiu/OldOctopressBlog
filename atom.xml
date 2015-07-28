@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-07-28T04:08:23+08:00</updated>
+  <updated>2015-07-28T15:51:49+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -12,6 +12,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Python使用小技巧]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2015/07/28/python-tips/"/>
+    <updated>2015-07-28T14:37:38+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2015/07/28/python-tips</id>
+    <content type="html"><![CDATA[<p>收集了一些使用Python过程中的小技巧或者常见错误。</p>
+
+<h2 id="while--if--break">1. While–if–break</h2>
+
+<p>适用情况：<strong>当需要执行一个循环，但是不能事先判断何时终止。</strong> 可以在循环内部加入判断，符合要求时跳出。比如，使用程序在某个目录下新建一个文件夹，如果文件名已经存在，需要重新生成文件名；否则，创建文件夹。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>While&#8211;if&#8211;break </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">import</span> <span class="nn">random</span><span class="o">,</span> <span class="nn">os</span>
+</span><span class="line">
+</span><span class="line"><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class="line">    <span class="n">letter</span> <span class="o">=</span> <span class="p">[</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">97</span><span class="p">,</span> <span class="mi">123</span><span class="p">)]</span>
+</span><span class="line">    <span class="n">folderName</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+</span><span class="line">    <span class="n">fn</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folderName</span><span class="p">)</span>
+</span><span class="line">    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class="line">        <span class="c"># get an unique name </span>
+</span><span class="line">        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+</span><span class="line">        <span class="k">break</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<!--more-->
+
+<h3 id="section">参考网址</h3>
+
+<ul>
+  <li>
+    <p><a href="https://wiki.python.org/moin/FrontPage">Python Wiki</a></p>
+  </li>
+  <li>
+    <p><a href="http://blog.shenwei.me/python-note/#more-3951">Wei Shen’s Python note</a></p>
+  </li>
+</ul>
+
+<h3 id="section-1">更新记录</h3>
+
+<p>2015年7月27日</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[UCSC Table下载注释文件]]></title>
@@ -4891,153 +4945,6 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 
 <p>2015年7月26日</p>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Emacs高级使用技巧]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2012/06/25/emacs-extend-skills/"/>
-    <updated>2012-06-25T08:01:36+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2012/06/25/emacs-extend-skills</id>
-    <content type="html"><![CDATA[<h2 id="emacs">1. Emacs配置文件位置</h2>
-
-<p>在Fedora系统下，Emacs的配置文件位置是<code class="language-bash">~/.emacs</code>。在Emacs配置文件中添加内容后，使用<code class="language-emacs-lisp">M-x eval-buffer</code>，使当前配置生效。编译代码以加快加载速度，<code class="language-eamcs-lisp">M-x byte-compile-file</code>。</p>
-
-<p>使用Eamcs解释器<code class="language-emacs-lisp">M-x ielm</code>。</p>
-
-<h2 id="emacs-1">2. Emacs自带的包管理系统</h2>
-
-<p>在Emacs24之后，自带包管理系统，使用<code class="language-bash">M-x eval-buffer</code>进入。可以添加<a href="http://melpa.org/">MELPA源</a>、<a href="https://marmalade-repo.org/">marmalade源</a>、<a href="http://elpa.gnu.org/packages/">GNU源</a>。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Add repositories of Emacs packages</span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-</pre></td><td class="code"><pre><code class="emacs-lisp"><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;package</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
-</span><span class="line">	     <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;marmalade&quot;</span> <span class="o">.</span> <span class="s">&quot;http://marmalade-repo.org/packages/&quot;</span><span class="p">))</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
-</span><span class="line">	     <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;melpa&quot;</span> <span class="o">.</span> <span class="s">&quot;http://melpa.milkbox.net/packages/&quot;</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
-</span><span class="line">	     <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;gnu&quot;</span> <span class="o">.</span> <span class="s">&quot;http://elpa.gnu.org/packages/&quot;</span><span class="p">)))</span>
-</span><span class="line"><span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<!--more-->
-
-<p>这样设置之后，就不需要类似<code class="language-emacs-lisp">(add-to-list 'load-path "~/.emacs.d/elpa/popup-20140207.1702/")</code>的语句了，因为Emacs会自动识别安装的包。但是，如果需要对某个包进行进一步设置，需要加上<code class="language-bash">(require 'popup)</code>之类的语句。</p>
-
-<h2 id="section">3. 显示行号</h2>
-
-<p>使用<code class="language-eamcs-lisp">M-x linum-mode</code>添加行号。如果需要永久显示，在Emacs配置文件中添加一下内容。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Show line number</span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class="emacs-lisp"><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-</span><span class="line"><span class="c1">;open linum mode</span>
-</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-</span><span class="line"><span class="p">(</span><span class="k">setq</span> <span class="nv">linum-format</span> <span class="s">&quot;%4d \u2502&quot;</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;prog-mode-hook</span> <span class="ss">&#39;linum-mode</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;ess-mode-hook</span> <span class="ss">&#39;linum-mode</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="shell">4. 进入Shell</h2>
-
-<p>三种方法：</p>
-
-<ul>
-  <li>
-    <p><code class="language-eamcs-lisp">M-x shell</code></p>
-  </li>
-  <li>
-    <p><code class="language-eamcs-lisp">M-x ansi-term</code></p>
-  </li>
-  <li>
-    <p><code class="language-eamcs-lisp">M-x eshell</code></p>
-  </li>
-</ul>
-
-<h2 id="root">5. root权限</h2>
-
-<p><code class="language-eamcs-lisp">C-x C-f</code> 之后输入root密码<code class="language-eamcs-lisp">/su:root@usrname password</code></p>
-
-<h2 id="section-1">6. 移动整体代码块</h2>
-
-<p>选中代码块后：
-向左移动2个字符：<code class="language-eamcs-lisp">C-u -2 C-x TAB</code>
-向右移动4个字符：<code class="language-eamcs-lisp">C-u 4 C-x TAB</code></p>
-
-<h2 id="section-2">7. 添加彩虹猫</h2>
-
-<p>添加<code>nyan-mode</code>包，之后在Emacs配置文档中写入：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Add nyan in modeline</span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class="emacs-lisp"><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-</span><span class="line"><span class="c1">;nyan-mode</span>
-</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-</span><span class="line"><span class="p">(</span><span class="nv">nyan-mode</span> <span class="no">t</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="yasnippet">8. 自定义YASnippet模板</h2>
-
-<p>使用<code class="language-emacs-lisp">M-x yas-new-snippet</code>，打开一个模板。比如，添加Octopress的语言高亮模板</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-</pre></td><td class="code"><pre><code class=""><span class="line"># -*- mode: snippet; require-final-newline: nil -*-
-</span><span class="line"># name: Highlight Language
-</span><span class="line"># key: hl
-</span><span class="line"># binding: direct-keybinding
-</span><span class="line"># contributor: Yulong Niu &lt;yulong.niu@aol.com&gt;
-</span><span class="line"># --
-</span><span class="line">
-</span><span class="line">{% codeblock lang:${1:bash} %}
-</span><span class="line">$0
-</span><span class="line">{% endcodeblock %}</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>其中 <code class="languag-emacs-lisp">${1:bash}</code>表示光标跳转位置，编号从1开始。<code class="language-emacs-lisp">$0</code>表示光标最后停留位置。如果不需要插入空行，在模板中把多余空行去掉。</p>
-
-<p>自定义的模板建议存放与 <code class="language-bash">~/.emacs.d/snippets/</code>的对应mode文件夹下。比如在markdown模式下使用的模板，存放与 <code class="language-bash">~/.emacs.d/snippets/markdown-mode/</code>。</p>
-
-<h3 id="section-3">参考资料</h3>
-
-<ul>
-  <li>
-    <p><a href="http://capitaomorte.github.io/yasnippet/">YASnippet Tutorial</a></p>
-  </li>
-  <li>
-    <p><a href="http://www.cnblogs.com/ibgo/p/3900317.html">自定义 Yasnippet 模板</a></p>
-  </li>
-  <li>
-    <p><a href="https://github.com/mad4alcohol/mad4a-blog/blob/master/_posts/2012-08-02-emacs-summary-cont.md">YASnippet添加模板</a></p>
-  </li>
-</ul>
-
-<h3 id="section-4">更新记录</h3>
-
-<p>2015年5月9日</p>
 ]]></content>
   </entry>
   
