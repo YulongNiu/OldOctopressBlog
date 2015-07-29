@@ -20,6 +20,7 @@ In real life, I am also a:
 
 * science fiction writer
 
+My publications: [Google Scholar](https://scholar.google.com/citations?user=HLCTLF0AAAAJ&hl=en)
 
 Now I am seeking a postdoc position in `bioinformatics` and `computational biology` from September 2015. If you are interested, please contact with me `yulong.niu@aol.com`.
  

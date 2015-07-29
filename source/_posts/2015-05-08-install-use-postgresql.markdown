@@ -8,11 +8,11 @@ categories: Linux
 
 ## 1. 安装和开启postgresql ##
 
-Fedora直接使用`yum`{:.language-bash}安装相关组件。
+Fedora直接使用`dnf`{:.language-bash}安装相关组件。
 
 {% codeblock lang:bash %}
 # 安装PostgreSQL
-# yum install postgresql postgresql-server postgresql-contrib postgresql-devel pgadmin3
+# dnf install postgresql postgresql-server postgresql-contrib postgresql-devel pgadmin3
 {% endcodeblock %}
 
 <!--more-->
@@ -22,7 +22,7 @@ Fedora直接使用`yum`{:.language-bash}安装相关组件。
 
 {% codeblock lang:bash %}
 # 初始化
-# postgresql-setup initdb
+# postgresql-setup --initdb --unit postgresql
 
 # 开启服务
 # service postgresql start
@@ -123,4 +123,4 @@ testdb=# \q
 
 ### 更新记录 ###
 
-2015年5月11日
+2015年7月29日
