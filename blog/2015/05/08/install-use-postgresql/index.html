@@ -198,12 +198,12 @@
 
 <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="postgresql">1. 安装和开启postgresql</h2>
 
-<p>Fedora直接使用<code class="language-bash">yum</code>安装相关组件。</p>
+<p>Fedora直接使用<code class="language-bash">dnf</code>安装相关组件。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 安装PostgreSQL</span>
-</span><span class="line"><span class="c"># yum install postgresql postgresql-server postgresql-contrib postgresql-devel pgadmin3</span>
+</span><span class="line"><span class="c"># dnf install postgresql postgresql-server postgresql-contrib postgresql-devel pgadmin3</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <!--more-->
@@ -225,7 +225,7 @@
 <span class="line-number">13</span>
 <span class="line-number">14</span>
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 初始化</span>
-</span><span class="line"><span class="c"># postgresql-setup initdb</span>
+</span><span class="line"><span class="c"># postgresql-setup --initdb --unit postgresql</span>
 </span><span class="line">
 </span><span class="line"><span class="c"># 开启服务</span>
 </span><span class="line"><span class="c"># service postgresql start</span>
@@ -368,7 +368,7 @@
 
 <h3 id="section-1">更新记录</h3>
 
-<p>2015年5月11日</p>
+<p>2015年7月29日</p>
 </div>
 
 
