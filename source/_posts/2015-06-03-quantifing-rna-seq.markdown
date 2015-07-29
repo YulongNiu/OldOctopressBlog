@@ -190,7 +190,7 @@ vstMat <- assay(vsd)
 
 
 
-### 参考网址 ###
+### 参考资料 ###
 
 * Biconductor DESeq2 workflows: [RNA-Seq workflow at the gene level](http://www.bioconductor.org/help/workflows/rnaseqGene/) 
 

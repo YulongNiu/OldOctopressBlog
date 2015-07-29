@@ -45,11 +45,12 @@ Fedora直接使用`dnf`{:.language-bash}安装相关组件。
 
 {% codeblock lang:bash %}
 # 进入home路径
-$ cd \home
+# cd /home/
+
 
 # 进入默认postgres用户，需要输入root密码。
 # 之后系统命令提示符会变成类似“bash-4.3$”。
-$ su postgres
+# su postgres
 
 # 创建用户
 # -P：创建用户后立即创建密码
@@ -111,7 +112,7 @@ testdb=# \q
 
 
 
-### <a id="Ref">参考网址</a> ###
+### 参考资料 ###
 
 * [PostgreSQL 9.4 Manuals](http://www.postgresql.org/docs/9.4/interactive/index.html)
 
