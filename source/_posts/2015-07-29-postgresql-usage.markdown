@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "postgresql使用注释"
+title: "postgresql使用指南"
 date: 2015-07-29 18:24:10 +0800
 comments: true
 categories: Linux
@@ -68,6 +68,51 @@ ORDER BY 2, column5;
 
 
 ## 3. 筛选 ##
+
+{% codeblock lang:psql Filter %}
+-- ORDER BY语句需要在WHERE之后
+-- AND表示“且”， OR表示“或”，第一个条件满足即终止
+-- AND和OR可有任意多个
+SELECT column1, column2
+FROM dataset 
+WHERE (column3 = a OR column3 = b) AND column1 = c
+ORDER BY column3;
+
+-- 多个OR语句使用IN代替，比如上述例子为：
+SELECT column1, column2
+FROM dataset 
+WHERE column3 IN (a, b) AND column1 = c
+ORDER BY column3;
+
+-- NOT与IN连用
+SELECT column1, column2
+FROM dataset 
+WHERE column3 NOT IN (a, b);
+
+-- BETWEEN a AND b语句，a必须小于等于b;
+-- 如a等于b，则相当于筛选与a（或者b）相等数值
+SELECT column1, column2
+FROM dataset
+WHERE column1 BETWEEN a AND b;
+
+--筛选NULL值使用IS NULL
+--筛选非NULL值使用IS NOT NULL
+SELECT column1, column2
+FROM dataset
+WHERE column1 IS NULL;
+
+
+{% endcodeblock %}
+
+* [Postgresql支持](http://www.postgresql.org/docs/9.4/static/functions-comparison.html#FUNCTIONS-COMPARISON-TABLE)的比较符：`<`{:.language-psql}、`<=`{:.language-psql}、`>`{:.language-psql}、`>=`{:.language-psql}、`=`{:.language-psql}和`!=`{:.language-psql}（“不等于”也可以表示为`<>`{:.language-psql}）。
+
+* 筛选字符串条件，需要对筛选串加引号，比如例子中`a`{:.language-psql}为`"testStr"`{:.language-psql}。
+
+* 合理使用括号，强制规定`AND`{:.language-psql}和`OR`{:.language-psql}先后顺序。
+
+* `IN`{:.language-psql}语句执行效率高，并且可以嵌套多层`SELECT`{:.language-psql}语句（每个`SELECT`{:.language-psql}只返回一列数据）。
+
+* 尽量在数据库查询过程，而非自己后续手写，完成数据筛选，因为：1. SQL数据库操作通常比自己手写效率高；2. 便于后续扩展。
 
 
 
