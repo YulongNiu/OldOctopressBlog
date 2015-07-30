@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Postgresql使用注释 - 牛牛龙</title>
+  <title>Postgresql使用指南 - 牛牛龙</title>
   <meta name="author" content="Yulong Niu">
 
   
@@ -22,7 +22,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:type" content="website">
   <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2015/07/29/postgresql-usage">
-  <meta property="og:title" content="Postgresql使用注释 - 牛牛龙">
+  <meta property="og:title" content="Postgresql使用指南 - 牛牛龙">
   
 
   <!-- mathjax config similar to math.stackexchange -->
@@ -189,7 +189,7 @@
     
     
     <h1 class="entry-title" itemprop="name headline">
-        Postgresql使用注释
+        Postgresql使用指南
         
     </h1>
     
@@ -304,6 +304,87 @@
 
 <h2 id="section-2">3. 筛选</h2>
 
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Filter </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+</pre></td><td class="code"><pre><code class="psql"><span class="line"><span class="c1">-- ORDER BY语句需要在WHERE之后</span>
+</span><span class="line"><span class="c1">-- AND表示“且”， OR表示“或”，第一个条件满足即终止</span>
+</span><span class="line"><span class="c1">-- AND和OR可有任意多个</span>
+</span><span class="line"><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
+</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
+</span><span class="line"><span class="k">WHERE</span> <span class="p">(</span><span class="n">column3</span> <span class="o">=</span> <span class="n">a</span> <span class="k">OR</span> <span class="n">column3</span> <span class="o">=</span> <span class="n">b</span><span class="p">)</span> <span class="k">AND</span> <span class="n">column1</span> <span class="o">=</span> <span class="n">c</span>
+</span><span class="line"><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column3</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="go">-- 多个OR语句使用IN代替，比如上述例子为：</span>
+</span><span class="line"><span class="go">SELECT column1, column2</span>
+</span><span class="line"><span class="go">FROM dataset </span>
+</span><span class="line"><span class="go">WHERE column3 IN (a, b) AND column1 = c</span>
+</span><span class="line"><span class="go">ORDER BY column3;</span>
+</span><span class="line">
+</span><span class="line"><span class="go">-- NOT与IN连用</span>
+</span><span class="line"><span class="go">SELECT column1, column2</span>
+</span><span class="line"><span class="go">FROM dataset </span>
+</span><span class="line"><span class="go">WHERE column3 NOT IN (a, b);</span>
+</span><span class="line">
+</span><span class="line"><span class="go">-- BETWEEN a AND b语句，a必须小于等于b;</span>
+</span><span class="line"><span class="go">-- 如a等于b，则相当于筛选与a（或者b）相等数值</span>
+</span><span class="line"><span class="go">SELECT column1, column2</span>
+</span><span class="line"><span class="go">FROM dataset</span>
+</span><span class="line"><span class="go">WHERE column1 BETWEEN a AND b;</span>
+</span><span class="line">
+</span><span class="line"><span class="go">--筛选NULL值使用IS NULL</span>
+</span><span class="line"><span class="go">--筛选非NULL值使用IS NOT NULL</span>
+</span><span class="line"><span class="go">SELECT column1, column2</span>
+</span><span class="line"><span class="go">FROM dataset</span>
+</span><span class="line"><span class="go">WHERE column1 IS NULL;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>
+    <p><a href="http://www.postgresql.org/docs/9.4/static/functions-comparison.html#FUNCTIONS-COMPARISON-TABLE">Postgresql支持</a>的比较符：<code class="language-psql">&lt;</code>、<code class="language-psql">&lt;=</code>、<code class="language-psql">&gt;</code>、<code class="language-psql">&gt;=</code>、<code class="language-psql">=</code>和<code class="language-psql">!=</code>（“不等于”也可以表示为<code class="language-psql">&lt;&gt;</code>）。</p>
+  </li>
+  <li>
+    <p>筛选字符串条件，需要对筛选串加引号，比如例子中<code class="language-psql">a</code>为<code class="language-psql">"testStr"</code>。</p>
+  </li>
+  <li>
+    <p>合理使用括号，强制规定<code class="language-psql">AND</code>和<code class="language-psql">OR</code>先后顺序。</p>
+  </li>
+  <li>
+    <p><code class="language-psql">IN</code>语句执行效率高，并且可以嵌套多层<code class="language-psql">SELECT</code>语句（每个<code class="language-psql">SELECT</code>只返回一列数据）。</p>
+  </li>
+  <li>
+    <p>尽量在数据库查询过程，而非自己后续手写，完成数据筛选，因为：1. SQL数据库操作通常比自己手写效率高；2. 便于后续扩展。</p>
+  </li>
+</ul>
+
 <h3 id="section-3">参考资料</h3>
 
 <ul>
@@ -392,7 +473,7 @@
   
   <div id="recent_posts" class="list-group">
     
-    <a class="list-group-item active" href="/blog/2015/07/29/postgresql-usage/">Postgresql使用注释</a>
+    <a class="list-group-item active" href="/blog/2015/07/29/postgresql-usage/">Postgresql使用指南</a>
     
     <a class="list-group-item " href="/blog/2015/07/28/python-tips/">Python使用小技巧</a>
     
