@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-07-30T17:27:26+08:00</updated>
+  <updated>2015-07-31T17:36:26+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -41,29 +41,29 @@
 <span class='line-number'>18</span>
 </pre></td><td class='code'><pre><code class='psql'><span class='line'><span class="err">–</span> <span class="err">选取特定的一列或者多列</span>
 </span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
-</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">选取全部列</span>
 </span><span class='line'><span class="k">SELECT</span> <span class="o">*</span>
-</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">去除重复，选取一列或多列中唯一元素</span>
-</span><span class='line'><span class="err">–</span> <span class="err">如输入多咧，则去除多列组合后的重复</span>
+</span><span class='line'><span class="err">–</span> <span class="err">如输入多列，则去除多列组合后的重复</span>
 </span><span class='line'><span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
-</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">制定输入列数</span>
-</span><span class='line'><span class="err">–</span> <span class="n">a</span><span class="err">是输出行数，</span><span class="n">b</span><span class="err">是</span><span class="n">h</span><span class="err">输出起始行（第一行计为</span><span class="mf">0</span><span class="err">）</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">指定输出列数</span>
+</span><span class='line'><span class="err">–</span> <span class="n">a</span><span class="err">是输出行数，</span><span class="n">b</span><span class="err">是输出起始行（第一行计为</span><span class="mf">0</span><span class="err">）</span>
 </span><span class='line'><span class="k">SELECT</span> <span class="k">column</span>
 </span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class='line'><span class="k">LIMIT</span> <span class="n">a</span> <span class="k">OFFSET</span> <span class="n">b</span><span class="p">;</span>
+</span><span class='line'><span class="k">LIMIT</span> <span class="n">a</span> <span class="k">OFFSET</span> <span class="n">b</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
 <!--more-->
 
 <ul>
   <li>
-    <p>使用<code class="language-bash">;</code>结束一条SQL语句；</p>
+    <p>使用<code class="language-bash">;</code>结束一条SQL语句，本文中省略；</p>
   </li>
   <li>
     <p>返回未排序数据；</p>
@@ -90,27 +90,23 @@
 <span class='line-number'>15</span>
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
 </pre></td><td class='code'><pre><code class='psql'><span class='line'><span class="err">–</span> <span class="err">按照一列或者多列升序排序</span>
 </span><span class='line'><span class="err">–</span> <span class="err">可以按照“不查询”的列排序</span>
 </span><span class='line'><span class="err">–</span> <span class="err">先按照</span><span class="n">column2</span><span class="err">排，再按照</span><span class="n">column5</span><span class="err">排</span>
 </span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span><span class="p">,</span> <span class="n">column3</span>
 </span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column2</span><span class="p">,</span> <span class="n">column5</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column2</span><span class="p">,</span> <span class="n">column5</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">降序</span>
 </span><span class='line'><span class="err">–</span> <span class="k">DESC</span><span class="err">只作用于最靠近的唯一一列，即</span><span class="n">column2</span><span class="err">，不作用于</span><span class="n">column5</span>
 </span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span><span class="p">,</span> <span class="n">column3</span>
 </span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column2</span> <span class="k">DESC</span><span class="p">,</span> <span class="n">column5</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column2</span> <span class="k">DESC</span><span class="p">,</span> <span class="n">column5</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–使用查询列相对编号</span>
 </span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span><span class="p">,</span> <span class="n">column3</span>
 </span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="mf">2</span><span class="p">,</span> <span class="n">column5</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="mf">2</span><span class="p">,</span> <span class="n">column5</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
@@ -161,45 +157,41 @@
 <span class='line-number'>28</span>
 <span class='line-number'>29</span>
 <span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
 </pre></td><td class='code'><pre><code class='psql'><span class='line'><span class="err">–</span> <span class="k">ORDER</span> <span class="k">BY</span><span class="err">语句需要在</span><span class="k">WHERE</span><span class="err">之后</span>
 </span><span class='line'><span class="err">–</span> <span class="k">AND</span><span class="err">表示“且”，</span> <span class="k">OR</span><span class="err">表示“或”，第一个条件满足即终止</span>
 </span><span class='line'><span class="err">–</span> <span class="k">AND</span><span class="err">和</span><span class="k">OR</span><span class="err">可有任意多个</span>
 </span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
 </span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
 </span><span class='line'><span class="k">WHERE</span> <span class="p">(</span><span class="n">column3</span> <span class="o">=</span> <span class="n">a</span> <span class="k">OR</span> <span class="n">column3</span> <span class="o">=</span> <span class="n">b</span><span class="p">)</span> <span class="k">AND</span> <span class="n">column1</span> <span class="o">=</span> <span class="n">c</span>
-</span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column3</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column3</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">多个</span><span class="k">OR</span><span class="err">语句使用</span><span class="k">IN</span><span class="err">代替，比如上述例子为：</span>
 </span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
 </span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
 </span><span class='line'><span class="k">WHERE</span> <span class="n">column3</span> <span class="k">IN</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">AND</span> <span class="n">column1</span> <span class="o">=</span> <span class="n">c</span>
-</span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column3</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column3</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="k">NOT</span><span class="err">与</span><span class="k">IN</span><span class="err">连用</span>
 </span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
 </span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class='line'><span class="k">WHERE</span> <span class="n">column3</span> <span class="k">NOT</span> <span class="k">IN</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="n">column3</span> <span class="k">NOT</span> <span class="k">IN</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="k">BETWEEN</span> <span class="n">a</span> <span class="k">AND</span> <span class="n">b</span><span class="err">语句，</span><span class="n">a</span><span class="err">必须小于等于</span><span class="n">b</span><span class="p">;</span>
-</span><span class='line'><span class="go">– 如a等于b，则相当于筛选与a（或者b）相等数值</span>
-</span><span class='line'><span class="go">SELECT column1, column2</span>
-</span><span class='line'><span class="go">FROM dataset</span>
-</span><span class='line'><span class="go">WHERE column1 BETWEEN a AND b;&lt;/p&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="k">BETWEEN</span> <span class="n">a</span> <span class="k">AND</span> <span class="n">b</span><span class="err">语句，</span><span class="n">a</span><span class="err">必须小于等于</span><span class="n">b</span>
+</span><span class='line'><span class="err">–</span> <span class="err">如</span><span class="n">a</span><span class="err">等于</span><span class="n">b</span><span class="err">，则相当于筛选与</span><span class="n">a</span><span class="err">（或者</span><span class="n">b</span><span class="err">）相等数值</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="n">column1</span> <span class="k">BETWEEN</span> <span class="n">a</span> <span class="k">AND</span> <span class="n">b</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="go">&lt;p&gt;–筛选NULL值使用IS NULL</span>
-</span><span class='line'><span class="go">–筛选非NULL值使用IS NOT NULL</span>
-</span><span class='line'><span class="go">SELECT column1, column2</span>
-</span><span class='line'><span class="go">FROM dataset</span>
-</span><span class='line'><span class="go">WHERE column1 IS NULL;&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="go">&lt;p&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–筛选</span><span class="k">NULL</span><span class="err">值使用</span><span class="k">IS</span> <span class="k">NULL</span>
+</span><span class='line'><span class="err">–筛选非</span><span class="k">NULL</span><span class="err">值使用</span><span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="n">column1</span> <span class="k">IS</span> <span class="k">NULL</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
   <li>
-    <p><a href="http://www.postgresql.org/docs/9.4/static/functions-comparison.html#FUNCTIONS-COMPARISON-TABLE">Postgresql支持</a>的比较符：<code class="language-psql">&lt;</code>、<code class="language-psql">&lt;=</code>、<code class="language-psql">&gt;</code>、<code class="language-psql">&gt;=</code>、<code class="language-psql">=</code>和<code class="language-psql">!=</code>（“不等于”也可以表示为<code class="language-psql">&lt;&gt;</code>）。</p>
+    <p><a href="http://www.postgresql.org/docs/9.4/static/functions-comparison.html#FUNCTIONS-COMPARISON-TABLE">Postgresql支持的比较符</a>：<code class="language-psql">&lt;</code>、<code class="language-psql">&lt;=</code>、<code class="language-psql">&gt;</code>、<code class="language-psql">&gt;=</code>、<code class="language-psql">=</code>和<code class="language-psql">!=</code>（“不等于”也可以表示为<code class="language-psql">&lt;&gt;</code>）。</p>
   </li>
   <li>
     <p>筛选字符串条件，需要对筛选串加引号，比如例子中<code class="language-psql">a</code>为<code class="language-psql">"testStr"</code>。</p>
@@ -215,7 +207,109 @@
   </li>
 </ul>
 
-<h3 id="section-3">参考资料</h3>
+<h2 id="section-3">4. 模式匹配</h2>
+
+<p><figure class='code'><figcaption><span>Pattern Matching </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class="err">–</span> <span class="k">LIKE</span><span class="err">和</span><span class="k">NOT</span> <span class="k">LIKE</span><span class="err">支持对字符串的模式匹配</span>
+</span><span class='line'><span class="err">–</span> <span class="err">“</span><span class="n">_</span><span class="err">”匹配单一一个字符</span>
+</span><span class='line'><span class="err">–</span> <span class="err">“</span><span class="o">%</span><span class="err">”匹配</span><span class="mf">0</span><span class="err">个或多个字符</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="n">column1</span> <span class="k">LIKE</span> <span class="err">‘</span><span class="n">F_y</span><span class="o">%</span><span class="err">’</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="k">SIMILAR</span> <span class="k">TO</span><span class="err">和</span><span class="k">NOT</span> <span class="k">SIMILAR</span> <span class="k">TO</span><span class="err">支持正则匹配</span>
+</span><span class='line'><span class="err">–</span> <span class="err">正则匹配中，仍然使用“</span><span class="n">_</span><span class="err">”和“</span><span class="o">%</span><span class="err">”</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="n">column1</span> <span class="k">SIMILAR</span> <span class="k">TO</span> <span class="err">‘</span><span class="p">[</span><span class="o">^</span><span class="n">JM</span><span class="p">]</span><span class="o">%</span><span class="err">’</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+  <li>
+    <p>Postgresql支持<code class="language-psql">ILIKE</code>和<code class="language-psql">NOT ILIKE</code>忽略大小写敏感搜索，这不是标准SQL语法。</p>
+  </li>
+  <li>
+    <p>注意数据库自动补充的空格，比如 <code class="language-psql">'F_y'</code>只能匹配“F开头-间隔一个字符-y结尾”的字符串，如果字符串后跟有空格，则不能匹配。</p>
+  </li>
+  <li>
+    <p><a href="http://www.postgresql.org/docs/9.4/static/functions-matching.html">Postgresql支持的通配符</a></p>
+  </li>
+  <li>
+    <p>模式匹配效率不高，尽量后置，不要过度使用。</p>
+  </li>
+</ul>
+
+<h2 id="section-4">5. 函数</h2>
+
+<p><figure class='code'><figcaption><span>Function </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class="err">–</span> <span class="err">字符串连接</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">RTRIM</span><span class="p">(</span><span class="n">column1</span><span class="p">)</span> <span class="o">||</span> <span class="err">‘</span> <span class="p">(</span><span class="err">‘</span> <span class="o">||</span> <span class="n">RTRIM</span><span class="p">(</span><span class="n">column1</span><span class="p">)</span> <span class="o">||</span> <span class="err">‘</span><span class="p">)</span><span class="err">’</span> <span class="k">AS</span> <span class="n">newName</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
+</span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column1</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–数学计算</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span> <span class="o">*</span> <span class="n">column3</span> <span class="k">AS</span> <span class="n">newName</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+  <li>Postgresql支持的函数：</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数名</th>
+      <th>意义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-bash">RTRIM()</code></td>
+      <td>删除字符串左侧空格</td>
+    </tr>
+    <tr>
+      <td><code class="language-bash">LTRIM()</code></td>
+      <td>删除字符串右侧空格</td>
+    </tr>
+    <tr>
+      <td><code class="language-bash">TRIM()</code></td>
+      <td>删除双侧空格</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>使用<code class="language-psql">AS</code>即使命名新列。</li>
+</ul>
+
+<h2 id="section-5">使用建议</h2>
+
+<ol>
+  <li>数据集的名字为一个单词，比如<code class="language-psql">priceCustom</code>而不是一个字符串 <code class="language-psql">'price custom'</code>。同样，命名别名（使用<code class="language-psql">AS</code>）也如此。</li>
+</ol>
+
+<h3 id="section-6">参考资料</h3>
 
 <ul>
   <li>
@@ -226,7 +320,7 @@
   </li>
 </ul>
 
-<h3 id="section-4">更新记录</h3>
+<h3 id="section-7">更新记录</h3>
 
 <p>2015年7月29日</p>
 ]]></content>
