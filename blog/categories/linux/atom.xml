@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-07-31T17:36:26+08:00</updated>
+  <updated>2015-08-01T16:51:11+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Postgresql使用指南]]></title>
+    <title type="html"><![CDATA[PostgreSQL使用指南]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2015/07/29/postgresql-usage/"/>
     <updated>2015-07-29T18:24:10+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2015/07/29/postgresql-usage</id>
@@ -191,7 +191,7 @@
 
 <ul>
   <li>
-    <p><a href="http://www.postgresql.org/docs/9.4/static/functions-comparison.html#FUNCTIONS-COMPARISON-TABLE">Postgresql支持的比较符</a>：<code class="language-psql">&lt;</code>、<code class="language-psql">&lt;=</code>、<code class="language-psql">&gt;</code>、<code class="language-psql">&gt;=</code>、<code class="language-psql">=</code>和<code class="language-psql">!=</code>（“不等于”也可以表示为<code class="language-psql">&lt;&gt;</code>）。</p>
+    <p><a href="http://www.postgresql.org/docs/9.4/static/functions-comparison.html#FUNCTIONS-COMPARISON-TABLE">PostgreSQL支持的比较符</a>：<code class="language-psql">&lt;</code>、<code class="language-psql">&lt;=</code>、<code class="language-psql">&gt;</code>、<code class="language-psql">&gt;=</code>、<code class="language-psql">=</code>和<code class="language-psql">!=</code>（“不等于”也可以表示为<code class="language-psql">&lt;&gt;</code>）。</p>
   </li>
   <li>
     <p>筛选字符串条件，需要对筛选串加引号，比如例子中<code class="language-psql">a</code>为<code class="language-psql">"testStr"</code>。</p>
@@ -238,13 +238,13 @@
 
 <ul>
   <li>
-    <p>Postgresql支持<code class="language-psql">ILIKE</code>和<code class="language-psql">NOT ILIKE</code>忽略大小写敏感搜索，这不是标准SQL语法。</p>
+    <p>PostgreSQL支持<code class="language-psql">ILIKE</code>和<code class="language-psql">NOT ILIKE</code>忽略大小写敏感搜索，这不是标准SQL语法。</p>
   </li>
   <li>
     <p>注意数据库自动补充的空格，比如 <code class="language-psql">'F_y'</code>只能匹配“F开头-间隔一个字符-y结尾”的字符串，如果字符串后跟有空格，则不能匹配。</p>
   </li>
   <li>
-    <p><a href="http://www.postgresql.org/docs/9.4/static/functions-matching.html">Postgresql支持的通配符</a></p>
+    <p><a href="http://www.postgresql.org/docs/9.4/static/functions-matching.html">PostgreSQL支持的通配符</a></p>
   </li>
   <li>
     <p>模式匹配效率不高，尽量后置，不要过度使用。</p>
@@ -262,19 +262,65 @@
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class="err">–</span> <span class="err">字符串连接</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class="err">–数学计算</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span> <span class="o">*</span> <span class="n">column3</span> <span class="k">AS</span> <span class="n">newName</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">字符串连接</span>
 </span><span class='line'><span class="k">SELECT</span> <span class="n">RTRIM</span><span class="p">(</span><span class="n">column1</span><span class="p">)</span> <span class="o">||</span> <span class="err">‘</span> <span class="p">(</span><span class="err">‘</span> <span class="o">||</span> <span class="n">RTRIM</span><span class="p">(</span><span class="n">column1</span><span class="p">)</span> <span class="o">||</span> <span class="err">‘</span><span class="p">)</span><span class="err">’</span> <span class="k">AS</span> <span class="n">newName</span>
 </span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
 </span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column1</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–数学计算</span>
-</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span> <span class="o">*</span> <span class="n">column3</span> <span class="k">AS</span> <span class="n">newName</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">使用函数</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">UPPER</span><span class="p">(</span><span class="n">column2</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">筛选日期</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">columnDate</span>
 </span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="n">DATE_PART</span><span class="p">(</span><span class="err">‘</span><span class="k">year</span><span class="err">’</span><span class="p">,</span> <span class="n">columnDate</span><span class="p">)</span> <span class="o">=</span> <span class="mf">2015</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">汇总数据</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">AVG</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="n">column1</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName1</span><span class="p">,</span>
+</span><span class='line'>       <span class="n">SUM</span><span class="p">(</span><span class="n">column2</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName2</span><span class="p">,</span>
+</span><span class='line'>       <span class="n">MAX</span><span class="p">(</span><span class="n">column3</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName3</span><span class="p">,</span>
+</span><span class='line'>       <span class="n">MIN</span><span class="p">(</span><span class="n">column4</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName4</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">Products</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="n">vend_id</span> <span class="o">=</span> <span class="err">‘</span><span class="n">DLL01</span><span class="err">’</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
-  <li>Postgresql支持的函数：</li>
+  <li>
+    <p>使用<code class="language-psql">AS</code>及时命名新列。</p>
+  </li>
+  <li>
+    <p>支持数字列的运算有<code class="language-psql">+</code>、<code class="language-psql">-</code>、<code class="language-psql">*</code>和<code class="language-psql">/</code>，更多操作参考<a href="http://www.postgresql.org/docs/9.4/static/functions-math.html">PostgreSQL支持的数值操作</a>。</p>
+  </li>
+  <li>
+    <p>为了移植性考虑，如果使用数据库内置函数，需要对代码相应部分添加详细注释。</p>
+  </li>
 </ul>
+
+<h2 id="postgresql">8. PostgreSQL支持的函数</h2>
+
+<h3 id="section-5">8.1 数值</h3>
 
 <table>
   <thead>
@@ -285,42 +331,138 @@
   </thead>
   <tbody>
     <tr>
-      <td><code class="language-bash">RTRIM()</code></td>
-      <td>删除字符串左侧空格</td>
+      <td><code class="language-psql">ABS()</code></td>
+      <td>绝对值</td>
     </tr>
     <tr>
-      <td><code class="language-bash">LTRIM()</code></td>
-      <td>删除字符串右侧空格</td>
+      <td><code class="language-psql">SQRT()</code></td>
+      <td>平方根</td>
     </tr>
     <tr>
-      <td><code class="language-bash">TRIM()</code></td>
-      <td>删除双侧空格</td>
+      <td><code class="language-psql">ROUND(v numeric, s int)</code></td>
+      <td>取特定小数位数</td>
+    </tr>
+    <tr>
+      <td><code class="language-psql">AVG()</code></td>
+      <td>平均值，忽略<code class="language-psql">NULL</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-psql">MAX()</code></td>
+      <td>最大值，忽略<code class="language-psql">NULL</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-psql">MIN()</code></td>
+      <td>最小指，忽略<code class="language-psql">NULL</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-psql">SUM()</code></td>
+      <td>求和，忽略<code class="language-psql">NULL</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-psql">COUNT(*)</code></td>
+      <td>所有行数，包括<code class="language-psql">NULL</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-psql">COUNT(column1)</code></td>
+      <td>行数，忽略<code class="language-psql">NULL</code></td>
     </tr>
   </tbody>
 </table>
 
-<ul>
-  <li>使用<code class="language-psql">AS</code>即使命名新列。</li>
-</ul>
+<p>详细参考：<a href="http://www.postgresql.org/docs/9.4/static/functions-math.html">PostgreSQL支持的数值操作</a></p>
 
-<h2 id="section-5">使用建议</h2>
+<h3 id="section-6">8.2 字符串</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数名</th>
+      <th>意义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-psql">RTRIM()</code></td>
+      <td>删除字符串左侧空格</td>
+    </tr>
+    <tr>
+      <td><code class="language-psql">LTRIM()</code></td>
+      <td>删除字符串右侧空格</td>
+    </tr>
+    <tr>
+      <td><code class="language-psql">TRIM()</code></td>
+      <td>删除双侧空格</td>
+    </tr>
+    <tr>
+      <td><code class="language-psql">SUBSTRING(string [from int] [for int])</code></td>
+      <td>按照索引取字符串（从1开始）</td>
+    </tr>
+    <tr>
+      <td><code class="language-psql">SUBSTRING(string [from int] [for int])</code></td>
+      <td>选取符合POSIX正则匹配字符串</td>
+    </tr>
+    <tr>
+      <td><code class="language-psql">CHAR_LENGTH()</code></td>
+      <td>计算字符串长度，等同于<code class="language-psql">LENGTH()</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-psql">UPPER()</code></td>
+      <td>大写</td>
+    </tr>
+    <tr>
+      <td><code class="language-psql">LOWER()</code></td>
+      <td>小写</td>
+    </tr>
+    <tr>
+      <td><code class="language-psql">LEFT(string, n int)</code></td>
+      <td>截取左侧n个字符串（从1开始）</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>详细参考：<a href="http://www.postgresql.org/docs/9.4/static/functions-string.html">PostgreSQL支持的字符串操作</a></p>
+
+<h3 id="section-7">8.3 日期</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数名</th>
+      <th>意义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-psql">CURRENT_DATE</code></td>
+      <td>当前日期</td>
+    </tr>
+    <tr>
+      <td><code class="language-psql">DATE_PART(text, timestamp)</code></td>
+      <td>选取日期中的年、月或日</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>详细参考：<a href="http://www.postgresql.org/docs/9.4/static/functions-datetime.html">PostgreSQL支持的日期操作</a></p>
+
+<h2 id="section-8">使用建议</h2>
 
 <ol>
   <li>数据集的名字为一个单词，比如<code class="language-psql">priceCustom</code>而不是一个字符串 <code class="language-psql">'price custom'</code>。同样，命名别名（使用<code class="language-psql">AS</code>）也如此。</li>
 </ol>
 
-<h3 id="section-6">参考资料</h3>
+<h3 id="section-9">参考资料</h3>
 
 <ul>
   <li>
     <p>《SQL必知必会（SQL in 10 Minutes, Sams Teach Yourself (4th Edition)）》<a href="https://book.douban.com/subject/24250054/">豆瓣链接</a></p>
   </li>
   <li>
-    <p><a href="https://wiki.postgresql.org/wiki/9.1%E7%AC%AC%E5%9B%9B%E7%AB%A0">Postgresql Wiki</a></p>
+    <p><a href="https://wiki.postgresql.org/wiki/9.1%E7%AC%AC%E5%9B%9B%E7%AB%A0">PostgreSQL Wiki</a></p>
   </li>
 </ul>
 
-<h3 id="section-7">更新记录</h3>
+<h3 id="section-10">更新记录</h3>
 
 <p>2015年7月29日</p>
 ]]></content>
