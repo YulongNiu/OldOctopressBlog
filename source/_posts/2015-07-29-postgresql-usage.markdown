@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "postgresql使用指南"
+title: "PostgreSQL使用指南"
 date: 2015-07-29 18:24:10 +0800
 comments: true
 styles: [data-table]
@@ -102,7 +102,7 @@ FROM dataset
 WHERE column1 IS NULL
 {% endcodeblock %}
 
-* [Postgresql支持的比较符](http://www.postgresql.org/docs/9.4/static/functions-comparison.html#FUNCTIONS-COMPARISON-TABLE)：`<`{:.language-psql}、`<=`{:.language-psql}、`>`{:.language-psql}、`>=`{:.language-psql}、`=`{:.language-psql}和`!=`{:.language-psql}（“不等于”也可以表示为`<>`{:.language-psql}）。
+* [PostgreSQL支持的比较符](http://www.postgresql.org/docs/9.4/static/functions-comparison.html#FUNCTIONS-COMPARISON-TABLE)：`<`{:.language-psql}、`<=`{:.language-psql}、`>`{:.language-psql}、`>=`{:.language-psql}、`=`{:.language-psql}和`!=`{:.language-psql}（“不等于”也可以表示为`<>`{:.language-psql}）。
 
 * 筛选字符串条件，需要对筛选串加引号，比如例子中`a`{:.language-psql}为`"testStr"`{:.language-psql}。
 
@@ -130,11 +130,11 @@ FROM dataset
 WHERE column1 SIMILAR TO '[^JM]%'
 {% endcodeblock %}
 
-* Postgresql支持`ILIKE`{:.language-psql}和`NOT ILIKE`{:.language-psql}忽略大小写敏感搜索，这不是标准SQL语法。
+* PostgreSQL支持`ILIKE`{:.language-psql}和`NOT ILIKE`{:.language-psql}忽略大小写敏感搜索，这不是标准SQL语法。
 
 * 注意数据库自动补充的空格，比如 `'F_y'`{:.language-psql}只能匹配“F开头-间隔一个字符-y结尾”的字符串，如果字符串后跟有空格，则不能匹配。
 
-* [Postgresql支持的通配符](http://www.postgresql.org/docs/9.4/static/functions-matching.html)
+* [PostgreSQL支持的通配符](http://www.postgresql.org/docs/9.4/static/functions-matching.html)
 
 * 模式匹配效率不高，尽量后置，不要过度使用。
 
@@ -142,36 +142,82 @@ WHERE column1 SIMILAR TO '[^JM]%'
 ## 5. 函数 ##
 
 {% codeblock lang:psql Function %}
+--数学计算
+SELECT column1, column2 * column3 AS newName
+FROM dataset
+
 -- 字符串连接
 SELECT RTRIM(column1) || ' (' || RTRIM(column1) || ')' AS newName
 FROM dataset
 ORDER BY column1
 
---数学计算
-SELECT column1, column2 * column3 AS newName
+-- 使用函数
+SELECT column1, UPPER(column2) AS newName
 FROM dataset
+
+-- 筛选日期
+SELECT column1, columnDate 
+FROM dataset
+WHERE DATE_PART('year', columnDate) = 2015
+
+-- 汇总数据
+SELECT AVG(DISTINCT column1) AS newName1,
+       SUM(column2) AS newName2,
+       MAX(column3) AS newName3,
+       MIN(column4) AS newName4
+FROM Products 
+WHERE vend_id = 'DLL01'
 {% endcodeblock %}
 
+* 使用`AS`{:.language-psql}及时命名新列。
 
-* Postgresql支持的函数：
+* 支持数字列的运算有`+`{:.language-psql}、`-`{:.language-psql}、`*`{:.language-psql}和`/`{:.language-psql}，更多操作参考[PostgreSQL支持的数值操作](http://www.postgresql.org/docs/9.4/static/functions-math.html)。
 
-
-| 函数名                     | 意义               |
-|----------------------------+--------------------|
-| `RTRIM()`{:.language-bash} | 删除字符串左侧空格 |
-| `LTRIM()`{:.language-bash} | 删除字符串右侧空格 |
-| `TRIM()`{:.language-bash}  | 删除双侧空格       |
+* 为了移植性考虑，如果使用数据库内置函数，需要对代码相应部分添加详细注释。
 
 
-* 使用`AS`{:.language-psql}即使命名新列。
+## 8. PostgreSQL支持的函数 ##
 
+### 8.1 数值 ###
 
+| 函数名                                     | 意义                                  |
+|--------------------------------------------+---------------------------------------|
+| `ABS()`{:.language-psql}                   | 绝对值                                |
+| `SQRT()`{:.language-psql}                  | 平方根                                |
+| `ROUND(v numeric, s int)`{:.language-psql} | 取特定小数位数                        |
+| `AVG()`{:.language-psql}                   | 平均值，忽略`NULL`{:.language-psql}   |
+| `MAX()`{:.language-psql}                   | 最大值，忽略`NULL`{:.language-psql}   |
+| `MIN()`{:.language-psql}                   | 最小指，忽略`NULL`{:.language-psql}   |
+| `SUM()`{:.language-psql}                   | 求和，忽略`NULL`{:.language-psql}     |
+| `COUNT(*)`{:.language-psql}                | 所有行数，包括`NULL`{:.language-psql} |
+| `COUNT(column1)`{:.language-psql}          | 行数，忽略`NULL`{:.language-psql}     |
 
+详细参考：[PostgreSQL支持的数值操作](http://www.postgresql.org/docs/9.4/static/functions-math.html)
 
+### 8.2 字符串 ###
 
+| 函数名                                                    | 意义                                              |
+|-----------------------------------------------------------+---------------------------------------------------|
+| `RTRIM()`{:.language-psql}                                | 删除字符串左侧空格                                |
+| `LTRIM()`{:.language-psql}                                | 删除字符串右侧空格                                |
+| `TRIM()`{:.language-psql}                                 | 删除双侧空格                                      |
+| `SUBSTRING(string [from int] [for int])`{:.language-psql} | 按照索引取字符串（从1开始）                       |
+| `SUBSTRING(string [from int] [for int])`{:.language-psql} | 选取符合POSIX正则匹配字符串                       |
+| `CHAR_LENGTH()`{:.language-psql}                          | 计算字符串长度，等同于`LENGTH()`{:.language-psql} |
+| `UPPER()`{:.language-psql}                                | 大写                                              |
+| `LOWER()`{:.language-psql}                                | 小写                                              |
+| `LEFT(string, n int)`{:.language-psql}                    | 截取左侧n个字符串（从1开始）                      |
 
+详细参考：[PostgreSQL支持的字符串操作](http://www.postgresql.org/docs/9.4/static/functions-string.html)
 
+### 8.3 日期 ###
 
+| 函数名                                        | 意义                   |
+|-----------------------------------------------+------------------------|
+| `CURRENT_DATE`{:.language-psql}               | 当前日期               |
+| `DATE_PART(text, timestamp)`{:.language-psql} | 选取日期中的年、月或日 |
+
+详细参考：[PostgreSQL支持的日期操作](http://www.postgresql.org/docs/9.4/static/functions-datetime.html)
 
 ## 使用建议 ##
 
@@ -187,7 +233,7 @@ FROM dataset
 
 * 《SQL必知必会（SQL in 10 Minutes, Sams Teach Yourself (4th Edition)）》[豆瓣链接](https://book.douban.com/subject/24250054/)
 
-* [Postgresql Wiki](https://wiki.postgresql.org/wiki/9.1%E7%AC%AC%E5%9B%9B%E7%AB%A0) 
+* [PostgreSQL Wiki](https://wiki.postgresql.org/wiki/9.1%E7%AC%AC%E5%9B%9B%E7%AB%A0) 
 
 
 
