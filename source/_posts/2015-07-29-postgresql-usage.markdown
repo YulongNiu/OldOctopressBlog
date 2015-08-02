@@ -176,6 +176,31 @@ WHERE vend_id = 'DLL01'
 * 为了移植性考虑，如果使用数据库内置函数，需要对代码相应部分添加详细注释。
 
 
+## 6. 分组 ##
+
+{% codeblock lang:psql Group %}
+-- 分组的意思是对一列或者多列数据归总
+SELECT column1, column2, COUNT(*) AS newName 
+FROM dataset
+WHERE column4 > 3
+GROUP BY column1, column1
+HAVING COUNT(*) > 1
+ORDER BY newName
+{% endcodeblock %}
+
+* `GROUP BY`{:.language-psql}必须出现在`WHERE`{:.language-psql}后，`ORDER BY`{:.language-psql}前。
+
+* `GROUP BY`{:.language-psql}需要配合聚集函数，比如`AVE()`{:.language-psql}，一起使用。
+
+* `GROUP BY`{:.language-psql}不保证返回结果有特定顺序，如果需要特定顺序，需要指明`ORDER BY`{:.language-psql}。`ORDER BY`{:.language-psql}可以使用新列名。
+
+* `SELECT`{:.language-psql}语句中出现的列，必须在`GROUP BY`{:.language-psql}中出现。
+
+* `NULL`{:.language-psql}单独给出，多个`NULL`{:.language-psql}合并为一组。
+
+* `HAVING`{:.language-psql}对分组汇总后数据筛选，区别`WHERE`{:.language-psql}（汇总分组前筛选）。不能使用新列名，比如`HAVING newName > 1`{:.language-psql}非法。
+
+
 ## 8. PostgreSQL支持的函数 ##
 
 ### 8.1 数值 ###
