@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-08-01T16:51:11+08:00</updated>
+  <updated>2015-08-02T14:32:42+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -318,9 +318,49 @@
   </li>
 </ul>
 
+<h2 id="section-5">6. 分组</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Group </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="psql"><span class="line"><span class="c1">-- 分组的意思是对一列或者多列数据归总</span>
+</span><span class="line"><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span><span class="p">,</span> <span class="n">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName</span>
+</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
+</span><span class="line"><span class="k">WHERE</span> <span class="n">column4</span> <span class="o">&gt;</span> <span class="mf">3</span>
+</span><span class="line"><span class="k">GROUP</span> <span class="k">BY</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column1</span>
+</span><span class="line"><span class="k">HAVING</span> <span class="n">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1</span>
+</span><span class="line"><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">newName</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>
+    <p><code class="language-psql">GROUP BY</code>必须出现在<code class="language-psql">WHERE</code>后，<code class="language-psql">ORDER BY</code>前。</p>
+  </li>
+  <li>
+    <p><code class="language-psql">GROUP BY</code>需要配合聚集函数，比如<code class="language-psql">AVE()</code>，一起使用。</p>
+  </li>
+  <li>
+    <p><code class="language-psql">GROUP BY</code>不保证返回结果有特定顺序，如果需要特定顺序，需要指明<code class="language-psql">ORDER BY</code>。<code class="language-psql">ORDER BY</code>可以使用新列名。</p>
+  </li>
+  <li>
+    <p><code class="language-psql">SELECT</code>语句中出现的列，必须在<code class="language-psql">GROUP BY</code>中出现。</p>
+  </li>
+  <li>
+    <p><code class="language-psql">NULL</code>单独给出，多个<code class="language-psql">NULL</code>合并为一组。</p>
+  </li>
+  <li>
+    <p><code class="language-psql">HAVING</code>对分组汇总后数据筛选，区别<code class="language-psql">WHERE</code>（汇总分组前筛选）。不能使用新列名，比如<code class="language-psql">HAVING newName &gt; 1</code>非法。</p>
+  </li>
+</ul>
+
 <h2 id="postgresql">8. PostgreSQL支持的函数</h2>
 
-<h3 id="section-5">8.1 数值</h3>
+<h3 id="section-6">8.1 数值</h3>
 
 <table>
   <thead>
@@ -371,7 +411,7 @@
 
 <p>详细参考：<a href="http://www.postgresql.org/docs/9.4/static/functions-math.html">PostgreSQL支持的数值操作</a></p>
 
-<h3 id="section-6">8.2 字符串</h3>
+<h3 id="section-7">8.2 字符串</h3>
 
 <table>
   <thead>
@@ -422,7 +462,7 @@
 
 <p>详细参考：<a href="http://www.postgresql.org/docs/9.4/static/functions-string.html">PostgreSQL支持的字符串操作</a></p>
 
-<h3 id="section-7">8.3 日期</h3>
+<h3 id="section-8">8.3 日期</h3>
 
 <table>
   <thead>
@@ -445,13 +485,13 @@
 
 <p>详细参考：<a href="http://www.postgresql.org/docs/9.4/static/functions-datetime.html">PostgreSQL支持的日期操作</a></p>
 
-<h2 id="section-8">使用建议</h2>
+<h2 id="section-9">使用建议</h2>
 
 <ol>
   <li>数据集的名字为一个单词，比如<code class="language-psql">priceCustom</code>而不是一个字符串 <code class="language-psql">'price custom'</code>。同样，命名别名（使用<code class="language-psql">AS</code>）也如此。</li>
 </ol>
 
-<h3 id="section-9">参考资料</h3>
+<h3 id="section-10">参考资料</h3>
 
 <ul>
   <li>
@@ -462,7 +502,7 @@
   </li>
 </ul>
 
-<h3 id="section-10">更新记录</h3>
+<h3 id="section-11">更新记录</h3>
 
 <p>2015年7月29日</p>
 ]]></content>
