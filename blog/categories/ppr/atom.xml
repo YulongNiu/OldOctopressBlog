@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ppr | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/ppr/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-08-02T14:32:42+08:00</updated>
+  <updated>2015-08-04T16:49:54+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -1023,7 +1023,7 @@ code snippet
 
 <h3 id="r">2.2 创建R对象和提取对象的数值</h3>
 
-<p>创建向量，可以使用<code class="language-python">rpy2.robjects.vectors</code>中提供的一系列函数，将一个Python的元组、列表或者字符串转换为R的向量。其中包括 <code class="language-python">StrVector()</code>、<code class="language-python">IntVector()</code>、<code class="language-python">FloatVector()</code>、<code class="language-python">FactorVector()</code>和<code>BoolVector()</code>，分别提供了转换字符、整数、浮点、带名字列表、因子和布尔向量。</p>
+<p>创建向量，可以使用<code class="language-python">rpy2.robjects.vectors</code>中提供的一系列函数，将一个Python的元组、列表或者字符串转换为R的向量。其中包括 <code class="language-python">StrVector()</code>、<code class="language-python">IntVector()</code>、<code class="language-python">FloatVector()</code>、<code class="language-python">FactorVector()</code>和<code>BoolVector()</code>，分别提供了转换字符、整数、浮点、因子和布尔向量。</p>
 
 <p>创建列表，可以使用<code class="language-python">ListVector()</code>将Python的字典转换为R的列表。</p>
 
@@ -1230,6 +1230,7 @@ code snippet
 <span class='line-number'>73</span>
 <span class='line-number'>74</span>
 <span class='line-number'>75</span>
+<span class='line-number'>76</span>
 </pre></td><td class='code'><pre><code class='python'><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="kn">from</span> <span class="nn">rpy2.robjects</span> <span class="kn">import</span> <span class="n">r</span>
 </span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="kn">from</span> <span class="nn">rpy2.robjects.vectors</span> <span class="kn">import</span> <span class="n">StrVector</span><span class="p">,</span> <span class="n">IntVector</span><span class="p">,</span> <span class="n">BoolVector</span><span class="p">,</span> <span class="n">ListVector</span><span class="p">,</span> <span class="n">DataFrame</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
@@ -1284,6 +1285,7 @@ code snippet
 </span><span class='line'>  <span class="n">a</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="k">class</span> <span class="err">‘</span><span class="nc">rpy2</span><span class="o">.</span><span class="n">robjects</span><span class="o">.</span><span class="n">vectors</span><span class="o">.</span><span class="n">Matrix</span><span class="err">’</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
 </span><span class='line'>  <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">Matrix</span> <span class="o">-</span> <span class="n">Python</span><span class="p">:</span><span class="mh">0x8b013cc</span> <span class="o">/</span> <span class="n">R</span><span class="p">:</span><span class="mh">0x97de388</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
 </span><span class='line'><span class="p">[</span>       <span class="mi">1</span><span class="p">,</span>        <span class="mi">2</span><span class="p">,</span>        <span class="mi">3</span><span class="p">,</span> <span class="err">…</span><span class="p">,</span>        <span class="mi">8</span><span class="p">,</span>        <span class="mi">9</span><span class="p">,</span>       <span class="mi">10</span><span class="p">]</span>
+</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">tmp</span><span class="o">.</span><span class="n">rx2</span><span class="p">(</span><span class="err">‘</span><span class="n">a</span><span class="err">’</span><span class="p">)</span>
 </span><span class='line'><span class="c"># same as the former one</span>
 </span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">tmp</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">tmp</span><span class="o">.</span><span class="n">rx2</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
