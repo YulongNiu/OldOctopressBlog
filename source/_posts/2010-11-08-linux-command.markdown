@@ -583,6 +583,56 @@ $ wget -c -t 0 -w 30 httplink
 # cat /var/log/messages
 {% endcodeblock %}
 
+## 36. 获取系统时间 ##
+
+{% codeblock lang:bash Time %}
+# 获取文件时间
+$ stat filename | grep Modify | awk '{print $2, $3}
+
+# 获取当前时间
+$ date
+$ date -d '-1 day'
+$ date -d '+1 hour'
+$ date -d yesterday '+%F %T'
+$ date -d tomorrow +%s
+
+# 获取本月日历
+$ cal
+{% endcodeblock %}
+
+## 37. 定时执行程序 ##
+
+使用cron，首先开启：
+
+{% codeblock lang:bash Start Crond %}
+# 开启
+# service crond start
+# 重启
+# service crond restart
+{% endcodeblock %}
+
+建立描述文件，比如`testCron`{:.language-bash}
+
+{% codeblock lang:bash Description file %}
+# 每半个小时执行command
+0,30 * * * * commmand
+{% endcodeblock %}
+
+提交
+
+{% codeblock lang:bash Submit cron files %}
+# 提交
+$ crontab testCron
+# 查看
+$ crontab -l
+# 删除
+$ crontab -r
+# 编辑
+$ crontab -e
+{% endcodeblock %}
+
+
+
 
 
 
@@ -608,9 +658,17 @@ $ wget -c -t 0 -w 30 httplink
 
 * [用CentOS 7打造合适的科研环境](http://seisman.info/linux-environment-for-seismology-research.html) 
 
-* [解决SSH闲置时间过长中断命令执行](http://blog.sina.com.cn/s/blog_c078bab701015sih.html) 
+* [解决SSH闲置时间过长中断命令执行](http://blog.sina.com.cn/s/blog_c078bab701015sih.html)
+
+* [Linux时间](http://codingstandards.iteye.com/blog/1157513)
+
+* [http://www.linuxsong.org/2010/09/shell-date-compare/](http://www.linuxsong.org/2010/09/shell-date-compare/)
+
+* [crontab 定时任务](http://linuxtools-rst.readthedocs.org/zh_CN/latest/tool/crontab.html) 
+
+
 
 
 ### 更新记录 ###
 
-2015年6月5日
+2015年8月4日

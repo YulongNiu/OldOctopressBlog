@@ -83,7 +83,7 @@ from rpy2.robjects import r
 
 ### 2.2 创建R对象和提取对象的数值 ###
 
-创建向量，可以使用`rpy2.robjects.vectors`{:.language-python}中提供的一系列函数，将一个Python的元组、列表或者字符串转换为R的向量。其中包括 `StrVector()`{:.language-python}、`IntVector()`{:.language-python}、`FloatVector()`{:.language-python}、`FactorVector()`{:.language-python}和`BoolVector()`，分别提供了转换字符、整数、浮点、带名字列表、因子和布尔向量。
+创建向量，可以使用`rpy2.robjects.vectors`{:.language-python}中提供的一系列函数，将一个Python的元组、列表或者字符串转换为R的向量。其中包括 `StrVector()`{:.language-python}、`IntVector()`{:.language-python}、`FloatVector()`{:.language-python}、`FactorVector()`{:.language-python}和`BoolVector()`，分别提供了转换字符、整数、浮点、因子和布尔向量。
 
 创建列表，可以使用`ListVector()`{:.language-python}将Python的字典转换为R的列表。
 
@@ -183,6 +183,7 @@ $b
   a: <class 'rpy2.robjects.vectors.Matrix'>
   <Matrix - Python:0x8b013cc / R:0x97de388>
 [       1,        2,        3, ...,        8,        9,       10]
+>>> tmp.rx2('a')
 # same as the former one
 >>> tmp.rx(1)
 >>> tmp.rx2(1)

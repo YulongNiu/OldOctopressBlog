@@ -183,7 +183,7 @@ WHERE vend_id = 'DLL01'
 SELECT column1, column2, COUNT(*) AS newName 
 FROM dataset
 WHERE column4 > 3
-GROUP BY column1, column1
+GROUP BY column1, column2
 HAVING COUNT(*) > 1
 ORDER BY newName
 {% endcodeblock %}
