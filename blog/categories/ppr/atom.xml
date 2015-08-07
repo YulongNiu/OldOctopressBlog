@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ppr | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/ppr/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-08-04T16:49:54+08:00</updated>
+  <updated>2015-08-07T15:09:11+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -47,9 +47,28 @@
 </span><span class='line'>        <span class="k">break</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
+<h2 id="section">2. 链式比较操作</h2>
+
+<p>Python支持一个链式的比较操作。</p>
+
+<p><figure class='code'><figcaption><span>comparison chain </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">testNum</span> <span class="o">=</span> <span class="mi">10</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span> <span class="nb">id</span><span class="o">=</span><span class="s">&quot;section-1&quot;</span><span class="o">&gt;</span><span class="err">链式比较操作</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c"># 区别if not和if a is not None</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="mi">0</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">testNum</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="mi">5</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="err">‘</span><span class="n">It</span> <span class="n">passed</span><span class="err">!’</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
 <!--more-->
 
-<h3 id="section">参考网址</h3>
+<h3 id="section-2">参考网址</h3>
 
 <ul>
   <li>
@@ -58,9 +77,12 @@
   <li>
     <p><a href="http://blog.shenwei.me/python-note/#more-3951">Wei Shen’s Python note</a></p>
   </li>
+  <li>
+    <p><a href="http://www.codefrom.com/c/214">十个我希望早点知道的python方法</a></p>
+  </li>
 </ul>
 
-<h3 id="section-1">更新记录</h3>
+<h3 id="section-3">更新记录</h3>
 
 <p>2015年7月27日</p>
 
