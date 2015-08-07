@@ -25,6 +25,23 @@ while True:
         break
 {% endcodeblock %}
 
+
+## 2. 链式比较操作 ##
+
+Python支持一个链式的比较操作。
+
+{% codeblock lang:python comparison chain %}
+testNum = 10
+
+# 链式比较操作
+# 区别if not和if a is not None
+if (not 0 < testNum < 5):
+    print('It passed!')
+{% endcodeblock %}
+
+
+
+
 <!--more-->
 
 ### 参考网址 ###
@@ -32,6 +49,8 @@ while True:
 * [Python Wiki](https://wiki.python.org/moin/FrontPage)
 
 * [Wei Shen's Python note](http://blog.shenwei.me/python-note/#more-3951)
+
+* [十个我希望早点知道的python方法](http://www.codefrom.com/c/214)
 
 
 
