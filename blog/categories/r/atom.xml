@@ -4,7 +4,7 @@
   <title><![CDATA[Category: R | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/r/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-08-07T15:09:11+08:00</updated>
+  <updated>2015-08-27T21:35:55+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -873,7 +873,7 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
   </ul>
 </blockquote>
 
-<p>这些例子可以直接使用R代码编排、“#”注释、多行也问题。这些例子可以用函数<code class="language-r">example()</code>运行。如果不想运行某些例子（比如演示错误使用等），格式：<code class="language-html">\dontrun{Rcode}</code>。如果例子中依赖其他包，使用<code class="language-r">if(require(pkg)){ }</code>格式。</p>
+<p>这些例子可以直接使用R代码编排、“#”注释、多行也问题。这些例子可以用函数<code class="language-r">example()</code>运行。如果不想运行某些例子（比如演示错误使用等），格式：<code class="language-html">\dontrun{Rcode}</code>。如果例子中依赖其他包，使用<code class="language-r">if(require(pkg)){ }</code>格式。如果函数使用了多核运算技术，例子最多只能允许使用2个核，如果使用多个核，会报错。</p>
 
 <p>也可以在包的根目录下建立文件，通过<code class="language-r">@example path/relative/to/packge/root</code>引用。如果函数不需要输出，则不用添加<code>@example</code>，否则在R包检查中会报错。</p>
 
@@ -911,7 +911,68 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 
 <p>推荐使用<a href="https://github.com/yihui/knitr"><span style="color: blue">knitr</span>包</a>。</p>
 
-<h2 id="section-2">5. 检查和压缩包</h2>
+<h2 id="section-2">5. 其他辅助文件</h2>
+
+<h3 id="news">5.1 NEWS文件</h3>
+
+<p>在包根目录下，可以添加<code class="language-bash">NEWS</code>文件，简要说明版本更新特征。参考<a href="https://github.com/hadley/ggplot2/blob/master/NEWS">ggplot2</a>的格式：</p>
+
+<p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pkgName version
+</span><span class='line'>————————-
+</span><span class='line'>NEW FEATURES&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;ul&gt;
+</span><span class='line'>  &lt;li&gt;
+</span><span class='line'>    &lt;p&gt;1st feature&lt;/p&gt;
+</span><span class='line'>  &lt;/li&gt;
+</span><span class='line'>  &lt;li&gt;
+</span><span class='line'>    &lt;p&gt;2nd feature&lt;/p&gt;
+</span><span class='line'>  &lt;/li&gt;
+</span><span class='line'>  &lt;li&gt;
+</span><span class='line'>    &lt;p&gt;3rd feature&lt;/p&gt;
+</span><span class='line'>  &lt;/li&gt;
+</span><span class='line'>&lt;/ul&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;BUG FIXES&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;ul&gt;
+</span><span class='line'>  &lt;li&gt;
+</span><span class='line'>    &lt;p&gt;fixed bug1&lt;/p&gt;
+</span><span class='line'>  &lt;/li&gt;
+</span><span class='line'>  &lt;li&gt;
+</span><span class='line'>    &lt;p&gt;fixed bug2</span></code></pre></td></tr></table></div></figure>
+</p>
+  </li>
+</ul>
+
+<p>也可以在NEWS的最开头加入自己的TODO列表，提示将来需要作的更新。</p>
+
+<h2 id="section-3">6. 检查和压缩包</h2>
 
 <p>在提交代码之前，首先需要检查自己的代码，运行命名</p>
 
@@ -955,13 +1016,13 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
 
 <p>使用 ftp://CRAN.R-project.org/incoming/ （用户名： anonymous；密码：自己邮箱地址）上传自己的包，并向CRAN@R-project.org发邮件通知自己上传了包（名称、版本等）。</p>
 
-<h2 id="section-3">注意事项</h2>
+<h2 id="section-4">注意事项</h2>
 
-<h3 id="section-4">1. 命名</h3>
+<h3 id="section-5">1. 命名</h3>
 
 <p>给自己的包起一个漂亮的名字，注意大小写，因为一些操作系统可能对大小写不敏感。因此，为了平台兼容性，包的命名尽量不要用大小写区分；不仅如此，在包源代码文件夹下，文件命名也要注意这个问题。起了名字之后，最好到<a href="http://cran.r-project.org/web/packages/available_packages_by_name.html">R包列表</a>去看看，检查下自己包的名字是否与其他人的冲突。</p>
 
-<h3 id="section-5">2. 名称符号</h3>
+<h3 id="section-6">2. 名称符号</h3>
 
 <blockquote>
   <ul>
@@ -1008,7 +1069,7 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
   </ol>
 </blockquote>
 
-<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+<h3 id="section-7">参考网址资料</h3>
 
 <ul>
   <li>
@@ -1020,11 +1081,14 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
   <li>
     <p>其他帮助文档：<a href="http://cos.name/2011/05/write-r-packages-like-a-ninja/">1</a>、<a href="http://yihui.name/knitr/">2</a>、<a href="http://cran.r-project.org/doc/manuals/R-exts.html#Dynamic-pages">3</a>、<a href="http://sjp.co.nz/posts/emacs-ess-knitr/">4</a>、<a href="https://github.com/yihui/knitr/issues/252">5</a>、<a href="http://cos.name/cn/topic/106644">6</a></p>
   </li>
+  <li>
+    <p><a href="https://stackoverflow.com/questions/25605185/how-do-i-add-a-changelog-or-news-file-to-my-r-package">NEWS文件说明</a></p>
+  </li>
 </ul>
 
-<h3 id="section-6">更新记录</h3>
+<h3 id="section-8">更新记录</h3>
 
-<p>2014年9月5日</p>
+<p>2015年8月27日</p>
 ]]></content>
   </entry>
   
