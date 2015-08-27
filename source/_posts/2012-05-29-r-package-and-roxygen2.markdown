@@ -167,7 +167,7 @@ person("Yihui", "Xie", email = "xie@yihui.name", role = c("aut", "cre")))
 > 
 > * 来几张漂亮图。
 
-这些例子可以直接使用R代码编排、“#”注释、多行也问题。这些例子可以用函数`example()`{:.language-r}运行。如果不想运行某些例子（比如演示错误使用等），格式：`\dontrun{Rcode}`{:.language-html}。如果例子中依赖其他包，使用`if(require(pkg)){ }`{:.language-r}格式。
+这些例子可以直接使用R代码编排、“#”注释、多行也问题。这些例子可以用函数`example()`{:.language-r}运行。如果不想运行某些例子（比如演示错误使用等），格式：`\dontrun{Rcode}`{:.language-html}。如果例子中依赖其他包，使用`if(require(pkg)){ }`{:.language-r}格式。如果函数使用了多核运算技术，例子最多只能允许使用2个核，如果使用多个核，会报错。
 
 也可以在包的根目录下建立文件，通过`@example path/relative/to/packge/root`{:.language-r}引用。如果函数不需要输出，则不用添加`@example`，否则在R包检查中会报错。
 
@@ -190,11 +190,40 @@ person("Yihui", "Xie", email = "xie@yihui.name", role = c("aut", "cre")))
 * 对data文件夹下的R data file进行注释。R data file通常以.RData或者.rda作为文件名扩展。[参考数据注释](http://r-pkgs.had.co.nz/data.html#documenting-data)。
 
 
-## 4. 写vignittes文件##
+## 4. 写vignittes文件 ##
 
 推荐使用[<span style="color: blue">knitr</span>包](https://github.com/yihui/knitr)。
 
-## 5. 检查和压缩包 ##
+## 5. 其他辅助文件 ##
+
+### 5.1 NEWS文件 ###
+
+在包根目录下，可以添加`NEWS`{:.language-bash}文件，简要说明版本更新特征。参考[ggplot2](https://github.com/hadley/ggplot2/blob/master/NEWS)的格式：
+
+
+{% raw %}
+```
+pkgName version
+-------------------------
+NEW FEATURES
+
+* 1st feature
+
+* 2nd feature
+
+* 3rd feature
+
+BUG FIXES
+
+* fixed bug1
+
+* fixed bug2
+```
+{% endraw %}
+
+也可以在NEWS的最开头加入自己的TODO列表，提示将来需要作的更新。
+
+## 6. 检查和压缩包 ##
 
 在提交代码之前，首先需要检查自己的代码，运行命名
 
@@ -268,7 +297,7 @@ GNU版本命名规则：Major_Version_Number.Minor_Version_Number[.Revision_Numb
 > 2. 假定pkg1和pkg2两个包，都有命名空间，而且输出同名函数f。这是，R会怎么处理呢？同样是“就近”原则，哪个包后载入，先用哪个包的函数f。不过，如果函数命名有冲突，后载入的包会给出一个警告“marsked from package: ***”。
 
 
-### <a id="Ref">参考网址</a> ###
+### 参考网址资料 ###
 
 * [knitr包的DESCRIPTION文件](https://github.com/yihui/knitr/blob/master/DESCRIPTION)
 
@@ -277,6 +306,8 @@ GNU版本命名规则：Major_Version_Number.Minor_Version_Number[.Revision_Numb
 * 其他帮助文档：[1](http://cos.name/2011/05/write-r-packages-like-a-ninja/)、[2](http://yihui.name/knitr/)、[3](http://cran.r-project.org/doc/manuals/R-exts.html#Dynamic-pages)、[4](http://sjp.co.nz/posts/emacs-ess-knitr/
 )、[5](https://github.com/yihui/knitr/issues/252)、[6](http://cos.name/cn/topic/106644)
 
+* [NEWS文件说明](https://stackoverflow.com/questions/25605185/how-do-i-add-a-changelog-or-news-file-to-my-r-package)
+
 ### 更新记录 ###
 
-2014年9月5日
+2015年8月27日
