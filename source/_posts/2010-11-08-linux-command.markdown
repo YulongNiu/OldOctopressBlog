@@ -178,10 +178,14 @@ $ javaws filename.jnlp
 $ cat filename    
 {% endcodeblock %}
 
-## 9. 查看自己系统32位还是64位 ##
+## 9. 查看系统 ##
 
 {% codeblock lang:bash %}
+# 32位还是64位
 $ uname -a
+
+# 查询操作系统发行版本
+# lsb_release -a
 {% endcodeblock %}
 
 ## 10. 查看当前路径 ##
@@ -638,7 +642,7 @@ $ crontab -e
 
 
 
-### <a id="Ref">参考网址</a> ###
+### 参考资料 ###
 
 * [大量文件操作](http://blog.csdn.net/dqswuyundong/article/details/5970004)
 
@@ -671,4 +675,4 @@ $ crontab -e
 
 ### 更新记录 ###
 
-2015年8月4日
+2015年8月29日
