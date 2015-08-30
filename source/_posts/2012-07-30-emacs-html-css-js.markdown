@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "emacs配置HTML/JS/CSS编辑环境"
+title: "Emacs配置HTML/JS/CSS编辑环境"
 date: 2012-07-30 22:31:13 +0800
 comments: true
 categories: lisp
 ---
 
-以下所有Emacs mode都使用[Emacs包安装系统](http://yulongniu.bionutshell.org/blog/2012/06/25/emacs-extend-skills/)
+以下所有Emacs mode都使用[Emacs包安装系统](http://yulongniu.bionutshell.org/blog/2012/06/25/emacs-extend-skills/)。
 
 ## 1. web-mode ##
 
@@ -31,13 +31,13 @@ categories: lisp
 
 补全缩写规律：
 
-* a：a+href
+* `a`{:.language-emacs-lisp}：a+href
 
-* #q：div+id(q)
+* `#q`{:.language-emacs-lisp}：div+id(q)
 
-* .x：div+class(x)
+* `.x`{:.language-emacs-lisp}：div+class(x)
 
-* #q.x：div+id(q)+class(x)
+* `#q.x`{:.language-emacs-lisp}：div+id(q)+class(x)
 
 ## 附加内容 ##
 
