@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Lisp | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/lisp/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-08-29T21:37:55+08:00</updated>
+  <updated>2015-08-30T23:52:03+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -603,6 +603,133 @@
 <h3 id="section-8">更新记录</h3>
 
 <p>2014年12月7日</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[emacs配置HTML/JS/CSS编辑环境]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2012/07/30/emacs-html-css-js/"/>
+    <updated>2012-07-30T22:31:13+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2012/07/30/emacs-html-css-js</id>
+    <content type="html"><![CDATA[<p>以下所有Emacs mode都使用<a href="http://yulongniu.bionutshell.org/blog/2012/06/25/emacs-extend-skills/">Emacs包安装系统</a></p>
+
+<h2 id="web-mode">1. web-mode</h2>
+
+<p><a href="http://web-mode.org/">web-mode</a> 提供了很好的wen配件（HTML、JavaScript、CSS、PHP等）的代码缩进、折叠和高亮等出色的功能。</p>
+
+<p>有用技巧：</p>
+
+<ul>
+  <li>
+    <p><code class="language-emacs-lisp">C-c C-n</code>：放在HTML标签上，在标签间跳转。</p>
+  </li>
+  <li>
+    <p><code class="language-emacs-lisp">C-c C-f</code>：放在HTML标签上，在标签折叠。
+<!--more--></p>
+  </li>
+</ul>
+
+<h2 id="emmet-mode">2. emmet-mode</h2>
+
+<p><a href="https://github.com/smihica/emmet-mode">emmet-mode</a>是<a href="http://emmet.io/">emmet</a>的Emacs扩展，取代了陈旧的<a href="http://www.emacswiki.org/emacs/ZenCoding">ZenCoding</a>。只需要输入制定的缩写，这个工具可以自动补全HTML标签。非常方便。</p>
+
+<p>有用技巧：</p>
+
+<ul>
+  <li>
+    <p><code class="language-emacs-lisp">M-x emmet-mode</code>：打开emmet-mode。</p>
+  </li>
+  <li>
+    <p><code class="language-emacs-lisp">C-j</code>：自动补全。</p>
+  </li>
+</ul>
+
+<p>补全缩写规律：</p>
+
+<ul>
+  <li>
+    <p>a：a+href</p>
+  </li>
+  <li>
+    <h1 id="qdividq">q：div+id(q)</h1>
+  </li>
+  <li>
+    <p>.x：div+class(x)</p>
+  </li>
+  <li>
+    <h1 id="qxdividqclassx">q.x：div+id(q)+class(x)</h1>
+  </li>
+</ul>
+
+<h2 id="section">附加内容</h2>
+
+<p>Emacs编程环境设置</p>
+
+<p><figure class='code'><figcaption><span>Emacs web config </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='emacs-lisp'><span class='line'><span class="c1">;;;;;;;;;;;;;;</span>
+</span><span class='line'><span class="c1">;emmet-mode</span>
+</span><span class='line'><span class="c1">;;;;;;;;;;;;;</span>
+</span><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="err">‘</span><span class="nv">emmet-mode</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">sgml-mode-hook</span> <span class="err">‘</span><span class="nv">emmet-mode</span><span class="p">)</span> <span class="c1">;; Auto-start on any markup modes</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">html-mode-hook</span> <span class="err">‘</span><span class="nv">emmet-mode</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">web-mode-hook</span> <span class="err">‘</span><span class="nv">emmet-mode</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">css-mode-hook</span>  <span class="err">‘</span><span class="nv">emmet-mode</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">&lt;p&gt;</span><span class="c1">;;;;;;;;;;;;;;</span>
+</span><span class='line'><span class="c1">;web-mode</span>
+</span><span class='line'><span class="c1">;;;;;;;;;;;;;;;</span>
+</span><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="err">‘</span><span class="nv">web-mode</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-to-list</span> <span class="err">‘</span><span class="nv">auto-mode-alist</span> <span class="err">‘</span><span class="p">(</span><span class="err">“</span><span class="nv">\.phtml\’</span><span class="err">”</span> <span class="o">.</span> <span class="nv">web-mode</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-to-list</span> <span class="err">‘</span><span class="nv">auto-mode-alist</span> <span class="err">‘</span><span class="p">(</span><span class="err">“</span><span class="nv">\.tpl\.php\’</span><span class="err">”</span> <span class="o">.</span> <span class="nv">web-mode</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-to-list</span> <span class="err">‘</span><span class="nv">auto-mode-alist</span> <span class="err">‘</span><span class="p">(</span><span class="err">“</span><span class="nv">\.[agj]sp\’</span><span class="err">”</span> <span class="o">.</span> <span class="nv">web-mode</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-to-list</span> <span class="err">‘</span><span class="nv">auto-mode-alist</span> <span class="err">‘</span><span class="p">(</span><span class="err">“</span><span class="nv">\.as[cp]x\’</span><span class="err">”</span> <span class="o">.</span> <span class="nv">web-mode</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-to-list</span> <span class="err">‘</span><span class="nv">auto-mode-alist</span> <span class="err">‘</span><span class="p">(</span><span class="err">“</span><span class="nv">\.erb\’</span><span class="err">”</span> <span class="o">.</span> <span class="nv">web-mode</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-to-list</span> <span class="err">‘</span><span class="nv">auto-mode-alist</span> <span class="err">‘</span><span class="p">(</span><span class="err">“</span><span class="nv">\.mustache\’</span><span class="err">”</span> <span class="o">.</span> <span class="nv">web-mode</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-to-list</span> <span class="err">‘</span><span class="nv">auto-mode-alist</span> <span class="err">‘</span><span class="p">(</span><span class="err">“</span><span class="nv">\.djhtml\’</span><span class="err">”</span> <span class="o">.</span> <span class="nv">web-mode</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-to-list</span> <span class="err">‘</span><span class="nv">auto-mode-alist</span> <span class="err">‘</span><span class="p">(</span><span class="err">“</span><span class="nv">\.html?\’</span><span class="err">”</span> <span class="o">.</span> <span class="nv">web-mode</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-web-mode-hook</span> <span class="p">()</span>
+</span><span class='line'>  <span class="err">“</span><span class="nv">Hooks</span> <span class="nv">for</span> <span class="nv">Web</span> <span class="nv">mode.</span><span class="err">”</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">setq</span> <span class="nv">web-mode-markup-indent-offset</span> <span class="mi">2</span><span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">web-mode-hook</span>  <span class="err">‘</span><span class="nv">my-web-mode-hook</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h3 id="section-1">参考资料</h3>
+
+<ul>
+  <li><a href="http://web-mode.org/">web-mode说明文档</a></li>
+</ul>
+
+<h3 id="section-2">更新记录</h3>
+
+<p>2015年8月30日</p>
 
 ]]></content>
   </entry>
