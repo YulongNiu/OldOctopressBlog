@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-08-30T23:55:45+08:00</updated>
+  <updated>2015-09-01T06:04:20+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -851,8 +851,8 @@
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># yum install zip</span>
-</span><span class='line'><span class="c"># yum install unzip</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># dnf install zip</span>
+</span><span class='line'><span class="c"># dnf install unzip</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -899,10 +899,10 @@
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 保留源文件压缩</span>
-</span><span class='line'><span class="nv">$ </span>gzip -c filename.gz <span class="p">&amp;</span>gt<span class="p">;</span> filename&lt;/p&gt;
+</span><span class='line'><span class="nv">$ </span>gzip -c filename <span class="p">&amp;</span>gt<span class="p">;</span> filename.gz&lt;/p&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-11&quot;</span>&gt;保留源文件解压&lt;/h1&gt;
-</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>gunzip -c filename <span class="p">&amp;</span>gt<span class="p">;</span> filename.gz
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>gunzip -c filename.gz <span class="p">&amp;</span>gt<span class="p">;</span> filename
 </span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="section-12">2. 文件夹操作</h2>
@@ -1725,7 +1725,7 @@
 
 <h3 id="section-76">更新记录</h3>
 
-<p>2015年8月29日</p>
+<p>2015年9月1日</p>
 ]]></content>
   </entry>
   
