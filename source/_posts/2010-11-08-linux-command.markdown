@@ -56,8 +56,8 @@ $ rar a -m5 /filePath/filename.rar /filePath/filename
 需要安装zip和unzip工具
 
 {% codeblock lang:bash %}
-# yum install zip
-# yum install unzip
+# dnf install zip
+# dnf install unzip
 {% endcodeblock %}
 
 {% codeblock lang:bash %}
@@ -84,10 +84,10 @@ $ zip -r filename *
 
 {% codeblock lang:bash %}
 # 保留源文件压缩
-$ gzip -c filename.gz > filename
+$ gzip -c filename > filename.gz
 
 # 保留源文件解压
-$ gunzip -c filename > filename.gz
+$ gunzip -c filename.gz > filename
 {% endcodeblock %}
 
 ## 2. 文件夹操作 ##
@@ -675,4 +675,4 @@ $ crontab -e
 
 ### 更新记录 ###
 
-2015年8月29日
+2015年9月1日
