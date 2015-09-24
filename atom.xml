@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-09-01T06:04:20+08:00</updated>
+  <updated>2015-09-24T17:03:20+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -1860,7 +1860,7 @@ MAPQ = -10 \times log_{10}(pvalue)
 </ul>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install global</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># dnf install global llvm llvm-devel clang* </span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <ul>
@@ -4709,10 +4709,18 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
     </ul>
   </li>
   <li>
-    <p>时间尺度进化树</p>
+    <p>已知进化树</p>
+
+    <ul>
+      <li><a href="http://opentreeoflife.org/">Open Tree of Life</a></li>
+    </ul>
   </li>
   <li>
-    <p><a href="http://www.timetree.org/about.php">TimeTree</a></p>
+    <p>时间尺度进化树</p>
+
+    <ul>
+      <li><a href="http://www.timetree.org/about.php">TimeTree</a></li>
+    </ul>
   </li>
   <li>
     <p>sRNA数据库</p>

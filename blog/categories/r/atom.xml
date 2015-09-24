@@ -4,7 +4,7 @@
   <title><![CDATA[Category: R | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/r/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-09-01T06:04:20+08:00</updated>
+  <updated>2015-09-24T17:03:20+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -734,7 +734,7 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
     <p>src文件夹：放置用其他语言写成的代码，比如C/C++/Fortran等。</p>
   </li>
   <li>
-    <p>data文件夹：放置一些data文件，比如R代码、表格（<code>*txt</code>/<code>*.tab</code>/<code>*.csv</code>）文件或者是用<code class="language-r">save()</code>函数保存的镜像（<code>*.RData</code>/<code>*.rda</code>）。这些文件必须是“自给自足”的，即不用调用包也能使用这些data。如果这些data比较大，可以将其压缩为<code>*.gzip</code>/<code>*.bzip2</code>/<code>*.xz</code>格式，或者在保存镜像时，使用<code class="language-r">save(, compress = TRUE)</code>。这些方法可以有效地减少包的体积和安装时间，以方便用户使用。</p>
+    <p>data文件夹：放置一些data文件，比如R代码、表格（<code>*txt</code>/<code>*.tab</code>/<code>*.csv</code>）文件或者是用<code class="language-r">save()</code>函数保存的镜像（<code>*.RData</code>/<code>*.rda</code>）。这些文件必须是“自给自足”的，即不用调用包也能使用这些data。如果这些data比较大，可以将其压缩为<code>*.gzip</code>/<code>*.bzip2</code>/<code>*.xz</code>格式，或者在保存镜像时，使用<code class="language-r">save(, compress = TRUE)</code>。这些方法可以有效地减少包的体积和安装时间，以方便用户使用。如果原始数据，比如<code>test.csv</code>{.language-bash}文件，可以放入<code>inst/extdata/</code>{.language-bash}文件夹。引用这类数据，使用<code>system.file("extdata", "test.csv", package = "myPkg")</code>{.language-bash}。</p>
   </li>
   <li>
     <p>demo文件夹：放置一些包的示例，通过<code>demo()</code>函数访问。（需要有一个00Index文件？不能自动生成？）</p>
@@ -903,7 +903,7 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
     <p><code>@aliases</code>：命名一个函数的别名，将指向同一个文档；<code>@family</code>：如果几个函数共用一个family name，它们将在seealso中交叉链接；<code>@seealso</code>：其他函数的超链接；<code>@rdname</code>：将多个函数合并在一个文档中。这些标记用于在HTML帮助文档中，可能出现这些超级链接或者文档合并。</p>
   </li>
   <li>
-    <p>对data文件夹下的R data file进行注释。R data file通常以.RData或者.rda作为文件名扩展。<a href="http://r-pkgs.had.co.nz/data.html#documenting-data">参考数据注释</a>。</p>
+    <p>对<code>data</code>{.language-bash}文件夹下的R data file进行注释。R data file通常以.RData或者.rda作为文件名扩展。<a href="http://r-pkgs.had.co.nz/data.html#documenting-data">参考数据注释</a>。</p>
   </li>
 </ul>
 

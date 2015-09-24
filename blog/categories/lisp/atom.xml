@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Lisp | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/lisp/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-09-01T06:04:20+08:00</updated>
+  <updated>2015-09-24T17:03:20+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -31,7 +31,7 @@
 </ul>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># yum install global</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># dnf install global llvm llvm-devel clang* </span>
 </span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
@@ -756,15 +756,11 @@
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
 </pre></td><td class='code'><pre><code class='emacs-lisp'><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="err">‘</span><span class="nc">package</span><span class="p">)</span>
 </span><span class='line'><span class="p">(</span><span class="nv">add-to-list</span> <span class="err">‘</span><span class="nv">package-archives</span>
-</span><span class='line'>	     <span class="err">‘</span><span class="p">(</span><span class="err">“</span><span class="nv">marmalade</span><span class="err">”</span> <span class="o">.</span> <span class="err">“</span><span class="nv">http://marmalade-repo.org/packages/</span><span class="err">”</span><span class="p">))</span>
+</span><span class='line'>	     <span class="err">‘</span><span class="p">(</span><span class="err">“</span><span class="nv">melpa</span><span class="err">”</span> <span class="o">.</span> <span class="err">“</span><span class="nv">http://melpa.milkbox.net/packages/</span><span class="err">”</span><span class="p">))</span>
 </span><span class='line'><span class="p">(</span><span class="nv">add-to-list</span> <span class="err">‘</span><span class="nv">package-archives</span>
-</span><span class='line'>	     <span class="err">‘</span><span class="p">(</span><span class="err">“</span><span class="nv">melpa</span><span class="err">”</span> <span class="o">.</span> <span class="err">“</span><span class="nv">http://melpa.milkbox.net/packages/</span><span class="err">”</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">add-to-list</span> <span class="err">‘</span><span class="nv">package-archives</span>
-</span><span class='line'>	     <span class="err">‘</span><span class="p">(</span><span class="err">“</span><span class="nv">gnu</span><span class="err">”</span> <span class="o">.</span> <span class="err">“</span><span class="nv">http://elpa.gnu.org/packages/</span><span class="err">”</span><span class="p">)))</span>
+</span><span class='line'>	     <span class="err">‘</span><span class="p">(</span><span class="err">“</span><span class="nv">gnu</span><span class="err">”</span> <span class="o">.</span> <span class="err">“</span><span class="nv">http://elpa.gnu.org/packages/</span><span class="err">”</span><span class="p">))</span>
 </span><span class='line'><span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
@@ -874,6 +870,9 @@
   </li>
   <li>
     <p><a href="https://github.com/mad4alcohol/mad4a-blog/blob/master/_posts/2012-08-02-emacs-summary-cont.md">YASnippet添加模板</a></p>
+  </li>
+  <li>
+    <p><a href="Copy/Paste in emacs ansi-term shell">Copy/Paste in emacs ansi-term shell</a></p>
   </li>
 </ul>
 
