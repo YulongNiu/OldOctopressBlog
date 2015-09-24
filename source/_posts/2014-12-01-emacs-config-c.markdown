@@ -18,7 +18,7 @@ categories: lisp
 * 安装[GNU Global](http://www.gnu.org/software/global/)
 
 {% codeblock lang:bash %}
-# yum install global
+# dnf install global llvm llvm-devel clang* 
 {% endcodeblock %}
 
 * 安装Emacs的`helm`、`helm-swoop`、`helm-gtags`、`sr-speedbar`、`smartparens`、`google-c-style`、`auto-complete`、`auto-complete-c-headers`、`auto-complete-clang`包。

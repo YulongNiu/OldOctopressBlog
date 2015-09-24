@@ -75,7 +75,7 @@ person("Yihui", "Xie", email = "xie@yihui.name", role = c("aut", "cre")))
 
 * src文件夹：放置用其他语言写成的代码，比如C/C++/Fortran等。
 
-* data文件夹：放置一些data文件，比如R代码、表格（`*txt`/`*.tab`/`*.csv`）文件或者是用`save()`{:.language-r}函数保存的镜像（`*.RData`/`*.rda`）。这些文件必须是“自给自足”的，即不用调用包也能使用这些data。如果这些data比较大，可以将其压缩为`*.gzip`/`*.bzip2`/`*.xz`格式，或者在保存镜像时，使用`save(, compress = TRUE)`{:.language-r}。这些方法可以有效地减少包的体积和安装时间，以方便用户使用。
+* data文件夹：放置一些data文件，比如R代码、表格（`*txt`/`*.tab`/`*.csv`）文件或者是用`save()`{:.language-r}函数保存的镜像（`*.RData`/`*.rda`）。这些文件必须是“自给自足”的，即不用调用包也能使用这些data。如果这些data比较大，可以将其压缩为`*.gzip`/`*.bzip2`/`*.xz`格式，或者在保存镜像时，使用`save(, compress = TRUE)`{:.language-r}。这些方法可以有效地减少包的体积和安装时间，以方便用户使用。如果原始数据，比如`test.csv`{.language-bash}文件，可以放入`inst/extdata/`{.language-bash}文件夹。引用这类数据，使用`system.file("extdata", "test.csv", package = "myPkg")`{.language-bash}。
 
 * demo文件夹：放置一些包的示例，通过`demo()`函数访问。（需要有一个00Index文件？不能自动生成？）
 
@@ -187,7 +187,7 @@ person("Yihui", "Xie", email = "xie@yihui.name", role = c("aut", "cre")))
 
 * `@aliases`：命名一个函数的别名，将指向同一个文档；`@family`：如果几个函数共用一个family name，它们将在seealso中交叉链接；`@seealso`：其他函数的超链接；`@rdname`：将多个函数合并在一个文档中。这些标记用于在HTML帮助文档中，可能出现这些超级链接或者文档合并。
 
-* 对data文件夹下的R data file进行注释。R data file通常以.RData或者.rda作为文件名扩展。[参考数据注释](http://r-pkgs.had.co.nz/data.html#documenting-data)。
+* 对`data`{.language-bash}文件夹下的R data file进行注释。R data file通常以.RData或者.rda作为文件名扩展。[参考数据注释](http://r-pkgs.had.co.nz/data.html#documenting-data)。
 
 
 ## 4. 写vignittes文件 ##

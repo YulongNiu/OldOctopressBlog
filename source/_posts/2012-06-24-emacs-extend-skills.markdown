@@ -20,11 +20,9 @@ categories: lisp
 {% codeblock lang:emacs-lisp Add repositories of Emacs packages%}
 (require 'package)
 (add-to-list 'package-archives
-	     '("marmalade" . "http://marmalade-repo.org/packages/"))
+	     '("melpa" . "http://melpa.milkbox.net/packages/"))
 (add-to-list 'package-archives
-	     '("melpa" . "http://melpa.milkbox.net/packages/")
-(add-to-list 'package-archives
-	     '("gnu" . "http://elpa.gnu.org/packages/")))
+	     '("gnu" . "http://elpa.gnu.org/packages/"))
 (package-initialize)
 {% endcodeblock %}
 
@@ -107,6 +105,8 @@ $0
 * [自定义 Yasnippet 模板](http://www.cnblogs.com/ibgo/p/3900317.html)
 
 * [YASnippet添加模板](https://github.com/mad4alcohol/mad4a-blog/blob/master/_posts/2012-08-02-emacs-summary-cont.md)
+
+* [Copy/Paste in emacs ansi-term shell](Copy/Paste in emacs ansi-term shell)
 
 
 
