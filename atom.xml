@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-09-29T22:47:32+08:00</updated>
+  <updated>2015-09-30T00:25:24+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -1734,20 +1734,13 @@ MAPQ = -10 \times log_{10}(pvalue)
   </li>
 </ul>
 
-<h2 id="section-3">2. 操作类型和顺序</h2>
+<h2 id="section-3">2. 操作符类型和优先级</h2>
 
 <p><img src="http://yulongniu.bionutshell.org/images/coperator.png" title="image" alt="C operators" /></p>
 
 <p>图片取自<a href="#Ref">参考资料2</a>。</p>
 
-<ul>
-  <li>
-    <p>赋值操作<code>=</code>：从右向左。</p>
-  </li>
-  <li>
-    <p>或操作<code>||</code>、且操作<code>&amp;&amp;</code>：从左向右，第一个判定成功即终止。</p>
-  </li>
-</ul>
+<p>操作符<strong>结合方向</strong>决定操作符的执行对象，比如多个同等操作符；而<strong>优先级</strong>决定操作符的结合方式，通俗来讲即谁和谁结合在一起。但是，C没有规定表达式运算的先后顺序，比如<code class="language-c">a = i + i++;</code>，有编译器决定是<code>i</code>还是<code>i++</code>先执行。</p>
 
 <h2 id="section-4">3. 语法注意事项</h2>
 
@@ -1780,14 +1773,38 @@ MAPQ = -10 \times log_{10}(pvalue)
     <p>矩阵计数从0开始。</p>
   </li>
   <li>
+    <p>顺序点（sequence point）</p>
+
+    <ul>
+      <li>
+        <p><code class="language-c">&amp;&amp;</code>、<code class="language-c">||</code>和comma operators，左边和右边表达式之间。</p>
+      </li>
+      <li>
+        <p>三元条件操作符<code class="language-c">?:</code>，在条件判断表达式与第二（第三）表达式之间。</p>
+      </li>
+      <li>
+        <p>完整表达式结束，包括赋值、<code class="language-c">return</code>语句、<code class="language-c">if</code>/<code class="language-c">switch</code>/<code class="language-c">while</code>/<code class="language-c">do-while</code>条件表达式判断结束和<code class="language-c">for</code>三个表示式。</p>
+      </li>
+      <li>
+        <p>函数的所有参数赋值和函数第一条语句执行之前（见后举例）。</p>
+      </li>
+      <li>
+        <p>变量初始化语句结束，比如<code class="language-c">int a = 1;</code>。如果多个变量初始化（<code>,</code>分割），则在每一个<code>,</code>结束处，比如 <code class="language-c">int a = 1, b = 2;</code>。</p>
+      </li>
+    </ul>
+  </li>
+  <li>
     <p><code class="language-c">i++</code>与<code class="language-c">++i</code></p>
 
     <ul>
       <li>
+        <p>大多数情况用于整数操作。</p>
+      </li>
+      <li>
         <p><code class="language-c">++i</code>马上自增，<code class="language-c">i++</code>自增则在两个相邻顺序点之间进行。表达式<code class="language-c">++i</code>值为<code>i+1</code>，表达式<code class="language-c">i++</code>值为<code>i</code>。</p>
       </li>
       <li>
-        <p>对于表达式<code class="language-c">f(i++)</code>，传入的参数值为<code>i</code>，但是在函数内部开始执行前，<code class="language-c">i</code>完成自增。这是因为在<strong>函数的所有参数赋值和函数第一条语句执行之前</strong>有一个顺序点。</p>
+        <p>对于表达式<code class="language-c">f(i++)</code>，传入的参数值为<code>i</code>，但是在函数内部开始执行前，<code class="language-c">i</code>完成自增。这是因为在<strong>函数的所有参数赋值和函数第一条语句执行之前</strong>有一个<strong>顺序点</strong>。</p>
       </li>
       <li>
         <p>在<code class="language-c">for</code>语句中，使用<code class="language-c">for(i = 0; i &lt; 10; i++)</code>与<code class="language-c">for(i = 0; i &lt; 10; ++i)</code>效果一样。</p>
@@ -1798,7 +1815,7 @@ MAPQ = -10 \times log_{10}(pvalue)
     </ul>
   </li>
   <li>
-    <p>副作用</p>
+    <p>副作用（side effect）</p>
 
     <ul>
       <li>
@@ -1807,9 +1824,29 @@ MAPQ = -10 \times log_{10}(pvalue)
       <li>
         <p>赋值运算的值是赋值操作后，左侧的值；强制转换为左侧值类型；赋值运算左侧必须为“左值（lvalue）”。</p>
       </li>
+      <li>
+        <p>在同一个表达式，即访问某个变量，同时又修改这个变量，会造成<strong>“未定义行为（undefined behavior）”</strong>。有副作用的操作，会带来隐晦为定义行为。未定义行为会随着不同的编译器，而产生不同的结果。其危险性不仅在于阻碍跨平台使用，而且也会有程序运行失败或者得到意想不到结果。<strong>建议：不在一个表达式中即访问又修改变量</strong>。一些典型的未定义行为的例子：</p>
+      </li>
     </ul>
   </li>
 </ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Undefined behavior in C </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="cp"># can not decide whether &quot;++&quot;, &quot;=&quot;, or &quot;+&quot; is the first</span>
+</span><span class="line"><span class="n">a</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span><span class="line"><span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span><span class="line"><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="cp"># &quot;,&quot; is not comma operator</span>
+</span><span class="line"><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">++</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h2 id="section-5">4. 标准库</h2>
 

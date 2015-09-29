@@ -124,16 +124,16 @@
     <loc>http://yulongniu.bionutshell.org/404.html</loc>
   </url>
   <url>
-    <loc>http://yulongniu.bionutshell.org/</loc>
-  </url>
-  <url>
     <loc>http://yulongniu.bionutshell.org/blog/archives/</loc>
   </url>
   <url>
-    <loc>http://yulongniu.bionutshell.org/whoami/</loc>
+    <loc>http://yulongniu.bionutshell.org/</loc>
   </url>
   <url>
     <loc>http://yulongniu.bionutshell.org/link/</loc>
+  </url>
+  <url>
+    <loc>http://yulongniu.bionutshell.org/whoami/</loc>
   </url>
   <url>
     <loc>http://yulongniu.bionutshell.org/blog/categories/linux/</loc>
@@ -155,5 +155,20 @@
   </url>
   <url>
     <loc>http://yulongniu.bionutshell.org/blog/categories/c/</loc>
+  </url>
+  <url>
+    <loc>http://yulongniu.bionutshell.org/posts/2/</loc>
+  </url>
+  <url>
+    <loc>http://yulongniu.bionutshell.org/posts/3/</loc>
+  </url>
+  <url>
+    <loc>http://yulongniu.bionutshell.org/posts/4/</loc>
+  </url>
+  <url>
+    <loc>http://yulongniu.bionutshell.org/posts/5/</loc>
+  </url>
+  <url>
+    <loc>http://yulongniu.bionutshell.org/posts/6/</loc>
   </url>
 </urlset>
