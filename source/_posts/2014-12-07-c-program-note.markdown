@@ -40,18 +40,13 @@ categories: c
 * `functions`
 
 
-## 2. 操作类型和顺序 ##
+## 2. 操作符类型和优先级 ##
 
 <img src="/images/coperator.png" title="image" alt="C operators">
 
 图片取自[参考资料2](#Ref)。
 
-
-* 赋值操作`=`：从右向左。
-
-* 或操作`||`、且操作`&&`：从左向右，第一个判定成功即终止。
-
-
+操作符**结合方向**决定操作符的执行对象，比如多个同等操作符；而**优先级**决定操作符的结合方式，通俗来讲即谁和谁结合在一起。但是，C没有规定表达式运算的先后顺序，比如`a = i + i++;`{:.language-c}，有编译器决定是`i`还是`i++`先执行。
 
 ## 3. 语法注意事项 ##
 
@@ -71,23 +66,48 @@ categories: c
 
 * 矩阵计数从0开始。
 
+* 顺序点（sequence point）
+
+    * `&&`{:.language-c}、`||`{:.language-c}和comma operators，左边和右边表达式之间。
+
+    * 三元条件操作符`?:`{:.language-c}，在条件判断表达式与第二（第三）表达式之间。
+
+    * 完整表达式结束，包括赋值、`return`{:.language-c}语句、`if`{:.language-c}/`switch`{:.language-c}/`while`{:.language-c}/`do-while`{:.language-c}条件表达式判断结束和`for`{:.language-c}三个表示式。
+
+    * 函数的所有参数赋值和函数第一条语句执行之前（见后举例）。
+
+    * 变量初始化语句结束，比如`int a = 1;`{:.language-c}。如果多个变量初始化（`,`分割），则在每一个`,`结束处，比如 `int a = 1, b = 2;`{:.language-c}。
+
 * `i++`{:.language-c}与`++i`{:.language-c}
 
+    * 大多数情况用于整数操作。
+    
     * `++i`{:.language-c}马上自增，`i++`{:.language-c}自增则在两个相邻顺序点之间进行。表达式`++i`{:.language-c}值为`i+1`，表达式`i++`{:.language-c}值为`i`。
 
-    * 对于表达式`f(i++)`{:.language-c}，传入的参数值为`i`，但是在函数内部开始执行前，`i`{:.language-c}完成自增。这是因为在**函数的所有参数赋值和函数第一条语句执行之前**有一个顺序点。
+    * 对于表达式`f(i++)`{:.language-c}，传入的参数值为`i`，但是在函数内部开始执行前，`i`{:.language-c}完成自增。这是因为在**函数的所有参数赋值和函数第一条语句执行之前**有一个**顺序点**。
 
     * 在`for`{:.language-c}语句中，使用`for(i = 0; i < 10; i++)`{:.language-c}与`for(i = 0; i < 10; ++i)`{:.language-c}效果一样。
 
     * 对于现代编译器，`i++`{:.language-c}和`++i`{:.language-c}的执行效率没有区别。所以写代码时，按照自认为最清楚的方式写。
 
 
-* 副作用
+* 副作用（side effect）
 
    * 所有赋值运算、`i++`{:.language-c}和`++i`{:.language-c}都有副作用，即改变原始变量的值。
 
    * 赋值运算的值是赋值操作后，左侧的值；强制转换为左侧值类型；赋值运算左侧必须为“左值（lvalue）”。
 
+   * 在同一个表达式，即访问某个变量，同时又修改这个变量，会造成**“未定义行为（undefined behavior）”**。有副作用的操作，会带来隐晦为定义行为。未定义行为会随着不同的编译器，而产生不同的结果。其危险性不仅在于阻碍跨平台使用，而且也会有程序运行失败或者得到意想不到结果。**建议：不在一个表达式中即访问又修改变量**。一些典型的未定义行为的例子：
+
+{% codeblock lang:c Undefined behavior in C %}
+# can not decide whether "++", "=", or "+" is the first
+a = i + i++;
+i = i++;
+a[i] = i++;
+
+# "," is not comma operator
+printf("%d %d\n", ++i, i);
+{% endcodeblock %}
 
 
 
