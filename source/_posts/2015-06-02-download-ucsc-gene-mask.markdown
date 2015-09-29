@@ -59,10 +59,6 @@ categories: Bioinfor
 <img src="/images/hg19_chrM_mask.png" title="image" alt="UCSC下载chrM注释筛选">
 
 
-
-
-
-
 ### 参考资料 ###
 
 * USCS Genome Browser的Google论坛：[1](https://groups.google.com/a/soe.ucsc.edu/forum/#!topic/genome/IL_aeOuPYU0)、[2](https://groups.google.com/a/soe.ucsc.edu/forum/#!msg/genome/jSAY8w1JVVo/P6lk4OJzDNEJ) 

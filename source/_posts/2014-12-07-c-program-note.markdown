@@ -42,16 +42,20 @@ categories: c
 
 ## 2. 操作类型和顺序 ##
 
-* 赋值操作`=`：从右向左
+<img src="/images/coperator.png" title="image" alt="C operators">
 
-* 或操作`||`、且操作`&&`：从左向右，遇到第一个`true`即停止
+图片取自[参考资料2](#Ref)。
 
+
+* 赋值操作`=`：从右向左。
+
+* 或操作`||`、且操作`&&`：从左向右，第一个判定成功即终止。
 
 
 
 ## 3. 语法注意事项 ##
 
-* `#define LOWER 0`定义常量的语句之后，没有分号`;`
+* `#define LOWER 0`定义常量的语句之后，没有分号`;`。
 
 * `EOF`是文档结束的标志（End of File），在`<stdio.h>`{:.language-c}定义为一个整数`-1`，代码如下：
 
@@ -61,13 +65,30 @@ categories: c
 #endif
 {% endcodeblock %}
 
-* 用引号`''`标记的字符串，对应的是ASCII的数字值
+* 用引号`''`标记的字符串，对应的是ASCII的数字值。
 
-* 赋值例如`c = getchar()`{:.language-c}也有值，其值等于等号左侧赋值操作后的值
+* `for`循环声明需要有主体，如无，在`for`语句后添加`;`作“无效声明（null statement）”。
 
-* `for`循环声明需要有主体，如无，在`for`语句后添加`;`作“无效声明（null statement）”
+* 矩阵计数从0开始。
 
-* 矩阵计数从0开始
+* `i++`{:.language-c}与`++i`{:.language-c}
+
+    * `++i`{:.language-c}马上自增，`i++`{:.language-c}自增则在两个相邻顺序点之间进行。表达式`++i`{:.language-c}值为`i+1`，表达式`i++`{:.language-c}值为`i`。
+
+    * 对于表达式`f(i++)`{:.language-c}，传入的参数值为`i`，但是在函数内部开始执行前，`i`{:.language-c}完成自增。这是因为在**函数的所有参数赋值和函数第一条语句执行之前**有一个顺序点。
+
+    * 在`for`{:.language-c}语句中，使用`for(i = 0; i < 10; i++)`{:.language-c}与`for(i = 0; i < 10; ++i)`{:.language-c}效果一样。
+
+    * 对于现代编译器，`i++`{:.language-c}和`++i`{:.language-c}的执行效率没有区别。所以写代码时，按照自认为最清楚的方式写。
+
+
+* 副作用
+
+   * 所有赋值运算、`i++`{:.language-c}和`++i`{:.language-c}都有副作用，即改变原始变量的值。
+
+   * 赋值运算的值是赋值操作后，左侧的值；强制转换为左侧值类型；赋值运算左侧必须为“左值（lvalue）”。
+
+
 
 
 ## 4. 标准库 ##
@@ -105,9 +126,14 @@ printf("%3.0f %6.1f\n", fahr, celsius);
 * `%%`：`%`自身
 
 
-### 参考资料 ###
+### <a id="Ref">参考资料</a> ###
 
 * BW Kernighan and DM Ritchie: [The C Programming Language (2nd Edition)](http://www.amazon.com/The-Programming-Language-2nd-Edition/dp/0131103628), 1988.
+
+* KN King: [C Programming: A Modern Approach, 2nd Edition](http://www.amazon.com/Programming-Modern-Approach-2nd-Edition/dp/0393979504), 2008.
+
+* [C各种标准](http://port70.net/~nsz/c/)
+
 
 ### 更新记录 ###
 
