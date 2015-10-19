@@ -27,9 +27,10 @@ load_all()
 其中`import`{:.language-bash}栏目，在源代码中使用了哪些包，需要逐步在import项目中添加和修改。
 
 
-## 3. 检查包 ##
+## 3. 更新文档和检查包 ##
 
 {% codeblock lang:r %}
+document()
 check()
 {% endcodeblock %}
 
@@ -53,4 +54,4 @@ build()
 
 ### 更新记录 ###
 
-2014年9月5日
+2015年10月20日
