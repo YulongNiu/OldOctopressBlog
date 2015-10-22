@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/c/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-09-30T00:25:24+08:00</updated>
+  <updated>2015-10-22T20:32:43+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -73,7 +73,14 @@
 
 <p>图片取自<a href="#Ref">参考资料2</a>。</p>
 
-<p>操作符<strong>结合方向</strong>决定操作符的执行对象，比如多个同等操作符；而<strong>优先级</strong>决定操作符的结合方式，通俗来讲即谁和谁结合在一起。但是，C没有规定表达式运算的先后顺序，比如<code class="language-c">a = i + i++;</code>，有编译器决定是<code>i</code>还是<code>i++</code>先执行。</p>
+<ul>
+  <li>
+    <p>操作符有两个性质：<strong>结合方向</strong>和<strong>优先级</strong>。<strong>结合方向</strong>决定操作符的执行对象，比如多个同等操作符；而<strong>优先级</strong>决定操作符的结合方式，通俗来讲即谁和谁结合在一起。但是，C没有规定表达式运算的先后顺序。比如对于二元操作符<code>+</code>，<code class="language-c">a = i + i++;</code>，由编译器决定是<code>i</code>还是<code>i++</code>先执行。</p>
+  </li>
+  <li>
+    <p>C89中操作符<code>/</code>和<code>%</code>，用于负整数操作，结果由编译器决定。</p>
+  </li>
+</ul>
 
 <h2 id="section-4">3. 语法注意事项</h2>
 
@@ -155,10 +162,10 @@
         <p>所有赋值运算、<code class="language-c">i++</code>和<code class="language-c">++i</code>都有副作用，即改变原始变量的值。</p>
       </li>
       <li>
-        <p>赋值运算的值是赋值操作后，左侧的值；强制转换为左侧值类型；赋值运算左侧必须为“左值（lvalue）”。</p>
+        <p>赋值运算的值是赋值操作后右侧的值，并且将其强制转换为左侧值类型；赋值运算左侧必须为“左值（lvalue）”。</p>
       </li>
       <li>
-        <p>在同一个表达式，即访问某个变量，同时又修改这个变量，会造成<strong>“未定义行为（undefined behavior）”</strong>。有副作用的操作，会带来隐晦为定义行为。未定义行为会随着不同的编译器，而产生不同的结果。其危险性不仅在于阻碍跨平台使用，而且也会有程序运行失败或者得到意想不到结果。<strong>建议：不在一个表达式中即访问又修改变量</strong>。一些典型的未定义行为的例子：</p>
+        <p>在同一个表达式，即访问某个变量，同时又修改这个变量，会造成<strong>“未定义行为（undefined behavior）”</strong>。有副作用的操作，会带来隐晦为定义行为。未定义行为会随着不同的编译器，而产生不同的结果。其危险性不仅在于阻碍跨平台使用，而且也会有程序运行失败或者得到意想不到结果。<strong>建议：不在一个表达式中即访问又修改同一个变量</strong>。一些典型的未定义行为的例子：</p>
       </li>
     </ul>
   </li>
@@ -189,45 +196,75 @@
 </pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="o">%</span><span class="mf">3.0f</span> <span class="o">%</span><span class="mf">6.1f</span><span class="err">\</span><span class="n">n</span><span class="err">”</span><span class="p">,</span> <span class="n">fahr</span><span class="p">,</span> <span class="n">celsius</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
+<p><code>%m.pX</code>：格式串模板，<code>m</code>表示要显示的最小字段宽度，<code>p</code>表示精度，<code>X</code>表示类型。</p>
+
+<p>对于 <code class="language-c">printf()</code>函数：</p>
+
 <ul>
   <li>
-    <p><code>%d</code>：十进制整数</p>
+    <p><code>%d</code>：十进制整数。</p>
   </li>
   <li>
-    <p><code>%ld</code>：长十进制整数</p>
+    <p><code>%ld</code>：长十进制整数。</p>
   </li>
   <li>
-    <p><code>%6d</code>：十进制整数，至少6位宽</p>
+    <p><code>%6d</code>：十进制整数，至少6位宽，右对齐；如果数字位数超过6位，则全部显示。</p>
   </li>
   <li>
-    <p><code>%f</code>：浮点数</p>
+    <p><code>%-6d</code>：同上，区别左对齐。</p>
   </li>
   <li>
-    <p><code>%6f</code>：浮点数，至少6位宽</p>
+    <p><code>%-6.3d</code>：同上，如果数字位数少于3位，左侧加0。</p>
   </li>
   <li>
-    <p><code>%6.0f</code>：浮点树，至少6位宽，无小数点而且无小数位</p>
+    <p><code>%f</code>：浮点数，默认小数位为6位。</p>
   </li>
   <li>
-    <p><code>%.2f</code>：浮点数，小数点后两位</p>
+    <p><code>%6f</code>：浮点数，至少6位宽。</p>
   </li>
   <li>
-    <p><code>%6.2f</code>：浮点数，至少6位宽，小数点后两位</p>
+    <p><code>%6.0f</code>：浮点树，至少6位宽，无小数点而且无小数位。</p>
   </li>
   <li>
-    <p><code>%o</code>：八进制</p>
+    <p><code>%.2f</code>：浮点数，小数点后两位。</p>
   </li>
   <li>
-    <p><code>%x</code>：六进制</p>
+    <p><code>%6.2f</code>：浮点数，至少6位宽，小数点后两位。</p>
   </li>
   <li>
-    <p><code>%c</code>：字符</p>
+    <p><code>%e</code>：科学计数。</p>
   </li>
   <li>
-    <p><code>%s</code>：字符串</p>
+    <p><code>%g</code>：科学计数或者浮点数。</p>
   </li>
   <li>
-    <p><code>%%</code>：<code>%</code>自身</p>
+    <p><code>%o</code>：八进制。</p>
+  </li>
+  <li>
+    <p><code>%x</code>：六进制。</p>
+  </li>
+  <li>
+    <p><code>%c</code>：字符。</p>
+  </li>
+  <li>
+    <p><code>%s</code>：字符串。</p>
+  </li>
+  <li>
+    <p><code>%%</code>：<code>%</code>自身。</p>
+  </li>
+</ul>
+
+<p>对于<code class="language-c">scantf()</code>函数：</p>
+
+<ul>
+  <li>
+    <p>格式串中出现空白字符（空格、水平或者垂直制表符、换页符、换行符），数量无关紧要，因为可以匹配任意数量（包括0个）空白字符。</p>
+  </li>
+  <li>
+    <p><strong>不要输把空白字符（比如<code>"%d "</code>）放入格式串的结尾</strong>。原因：<code class="language-c">scantf()</code>会挂起，直到出现不能匹配的空白字符。</p>
+  </li>
+  <li>
+    <p><code>%f</code>、<code>%e</code>、<code>%g</code>：可以互换使用。</p>
   </li>
 </ul>
 

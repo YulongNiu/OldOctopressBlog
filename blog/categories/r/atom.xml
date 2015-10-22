@@ -4,7 +4,7 @@
   <title><![CDATA[Category: R | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/r/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-09-30T00:25:24+08:00</updated>
+  <updated>2015-10-22T20:32:43+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -427,10 +427,12 @@
 </span></code></pre></td></tr></table></div></figure>
 其中<code class="language-bash">import</code>栏目，在源代码中使用了哪些包，需要逐步在import项目中添加和修改。</p>
 
-<h2 id="section-1">3. 检查包</h2>
+<h2 id="section-1">3. 更新文档和检查包</h2>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='r'><span class='line'>check<span class="p">()</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>document<span class="p">()</span>
+</span><span class='line'>check<span class="p">()</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="section-2">4. 安装包</h2>
@@ -453,7 +455,7 @@
 
 <h3 id="section-3">更新记录</h3>
 
-<p>2014年9月5日</p>
+<p>2015年10月20日</p>
 ]]></content>
   </entry>
   
@@ -734,7 +736,7 @@ In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, 
     <p>src文件夹：放置用其他语言写成的代码，比如C/C++/Fortran等。</p>
   </li>
   <li>
-    <p>data文件夹：放置一些data文件，比如R代码、表格（<code>*txt</code>/<code>*.tab</code>/<code>*.csv</code>）文件或者是用<code class="language-r">save()</code>函数保存的镜像（<code>*.RData</code>/<code>*.rda</code>）。这些文件必须是“自给自足”的，即不用调用包也能使用这些data。如果这些data比较大，可以将其压缩为<code>*.gzip</code>/<code>*.bzip2</code>/<code>*.xz</code>格式，或者在保存镜像时，使用<code class="language-r">save(, compress = TRUE)</code>。这些方法可以有效地减少包的体积和安装时间，以方便用户使用。如果原始数据，比如<code>test.csv</code>{.language-bash}文件，可以放入<code>inst/extdata/</code>{.language-bash}文件夹。引用这类数据，使用<code>system.file("extdata", "test.csv", package = "myPkg")</code>{.language-bash}。</p>
+    <p>data文件夹：放置一些data文件，比如R代码、表格（<code>*txt</code>/<code>*.tab</code>/<code>*.csv</code>）文件或者是用<code class="language-r">save()</code>函数保存的镜像（<code>*.RData</code>/<code>*.rda</code>）。这些文件必须是“自给自足”的，即不用调用包也能使用这些data。如果这些data比较大，可以将其压缩为<code>*.gzip</code>/<code>*.bzip2</code>/<code>*.xz</code>格式，或者在保存镜像时，使用<code class="language-r">save(, compress = TRUE)</code>。这些方法可以有效地减少包的体积和安装时间，以方便用户使用。如果原始数据，比如<code>test.csv</code>{.language-bash}文件，可以放入<code>inst/extdata/</code>{.language-bash}文件夹。引用这类数据，使用<code class="languag-r">system.file("extdata", "test.csv", package = "myPkg")</code>。</p>
   </li>
   <li>
     <p>demo文件夹：放置一些包的示例，通过<code>demo()</code>函数访问。（需要有一个00Index文件？不能自动生成？）</p>
