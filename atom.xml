@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-10-25T22:23:10+08:00</updated>
+  <updated>2015-10-26T00:21:54+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -48,7 +48,7 @@
     <p><code>//*[count(nodeD)=3]</code>：含有3个nodeD子节点的节点；<code>//*[count(*)=2]</code>：含有任意2个子节点的节点。</p>
   </li>
   <li>
-    <p><code>//*[name()='nodeB']</code>：所有名称为“nodeB”的节点，等价于<code>//nodeB</code>；<code>//*[starts-with(name(),'N')]</code>：所有名称以“N”开头的节点；<code>//*[contains(name(),'N')]</code>：所有名称中含有“N”的节点；//*[string-length(name()) = 3]：所有名称的字符串长度等于3的节点。</p>
+    <p><code>//*[name()='nodeB']</code>：所有名称为“nodeB”的节点，等价于<code>//nodeB</code>；<code>//*[starts-with(name(),'N')]</code>：所有名称以“N”开头的节点；<code>//*[contains(name(),'N')]</code>：所有名称中含有“N”的节点；<code>//*[string-length(name()) = 3]</code>：所有名称的字符串长度等于3的节点。</p>
   </li>
   <li>
     <p><code>//nodeA | //nodeB</code>：所有nodeA，以及nodeB的节点，多个搜索条件合并，搜索添加没有限制。</p>
