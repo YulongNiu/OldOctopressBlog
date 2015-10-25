@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://yulongniu.bionutshell.org/blog/2015/10/25/xpath-xml/</loc>
+    <lastmod>2015-10-25T19:05:33+08:00</lastmod>
+  </url>
+  <url>
     <loc>http://yulongniu.bionutshell.org/blog/2015/09/30/spacemacs-tutorial/</loc>
     <lastmod>2015-09-30T16:31:09+08:00</lastmod>
   </url>
@@ -128,16 +132,16 @@
     <loc>http://yulongniu.bionutshell.org/404.html</loc>
   </url>
   <url>
-    <loc>http://yulongniu.bionutshell.org/</loc>
-  </url>
-  <url>
     <loc>http://yulongniu.bionutshell.org/blog/archives/</loc>
   </url>
   <url>
-    <loc>http://yulongniu.bionutshell.org/whoami/</loc>
+    <loc>http://yulongniu.bionutshell.org/</loc>
   </url>
   <url>
     <loc>http://yulongniu.bionutshell.org/link/</loc>
+  </url>
+  <url>
+    <loc>http://yulongniu.bionutshell.org/whoami/</loc>
   </url>
   <url>
     <loc>http://yulongniu.bionutshell.org/blog/categories/linux/</loc>
@@ -159,5 +163,26 @@
   </url>
   <url>
     <loc>http://yulongniu.bionutshell.org/blog/categories/c/</loc>
+  </url>
+  <url>
+    <loc>http://yulongniu.bionutshell.org/blog/categories/hcj/</loc>
+  </url>
+  <url>
+    <loc>http://yulongniu.bionutshell.org/posts/2/</loc>
+  </url>
+  <url>
+    <loc>http://yulongniu.bionutshell.org/posts/3/</loc>
+  </url>
+  <url>
+    <loc>http://yulongniu.bionutshell.org/posts/4/</loc>
+  </url>
+  <url>
+    <loc>http://yulongniu.bionutshell.org/posts/5/</loc>
+  </url>
+  <url>
+    <loc>http://yulongniu.bionutshell.org/posts/6/</loc>
+  </url>
+  <url>
+    <loc>http://yulongniu.bionutshell.org/posts/7/</loc>
   </url>
 </urlset>
