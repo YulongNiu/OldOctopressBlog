@@ -243,7 +243,7 @@
     <p><code>//node1[@*]</code>：所有node1带有任意属性的节点；<code>//node1[not(@*)]</code>：所有node1不带属性的节点。</p>
   </li>
   <li>
-    <p><code>//node1[TEST1][TEST2]</code>：多个属性形选择可以首位相接，依次判断是否为真。TEST1和TEST2同时为真，返回选择结果。</p>
+    <p><code>//node1[TEST1][TEST2]</code>：多个属性形选择可以首位相接，依次判断是否为真。TEST1和TEST2同时为真，返回选择结果。<code>//nodeA[nodeB/@attr1='test1']</code>：选择所有nodeA节点，这些nodeA节点拥有nodeB子节点且属性“attr1”为“test1”。<code>//nodeC[@attr1='test1'][../nodeB/@attr2='test2']</code>：选择所有拥有“attr1”为“test1”的nodeC节点，而且这些nodeC节点有属性“attr2”为“test2”的nodeB父亲节点。</p>
   </li>
 </ul>
 
