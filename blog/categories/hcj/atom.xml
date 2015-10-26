@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Hcj | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/hcj/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-10-26T00:21:54+08:00</updated>
+  <updated>2015-10-26T15:09:58+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -96,13 +96,13 @@
     <p><code>child::</code>：默认轴，可以省略。比如<code>/child::nodeA</code>等价于<code>/AAA</code>。</p>
   </li>
   <li>
-    <p><code>descendant::</code>：选择上下文节点的所有子节点、子节点的子节点、子节点的子节点的子节点（依次类推，直至最后一个子节点）。<code>//nodeA/descendant::*</code>：所有nodeA节点的所有子节点、子节点的子节点等等；<code>//nodeA/descendant::nodeC</code>：所有nodeA节点的所有的nodeC子节点，nodeD可能是nodeA的某个子节点的子节点，区别与<code>//nodeA/nodeD</code>；<code>/descendant::*</code>：文档所有子节点、子节点的子节点等等，等价于<code>//*</code>。</p>
+    <p><code>descendant::</code>：选择上下文节点的所有子节点、子节点的子节点、子节点的子节点的子节点（依次类推，直至最后一个子节点）。<code>//nodeA/descendant::*</code>：所有nodeA节点的所有子节点、子节点的子节点等等；<code>//nodeA/descendant::nodeC</code>：所有nodeA节点的所有的nodeC子节点，nodeC可能是nodeA的某个子节点的子节点，区别与<code>//nodeA/nodeD</code>；<code>/descendant::*</code>：文档所有子节点、子节点的子节点等等，等价于<code>//*</code>。</p>
   </li>
   <li>
     <p><code>descendant-or-self::*</code>：选择上下文节点自身及其所有子节点、子节点的子节点（依次类推，直至最后一个子节点）。</p>
   </li>
   <li>
-    <p><code>parent::</code>：选择上下文节点的父节点（最靠近的父节点）。<code>//nodeC/parent::*</code>：所有nodeC节点的所有父节点；<code>//nodeC/descendant::nodeA[@attr1='test1']</code>：nodeC节点的nodeA父节点，这些nodeA父节点的“attr1”属性等于“test1”。</p>
+    <p><code>parent::</code>：选择上下文节点的父节点（最靠近的父节点）。<code>//nodeC/parent::*</code>：所有nodeC节点的所有父节点；<code>//nodeC/parent::nodeA[@attr1='test1']</code>：nodeC节点的nodeA父节点，这些nodeA父节点的“attr1”属性等于“test1”。</p>
   </li>
   <li>
     <p><code>ancestor::</code>：选择上下文节点的父节点，父节点的父节点（依次类推，直至最前一个父节点，包括根节点）。<code>//nodeC/ancestor::nodeA</code>：所有nodeC的父节点和父节点的父节点等等中的nodeA节点。</p>
@@ -137,7 +137,7 @@
     <p><a href="http://www.zvon.org/xxl/XPathTutorial/General_chi/examples.html">zvon中XPath的有趣例子</a></p>
   </li>
   <li>
-    <p><a href="http://www.w3school.com.cn/xpath/index.asp">w3c的XPath中文教程</a></p>
+    <p><a href="http://www.w3school.com.cn/xpath/index.asp">w3school的XPath中文教程</a></p>
   </li>
   <li>
     <p><a href="http://xccds1977.blogspot.sg/2013/02/xmlxpath.html">博文《XML和XPath使用方法备忘》</a></p>
