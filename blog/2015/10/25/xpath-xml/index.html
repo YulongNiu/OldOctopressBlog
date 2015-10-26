@@ -237,7 +237,7 @@
 
 <ul>
   <li>
-    <p><code>//@attr1</code>：所有拥有attr1的<strong>属性</strong>，注意：返回的不是节点，而是类此<code>attr1=text1</code>的属性；<code>//node1/@attr1</code>：所有node1带有的attr1属性；<code>//nodeB[@attr1]</code>：所有拥有“attr1”属性的nodeB节点；<code>//nodeB[@attr1='test1']</code>：所有拥有“attr1”属性为“test1”的nodeB节点；<code>//nodeB[normalize-space(@attr1)='test1']</code>：所有拥有attr1属性为“test1”（属性去除前后空格，连续空格替换为一个空格）的nodeB节点。</p>
+    <p><code>//@attr1</code>：所有拥有attr1的<strong>属性</strong>，注意：返回的不是节点，而是类此<code>attr1=text1</code>的属性；<code>//node1/@attr1</code>：所有node1带有的attr1属性；<code>//nodeB[@attr1]</code>：所有拥有“attr1”属性的nodeB节点；<code>//nodeB[@attr1='test1']</code>：所有拥有“attr1”属性为“test1”的nodeB节点；<code>//nodeB[normalize-space(@attr1)='test1']</code>：所有拥有attr1属性为“test1”（属性去除字符串前后空格，内部连续空格替换为一个空格）的nodeB节点。</p>
   </li>
   <li>
     <p><code>//node1[@*]</code>：所有node1带有任意属性的节点；<code>//node1[not(@*)]</code>：所有node1不带属性的节点。</p>
@@ -260,14 +260,20 @@
     <p><code>//nodeC[.=5]</code>：所有nodeC节点，其内容等于5。使用<code>.</code>代替自身。</p>
   </li>
   <li>
-    <p><code>//nodeC/node()</code>：选择所有nodeC节点下的所有点，包括子节点（距离最近，不包括子节点的子节点）和节点内容。</p>
+    <p><code>//nodeC/node()</code>：选择所有nodeC节点下的所有点，包括节点下内容和子节点（距离最近，不包括子节点的子节点）。</p>
   </li>
   <li>
-    <p><code>//nodeC/text()</code>：选择所有nodeC节点下的节点内容。</p>
+    <p><code>//nodeC/text()</code>：选择所有nodeC节点下的内容。</p>
   </li>
 </ul>
 
-<h2 id="section-4">2. 轴</h2>
+<h3 id="section-4">1.4 函数使用</h3>
+
+<ul>
+  <li><code>//nodeC[contains(text(), 'test1')]</code>：选择所有nodeC节点，而且nodeC节点下内容包括“test1”。</li>
+</ul>
+
+<h2 id="section-5">2. 轴</h2>
 
 <ul>
   <li>
@@ -305,7 +311,7 @@
   </li>
 </ul>
 
-<h2 id="section-5">参考网址</h2>
+<h2 id="section-6">参考网址</h2>
 
 <ul>
   <li>
@@ -322,7 +328,7 @@
   </li>
 </ul>
 
-<h3 id="section-6">更新记录</h3>
+<h3 id="section-7">更新记录</h3>
 
 <p>2015年10月24日</p>
 </div>
