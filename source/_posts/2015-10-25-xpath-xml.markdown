@@ -58,11 +58,11 @@ XPath查询集中在三个对象：节点、节点属性和节点内容。
 
 * `child::`：默认轴，可以省略。比如`/child::nodeA`等价于`/AAA`。
 
-* `descendant::`：选择上下文节点的所有子节点、子节点的子节点、子节点的子节点的子节点（依次类推，直至最后一个子节点）。`//nodeA/descendant::*`：所有nodeA节点的所有子节点、子节点的子节点等等；`//nodeA/descendant::nodeC`：所有nodeA节点的所有的nodeC子节点，nodeD可能是nodeA的某个子节点的子节点，区别与`//nodeA/nodeD`；`/descendant::*`：文档所有子节点、子节点的子节点等等，等价于`//*`。
+* `descendant::`：选择上下文节点的所有子节点、子节点的子节点、子节点的子节点的子节点（依次类推，直至最后一个子节点）。`//nodeA/descendant::*`：所有nodeA节点的所有子节点、子节点的子节点等等；`//nodeA/descendant::nodeC`：所有nodeA节点的所有的nodeC子节点，nodeC可能是nodeA的某个子节点的子节点，区别与`//nodeA/nodeD`；`/descendant::*`：文档所有子节点、子节点的子节点等等，等价于`//*`。
 
 * `descendant-or-self::*`：选择上下文节点自身及其所有子节点、子节点的子节点（依次类推，直至最后一个子节点）。
 
-* `parent::`：选择上下文节点的父节点（最靠近的父节点）。`//nodeC/parent::*`：所有nodeC节点的所有父节点；`//nodeC/descendant::nodeA[@attr1='test1']`：nodeC节点的nodeA父节点，这些nodeA父节点的“attr1”属性等于“test1”。
+* `parent::`：选择上下文节点的父节点（最靠近的父节点）。`//nodeC/parent::*`：所有nodeC节点的所有父节点；`//nodeC/parent::nodeA[@attr1='test1']`：nodeC节点的nodeA父节点，这些nodeA父节点的“attr1”属性等于“test1”。
 
 * `ancestor::`：选择上下文节点的父节点，父节点的父节点（依次类推，直至最前一个父节点，包括根节点）。`//nodeC/ancestor::nodeA`：所有nodeC的父节点和父节点的父节点等等中的nodeA节点。
 
@@ -88,7 +88,7 @@ XPath查询集中在三个对象：节点、节点属性和节点内容。
 
 * [zvon中XPath的有趣例子](http://www.zvon.org/xxl/XPathTutorial/General_chi/examples.html)
 
-* [w3c的XPath中文教程](http://www.w3school.com.cn/xpath/index.asp)
+* [w3school的XPath中文教程](http://www.w3school.com.cn/xpath/index.asp)
 
 * [博文《XML和XPath使用方法备忘》](http://xccds1977.blogspot.sg/2013/02/xmlxpath.html)
 
