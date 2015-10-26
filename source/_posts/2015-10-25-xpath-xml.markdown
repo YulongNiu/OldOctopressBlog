@@ -34,7 +34,7 @@ XPath查询集中在三个对象：节点、节点属性和节点内容。
 
 ### 1.2 选择节点属性 ###
 
-* `//@attr1`：所有拥有attr1的**属性**，注意：返回的不是节点，而是类此`attr1=text1`的属性；`//node1/@attr1`：所有node1带有的attr1属性；`//nodeB[@attr1]`：所有拥有“attr1”属性的nodeB节点；`//nodeB[@attr1='test1']`：所有拥有“attr1”属性为“test1”的nodeB节点；`//nodeB[normalize-space(@attr1)='test1']`：所有拥有attr1属性为“test1”（属性去除前后空格，连续空格替换为一个空格）的nodeB节点。
+* `//@attr1`：所有拥有attr1的**属性**，注意：返回的不是节点，而是类此`attr1=text1`的属性；`//node1/@attr1`：所有node1带有的attr1属性；`//nodeB[@attr1]`：所有拥有“attr1”属性的nodeB节点；`//nodeB[@attr1='test1']`：所有拥有“attr1”属性为“test1”的nodeB节点；`//nodeB[normalize-space(@attr1)='test1']`：所有拥有attr1属性为“test1”（属性去除字符串前后空格，内部连续空格替换为一个空格）的nodeB节点。
 
 * `//node1[@*]`：所有node1带有任意属性的节点；`//node1[not(@*)]`：所有node1不带属性的节点。
 
@@ -49,9 +49,14 @@ XPath查询集中在三个对象：节点、节点属性和节点内容。
 
 * `//nodeC[.=5]`：所有nodeC节点，其内容等于5。使用`.`代替自身。
 
-* `//nodeC/node()`：选择所有nodeC节点下的所有点，包括子节点（距离最近，不包括子节点的子节点）和节点内容。
+* `//nodeC/node()`：选择所有nodeC节点下的所有点，包括节点下内容和子节点（距离最近，不包括子节点的子节点）。
 
-* `//nodeC/text()`：选择所有nodeC节点下的节点内容。
+* `//nodeC/text()`：选择所有nodeC节点下的内容。
+
+
+### 1.4 函数使用 ###
+
+* `//nodeC[contains(text(), 'test1')]`：选择所有nodeC节点，而且nodeC节点下内容包括“test1”。
 
 
 ## 2. 轴 ##
