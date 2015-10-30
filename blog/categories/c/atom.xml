@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/c/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-10-26T20:01:37+08:00</updated>
+  <updated>2015-10-30T17:15:24+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -202,7 +202,7 @@
 
 <ul>
   <li>
-    <p><code>%d</code>：十进制整数。</p>
+    <p><code>%d</code>：十进制整数；<code>%1d</code>一个十进制整数，配合<code>scanf()</code>实现单个整数输入操作。</p>
   </li>
   <li>
     <p><code>%ld</code>：长十进制整数。</p>
@@ -254,14 +254,14 @@
   </li>
 </ul>
 
-<p>对于<code class="language-c">scantf()</code>函数：</p>
+<p>对于<code class="language-c">scanf()</code>函数：</p>
 
 <ul>
   <li>
     <p>格式串中出现空白字符（空格、水平或者垂直制表符、换页符、换行符），数量无关紧要，因为可以匹配任意数量（包括0个）空白字符。</p>
   </li>
   <li>
-    <p><strong>不要输把空白字符（比如<code>"%d "</code>）放入格式串的结尾</strong>。原因：<code class="language-c">scantf()</code>会挂起，直到出现不能匹配的空白字符。</p>
+    <p><strong>不要输把空白字符（比如<code>"%d "</code>）放入格式串的结尾</strong>。原因：<code class="language-c">scanf()</code>会挂起，直到出现不能匹配的空白字符。</p>
   </li>
   <li>
     <p><code>%f</code>、<code>%e</code>、<code>%g</code>：可以互换使用。</p>
