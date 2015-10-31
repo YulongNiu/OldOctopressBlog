@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/c/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-10-30T17:15:24+08:00</updated>
+  <updated>2015-11-01T01:45:19+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -80,9 +80,23 @@
   <li>
     <p>C89中操作符<code>/</code>和<code>%</code>，用于负整数操作，结果由编译器决定。</p>
   </li>
+  <li>
+    <p>运算符<code>&amp;&amp;</code>和<code>||</code>（从左向右结合），两侧的两个表达式有运算顺序，先左后右。<strong>有可能右侧表达式没有计算，因此不要在右侧放入有副作用的表达式</strong>。</p>
+  </li>
 </ul>
 
-<h2 id="section-4">3. 语法注意事项</h2>
+<h2 id="section-4">3. 表达式</h2>
+
+<ul>
+  <li>
+    <p>条件表达式<code class="language-c">i &gt; 0 ? i : f</code>，如果<code>i</code>和<code>f</code>是整数型和浮点型，即使条件判定为真，表达式的值为浮点型。</p>
+  </li>
+  <li>
+    <p><code>switch</code>语句最后一个分支，添加<code class="language-c">break;</code>语句。防止之后修改程序，需要再添加判断条件时，遗漏<code class="language-c">break;</code>语句。</p>
+  </li>
+</ul>
+
+<h2 id="section-5">4. 语法注意事项</h2>
 
 <ul>
   <li>
@@ -188,9 +202,9 @@
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="o">%</span><span class="n">d</span> <span class="o">%</span><span class="n">d</span><span class="err">\</span><span class="n">n</span><span class="err">”</span><span class="p">,</span> <span class="o">++</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="section-5">4. 标准库</h2>
+<h2 id="section-6">5. 标准库</h2>
 
-<h3 id="include-stdiohlanguage-c">4.1 <code class="language-c">#include &lt;stdio.h&gt;</code></h3>
+<h3 id="include-stdiohlanguage-c">5.1 <code class="language-c">#include &lt;stdio.h&gt;</code></h3>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="o">%</span><span class="mf">3.0f</span> <span class="o">%</span><span class="mf">6.1f</span><span class="err">\</span><span class="n">n</span><span class="err">”</span><span class="p">,</span> <span class="n">fahr</span><span class="p">,</span> <span class="n">celsius</span><span class="p">);</span>
@@ -282,7 +296,7 @@
   </li>
 </ul>
 
-<h3 id="section-6">更新记录</h3>
+<h3 id="section-7">更新记录</h3>
 
 <p>2014年12月7日</p>
 ]]></content>
