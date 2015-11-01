@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/c/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-11-01T01:45:19+08:00</updated>
+  <updated>2015-11-01T13:55:54+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -228,7 +228,7 @@
     <p><code>%-6d</code>：同上，区别左对齐。</p>
   </li>
   <li>
-    <p><code>%-6.3d</code>：同上，如果数字位数少于3位，左侧加0。</p>
+    <p><code>%-6.3d</code>：同上，如果数字位数少于3位，左侧加0。比如，<code class="language-c">printf(".2d%", 5)</code>的输出为<code>05</code>。</p>
   </li>
   <li>
     <p><code>%f</code>：浮点数，默认小数位为6位。</p>
