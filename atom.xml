@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-11-01T13:55:54+08:00</updated>
+  <updated>2015-11-03T21:11:21+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -2047,6 +2047,9 @@ MAPQ = -10 \times log_{10}(pvalue)
   <li>
     <p><code>switch</code>语句最后一个分支，添加<code class="language-c">break;</code>语句。防止之后修改程序，需要再添加判断条件时，遗漏<code class="language-c">break;</code>语句。</p>
   </li>
+  <li>
+    <p>逗号表达式中，<code class="language-c">表达式1, 表达式2</code>，<code>表达式1</code>先计算之后丢弃其值，之后计算<code>表达式2</code>。因此，<strong><code>表达式1</code>必须有副作用</strong>。</p>
+  </li>
 </ul>
 
 <h2 id="section-5">4. 语法注意事项</h2>
@@ -2054,6 +2057,12 @@ MAPQ = -10 \times log_{10}(pvalue)
 <ul>
   <li>
     <p><code>#define LOWER 0</code>定义常量的语句之后，没有分号<code>;</code>。</p>
+  </li>
+  <li>
+    <p><code class="language-c">break;</code>只能跳出一层循环。</p>
+  </li>
+  <li>
+    <p><code class="language-c">continue;</code>。一个有意思的应用场景，用<code>continue;</code>语句<strong>条件性</strong>忽略一些语句。</p>
   </li>
   <li>
     <p><code>EOF</code>是文档结束的标志（End of File），在<code class="language-c">&lt;stdio.h&gt;</code>定义为一个整数<code>-1</code>，代码如下：</p>
@@ -2074,7 +2083,7 @@ MAPQ = -10 \times log_{10}(pvalue)
     <p>用引号<code>''</code>标记的字符串，对应的是ASCII的数字值。</p>
   </li>
   <li>
-    <p><code>for</code>循环声明需要有主体，如无，在<code>for</code>语句后添加<code>;</code>作“无效声明（null statement）”。</p>
+    <p><code>for</code>循环声明需要有主体；如无，在<code>for</code>语句后添加<code>;</code>作“无效声明（null statement）”。<strong>为了避免误解，<code>;</code>单独占一行</strong>，或者使用<code>{}</code>代替单独一行的<code>;</code>。</p>
   </li>
   <li>
     <p>矩阵计数从0开始。</p>
@@ -2109,6 +2118,9 @@ MAPQ = -10 \times log_{10}(pvalue)
       </li>
       <li>
         <p><code class="language-c">++i</code>马上自增，<code class="language-c">i++</code>自增则在两个相邻顺序点之间进行。表达式<code class="language-c">++i</code>值为<code>i+1</code>，表达式<code class="language-c">i++</code>值为<code>i</code>。</p>
+      </li>
+      <li>
+        <p>表达式<code class="language-c">i++ == 0;</code>中，<code>i</code>使用原始数值，在表达式结束后自增；相反，表达式<code class="language-c">++i == 0;</code>中，<code>i</code>马上自增后与0比较。</p>
       </li>
       <li>
         <p>对于表达式<code class="language-c">f(i++)</code>，传入的参数值为<code>i</code>，但是在函数内部开始执行前，<code class="language-c">i</code>完成自增。这是因为在<strong>函数的所有参数赋值和函数第一条语句执行之前</strong>有一个<strong>顺序点</strong>。</p>
@@ -2233,6 +2245,12 @@ MAPQ = -10 \times log_{10}(pvalue)
   <li>
     <p><code>%f</code>、<code>%e</code>、<code>%g</code>：可以互换使用。</p>
   </li>
+</ul>
+
+<h2 id="c99">6. C99注意事项</h2>
+
+<ul>
+  <li>在<code>for</code>语句中声明的计数变量，只能在for循环中使用。比如 <code class="language-c">for(int i = 0; i &lt; 10; i++){...}</code>，变量<code>i</code>只能在循环内起作用。</li>
 </ul>
 
 <h3 id="a-idrefa"><a id="Ref">参考资料</a></h3>
