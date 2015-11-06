@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/c/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-11-03T21:11:21+08:00</updated>
+  <updated>2015-11-06T23:00:30+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -20,28 +20,37 @@
     <id>http://yulongniu.bionutshell.org/blog/2014/12/08/c-program-note</id>
     <content type="html"><![CDATA[<h2 id="section">1. 基本数据类型</h2>
 
-<h3 id="section-1">1.1 数字形式</h3>
+<h3 id="section-1">1.1 算术类型</h3>
 
-<p>数字的位数是多少？</p>
+<p>强制编辑器处理常量为长整数，<code>1135L</code>；强制处理为无符号，<code>1135U</code>；混合使用，<code>1135UL</code>，<code>U</code>和<code>L</code>顺序和大小写不重要。强制编辑器处理常量为单精度浮点数，<code>11.3f</code>；强制为双精度，<code>11.3L</code>或者<code>11.3l</code>。<strong>避免无符号和有符号整数混用。</strong></p>
+
+<p>强制类型转化表达式的一般形式为：<code>(int)floatNumber</code>。C语言把<code>(type)</code>视为一元运算符，所以其等级高于二元运算符。</p>
+
+<p>类型定义一般形式为：<code>typedef int Newint;</code>，注意结尾的<code>；</code>。</p>
+
+<p><code>sizeof</code>运算符一般形式为：<code>sizeof(type)</code>，比如<code>sizeof(long int)</code>计算<code>int</code>类型占用多少个字节。也可以应用与常量、变量或者表达式。</p>
 
 <ul>
   <li>
-    <p><code>int</code>：整数</p>
+    <p><code>int</code>：有符号整数（最左边一位表示符号，<code>0</code>为正数，<code>1</code>为负数），完整形式为<code>signed int</code>（singed可以省略）；<code>unsinged int</code>：无符号整数。</p>
   </li>
   <li>
-    <p><code>short</code>：短整数</p>
+    <p><code>short</code>：有符号短整数，完整形式为<code>signed short int</code>；<code>unsigned short</code>：无符号短整数。</p>
   </li>
   <li>
-    <p><code>long</code>：长整数</p>
+    <p><code>long</code>：有符号长整数，完整形式为<code>signed long int</code>；<code>unsigned long</code>：无符号长整数。</p>
   </li>
   <li>
-    <p><code>float</code>：浮点数</p>
+    <p><code>float</code>：单精度浮点数</p>
   </li>
   <li>
-    <p><code>double</code>：双浮点数</p>
+    <p><code>double</code>：双精度浮点数</p>
   </li>
   <li>
-    <p><code>char</code>：字符</p>
+    <p><code>long double</code>：扩展精度浮点数</p>
+  </li>
+  <li>
+    <p><code>char</code>：字符，C语言把字符当做小整数处理，字符常量使用<strong>单引号</strong>。</p>
   </li>
 </ul>
 
@@ -231,9 +240,6 @@
     <p><code>%d</code>：十进制整数；<code>%1d</code>一个十进制整数，配合<code>scanf()</code>实现单个整数输入操作。</p>
   </li>
   <li>
-    <p><code>%ld</code>：长十进制整数。</p>
-  </li>
-  <li>
     <p><code>%6d</code>：十进制整数，至少6位宽，右对齐；如果数字位数超过6位，则全部显示。</p>
   </li>
   <li>
@@ -264,10 +270,7 @@
     <p><code>%g</code>：科学计数或者浮点数。</p>
   </li>
   <li>
-    <p><code>%o</code>：八进制。</p>
-  </li>
-  <li>
-    <p><code>%x</code>：六进制。</p>
+    <p><code>%o</code>：无符号八进制。<code>%x</code>：无符号六进制。</p>
   </li>
   <li>
     <p><code>%c</code>：字符。</p>
@@ -277,6 +280,9 @@
   </li>
   <li>
     <p><code>%%</code>：<code>%</code>自身。</p>
+  </li>
+  <li>
+    <p>对于<code>%d</code>、<code>%o</code>、<code>%x</code>，<code>%ld</code>等表示长整数，<code>%hd</code>等表示短整数。</p>
   </li>
 </ul>
 
@@ -290,7 +296,7 @@
     <p><strong>不要输把空白字符（比如<code>"%d "</code>）放入格式串的结尾</strong>。原因：<code class="language-c">scanf()</code>会挂起，直到出现不能匹配的空白字符。</p>
   </li>
   <li>
-    <p><code>%f</code>、<code>%e</code>、<code>%g</code>：可以互换使用。</p>
+    <p><code>%f</code>、<code>%e</code>、<code>%g</code>：可以互换使用；double型，使用<code>%lf</code>等；long double型，<code>%Lf</code>等。</p>
   </li>
 </ul>
 
