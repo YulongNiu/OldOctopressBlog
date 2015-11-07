@@ -66,7 +66,7 @@ categories: c
 
 * 条件表达式`i > 0 ? i : f`{:.language-c}，如果`i`和`f`是整数型和浮点型，即使条件判定为真，表达式的值为浮点型。
 
-* `switch`语句最后一个分支，添加`break;`{:.language-c}语句。防止之后修改程序，需要再添加判断条件时，遗漏`break;`{:.language-c}语句。
+* `switch`语句最后一个分支，添加`break;`{:.language-c}语句。原因是防止之后修改程序，需要再添加判断条件时，遗漏`break;`{:.language-c}语句。C语言的`switch`语句不能判断范围，但适合多个`OR`连接的判断语句。
 
 * 逗号表达式中，`表达式1, 表达式2`{:.language-c}，`表达式1`先计算之后丢弃其值，之后计算`表达式2`。因此，**`表达式1`必须有副作用**。
 
@@ -195,6 +195,19 @@ printf("%3.0f %6.1f\n", fahr, celsius);
 ## 6. C99注意事项 ##
 
 * 在`for`语句中声明的计数变量，只能在for循环中使用。比如 `for(int i = 0; i < 10; i++){...}`{:.language-c}，变量`i`只能在循环内起作用。
+
+* 新增加表示布尔数值的头文件`<stdbool.h>`，使用方法
+
+{% codeblock lang:c bool in C99 %}
+#include <stdbool.h>
+
+int main(void)
+{
+  bool trueVal = true, falseVal = false;
+
+  return 0;
+}
+{% endcodeblock %}
 
 
 
