@@ -309,13 +309,13 @@
 <ul>
   <li>
     <p>强制编辑器处理常量为长整数（十进制、八进制和十六进制），<code>1135L</code>；强制处理为无符号，<code>1135U</code>；混合使用，<code>1135UL</code>，<code>U</code>和<code>L</code>顺序和大小写不重要。
-<span style="color: green"><strong>C99</strong></span>中增加了<code>ll</code>或者<code>LL</code>后缀，强制<code>long long int</code>型整数，可以与<code>u</code>或<code>U</code>连用。<strong>避免无符号和有符号整数混用</strong>。</p>
+<span style="color: green"><strong>C99</strong></span>中增加了<code>ll</code>或者<code>LL</code>后缀，强制<code>long long int</code>型整数，可以与<code>u</code>或<code>U</code>连用。<strong>避免无符号和有符号整数混用，特别是无符号和有符号整数比较，会产生意想不到的后果</strong>。</p>
   </li>
   <li>
     <p>强制编辑器处理常量为单精度浮点数，<code>11.3f</code>，<code>11.3</code>会被认为是<code>double</code>型；强制为双精度，<code>11.3L</code>或者<code>11.3l</code>。</p>
   </li>
   <li>
-    <p>强制类型转化表达式的一般形式为：<code>(int)floatNumber</code>。C语言把<code>(type)</code>视为一元运算符，所以其等级高于二元运算符。</p>
+    <p>强制类型转化表达式的一般形式为：<code>(int) floatNumber</code>。C语言把<code>(type)</code>视为一元运算符，所以其等级高于二元运算符。</p>
   </li>
   <li>
     <p>类型定义一般形式为：<code>typedef int Newint;</code>，注意结尾的<code>；</code>。区别与使用宏定义类型，函数体内定义的<code>typdef</code>变量在函数体外无法使用，而宏可以作用于任何对应位置。</p>
