@@ -17,7 +17,7 @@ categories: c
 | 类型                  | 解释           | 说明                                                      | 注意事项                                                                                    | 本地字节数 |
 |-----------------------+----------------+-----------------------------------------------------------+---------------------------------------------------------------------------------------------+------------|
 | `short`               | 有符号短整数   | 完整形式`signed short int`，`singed`和`int`可以省略       | 最左边一位表示符号，`0`为正数，`1`为负数                                                    |          2 |
-| `unsinged short`      | 无符号短整数   | 完整形式`unsigned short int`，`int`可以省略               | 全部位占满                                                                                  |          2 |
+| `unsigned short`      | 无符号短整数   | 完整形式`unsigned short int`，`int`可以省略               | 全部位占满                                                                                  |          2 |
 | `int`                 | 有符号整数     | 完整形式`signed int`，`singed`可以省略                    | 最左边一位表示符号，`0`为正数，`1`为负数                                                    |          4 |
 | `unsigned int`        | 无符号整数     |                                                           | 全部位占满                                                                                  |          4 |
 | `long`                | 有符号长整数   | 完整形式为`signed long int`，`singed`和`int`可以省略      | 最左边一位表示符号，`0`为正数，`1`为负数                                                    |          8 |
@@ -39,13 +39,13 @@ categories: c
 
 * 类型定义一般形式为：`typedef int Newint;`，注意结尾的`；`。区别与使用宏定义类型，函数体内定义的`typdef`变量在函数体外无法使用，而宏可以作用于任何对应位置。
 
-* `sizeof`运算符一般形式为：`sizeof(type)`，比如`sizeof(long int)`计算`int`类型占用多少个字节。也可以应用与常量、变量或者表达式。
+* `sizeof`运算符一般形式为：`sizeof(type)`，比如`sizeof(long int)`计算`int`类型占用多少个字节。`sizeof`表达式的类型是`size_t`（无符号整数），所以安全的方法是强制转换为`unsigned long`型，比如`(unsigned long) sizeof(int)`{:.language-c}。括号不是强制需要，加上括号防止因为优先级不同而引起歧义。可以应用与常量、变量或者表达式。
 
 <!--more-->
 
 ### 1.2 数组 ###
 
-数组计数从0开始索引。
+数组索引从0开始；数组按行存储。
 
 #### 1.2.1 一维数组 ####
 
@@ -55,17 +55,23 @@ categories: c
 
 * 数组长度之后可能会变，所以可以使用宏定义一维数组的长度，比如`#define LEN 5`{:.language-c}。
 
-* 确定数组长度，可以联合使用宏和`sizeof`，比如`#define SIZE ((int) )`{:.language-c}
+* 确定数组长度，可以联合使用宏和`sizeof`，比如`#define SIZE ((int) (sizeof(a) / sizeof(a[0])))`{:.language-c}
 
 初始化数组：
 
-* 声明每一个元素的数值，比如`int testArray[5] = {1, 2, 3, 4, 5}`{:.language-c}。这种情况可以忽略数组长度，比如`int testArray[] = {1, 2, 3, 4, 5}`{:.language-c}。
+* 声明每一个元素的数值，比如`int testArray[5] = {1, 2, 3, 4, 5};`{:.language-c}。这种情况可以忽略数组长度，比如`int testArray[] = {1, 2, 3, 4, 5};`{:.language-c}。
 
-* 声明部分元素，比如`int testArray[5] = {1, 2, 3}`{:.language-c}，4号与5号元素默认为0。<span style="color: green">**C99**</span>提供元素下标初始化，比如：`int testArray[5] = {[0] = 1, [1] = 2, [2] = 3}`{:.language-c}；或者混用，比如`int testArray[5] = {1, 2, [2] = 3}`{:.language-c}；甚至自动判断长度，比如`int testArray[] = {[0] = 1, 2, [2] = 3, a[4] = 0}`{:.language-c}，编译器根据最大元素序号，制定数组长度为5。使用元素下标初始化，**尽量按照下标序号从大到小初始化**，否则可能引起后面元素覆盖前面元素。
+* 声明部分元素，比如`int testArray[5] = {1, 2, 3};`{:.language-c}，4号与5号元素默认为0。<span style="color: green">**C99**</span>提供元素下标初始化，比如：`int testArray[5] = {[0] = 1, [1] = 2, [2] = 3};`{:.language-c}；或者混用，比如`int testArray[5] = {1, 2, [2] = 3};`{:.language-c}；甚至自动判断长度，比如`int testArray[] = {[0] = 1, 2, [2] = 3, a[4] = 0};`{:.language-c}，编译器根据最大元素序号，制定数组长度为5。使用元素下标初始化，**尽量按照下标序号从大到小初始化**，否则可能引起后面元素覆盖前面元素。
 
-* 声明全部元素为0，比如`int testArray[5] = {0}`{:.language-c}。
+* 声明全部元素为0，比如`int testArray[5] = {0};`{:.language-c}。
 
+#### 1.2.2 多维数组 ####
 
+初始化数组：
+
+* 声明每一个元素或者部分元素，其余未声明元素为0。<span style="color: green">**C99**</span>同样提供了下标初始化。比如：`int testArray[2][2] = {[0][0] = 0, [1][1] = 1};`{:.language-c}
+
+* 声明全部元素为0，比如`int testArray[5][10] = {0};`。
 
 ### 1.3 其他 ###
 
@@ -305,6 +311,8 @@ int main(void)
 * KN King: [C Programming: A Modern Approach, 2nd Edition](http://www.amazon.com/Programming-Modern-Approach-2nd-Edition/dp/0393979504), 2008.
 
 * [C各种标准](http://port70.net/~nsz/c/)
+
+* [C函数库快速查询](http://ganquan.info/standard-c/) 
 
 
 ### 更新记录 ###
