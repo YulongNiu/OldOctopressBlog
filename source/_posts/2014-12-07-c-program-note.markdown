@@ -237,15 +237,15 @@ printf("%3.0f %6.1f\n", fahr, celsius);
 
     * `%g`：科学计数或者浮点数。
 
-* `l`：`double`型前缀。
+* `%l`：`double`型前缀。
 
-    * `l`只在`scanf()`{:.language-c}中使用，在`printf()`{:.language-c}使用`%f`、`%e`和`%g`表示`float`型和`double`型。
+    * `%l`只在`scanf()`{:.language-c}中使用，在`printf()`{:.language-c}使用`%f`、`%e`和`%g`表示`float`型和`double`型。
 
     *  <span style="color: green">**C99**</span>中允许在`printf()`{:.language-c}使用`%lf`、`%le`和`%lg`，但是`l`不起作用。
 
-    * `L`：`long double`型前缀。
+    * `%L`：`long double`型前缀。
 
-    * `l`和`L`与`e`、`f`、`g`连用。
+    * `%l`和`%L`与`e`、`f`、`g`连用。
 
 * `%c`：字符。
 
