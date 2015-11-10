@@ -220,7 +220,7 @@
       <td>2</td>
     </tr>
     <tr>
-      <td><code>unsinged short</code></td>
+      <td><code>unsigned short</code></td>
       <td>无符号短整数</td>
       <td>完整形式<code>unsigned short int</code>，<code>int</code>可以省略</td>
       <td>全部位占满</td>
@@ -321,7 +321,7 @@
     <p>类型定义一般形式为：<code>typedef int Newint;</code>，注意结尾的<code>；</code>。区别与使用宏定义类型，函数体内定义的<code>typdef</code>变量在函数体外无法使用，而宏可以作用于任何对应位置。</p>
   </li>
   <li>
-    <p><code>sizeof</code>运算符一般形式为：<code>sizeof(type)</code>，比如<code>sizeof(long int)</code>计算<code>int</code>类型占用多少个字节。也可以应用与常量、变量或者表达式。</p>
+    <p><code>sizeof</code>运算符一般形式为：<code>sizeof(type)</code>，比如<code>sizeof(long int)</code>计算<code>int</code>类型占用多少个字节。<code>sizeof</code>表达式的类型是<code>size_t</code>（无符号整数），所以安全的方法是强制转换为<code>unsigned long</code>型，比如<code class="language-c">(unsigned long) sizeof(int)</code>。括号不是强制需要，加上括号防止因为优先级不同而引起歧义。可以应用与常量、变量或者表达式。</p>
   </li>
 </ul>
 
