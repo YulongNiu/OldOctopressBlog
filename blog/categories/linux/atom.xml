@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-11-10T19:28:47+08:00</updated>
+  <updated>2015-11-21T23:08:14+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -2006,7 +2006,7 @@ mydict.bmp
 <p><figure class='code'><figcaption><span>Example of using cpdf</span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 选择第二页输出</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 选择第一页输出</span>
 </span><span class='line'><span class="nv">$ </span>cpdf pdfFile.pdf <span class="m">1</span> -o outPdfFile.pdf
 </span></code></pre></td></tr></table></div></figure></p>
 
@@ -2109,7 +2109,7 @@ mydict.bmp
 
 <h3 id="section-9">更新记录</h3>
 
-<p>2015年6月11日</p>
+<p>2015年11月21日</p>
 
 ]]></content>
   </entry>
