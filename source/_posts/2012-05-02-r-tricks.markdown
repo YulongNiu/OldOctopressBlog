@@ -89,10 +89,6 @@ NULL
 
 > 如果要在list中插入元素，可以使用`append(x, values, after = length(x))`{:.language-r}函数。`append()`{:.language-r}函数原本是对vector设计的，但是list也能使用。
 
-* 取值
-
-> 对list进行取值，不能直接使用`TRUE`{:.language-r}/`FALSE`{:.language-r}向量，而是使用下标进行，可以使用`which()`{:.language-r}函数转换。
-
 ## 4. 创建“空”值很淡定，要么空来要么0 ##
 
 如果要创建一个空的对象（对象的长度是0）很容易，比如：
@@ -398,4 +394,4 @@ for (i in tmp1) {
 
 ### 更新记录 ###
 
-2015年7月11日
+2015年11月21日

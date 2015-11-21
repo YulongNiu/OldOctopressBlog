@@ -213,7 +213,7 @@ $ convert -density 500 input.pdf output.jpg
 [cpdf](http://community.coherentpdf.com/)用于对PDF文件执行分割、合并和压缩等操作。下载预编译版本使用。
 
 {% codeblock lang:bash Example of using cpdf%}
-# 选择第二页输出
+# 选择第一页输出
 $ cpdf pdfFile.pdf 1 -o outPdfFile.pdf
 {% endcodeblock %}
 
@@ -293,7 +293,7 @@ Wine可以尽可能模拟Window软件
 
 ### 更新记录 ###
 
-2015年6月11日
+2015年11月21日
 
 
 
