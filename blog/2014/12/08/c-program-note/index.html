@@ -313,7 +313,7 @@
 <span style="color: green"><strong>C99</strong></span>中增加了<code>ll</code>或者<code>LL</code>后缀，强制<code>long long int</code>型整数，可以与<code>u</code>或<code>U</code>连用。<strong>避免无符号和有符号整数混用，特别是无符号和有符号整数比较，会产生意想不到的后果</strong>。</p>
   </li>
   <li>
-    <p>强制编辑器处理常量为单精度浮点数，<code>11.3f</code>，<code>11.3</code>会被认为是<code>double</code>型；强制为双精度，<code>11.3L</code>或者<code>11.3l</code>（这里可以看出使用<code>L</code>更好，因为<code>l</code>会被误认为数字<code>1</code>）。</p>
+    <p>强制编辑器处理常量为单精度浮点数，<code>11.3f</code>，<code>11.3</code>会被认为是<code>double</code>型；强制为双精度，<code>11.3L</code>或者<code>11.3l</code>（这里看出使用<code>L</code>更好，因为<code>l</code>会被误认为数字<code>1</code>）。</p>
   </li>
   <li>
     <p>强制类型转化表达式的一般形式为：<code>(int) floatNumber</code>。C语言把<code>(type)</code>视为一元运算符，所以其等级高于二元运算符。</p>
@@ -639,7 +639,7 @@
 
     <ul>
       <li>
-        <p><code>%l</code>只在<code class="language-c">scanf()</code>中使用，在<code class="language-c">printf()</code>使用<code>%f</code>、<code>%e</code>和<code>%g</code>表示<code>float</code>型和<code>double</code>型。</p>
+        <p><code>%l</code>只在<code class="language-c">scanf()</code>中使用，在<code class="language-c">printf()</code>使用<code>%f</code>和<code>%e</code>（或者<code>%g</code>）表示<code>float</code>型和<code>double</code>型。</p>
       </li>
       <li>
         <p><span style="color: green"><strong>C99</strong></span>中允许在<code class="language-c">printf()</code>使用<code>%lf</code>、<code>%le</code>和<code>%lg</code>，但是<code>l</code>不起作用。</p>
