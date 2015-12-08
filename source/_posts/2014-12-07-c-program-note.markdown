@@ -259,10 +259,6 @@ printf("%3.0f %6.1f\n", fahr, celsius);
 
 * **不要输把空白字符（比如`"%d "`）放入格式串的结尾**。原因：`scanf()`{:.language-c}会挂起，直到出现不能匹配的空白字符。
 
-* `%f`、`%e`、`%g`：可以互换使用；double型，使用`%lf`等；long double型，`%Lf`等。
-
-
-
 ## 6. <span style="color: green">**C99**</span>注意事项 ##
 
 * 在`for`语句中声明的计数变量，只能在for循环中使用。比如 `for(int i = 0; i < 10; i++){...}`{:.language-c}，变量`i`只能在循环内起作用。
