@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-12-06T15:34:01+08:00</updated>
+  <updated>2015-12-08T14:47:16+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -2444,9 +2444,6 @@ MAPQ = -10 \times log_{10}(pvalue)
   </li>
   <li>
     <p><strong>不要输把空白字符（比如<code>"%d "</code>）放入格式串的结尾</strong>。原因：<code class="language-c">scanf()</code>会挂起，直到出现不能匹配的空白字符。</p>
-  </li>
-  <li>
-    <p><code>%f</code>、<code>%e</code>、<code>%g</code>：可以互换使用；double型，使用<code>%lf</code>等；long double型，<code>%Lf</code>等。</p>
   </li>
 </ul>
 
