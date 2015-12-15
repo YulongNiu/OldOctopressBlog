@@ -317,8 +317,8 @@ $ bundle install
 $ rake setup_github_pages
 {% endcodeblock %}
 
-如果遇到类似`error: failed to push some refs to`{:.language-bash}的错误，参考 [stackoverflow](http://stackoverflow.com/questions/24114676/git-error-failed-to-push-some-refs-to)解决。
-
+如果是遇到类似`error: failed to push some refs to`{:.language-bash}的错误，参考 [stackoverflow](http://stackoverflow.com/questions/24114676/git-error-failed-to-push-some-refs-to)解决。
+i
 
 ## 17. 多台电脑共同编写博客 ##
 
