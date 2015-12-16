@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>R Ggplot2 Notes - 牛牛龙</title>
+  <meta name="author" content="Yulong Niu">
+
+  
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://yulongniu.bionutshell.org/blog/2013/10/02/ggplot2-notes">
+  <link href="/favicon.ico" type="image/png" rel="icon">
+  <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
+
+  <!-- http://opengraphprotocol.org/ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2013/10/02/ggplot2-notes">
+  <meta property="og:title" content="R Ggplot2 Notes - 牛牛龙">
+  
+
+  <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script src="/javascripts/libs/jquery/jquery-2.0.3.min.js"></script>
+
+<!--enable to choose theme in octostrap-->
+
+  <link href="/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="/assets/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+
+
+
+<!-- link open with new tab  -->
+<script>
+  function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+  $(this).attr('target', '_blank');
+  });
+  }
+  
+  $(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+  });
+</script>
+
+
+  
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  
+
+  
+   <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-53073828-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+  <body   >
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div id="wrap">
+      <header role="banner">
+        <nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">牛牛龙</a>
+        </div>
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a rel="index" href="/">Blog</a>
+                </li>
+                <li >
+                    <a href="/blog/archives">Archives</a>
+                </li>
+		<li >
+                  <a href="/whoami">WhoAmI</a>
+                </li>
+		<li >
+                  <a href="/link">Link</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="subscribe-rss" href="/atom.xml" title="subscribe via RSS">
+                        <span class="visible-xs">RSS</span>
+                        <img class="hidden-xs" src="/images/rss.png" alt="RSS">
+                    </a>
+                </li>
+                
+            </ul>
+            
+                <form class="search navbar-form navbar-right" action="https://www.google.com/search" method="GET">
+                    <input type="hidden" name="q" value="site:yulongniu.bionutshell.org">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="q" placeholder="Search">
+                    </div>
+                </form>
+            
+        </div>
+    </div>
+</nav>
+
+
+      </header>
+      <div id="main" role="main" class="container">
+        <div id="content">
+          <div class="row">
+  <div class="page-content col-md-9" itemscope itemtype="http://schema.org/Blog">
+    <meta itemprop="name" content="牛牛龙" />
+    
+    <meta itemprop="url" content="http://yulongniu.bionutshell.org" />
+    <article class="hentry" role="article" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+      
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2013-10-02T14:47:11+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org">Comments</a>
+        
+      </p>
+    
+    
+    <h1 class="entry-title" itemprop="name headline">
+        R Ggplot2 Notes
+        
+    </h1>
+    
+  </header>
+
+
+<div class="entry-content clearfix" itemprop="articleBody description"><h1 id="r-package-span-stylecolor-blueggplot2span-notes">R Package <span style="color: blue">ggplot2</span> Notes</h1>
+
+<h2 id="basic-grammar">1. Basic grammar</h2>
+
+<h3 id="plot-types">1.1 Plot types</h3>
+
+<p>The R package <span style="color: blue">ggplot2</span> is a famous plot tool for high quality scientific figures. The <span style="color: blue">ggplot2</span> style figures are widely seen in papers published in high quality journals such as <em>PNAS</em>, <em>Nature</em> and <em>Cell</em>.</p>
+
+<p>The input data should be in <strong>data frame</strong> form, and it is easily to use the function <code class="language-r">as.data.frame()</code>. “<span style="color:red"><strong>+</strong></span>” is used to connect different plot statement. A typical <span style="color: blue">ggplot2</span> plot statement is like:</p>
+
+<!--more-->
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="kn">require</span><span class="p">(</span><span class="s">&#39;ggplot2&#39;</span><span class="p">)</span>
+</span><span class="line">ggplot<span class="p">(</span>data<span class="o">=</span>mpg<span class="p">,</span> mapping<span class="o">=</span>aes<span class="p">(</span>x<span class="o">=</span>cty<span class="p">,</span> y<span class="o">=</span>hwy<span class="p">,</span> colour<span class="o">=</span><span class="kp">factor</span><span class="p">(</span>year<span class="p">)))</span> <span class="o">+</span>
+</span><span class="line">geom_point<span class="p">()</span> <span class="o">+</span> stat_smooth<span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p><code class="language-r">ggplot()</code>: <strong>data</strong> is a <span style="color:blue">data.frame</span> class object. <strong>mapping</strong> is an <code class="language-r">aes()</code> function to specify the X-axis and Y-axis. When a <code class="language-r">aes()</code> is used, a figure legend will be added. If we do not want the legends appear, use <code class="language-r">show_guide = FALSE</code> in <em>geom_XXX</em> or <em>stat_XXX</em></p>
+
+<p><code class="language-r">geom_point()</code>: is used to plot points with the attributes <strong>x</strong>, <strong>y</strong>, alpha, colour, fill, shape, size.</p>
+
+<p><code class="language-r">geom_line()</code>: is used to plot points with the attributes <strong>x</strong>, <strong>y</strong>, alpha, colour, fill, shape, size.</p>
+
+<p><code class="language-r">geom_bar()</code>: bar plot. <code class="language-r">stat = 'identity'</code> for draw the identical, <code class="language-r">hjust</code> and <code class="language-r">vjust</code> is to adjust the x and y axis distance. <code class="language-r">coord_flip()</code> to reverse X and Y axis. <code class="language-r">position = 'dodge'</code> to set position of two bars, can be set as ‘dodge’, ‘stack’, ‘fill’ and ‘identity’.</p>
+
+<p><code class="language-r">geom_box()</code>: boxplot.</p>
+
+<p><code class="language-r">geom_tile()</code>: fill blocks.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="c1"># example</span>
+</span><span class="line"><span class="kn">require</span><span class="p">(</span><span class="s">&#39;ggplot2&#39;</span><span class="p">)</span>
+</span><span class="line">p <span class="o">&lt;-</span> ggplot<span class="p">(</span>mtcars<span class="p">,</span> aes<span class="p">(</span><span class="kp">factor</span><span class="p">(</span>cyl<span class="p">),</span> mpg<span class="p">))</span>
+</span><span class="line"><span class="c1"># basic plot</span>
+</span><span class="line">p <span class="o">+</span> geom_boxplot<span class="p">()</span>
+</span><span class="line"><span class="c1"># add colors to boxes</span>
+</span><span class="line">p <span class="o">+</span> geom_boxplot<span class="p">(</span>aes<span class="p">(</span>fill <span class="o">=</span> <span class="kp">factor</span><span class="p">(</span>cyl<span class="p">)))</span>
+</span><span class="line"><span class="c1"># change default colors</span>
+</span><span class="line">p <span class="o">+</span> geom_boxplot<span class="p">(</span>aes<span class="p">(</span>fill <span class="o">=</span> <span class="kp">factor</span><span class="p">(</span>cyl<span class="p">)))</span> <span class="o">+</span> scale_fill_manual<span class="p">(</span>values <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p><code class="language-r">geom_rect(mapping = NULL, data = NULL, stat = "identity", position = "identity", ...)</code>: plot rectangles. 
+In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, <code class="language-r">xmax</code>, <code class="language-r">ymin</code>, and <code class="language-r">ymax</code> are necessary. 
+<code class="language-r">inherit.aes = FALSE</code> may be used if new <code class="language-r">data</code> is applied.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="c1"># example</span>
+</span><span class="line">ggplot<span class="p">(</span>mtcars<span class="p">)</span> <span class="o">+</span>
+</span><span class="line">  geom_density<span class="p">(</span>aes<span class="p">(</span>x<span class="o">=</span>disp<span class="p">,</span> group<span class="o">=</span>cyl<span class="p">,</span> fill<span class="o">=</span>cyl<span class="p">),</span> alpha<span class="o">=</span><span class="m">0.6</span><span class="p">,</span> adjust<span class="o">=</span><span class="m">0.75</span><span class="p">)</span> <span class="o">+</span>
+</span><span class="line">  geom_rect<span class="p">(</span>data<span class="o">=</span>mtcars<span class="p">[</span><span class="m">1</span><span class="p">,],</span> aes<span class="p">(</span>xmin<span class="o">=</span><span class="m">100</span><span class="p">,</span> xmax<span class="o">=</span><span class="m">200</span><span class="p">,</span> ymin<span class="o">=</span><span class="m">0</span><span class="p">,</span>ymax<span class="o">=</span><span class="kc">Inf</span><span class="p">),</span> fill<span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">0.2</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="statistics">1.2 Statistics</h3>
+
+<p><code class="language-r">geom_smooth()</code>: is used for the add smooth line with the <strong>method</strong> lm, glm, gam, loess and rlm. <code class="language-r">se = TRUE</code> is to display the confident region. The following aesthetics <strong>x</strong>, <strong>y</strong>, alpha, colour, fill, linetype, size, weight could be added.</p>
+
+<p><code class="language-r">stat_boxplot()</code>: plot error lines in boxplot.</p>
+
+<h3 id="add-elements">1.3 Add elements</h3>
+
+<p><code class="language-r">xlab()</code>: change X axis label, set <code>xlab('')</code> to remove the X axis label; <code class="language-r">ylab()</code>: change Y axis label; <code class="language-r">ggtitle()</code>: add figure title; <code class="language-r">scale_y_continuous(limits=c(0, 20))</code> and <code class="language-r">scale_x_continuous(limits=c(0, 20))</code> to adjust range of X and Y axis.</p>
+
+<p><code class="language-r">geom_abline(intercept = 37, slope = -5)</code>: to add line.</p>
+
+<p><code class="language-r">geom_hline</code> and <code class="language-r">geom_vline</code>: to add horizontal and vertical lines.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="c1"># example </span>
+</span><span class="line">p <span class="o">&lt;-</span> ggplot<span class="p">(</span>mtcars<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> wt<span class="p">,</span> y <span class="o">=</span> mpg<span class="p">))</span> <span class="o">+</span> geom_point<span class="p">()</span>
+</span><span class="line">geom_vline<span class="p">(</span>xintercept <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;green&quot;</span><span class="p">,</span> linetype <span class="o">=</span> <span class="s">&quot;longdash&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="c1"># ggplot2 line type</span>
+</span><span class="line">d <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span>lt<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;blank&#39;</span><span class="p">,</span> <span class="s">&#39;solid&#39;</span><span class="p">,</span> <span class="s">&#39;dashed&#39;</span><span class="p">,</span> <span class="s">&#39;dotted&#39;</span><span class="p">,</span> <span class="s">&#39;dotdash&#39;</span><span class="p">,</span> <span class="s">&#39;longdash&#39;</span><span class="p">,</span> <span class="s">&#39;twodash&#39;</span><span class="p">,</span> <span class="s">&#39;1F&#39;</span><span class="p">,</span> <span class="s">&#39;F1&#39;</span><span class="p">,</span> <span class="s">&#39;4C88C488&#39;</span><span class="p">,</span> <span class="s">&#39;12345678&#39;</span><span class="p">))</span>
+</span><span class="line">ggplot<span class="p">()</span> <span class="o">+</span>
+</span><span class="line">  scale_x_continuous<span class="p">(</span>name<span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> breaks<span class="o">=</span><span class="kc">NULL</span><span class="p">)</span> <span class="o">+</span>
+</span><span class="line">  scale_y_discrete<span class="p">(</span>name<span class="o">=</span><span class="s">&#39;linetype&#39;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class="line">  scale_linetype_identity<span class="p">()</span> <span class="o">+</span>
+</span><span class="line">  geom_segment<span class="p">(</span>data<span class="o">=</span>d<span class="p">,</span> mapping<span class="o">=</span>aes<span class="p">(</span>x<span class="o">=</span><span class="m">0</span><span class="p">,</span> xend<span class="o">=</span><span class="m">1</span><span class="p">,</span> y<span class="o">=</span>lt<span class="p">,</span> yend<span class="o">=</span>lt<span class="p">,</span> linetype<span class="o">=</span>lt<span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code class="language-r">geom_text()</code>: to add text. Set <code>parse = TRUE</code> to use expression and greek letters.</p>
+
+<p><code class="language-r">scale_fill_discrete(..., values)</code>: change labels. <code class="language-r">name</code> to reset label names, <code class="language-r">labels</code> to reset labels.</p>
+
+<p><code class="language-r">scale_shape_manual(..., values)</code>: change the shape of points.</p>
+
+<p><code class="language-r">scale_linetype_manual(..., values)</code>: change the types of lines. line referring <a href="http://www.cookbook-r.com/Graphs/Shapes_and_line_types/">R plot</a>.<code>name</code>, <code>value</code>, <code>labels</code> are used to change value.</p>
+
+<p><code class="language-r">scale_color_manual</code> is used for change the colors. Please refer to <a href="http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/">Useful color palette</a>, <a href="http://blog.ggplot2.org/post/24607351280/choosing-colour-palettes-part-ii-educated-choices">Introduction of ggplot2 colors</a>, and <a href="http://research.stowers-institute.org/efg/R/Color/Chart/">R Color Chart</a> 
+. The default ggplot2 colors are generated from the “<em>scales</em>” package, for example the default “hue pallet” could be view as <code class="language-r">show_col(hue_pal(h = c(0, 360) + 15, c = 100, l = 65, h.start = 0, direction = 1)(9))</code></p>
+
+<p><code class="language-r">scale_fill_manual(..., alues)</code> to change filled colors.</p>
+
+<p><code class="language-r">theme</code> is used for exact control. <code>legend.position='none'</code> to remove the side legend.</p>
+
+<h2 id="save-plot">2. Save plot</h2>
+
+<p>The function <code class="language-r">ggsave()</code> is used to save the screen plot to file. <code class="language-r">print()</code> is also applied like:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line">pdf<span class="p">(</span><span class="s">&#39;testfile.pdf&#39;</span><span class="p">)</span>
+</span><span class="line">q <span class="o">&lt;-</span> ggplot<span class="p">()</span>
+</span><span class="line"><span class="kp">print</span><span class="p">(</span><span class="kp">q</span><span class="p">)</span>
+</span><span class="line">dev.off<span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="other-issues">3. Other issues</h2>
+
+<h3 id="plot-mutiple-ggplot2">3.1 Plot mutiple ggplot2</h3>
+
+<p>Use <span style="color: blue">gridExtra</span> package to plot multiple ggplot2 figures in the one figure.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="c1"># example</span>
+</span><span class="line"><span class="kn">require</span><span class="p">(</span><span class="s">&#39;gridExtra&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="c1"># save ggplot object into a list like &quot;plotList&quot;</span>
+</span><span class="line"><span class="kp">do.call</span><span class="p">(</span>grid.arrange<span class="p">,</span> plotList<span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li><a href="http://directlabels.r-forge.r-project.org/examples.html">Better labels</a></li>
+  <li><a href="http://docs.ggplot2.org/current/">ggplot2 doc</a></li>
+  <li><a href="http://zevross.com/blog/2014/08/04/beautiful-plotting-in-r-a-ggplot2-cheatsheet-3/#working-with-colors">ggplot2 cheatsheet</a></li>
+</ul>
+
+<h3 id="section">更新记录</h3>
+
+<p>2014年8月28日</p>
+</div>
+
+
+      <footer>
+        <p class="meta text-muted">
+          
+  
+
+<span class="glyphicon glyphicon-user"></span> <span class="byline author vcard" itemprop="author" itemscope itemtype="http://schema.org/Person">Posted by <span class="fn" itemprop="name">Yulong Niu</span></span>
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2013-10-02T14:47:11+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+          
+
+<span class="glyphicon glyphicon-tags"></span>&nbsp;
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/r/'>r</a>
+  
+</span>
+
+
+        </p>
+        
+          <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.bionutshell.org/blog/2013/10/02/ggplot2-notes/" data-via="" data-counturl="http://yulongniu.bionutshell.org/blog/2013/10/02/ggplot2-notes/" >Tweet</a>
+  
+  
+  
+</div>
+
+        
+        
+          <ul class="meta text-muted pager">
+            
+            <li class="previous"><a href="/blog/2013/06/19/bioinfor-tools/" title="Previous Post: 生物信息学工具网址">&laquo; 生物信息学工具网址</a></li>
+            
+            
+            <li class="next"><a href="/blog/2013/11/10/mutual-information/" title="Next Post: A brief intruction of mutual information and demonstration with R">A brief intruction of mutual information and demonstration with R &raquo;</a></li>
+            
+          </ul>
+        
+      </footer>
+    </article>
+    
+      <section>
+        <h2>Comments</h2>
+        <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+      </section>
+    
+  </div>
+
+  
+  <aside class="sidebar col-md-3">
+    
+      <section class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Recent Posts</h3>
+  </div>
+  
+  <div id="recent_posts" class="list-group">
+    
+    <a class="list-group-item " href="/blog/2015/10/25/xpath-xml/">XML中XPath规则总结</a>
+    
+    <a class="list-group-item " href="/blog/2015/09/30/spacemacs-tutorial/">Spacemacs使用记录</a>
+    
+    <a class="list-group-item " href="/blog/2015/07/29/postgresql-usage/">PostgreSQL使用指南</a>
+    
+    <a class="list-group-item " href="/blog/2015/07/28/python-tips/">Python使用小技巧</a>
+    
+    <a class="list-group-item " href="/blog/2015/06/02/download-ucsc-gene-mask/">UCSC Table下载注释文件</a>
+    
+  </div>
+</section>
+<section class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Categories</h3>
+  </div>
+  <div class="list-group">
+    
+    
+    <a class="list-group-item " href="/blog/categories/linux/index.html">
+        <span class="badge">5</span>
+        linux
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/r/index.html">
+        <span class="badge">6</span>
+        r
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/lisp/index.html">
+        <span class="badge">6</span>
+        lisp
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/ppr/index.html">
+        <span class="badge">5</span>
+        ppr
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
+        <span class="badge">7</span>
+        bioinfor
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/saysomething/index.html">
+        <span class="badge">1</span>
+        saysomething
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/c/index.html">
+        <span class="badge">1</span>
+        c
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/hcj/index.html">
+        <span class="badge">1</span>
+        hcj
+      </a>
+    
+  </div>
+</section>
+
+
+
+
+
+
+    
+  </aside>
+  
+</div>
+
+        </div>
+      </div>
+    </div>
+    <footer role="contentinfo"><div class="container">
+    <p class="text-muted credits">
+  Copyright &copy; 2015 - Yulong Niu<br>
+  <small>
+      <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>,
+      <span class="credit">customized with <a href="https://github.com/kAworu/octostrap3">octostrap3</a></span>.
+  </small>
+</p>
+
+</div>
+</footer>
+    
+
+<script type="text/javascript">
+      var disqus_shortname = 'yulongniu';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://yulongniu.bionutshell.org/blog/2013/10/02/ggplot2-notes/';
+        var disqus_url = 'http://yulongniu.bionutshell.org/blog/2013/10/02/ggplot2-notes/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+<script src="/assets/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/javascripts/modernizr-2.0.js"></script>
+
+
+  </body>
+</html>

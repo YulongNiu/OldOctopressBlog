@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8">
-  <title>牛牛龙</title>
+  <title>Python使用小技巧 - 牛牛龙</title>
   <meta name="author" content="Yulong Niu">
 
   
@@ -14,15 +14,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yulongniu.bionutshell.org">
+  <link rel="canonical" href="http://yulongniu.bionutshell.org/blog/2015/07/28/python-tips">
   <link href="/favicon.ico" type="image/png" rel="icon">
   <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
 
   <!-- http://opengraphprotocol.org/ -->
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="http://yulongniu.bionutshell.org">
-  <meta property="og:title" content="牛牛龙">
+  <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2015/07/28/python-tips">
+  <meta property="og:title" content="Python使用小技巧 - 牛牛龙">
   
 
   <!-- mathjax config similar to math.stackexchange -->
@@ -158,205 +158,12 @@
       <div id="main" role="main" class="container">
         <div id="content">
           <div class="row">
-  <div class="page-content col-md-9">
-    <div class="blog-index" itemscope itemtype="http://schema.org/Blog">
+  <div class="page-content col-md-9" itemscope itemtype="http://schema.org/Blog">
     <meta itemprop="name" content="牛牛龙" />
     
     <meta itemprop="url" content="http://yulongniu.bionutshell.org" />
+    <article class="hentry" role="article" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
       
-      
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-10-25T19:05:33+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2015/10/25/xpath-xml/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2015/10/25/xpath-xml/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2015/10/25/xpath-xml/" itemprop="url">XML中XPath规则总结</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><p><a href="http://www.w3.org/TR/xpath-30/">XPath</a>提供了一种对XML节点、节点属性和内容快速查询的规则。在各种编程语言中都有实现，比如C语言的<a href="http://www.xmlsoft.org/">libxml2</a>和对应的R包 <a href="https://cran.r-project.org/web/packages/xml2/index.html">xml2</a>。</p>
-
-<h2 id="section">1. 查询规则</h2>
-
-<p>XPath查询集中在三个对象：节点、节点属性和节点内容。</p>
-
-<h3 id="section-1">1.1 选择节点</h3>
-
-<ul>
-  <li>
-    <p><code>/nodeA/nodeB</code>：nodeA为根节点，nodeA下的所有nodeB节点；等价于<code>nodeB</code>。</p>
-  </li>
-  <li>
-    <p><code>//nodeB</code>：所有nodeB节点，在R包xml2中（比如函数<code class="language-bash">xml_find_all()</code>），<code>//nodeB</code>搜索范围是整个文档，忽略当前节点；而<code>.//nodeB</code>搜索范围是当前节点之下。</p>
-  </li>
-</ul>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2015/10/25/xpath-xml/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-09-30T16:31:09+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2015/09/30/spacemacs-tutorial/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2015/09/30/spacemacs-tutorial/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2015/09/30/spacemacs-tutorial/" itemprop="url">Spacemacs使用记录</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><p><a href="https://github.com/syl20bnr/spacemacs">Spacemacs</a>结合了Vim和Emacs，而且定制了各种好用的设置，极大地减轻了Emacs的配置负担。推荐使用<code>hybrid</code>模式，这样浏览代码时可以使用Vim快捷键，进入Insert mode后使用Emacs快捷键。<code>hybrid</code>模式还有一个好处，编辑时方便汉字输入。</p>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2015/09/30/spacemacs-tutorial/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-07-29T18:24:10+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2015/07/29/postgresql-usage/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2015/07/29/postgresql-usage/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2015/07/29/postgresql-usage/" itemprop="url">PostgreSQL使用指南</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="section">1. 查询</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Query </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-</pre></td><td class="code"><pre><code class="psql"><span class="line"><span class="c1">-- 选取特定的一列或者多列</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">-- 选取全部列</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="o">*</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">-- 去除重复，选取一列或多列中唯一元素</span>
-</span><span class="line"><span class="c1">-- 如输入多列，则去除多列组合后的重复</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">-- 指定输出列数</span>
-</span><span class="line"><span class="c1">-- a是输出行数，b是输出起始行（第一行计为0）</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="k">column</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line"><span class="k">LIMIT</span> <span class="n">a</span> <span class="k">OFFSET</span> <span class="n">b</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2015/07/29/postgresql-usage/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
   <header class="page-header">
     
       <p class="meta text-muted text-uppercase">
@@ -375,18 +182,21 @@
 
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-07-28T14:37:38+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
-           | <a href="/blog/2015/07/28/python-tips/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2015/07/28/python-tips/">Comments</a>
+           | <a href="#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org">Comments</a>
         
       </p>
     
     
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2015/07/28/python-tips/" itemprop="url">Python使用小技巧</a></h2>
+    <h1 class="entry-title" itemprop="name headline">
+        Python使用小技巧
+        
+    </h1>
     
   </header>
 
 
-  <div class="entry-content clearfix" itemprop="articleBody description"><p>收集了一些使用Python过程中的小技巧或者常见错误。</p>
+<div class="entry-content clearfix" itemprop="articleBody description"><p>收集了一些使用Python过程中的小技巧或者常见错误。</p>
 
 <h2 id="while--if--break">1. While–if–break</h2>
 
@@ -434,85 +244,96 @@
 </span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="s">&#39;It passed!&#39;</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<!--more-->
+
+<h3 id="section-1">参考网址</h3>
+
+<ul>
+  <li>
+    <p><a href="https://wiki.python.org/moin/FrontPage">Python Wiki</a></p>
+  </li>
+  <li>
+    <p><a href="http://blog.shenwei.me/python-note/#more-3951">Wei Shen’s Python note</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.codefrom.com/c/214">十个我希望早点知道的python方法</a></p>
+  </li>
+</ul>
+
+<h3 id="section-2">更新记录</h3>
+
+<p>2015年7月27日</p>
+
 </div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2015/07/28/python-tips/">Read on &rarr;</a>
-    </footer>
-  
 
 
-        </article>
-      
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+      <footer>
+        <p class="meta text-muted">
           
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
+  
+
+<span class="glyphicon glyphicon-user"></span> <span class="byline author vcard" itemprop="author" itemscope itemtype="http://schema.org/Person">Posted by <span class="fn" itemprop="name">Yulong Niu</span></span>
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-07-28T14:37:38+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+          
+
+<span class="glyphicon glyphicon-tags"></span>&nbsp;
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ppr/'>ppr</a>
+  
+</span>
+
+
+        </p>
         
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-06-02T16:49:41+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2015/06/02/download-ucsc-gene-mask/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2015/06/02/download-ucsc-gene-mask/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2015/06/02/download-ucsc-gene-mask/" itemprop="url">UCSC Table下载注释文件</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><p>在进行RNA-seq数据分析时，需要从<a href="http://genome.ucsc.edu/cgi-bin/hgTables">UCSC Table</a>下载各种注释信息。比如Cufflinks等要求的转录组注释信息、Cufflinks建议去除的rRNA/tRNA/线粒体组注释。</p>
-
-<h2 id="section">1. 基因注释信息</h2>
-
-<p>下载转录组Ensembl注释文件：</p>
-
-<p><img src="/images/hg19_ensembl.png" title="image" alt="UCSC下载Ensembl注释" /></p>
-
+          <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.bionutshell.org/blog/2015/07/28/python-tips/" data-via="" data-counturl="http://yulongniu.bionutshell.org/blog/2015/07/28/python-tips/" >Tweet</a>
+  
+  
+  
 </div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2015/06/02/download-ucsc-gene-mask/">Read on &rarr;</a>
-    </footer>
-  
 
-
-        </article>
-      
-    </div>
-
-    <ul class="pager">
-      
-        <li class="previous"><a href="/posts/2">&larr;&nbsp;Older</a></li>
-      
-      <li><a href="/blog/archives">Blog Archives</a></li>
-      
-        <li class="next disabled"><a href="#">Newer&nbsp;&rarr;</a></li>
-      
-    </ul>
+        
+        
+          <ul class="meta text-muted pager">
+            
+            <li class="previous"><a href="/blog/2015/06/02/download-ucsc-gene-mask/" title="Previous Post: UCSC Table下载注释文件">&laquo; UCSC Table下载注释文件</a></li>
+            
+            
+            <li class="next"><a href="/blog/2015/07/29/postgresql-usage/" title="Next Post: PostgreSQL使用指南">PostgreSQL使用指南 &raquo;</a></li>
+            
+          </ul>
+        
+      </footer>
+    </article>
+    
+      <section>
+        <h2>Comments</h2>
+        <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+      </section>
+    
   </div>
 
   
-    <aside class="sidebar col-md-3">
-      
-        <section class="panel panel-default">
+  <aside class="sidebar col-md-3">
+    
+      <section class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Recent Posts</h3>
   </div>
@@ -525,7 +346,7 @@
     
     <a class="list-group-item " href="/blog/2015/07/29/postgresql-usage/">PostgreSQL使用指南</a>
     
-    <a class="list-group-item " href="/blog/2015/07/28/python-tips/">Python使用小技巧</a>
+    <a class="list-group-item active" href="/blog/2015/07/28/python-tips/">Python使用小技巧</a>
     
     <a class="list-group-item " href="/blog/2015/06/02/download-ucsc-gene-mask/">UCSC Table下载注释文件</a>
     
@@ -593,8 +414,8 @@
 
 
 
-      
-    </aside>
+    
+  </aside>
   
 </div>
 
@@ -618,7 +439,10 @@
       var disqus_shortname = 'yulongniu';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://yulongniu.bionutshell.org/blog/2015/07/28/python-tips/';
+        var disqus_url = 'http://yulongniu.bionutshell.org/blog/2015/07/28/python-tips/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

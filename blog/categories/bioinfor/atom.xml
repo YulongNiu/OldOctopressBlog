@@ -1,0 +1,1460 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Bioinfor | 牛牛龙]]></title>
+  <link href="http://yulongniu.bionutshell.org/blog/categories/bioinfor/atom.xml" rel="self"/>
+  <link href="http://yulongniu.bionutshell.org/"/>
+  <updated>2015-12-16T13:53:40+08:00</updated>
+  <id>http://yulongniu.bionutshell.org/</id>
+  <author>
+    <name><![CDATA[Yulong Niu]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[UCSC Table下载注释文件]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2015/06/02/download-ucsc-gene-mask/"/>
+    <updated>2015-06-02T16:49:41+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2015/06/02/download-ucsc-gene-mask</id>
+    <content type="html"><![CDATA[<p>在进行RNA-seq数据分析时，需要从<a href="http://genome.ucsc.edu/cgi-bin/hgTables">UCSC Table</a>下载各种注释信息。比如Cufflinks等要求的转录组注释信息、Cufflinks建议去除的rRNA/tRNA/线粒体组注释。</p>
+
+<h2 id="section">1. 基因注释信息</h2>
+
+<p>下载转录组Ensembl注释文件：</p>
+
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_ensembl.png" title="image" alt="UCSC下载Ensembl注释" /></p>
+
+<!--more-->
+
+<p>在“table”选择中，<code class="language-bash">ensemblSource</code>表示Ensembl类型注释，<code class="language-bash">ensemblToGeneName</code>表示Ensembl到基因名注释对应。</p>
+
+<h2 id="rrna">2. rRNA注释信息</h2>
+
+<p>分为两步：</p>
+
+<p>第一步， “table”选择<code class="language-bash">wgEncodeGencodeBasicV19</code>。</p>
+
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_rRNA.png" title="image" alt="UCSC下载rRNA注释" /></p>
+
+<p>第二步，按照下图编辑“filter”。</p>
+
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_rRNA_maskTable.png" title="image" alt="UCSC下载rRNA注释Table" /></p>
+
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_rRNA_mask.png" title="image" alt="UCSC下载rRNA注释筛选" /></p>
+
+<h2 id="trna">3. tRNA注释信息</h2>
+
+<p>分为两步：</p>
+
+<p>第一步，“track”选择 <code class="language-bash">tRNA Genes</code>。</p>
+
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_tRNA.png" title="image" alt="UCSC下载tRNA注释" /></p>
+
+<p>第二步，保留pseudo tRNA注释。</p>
+
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_tRNA_mask.png" title="image" alt="UCSC下载tRNA注释" /></p>
+
+<h2 id="section-1">4. 线粒体基因组注释</h2>
+
+<p>分为两步：</p>
+
+<p>第一步， “table”选择<code class="language-bash">wgEncodeGencodeBasicV19</code>。</p>
+
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_chrM.png" title="image" alt="UCSC下载chrM注释" /></p>
+
+<p>第二步，按照下图编辑“filter”。</p>
+
+<p><img src="http://yulongniu.bionutshell.org/images/hg19_chrM_mask.png" title="image" alt="UCSC下载chrM注释筛选" /></p>
+
+<h3 id="section-2">参考资料</h3>
+
+<ul>
+  <li>
+    <p>USCS Genome Browser的Google论坛：<a href="https://groups.google.com/a/soe.ucsc.edu/forum/#!topic/genome/IL_aeOuPYU0">1</a>、<a href="https://groups.google.com/a/soe.ucsc.edu/forum/#!msg/genome/jSAY8w1JVVo/P6lk4OJzDNEJ">2</a></p>
+  </li>
+  <li>
+    <p>另一种选择rRNA、tRNA和线粒体组注释的方法<a href="http://onetipperday.blogspot.tw/2012/08/how-to-get-trnarrnamitochondrial-gene.html">How to get tRNA/rRNA/mitochondrial gene GTF file</a></p>
+  </li>
+  <li>
+    <p><a href="http://webappl.blogspot.tw/2015/02/extract-rrna-and-trna-features-from.html">Extract rRNA and tRNA features from UCSC Browser</a></p>
+  </li>
+</ul>
+
+<h3 id="section-3">更新记录</h3>
+
+<p>2015年6月1日</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[过滤TopHat分析双端测序的输出]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2015/05/16/filter-tophat2-output/"/>
+    <updated>2015-05-16T04:33:10+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2015/05/16/filter-tophat2-output</id>
+    <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<h2 id="section">0. 结论</h2>
+
+<p>在使用TopHat2匹配双端测序结果后，建议根据成对reads的map基因组位置唯一、方向正确和距离合适的标准，筛选得到的匹配结果。比如，TopHat2可能生成<code class="language-bash">accepted_hits.bam</code>文件，处理方法如下：</p>
+
+<p><figure class='code'><figcaption><span>Filter TopHat Outputs</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;bam&quot;</span>&gt;首先查看bam文件头部有多少行&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>samtools view -H accepted_hits.bam <span class="p">|</span> wc -l
+</span><span class='line'>86&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;mapreadsnr--86&quot;</span>&gt;筛选成对且成功map到基因组唯一位置的reads，按照上一条输出结果，调整“NR <span class="p">&amp;</span>lt<span class="p">;</span><span class="o">=</span> 86”&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>samtools view -h accepted_hits.bam <span class="p">|</span> <span class="se">\</span>
+</span><span class='line'>    awk ‘<span class="o">{</span><span class="k">if</span> <span class="o">(</span>NR <span class="p">&amp;</span>lt<span class="p">;</span><span class="o">=</span> 86<span class="o">)</span> print <span class="nv">$0</span><span class="o">}</span><span class="p">;</span> <span class="o">{</span><span class="k">if</span><span class="o">(</span><span class="nv">$5</span> <span class="o">==</span> <span class="m">50</span> <span class="p">&amp;</span>amp<span class="p">;&amp;</span>amp<span class="p">;</span> <span class="o">(</span><span class="nv">$2</span> <span class="o">==</span> <span class="m">163</span> <span class="o">||</span> <span class="nv">$2</span> <span class="o">==</span> <span class="m">147</span> <span class="o">||</span> <span class="nv">$2</span> <span class="o">==</span> <span class="m">83</span> <span class="o">||</span> <span class="nv">$2</span> <span class="o">==</span> 99<span class="o">))</span> print <span class="nv">$0</span><span class="o">}</span>’ <span class="p">|</span> <span class="se">\</span>
+</span><span class='line'>    samtools view -b - <span class="p">&amp;</span>gt<span class="p">;</span> accepted_filtered.bam&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>samtools view accepted_filtered.bam <span class="p">|</span> wc -l
+</span><span class='line'>79143942
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2 id="tophatsam">1. TopHat输出sam文件的第五列</h2>
+
+<p><a href="http://ccb.jhu.edu/software/tophat/manual.shtml">TopHat文档</a>没有解释其输出bam文件（比如<code class="language-bash">accepted_hits.bam</code>）的第五列的意义。按照<a href="http://bowtie-bio.sourceforge.net/bowtie2/index.shtml">Bowtie2</a>输出结果来看，是表示映射质量指标Mapping Quality scores（MAPQ），具体计算参考公式$\eqref{eq:1}$。</p>
+
+<script type="math/tex; mode=display">\begin{align}
+MAPQ = -10 \times log_{10}(pvalue)
+\label{eq:1}
+\end{align}</script>
+
+<!--more-->
+
+<p>MAPQ值越大，表示对应的read的alignment质量越高。然而，在TopHat输出结果中，MAPQ所代表意义略有不同。</p>
+
+<p><figure class='code'><figcaption><span>“MAPQ” distribution from TopHat2 accepted mapping reads</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 查看accepted_hits.bam文件的MAPQ数值，并统计出现频数</span>
+</span><span class='line'><span class="nv">$ </span>samtools view accepted_hits.bam <span class="p">|</span> awk ‘<span class="o">{</span>print <span class="nv">$5</span><span class="o">}</span>’ <span class="p">|</span> sort –parallel<span class="o">=</span><span class="m">4</span> -n <span class="p">|</span> uniq -c
+</span><span class='line'><span class="m">5057430</span> 0
+</span><span class='line'><span class="m">3117731</span> 1
+</span><span class='line'><span class="m">8058500</span> 3
+</span><span class='line'><span class="m">93044727</span> 50&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;mapqnhin&quot;</span>&gt;查看前100位MAPQ数值和NH:i:n分布&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>samtools view accepted_hits.bam <span class="p">|</span> awk ‘<span class="o">{</span>print <span class="nv">$5</span><span class="o">}</span>’ <span class="p">|</span> head -100 <span class="p">|</span> sort –parallel<span class="o">=</span><span class="m">4</span> -n <span class="p">|</span> uniq -c
+</span><span class='line'><span class="m">35</span> 0
+</span><span class='line'><span class="m">42</span> 1
+</span><span class='line'><span class="m">22</span> 3
+</span><span class='line'><span class="m">1</span> 50&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>samtools view accepted_hits.bam <span class="p">|</span> awk ‘<span class="o">{</span>print <span class="nv">$20</span><span class="o">}</span>’ <span class="p">|</span> head -100 <span class="p">|</span> sort –parallel<span class="o">=</span><span class="m">4</span> -n <span class="p">|</span> uniq -c
+</span><span class='line'><span class="m">1</span> NH:i:1
+</span><span class='line'><span class="m">22</span> NH:i:2
+</span><span class='line'><span class="m">3</span> NH:i:20
+</span><span class='line'><span class="m">13</span> NH:i:3
+</span><span class='line'><span class="m">29</span> NH:i:4
+</span><span class='line'><span class="m">5</span> NH:i:5
+</span><span class='line'><span class="m">21</span> NH:i:6
+</span><span class='line'><span class="m">1</span> NH:i:7
+</span><span class='line'><span class="m">2</span> NH:i:8
+</span><span class='line'><span class="m">3</span> NH:i:9&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;mapqnhin-1&quot;</span>&gt;查看前200位MAPQ数值和NH:i:n分布&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>samtools view accepted_hits.bam <span class="p">|</span> awk ‘<span class="o">{</span>print <span class="nv">$5</span><span class="o">}</span>’ <span class="p">|</span> head -200 <span class="p">|</span> sort –parallel<span class="o">=</span><span class="m">4</span> -n <span class="p">|</span> uniq -c
+</span><span class='line'><span class="m">60</span> 0
+</span><span class='line'><span class="m">43</span> 1
+</span><span class='line'><span class="m">67</span> 3
+</span><span class='line'><span class="m">30</span> 50&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>samtools view accepted_hits.bam <span class="p">|</span> awk ‘<span class="o">{</span>print <span class="nv">$20</span><span class="o">}</span>’ <span class="p">|</span> head -200 <span class="p">|</span> sort –parallel<span class="o">=</span><span class="m">4</span> -n <span class="p">|</span> uniq -c
+</span><span class='line'><span class="m">30</span> NH:i:1
+</span><span class='line'><span class="m">8</span> NH:i:12
+</span><span class='line'><span class="m">7</span> NH:i:14
+</span><span class='line'><span class="m">67</span> NH:i:2
+</span><span class='line'><span class="m">3</span> NH:i:20
+</span><span class='line'><span class="m">13</span> NH:i:3
+</span><span class='line'><span class="m">30</span> NH:i:4
+</span><span class='line'><span class="m">5</span> NH:i:5
+</span><span class='line'><span class="m">31</span> NH:i:6
+</span><span class='line'><span class="m">1</span> NH:i:7
+</span><span class='line'><span class="m">2</span> NH:i:8
+</span><span class='line'><span class="m">3</span> NH:i:9
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>首先，我们可以看到TopHat输出的MAPQ只有四个数值，分别为<code class="language-bash">50</code>、<code class="language-bash">3</code>、<code class="language-bash">1</code>和<code class="language-bash">0</code>。根据<a href="http://samtools.github.io/hts-specs/SAMv1.pdf">sam文件标准</a>，<code class="language-bash">NH:i:n</code>表示含有查询序列的alignment的数量。因此，通过上述前100位和前200位分析可以发现，MAPQ并不是按照公式$\eqref{eq:1}$计算，而有可能是以下关系：</p>
+
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">MAPQ (tophat)</th>
+      <th style="text-align: center">Tag</th>
+      <th style="text-align: right">描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">50</td>
+      <td style="text-align: center">NH:i:1</td>
+      <td style="text-align: right">map至唯一位置</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">30</td>
+      <td style="text-align: center">NH:i:2</td>
+      <td style="text-align: right">map至2个位置</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">1</td>
+      <td style="text-align: center">NH:i:3/NH:i:4</td>
+      <td style="text-align: right">map至3个或4个位置</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">0</td>
+      <td style="text-align: center">NH:i:n (n &gt; 4)</td>
+      <td style="text-align: right">map到多余4个位置</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<p>展示一个<code class="language-bash">NH:i:1</code>的例子，注意Illumina双端测序平台<code class="language-bash">fr-unstranded</code>：</p>
+
+<p><figure class='code'><figcaption><span>Two pairs of unique mapped reads from Illumina HiSeq2000 </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>HISEQ2000-02:436:C2PG3ACXX:3:2313:10972:95322   <span class="m">163</span>     chr1    <span class="m">637224</span>  <span class="m">50</span>      <span class="nv">100M</span>    <span class="o">=</span>       <span class="m">637339</span>  <span class="m">215</span>     AAATGATCTGTACAATAACCCCCTGTGACACCAGTCTACCTATGTAACAAATGCCCCTAAACTTAAAATAAAAGTTAAAAAAAAAGAAAATTAAAATCTC  <span class="p">&amp;</span>lt<span class="p">;</span>@@BDABBDFBCDGEGHIGIIGIABAFHBGDFGGGHIIIFIEIGGGGIIIFFDHIGIIIIIIIICEHIIIIIIHEHHDHFFCBCCB@BCAACCCCCECCC    AS:i:0  XN:i:0  XM:i:0  XO:i:0  XG:i:0  NM:i:0  MD:Z:100     YT:Z:UU  NH:i:1
+</span><span class='line'>HISEQ2000-02:436:C2PG3ACXX:3:2313:10972:95322   <span class="m">83</span>      chr1    <span class="m">637339</span>  <span class="m">50</span>      <span class="nv">100M</span>    <span class="o">=</span>       <span class="m">637224</span>  -215    GTAATATGAAAAACACAAATCTTTCATTCATTCCTTTCAACTGATGAGGAAAATGAGGCATCGGGAGTTAGTAAAAGTCCACATTGAGATATGAGACCCA  <span class="nv">CCADDDCCCCCCCDEEEECAEHEEGGIIHGFAAGGGHEF</span><span class="o">=</span>IGGGIIGGHGCGIEIIIGIIIIIIIFIHIIIIIIGIIHFEAIGGIIGFFDFHDDDAD@@@    AS:i:0  XN:i:0  XM:i:0  XO:i:0  XG:i:0  NM:i:0  MD:Z:100     YT:Z:UU  NH:i:1&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;HISEQ2000-06:325:C2RC0ACXX:5:2205:6961:88285    <span class="m">99</span>      chr1    <span class="m">643662</span>  <span class="m">50</span>      <span class="nv">100M</span>    <span class="o">=</span>       <span class="m">643707</span>  <span class="m">145</span>     CCTATCAAAATCTTAGCATTCCTCTTAGCCCTCAACAAAGCATTTCTAAAATGTGTATAGAAGACCAAAGGGCCAAAAGAGTCAACTTCTGAAGAAGCGC  CCCFFFFFHHHHHJJJJIJJHJJJJJJJIIJJJJJJJJJJJJIJJJJJIIIJJIIIJJJJJJJJJIJJJJIJJJIHHHHFFEFFFEEEEEEEDDCDDCDD    AS:i:0  XN:i:0  XM:i:0  XO:i:0  XG:i:0  NM:i:0  MD:Z:100     YT:Z:UU  NH:i:1
+</span><span class='line'>HISEQ2000-06:325:C2RC0ACXX:5:2205:6961:88285    <span class="m">147</span>     chr1    <span class="m">643707</span>  <span class="m">50</span>      <span class="nv">100M</span>    <span class="o">=</span>       <span class="m">643662</span>  -145    CTAAAATGTGTATAGAAGACCAAAGGGCCAAAAGAGTCAACTTCTGAAGAAGCGCAAAAAGAAAGTTGAGGAAATCTTAAAACATGTTATTGAGCTTAAA  CEEEDDDDEDFEEEEEEEBFFFFFHHHHEJJJJJJJJIJJJJGJIIIIHFJJJIIJJJJJIJJJJJJJJJJJJGHJJJJIJJJJJJJGHHHHFFFFFCCC    AS:i:0  XN:i:0  XM:i:0  XO:i:0  XG:i:0  NM:i:0  MD:Z:100     YT:Z:UU  NH:i:1
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2 id="sam">2. sam文件的第二列</h2>
+
+<p>sam文件中的第二列提供了具体的map情况，下列表格摘自<a href="http://samtools.github.io/hts-specs/SAMv1.pdf">sam文件标准</a>，sam/bam文件中第二列各种条件<strong>求和</strong>的<strong>十进制</strong>标识，<a href="http://broadinstitute.github.io/picard/explain-flags.html">快速解释第二列的bitwise FLAG</a>：</p>
+
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Decimal</th>
+      <th style="text-align: center">Hexadecimal</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0x1</td>
+      <td style="text-align: left">template having multiple segments in sequencing</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">0x2</td>
+      <td style="text-align: left">each segment properly aligned according to the aligner</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">0x4</td>
+      <td style="text-align: left">segment unmapped</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">8</td>
+      <td style="text-align: center">0x8</td>
+      <td style="text-align: left">next segment in the template unmapped</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">16</td>
+      <td style="text-align: center">0x10</td>
+      <td style="text-align: left">SEQ being reverse complemented</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">32</td>
+      <td style="text-align: center">0x20</td>
+      <td style="text-align: left">SEQ of the next segment in the template being reverse complemented</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">64</td>
+      <td style="text-align: center">0x40</td>
+      <td style="text-align: left">the first segment in the template</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">128</td>
+      <td style="text-align: center">0x80</td>
+      <td style="text-align: left">the last segment in the template</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">256</td>
+      <td style="text-align: center">0x100</td>
+      <td style="text-align: left">secondary alignment</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">512</td>
+      <td style="text-align: center">0x200</td>
+      <td style="text-align: left">not passing quality controls</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1024</td>
+      <td style="text-align: center">0x400</td>
+      <td style="text-align: left">PCR or optical duplicate</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2048</td>
+      <td style="text-align: center">0x800</td>
+      <td style="text-align: left">supplementary alignment</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<p>在map完成双端测序序列中，我们感兴趣的是一对reads都正确align到基因组上，而且方相匹配又距离合适。符合这样条件的reads，对应的第二列数值为99、147、83和163，具体图示参考<a href="https://biobeat.wordpress.com/2013/04/29/directional-rna-seq-part-1-extract-strand-information-from-sam-file/">Directional RNA-seq— Part 1: SAM file flags</a>。下面表格解释四个数值的具体意义，其中<code class="language-bash">1</code>标识双端测序，<code class="language-bash">2</code>表示一对reads正确地map到基因组合适位置，表格中着重陈述<code class="language-bash">64</code>、<code class="language-bash">32</code>、<code class="language-bash">128</code>和<code class="language-bash">16</code>。</p>
+
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th>Flag</th>
+      <th>Composition</th>
+      <th>Explanation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>99</td>
+      <td>64+32+2+1</td>
+      <td>一对引物中第一个map到基因组正义链；第二个反方向map到基因组正义链</td>
+    </tr>
+    <tr>
+      <td>147</td>
+      <td>128+16+2+1</td>
+      <td>一对引物中第二个反方向map基因组正义链；第一个map到基因组正义链</td>
+    </tr>
+    <tr>
+      <td>83</td>
+      <td>64+16+2+1</td>
+      <td>一对引物中第一个map到基因组反义链；第二个反方向map到基因组反义链</td>
+    </tr>
+    <tr>
+      <td>163</td>
+      <td>128+32+2+1</td>
+      <td>一对引物中第二个反方向map基因组正义链；第一个map到基因组正义链</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<p>之后，我们需要筛选含有这些flags的reads。由于我们通常需要操作bam文件，也希望输出是bam文件，中间过程不希望再重新生成sam文件。那么，就需要结合使用<code class="language-bash">awk</code>进行筛选，具体方法见本篇文章开头所示。当然，如果是只是查看，可以使用下面例子中的 <code class="language-bash">samtools view -f 0x2</code>。</p>
+
+<p><figure class='code'><figcaption><span>Count number of unique pair-mapped alignments</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># map到基因组上唯一位置的reads数目</span>
+</span><span class='line'><span class="nv">$ </span>samtools view -q <span class="m">50</span> accepted_hits.bam <span class="p">|</span> wc -l
+</span><span class='line'>93044727
+</span><span class='line'><span class="c"># 成对reads都map到基因组对应位置的reads数目</span>
+</span><span class='line'><span class="nv">$ </span>samtools view -f 0x2 accepted_hits.bam <span class="p">|</span> wc -l
+</span><span class='line'>88793640
+</span><span class='line'><span class="c"># 成对且唯一mapped的reads数目</span>
+</span><span class='line'><span class="nv">$ </span>samtools view -q <span class="m">50</span> -f 0x2 accepted_hits.bam <span class="p">|</span> wc -l
+</span><span class='line'>79143942
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2 id="tophat">3. 操作TopHat输出的文件命令集锦</h2>
+
+<p><figure class='code'><figcaption><span>Useful bash for bam files from TopHat</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># samtools的view -c命令，其实就是输出sam文件有多少行</span>
+</span><span class='line'><span class="nv">$ </span>samtools view accepted_hits.bam <span class="p">|</span> wc -l
+</span><span class='line'>109278388
+</span><span class='line'><span class="nv">$ </span>samtools view -c accepted_hits.bam
+</span><span class='line'>109278388&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;bammappedreads&quot;</span>&gt;查看bam文件中mapped的reads长度分布&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# 第二种方法是运行FastQC，输出结果中也有显示
+</span><span class='line'>samtools view accepted_hits.bam <span class="p">|</span> awk ‘<span class="o">{</span>print length<span class="o">(</span><span class="nv">$10</span><span class="o">)}</span>’ <span class="p">|</span> sort -n <span class="p">|</span> uniq -c&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;bed&quot;</span>&gt;查看bed文件前几行&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>head junction.bed
+</span><span class='line'><span class="c"># 统计bed文件有多少行，需要去除第一行注释</span>
+</span><span class='line'><span class="c"># 以下两种方式相同，但不够完美</span>
+</span><span class='line'><span class="nv">$ </span>wc -l junction.bed
+</span><span class='line'><span class="m">220648</span> junctions.bed
+</span><span class='line'><span class="nv">$ </span>awk ‘END <span class="o">{</span>print NR<span class="o">}</span>’ junctions.bed
+</span><span class='line'>220648
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2 id="dnamrna">4. DNA链和mRNA链的称呼总结</h2>
+
+<p>双链DNA和单链mRNA，对每条链都有特定的称呼。总结如下：</p>
+
+<p><figure class='code'><figcaption><span>DNA/RNA strands </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>3’~~~~~UCUGAU~~~~~ 5’ mRNA的对应基因信息在reverse strand&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;5’—–AGACTA———-ATTGTT—– 3’
+</span><span class='line'>3’—–TCTGAT———-TAACAA—– 5’&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;pre&gt;&lt;code&gt;            5<span class="s1">&#39;~~~~~AUUGUU~~~~~ 3&#39;</span> mRNA的对应基因信息在forward strand
+</span></code></pre></td></tr></table></div></figure>
+</code></pre>
+
+<p>对于一条双链DNA，称呼列表如下：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方向<sup>a</sup></th>
+      <th>名称1</th>
+      <th>名称2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>从左至右</td>
+      <td>forward</td>
+      <td>plus</td>
+    </tr>
+    <tr>
+      <td>从右至左</td>
+      <td>reverse</td>
+      <td>minus</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><sup>a</sup>：方向是指5’至3’的阅读方向，用于区分两条DNA链条</p>
+
+<hr />
+
+<p>对于一条RNA链，其对应的双链DNA称呼如下：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>mRNA方向<sup>a</sup></th>
+      <th>名称1</th>
+      <th>名称2</th>
+      <th>名称3</th>
+      <th>名称4</th>
+      <th>名称5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>同向</td>
+      <td>coding</td>
+      <td>nontemplate</td>
+      <td>sense</td>
+      <td>positive</td>
+      <td>+</td>
+    </tr>
+    <tr>
+      <td>反向</td>
+      <td>template</td>
+      <td>noncoding</td>
+      <td>antisense</td>
+      <td>negative</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><sup>a</sup>：mRNA方向是指5’至3’。</p>
+
+<hr />
+
+<h3 id="section-1">参考网址</h3>
+
+<ul>
+  <li>
+    <p><a href="http://blog.qiuworld.com:8080/archives/3321">关于map当中的unique mapped reads问题</a></p>
+  </li>
+  <li>
+    <p>TopHat的bam输出文件第五列（类似MAPQ）的讨论： <a href="https://groups.google.com/forum/#!topic/tuxedo-tools-users/m0p1qXDEqKA">tophat mapping quality</a>和<a href="http://www.acgt.me/blog/2015/3/17/more-madness-with-mapq-scores-aka-why-bioinformaticians-hate-poor-and-incomplete-software-documentation">More madness with MAPQ scores</a></p>
+  </li>
+  <li>
+    <p><a href="https://biobeat.wordpress.com/2013/05/01/directional-rna-seq-part-2-using-samtools/">Directional RNA-seq— Part 2: Explore SAM flags using samtools</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.acgt.me/blog/2015/4/15/filtering-a-sam-file-generated-by-tophat-to-find-uniquely-mapped-concordant-read-pairs-awk-vs-samtools">Filtering a SAM file generated by TopHat to find uniquely mapped, concordant read pairs: AWK vs SAMtools</a></p>
+  </li>
+  <li>
+    <p><a href="https://www.biostars.org/p/3423/">Question: Forward And Reverse Strand Conventions</a></p>
+  </li>
+  <li>
+    <p><a href="http://en.wikipedia.org/wiki/Sense_(molecular_biology)">wiki</a></p>
+  </li>
+</ul>
+
+<h3 id="section-2">更新记录</h3>
+
+<p>2015年5月25日</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[二代测序中的短序列比对]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2014/07/26/short-sequence-alignment/"/>
+    <updated>2014-07-26T02:04:25+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2014/07/26/short-sequence-alignment</id>
+    <content type="html"><![CDATA[<p>在二代测序数据分析中，非常重要的一步是将测得的短序列“对应”到基因组上。所使用的工具被称为“短序列比对工具（short sequence aligners）”。以下是一些常用工具的介绍。</p>
+
+<h2 id="bowtie">1. Bowtie</h2>
+
+<p><strong>简介</strong>：<a href="http://bowtie-bio.sourceforge.net/">Bowtie2</a>是现在广泛使用的序列比对工具。</p>
+
+<p><strong>运行方式</strong>：所有平台</p>
+
+<p><strong>特点</strong>：</p>
+
+<ul>
+  <li>
+    <p>相比较<a href="http://bowtie-bio.sourceforge.net/index.shtml">Bowtie1</a>，处理大于50bp的短序列，速度更快、也更敏感。Bowtie1在处理小于50bp的短序列上，效果更好。</p>
+  </li>
+  <li>
+    <p><a href="http://support.illumina.com/sequencing/sequencing_software/igenome.ilmn">iGenomes</a>提供一些事先编排（index）的基因组。
+<!--more--></p>
+  </li>
+</ul>
+
+<p><strong>快速运行</strong>：</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 建立一系列FASTA文件目录</span>
+</span><span class='line'><span class="nv">$ </span>bowtie2-build /filePath/genomeFastaFile indexName&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;index&quot;</span>&gt;从已经index文件中提取原始基因组&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>bowtie2-inspect indexName <span class="p">&amp;</span>gt<span class="p">;</span> genomeFastaFile&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;unpaired&quot;</span>&gt;unpaired序列比对&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>bowtie2 -p <span class="m">4</span> -x indexName -U readFiles -S samFileName&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;paired&quot;</span>&gt;paired序列比对&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>bowtie2 -p <span class="m">4</span> -x indexName  -1 readFiles1 -2 readFiles2 -S eg2.sam&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+  <li>
+    <p><code>-p</code>：多线程</p>
+  </li>
+  <li>
+    <p><code>-x</code>：之后跟index名称</p>
+  </li>
+  <li>
+    <p><code>-U</code>：测序文件（比如Fasta，Fastq文件）</p>
+  </li>
+  <li>
+    <p><code>-1</code>/<code>-2</code>：标识paired文件</p>
+  </li>
+  <li>
+    <p><code>-S</code>：SAM格式输出文件</p>
+  </li>
+</ul>
+
+<h3 id="section">参考网址</h3>
+
+<ul>
+  <li><a href="http://lh3lh3.users.sourceforge.net/NGSalign.shtml">Heng Li总结的工具列表</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[构建和展示进化树软件使用心得]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2014/05/02/phylo-tool-summary/"/>
+    <updated>2014-05-02T05:13:59+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2014/05/02/phylo-tool-summary</id>
+    <content type="html"><![CDATA[<h2 id="section">构建进化树</h2>
+
+<h3 id="phyml">1. PhyML</h3>
+
+<p><strong>构建进化树方法</strong>：Maximum Likelihood</p>
+
+<p><strong>评估</strong>：选择bootstrap或者Likelihood-ratio test</p>
+
+<p><strong>运行方式</strong>：所有平台和<a href="http://atgc.lirmm.fr/phyml/">网页</a></p>
+
+<p><strong>心得</strong>：理论上支持4000条序列，小于2000000个字符。但是，对于个人电脑，通常100-200条序列比较合适。命令行运行时，可以选择非常简介的默认模式运行。在默认模式下，bootstrap需要手动开启。安装和使用非常方便，直接下载后可以直接使用。同时，bootstrap可以通过MPI分布计算，但是需要从源代码安装。</p>
+
+<p><strong>快速运行</strong>：</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>phyml -i align_file.phy –no_memory_check
+</span></code></pre></td></tr></table></div></figure></p>
+
+<!--more-->
+
+<ul>
+  <li><code>-i</code>：后跟需要Phylip格式文件</li>
+  <li><code>--no_memory_check</code>：不用检查内存，防止程序运行时跳出</li>
+</ul>
+
+<h3 id="raxml">2. RAxML</h3>
+
+<p><strong>构建进化树方法</strong>：Maximum Likelihood</p>
+
+<p><strong>运行方式</strong>：所有<a href="http://www.exelixis-lab.org/">平台</a>和网页。</p>
+
+<p><strong>心得</strong>：推荐<a href="http://www.phylo.org/portal2/login!input.action">网页运行</a>，支持数据的存放和其他构建进化树的方法。本地安装支持MPI和PThreads的分布计算，但是安装有些复杂，需要仔细阅读文档。</p>
+
+<p><strong>快速运行1</strong>：</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>raxmlHPC-PTHREADS-AVX -x <span class="m">12345</span> -p <span class="m">12345</span> -# <span class="m">100</span> -m GTRGAMMA -T <span class="m">4</span> -s align_file.phy -n TEST
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+  <li><code>-x</code>：bootstrap运行时设定随机数，用于结果重现</li>
+  <li><code>-p</code>：parsimony推断时设定随机数，用于结果重现</li>
+  <li><code>-#</code>：bootstrap次数。也可以设定为autoMRE，最大次数是1000。</li>
+  <li><code>-m</code>：设定使用的模型，GTRGAMMA为核苷酸序列适用模型</li>
+  <li><code>-T</code>：设定线程数，不要超过最大线程</li>
+  <li><code>-s</code>：输入文件，Phylip或者fasta文件</li>
+  <li><code>-n</code>：输入文件记号</li>
+</ul>
+
+<p><strong>快速运行2</strong>：</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>raxmlHPC-PTHREADS-AVX -f a -x <span class="m">12345</span> -p <span class="m">12345</span> -# autoMRE -m GTRCAT -T <span class="m">4</span> -s align_file.phy -n TEST
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+  <li><code>-f a</code>：选定算法，快速bootstrap</li>
+</ul>
+
+<h2 id="section-1">展示进化树</h2>
+
+<h3 id="itol">1. iTOL</h3>
+
+<p><strong>运行方式</strong>：<a href="http://itol.embl.de/">网页</a></p>
+
+<p><strong>心得</strong>：</p>
+
+<ul>
+  <li>
+    <p>用户可以添加很多自定义的项目，丰富和完善自己的进化树，比如添加柱状图、蛋白结构域、heatmap、基因平行转移（horizontal gene transfer）等；</p>
+  </li>
+  <li>
+    <p>如果输入NCBI taxonomy编号，能够自动转化成物种名称；支持鼠标点击交互式运行，非常方便。
+心得：可以在网站上建立自己的帐号，之后设定不同的project展示和存放自己的项目。尝试构建了2000条左右的序列，显示完全没有问题。</p>
+  </li>
+</ul>
+
+<h3 id="section-2">更新记录</h3>
+
+<p>2014年5月1日</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Circos Notes]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2014/03/18/circos-notes/"/>
+    <updated>2014-03-18T03:37:45+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2014/03/18/circos-notes</id>
+    <content type="html"><![CDATA[<p>Mapping data onto a Circos figure requires that you identify what patterns in your data are (a) likely to be important and (b) likely to be present, and create a figure that exposes such patterns. Remember, if the pattern exists, you can’t afford to miss it. If it doesn’t exist, you can’t afford to be fooled into thinking that it’s there, or left wondering whether it’s occluded by other data.</p>
+
+<h2 id="run-circos">1. Run circos</h2>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bin/circos
+</span><span class='line'>-png
+</span><span class='line'>-svg
+</span><span class='line'>-conf etc/circos.conf
+</span><span class='line'>-outputdir /path/to/your/output/directory
+</span><span class='line'>-outputfile yourimage.png
+</span></code></pre></td></tr></table></div></figure>
+<!--more--></p>
+
+<ul>
+  <li>
+    <p><code class="language-bash">-debug</code> is used for debugging</p>
+  </li>
+  <li>
+    <p><code class="language-bash">-cdump</code> is used for check the parsing file.</p>
+  </li>
+</ul>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># store all debug output in circos.debug.txt and display only karyotype</span>
+</span><span class='line'><span class="p">&amp;</span>gt<span class="p">;</span> circos … -group_debug _all <span class="p">|</span> tee circos.debug.txt <span class="p">|</span> egrep “debuggroup karyotype”
+</span><span class='line'><span class="c"># extract other debug reports</span>
+</span><span class='line'><span class="p">&amp;</span>gt<span class="p">;</span> egrep “debuggroup rule” circos.debug.txt
+</span><span class='line'><span class="p">&amp;</span>gt<span class="p">;</span> egrep “debuggroup <span class="o">(</span>rule<span class="p">|</span>scale<span class="o">)</span>” circos.debug.txt
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2 id="syntax-and-configure-files">2. Syntax and configure files</h2>
+
+<p>Configuration syntax is like:</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;ideogram&gt;</span>
+</span><span class='line'> thickness = 30p
+</span><span class='line'> fill      = yes
+</span><span class='line'> ...
+</span><span class='line'><span class="nt">&lt;/ideogram&gt;</span>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+Usefule syntax: hierarchical structure <code class="language-html">&lt;ideogram&gt;</code>; all data points in all plot tracks <code class="language-html">&lt;links&gt;</code> and <code class="language-html">&lt;plots&gt;</code>; local data points in a given track <code class="language-html">&lt;link&gt;</code> and <code class="language-html">&lt;plot&gt;</code>; rules <code class="language-html">&lt;rules&gt;</code> and <code class="language-html">&lt;rule&gt;</code>; highlight<code class="language-html">&lt;hightlight&gt;</code>.</p>
+
+<p>Extermal imports</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;image&gt;</span>
+</span><span class='line'># Included from Circos distribution.
+</span><span class='line'><span class="ni">&amp;lt;&amp;lt;</span>include etc/image.conf<span class="ni">&amp;gt;&amp;gt;</span>
+</span><span class='line'><span class="nt">&lt;/image&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;h1</span> <span class="na">id=</span><span class="s">&quot;colors-fonts-and-fill-patterns&quot;</span><span class="nt">&gt;</span>colors, fonts and fill patterns<span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>«include etc/colors_fonts_patterns.conf»
+</span><span class='line'># system and debug parameters
+</span><span class='line'>«include etc/housekeeping.conf»
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>Accessing configuration values<code class="language-html">parameter2 = conf(parameter1)</code> or <code class="language-html">parameter2 = conf(block1,block2,parameter1)</code> for:</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;block1&gt;</span>
+</span><span class='line'><span class="nt">&lt;block2&gt;</span>
+</span><span class='line'>parameter1 = ...
+</span><span class='line'><span class="nt">&lt;/block2&gt;</span>
+</span><span class='line'><span class="nt">&lt;/block1&gt;</span>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>Eval</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>track_color = blue
+</span><span class='line'>track_width = 100
+</span><span class='line'>track_start = 0.5<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;plots&gt;</span>
+</span><span class='line'><span class="nt">&lt;plot&gt;</span>
+</span><span class='line'># color=blue
+</span><span class='line'>color = conf(track_color)
+</span><span class='line'># r0 = 0.5r
+</span><span class='line'>r0    = eval(conf(track_start) . &quot;r&quot;)
+</span><span class='line'># r1 = 0.5r+100p
+</span><span class='line'>r1    = eval(conf(track_start) . &quot;r&quot; + conf(track_width) . &quot;p&quot;)
+</span><span class='line'><span class="nt">&lt;/plot&gt;</span>
+</span><span class='line'><span class="nt">&lt;/plots&gt;</span>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>Color</p>
+
+<p>Use the color name given, like <code class="language-html">red</code>, <code class="language-html">lred</code>, <code class="language-html">vlred</code>, <code class="language-html">vvlred</code>, <code class="language-html">dred</code>, <code class="language-html">vdred</code>, <code class="language-html">vvdred</code>. If a pure color is need, use <code class="language-html">pred</code>. For the transparent color, <code class="language-html">red_a1</code>, <code class="language-html">red_a2</code>, and to <code class="language-html">red_a5</code>. <code class="language-html">red_a1</code> has a 17% tansparency and <code class="language-html">red_a5</code> have a 83% transparency.</p>
+
+<h2 id="ideogram">3. Ideogram</h2>
+
+<p>One of the most common used ideogram is the karyotypes plot. The chromosome is marked as:</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'>
+</span><span class='line'><span class="nb">chr</span> <span class="o">-</span> <span class="n">id</span> <span class="n">label</span> <span class="n">start</span> <span class="n">end</span> <span class="n">color</span>
+</span></code></pre></td></tr></table></div></figure>
+for example</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">chr</span> <span class="o">-</span> <span class="n">hs1</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">249250621</span> <span class="n">chr1</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>The cytogenetic bands data is like:</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">band</span> <span class="n">hs1</span> <span class="n">p36</span><span class="mf">.33</span> <span class="n">p36</span><span class="mf">.33</span> <span class="mi">0</span> <span class="mi">2300000</span> <span class="n">gneg</span>
+</span></code></pre></td></tr></table></div></figure>
+* Choose a subset of chromosomes</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">chromosomes_display_default</span> <span class="o">=</span> <span class="nb">no</span><span class="sr">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;</span><span class="n">chromosomes</span> <span class="o">=</span> <span class="n">hs1</span><span class="p">;</span><span class="n">hs2</span><span class="p">;</span><span class="n">hs3</span><span class="p">;</span><span class="n">h4</span>
+</span><span class='line'><span class="n">chromosomes</span> <span class="o">=</span> <span class="sr">/hs[1-4]$/</span>
+</span><span class='line'><span class="n">chromosomes</span> <span class="o">=</span> <span class="sr">/hs[1-4]$/</span><span class="p">;</span><span class="n">hs10</span><span class="p">;</span><span class="n">hs11</span>
+</span><span class='line'><span class="n">chromosomes</span> <span class="o">=</span> <span class="sr">/hs[1-4]$/</span><span class="p">;</span><span class="o">-</span><span class="n">hs3</span>
+</span><span class='line'><span class="n">chromosomes</span> <span class="o">=</span> <span class="n">hs1:</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="mi">120</span><span class="o">-</span><span class="p">);</span><span class="n">hs2</span><span class="p">;</span><span class="n">hs3</span><span class="p">;</span><span class="n">h4</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+  <li>Order</li>
+</ul>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">chromosomes_order</span> <span class="o">=</span> <span class="n">hs2</span><span class="p">,</span><span class="n">hs3</span><span class="p">,</span><span class="n">hs1</span><span class="p">,</span><span class="n">hs5</span><span class="p">,</span><span class="n">hs4</span><span class="p">,</span><span class="n">hs8</span><span class="p">,</span><span class="n">hs7</span><span class="p">,</span><span class="n">hs6</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+  <li>Scale</li>
+</ul>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">chromosomes_scale</span> <span class="o">=</span> <span class="n">hs1</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span><span class="n">hs2</span><span class="o">=</span><span class="mf">2.0</span>
+</span><span class='line'><span class="c1"># 25% and 50%</span>
+</span><span class='line'><span class="n">chromosomes_scale</span> <span class="o">=</span> <span class="n">hs1</span><span class="o">=</span><span class="mf">0.25</span><span class="n">r</span><span class="p">,</span><span class="n">hs2</span><span class="o">=</span><span class="mf">0.50</span><span class="n">r</span>
+</span><span class='line'><span class="c1"># each is 25%</span>
+</span><span class='line'><span class="n">chromosomes_scale</span> <span class="o">=</span> <span class="sr">/hs[12]/</span><span class="o">=</span><span class="mf">0.5</span><span class="n">rn</span>
+</span><span class='line'><span class="c1"># all ideograms distributed evenly within entire figure</span>
+</span><span class='line'><span class="n">chromosomes_scale</span>   <span class="o">=</span> <span class="sr">/./</span><span class="o">=</span><span class="mi">1</span><span class="n">rn</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+  <li>Rotation</li>
+</ul>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;image&gt;</span>
+</span><span class='line'>angle_orientation* = counterclockwise
+</span><span class='line'><span class="ni">&amp;lt;&amp;lt;</span>include etc/image<span class="ni">&amp;gt;&amp;gt;</span>
+</span><span class='line'><span class="nt">&lt;/image&gt;</span>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">chromosomes_reverse</span> <span class="o">=</span> <span class="sr">/hs[234]/</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+  <li>Chromosome color</li>
+</ul>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">chromosomes_color</span> <span class="o">=</span> <span class="n">hs1</span><span class="o">=</span><span class="n">red</span><span class="p">,</span><span class="n">hs2</span><span class="o">=</span><span class="n">orange</span><span class="p">,</span><span class="n">hs3</span><span class="o">=</span><span class="n">green</span><span class="p">,</span><span class="n">hs4</span><span class="o">=</span><span class="n">blue</span>
+</span></code></pre></td></tr></table></div></figure>
+Also, the color could be redefined as</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">chr1</span><span class="o">*</span> <span class="o">=</span> <span class="n">red</span>
+</span><span class='line'><span class="n">chr2</span><span class="o">*</span> <span class="o">=</span> <span class="n">orange</span>
+</span><span class='line'><span class="n">chr3</span><span class="o">*</span> <span class="o">=</span> <span class="n">green</span>
+</span><span class='line'><span class="n">chr4</span><span class="o">*</span> <span class="o">=</span> <span class="n">blue</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+  <li>Position</li>
+</ul>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">chromosomes_radius</span> <span class="o">=</span> <span class="n">hs4:0</span><span class="mf">.9</span><span class="n">r</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+  <li>Show bands</li>
+</ul>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">band_transparency</span> <span class="o">=</span> <span class="mi">0</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+  <li>Add chromosome</li>
+</ul>
+
+<p>For example, add the human mitochondria chromosome.</p>
+
+<p>Add the following to the file <code class="language-bash">data/karyotype/karyotype.human.txt</code></p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">chr</span> <span class="o">-</span> <span class="n">hsMT</span> <span class="n">MT</span> <span class="mi">0</span> <span class="mi">16569</span> <span class="n">chrMT</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>Add “hsMT” color in the file <code class="language-bash">etc/colors.ucsc.conf</code></p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">chrMT</span> <span class="o">=</span> <span class="mi">121</span><span class="p">,</span><span class="mi">204</span><span class="p">,</span><span class="mi">61</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2 id="highlight">4. Highlight</h2>
+
+<h3 id="data-type">4.1 Data type</h3>
+
+<p>Data type of highlight is</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">chr</span> <span class="n">start</span> <span class="n">end</span>
+</span></code></pre></td></tr></table></div></figure>
+for exmaple,</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">hs1</span> <span class="mi">1298972</span> <span class="mi">1300443</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>We can also add the highlight information into the data file, for example:</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">hs1</span> <span class="mi">100433463</span> <span class="mi">100487964</span> <span class="n">fill_color</span><span class="o">=</span><span class="n">red</span><span class="p">,</span><span class="n">r0</span><span class="o">=</span><span class="mf">0.6</span><span class="n">r</span><span class="p">,</span><span class="n">r1</span><span class="o">=</span><span class="mf">0.6</span><span class="n">r</span><span class="o">+</span><span class="mi">50</span><span class="n">p</span>
+</span><span class='line'><span class="n">hs1</span> <span class="mi">232817594</span> <span class="mi">240828534</span> <span class="n">fill_color</span><span class="o">=</span><span class="n">chr9</span><span class="p">,</span><span class="n">z</span><span class="o">=</span><span class="mi">61</span><span class="p">,</span><span class="n">r0</span><span class="o">=</span><span class="mf">0.4</span><span class="n">r</span><span class="o">-</span><span class="mf">78.7058</span><span class="n">p</span><span class="p">,</span><span class="n">r1</span><span class="o">=</span><span class="mf">0.4</span><span class="n">r</span><span class="o">+</span><span class="mf">78.7058</span><span class="n">p</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h3 id="conf-format">4.2 Conf format</h3>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;highlights&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;highlight&gt;</span>
+</span><span class='line'>...
+</span><span class='line'><span class="nt">&lt;/highlight&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;highlight&gt;</span>
+</span><span class='line'>...
+</span><span class='line'><span class="nt">&lt;/highlight&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;highlight&gt;</span>
+</span><span class='line'>...
+</span><span class='line'><span class="nt">&lt;/highlight&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;/highlights&gt;</span>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h3 id="parameters">4.3 Parameters</h3>
+
+<p><code>r0</code>: inner radius of highlight</p>
+
+<p><code>r1</code>: outer radius of highlight</p>
+
+<p><code>offset</code>:  an offset applied to both r0 and r1 (useful for overriding default r0,r1 values defined at lower precedence)</p>
+
+<p><code>fill_color</code>: color of the highlight slice</p>
+
+<p><code>stroke_color</code>: color of the highlight border, drawn if stroke_thickness is set</p>
+
+<p><code>stroke_thickness</code>: border thickness, if any, of the highlight slice</p>
+
+<p><code>z</code>: z-depth of the highlight, controlling the order in which highlights are drawn</p>
+
+<p><code>ideogram</code>: toggles the position of the highlight to be within the ideogram extent</p>
+
+<h3 id="plot-hightlight">4.4 Plot hightlight</h3>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;plots&gt;</span>
+</span><span class='line'><span class="nt">&lt;plot&gt;</span>
+</span><span class='line'>type = highlight
+</span><span class='line'>file = data/3/chr.highlights.txt
+</span><span class='line'>r0   = 0.3r
+</span><span class='line'>r1   = 0.35r
+</span><span class='line'>z    = 10
+</span><span class='line'><span class="nt">&lt;/plot&gt;</span>
+</span><span class='line'><span class="nt">&lt;/plots&gt;</span>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2 id="links">5. Links</h2>
+
+<h3 id="data-type-1">5.1 Data type</h3>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">hs1</span> <span class="mi">100</span> <span class="mi">200</span> <span class="n">hs2</span> <span class="mi">250</span> <span class="mi">300</span>
+</span></code></pre></td></tr></table></div></figure>
+or</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">segdup00010</span> <span class="n">hs1</span> <span class="mi">100</span> <span class="mi">200</span>
+</span><span class='line'><span class="n">segdup00010</span> <span class="n">hs2</span> <span class="mi">250</span> <span class="mi">300</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>with link options</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">hs1</span> <span class="mi">100</span> <span class="mi">200</span> <span class="n">hs2</span> <span class="mi">250</span> <span class="mi">300</span> <span class="n">color</span><span class="o">=</span><span class="n">blue</span>
+</span><span class='line'><span class="n">hs1</span> <span class="mi">400</span> <span class="mi">550</span> <span class="n">hs3</span> <span class="mi">500</span> <span class="mi">750</span> <span class="n">color</span><span class="o">=</span><span class="n">red</span><span class="p">,</span><span class="n">thickness</span><span class="o">=</span><span class="mi">5</span><span class="n">p</span>
+</span><span class='line'><span class="n">hs1</span> <span class="mi">600</span> <span class="mi">800</span> <span class="n">hs4</span> <span class="mi">150</span> <span class="mi">350</span> <span class="n">color</span><span class="o">=</span><span class="n">black</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h3 id="conf-format-1">5.2 Conf format</h3>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;links&gt;</span>
+</span><span class='line'><span class="nt">&lt;link</span> <span class="nt">/&gt;</span>
+</span><span class='line'>file          = data/5/segdup.txt
+</span><span class='line'>radius        = 0.8r
+</span><span class='line'>bezier_radius = 0r
+</span><span class='line'>color         = black_a4
+</span><span class='line'>thickness     = 2
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;/links&gt;</span>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h3 id="parameters-1">5.3 Parameters</h3>
+
+<p><code>radius</code>: this is the radial position of the termination of the link; for relative values, if radius &lt; 1 then it is defined in terms of the inner ideogram radius, otherwise it is defined in terms of the outer ideogram radius</p>
+
+<p><code>bezier_radius</code>: the radial position of the third control point (in addition to the two positions defined by the link coordinates) used to draw the Bezier curve; if this parameter is not defined then straight lines will be used</p>
+
+<p><code>color</code>: color of the link line</p>
+
+<p><code>thickness</code>: thickness of the link line (note that this is not stroke_thickness, since the line isn’t technically stroked)</p>
+
+<p><code>record_limit</code>: if this is defined, the number of records read from the file is capped; coordinate records are sampled from the start of the file; useful for debugging</p>
+
+<p>In each <code class="language-html">&lt;link&gt;</code>, <code class="language-html">&lt;rules&gt;</code> and <code class="language-html">&lt;rule&gt;</code> can be applied to special ruls. Each <code class="language-html">&lt;rule&gt;</code> contains three parts: <em>a condition</em>, <em>formatting statements</em> and <em>an optional ‘flow’ statement</em>.</p>
+
+<p>Marker the priority of rules</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;rule&gt;</span>
+</span><span class='line'># 1st
+</span><span class='line'>importance = 10
+</span><span class='line'><span class="nt">&lt;/rule&gt;</span>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>Add a tag</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;rule&gt;</span>
+</span><span class='line'>flow = goto special_rule if true
+</span><span class='line'>...
+</span><span class='line'><span class="nt">&lt;/rule&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;rule&gt;</span>
+</span><span class='line'>tag = special_rule
+</span><span class='line'>...
+</span><span class='line'><span class="nt">&lt;/rule&gt;</span>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2 id="histograms">6. Histograms</h2>
+
+<p>Histogram, line plot, scatter plot, and heat map share the same data format</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">chr</span> <span class="n">start</span> <span class="n">end</span> <span class="n">value</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+for exmaple</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">hs3</span> <span class="mi">196000000</span> <span class="mi">197999999</span> <span class="mf">71.0000</span> <span class="n">fill_color</span><span class="o">=</span><span class="n">blue</span>
+</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="c1"># in data file</span>
+</span><span class='line'><span class="n">hs3</span> <span class="mi">196000000</span> <span class="mi">197999999</span> <span class="mf">71.0000</span> <span class="n">id</span><span class="o">=</span><span class="n">abc</span><span class="sr">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;in-rule-block&quot;</span><span class="o">&gt;</span><span class="n">in</span> <span class="n">rule</span> <span class="n">block</span><span class="sr">&lt;/h1&gt;</span>
+</span><span class='line'><span class="sr">&lt;rule&gt;</span>
+</span><span class='line'><span class="n">condition</span>  <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="ow">eq</span> <span class="s">&quot;abc&quot;</span>
+</span><span class='line'><span class="n">fill_color</span> <span class="o">=</span> <span class="n">blue</span>
+</span><span class='line'><span class="sr">&lt;/rule&gt;</span>
+</span><span class='line'><span class="sr">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+Another data format has multiple values</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">chr</span> <span class="n">start</span> <span class="n">end</span> <span class="n">value</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="err">…</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+for example</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">hs3</span> <span class="mi">196000000</span> <span class="mi">197999999</span> <span class="mf">0.0000</span><span class="p">,</span><span class="mf">7.0000</span><span class="p">,</span><span class="mf">64.0000</span><span class="p">,</span><span class="mf">0.0000</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+  <li>Plot histogram</li>
+</ul>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;plots&gt;</span>
+</span><span class='line'><span class="nt">&lt;plot&gt;</span>
+</span><span class='line'>type = histogram
+</span><span class='line'>file = data/5/segdup.hs1234.hist.txt
+</span><span class='line'>r1   = 0.88r
+</span><span class='line'>r0   = 0.81r
+</span><span class='line'>
+</span><span class='line'>fill_color = vdgrey
+</span><span class='line'>extend_bin = no
+</span><span class='line'><span class="nt">&lt;/plot&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+For multiple values, `fill_color`{:.language-bash} is used to set the different colors.
+
+* Orientation
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>orientation = in
+</span></code></pre></td></tr></table></div></figure>
+
+* Rules
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;rules&gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span><span class="nt">&lt;include</span> <span class="na">exclude</span><span class="err">.</span><span class="na">hs1</span><span class="err">.</span><span class="na">rule=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span><span class="ni">&amp;gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+* Backgrounds and axes
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;plot&gt;</span>
+</span><span class='line'>...
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;axes&gt;</span>
+</span><span class='line'> <span class="nt">&lt;axis&gt;</span>
+</span><span class='line'> ...
+</span><span class='line'> <span class="nt">&lt;/axis&gt;</span>
+</span><span class='line'> <span class="nt">&lt;axis&gt;</span>
+</span><span class='line'> ...
+</span><span class='line'> <span class="nt">&lt;/axis&gt;</span>
+</span><span class='line'> ...
+</span><span class='line'><span class="nt">&lt;/axes&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;backgrounds&gt;</span>
+</span><span class='line'> <span class="nt">&lt;background&gt;</span>
+</span><span class='line'> ...
+</span><span class='line'> <span class="nt">&lt;/background&gt;</span>
+</span><span class='line'> <span class="nt">&lt;background&gt;</span>
+</span><span class='line'> ...
+</span><span class='line'> <span class="nt">&lt;/background&gt;</span>
+</span><span class='line'> ...
+</span><span class='line'><span class="nt">&lt;/backgrounds&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;/plot&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+* text
+
+text data format is
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">chr</span> <span class="n">start</span> <span class="n">end</span> <span class="n">value</span>
+</span></code></pre></td></tr></table></div></figure>
+
+for exmaple
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">hs1</span> <span class="mi">100425066</span> <span class="mi">100487997</span> <span class="n">DBT</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;plots&gt;</span>
+</span><span class='line'><span class="nt">&lt;plot&gt;</span>
+</span><span class='line'>type             = text
+</span><span class='line'>color            = black
+</span><span class='line'>file             = data/phylo/labelGene.txt
+</span><span class='line'><span class="nt">&lt;/plot&gt;</span>
+</span><span class='line'><span class="nt">&lt;/plots&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+apply rules
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;rules&gt;</span>
+</span><span class='line'><span class="nt">&lt;rule&gt;</span>
+</span><span class='line'>importance = 90
+</span><span class='line'>condition  = var(value) eq &quot;GeneName&quot;
+</span><span class='line'>color = blue
+</span><span class='line'><span class="nt">&lt;/rule&gt;</span>
+</span><span class='line'><span class="nt">&lt;/rules&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+## Reference ##
+
+* [Ciros grocery of published pictures](http://circos.ca/images/scientific_literature/)
+
+</include></rules></plots>
+]]></content>
+  </entry>
+  
+</feed>

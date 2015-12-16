@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>R小技巧集锦 - 牛牛龙</title>
+  <meta name="author" content="Yulong Niu">
+
+  
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://yulongniu.bionutshell.org/blog/2012/05/03/r-tricks">
+  <link href="/favicon.ico" type="image/png" rel="icon">
+  <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
+
+  <!-- http://opengraphprotocol.org/ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2012/05/03/r-tricks">
+  <meta property="og:title" content="R小技巧集锦 - 牛牛龙">
+  
+
+  <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script src="/javascripts/libs/jquery/jquery-2.0.3.min.js"></script>
+
+<!--enable to choose theme in octostrap-->
+
+  <link href="/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="/assets/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+
+
+
+<!-- link open with new tab  -->
+<script>
+  function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+  $(this).attr('target', '_blank');
+  });
+  }
+  
+  $(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+  });
+</script>
+
+
+  
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  
+
+  
+   <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-53073828-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+  <body   >
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div id="wrap">
+      <header role="banner">
+        <nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">牛牛龙</a>
+        </div>
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a rel="index" href="/">Blog</a>
+                </li>
+                <li >
+                    <a href="/blog/archives">Archives</a>
+                </li>
+		<li >
+                  <a href="/whoami">WhoAmI</a>
+                </li>
+		<li >
+                  <a href="/link">Link</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="subscribe-rss" href="/atom.xml" title="subscribe via RSS">
+                        <span class="visible-xs">RSS</span>
+                        <img class="hidden-xs" src="/images/rss.png" alt="RSS">
+                    </a>
+                </li>
+                
+            </ul>
+            
+                <form class="search navbar-form navbar-right" action="https://www.google.com/search" method="GET">
+                    <input type="hidden" name="q" value="site:yulongniu.bionutshell.org">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="q" placeholder="Search">
+                    </div>
+                </form>
+            
+        </div>
+    </div>
+</nav>
+
+
+      </header>
+      <div id="main" role="main" class="container">
+        <div id="content">
+          <div class="row">
+  <div class="page-content col-md-9" itemscope itemtype="http://schema.org/Blog">
+    <meta itemprop="name" content="牛牛龙" />
+    
+    <meta itemprop="url" content="http://yulongniu.bionutshell.org" />
+    <article class="hentry" role="article" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+      
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2012-05-03T10:17:02+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org">Comments</a>
+        
+      </p>
+    
+    
+    <h1 class="entry-title" itemprop="name headline">
+        R小技巧集锦
+        
+    </h1>
+    
+  </header>
+
+
+<div class="entry-content clearfix" itemprop="articleBody description"><p>持续更新R语言编程中的一些小技巧，包括一些易错点。
+但是，需要注意的，<strong>一旦需要使用一些非常稀奇古怪的技巧时，可以尝试反思是否是自己数据结构或者算法出了问题。</strong></p>
+
+<h2 id="iflanguage-relselanguage-r">1. <code class="language-r">if</code>爱你，<code class="language-r">else</code>就要和你在一起，又要给你一些距离</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="kr">if</span> <span class="p">(</span>con<span class="p">){</span>
+</span><span class="line">  expr
+</span><span class="line">  <span class="p">}</span> <span class="kp">else</span><span class="p">{</span>
+</span><span class="line">  expr2
+</span><span class="line">  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code class="language-r">if...else..</code>结构中，<code class="language-r">}</code>与<code class="language-r">else</code>必须在同一行。</p>
+
+<!--more-->
+
+<p>简易形式（<span style="color: blue">不推荐</span>）：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="c1"># else不能与expr在同一行</span>
+</span><span class="line"><span class="kr">if</span> <span class="p">(</span>con<span class="p">)</span> expr
+</span><span class="line"><span class="kr">else</span> expr2
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>建议将所有<code class="language-r">if ... else ...</code>结构写成第一种形式，如果没有<code class="language-r">else</code>，用<code class="language-r">else {}</code>代替。</p>
+
+<h2 id="nulllanguage-rnulllanguage-rnulllanguage-rr">2. <code class="language-r">NULL</code>是空，<code class="language-r">NULL</code>是气，<code class="language-r">NULL</code>在R中就是空气。</h2>
+
+<p>如果表达式（expression）或者函数（function）的值没有定义，那么将返回<code class="language-r">NULL</code>。在R中，<code class="language-r">NULL</code>与很多对象合并在一起时，都被忽略掉。比如以下例子：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="c1"># NULL is neglected in vector</span>
+</span><span class="line"><span class="o">&gt;</span> <span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="kc">NA</span><span class="p">,</span> <span class="kc">NULL</span><span class="p">,</span> <span class="kc">FALSE</span><span class="p">)</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span>  <span class="m">1</span> <span class="kc">NA</span>  <span class="m">0</span>
+</span><span class="line">
+</span><span class="line"><span class="c1"># also in matrix</span>
+</span><span class="line"><span class="o">&gt;</span> <span class="kt">matrix</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="kc">NA</span><span class="p">,</span> <span class="kc">NULL</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span> <span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
+</span><span class="line">     <span class="p">[,</span><span class="m">1</span><span class="p">]</span> <span class="p">[,</span><span class="m">2</span><span class="p">]</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">,]</span>    <span class="m">1</span>    <span class="m">2</span>
+</span><span class="line"><span class="p">[</span><span class="m">2</span><span class="p">,]</span>   <span class="kc">NA</span>    <span class="m">1</span>
+</span><span class="line">警告信息：
+</span><span class="line">In <span class="kt">matrix</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="kc">NA</span><span class="p">,</span> <span class="kc">NULL</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span> <span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span> <span class="o">:</span> 数据长度<span class="p">[</span><span class="m">3</span><span class="p">]</span>不是矩阵行数<span class="p">[</span><span class="m">2</span><span class="p">]</span>的整倍
+</span><span class="line">
+</span><span class="line"><span class="c1"># also in list</span>
+</span><span class="line"><span class="o">&gt;</span> tmp <span class="o">&lt;-</span> <span class="kt">list</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+</span><span class="line"><span class="o">&gt;</span> tmp<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kc">NULL</span>
+</span><span class="line"><span class="o">&gt;</span> tmp
+</span><span class="line"><span class="p">[[</span><span class="m">1</span><span class="p">]]</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">2</span>
+</span><span class="line"><span class="o">&gt;</span> tmp<span class="p">[[</span><span class="m">1</span><span class="p">]]</span> <span class="o">&lt;-</span> <span class="kc">NULL</span>
+</span><span class="line"><span class="o">&gt;</span> tmp
+</span><span class="line"><span class="kt">list</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>如果一定要将列表中的某个个元素赋值为NULL，可以使用list(NULL)，比如：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="o">&gt;</span> tmp <span class="o">&lt;-</span> <span class="kt">list</span><span class="p">()</span>
+</span><span class="line"><span class="o">&gt;</span> tmp<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kt">list</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span>
+</span><span class="line"><span class="o">&gt;</span> tmp
+</span><span class="line"><span class="p">[[</span><span class="m">1</span><span class="p">]]</span>
+</span><span class="line"><span class="kc">NULL</span>
+</span><span class="line"><span class="o">&gt;</span> <span class="kp">is.null</span><span class="p">(</span>tmp<span class="p">[[</span><span class="m">1</span><span class="p">]])</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="kc">TRUE</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="listlist">3. list不是万能的，但没有list是万万不能的</h2>
+
+<p>列表（list）在R中是个全能选手、无所不“包”；list还是金箍棒，别看它丫的开始长度（<code class="language-r">length()</code>）短，之后想变长就变长，多长都行。</p>
+
+<p>这暗示list可以这样用：在循环开始时，我们不知道会产生多少个元素，可以事先规定输出结果为<code class="language-r">a &lt;- list()</code>，之后赋值；甚至可以按照名字赋值，比如<code class="language-r">a$add &lt;- exprs</code>。</p>
+
+<ul>
+  <li>创建</li>
+</ul>
+
+<blockquote>
+  <p>如果要创建一个长度为n的、每个元素都为<code class="language-r">NULL</code>的list，可以使用<code class="language-r">vector("list", n)</code>。</p>
+</blockquote>
+
+<ul>
+  <li>插入</li>
+</ul>
+
+<blockquote>
+  <p>如果要在list中插入元素，可以使用<code class="language-r">append(x, values, after = length(x))</code>函数。<code class="language-r">append()</code>函数原本是对vector设计的，但是list也能使用。</p>
+</blockquote>
+
+<h2 id="section">4. 创建“空”值很淡定，要么空来要么0</h2>
+
+<p>如果要创建一个空的对象（对象的长度是0）很容易，比如：</p>
+
+<ul>
+  <li>创建一个长度为0的数值向量</li>
+</ul>
+
+<blockquote>
+  <p><code class="language-r">numeric()</code>或者<code class="language-r">numeric(0)</code></p>
+
+  <p><code class="language-r">character()</code>或者<code class="language-r">character(0)</code></p>
+
+  <p><code class="language-r">integer()</code>或者<code class="language-r">integer(0)</code>可以起到同样的效果</p>
+
+  <p><code class="language-r">factor()</code>创建一个长度为0的因子</p>
+
+  <p><span style="color: blue">注意</span>：<code class="language-r">factor(0)</code>的长度是1</p>
+</blockquote>
+
+<ul>
+  <li>创建一个长度为0的矩阵</li>
+</ul>
+
+<blockquote>
+  <p><code>matrix(0, 0, 0)</code></p>
+
+  <p><span style="color: blue">注意</span>：<code class="language-r">array()</code>创建的对象长度为1。</p>
+</blockquote>
+
+<ul>
+  <li>创建一个长度为0的列表</li>
+</ul>
+
+<blockquote>
+  <p><code class="language-r">list()</code></p>
+</blockquote>
+
+<ul>
+  <li>创建一个长度为0的data.frame</li>
+</ul>
+
+<blockquote>
+  <p><code class="language-r">data.frame()</code></p>
+</blockquote>
+
+<h2 id="dataframe">5. 对象转换要小心，data.frame是陷阱</h2>
+
+<p>R中一些对象转换要格外小心，特别是牵扯到data.frame类型。以下是几个常见的陷阱：</p>
+
+<h3 id="section-1">5.1 “字符型因子”转换为“数值型向量”</h3>
+
+<p>需要先转成字符串向量过渡一下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="kp">as.numeric</span><span class="p">(</span><span class="kp">as.character</span><span class="p">(</span>MyFactor<span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="dataframe-1">5.2 字符和数值因子混搭data.frame</h3>
+
+<p>每一列是按照字符型因子保存。留意表面上是数值的一列，它非常危险，特别是排序。一个例子：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="o">&gt;</span> a1 <span class="o">&lt;-</span> <span class="kp">as.factor</span><span class="p">(</span><span class="kp">as.character</span><span class="p">(</span>a1<span class="p">))</span>
+</span><span class="line"><span class="o">&gt;</span> a1
+</span><span class="line"> <span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">5</span>  <span class="m">6</span>  <span class="m">7</span>  <span class="m">8</span>  <span class="m">9</span>  <span class="m">10</span> <span class="m">11</span> <span class="m">12</span> <span class="m">13</span> <span class="m">14</span> <span class="m">15</span>
+</span><span class="line">Levels<span class="o">:</span> <span class="m">10</span> <span class="m">11</span> <span class="m">12</span> <span class="m">13</span> <span class="m">14</span> <span class="m">15</span> <span class="m">5</span> <span class="m">6</span> <span class="m">7</span> <span class="m">8</span> <span class="m">9</span>
+</span><span class="line"><span class="o">&gt;</span> <span class="kp">sort</span><span class="p">(</span>a1<span class="p">)</span>
+</span><span class="line"> <span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">10</span> <span class="m">11</span> <span class="m">12</span> <span class="m">13</span> <span class="m">14</span> <span class="m">15</span> <span class="m">5</span>  <span class="m">6</span>  <span class="m">7</span>  <span class="m">8</span>  <span class="m">9</span>
+</span><span class="line">Levels<span class="o">:</span> <span class="m">10</span> <span class="m">11</span> <span class="m">12</span> <span class="m">13</span> <span class="m">14</span> <span class="m">15</span> <span class="m">5</span> <span class="m">6</span> <span class="m">7</span> <span class="m">8</span> <span class="m">9</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="elselanguage-riflanguage-rswitchlanguage-r">6. 多个<code class="language-r">else</code>/<code class="language-r">if</code>别担心，<code class="language-r">switch()</code>函数来帮助</h2>
+
+<p>如果需要在不同情况下，对变量进行不同的处理，自然会联想到使用多个多个<code class="language-r">else</code>/<code class="language-r">if</code>。如果<code class="language-r">else</code>/<code class="language-r">if</code>是用来处理的简单的赋值，可以使用<code class="language-r">switch(EXPR, ...)</code>函数。其中，<code class="language-r">EXPR</code>是一个表达式，生成一个数字或者字符串；接下来，使用生成的数字和字符串匹配<code class="language-r">...</code>中的内容。</p>
+
+<p>所以，我们很容易想到，如果<code class="language-r">EXPR</code>生成的数字，则对应匹配<code class="language-r">...</code>的第几个元素，此时<code class="language-r">...</code>中的变量可以没有名字；如果是字符串，就会严格地匹配<code class="language-r">...</code>中相同名字的变量；如果<code class="language-r">EXPR</code>生成是字符串，<code class="language-r">...</code>中没有相匹配的变量名，则返回<code class="language-r">NULL</code>；如果<code class="language-r">...</code>中有一个“无名”变量（即没有对变量赋值），上一种情况下返回该无名变量，相当于最后一个<code class="language-r">else</code>。比如：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="o">&gt;</span> <span class="kr">switch</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> a <span class="o">=</span> <span class="m">3</span><span class="p">,</span> b <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">3</span>
+</span><span class="line"><span class="o">&gt;</span> <span class="kr">switch</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> aa <span class="o">=</span> <span class="s">&#39;red&#39;</span><span class="p">,</span> bb <span class="o">=</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> cc <span class="o">=</span> <span class="s">&#39;yellow&#39;</span><span class="p">,</span> <span class="s">&#39;No value&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;blue&quot;</span>
+</span><span class="line"><span class="o">&gt;</span> <span class="kr">switch</span><span class="p">(</span><span class="s">&#39;aa&#39;</span><span class="p">,</span> aa <span class="o">=</span> <span class="s">&#39;red&#39;</span><span class="p">,</span> bb <span class="o">=</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> cc <span class="o">=</span> <span class="s">&#39;yellow&#39;</span><span class="p">,</span> <span class="s">&#39;No value&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;red&quot;</span>
+</span><span class="line"><span class="o">&gt;</span> <span class="kr">switch</span><span class="p">(</span><span class="s">&#39;dd&#39;</span><span class="p">,</span> aa <span class="o">=</span> <span class="s">&#39;red&#39;</span><span class="p">,</span> bb <span class="o">=</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> cc <span class="o">=</span> <span class="s">&#39;yellow&#39;</span><span class="p">,</span> <span class="s">&#39;No value&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;No value&quot;</span>
+</span><span class="line"><span class="o">&gt;</span> <span class="kr">switch</span><span class="p">(</span><span class="s">&#39;bb&#39;</span><span class="p">,</span> aa <span class="o">=</span> <span class="s">&#39;red&#39;</span><span class="p">,</span> bb <span class="o">=</span> <span class="p">,</span> cc <span class="o">=</span> <span class="s">&#39;yellow&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;yellow&quot;</span>
+</span><span class="line"><span class="o">&gt;</span> <span class="kr">switch</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> aa <span class="o">=</span> <span class="s">&#39;red&#39;</span><span class="p">,</span> bb <span class="o">=</span> <span class="p">,</span> cc <span class="o">=</span> <span class="s">&#39;yellow&#39;</span><span class="p">)</span>
+</span><span class="line">Error<span class="o">:</span> empty alternative <span class="kr">in</span> <span class="kt">numeric</span> <span class="kr">switch</span>
+</span><span class="line"><span class="o">&gt;</span> <span class="kr">switch</span><span class="p">(</span><span class="s">&#39;dd&#39;</span><span class="p">,</span> aa <span class="o">=</span> <span class="s">&#39;red&#39;</span><span class="p">,</span> bb <span class="o">=</span> <span class="p">,</span> cc <span class="o">=</span> <span class="s">&#39;yellow&#39;</span><span class="p">,</span> <span class="s">&#39;no&#39;</span><span class="p">,</span> <span class="s">&#39;value&#39;</span><span class="p">)</span>
+</span><span class="line">Error<span class="o">:</span> duplicate <span class="kr">switch</span> defaults<span class="o">:</span> <span class="s">&#39;&quot;no&quot;&#39;</span> and <span class="s">&#39;&quot;value&quot;&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><span style="color: blue">注意</span>：</p>
+
+<ul>
+  <li>
+    <p>如果<code class="language-r">EXPR</code>是数字，范围不能超过<code class="language-r">...</code>的长度。同时，虽然此时<code class="language-r">...</code>变量可以名字，但是有名字的变量必须有数值，不能学习以上例子中倒数第二种情况，否则会报错。</p>
+  </li>
+  <li>
+    <p>如果<code class="language-r">EXPR</code>是字符串，那么会进行自动继承，即前者继承后者。</p>
+  </li>
+  <li>
+    <p>虽然<code class="language-r">EXPR</code>是字符串情况可以自动继承，甚至继承一个无名变量，但是无名变量只能有一个。</p>
+  </li>
+  <li>
+    <p>最后将<code>EXPR</code>明确写出，为了R的版本兼容。</p>
+  </li>
+</ul>
+
+<p><strong>总结</strong>：
+<code class="language-r">swich()</code>函数是一个好玩却又危险的函数，一个没有歧义的使用方法是：<code class="language-r">EXPR</code>明确写出，且返回字符串，<code class="language-r">...</code>中每一个变量都有确切的值，无名变量只有一个，比如：<code class="language-r">switch(EXPR='dd', aa = 'red', bb = 'blue', cc = 'yellow', 'no value')</code>。</p>
+
+<h2 id="rdroplanguage-r">7. R取值有技巧，<code class="language-r">drop</code>选项巧帮助</h2>
+
+<p>当对象是一个矩阵的时候，通常我们要获取其中一些元素。如果取出的正好是一行或者一列，此时，R会返回给我们一个向量，而不是矩阵。这会带来很大的麻烦，因为我们必须判断返回对象是向量，还是矩阵，才能继续下面的操作。此时，<code class="language-r">drop</code>可以帮助我们，如果设置<code class="language-r">drop = FALSE</code>，就会保持原样返回结果。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="o">&gt;</span> b <span class="o">&lt;-</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">6</span><span class="p">,</span> nrow <span class="o">=</span> <span class="m">2</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">3</span><span class="p">)</span>
+</span><span class="line"><span class="o">&gt;</span> b
+</span><span class="line">     <span class="p">[,</span><span class="m">1</span><span class="p">]</span> <span class="p">[,</span><span class="m">2</span><span class="p">]</span> <span class="p">[,</span><span class="m">3</span><span class="p">]</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">,]</span>    <span class="m">1</span>    <span class="m">3</span>    <span class="m">5</span>
+</span><span class="line"><span class="p">[</span><span class="m">2</span><span class="p">,]</span>    <span class="m">2</span>    <span class="m">4</span>    <span class="m">6</span>
+</span><span class="line"><span class="o">&gt;</span> b<span class="p">[,</span> <span class="m">3</span><span class="p">]</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">5</span> <span class="m">6</span>
+</span><span class="line"><span class="o">&gt;</span> b<span class="p">[,</span> <span class="m">3</span><span class="p">,</span> drop <span class="o">=</span> <span class="kc">FALSE</span><span class="p">]</span>
+</span><span class="line">     <span class="p">[,</span><span class="m">1</span><span class="p">]</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">,]</span>    <span class="m">5</span>
+</span><span class="line"><span class="p">[</span><span class="m">2</span><span class="p">,]</span>    <span class="m">6</span>
+</span><span class="line"><span class="o">&gt;</span> b<span class="p">[</span><span class="m">1</span><span class="p">,</span> <span class="p">,</span> drop <span class="o">=</span> <span class="kc">FALSE</span><span class="p">]</span>
+</span><span class="line">     <span class="p">[,</span><span class="m">1</span><span class="p">]</span> <span class="p">[,</span><span class="m">2</span><span class="p">]</span> <span class="p">[,</span><span class="m">3</span><span class="p">]</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">,]</span>    <span class="m">1</span>    <span class="m">3</span>    <span class="m">5</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="language-r--language-r-">8. <code class="language-r">|</code> 和 <code class="language-r">||</code> 有区别，返回向量与单值</h2>
+
+<p>R中的逻辑运算符号有两组，<code class="language-r">|</code>或者<code class="language-r">||</code>（<code class="language-r">&amp;</code>或者<code class="language-r">&amp;&amp;</code>），看起来觉得有些多余。其实，这是为了R独特的“<strong>向量运算</strong>”考虑的。<code class="language-r">|</code>或者<code class="language-r">&amp;</code>首先考虑返回一个向量，而<code class="language-r">||</code>和<code class="language-r">&amp;&amp;</code>则只返回最后一个值。比如：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="o">&gt;</span> <span class="kt">c</span><span class="p">(</span><span class="kc">FALSE</span><span class="p">,</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">|</span> <span class="kt">c</span><span class="p">(</span><span class="kc">FALSE</span><span class="p">,</span> <span class="kc">FALSE</span><span class="p">)</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="kc">FALSE</span>  <span class="kc">TRUE</span>
+</span><span class="line"><span class="o">&gt;</span> <span class="kt">c</span><span class="p">(</span><span class="kc">FALSE</span><span class="p">,</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">||</span> <span class="kt">c</span><span class="p">(</span><span class="kc">FALSE</span><span class="p">,</span> <span class="kc">FALSE</span><span class="p">)</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="kc">FALSE</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-2">9. 递归</h2>
+
+<p>R在解释代码时，不支持尾递归优化，所以在R中不要写递归。</p>
+
+<h2 id="r0language-rnalanguage-r">10. R图例空元素，<code class="language-r">0</code>和<code class="language-r">NA</code>来代替</h2>
+
+<p>在R绘图的图例中，通常需要“线条”和“点”分开单独表示，这里用到<code class="language-r">0</code>和<code class="language-r">NA</code>的小技巧。如果在<code class="language-r">legend()</code>函数函数中，<code class="language-r">pch = NA</code>表示没有点，<code class="language-r">lty=0</code>表示没有线条。</p>
+
+<h2 id="evallanguage-rparselanguage-r">11. 字符串转代码很容易，<code class="language-r">eval()</code>/<code class="language-r">parse()</code>很随意</h2>
+
+<p>如果我们有一个字符字符串，现在需要将其转为可执行代码。方法如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="o">&gt;</span> test1 <span class="o">=</span> <span class="s">&#39;1:3&#39;</span>
+</span><span class="line"><span class="o">&gt;</span> test1
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;1:3&quot;</span>
+</span><span class="line"><span class="o">&gt;</span> <span class="kp">eval</span><span class="p">(</span><span class="kp">parse</span><span class="p">(</span>text <span class="o">=</span> test1<span class="p">))</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">1</span> <span class="m">2</span> <span class="m">3</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="factorclanguage-r">12. factor如需换标签，<code class="language-r">c()</code>函数有妙招</h2>
+
+<p>如果我们需要对一个factor的标签（label）进行转换，并且返回一个向量，有两种方法可以使用:</p>
+
+<ul>
+  <li>第一种方法，使用<code>c()</code>函数</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="o">&gt;</span> tmp1 <span class="o">&lt;-</span> <span class="kp">factor</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">,</span> each <span class="o">=</span> <span class="m">3</span><span class="p">))</span>
+</span><span class="line"><span class="o">&gt;</span> tmp1
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">1</span> <span class="m">1</span> <span class="m">1</span> <span class="m">2</span> <span class="m">2</span> <span class="m">2</span> <span class="m">3</span> <span class="m">3</span> <span class="m">3</span>
+</span><span class="line">Levels<span class="o">:</span> <span class="m">1</span> <span class="m">2</span> <span class="m">3</span>
+</span><span class="line"><span class="o">&gt;</span> <span class="kt">c</span><span class="p">(</span><span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">])[</span>tmp1<span class="p">]</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;a&quot;</span> <span class="s">&quot;a&quot;</span> <span class="s">&quot;a&quot;</span> <span class="s">&quot;b&quot;</span> <span class="s">&quot;b&quot;</span> <span class="s">&quot;b&quot;</span> <span class="s">&quot;c&quot;</span> <span class="s">&quot;c&quot;</span> <span class="s">&quot;c&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>第二种方法，先转换标签，之后再使用<code class="language-r">as.character()</code>函数。</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="o">&gt;</span> tmp2 <span class="o">&lt;-</span> <span class="kp">factor</span><span class="p">(</span>tmp1<span class="p">,</span> labels <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">])</span>
+</span><span class="line"><span class="o">&gt;</span> tmp2
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> a a a b b b <span class="kt">c</span> <span class="kt">c</span> <span class="kt">c</span>
+</span><span class="line">Levels<span class="o">:</span> a b <span class="kt">c</span>
+</span><span class="line"><span class="o">&gt;</span> <span class="kp">as.character</span><span class="p">(</span>tmp2<span class="p">)</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;a&quot;</span> <span class="s">&quot;a&quot;</span> <span class="s">&quot;a&quot;</span> <span class="s">&quot;b&quot;</span> <span class="s">&quot;b&quot;</span> <span class="s">&quot;b&quot;</span> <span class="s">&quot;c&quot;</span> <span class="s">&quot;c&quot;</span> <span class="s">&quot;c&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-3">13. 操作符也是函数，使用起来有妙招</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="o">&gt;</span> <span class="s">&quot;+&quot;</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">3</span>
+</span><span class="line"><span class="o">&gt;</span> <span class="s">&#39;&gt;&#39;</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="kc">FALSE</span>
+</span><span class="line"><span class="o">&gt;</span> tmp1 <span class="o">=</span> <span class="kt">list</span><span class="p">()</span>
+</span><span class="line"><span class="o">&gt;</span> <span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span>
+</span><span class="line">  tmp1<span class="p">[[</span>i<span class="p">]]</span> <span class="o">=</span> i<span class="o">:</span><span class="p">(</span>i<span class="m">+1</span><span class="p">)</span>
+</span><span class="line"><span class="o">&gt;</span> tmp1
+</span><span class="line"><span class="p">[[</span><span class="m">1</span><span class="p">]]</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">1</span> <span class="m">2</span>
+</span><span class="line">
+</span><span class="line"><span class="p">[[</span><span class="m">2</span><span class="p">]]</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">2</span> <span class="m">3</span>
+</span><span class="line">
+</span><span class="line"><span class="p">[[</span><span class="m">3</span><span class="p">]]</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">3</span> <span class="m">4</span>
+</span><span class="line">
+</span><span class="line"><span class="p">[[</span><span class="m">4</span><span class="p">]]</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">4</span> <span class="m">5</span>
+</span><span class="line">
+</span><span class="line"><span class="p">[[</span><span class="m">5</span><span class="p">]]</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">5</span> <span class="m">6</span>
+</span><span class="line">
+</span><span class="line"><span class="p">[[</span><span class="m">6</span><span class="p">]]</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">6</span> <span class="m">7</span>
+</span><span class="line">
+</span><span class="line"><span class="p">[[</span><span class="m">7</span><span class="p">]]</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">7</span> <span class="m">8</span>
+</span><span class="line">
+</span><span class="line"><span class="p">[[</span><span class="m">8</span><span class="p">]]</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">8</span> <span class="m">9</span>
+</span><span class="line">
+</span><span class="line"><span class="p">[[</span><span class="m">9</span><span class="p">]]</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span>  <span class="m">9</span> <span class="m">10</span>
+</span><span class="line">
+</span><span class="line"><span class="p">[[</span><span class="m">10</span><span class="p">]]</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">10</span> <span class="m">11</span>
+</span><span class="line"><span class="o">&gt;</span> <span class="kp">sapply</span><span class="p">(</span>tmp1<span class="p">,</span> <span class="s">&#39;[[&#39;</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+</span><span class="line"> <span class="p">[</span><span class="m">1</span><span class="p">]</span>  <span class="m">2</span>  <span class="m">3</span>  <span class="m">4</span>  <span class="m">5</span>  <span class="m">6</span>  <span class="m">7</span>  <span class="m">8</span>  <span class="m">9</span> <span class="m">10</span> <span class="m">11</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>最后一个例子中，使用了<code class="language-r">[[</code>，巧妙地取得了第二个元素。</p>
+
+<h2 id="tablequotelanguage-r">14. 输出table有引号，<code class="language-r">quote</code>参数来帮忙</h2>
+
+<p>在使用<code class="language-r">write.table()</code>命令输入一个data.frame对象时候，输入文件会加引号。这时，设定<code class="language-r">quote</code>参数，<code class="language-r">write.table(..., quote = FALSE)</code>。</p>
+
+<h2 id="identicallanguage-r">15. 比较两个元素<code class="language-r">identical()</code></h2>
+
+<h2 id="listdocalllanguage-r">16. 压缩list用<code class="language-r">do.call()</code></h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="kp">do.call</span><span class="p">(</span><span class="kp">rbind</span><span class="p">,</span> <span class="kt">list</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="splitlanguage-r">17. 分割数据使用<code class="language-r">split()</code></h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="o">&gt;</span> test1 <span class="o">&lt;-</span> <span class="kp">rep</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">),</span> <span class="kt">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">))</span>
+</span><span class="line"><span class="o">&gt;</span> test1
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;a&quot;</span> <span class="s">&quot;a&quot;</span> <span class="s">&quot;a&quot;</span> <span class="s">&quot;b&quot;</span> <span class="s">&quot;b&quot;</span> <span class="s">&quot;b&quot;</span> <span class="s">&quot;b&quot;</span>
+</span><span class="line"><span class="o">&gt;</span> <span class="kp">split</span><span class="p">(</span>test1<span class="p">,</span> <span class="kp">factor</span><span class="p">(</span>test1<span class="p">))</span>
+</span><span class="line"><span class="o">$</span>a
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;a&quot;</span> <span class="s">&quot;a&quot;</span> <span class="s">&quot;a&quot;</span>
+</span><span class="line">
+</span><span class="line"><span class="o">$</span>b
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;b&quot;</span> <span class="s">&quot;b&quot;</span> <span class="s">&quot;b&quot;</span> <span class="s">&quot;b&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="txtsinklanguage-r">18. 输出txt文档找<code class="language-r">sink()</code></h2>
+
+<p><code>sink()</code>可以将R的对象输出到外部文档中，第一遍可能包括了系统信息，需要输出第二遍。一个典型的流程如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="o">&gt;</span> <span class="kp">sink</span><span class="p">(</span>filename<span class="p">)</span>
+</span><span class="line"><span class="o">&gt;</span> test1
+</span><span class="line"><span class="o">&gt;</span> <span class="kp">sink</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="rfor">19. R中循环for妙用</h2>
+
+<p>R中for循环中，需要指定一个计数器，比如i in 1:10之类。R可以直接将一个向量用于计数，返回向量中对应的值，比如:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="o">&gt;</span> tmp1 <span class="o">&lt;-</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">]</span>
+</span><span class="line"><span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> tmp1<span class="p">)</span> <span class="p">{</span>
+</span><span class="line">  <span class="kp">print</span><span class="p">(</span>i<span class="p">)</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="o">&gt;</span> <span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;a&quot;</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;b&quot;</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;c&quot;</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;d&quot;</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;e&quot;</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;f&quot;</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;g&quot;</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;h&quot;</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;i&quot;</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;j&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="reducelanguage-r">20. 多个序列取交集并集用<code class="language-r">Reduce()</code></h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="o">&gt;</span> <span class="kp">Reduce</span><span class="p">(</span><span class="kp">union</span><span class="p">,</span> <span class="kt">list</span><span class="p">(</span><span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">],</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">]))</span>
+</span><span class="line"><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;a&quot;</span> <span class="s">&quot;b&quot;</span> <span class="s">&quot;c&quot;</span> <span class="s">&quot;d&quot;</span> <span class="s">&quot;e&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="githubrsourceurllanguage-r">21. 载入github储存的R代码使用<code class="language-r">source_url</code></h2>
+
+<p>需要安装和调用<a href="http://cran.r-project.org/web/packages/devtools/index.html">devtools</a>包</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Load the R code from web url </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="R"><span class="line"><span class="o">&gt;</span> <span class="kn">library</span><span class="p">(</span>devtools<span class="p">)</span>
+</span><span class="line"><span class="o">&gt;</span> source_url<span class="p">(</span><span class="s">&#39;https://raw.githubusercontent.com/YulongNiu/FunFunc/master/test_two_proportion.R&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li>
+    <p><a href="https://stat.ethz.ch/pipermail/r-help/attachments/20030506/ba1b4515/attachment.pl">R中的if/else</a></p>
+  </li>
+  <li>
+    <p>建立长度为0的对象：<a href="http://cos.name/cn/topic/105751">1</a>, <a href="http://cran.r-project.org/doc/contrib/Genolini-S4tutorialV0-5en.pdf">2</a></p>
+  </li>
+  <li>
+    <p>R中其他令人迷惑的地方：<a href="http://ygc.name/2012/07/10/tricky-things-in-r/">1</a>，<a href="http://cos.name/cn/topic/17000#post-17000">2</a></p>
+  </li>
+</ul>
+
+<h3 id="section-4">更新记录</h3>
+
+<p>2015年11月21日</p>
+</div>
+
+
+      <footer>
+        <p class="meta text-muted">
+          
+  
+
+<span class="glyphicon glyphicon-user"></span> <span class="byline author vcard" itemprop="author" itemscope itemtype="http://schema.org/Person">Posted by <span class="fn" itemprop="name">Yulong Niu</span></span>
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2012-05-03T10:17:02+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+          
+
+<span class="glyphicon glyphicon-tags"></span>&nbsp;
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/r/'>r</a>
+  
+</span>
+
+
+        </p>
+        
+          <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.bionutshell.org/blog/2012/05/03/r-tricks/" data-via="" data-counturl="http://yulongniu.bionutshell.org/blog/2012/05/03/r-tricks/" >Tweet</a>
+  
+  
+  
+</div>
+
+        
+        
+          <ul class="meta text-muted pager">
+            
+            <li class="previous"><a href="/blog/2011/08/13/emacs-ess-tips/" title="Previous Post: Emacs和ESS的使用技巧">&laquo; Emacs和ESS的使用技巧</a></li>
+            
+            
+            <li class="next"><a href="/blog/2012/05/30/r-package-and-roxygen2/" title="Next Post: R包制作和roxygen2使用说明">R包制作和roxygen2使用说明 &raquo;</a></li>
+            
+          </ul>
+        
+      </footer>
+    </article>
+    
+      <section>
+        <h2>Comments</h2>
+        <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+      </section>
+    
+  </div>
+
+  
+  <aside class="sidebar col-md-3">
+    
+      <section class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Recent Posts</h3>
+  </div>
+  
+  <div id="recent_posts" class="list-group">
+    
+    <a class="list-group-item " href="/blog/2015/10/25/xpath-xml/">XML中XPath规则总结</a>
+    
+    <a class="list-group-item " href="/blog/2015/09/30/spacemacs-tutorial/">Spacemacs使用记录</a>
+    
+    <a class="list-group-item " href="/blog/2015/07/29/postgresql-usage/">PostgreSQL使用指南</a>
+    
+    <a class="list-group-item " href="/blog/2015/07/28/python-tips/">Python使用小技巧</a>
+    
+    <a class="list-group-item " href="/blog/2015/06/02/download-ucsc-gene-mask/">UCSC Table下载注释文件</a>
+    
+  </div>
+</section>
+<section class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Categories</h3>
+  </div>
+  <div class="list-group">
+    
+    
+    <a class="list-group-item " href="/blog/categories/linux/index.html">
+        <span class="badge">5</span>
+        linux
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/r/index.html">
+        <span class="badge">6</span>
+        r
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/lisp/index.html">
+        <span class="badge">6</span>
+        lisp
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/ppr/index.html">
+        <span class="badge">5</span>
+        ppr
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
+        <span class="badge">7</span>
+        bioinfor
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/saysomething/index.html">
+        <span class="badge">1</span>
+        saysomething
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/c/index.html">
+        <span class="badge">1</span>
+        c
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/hcj/index.html">
+        <span class="badge">1</span>
+        hcj
+      </a>
+    
+  </div>
+</section>
+
+
+
+
+
+
+    
+  </aside>
+  
+</div>
+
+        </div>
+      </div>
+    </div>
+    <footer role="contentinfo"><div class="container">
+    <p class="text-muted credits">
+  Copyright &copy; 2015 - Yulong Niu<br>
+  <small>
+      <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>,
+      <span class="credit">customized with <a href="https://github.com/kAworu/octostrap3">octostrap3</a></span>.
+  </small>
+</p>
+
+</div>
+</footer>
+    
+
+<script type="text/javascript">
+      var disqus_shortname = 'yulongniu';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://yulongniu.bionutshell.org/blog/2012/05/03/r-tricks/';
+        var disqus_url = 'http://yulongniu.bionutshell.org/blog/2012/05/03/r-tricks/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+<script src="/assets/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/javascripts/modernizr-2.0.js"></script>
+
+
+  </body>
+</html>
