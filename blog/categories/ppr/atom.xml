@@ -828,8 +828,12 @@ code snippet
 </span><span class='line'><span class="nv">$ </span>rake setup_github_pages
 </span></code></pre></td></tr></table></div></figure></p>
 
+<<<<<<< HEAD
 <p>如果是遇到类似<code class="language-bash">error: failed to push some refs to</code>的错误，参考 <a href="http://stackoverflow.com/questions/24114676/git-error-failed-to-push-some-refs-to">stackoverflow</a>解决。
 i</p>
+=======
+<p>如何遇到类似<code class="language-bash">error: failed to push some refs to</code>的错误，参考 <a href="http://stackoverflow.com/questions/24114676/git-error-failed-to-push-some-refs-to">stackoverflow</a>解决。</p>
+>>>>>>> e4751d4f103fb441a7c826a0493607703be1e86e
 
 <h2 id="section-15">17. 多台电脑共同编写博客</h2>
 
