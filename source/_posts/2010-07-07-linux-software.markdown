@@ -11,13 +11,15 @@ categories: linux
 
 ## 1. 添加常用源 ##
 
-添加[rpmfusion](http://rpmfusion.org/Configuration)的free和nonfree源。
+* 添加[rpmfusion](http://rpmfusion.org/Configuration)的free和nonfree源。
 
-## 2. 互联网  ##
+* 添加[FZUG](http://repo.fdzh.org/)源。一个中文Fedora的源和社区，在Fedora下安装搜狗输入法、有道词典、百度云客户端等。
 
-* Skype
+## 2. 辅助安装工具  ##
 
-> [Skype](http://www.skype.com/)提供了常用Linux发行版的安装包，可以直接下载使用。
+* fed
+
+[fedy](http://folkswithhats.org/)是一个辅助在Fedora系统下，更容易安装Skypy、Chrome、Stream等的工具。
 
 <!--more-->
 
@@ -54,12 +56,7 @@ Linux下有很多录制屏幕的软件，推荐RecordMyDesktop。可以自己选
 $ qt-recordMyDesktop
 {% endcodeblock %}
 
-
 ## 4. 办公 ##
-
-* fedy安装工具
-
-[fedy](https://satya164.github.io/fedy/)是一个辅助在Fedora系统下，更容易安装各种软件的工具。
 
 * 字典GoldenDict
 
@@ -293,7 +290,7 @@ Wine可以尽可能模拟Window软件
 
 ### 更新记录 ###
 
-2015年11月21日
+2015年12月17日
 
 
 
