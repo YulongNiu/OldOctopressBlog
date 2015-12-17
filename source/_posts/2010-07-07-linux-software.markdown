@@ -19,7 +19,7 @@ categories: linux
 
 * fed
 
-[fedy](http://folkswithhats.org/)是一个辅助在Fedora系统下，更容易安装Skypy、Chrome、Stream等的工具。
+[fedy](http://folkswithhats.org/)是一个辅助在Fedora系统下，更容易安装Skypy、Chrome、Steam等的工具。
 
 <!--more-->
 
