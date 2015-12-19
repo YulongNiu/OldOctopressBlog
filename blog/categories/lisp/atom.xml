@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Lisp | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/lisp/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-12-19T17:16:16+08:00</updated>
+  <updated>2015-12-19T18:49:03+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -18,7 +18,7 @@
     <link href="http://yulongniu.bionutshell.org/blog/2015/09/30/spacemacs-tutorial/"/>
     <updated>2015-09-30T16:31:09+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2015/09/30/spacemacs-tutorial</id>
-    <content type="html"><![CDATA[<p><a href="https://github.com/syl20bnr/spacemacs">Spacemacs</a>结合了Vim和Emacs，而且定制了各种好用的设置，极大地减轻了Emacs的配置负担。推荐使用<code>hybrid</code>模式，这样浏览代码时可以使用Vim快捷键，进入Insert mode后使用Emacs快捷键。<code>hybrid</code>模式还有一个好处，编辑时方便汉字输入。</p>
+    <content type="html"><![CDATA[<p><a href="https://github.com/syl20bnr/spacemacs">Spacemacs</a>结合了Vim和Emacs，而且定制了各种好用的设置，极大地减轻了Emacs的配置负担。推荐使用<code>hybrid</code>模式，这样浏览代码时可以使用Vim快捷键，进入Insert mode后使用Emacs快捷键。<code>hybrid</code>模式还有一个好处，编辑时方便汉字输入。Vim模式的先导键是<code>SPC</code>，在Emacs模式下是<code>M-m</code>。</p>
 
 <!--more-->
 
