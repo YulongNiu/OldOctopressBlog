@@ -73,6 +73,14 @@ categories: c
 
 * 声明全部元素为0，比如`int testArray[5][10] = {0};`。
 
+#### 1.2.3 <span style="color: green">**C99**</span>变长数组 ####
+
+<span style="color: green">**C99**</span>允许声明变长数组。但是，变长数组的声明和初始化不能在一条语句中。正确的做法是：先声明变长数组，之后初始化。比如：
+
+
+
+
+
 ### 1.3 其他 ###
 
 * `structures`
@@ -127,8 +135,6 @@ categories: c
 
 * `for`循环声明需要有主体；如无，在`for`语句后添加`;`作“无效声明（null statement）”。**为了避免误解，`;`单独占一行**，或者使用`{}`代替单独一行的`;`。
 
-
-
 * 顺序点（sequence point）
 
     * `&&`{:.language-c}、`||`{:.language-c}和comma operators，左边和右边表达式之间。
@@ -161,8 +167,6 @@ categories: c
 
     * 数组访问超过下表上限。造成原因：很有可能是忘记**数组从0开始索引**。
 
-    * 
-
 * 副作用（side effect）
 
    * 所有赋值运算、`i++`{:.language-c}和`++i`{:.language-c}都有副作用，即改变原始变量的值。
@@ -171,17 +175,17 @@ categories: c
 
    * 在同一个表达式，即访问某个变量，同时又修改这个变量，会造成**“未定义行为”**。有副作用的操作，会带来隐晦未定义行为。未定义行为会随着不同的编译器，而产生不同的结果。其危险性不仅在于阻碍跨平台使用，而且也会有程序运行失败或者得到意想不到结果。**建议：不在一个表达式中即访问又修改同一个变量**。一些典型的未定义行为的例子：
 
-{% codeblock lang:c Undefined behavior in C %}
-# can not decide whether "++", "=", or "+" is the first
-a = i + i++;
-i = i++;
-a[i] = i++;
+{% codeblock lang:c Initialization of variable-length array (VLA) C99 %}
+int size;
+printf("Enter size of array: ");
+scanf("%d", &size);
+int square[size];
 
-# "," is not comma operator
-printf("%d %d\n", ++i, i);
+/* initial square */
+for (int i = 0; i < size; i++) {
+  square[i] = 0;
+}
 {% endcodeblock %}
-
-
 
 ## 5. 标准库 ##
 
