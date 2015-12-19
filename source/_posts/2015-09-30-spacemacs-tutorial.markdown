@@ -6,7 +6,7 @@ comments: true
 categories: lisp 
 ---
 
-[Spacemacs](https://github.com/syl20bnr/spacemacs)结合了Vim和Emacs，而且定制了各种好用的设置，极大地减轻了Emacs的配置负担。推荐使用`hybrid`模式，这样浏览代码时可以使用Vim快捷键，进入Insert mode后使用Emacs快捷键。`hybrid`模式还有一个好处，编辑时方便汉字输入。
+[Spacemacs](https://github.com/syl20bnr/spacemacs)结合了Vim和Emacs，而且定制了各种好用的设置，极大地减轻了Emacs的配置负担。推荐使用`hybrid`模式，这样浏览代码时可以使用Vim快捷键，进入Insert mode后使用Emacs快捷键。`hybrid`模式还有一个好处，编辑时方便汉字输入。Vim模式的先导键是`SPC`，在Emacs模式下是`M-m`。
 
 <!--more-->
 
@@ -31,7 +31,6 @@ categories: lisp
     * `G`：文档结束位置。
 
     * `:[number]`：跳转到制定行。
-
 
 ### 1.2 插入和替换 ###
 
@@ -60,12 +59,6 @@ categories: lisp
     * `:s/old/new`：替换第一个匹配；`:s/old/new/g`：替换当前行匹配；`:#,#s/old/new/g`：替换行（`#`为行号）之间匹配；`:%s/old/new/g `：替换全文匹配。
 
     * `:%s/old/new/gc`：替换全文匹配，每一个匹配会提示是否匹配（输入`y`表示执行替换，`n`表示跳过匹配）。
-
-
-
-
-
-
 
 ### 1.4 删除、剪切和粘贴 ###
 
