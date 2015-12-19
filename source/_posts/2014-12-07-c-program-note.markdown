@@ -78,8 +78,17 @@ categories: c
 <span style="color: green">**C99**</span>允许声明变长数组。但是，变长数组的声明和初始化不能在一条语句中。正确的做法是：先声明变长数组，之后初始化。比如：
 
 
+{% codeblock lang:c Initialization of variable-length array (VLA) C99 %}
+int size;
+printf("Enter size of array: ");
+scanf("%d", &size);
+int square[size];
 
-
+/* initial square */
+for (int i = 0; i < size; i++) {
+  square[i] = 0;
+}
+{% endcodeblock %}
 
 ### 1.3 其他 ###
 
@@ -175,16 +184,14 @@ categories: c
 
    * 在同一个表达式，即访问某个变量，同时又修改这个变量，会造成**“未定义行为”**。有副作用的操作，会带来隐晦未定义行为。未定义行为会随着不同的编译器，而产生不同的结果。其危险性不仅在于阻碍跨平台使用，而且也会有程序运行失败或者得到意想不到结果。**建议：不在一个表达式中即访问又修改同一个变量**。一些典型的未定义行为的例子：
 
-{% codeblock lang:c Initialization of variable-length array (VLA) C99 %}
-int size;
-printf("Enter size of array: ");
-scanf("%d", &size);
-int square[size];
+{% codeblock lang:c Undefined behavior in C %}
+# can not decide whether "++", "=", or "+" is the first
+a = i + i++;
+i = i++;
+a[i] = i++;
 
-/* initial square */
-for (int i = 0; i < size; i++) {
-  square[i] = 0;
-}
+# "," is not comma operator
+printf("%d %d\n", ++i, i);
 {% endcodeblock %}
 
 ## 5. 标准库 ##
@@ -292,16 +299,6 @@ int main(void)
   return 0;
 }
 {% endcodeblock %}
-
-
-
-
-
-
-
-
-
-
 
 
 ### <a id="Ref">参考资料</a> ###
