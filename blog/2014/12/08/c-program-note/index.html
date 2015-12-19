@@ -379,6 +379,27 @@
 
 <p><span style="color: green"><strong>C99</strong></span>允许声明变长数组。但是，变长数组的声明和初始化不能在一条语句中。正确的做法是：先声明变长数组，之后初始化。比如：</p>
 
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Initialization of variable-length array (VLA) C99 </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="kt">int</span> <span class="n">size</span><span class="p">;</span>
+</span><span class="line"><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enter size of array: &quot;</span><span class="p">);</span>
+</span><span class="line"><span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
+</span><span class="line"><span class="kt">int</span> <span class="n">square</span><span class="p">[</span><span class="n">size</span><span class="p">];</span>
+</span><span class="line">
+</span><span class="line"><span class="cm">/* initial square */</span>
+</span><span class="line"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">  <span class="n">square</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
 <h3 id="section-5">1.3 其他</h3>
 
 <ul>
@@ -535,7 +556,7 @@
   </li>
 </ul>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Initialization of variable-length array (VLA) C99 </span></figcaption>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Undefined behavior in C </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -543,17 +564,13 @@
 <span class="line-number">5</span>
 <span class="line-number">6</span>
 <span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="kt">int</span> <span class="n">size</span><span class="p">;</span>
-</span><span class="line"><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enter size of array: &quot;</span><span class="p">);</span>
-</span><span class="line"><span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
-</span><span class="line"><span class="kt">int</span> <span class="n">square</span><span class="p">[</span><span class="n">size</span><span class="p">];</span>
+</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="cp"># can not decide whether &quot;++&quot;, &quot;=&quot;, or &quot;+&quot; is the first</span>
+</span><span class="line"><span class="n">a</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span><span class="line"><span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span><span class="line"><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">++</span><span class="p">;</span>
 </span><span class="line">
-</span><span class="line"><span class="cm">/* initial square */</span>
-</span><span class="line"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span><span class="line">  <span class="n">square</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="cp"># &quot;,&quot; is not comma operator</span>
+</span><span class="line"><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">++</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h2 id="section-9">5. 标准库</h2>
