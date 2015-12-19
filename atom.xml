@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-12-19T17:05:57+08:00</updated>
+  <updated>2015-12-19T17:16:16+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -3618,25 +3618,26 @@ MAPQ = -10 \times log_{10}(pvalue)
 <span class="line-number">13</span>
 <span class="line-number">14</span>
 <span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 注意切换到指定ruby版本</span>
-</span><span class="line"><span class="c"># 克隆source分支到本地</span>
-</span><span class="line"><span class="nv">$ </span>git clone -b <span class="nb">source </span>git@github.com:usrname/usrname.github.io.git octopress
-</span><span class="line">
-</span><span class="line"><span class="c"># 克隆master分支到_deploy文件夹</span>
-</span><span class="line"><span class="nv">$ </span><span class="nb">cd </span>octopress
-</span><span class="line"><span class="nv">$ </span>git clone git@github.com:usrname/usrname.github.io.git _deploy
+</span><span class="line"><span class="c"># 克隆source分支到本地，注意替换“YulongNiu”为自己的GitHub名称</span>
+</span><span class="line"><span class="nv">$ </span>git clone -b <span class="nb">source </span>git@github.com:YulongNiu/YulongNiu.github.io.git octopress
 </span><span class="line">
 </span><span class="line"><span class="c"># 安装bundle</span>
+</span><span class="line"><span class="nv">$ </span><span class="nb">cd </span>octopress
 </span><span class="line"><span class="nv">$ </span>gem install bundler
 </span><span class="line"><span class="nv">$ </span>bundle install
 </span><span class="line">
-</span><span class="line"><span class="c"># 重新关联github账户</span>
-</span><span class="line"><span class="c"># 按照提示输入github的地址</span>
-</span><span class="line"><span class="nv">$ </span>rake setup_github_pages
+</span><span class="line"><span class="c"># 克隆master分支到_deploy文件夹</span>
+</span><span class="line"><span class="nv">$ </span>mkdir _deploy
+</span><span class="line"><span class="nv">$ </span><span class="nb">cd </span>_deploy
+</span><span class="line"><span class="nv">$ </span>git init
+</span><span class="line"><span class="nv">$ </span>git remote add origin git@github.com:YulongNiu/YulongNiu.github.io.git
+</span><span class="line"><span class="nv">$ </span>git pull origin master
+</span><span class="line"><span class="nv">$ </span><span class="nb">cd</span> ..
+</span><span class="line"><span class="nv">$ </span>rake gen_deploy
 </span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>如果是遇到类似<code class="language-bash">error: failed to push some refs to</code>的错误，参考 <a href="http://stackoverflow.com/questions/24114676/git-error-failed-to-push-some-refs-to">stackoverflow</a>解决。
-i</p>
 
 <h2 id="section-13">17. 多台电脑共同编写博客</h2>
 
@@ -3687,13 +3688,13 @@ i</p>
     <p><a href="http://programus.github.io/blog/2012/03/07/add-table-data-css-for-octopress/">Octopress添加表格</a></p>
   </li>
   <li>
-    <p><a href="http://blog.csdn.net/hankai1024/article/details/12786201">Octopress重装或者多台电脑上并行写作同步</a>和<a href="http://boboshone.com/blog/2013/06/05/write-octopress-blog-on-multiple-machines/">在多台电脑上写Octopress博客</a></p>
+    <p><a href="http://swalsh.org/blog/2014/09/07/migrating-octopress-to-a-new-computer/">Octopress重装或者多台电脑上并行写作同步</a></p>
   </li>
 </ul>
 
 <h3 id="section-14">更新记录</h3>
 
-<p>2015年6月28日</p>
+<p>2015年12月19日</p>
 
 ]]></content>
   </entry>
