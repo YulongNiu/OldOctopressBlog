@@ -301,24 +301,23 @@ rake new_page[ANewPage]
 
 {% codeblock lang:bash Re-set Octopress on local computer %}
 # 注意切换到指定ruby版本
-# 克隆source分支到本地
-$ git clone -b source git@github.com:usrname/usrname.github.io.git octopress
-
-# 克隆master分支到_deploy文件夹
-$ cd octopress
-$ git clone git@github.com:usrname/usrname.github.io.git _deploy
+# 克隆source分支到本地，注意替换“YulongNiu”为自己的GitHub名称
+$ git clone -b source git@github.com:YulongNiu/YulongNiu.github.io.git octopress
 
 # 安装bundle
+$ cd octopress
 $ gem install bundler
 $ bundle install
 
-# 重新关联github账户
-# 按照提示输入github的地址
-$ rake setup_github_pages
+# 克隆master分支到_deploy文件夹
+$ mkdir _deploy
+$ cd _deploy
+$ git init
+$ git remote add origin git@github.com:YulongNiu/YulongNiu.github.io.git
+$ git pull origin master
+$ cd ..
+$ rake gen_deploy
 {% endcodeblock %}
-
-如果是遇到类似`error: failed to push some refs to`{:.language-bash}的错误，参考 [stackoverflow](http://stackoverflow.com/questions/24114676/git-error-failed-to-push-some-refs-to)解决。
-i
 
 ## 17. 多台电脑共同编写博客 ##
 
@@ -329,8 +328,6 @@ $ git pull origin source
 $ cd ./_deploy
 $ git pull origin master
 {% endcodeblock %}
-
-
 
 
 ### <a id="Ref">参考资料</a> ###
@@ -355,12 +352,11 @@ $ git pull origin master
 
 * [Octopress添加表格](http://programus.github.io/blog/2012/03/07/add-table-data-css-for-octopress/)
 
-* [Octopress重装或者多台电脑上并行写作同步](http://blog.csdn.net/hankai1024/article/details/12786201)和[在多台电脑上写Octopress博客](http://boboshone.com/blog/2013/06/05/write-octopress-blog-on-multiple-machines/)
-
+* [Octopress重装或者多台电脑上并行写作同步](http://swalsh.org/blog/2014/09/07/migrating-octopress-to-a-new-computer/)
 
 
 ### 更新记录 ###
 
-2015年6月28日
+2015年12月19日
 
 
