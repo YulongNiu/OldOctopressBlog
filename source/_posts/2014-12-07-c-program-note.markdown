@@ -69,6 +69,8 @@ categories: c
 
 初始化数组：
 
+* 普通形式为：`int a[2][2] = {{1, 2}, {3, 4}};`{:.language-c}
+
 * 声明每一个元素或者部分元素，其余未声明元素为0。<span style="color: green">**C99**</span>同样提供了下标初始化。比如：`int testArray[2][2] = {[0][0] = 0, [1][1] = 1};`{:.language-c}。
 
 * 声明全部元素为0，比如`int testArray[5][10] = {0};`。
@@ -76,7 +78,6 @@ categories: c
 #### 1.2.3 <span style="color: green">**C99**</span>变长数组 ####
 
 <span style="color: green">**C99**</span>允许声明变长数组。但是，变长数组的声明和初始化不能在一条语句中。正确的做法是：先声明变长数组，之后初始化。比如：
-
 
 {% codeblock lang:c Initialization of variable-length array (VLA) C99 %}
 int size;
@@ -127,7 +128,7 @@ oneArrayFun(testArry, testLen);
 
 * 对于一维数组类型的参数，“长度”的实际参数可以比形式参数小，但不能大。函数可以改变一维数组形参的值，并在实参中体现。
 
-* **C89**定义形参为多维数组的函数，只能省略第一维长度，其余维度必须声明，普遍形式为：
+* **C89**定义形参为多维数组的函数，只能省略第一维长度，其余维度必须声明（即常量），普遍形式为：
 
 {% codeblock lang:c Definition of function using array as the parameter %}
 /* 比如二维数组，行不是必须，但必须制定列 */
@@ -174,6 +175,24 @@ int twoArrayFun(int row, int col, int a[row][col]);
 int twoArrayFun(int row, int col, int a[*][*]); 
 int twoArrayFun(int row, int col, int a[][col]); 
 int twoArrayFun(int row, int col, int a[][*]); 
+{% endcodeblock %}
+
+* <span style="color: green">**C99**</span>允许在数组参数中使用关键字`static`，但只能用于第一维。好处是编译器更快访问数组，比如：
+
+{% codeblock lang:c Use static in <span style="color: green">C99</span> %}
+/* 一维数组长度至少为5 */
+int oneArrayFun(int a[static 5], int len) {
+...
+}
+{% endcodeblock %}
+
+* <span style="color: green">**C99**</span>允许使用**复合字面量**。复合字面量是“左值”，可以包括常量或者常量表达式，形式与数组初始化类似；也可以使用`const`修饰。
+
+{% codeblock lang:c Use static in <span style="color: green">C99</span> %}
+/* 一维数组长度至少为5 */
+int oneArrayFun(int a[static 5], int len) {
+...
+}
 {% endcodeblock %}
 
 
