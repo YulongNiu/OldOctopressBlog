@@ -95,13 +95,13 @@ for (int i = 0; i < size; i++) {
 
 * 函数不能返回数组，也不能返回两个数。
 
-* 函数返回类型可以是`void`，形参可以是`void`。void类型函数没有返回值。
+* 函数返回类型可以是`void`，形参可以是`void`。`void`类型函数没有返回值，可以写一条表达式为空的`return`语句，比如`return;`{:.language-c}。
 
 * 每个形参必须单独声明类型，使用`,`连接；
 
 * 使用`void`丢弃函数返回值，比如`printf()`函数返回显示的字符数目，强制丢弃返回数值写为：`(void) printf("Drop the return value.");`{:.language-c}。
 
-* 函数返回点：`return`语句；`exit()`函数（位于`<stdlib.h>`库）。<span style="color: green">**C99**</span>规定：非void类型函数必须制定返回类型，不能缺省。
+* `main`函数返回值：`return`语句；`exit()`函数（位于`<stdlib.h>`库）。任何函数调用`exit()`函数，都会导致程序终止；只有`main`函数调用`return`语句，程序才终止。<span style="color: green">**C99**</span>规定：非`void`类型函数必须指定返回类型，不能缺省。
 
 * 函数声明的形式为`int thisFun(double para1, int para2);`{:.language-c}。<span style="color: green">**C99**</span>规定：函数在调用前，必须事先声明或者定义。调用前声明有很多好处，比如避免实际参数的默认转换等。
 
@@ -201,8 +201,35 @@ int main(void)
   printf("Sum is %d. \n", oneArray((int [5]){i, j, k}, 5));
   
   printf("Sum is %d. \n", oneArray((int [5]){1, 3, 5, 7}, 4));
+  
+  printf("Sum is %d. \n",
+         constOneArray((const int [5]){1, 1, 1, 1}, 3));
+         
   return 0;
 }
+
+int oneArray(int a[], int len) {
+
+  int sum = 0;
+
+  for (int i = 0; i < len; i ++) {
+    sum += a[i];
+  }
+
+  return sum;
+}
+
+int constOneArray(const int a[], int len) {
+
+  int sum = 0;
+
+  for (int i = 0; i < len; i ++) {
+    sum += a[i];
+  }
+
+  return sum;
+}
+
 {% endcodeblock %}
 
 
@@ -225,8 +252,6 @@ int main(void)
 * 操作符`/`和`%`用于负整数操作，结果由编译器决定。<span style="color: green">**C99**</span>中`/`和`%`操作负数，返回最靠近0的结果。
 
 * 运算符`&&`和`||`（从左向右结合），两侧的两个表达式有运算顺序，先左后右。**有可能右侧表达式没有计算，因此不要在右侧放入有副作用的表达式**。
-
-
 
 ## 3. 表达式 ##
 
@@ -288,6 +313,8 @@ int main(void)
     * 一个表达式中既访问又修改同一个变量。
 
     * 数组访问超过上下限。造成原因：很有可能是忘记**数组从0开始索引**。
+    
+    * **C89**中，非`void`类型函数，执行到末尾，没有执行`return`语句。程序调用此类函数，会出现未定义行为。<span style="color: green">**C99**</span>中，不合法。
 
 * 副作用（side effect）
 
