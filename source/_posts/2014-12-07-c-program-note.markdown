@@ -94,7 +94,7 @@ for (int i = 0; i < size; i++) {
 
 #### 1.3.1 函数定义 ####
 
-* 函数不能返回数组。
+* 函数不能返回数组，也不能返回两个数。
 
 * 函数返回类型可以是`void`，形参可以是`void`。void类型函数没有返回值。
 
@@ -104,8 +104,77 @@ for (int i = 0; i < size; i++) {
 
 * 函数返回点：`return`语句；`exit()`函数（位于`<stdlib.h>`库）。<span style="color: green">**C99**</span>规定：非void类型函数必须制定返回类型，不能缺省。
 
-* 函数声明的形式为`int thisFun(double para1, int para2);`{:.language-c}。<span style="color: green">**C99**</span>规定：函数在调用前，必须事先声明或者定义。
+* 函数声明的形式为`int thisFun(double para1, int para2);`{:.language-c}。<span style="color: green">**C99**</span>规定：函数在调用前，必须事先声明或者定义。调用前声明有很多好处，比如避免实际参数的默认转换等。
 
+#### 1.3.2 数组型参数 ####
+
+* 定义形参为一维数组的函数，普遍形式为：
+
+{% codeblock lang:c Definition of function using array as the parameter %}
+/* 一维数组长度不是必须 */
+int oneArrayFun(int a[], int len) {
+...
+}
+
+/* 函数声明 */ 
+int oneArrayFun(int a[], int len);
+/* 省略形参声明 */
+int oneArrayFun(int [], int);
+
+/* 实际调用 */
+oneArrayFun(testArry, testLen);
+{% endcodeblock %}
+
+* 对于一维数组类型的参数，“长度”的实际参数可以比形式参数小，但不能大。函数可以改变一维数组形参的值，并在实参中体现。
+
+* **C89**定义形参为多维数组的函数，只能省略第一维长度，其余维度必须声明，普遍形式为：
+
+{% codeblock lang:c Definition of function using array as the parameter %}
+/* 比如二维数组，行不是必须，但必须制定列 */
+#define COL 10
+
+int twoArrayFun(int a[][COL], int row) {
+...
+}
+
+/* 函数声明 */ 
+int twoArrayFun(int a[][COL], int row);
+/* 省略形参声明 */
+int twoArrayFun(int [][COL], int);
+
+/* 实际调用 */
+twoArrayFun(testArry, testRow);
+{% endcodeblock %}
+
+* <span style="color: green">**C99**</span>可以声明任意变长数组作为函数参数，普遍形式为：
+
+{% codeblock lang:c Definition of function using VLA as the parameter in <span style="color: green">C99</span> %}
+/* 一维VLA */
+int oneArrayFun(int len, int a[len]) {
+...
+}
+
+/* 一维VLA声明的各种形式 */ 
+int oneArrayFun(int len, int a[len]);
+int oneArrayFun(int len, int a[*]);
+int oneArrayFun(int, int [*]);
+int oneArrayFun(int len, int a[]);
+int oneArrayFun(int, int []);
+
+/* 实际调用 */
+oneArrayFun(testArry, testLen);
+
+/* 二维VLA */
+int twoArrayFun(int row, int col, int a[row][col]) {
+...
+}
+
+/* 二维VLA声明的各种形式 */ 
+int twoArrayFun(int row, int col, int a[row][col]); 
+int twoArrayFun(int row, int col, int a[*][*]); 
+int twoArrayFun(int row, int col, int a[][col]); 
+int twoArrayFun(int row, int col, int a[][*]); 
+{% endcodeblock %}
 
 
 ### 1.4 其他 ###
@@ -149,7 +218,7 @@ for (int i = 0; i < size; i++) {
 
 * `EOF`是文档结束的标志（End of File），在`<stdio.h>`{:.language-c}定义为一个整数`-1`，代码如下：
 
-{% codeblock definition of EOF in C lang:c %}
+{% codeblock Definition of EOF in C lang:c %}
 #ifndef EOF
 # define EOF (-1)
 #endif
