@@ -69,8 +69,6 @@ categories: c
 
 初始化数组：
 
-* 普通形式为：`int a[2][2] = {{1, 2}, {3, 4}};`{:.language-c}
-
 * 声明每一个元素或者部分元素，其余未声明元素为0。<span style="color: green">**C99**</span>同样提供了下标初始化。比如：`int testArray[2][2] = {[0][0] = 0, [1][1] = 1};`{:.language-c}。
 
 * 声明全部元素为0，比如`int testArray[5][10] = {0};`。
@@ -126,7 +124,9 @@ int oneArrayFun(int [], int);
 oneArrayFun(testArry, testLen);
 {% endcodeblock %}
 
-* 对于一维数组类型的参数，“长度”的实际参数可以比形式参数小，但不能大。函数可以改变一维数组形参的值，并在实参中体现。
+* 对于一维数组类型的参数，“长度”的实际参数可以比形式参数小，但不能大。
+
+* 函数可以改变一维数组形参的值，并在实参中体现。
 
 * **C89**定义形参为多维数组的函数，只能省略第一维长度，其余维度必须声明（即常量），普遍形式为：
 
@@ -189,9 +189,19 @@ int oneArrayFun(int a[static 5], int len) {
 * <span style="color: green">**C99**</span>允许使用**复合字面量**。复合字面量是“左值”，可以包括常量或者常量表达式，形式与数组初始化类似；也可以使用`const`修饰。
 
 {% codeblock lang:c Use static in <span style="color: green">C99</span> %}
-/* 一维数组长度至少为5 */
-int oneArrayFun(int a[static 5], int len) {
-...
+#include <stdio.h>
+
+int oneArray(int a[], int len);
+
+int main(void)
+{
+  printf("Sum is %d. \n", oneArray((int []){1, 2, 3, 4, 5}, 5));
+
+  int i = 1, j = 2, k = 3;
+  printf("Sum is %d. \n", oneArray((int [5]){i, j, k}, 5));
+  
+  printf("Sum is %d. \n", oneArray((int [5]){1, 3, 5, 7}, 4));
+  return 0;
 }
 {% endcodeblock %}
 
