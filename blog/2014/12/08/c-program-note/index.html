@@ -368,9 +368,6 @@
 
 <ul>
   <li>
-    <p>普通形式为：&#8220;{:.language-c}</p>
-  </li>
-  <li>
     <p>声明每一个元素或者部分元素，其余未声明元素为0。<span style="color: green"><strong>C99</strong></span>同样提供了下标初始化。比如：<code class="language-c">int testArray[2][2] = {[0][0] = 0, [1][1] = 1};</code>。</p>
   </li>
   <li>
@@ -463,7 +460,10 @@
 
 <ul>
   <li>
-    <p>对于一维数组类型的参数，“长度”的实际参数可以比形式参数小，但不能大。函数可以改变一维数组形参的值，并在实参中体现。</p>
+    <p>对于一维数组类型的参数，“长度”的实际参数可以比形式参数小，但不能大。</p>
+  </li>
+  <li>
+    <p>函数可以改变一维数组形参的值，并在实参中体现。</p>
   </li>
   <li>
     <p><strong>C89</strong>定义形参为多维数组的函数，只能省略第一维长度，其余维度必须声明（即常量），普遍形式为：</p>
@@ -561,6 +561,52 @@
 <ul>
   <li><span style="color: green"><strong>C99</strong></span>允许在数组参数中使用关键字<code>static</code>，但只能用于第一维。好处是编译器更快访问数组，比如：</li>
 </ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Use static in <span style="color: green">C99</span> </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="cm">/* 一维数组长度至少为5 */</span>
+</span><span class="line"><span class="kt">int</span> <span class="nf">oneArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="k">static</span> <span class="mi">5</span><span class="p">],</span> <span class="kt">int</span> <span class="n">len</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line"><span class="p">...</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li><span style="color: green"><strong>C99</strong></span>允许使用<strong>复合字面量</strong>。复合字面量是“左值”，可以包括常量或者常量表达式，形式与数组初始化类似；也可以使用<code>const</code>修饰。</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Use static in <span style="color: green">C99</span> </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="cp">#include &lt;stdio.h&gt;</span>
+</span><span class="line">
+</span><span class="line"><span class="kt">int</span> <span class="nf">oneArray</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">len</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Sum is %d. </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">oneArray</span><span class="p">((</span><span class="kt">int</span> <span class="p">[]){</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="mi">5</span><span class="p">));</span>
+</span><span class="line">
+</span><span class="line">  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span><span class="line">  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Sum is %d. </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">oneArray</span><span class="p">((</span><span class="kt">int</span> <span class="p">[</span><span class="mi">5</span><span class="p">]){</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">},</span> <span class="mi">5</span><span class="p">));</span>
+</span><span class="line">
+</span><span class="line">  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Sum is %d. </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">oneArray</span><span class="p">((</span><span class="kt">int</span> <span class="p">[</span><span class="mi">5</span><span class="p">]){</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">},</span> <span class="mi">4</span><span class="p">));</span>
+</span><span class="line">  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="section-8">1.4 其他</h3>
 

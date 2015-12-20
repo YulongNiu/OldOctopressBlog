@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Saysomething | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/saysomething/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-12-20T21:28:42+08:00</updated>
+  <updated>2015-12-20T21:40:26+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -22,11 +22,13 @@
 
 <p>This is a piece of html code <code class="language-html">&lt;html&gt;</code></p>
 
-<p>{% codeblock lang:ruby %}
-def what?
-  42
-end
-{% endcodeblock %}</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">what?</span>
+</span><span class='line'>  <span class="mi">42</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <!-- more -->
 
