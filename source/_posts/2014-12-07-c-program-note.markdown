@@ -51,11 +51,11 @@ categories: c
 
 数组长度：
 
-* 数组长度可以是任何整数常量或整数常量表达式，比如`testLen + 1`{:.language-c}，`testLen`之前声明为整数常量（>-1）；
+* 数组长度可以是任何整数常量或整数常量表达式，比如`testLen + 1`{:.language-c}，`testLen`之前声明为整数常量（>-1）。
 
 * 数组长度之后可能会变，所以可以使用宏定义一维数组的长度，比如`#define LEN 5`{:.language-c}。
 
-* 确定数组长度，可以联合使用宏和`sizeof`，比如`#define SIZE ((int) (sizeof(a) / sizeof(a[0])))`{:.language-c}
+* 确定数组长度，可以联合使用宏和`sizeof`，比如`#define SIZE ((int) (sizeof(a) / sizeof(a[0])))`{:.language-c}。
 
 初始化数组：
 
@@ -69,7 +69,7 @@ categories: c
 
 初始化数组：
 
-* 声明每一个元素或者部分元素，其余未声明元素为0。<span style="color: green">**C99**</span>同样提供了下标初始化。比如：`int testArray[2][2] = {[0][0] = 0, [1][1] = 1};`{:.language-c}
+* 声明每一个元素或者部分元素，其余未声明元素为0。<span style="color: green">**C99**</span>同样提供了下标初始化。比如：`int testArray[2][2] = {[0][0] = 0, [1][1] = 1};`{:.language-c}。
 
 * 声明全部元素为0，比如`int testArray[5][10] = {0};`。
 
@@ -90,16 +90,31 @@ for (int i = 0; i < size; i++) {
 }
 {% endcodeblock %}
 
-### 1.3 其他 ###
+### 1.3 函数 ###
+
+#### 1.3.1 函数定义 ####
+
+* 函数不能返回数组。
+
+* 函数返回类型可以是`void`，形参可以是`void`。void类型函数没有返回值。
+
+* 每个形参必须单独声明类型，使用`,`连接；
+
+* 使用`void`丢弃函数返回值，比如`printf()`函数返回显示的字符数目，强制丢弃返回数值写为：`(void) printf("Drop the return value.");`{:.language-c}。
+
+* 函数返回点：`return`语句；`exit()`函数（位于`<stdlib.h>`库）。<span style="color: green">**C99**</span>规定：非void类型函数必须制定返回类型，不能缺省。
+
+* 函数声明的形式为`int thisFun(double para1, int para2);`{:.language-c}。<span style="color: green">**C99**</span>规定：函数在调用前，必须事先声明或者定义。
+
+
+
+### 1.4 其他 ###
 
 * `structures`
 
 * `unions`
 
 * `pointers`
-
-* `functions`
-
 
 ## 2. 操作符类型和优先级 ##
 
@@ -174,7 +189,7 @@ for (int i = 0; i < size; i++) {
 
     * 一个表达式中既访问又修改同一个变量。
 
-    * 数组访问超过下表上限。造成原因：很有可能是忘记**数组从0开始索引**。
+    * 数组访问超过上下限。造成原因：很有可能是忘记**数组从0开始索引**。
 
 * 副作用（side effect）
 
