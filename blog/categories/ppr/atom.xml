@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ppr | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/ppr/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2015-12-20T22:18:13+08:00</updated>
+  <updated>2015-12-25T02:04:04+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -911,6 +911,8 @@ code snippet
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># pip install rpy2</span>
 </span></code></pre></td></tr></table></div></figure></p>
+
+<!--more-->
 
 <h2 id="pythonr">2. python调用R对象</h2>
 
