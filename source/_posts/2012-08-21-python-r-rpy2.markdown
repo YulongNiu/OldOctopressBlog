@@ -20,6 +20,8 @@ rpy2作为Python的一个模块，其[安装](http://rpy.sourceforge.net/rpy2/do
 # pip install rpy2
 {% endcodeblock %}
 
+<!--more-->
+
 ## 2. python调用R对象 ##
 
 ### 2.1 使用`rpy2.robjects`{:.language-python} ###
