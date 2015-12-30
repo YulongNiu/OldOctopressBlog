@@ -97,6 +97,7 @@ worker.init <- function(packages) {
   }
   NULL
 }
+clusterCall(cl, worker.init, c('bigmemory', 'foreach', 'doMC'))
 {% endcodeblock %}
 
 * 第二种方法是在调用函数中加入。
@@ -260,4 +261,4 @@ adj2ftBig2 <- function(adMat, adAllRowCol, n = 4){
 
 ### 更新记录 ###
 
-2014年7月22日
+2015年12月30日
