@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2016-01-06T23:31:26+08:00</updated>
+  <updated>2016-01-07T02:28:45+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -4577,10 +4577,8 @@ MAPQ = -10 \times log_{10}(pvalue)
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
-<span class="line-number">6</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">Imports: 
-</span><span class="line">    Rcpp,
-</span><span class="line">    RcppArmadillo
+</span><span class="line">    Rcpp
 </span><span class="line">LinkingTo: 
 </span><span class="line">    Rcpp,
 </span><span class="line">    RcppArmadillo</span></code></pre></td></tr></table></div></figure></notextile></div>
