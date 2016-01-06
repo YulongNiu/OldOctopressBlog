@@ -34,8 +34,7 @@ use_rcpp()
 {% raw %}
 ```
 Imports: 
-    Rcpp,
-    RcppArmadillo
+    Rcpp
 LinkingTo: 
     Rcpp,
     RcppArmadillo
