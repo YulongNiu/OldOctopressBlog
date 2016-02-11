@@ -55,7 +55,7 @@ The $\eqref{eq:1}$ is equal to
 
 $$
 \begin{equation}
-I(X;Y) = \sum_{x \in \{1, 0\}}\sum_{y \in \{1, 0\}} p(x,y) \frac{\log(p(x,y))}{p(x)p(y)}
+I(X;Y) = \sum_{x \in \{0, 1\}}\sum_{y \in \{0, 1\}} p(x,y) \log\left(\frac{p(x,y)}{p(x)p(y)}\right)
 \label{eq:2}
 \end{equation}
 $$
@@ -141,4 +141,4 @@ y1 0.04279723
 
 ### Update record ###
 
-12/16/2014
+02/11/2016
