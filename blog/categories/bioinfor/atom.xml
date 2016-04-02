@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bioinfor | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/bioinfor/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2016-04-02T14:23:49+08:00</updated>
+  <updated>2016-04-02T14:29:55+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -115,7 +115,7 @@
 
 <p>以下详细介绍<code class="language-bash">pe_utils</code>使用方法。</p>
 
-<p>第一步， 下载对应物种的基因注释文件GTF或者GFF，比如<a href="http://genome.ucsc.edu/cgi-bin/hgTables?command=start">USCS Table Browser</a>（<code class="language-bash">output format</code>选择<code class="language-bash">GTF</code>）或者使用MISO提供的<a href="http://miso.readthedocs.org/en/fastmiso/#human-mouse-gene-models-for-isoform-centric-analyses">Ensembl版本</a>。如果GTF文件，使用<code class="language-bash">gffread</code>工具进行转换，具体方法参考？？？？？？？</p>
+<p>第一步， 下载对应物种的基因注释文件GTF或者GFF，比如<a href="http://genome.ucsc.edu/cgi-bin/hgTables?command=start">USCS Table Browser</a>（<code class="language-bash">output format</code>选择<code class="language-bash">GTF</code>）或者使用MISO提供的<a href="http://miso.readthedocs.org/en/fastmiso/#human-mouse-gene-models-for-isoform-centric-analyses">Ensembl版本</a>。如果GTF文件，使用<a href="https://cole-trapnell-lab.github.io/cufflinks/file_formats/">Cufflinks</a>的<code class="language-bash">gffread</code>工具进行转换。</p>
 
 <p>第二步，确定TopHat运行结果的bam文件与基因注释GFF文件，两者基因组命名方法一致。有的使用类似<code class="language-bash">chr1</code>命名，而另外一些使用<code class="language-bash">1</code>。如果不一致，建议修改GFF文件。</p>
 
