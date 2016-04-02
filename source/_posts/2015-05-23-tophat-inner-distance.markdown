@@ -26,7 +26,7 @@ categories: Bioinfor
 以下详细介绍`pe_utils`{:.language-bash}使用方法。
 
 
-第一步， 下载对应物种的基因注释文件GTF或者GFF，比如[USCS Table Browser](http://genome.ucsc.edu/cgi-bin/hgTables?command=start)（`output format`{:.language-bash}选择`GTF`{:.language-bash}）或者使用MISO提供的[Ensembl版本](http://miso.readthedocs.org/en/fastmiso/#human-mouse-gene-models-for-isoform-centric-analyses)。如果GTF文件，使用`gffread`{:.language-bash}工具进行转换，具体方法参考？？？？？？？
+第一步， 下载对应物种的基因注释文件GTF或者GFF，比如[USCS Table Browser](http://genome.ucsc.edu/cgi-bin/hgTables?command=start)（`output format`{:.language-bash}选择`GTF`{:.language-bash}）或者使用MISO提供的[Ensembl版本](http://miso.readthedocs.org/en/fastmiso/#human-mouse-gene-models-for-isoform-centric-analyses)。如果GTF文件，使用[Cufflinks](https://cole-trapnell-lab.github.io/cufflinks/file_formats/)的`gffread`{:.language-bash}工具进行转换。
 
 第二步，确定TopHat运行结果的bam文件与基因注释GFF文件，两者基因组命名方法一致。有的使用类似`chr1`{:.language-bash}命名，而另外一些使用`1`{:.language-bash}。如果不一致，建议修改GFF文件。
 
