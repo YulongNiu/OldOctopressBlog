@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8">
-  <title>使用Pyenv控制多个版本Python - 牛牛龙</title>
+  <title>确定TopHat中mate-inner-dist参数 - 牛牛龙</title>
   <meta name="author" content="Yulong Niu">
 
   
@@ -14,15 +14,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yulongniu.bionutshell.org/blog/2015/05/09/python-different-version">
+  <link rel="canonical" href="http://yulongniu.bionutshell.org/blog/2015/05/23/tophat-inner-distance">
   <link href="/favicon.ico" type="image/png" rel="icon">
   <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
 
   <!-- http://opengraphprotocol.org/ -->
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2015/05/09/python-different-version">
-  <meta property="og:title" content="使用Pyenv控制多个版本Python - 牛牛龙">
+  <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2015/05/23/tophat-inner-distance">
+  <meta property="og:title" content="确定TopHat中mate-inner-dist参数 - 牛牛龙">
   
 
   <!-- mathjax config similar to math.stackexchange -->
@@ -180,7 +180,7 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-09T00:14:10+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-23T19:08:19+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="#disqus_thread" itemprop="discussionUrl"
              data-disqus-identifier="http://yulongniu.bionutshell.org">Comments</a>
@@ -189,42 +189,55 @@
     
     
     <h1 class="entry-title" itemprop="name headline">
-        使用Pyenv控制多个版本Python
+        确定TopHat中mate-inner-dist参数
         
     </h1>
     
   </header>
 
 
-<div class="entry-content clearfix" itemprop="articleBody description"><p>同时在一台电脑上使用多个版本的Python，可以通过<a href="https://github.com/yyuu/pyenv">pyenv</a>控制和管理。</p>
+<div class="entry-content clearfix" itemprop="articleBody description"><p>对于双端测序RNA-seq数据，TopHat在运行时候，有两个参数<code class="language-bash">-r/--mate-inner-dist</code>和<code class="language-bash">--mate-std-dev</code>分别标识一对reads的间隔长度的期望平均值和标准差，其默认值分别为50bp和20bp。这两个参数本身是个估计值，用于TopHat在map过程中确定一对reads是否匹配到基因组正确位置。如果能够准确设定这两个数值，将会提升TopHat结果的准确性和完整性，具体比较参考？？？？？？？</p>
 
-<h2 id="section">1. 安装方法</h2>
+<p>有两种方法获得这对参数的准确值：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<p>第一种：获取RNA-seq实验建库方法，之后按照以下网址说明计算，<a href="http://blog.qiuworld.com:8080/archives/3007">RNA-seq差异表达分析工作流程</a>。</p>
+
+<!--more-->
+
+<p>第二种：根据RNA-seq数据进行估算，具体步骤为：</p>
+
+<ol>
+  <li>
+    <p>使用TopHat默认参数先跑一遍。</p>
+  </li>
+  <li>
+    <p>使用<a href="http://miso.readthedocs.org/en/fastmiso/#computing-the-insert-length-distribution-and-its-statistics">MISO</a>的<code class="language-bash">pe_utils</code>工具估算。</p>
+  </li>
+</ol>
+
+<p>以下详细介绍<code class="language-bash">pe_utils</code>使用方法。</p>
+
+<p>第一步， 下载对应物种的基因注释文件GTF或者GFF，比如<a href="http://genome.ucsc.edu/cgi-bin/hgTables?command=start">USCS Table Browser</a>（<code class="language-bash">output format</code>选择<code class="language-bash">GTF</code>）或者使用MISO提供的<a href="http://miso.readthedocs.org/en/fastmiso/#human-mouse-gene-models-for-isoform-centric-analyses">Ensembl版本</a>。如果GTF文件，使用<code class="language-bash">gffread</code>工具进行转换，具体方法参考？？？？？？？</p>
+
+<p>第二步，确定TopHat运行结果的bam文件与基因注释GFF文件，两者基因组命名方法一致。有的使用类似<code class="language-bash">chr1</code>命名，而另外一些使用<code class="language-bash">1</code>。如果不一致，建议修改GFF文件。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Summary Chromosomes&#8217; Names</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>git clone git://github.com/yyuu/pyenv.git ~/.pyenv
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 查看GFF文件中基因组命名</span>
+</span><span class="line"><span class="nv">$ </span>awk <span class="s1">&#39;{print $1}&#39;</span> hg19USCS.gff <span class="p">|</span> sort -n <span class="p">|</span> uniq -c
 </span><span class="line">
-</span><span class="line"><span class="c"># 写入路径信息</span>
-</span><span class="line"><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;export PYENV_ROOT=&quot;$HOME/.pyenv&quot;&#39;</span> &gt;&gt; ~/.bashrc
-</span><span class="line"><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;export PATH=&quot;$PYENV_ROOT/bin:$PATH&quot;&#39;</span> &gt;&gt; ~/.bashrc
-</span><span class="line"><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;eval &quot;$(pyenv init -)&quot;&#39;</span> &gt;&gt; ~/.bashrc
-</span><span class="line">
-</span><span class="line"><span class="c"># 重新载入</span>
-</span><span class="line"><span class="nv">$ </span><span class="nb">source</span> ~/.bashrc
+</span><span class="line"><span class="c"># 查看bam文件中基因组命名</span>
+</span><span class="line">samtools view accepted_hits.bam <span class="p">|</span> head -1000 <span class="p">|</span> awk <span class="s1">&#39;{print $3}&#39;</span> <span class="p">|</span> sort -n <span class="p">|</span> uniq -c
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<!--more-->
+<p>第三步，筛选较长外显子，比如长度大于1000bp。MISO提供了<code class="language-bash">exon_utils</code>工具用于提取长外显子，但是我们没有能够成功运行过。因此这里提供一个R版本的脚本，比如基因注释文件名为<code class="language-bash">hg19USCS.gff</code>，输出筛选的文件名为<code class="language-bash">hg19USCS_selected.gff</code>。</p>
 
-<h2 id="python">2. 安装多个版本Python和对应包</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>R Script of Select exons with length &gt; 1000bp</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -235,87 +248,41 @@
 <span class="line-number">9</span>
 <span class="line-number">10</span>
 <span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 查看可提供的Python版本列表</span>
-</span><span class="line"><span class="nv">$ </span>pyenv install --list
+</pre></td><td class="code"><pre><code class="R"><span class="line">gffFile <span class="o">&lt;-</span> read.table<span class="p">(</span><span class="s">&#39;hg19USCS.gff&#39;</span><span class="p">,</span> stringsAsFactors <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
 </span><span class="line">
-</span><span class="line"><span class="c"># 安装Python所依赖包</span>
-</span><span class="line"><span class="c"># yum install readline readline-devel readline-static openssl openssl-devel openssl-static sqlite-devel bzip2-devel bzip2-libs</span>
+</span><span class="line">gffExon <span class="o">&lt;-</span> gffFile<span class="p">[</span>gffFile<span class="p">[,</span> <span class="m">3</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;exon&#39;</span><span class="p">,</span> <span class="p">]</span>
 </span><span class="line">
-</span><span class="line"><span class="c"># 安装其他版本Python</span>
-</span><span class="line"><span class="c"># 如果命令行下载安装Python太慢，可以将下载的安装包放入~/.pyenv/cache/文件夹中，之后安装</span>
-</span><span class="line"><span class="nv">$ </span>pyenv install 3.4.3
-</span><span class="line"><span class="nv">$ </span>pyenv rehash
+</span><span class="line">exonLen <span class="o">&lt;-</span> <span class="kp">abs</span><span class="p">(</span>gffExon<span class="p">[,</span> <span class="m">5</span><span class="p">]</span> <span class="o">-</span> gffExon<span class="p">[,</span> <span class="m">4</span><span class="p">])</span>
 </span><span class="line">
-</span><span class="line"><span class="c"># 查看已安装Python版本</span>
-</span><span class="line"><span class="nv">$ </span>pyenv versions
+</span><span class="line">gffExonSelect <span class="o">&lt;-</span> gffExon<span class="p">[</span>exonLen <span class="o">&gt;=</span> <span class="m">1000</span><span class="p">,</span> <span class="p">]</span>
 </span><span class="line">
-</span><span class="line"><span class="c"># 全局切换Python版本</span>
-</span><span class="line"><span class="nv">$ </span>pyenv global 3.4.3
-</span><span class="line">
-</span><span class="line"><span class="c"># 安装对应版本Python包。</span>
-</span><span class="line"><span class="c"># 每次安装包之后，都要执行rehash。</span>
-</span><span class="line"><span class="nv">$ </span>pip install ipython
-</span><span class="line"><span class="nv">$ </span>pyenv rehash
+</span><span class="line">write.table<span class="p">(</span>gffExonSelect<span class="p">,</span> <span class="s">&#39;hg19USCS_selected.gff&#39;</span><span class="p">,</span>
+</span><span class="line">            row.names <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> col.names <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span>
+</span><span class="line">            quote <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> sep <span class="o">=</span> <span class="s">&#39;\t&#39;</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>如果在使用<code class="language-bash">pip</code>安装包时，下载速度过慢，可以考虑使用国内源。比如：</p>
+<p>第四步，使用<code class="language-bash">pe_utils</code>，实例如下：</p>
 
-<ul>
-  <li>
-    <p>http://pypi.mirrors.ustc.edu.cn/</p>
-  </li>
-  <li>
-    <p>http://pypi.douban.com/</p>
-  </li>
-</ul>
-
-<p>使用方法为：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Using different pip mirror</span></figcaption>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>An example of how to use pe_utils</span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>pip install --upgrade numpy -i http://pypi.mirrors.ustc.edu.cn/simple
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="pyenv">3. 更新pyenv</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span><span class="nb">cd</span> ~/.pyenv
-</span><span class="line"><span class="nv">$ </span>git pull
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="python-1">4. 删除特定版本Python</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 查找特定版本Python文件夹位置，之后直接删除即可。</span>
-</span><span class="line"><span class="nv">$ </span>pyenv prefix 3.4.3
-</span><span class="line"><span class="nv">$ </span>rm -rf ~/.pyenv/versions/3.4.3
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 输入bam文件和GFF文件</span>
+</span><span class="line"><span class="nv">$ </span>pe_utils --compute-insert-len accepted_hits.bam hg19USCS_selected.gff --output-dir insert-dist/
+</span><span class="line">
+</span><span class="line"><span class="c"># 在insert-dist会出现类似accepted_filtered.bam.insert_len文件</span>
+</span><span class="line"><span class="c"># -r/--mate-inner-dist估计值为mean</span>
+</span><span class="line"><span class="c"># --mate-std-dev估计值为sdev</span>
+</span><span class="line"><span class="nv">$ </span>head -1 accepted_filtered.bam.insert_len
+</span><span class="line"><span class="c">#mean=165.3,sdev=45.2,dispersion=3.5,num_pairs=5622239</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
-
-<ul>
-  <li>
-    <p><a href="http://seisman.info/python-pyenv.html">Python多版本共存之pyenv</a></p>
-  </li>
-  <li>
-    <p><a href="http://www.leadnt.com/%E4%BD%BF%E7%94%A8%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90%E6%9D%A5%E5%8A%A0%E9%80%9Fpython-pypi%E5%8C%85%E7%9A%84%E5%AE%89%E8%A3%85.html">使用国内镜像源来加速python pypi包的安装</a></p>
-  </li>
-</ul>
-
-<h3 id="section-1">更新记录</h3>
+<h3 id="section">更新记录</h3>
 
 <p>2015年5月23日</p>
 </div>
@@ -341,13 +308,13 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-09T00:14:10+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-23T19:08:19+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
           
 
 <span class="glyphicon glyphicon-tags"></span>&nbsp;
 <span class="categories">
   
-    <a class='category' href='/blog/categories/ppr/'>ppr</a>
+    <a class='category' href='/blog/categories/bioinfor/'>bioinfor</a>
   
 </span>
 
@@ -356,7 +323,7 @@
         
           <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.bionutshell.org/blog/2015/05/09/python-different-version/" data-via="" data-counturl="http://yulongniu.bionutshell.org/blog/2015/05/09/python-different-version/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.bionutshell.org/blog/2015/05/23/tophat-inner-distance/" data-via="" data-counturl="http://yulongniu.bionutshell.org/blog/2015/05/23/tophat-inner-distance/" >Tweet</a>
   
   
   
@@ -366,10 +333,10 @@
         
           <ul class="meta text-muted pager">
             
-            <li class="previous"><a href="/blog/2015/05/08/install-use-postgresql/" title="Previous Post: Fedora安装与使用PostgreSQL">&laquo; Fedora安装与使用PostgreSQL</a></li>
+            <li class="previous"><a href="/blog/2015/05/16/filter-tophat2-output/" title="Previous Post: 过滤TopHat分析双端测序的输出">&laquo; 过滤TopHat分析双端测序的输出</a></li>
             
             
-            <li class="next"><a href="/blog/2015/05/09/django-tutorial/" title="Next Post: Django使用介绍">Django使用介绍 &raquo;</a></li>
+            <li class="next"><a href="/blog/2015/05/28/bash-program/" title="Next Post: Bash简易编程">Bash简易编程 &raquo;</a></li>
             
           </ul>
         
@@ -494,8 +461,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://yulongniu.bionutshell.org/blog/2015/05/09/python-different-version/';
-        var disqus_url = 'http://yulongniu.bionutshell.org/blog/2015/05/09/python-different-version/';
+        var disqus_identifier = 'http://yulongniu.bionutshell.org/blog/2015/05/23/tophat-inner-distance/';
+        var disqus_url = 'http://yulongniu.bionutshell.org/blog/2015/05/23/tophat-inner-distance/';
         var disqus_script = 'embed.js';
       
     (function () {

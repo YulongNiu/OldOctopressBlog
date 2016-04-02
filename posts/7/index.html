@@ -184,6 +184,248 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2011-08-13T05:20:57+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2011/08/13/emacs-ess-tips/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2011/08/13/emacs-ess-tips/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2011/08/13/emacs-ess-tips/" itemprop="url">Emacs和ESS的使用技巧</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="ess">1. 安装ESS</h2>
+
+<p>有两种方法可以安装，一种是直接使用系统自带的包安装系统，比如<code>yum</code>：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install emacs-ess</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>但是，有时可能不是ESS最新版本。所以，推荐第二种方法，使用Emacs自带的包系统，方便、更新及时，设置方法<a href="http://yulongniu.bionutshell.org/blog/2012/06/24/emacs-extend-skills/">参考</a>，安装<code>ess</code>包。</p>
+
+<h2 id="ess-1">2. 使用ESS</h2>
+
+<p>进入GNU Emacs界面之后，输入<code>M-X R</code> 即可进入R界面。在这个过程中，会询问是否在当前运行目录下运行R，可以选择在不同目录下运行。</p>
+
+<ul>
+  <li><code>M-x R</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>启动R。R运行的buffer因为是在Emacs编辑器下运行，所以称为inferior（Emacs文档中称之为iESS buffer）。</p>
+    </li>
+    <li>
+      <p><code>C-u M-x R RET --no-save RET</code>：启动R并且不保存。</p>
+    </li>
+    <li>
+      <p><code>M-x ess-transcript-clean-region</code>：清理R界面。</p>
+    </li>
+    <li>
+      <p><code>C-c C-z</code>：强制停止运行的R进程。</p>
+    </li>
+  </ol>
+</blockquote>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2011/08/13/emacs-ess-tips/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2011-08-13T02:57:17+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2011/08/13/emacs-tips/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2011/08/13/emacs-tips/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2011/08/13/emacs-tips/" itemprop="url">Emacs使用技巧</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="section">1. 安装</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 安装Emacs</span>
+</span><span class="line"><span class="c"># yum install emacs </span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-1">2. 窗口和文件操作</h2>
+
+<p>Emacs的按键操作，约定<code>C</code>代表<code>Ctrl</code>键，<code>M</code>代表<code>Alt</code>键，<code>RET</code>表示Enter键。<code>C-x</code>对应字符扩展，比如<code>C-x C-b</code>表示列出所有buffer；<code>M-x</code>对应命令扩展，比如<code>M-x replace-string</code>（可以用TAB补全）表示字符替换。</p>
+
+<ul>
+  <li><code>C-x 2</code>或<code>C-x 3</code>：</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>
+      <p>将窗口分割成两个或者三个。</p>
+    </li>
+    <li>
+      <p><code>C-x 1</code>：只保留一个窗口。</p>
+    </li>
+    <li>
+      <p><code>C-x n</code>：开n个窗口</p>
+    </li>
+  </ol>
+</blockquote>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2011/08/13/emacs-tips/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2010-11-09T06:00:40+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2010/11/09/linux-command/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2010/11/09/linux-command/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2010/11/09/linux-command/" itemprop="url">Linux常用命令集锦</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="section">1. 压缩与解压缩</h2>
+
+<p><code class="language-bash">.tar.gz</code>格式文件</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 解压 </span>
+</span><span class="line"><span class="nv">$ </span>tar -zxvf /filePath/filename.tar.gz
+</span><span class="line">
+</span><span class="line"><span class="c"># 压缩 </span>
+</span><span class="line"><span class="nv">$ </span>tar -zcvf /filePath/filename.tar.gz /filePath/filename
+</span><span class="line">
+</span><span class="line"><span class="c"># 解压到特定文件夹</span>
+</span><span class="line"><span class="nv">$ </span>tar -zxvf /filePath/filename.tar.gz -C /filePath/filename
+</span><span class="line">
+</span><span class="line"><span class="c"># 压缩到特定文件夹</span>
+</span><span class="line"><span class="nv">$ </span>tar -zcvf /filePath/filename.tar.gz -C /filePath/filename
+</span><span class="line">
+</span><span class="line"><span class="c"># 压缩所有txt类型文件 </span>
+</span><span class="line"><span class="nv">$ </span>gzip *.txt
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code class="language-bash">.tar.bz2</code>格式文件</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 解压 </span>
+</span><span class="line"><span class="nv">$ </span>tar -jxvf /filePath/filename.taz.bz2
+</span><span class="line">
+</span><span class="line"><span class="c"># 压缩</span>
+</span><span class="line"><span class="nv">$ </span>tar -jcvf /filePath/filename.tar.bz2 /filePath/filename
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2010/11/09/linux-command/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2010-09-04T22:21:38+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2010/09/04/linux-install-r/#disqus_thread" itemprop="discussionUrl"
@@ -362,7 +604,7 @@
     
     
     <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
-        <span class="badge">7</span>
+        <span class="badge">10</span>
         bioinfor
       </a>
     

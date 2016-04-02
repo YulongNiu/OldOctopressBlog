@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bioinfor | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/bioinfor/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2016-02-11T21:50:42+08:00</updated>
+  <updated>2016-04-02T14:19:18+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -86,6 +86,103 @@
 
 <p>2015年6月1日</p>
 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[确定TopHat中mate-inner-dist参数]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2015/05/23/tophat-inner-distance/"/>
+    <updated>2015-05-23T19:08:19+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2015/05/23/tophat-inner-distance</id>
+    <content type="html"><![CDATA[<p>对于双端测序RNA-seq数据，TopHat在运行时候，有两个参数<code class="language-bash">-r/--mate-inner-dist</code>和<code class="language-bash">--mate-std-dev</code>分别标识一对reads的间隔长度的期望平均值和标准差，其默认值分别为50bp和20bp。这两个参数本身是个估计值，用于TopHat在map过程中确定一对reads是否匹配到基因组正确位置。如果能够准确设定这两个数值，将会提升TopHat结果的准确性和完整性，具体比较参考？？？？？？？</p>
+
+<p>有两种方法获得这对参数的准确值：</p>
+
+<p>第一种：获取RNA-seq实验建库方法，之后按照以下网址说明计算，<a href="http://blog.qiuworld.com:8080/archives/3007">RNA-seq差异表达分析工作流程</a>。</p>
+
+<!--more-->
+
+<p>第二种：根据RNA-seq数据进行估算，具体步骤为：</p>
+
+<ol>
+  <li>
+    <p>使用TopHat默认参数先跑一遍。</p>
+  </li>
+  <li>
+    <p>使用<a href="http://miso.readthedocs.org/en/fastmiso/#computing-the-insert-length-distribution-and-its-statistics">MISO</a>的<code class="language-bash">pe_utils</code>工具估算。</p>
+  </li>
+</ol>
+
+<p>以下详细介绍<code class="language-bash">pe_utils</code>使用方法。</p>
+
+<p>第一步， 下载对应物种的基因注释文件GTF或者GFF，比如<a href="http://genome.ucsc.edu/cgi-bin/hgTables?command=start">USCS Table Browser</a>（<code class="language-bash">output format</code>选择<code class="language-bash">GTF</code>）或者使用MISO提供的<a href="http://miso.readthedocs.org/en/fastmiso/#human-mouse-gene-models-for-isoform-centric-analyses">Ensembl版本</a>。如果GTF文件，使用<code class="language-bash">gffread</code>工具进行转换，具体方法参考？？？？？？？</p>
+
+<p>第二步，确定TopHat运行结果的bam文件与基因注释GFF文件，两者基因组命名方法一致。有的使用类似<code class="language-bash">chr1</code>命名，而另外一些使用<code class="language-bash">1</code>。如果不一致，建议修改GFF文件。</p>
+
+<p><figure class='code'><figcaption><span>Summary Chromosomes’ Names</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 查看GFF文件中基因组命名</span>
+</span><span class='line'><span class="nv">$ </span>awk ‘<span class="o">{</span>print <span class="nv">$1</span><span class="o">}</span>’ hg19USCS.gff <span class="p">|</span> sort -n <span class="p">|</span> uniq -c&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;bam&quot;</span>&gt;查看bam文件中基因组命名&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;samtools view accepted_hits.bam <span class="p">|</span> head -1000 <span class="p">|</span> awk ‘<span class="o">{</span>print <span class="nv">$3</span><span class="o">}</span>’ <span class="p">|</span> sort -n <span class="p">|</span> uniq -c
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>第三步，筛选较长外显子，比如长度大于1000bp。MISO提供了<code class="language-bash">exon_utils</code>工具用于提取长外显子，但是我们没有能够成功运行过。因此这里提供一个R版本的脚本，比如基因注释文件名为<code class="language-bash">hg19USCS.gff</code>，输出筛选的文件名为<code class="language-bash">hg19USCS_selected.gff</code>。</p>
+
+<p><figure class='code'><figcaption><span>R Script of Select exons with length &gt; 1000bp</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='R'><span class='line'>gffFile <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> read.table<span class="p">(</span>‘hg19USCS.gff’<span class="p">,</span> stringsAsFactors <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>gffExon <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> gffFile<span class="p">[</span>gffFile<span class="p">[,</span> <span class="m">3</span><span class="p">]</span> <span class="o">==</span> ‘exon’<span class="p">,</span> <span class="p">]</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>exonLen <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> <span class="kp">abs</span><span class="p">(</span>gffExon<span class="p">[,</span> <span class="m">5</span><span class="p">]</span> <span class="o">-</span> gffExon<span class="p">[,</span> <span class="m">4</span><span class="p">])</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>gffExonSelect <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> gffExon<span class="p">[</span>exonLen <span class="o">&amp;</span>gt<span class="p">;</span><span class="o">=</span> <span class="m">1000</span><span class="p">,</span> <span class="p">]</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>write.table<span class="p">(</span>gffExonSelect<span class="p">,</span> ‘hg19USCS_selected.gff’<span class="p">,</span>
+</span><span class='line'>            row.names <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> col.names <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span>
+</span><span class='line'>            quote <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> sep <span class="o">=</span> ‘\<span class="kp">t</span>’<span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>第四步，使用<code class="language-bash">pe_utils</code>，实例如下：</p>
+
+<p><figure class='code'><figcaption><span>An example of how to use pe_utils</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 输入bam文件和GFF文件</span>
+</span><span class='line'><span class="nv">$ </span>pe_utils –compute-insert-len accepted_hits.bam hg19USCS_selected.gff –output-dir insert-dist/&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;insert-distacceptedfilteredbaminsertlen&quot;</span>&gt;在insert-dist会出现类似accepted_filtered.bam.insert_len文件&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# -r/–mate-inner-dist估计值为mean
+</span><span class='line'><span class="c"># –mate-std-dev估计值为sdev</span>
+</span><span class='line'><span class="nv">$ </span>head -1 accepted_filtered.bam.insert_len
+</span><span class='line'><span class="c">#mean=165.3,sdev=45.2,dispersion=3.5,num_pairs=5622239</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h3 id="section">更新记录</h3>
+
+<p>2015年5月23日</p>
 ]]></content>
   </entry>
   
@@ -673,787 +770,258 @@ MAPQ = -10 \times log_{10}(pvalue)
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[构建和展示进化树软件使用心得]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2014/05/02/phylo-tool-summary/"/>
-    <updated>2014-05-02T05:13:59+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2014/05/02/phylo-tool-summary</id>
-    <content type="html"><![CDATA[<h2 id="section">构建进化树</h2>
+    <title type="html"><![CDATA[RNA-seq基本概念和数据分析流程]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2014/07/23/rna-seq-analysis/"/>
+    <updated>2014-07-23T05:03:15+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2014/07/23/rna-seq-analysis</id>
+    <content type="html"><![CDATA[<p>RNA-seq相比较基因芯片，价格虽然昂贵一些，精度和灵敏度更高。同时，在测序深度足够时，也可以检测mRNA选择性剪切类型。</p>
 
-<h3 id="phyml">1. PhyML</h3>
-
-<p><strong>构建进化树方法</strong>：Maximum Likelihood</p>
-
-<p><strong>评估</strong>：选择bootstrap或者Likelihood-ratio test</p>
-
-<p><strong>运行方式</strong>：所有平台和<a href="http://atgc.lirmm.fr/phyml/">网页</a></p>
-
-<p><strong>心得</strong>：理论上支持4000条序列，小于2000000个字符。但是，对于个人电脑，通常100-200条序列比较合适。命令行运行时，可以选择非常简介的默认模式运行。在默认模式下，bootstrap需要手动开启。安装和使用非常方便，直接下载后可以直接使用。同时，bootstrap可以通过MPI分布计算，但是需要从源代码安装。</p>
-
-<p><strong>快速运行</strong>：</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>phyml -i align_file.phy –no_memory_check
-</span></code></pre></td></tr></table></div></figure></p>
+<h2 id="section">1. 样品制备</h2>
 
 <!--more-->
 
-<ul>
-  <li><code>-i</code>：后跟需要Phylip格式文件</li>
-  <li><code>--no_memory_check</code>：不用检查内存，防止程序运行时跳出</li>
-</ul>
+<h2 id="section-1">2. 测序</h2>
 
-<h3 id="raxml">2. RAxML</h3>
+<p>Illumina双端测序<a href="http://www.illumina.com/technology/next-generation-sequencing/paired-end-sequencing_assay.html">动画</a>和<a href="http://onetipperday.blogspot.sg/2013/12/illumina-hiseq2000-adapter-and.html">图示</a>。</p>
 
-<p><strong>构建进化树方法</strong>：Maximum Likelihood</p>
+<h2 id="section-2">3. 分析流程</h2>
 
-<p><strong>运行方式</strong>：所有<a href="http://www.exelixis-lab.org/">平台</a>和网页。</p>
+<p>RNA-seq<a href="http://blog.qiuworld.com:8080/archives/2343">主要分析流程</a>：</p>
 
-<p><strong>心得</strong>：推荐<a href="http://www.phylo.org/portal2/login!input.action">网页运行</a>，支持数据的存放和其他构建进化树的方法。本地安装支持MPI和PThreads的分布计算，但是安装有些复杂，需要仔细阅读文档。</p>
-
-<p><strong>快速运行1</strong>：</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>raxmlHPC-PTHREADS-AVX -x <span class="m">12345</span> -p <span class="m">12345</span> -# <span class="m">100</span> -m GTRGAMMA -T <span class="m">4</span> -s align_file.phy -n TEST
+<p><figure class='code'><figcaption><span>Workflow of RNA-seq data analysis </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>原始数据质量评估 –<span class="p">&amp;</span>gt<span class="p">;</span>
+</span><span class='line'>数据清洗（去除接头和低质量read） –<span class="p">&amp;</span>gt<span class="p">;</span>
+</span><span class='line'>清洗数据质量评估 –<span class="p">&amp;</span>gt<span class="p">;</span>
+</span><span class='line'>map测序结果至基因组（转录组） –<span class="p">&amp;</span>gt<span class="p">;</span>
+</span><span class='line'>map数据质量评估 –<span class="p">&amp;</span>gt<span class="p">;</span>
+</span><span class='line'>差异表达基因/选择性剪切/新基因/融合基因选择 –<span class="p">&amp;</span>gt<span class="p">;</span>
+</span><span class='line'>GO和pathway分析 –<span class="p">&amp;</span>gt<span class="p">;</span>
+</span><span class='line'>共表达网络分析
 </span></code></pre></td></tr></table></div></figure></p>
 
-<ul>
-  <li><code>-x</code>：bootstrap运行时设定随机数，用于结果重现</li>
-  <li><code>-p</code>：parsimony推断时设定随机数，用于结果重现</li>
-  <li><code>-#</code>：bootstrap次数。也可以设定为autoMRE，最大次数是1000。</li>
-  <li><code>-m</code>：设定使用的模型，GTRGAMMA为核苷酸序列适用模型</li>
-  <li><code>-T</code>：设定线程数，不要超过最大线程</li>
-  <li><code>-s</code>：输入文件，Phylip或者fasta文件</li>
-  <li><code>-n</code>：输入文件记号</li>
-</ul>
+<h3 id="section-3">3.1 序列清洗</h3>
 
-<p><strong>快速运行2</strong>：</p>
+<p>序列清洗主要是去除测序结果中的<a href="http://onetipperday.blogspot.sg/2013/06/illumina-hiseq2000-adapter.html">adapter</a>，</p>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>raxmlHPC-PTHREADS-AVX -f a -x <span class="m">12345</span> -p <span class="m">12345</span> -# autoMRE -m GTRCAT -T <span class="m">4</span> -s align_file.phy -n TEST
-</span></code></pre></td></tr></table></div></figure></p>
+<p>以下使用Illumina HiSeq2000平台，对一个人类样本的RNA测序。统计各种序列清洗方法和选择后的reads数目。原始数据两端测序reads分别为54,492,228和54,492,228。</p>
 
-<ul>
-  <li><code>-f a</code>：选定算法，快速bootstrap</li>
-</ul>
+<hr />
 
-<h2 id="section-1">展示进化树</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>#Trimmed</th>
+      <th>#Mapped*</th>
+      <th>#Filtered</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>r50-notrim</td>
+      <td>108,984,456</td>
+      <td>109,278,388</td>
+      <td>79,143,942</td>
+    </tr>
+    <tr>
+      <td>r50-nomixed-notrim</td>
+      <td>108,984,456</td>
+      <td>103,548,800</td>
+      <td>79,143,942</td>
+    </tr>
+    <tr>
+      <td>r50-nomixed-trimmomatic-min20</td>
+      <td>104,164,622</td>
+      <td>116,315,394</td>
+      <td>80,337,256</td>
+    </tr>
+    <tr>
+      <td>r50-nomixed-trimmomatic-min36</td>
+      <td>101,548,172</td>
+      <td>110,778,108</td>
+      <td>79,248,896</td>
+    </tr>
+    <tr>
+      <td>r50-nomixed-trimmomatic-min50</td>
+      <td>98,525,312</td>
+      <td>106,659,988</td>
+      <td>77,779,424</td>
+    </tr>
+    <tr>
+      <td>r50-nomixed-galore-min20</td>
+      <td>107,097,862</td>
+      <td>114,943,386</td>
+      <td>83,039,928</td>
+    </tr>
+    <tr>
+      <td>r100-nomixed-galore-min20</td>
+      <td>107,097,862</td>
+      <td>114,944,672</td>
+      <td>87,899,316</td>
+    </tr>
+    <tr>
+      <td>r165sd45-nomixed-galore-min20</td>
+      <td>107,097,862</td>
+      <td>114,201,366</td>
+      <td>90,750,208</td>
+    </tr>
+    <tr>
+      <td>r165sd45G-nomixed-galore-min20</td>
+      <td>107,097,862</td>
+      <td>109,901,742</td>
+      <td>93,477,122</td>
+    </tr>
+    <tr>
+      <td>r165sd45-nomixed-galore-min50</td>
+      <td>104,869,208</td>
+      <td>109,258,544</td>
+      <td>89,329,672</td>
+    </tr>
+  </tbody>
+</table>
 
-<h3 id="itol">1. iTOL</h3>
+<p><strong>*</strong>：使用TopHat2把序列mapped到hs19基因组。TopHat2默认设置为，如果一个reads能mapped到多个位点，则都会报道。因此数目可能比原始数据多。</p>
 
-<p><strong>运行方式</strong>：<a href="http://itol.embl.de/">网页</a></p>
+<hr />
 
-<p><strong>心得</strong>：</p>
+<h2 id="section-4">4. 分析过程注意事项</h2>
+
+<ol>
+  <li>参考转录组注释文件（GFF/GTF）的染色体编号，与基因组信息一致。比如都用<code class="language-bash">chr1</code>，或者都用<code class="language-bash">1</code>标识1号染色体。可能出现问题地方：</li>
+</ol>
+
+<blockquote>
+  <ul>
+    <li>
+      <p><a href="http://ccb.jhu.edu/software/tophat/manual.shtml">TopHat</a>的<code class="language-bash">-G/--GTF</code>参数。</p>
+    </li>
+    <li>
+      <p><a href="http://miso.readthedocs.org/en/fastmiso/#human-mouse-gene-models-for-isoform-centric-analyses">MISO</a>程序<code class="language-bash">pe_utils</code>的传入转录组注释文件。</p>
+    </li>
+  </ul>
+
+</blockquote>
+
+<h2 id="section-5">5. 基本概念</h2>
 
 <ul>
   <li>
-    <p>用户可以添加很多自定义的项目，丰富和完善自己的进化树，比如添加柱状图、蛋白结构域、heatmap、基因平行转移（horizontal gene transfer）等；</p>
+    <p><strong>Read</strong>：是组成测序的结果的基本单位。</p>
   </li>
   <li>
-    <p>如果输入NCBI taxonomy编号，能够自动转化成物种名称；支持鼠标点击交互式运行，非常方便。
-心得：可以在网站上建立自己的帐号，之后设定不同的project展示和存放自己的项目。尝试构建了2000条左右的序列，显示完全没有问题。</p>
+    <p><strong>Count</strong>：在某次测序中，对于某个指标（比如某个基因），得到的reads数的总和。</p>
+  </li>
+  <li>
+    <p><strong>RPKM</strong>（Reads Per Kilobase per Million）和<strong>FPKM</strong>（Fragments Per Kilobase per Million）：</p>
   </li>
 </ul>
 
-<h3 id="section-2">更新记录</h3>
+<blockquote>
+  <p>首先需要解释FPKM和RPKM的原理是相似的，区别在于FPKM对应的是DNA片段，比如在一个Illumina的pair-end（双尾）RNA-seq中，一对（两个）reads对应是一个DNA片段。有了FPKM（RPKM）概念，我们就能比较：同一个样本中基因A和基因B的相对表达量；或者不同样本中，同一个基因的相对表达量。</p>
 
-<p>2014年5月1日</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Circos Notes]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2014/03/18/circos-notes/"/>
-    <updated>2014-03-18T03:37:45+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2014/03/18/circos-notes</id>
-    <content type="html"><![CDATA[<p>Mapping data onto a Circos figure requires that you identify what patterns in your data are (a) likely to be important and (b) likely to be present, and create a figure that exposes such patterns. Remember, if the pattern exists, you can’t afford to miss it. If it doesn’t exist, you can’t afford to be fooled into thinking that it’s there, or left wondering whether it’s occluded by other data.</p>
-
-<h2 id="run-circos">1. Run circos</h2>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>bin/circos
-</span><span class='line'>-png
-</span><span class='line'>-svg
-</span><span class='line'>-conf etc/circos.conf
-</span><span class='line'>-outputdir /path/to/your/output/directory
-</span><span class='line'>-outputfile yourimage.png
-</span></code></pre></td></tr></table></div></figure>
-<!--more--></p>
+  <p>具体的原因是：引入“每一千碱基（per kilobase）”的原因在于，不同的RNA可能有不同长度，长度越长，对应的reads就越多。当每个RNA都除以自身长度（以1000碱基为单位）时，就可以比较同一个样本中不同基因的相对表达量了。相似地，引入“每一百万reads”的原因是，不同的样本可能测序的深度不一样，深度越深，当然对应的reads就越多了。如果结果除以各自库的数量（以一百万reads为单位），那么我们就能很好地衡量两个不同样本中同一个基因的相对表达量。</p>
+</blockquote>
 
 <ul>
   <li>
-    <p><code class="language-bash">-debug</code> is used for debugging</p>
+    <p><strong>Alignment</strong>：确定测得的reads在基因组上的位置的过程。</p>
   </li>
   <li>
-    <p><code class="language-bash">-cdump</code> is used for check the parsing file.</p>
+    <p><strong>Mapping</strong>：确定aligned reads对应的转录本。</p>
+  </li>
+  <li>
+    <p><strong>Pair end (PE)</strong>和<strong>Mate-Pair (MP)</strong>：</p>
   </li>
 </ul>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># store all debug output in circos.debug.txt and display only karyotype</span>
-</span><span class='line'><span class="p">&amp;</span>gt<span class="p">;</span> circos … -group_debug _all <span class="p">|</span> tee circos.debug.txt <span class="p">|</span> egrep “debuggroup karyotype”
-</span><span class='line'><span class="c"># extract other debug reports</span>
-</span><span class='line'><span class="p">&amp;</span>gt<span class="p">;</span> egrep “debuggroup rule” circos.debug.txt
-</span><span class='line'><span class="p">&amp;</span>gt<span class="p">;</span> egrep “debuggroup <span class="o">(</span>rule<span class="p">|</span>scale<span class="o">)</span>” circos.debug.txt
-</span></code></pre></td></tr></table></div></figure></p>
+<blockquote>
+  <p>两种双端测序的方法，主要区别在样品库制备和测序上。比如PE制备的库是adapter在目标序列两端，而MP库中adapter在目标序列中间。因此，在数据分析时，MP类型测序必须注意剔除adapter。具体参考<a href="http://seqanswers.com/forums/showthread.php?t=503">论坛讨论</a>和<a href="http://scottmyourstone.blogspot.sg/2013/11/difference-between-paired-end-and-mate.html">Difference Between Paired-End and Mate-Pair Reads</a>。</p>
 
-<h2 id="syntax-and-configure-files">2. Syntax and configure files</h2>
-
-<p>Configuration syntax is like:</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
-</span><span class='line'><span class="nt">&lt;ideogram&gt;</span>
-</span><span class='line'> thickness = 30p
-</span><span class='line'> fill      = yes
-</span><span class='line'> ...
-</span><span class='line'><span class="nt">&lt;/ideogram&gt;</span>
-</span><span class='line'><span class="nt">&lt;p&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-Usefule syntax: hierarchical structure <code class="language-html">&lt;ideogram&gt;</code>; all data points in all plot tracks <code class="language-html">&lt;links&gt;</code> and <code class="language-html">&lt;plots&gt;</code>; local data points in a given track <code class="language-html">&lt;link&gt;</code> and <code class="language-html">&lt;plot&gt;</code>; rules <code class="language-html">&lt;rules&gt;</code> and <code class="language-html">&lt;rule&gt;</code>; highlight<code class="language-html">&lt;hightlight&gt;</code>.</p>
-
-<p>Extermal imports</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
-</span><span class='line'><span class="nt">&lt;image&gt;</span>
-</span><span class='line'># Included from Circos distribution.
-</span><span class='line'><span class="ni">&amp;lt;&amp;lt;</span>include etc/image.conf<span class="ni">&amp;gt;&amp;gt;</span>
-</span><span class='line'><span class="nt">&lt;/image&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;h1</span> <span class="na">id=</span><span class="s">&quot;colors-fonts-and-fill-patterns&quot;</span><span class="nt">&gt;</span>colors, fonts and fill patterns<span class="nt">&lt;/h1&gt;</span>
-</span><span class='line'><span class="nt">&lt;p&gt;</span>«include etc/colors_fonts_patterns.conf»
-</span><span class='line'># system and debug parameters
-</span><span class='line'>«include etc/housekeeping.conf»
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p>Accessing configuration values<code class="language-html">parameter2 = conf(parameter1)</code> or <code class="language-html">parameter2 = conf(block1,block2,parameter1)</code> for:</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
-</span><span class='line'><span class="nt">&lt;block1&gt;</span>
-</span><span class='line'><span class="nt">&lt;block2&gt;</span>
-</span><span class='line'>parameter1 = ...
-</span><span class='line'><span class="nt">&lt;/block2&gt;</span>
-</span><span class='line'><span class="nt">&lt;/block1&gt;</span>
-</span><span class='line'><span class="nt">&lt;p&gt;</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p>Eval</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>track_color = blue
-</span><span class='line'>track_width = 100
-</span><span class='line'>track_start = 0.5<span class="nt">&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;plots&gt;</span>
-</span><span class='line'><span class="nt">&lt;plot&gt;</span>
-</span><span class='line'># color=blue
-</span><span class='line'>color = conf(track_color)
-</span><span class='line'># r0 = 0.5r
-</span><span class='line'>r0    = eval(conf(track_start) . &quot;r&quot;)
-</span><span class='line'># r1 = 0.5r+100p
-</span><span class='line'>r1    = eval(conf(track_start) . &quot;r&quot; + conf(track_width) . &quot;p&quot;)
-</span><span class='line'><span class="nt">&lt;/plot&gt;</span>
-</span><span class='line'><span class="nt">&lt;/plots&gt;</span>
-</span><span class='line'><span class="nt">&lt;p&gt;</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p>Color</p>
-
-<p>Use the color name given, like <code class="language-html">red</code>, <code class="language-html">lred</code>, <code class="language-html">vlred</code>, <code class="language-html">vvlred</code>, <code class="language-html">dred</code>, <code class="language-html">vdred</code>, <code class="language-html">vvdred</code>. If a pure color is need, use <code class="language-html">pred</code>. For the transparent color, <code class="language-html">red_a1</code>, <code class="language-html">red_a2</code>, and to <code class="language-html">red_a5</code>. <code class="language-html">red_a1</code> has a 17% tansparency and <code class="language-html">red_a5</code> have a 83% transparency.</p>
-
-<h2 id="ideogram">3. Ideogram</h2>
-
-<p>One of the most common used ideogram is the karyotypes plot. The chromosome is marked as:</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'>
-</span><span class='line'><span class="nb">chr</span> <span class="o">-</span> <span class="n">id</span> <span class="n">label</span> <span class="n">start</span> <span class="n">end</span> <span class="n">color</span>
-</span></code></pre></td></tr></table></div></figure>
-for example</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">chr</span> <span class="o">-</span> <span class="n">hs1</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">249250621</span> <span class="n">chr1</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p>The cytogenetic bands data is like:</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">band</span> <span class="n">hs1</span> <span class="n">p36</span><span class="mf">.33</span> <span class="n">p36</span><span class="mf">.33</span> <span class="mi">0</span> <span class="mi">2300000</span> <span class="n">gneg</span>
-</span></code></pre></td></tr></table></div></figure>
-* Choose a subset of chromosomes</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">chromosomes_display_default</span> <span class="o">=</span> <span class="nb">no</span><span class="sr">&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="sr">&lt;p&gt;</span><span class="n">chromosomes</span> <span class="o">=</span> <span class="n">hs1</span><span class="p">;</span><span class="n">hs2</span><span class="p">;</span><span class="n">hs3</span><span class="p">;</span><span class="n">h4</span>
-</span><span class='line'><span class="n">chromosomes</span> <span class="o">=</span> <span class="sr">/hs[1-4]$/</span>
-</span><span class='line'><span class="n">chromosomes</span> <span class="o">=</span> <span class="sr">/hs[1-4]$/</span><span class="p">;</span><span class="n">hs10</span><span class="p">;</span><span class="n">hs11</span>
-</span><span class='line'><span class="n">chromosomes</span> <span class="o">=</span> <span class="sr">/hs[1-4]$/</span><span class="p">;</span><span class="o">-</span><span class="n">hs3</span>
-</span><span class='line'><span class="n">chromosomes</span> <span class="o">=</span> <span class="n">hs1:</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="mi">120</span><span class="o">-</span><span class="p">);</span><span class="n">hs2</span><span class="p">;</span><span class="n">hs3</span><span class="p">;</span><span class="n">h4</span>
-</span></code></pre></td></tr></table></div></figure></p>
+  <p>在序列软件软件中，有时也称呼一对测序reads（对同一个目标片段分别测得的正义链和反义链），它们互为mate，分别存在两个对应的测序结果文件中。</p>
+</blockquote>
 
 <ul>
-  <li>Order</li>
+  <li><strong>Adapter（接头）</strong>、<strong>Barcode（标签）</strong>和<strong>Insert（插入片段）</strong>：</li>
 </ul>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">chromosomes_order</span> <span class="o">=</span> <span class="n">hs2</span><span class="p">,</span><span class="n">hs3</span><span class="p">,</span><span class="n">hs1</span><span class="p">,</span><span class="n">hs5</span><span class="p">,</span><span class="n">hs4</span><span class="p">,</span><span class="n">hs8</span><span class="p">,</span><span class="n">hs7</span><span class="p">,</span><span class="n">hs6</span>
-</span></code></pre></td></tr></table></div></figure></p>
+<blockquote>
+  <p>adapter是一段短的序列已知的核酸链，用于链接序列未知的目标测序片段。</p>
+
+  <p>barcode，也称为index，是一段很短的寡居核酸链，用于在多个样品混合测序时，标记不同的样品。
+insert是用于测序的目标片段，因为是包括在两个adapter之间，所以被称为“插入”片段。</p>
+
+  <p>一个常见测序片段类似与<code class="language-bash">adapter--barcode--insert--adapter</code>。测序开始时前几个碱基无法测得，第一个adapter在数据输出时被去除；由于测序仪读长限制，第二个adapter通常无法测得。所以，经常得到类似 <code class="language-bash">barcode--部分insert</code>的read。最后，把barcode去除，只保留测度insert的片段，这个操作的术语是demultiplexing。</p>
+
+  <p>需要注意的是，<a href="http://www.illumina.com/documents/products/datasheets/datasheet_truseq_sample_prep_kits.pdf">Illumina TruSeq</a>样品库制备方法中，barcode是在adapter中部，而且是与insert分开测序。而<a href="http://res.illumina.com/documents/products/technotes/technote_nextera_matepair_data_processing.pdf">Illumina Nextera Mate Pair</a>样品库制备中，adapter在目标序列中部。</p>
+</blockquote>
 
 <ul>
-  <li>Scale</li>
+  <li>
+    <p><strong>Concordant Pairs</strong>和<strong>Discordant Pairs</strong>：根据<a href="http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#paired-inputs">Bowtie2</a>的解释，concordant pairs表示一对reads在alignment时，既方向匹配又有合适距离（Bowtie2中是200bp～500bp）。如果上述方向和距离，任意一个条件不满足，则称为discordant pairs。</p>
+  </li>
+  <li>
+    <p><strong>chrN_random</strong>和<strong>chrUn</strong>：基因组文件中通常含有类似<code class="language-bash">chr9_gl000198_random</code>和<code class="language-bash">chrUn_gl000211</code>的基因组。根据<a href="https://genome.ucsc.edu/FAQ/FAQdownloads.html#download11">UCSC</a>解释，<code class="language-bash">chrN_random</code>包括基因组已知但具体位置未知序列，或者位置已知但具体内容未完成序列。<code class="language-bash">ChrUn</code>中包括一些具体位置未知的序列。</p>
+  </li>
+  <li>
+    <p><strong>chrN_xxx_hap1</strong>：转录组注释文件中会出现类似<code class="language-bash">chr6_apd_hap1</code>和<code class="language-bash">chr6_dbb_hap3</code>的基因组注释。根据<a href="http://genome.ucsc.edu/cgi-bin/hgGateway?org=Human&amp;db=hg19">UCSC解释</a>这些基因组是[单倍型(haplotype)]基因组(http://hapmap.ncbi.nlm.nih.gov/originhaplotype.html.en)。</p>
+  </li>
 </ul>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">chromosomes_scale</span> <span class="o">=</span> <span class="n">hs1</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span><span class="n">hs2</span><span class="o">=</span><span class="mf">2.0</span>
-</span><span class='line'><span class="c1"># 25% and 50%</span>
-</span><span class='line'><span class="n">chromosomes_scale</span> <span class="o">=</span> <span class="n">hs1</span><span class="o">=</span><span class="mf">0.25</span><span class="n">r</span><span class="p">,</span><span class="n">hs2</span><span class="o">=</span><span class="mf">0.50</span><span class="n">r</span>
-</span><span class='line'><span class="c1"># each is 25%</span>
-</span><span class='line'><span class="n">chromosomes_scale</span> <span class="o">=</span> <span class="sr">/hs[12]/</span><span class="o">=</span><span class="mf">0.5</span><span class="n">rn</span>
-</span><span class='line'><span class="c1"># all ideograms distributed evenly within entire figure</span>
-</span><span class='line'><span class="n">chromosomes_scale</span>   <span class="o">=</span> <span class="sr">/./</span><span class="o">=</span><span class="mi">1</span><span class="n">rn</span>
-</span></code></pre></td></tr></table></div></figure></p>
+<h3 id="section-6">参考网址</h3>
 
 <ul>
-  <li>Rotation</li>
+  <li>
+    <p>推荐幻灯片<a href="http://www.slideshare.net/mikaelhuss/all-bio-rnaseqqc?from_action=save">RNA-seq quality control and pre-processing</a></p>
+  </li>
+  <li>
+    <p><a href="http://faculty.ucr.edu/~tgirke/HTML_Presentations/Manuals/Workshop_Dec_12_16_2013/Rrnaseq/Rrna">Bioconductor详细流程</a></p>
+  </li>
+  <li>
+    <p>RPKM和FPKM：<a href="http://jefworks.com/rpkm-and-fpkm-explained/">1</a>、 <a href="http://www.cureffi.org/2013/09/12/counts-vs-fpkms-in-rna-seq/">2</a>和<a href="http://www.partek.com/Tutorials/microarray/User_Guides/UnderstandingReads.pdf">3一个计算RPKM的例子</a></p>
+  </li>
+  <li>
+    <p>ENCODE推荐的RNA-seq数据分析指导 <a href="http://genome.ucsc.edu/ENCODE/protocols/dataStandards/ENCODE_RNAseq_Standards_V1.0.pdf">The ENCODE Consortium: Standards, Guidelines and Best Practices for RNA-seq</a></p>
+  </li>
+  <li>
+    <p>RNA-seq差异表达分析工作流程：<a href="http://216.49.144.90:8080/archives/3007/comment-page-2">中文</a>，<a href="http://vallandingham.me/RNA_seq_differential_expression.html">英文</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.rna-seqblog.com/how-many-reads-are-enough/">多少个read才够</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.macrogencn.com/_d275872179.htm">高通量测序常用名词汇总</a></p>
+  </li>
+  <li>
+    <p><a href="http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#paired-inputs">Bowtie2对一些常用名词解释</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.plob.org/2014/11/09/8672.html">二代测序中barcodes index的介绍</a></p>
+  </li>
+  <li>
+    <p>Illumina样品制备参考：<a href="https://www.med.unc.edu/pharm/calabreselab/files/tufts-sequencing-primer">Illumina TruSeq DNA Adapters De-Mystified</a>和<a href="http://bioinformatics.cvr.ac.uk/blog/illumina-adapter-and-primer-sequences/">Illumina adapter and primer sequences</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.research.janahang.com/quality-control-and-trimming-of-rna-seq-data/">Quality Control and Trimming of RNA-seq data</a></p>
+  </li>
+  <li>
+    <p><a href="http://cgrlucb.wikispaces.com/file/view/readMapping.pdf">Best Practices and Suggestions for Read Alignment</a></p>
+  </li>
+  <li>
+    <p><a href="http://barcwiki.wi.mit.edu/wiki/SOPs/rna-seq-diff-expressions">Using RNA-seq to quantify gene levels and assay for differential expression</a></p>
+  </li>
 </ul>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
-</span><span class='line'><span class="nt">&lt;image&gt;</span>
-</span><span class='line'>angle_orientation* = counterclockwise
-</span><span class='line'><span class="ni">&amp;lt;&amp;lt;</span>include etc/image<span class="ni">&amp;gt;&amp;gt;</span>
-</span><span class='line'><span class="nt">&lt;/image&gt;</span>
-</span><span class='line'><span class="nt">&lt;p&gt;</span>
-</span></code></pre></td></tr></table></div></figure></p>
+<h3 id="section-7">更新记录</h3>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">chromosomes_reverse</span> <span class="o">=</span> <span class="sr">/hs[234]/</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<ul>
-  <li>Chromosome color</li>
-</ul>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">chromosomes_color</span> <span class="o">=</span> <span class="n">hs1</span><span class="o">=</span><span class="n">red</span><span class="p">,</span><span class="n">hs2</span><span class="o">=</span><span class="n">orange</span><span class="p">,</span><span class="n">hs3</span><span class="o">=</span><span class="n">green</span><span class="p">,</span><span class="n">hs4</span><span class="o">=</span><span class="n">blue</span>
-</span></code></pre></td></tr></table></div></figure>
-Also, the color could be redefined as</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">chr1</span><span class="o">*</span> <span class="o">=</span> <span class="n">red</span>
-</span><span class='line'><span class="n">chr2</span><span class="o">*</span> <span class="o">=</span> <span class="n">orange</span>
-</span><span class='line'><span class="n">chr3</span><span class="o">*</span> <span class="o">=</span> <span class="n">green</span>
-</span><span class='line'><span class="n">chr4</span><span class="o">*</span> <span class="o">=</span> <span class="n">blue</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<ul>
-  <li>Position</li>
-</ul>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">chromosomes_radius</span> <span class="o">=</span> <span class="n">hs4:0</span><span class="mf">.9</span><span class="n">r</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<ul>
-  <li>Show bands</li>
-</ul>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">band_transparency</span> <span class="o">=</span> <span class="mi">0</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<ul>
-  <li>Add chromosome</li>
-</ul>
-
-<p>For example, add the human mitochondria chromosome.</p>
-
-<p>Add the following to the file <code class="language-bash">data/karyotype/karyotype.human.txt</code></p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">chr</span> <span class="o">-</span> <span class="n">hsMT</span> <span class="n">MT</span> <span class="mi">0</span> <span class="mi">16569</span> <span class="n">chrMT</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p>Add “hsMT” color in the file <code class="language-bash">etc/colors.ucsc.conf</code></p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">chrMT</span> <span class="o">=</span> <span class="mi">121</span><span class="p">,</span><span class="mi">204</span><span class="p">,</span><span class="mi">61</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<h2 id="highlight">4. Highlight</h2>
-
-<h3 id="data-type">4.1 Data type</h3>
-
-<p>Data type of highlight is</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">chr</span> <span class="n">start</span> <span class="n">end</span>
-</span></code></pre></td></tr></table></div></figure>
-for exmaple,</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">hs1</span> <span class="mi">1298972</span> <span class="mi">1300443</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p>We can also add the highlight information into the data file, for example:</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">hs1</span> <span class="mi">100433463</span> <span class="mi">100487964</span> <span class="n">fill_color</span><span class="o">=</span><span class="n">red</span><span class="p">,</span><span class="n">r0</span><span class="o">=</span><span class="mf">0.6</span><span class="n">r</span><span class="p">,</span><span class="n">r1</span><span class="o">=</span><span class="mf">0.6</span><span class="n">r</span><span class="o">+</span><span class="mi">50</span><span class="n">p</span>
-</span><span class='line'><span class="n">hs1</span> <span class="mi">232817594</span> <span class="mi">240828534</span> <span class="n">fill_color</span><span class="o">=</span><span class="n">chr9</span><span class="p">,</span><span class="n">z</span><span class="o">=</span><span class="mi">61</span><span class="p">,</span><span class="n">r0</span><span class="o">=</span><span class="mf">0.4</span><span class="n">r</span><span class="o">-</span><span class="mf">78.7058</span><span class="n">p</span><span class="p">,</span><span class="n">r1</span><span class="o">=</span><span class="mf">0.4</span><span class="n">r</span><span class="o">+</span><span class="mf">78.7058</span><span class="n">p</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<h3 id="conf-format">4.2 Conf format</h3>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;highlights&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;highlight&gt;</span>
-</span><span class='line'>...
-</span><span class='line'><span class="nt">&lt;/highlight&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;highlight&gt;</span>
-</span><span class='line'>...
-</span><span class='line'><span class="nt">&lt;/highlight&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;highlight&gt;</span>
-</span><span class='line'>...
-</span><span class='line'><span class="nt">&lt;/highlight&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;/highlights&gt;</span>
-</span><span class='line'><span class="nt">&lt;p&gt;</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<h3 id="parameters">4.3 Parameters</h3>
-
-<p><code>r0</code>: inner radius of highlight</p>
-
-<p><code>r1</code>: outer radius of highlight</p>
-
-<p><code>offset</code>:  an offset applied to both r0 and r1 (useful for overriding default r0,r1 values defined at lower precedence)</p>
-
-<p><code>fill_color</code>: color of the highlight slice</p>
-
-<p><code>stroke_color</code>: color of the highlight border, drawn if stroke_thickness is set</p>
-
-<p><code>stroke_thickness</code>: border thickness, if any, of the highlight slice</p>
-
-<p><code>z</code>: z-depth of the highlight, controlling the order in which highlights are drawn</p>
-
-<p><code>ideogram</code>: toggles the position of the highlight to be within the ideogram extent</p>
-
-<h3 id="plot-hightlight">4.4 Plot hightlight</h3>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
-</span><span class='line'><span class="nt">&lt;plots&gt;</span>
-</span><span class='line'><span class="nt">&lt;plot&gt;</span>
-</span><span class='line'>type = highlight
-</span><span class='line'>file = data/3/chr.highlights.txt
-</span><span class='line'>r0   = 0.3r
-</span><span class='line'>r1   = 0.35r
-</span><span class='line'>z    = 10
-</span><span class='line'><span class="nt">&lt;/plot&gt;</span>
-</span><span class='line'><span class="nt">&lt;/plots&gt;</span>
-</span><span class='line'><span class="nt">&lt;p&gt;</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<h2 id="links">5. Links</h2>
-
-<h3 id="data-type-1">5.1 Data type</h3>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">hs1</span> <span class="mi">100</span> <span class="mi">200</span> <span class="n">hs2</span> <span class="mi">250</span> <span class="mi">300</span>
-</span></code></pre></td></tr></table></div></figure>
-or</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">segdup00010</span> <span class="n">hs1</span> <span class="mi">100</span> <span class="mi">200</span>
-</span><span class='line'><span class="n">segdup00010</span> <span class="n">hs2</span> <span class="mi">250</span> <span class="mi">300</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p>with link options</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">hs1</span> <span class="mi">100</span> <span class="mi">200</span> <span class="n">hs2</span> <span class="mi">250</span> <span class="mi">300</span> <span class="n">color</span><span class="o">=</span><span class="n">blue</span>
-</span><span class='line'><span class="n">hs1</span> <span class="mi">400</span> <span class="mi">550</span> <span class="n">hs3</span> <span class="mi">500</span> <span class="mi">750</span> <span class="n">color</span><span class="o">=</span><span class="n">red</span><span class="p">,</span><span class="n">thickness</span><span class="o">=</span><span class="mi">5</span><span class="n">p</span>
-</span><span class='line'><span class="n">hs1</span> <span class="mi">600</span> <span class="mi">800</span> <span class="n">hs4</span> <span class="mi">150</span> <span class="mi">350</span> <span class="n">color</span><span class="o">=</span><span class="n">black</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<h3 id="conf-format-1">5.2 Conf format</h3>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
-</span><span class='line'><span class="nt">&lt;links&gt;</span>
-</span><span class='line'><span class="nt">&lt;link</span> <span class="nt">/&gt;</span>
-</span><span class='line'>file          = data/5/segdup.txt
-</span><span class='line'>radius        = 0.8r
-</span><span class='line'>bezier_radius = 0r
-</span><span class='line'>color         = black_a4
-</span><span class='line'>thickness     = 2
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;/links&gt;</span>
-</span><span class='line'><span class="nt">&lt;p&gt;</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<h3 id="parameters-1">5.3 Parameters</h3>
-
-<p><code>radius</code>: this is the radial position of the termination of the link; for relative values, if radius &lt; 1 then it is defined in terms of the inner ideogram radius, otherwise it is defined in terms of the outer ideogram radius</p>
-
-<p><code>bezier_radius</code>: the radial position of the third control point (in addition to the two positions defined by the link coordinates) used to draw the Bezier curve; if this parameter is not defined then straight lines will be used</p>
-
-<p><code>color</code>: color of the link line</p>
-
-<p><code>thickness</code>: thickness of the link line (note that this is not stroke_thickness, since the line isn’t technically stroked)</p>
-
-<p><code>record_limit</code>: if this is defined, the number of records read from the file is capped; coordinate records are sampled from the start of the file; useful for debugging</p>
-
-<p>In each <code class="language-html">&lt;link&gt;</code>, <code class="language-html">&lt;rules&gt;</code> and <code class="language-html">&lt;rule&gt;</code> can be applied to special ruls. Each <code class="language-html">&lt;rule&gt;</code> contains three parts: <em>a condition</em>, <em>formatting statements</em> and <em>an optional ‘flow’ statement</em>.</p>
-
-<p>Marker the priority of rules</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
-</span><span class='line'><span class="nt">&lt;rule&gt;</span>
-</span><span class='line'># 1st
-</span><span class='line'>importance = 10
-</span><span class='line'><span class="nt">&lt;/rule&gt;</span>
-</span><span class='line'><span class="nt">&lt;p&gt;</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p>Add a tag</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
-</span><span class='line'><span class="nt">&lt;rule&gt;</span>
-</span><span class='line'>flow = goto special_rule if true
-</span><span class='line'>...
-</span><span class='line'><span class="nt">&lt;/rule&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;rule&gt;</span>
-</span><span class='line'>tag = special_rule
-</span><span class='line'>...
-</span><span class='line'><span class="nt">&lt;/rule&gt;</span>
-</span><span class='line'><span class="nt">&lt;p&gt;</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<h2 id="histograms">6. Histograms</h2>
-
-<p>Histogram, line plot, scatter plot, and heat map share the same data format</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">chr</span> <span class="n">start</span> <span class="n">end</span> <span class="n">value</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-for exmaple</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">hs3</span> <span class="mi">196000000</span> <span class="mi">197999999</span> <span class="mf">71.0000</span> <span class="n">fill_color</span><span class="o">=</span><span class="n">blue</span>
-</span></code></pre></td></tr></table></div></figure>
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="c1"># in data file</span>
-</span><span class='line'><span class="n">hs3</span> <span class="mi">196000000</span> <span class="mi">197999999</span> <span class="mf">71.0000</span> <span class="n">id</span><span class="o">=</span><span class="n">abc</span><span class="sr">&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;in-rule-block&quot;</span><span class="o">&gt;</span><span class="n">in</span> <span class="n">rule</span> <span class="n">block</span><span class="sr">&lt;/h1&gt;</span>
-</span><span class='line'><span class="sr">&lt;rule&gt;</span>
-</span><span class='line'><span class="n">condition</span>  <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="ow">eq</span> <span class="s">&quot;abc&quot;</span>
-</span><span class='line'><span class="n">fill_color</span> <span class="o">=</span> <span class="n">blue</span>
-</span><span class='line'><span class="sr">&lt;/rule&gt;</span>
-</span><span class='line'><span class="sr">&lt;p&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-Another data format has multiple values</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">chr</span> <span class="n">start</span> <span class="n">end</span> <span class="n">value</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="err">…</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-for example</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">hs3</span> <span class="mi">196000000</span> <span class="mi">197999999</span> <span class="mf">0.0000</span><span class="p">,</span><span class="mf">7.0000</span><span class="p">,</span><span class="mf">64.0000</span><span class="p">,</span><span class="mf">0.0000</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<ul>
-  <li>Plot histogram</li>
-</ul>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
-</span><span class='line'><span class="nt">&lt;plots&gt;</span>
-</span><span class='line'><span class="nt">&lt;plot&gt;</span>
-</span><span class='line'>type = histogram
-</span><span class='line'>file = data/5/segdup.hs1234.hist.txt
-</span><span class='line'>r1   = 0.88r
-</span><span class='line'>r0   = 0.81r
-</span><span class='line'>
-</span><span class='line'>fill_color = vdgrey
-</span><span class='line'>extend_bin = no
-</span><span class='line'><span class="nt">&lt;/plot&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-For multiple values, `fill_color`{:.language-bash} is used to set the different colors.
-
-* Orientation
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>orientation = in
-</span></code></pre></td></tr></table></div></figure>
-
-* Rules
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;rules&gt;</span>
-</span><span class='line'><span class="ni">&amp;lt;</span><span class="nt">&lt;include</span> <span class="na">exclude</span><span class="err">.</span><span class="na">hs1</span><span class="err">.</span><span class="na">rule=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span><span class="ni">&amp;gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-* Backgrounds and axes
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;plot&gt;</span>
-</span><span class='line'>...
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;axes&gt;</span>
-</span><span class='line'> <span class="nt">&lt;axis&gt;</span>
-</span><span class='line'> ...
-</span><span class='line'> <span class="nt">&lt;/axis&gt;</span>
-</span><span class='line'> <span class="nt">&lt;axis&gt;</span>
-</span><span class='line'> ...
-</span><span class='line'> <span class="nt">&lt;/axis&gt;</span>
-</span><span class='line'> ...
-</span><span class='line'><span class="nt">&lt;/axes&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;backgrounds&gt;</span>
-</span><span class='line'> <span class="nt">&lt;background&gt;</span>
-</span><span class='line'> ...
-</span><span class='line'> <span class="nt">&lt;/background&gt;</span>
-</span><span class='line'> <span class="nt">&lt;background&gt;</span>
-</span><span class='line'> ...
-</span><span class='line'> <span class="nt">&lt;/background&gt;</span>
-</span><span class='line'> ...
-</span><span class='line'><span class="nt">&lt;/backgrounds&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;/plot&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-* text
-
-text data format is
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">chr</span> <span class="n">start</span> <span class="n">end</span> <span class="n">value</span>
-</span></code></pre></td></tr></table></div></figure>
-
-for exmaple
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">hs1</span> <span class="mi">100425066</span> <span class="mi">100487997</span> <span class="n">DBT</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;plots&gt;</span>
-</span><span class='line'><span class="nt">&lt;plot&gt;</span>
-</span><span class='line'>type             = text
-</span><span class='line'>color            = black
-</span><span class='line'>file             = data/phylo/labelGene.txt
-</span><span class='line'><span class="nt">&lt;/plot&gt;</span>
-</span><span class='line'><span class="nt">&lt;/plots&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-apply rules
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;rules&gt;</span>
-</span><span class='line'><span class="nt">&lt;rule&gt;</span>
-</span><span class='line'>importance = 90
-</span><span class='line'>condition  = var(value) eq &quot;GeneName&quot;
-</span><span class='line'>color = blue
-</span><span class='line'><span class="nt">&lt;/rule&gt;</span>
-</span><span class='line'><span class="nt">&lt;/rules&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-## Reference ##
-
-* [Ciros grocery of published pictures](http://circos.ca/images/scientific_literature/)
-
-</include></rules></plots>
+<p>2015年5月19日</p>
 ]]></content>
   </entry>
   
