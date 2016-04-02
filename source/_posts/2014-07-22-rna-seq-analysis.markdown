@@ -42,7 +42,7 @@ GO和pathway分析 -->
 
 ### 3.1 序列清洗 ###
 
-序列清洗主要是去除测序结果中的[adapter](http://onetipperday.blogspot.sg/2013/06/illumina-hiseq2000-adapter.html)，
+序列清洗主要是去除测序结果中的[adapter](http://onetipperday.blogspot.sg/2013/06/illumina-hiseq2000-adapter.html)或通用引物等。
 
 以下使用Illumina HiSeq2000平台，对一个人类样本的RNA测序。统计各种序列清洗方法和选择后的reads数目。原始数据两端测序reads分别为54,492,228和54,492,228。
 
