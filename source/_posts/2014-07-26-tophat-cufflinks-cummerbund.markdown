@@ -38,7 +38,7 @@ $ tophat2 -p 8 -o human_1 hg19 human_1.fastq.gz
 
 * `-r/--mate-inner-dist`{:.language-bash}：一对reads的间隔长度的期望平均值，默认值为50bp，**建议添加**。具体解释，参考[RNA-seq差异表达分析工作流程](http://blog.qiuworld.com:8080/archives/3007)和[Tophat中-r/–mate-inner-dist参数](http://www.plob.org/2012/12/04/4988.html)。
 
-* `--mate-std-dev`{:.language-bash}：一对reads的间隔长度分布的标准差，默认值为20bp，**建议添加**。`-r/--mate-inner-dist`{:.language-bash}和`--mate-std-dev`{:.language-bash}的估计方法参考？？？？？？？
+* `--mate-std-dev`{:.language-bash}：一对reads的间隔长度分布的标准差，默认值为20bp，**建议添加**。`-r/--mate-inner-dist`{:.language-bash}和`--mate-std-dev`{:.language-bash}的估计方法参考[确定TopHat中mate-inner-dist参数](http://yulongniu.bionutshell.org/blog/2015/05/23/tophat-inner-distance/)。
 
 * `--library-type`{:.language-bash}：
 

@@ -7,7 +7,7 @@ published: true
 categories: Bioinfor
 ---
 
-对于双端测序RNA-seq数据，TopHat在运行时候，有两个参数`-r/--mate-inner-dist`{:.language-bash}和`--mate-std-dev`{:.language-bash}分别标识一对reads的间隔长度的期望平均值和标准差，其默认值分别为50bp和20bp。这两个参数本身是个估计值，用于TopHat在map过程中确定一对reads是否匹配到基因组正确位置。如果能够准确设定这两个数值，将会提升TopHat结果的准确性和完整性，具体比较参考？？？？？？？
+对于双端测序RNA-seq数据，TopHat在运行时候，有两个参数`-r/--mate-inner-dist`{:.language-bash}和`--mate-std-dev`{:.language-bash}分别标识一对reads的间隔长度的期望平均值和标准差，其默认值分别为50bp和20bp。这两个参数本身是个估计值，用于TopHat在map过程中确定一对reads是否匹配到基因组正确位置。如果能够准确设定这两个数值，将会提升TopHat结果的准确性和完整性。
 
 有两种方法获得这对参数的准确值：
 
