@@ -5,7 +5,7 @@ title: "RNA-seq基本概念和数据分析流程"
 date: 2014-07-22 17:03:15 -0400
 comments: true
 styles: [data-table]
-published: false
+published: true
 categories: bioinfor
 ---
 

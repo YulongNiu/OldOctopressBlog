@@ -3,7 +3,7 @@ layout: post
 title: "TopHat/Cufflinks/CummeRbund使用介绍"
 date: 2014-06-26 14:51:56 +0800
 comments: true
-published: false
+published: true
 categories: Bioinfor
 ---
 
@@ -123,7 +123,7 @@ $ cuffmerge -p 8 -g hg19USCS_ensembl.gtf -s hg19.fa -o mergeFile assemblies.txt
 * `assemblies.txt`{:.language-bash$}：是一个文件，写入需要组装转录本的路径。
 
 
-### 2.3 `cuffdiff`{:.language-bash} 快速运行 ###
+### 2.3 `cuffquant`{:.language-bash} 快速运行 ###
 
 {% codeblock lang:bash Example code for cuffd %}
 $ cuffquant -p 14 -o quantOut -b hg19.fa \
@@ -166,15 +166,9 @@ $ cuffdiff -p 14 -o diffOut -b hg19.fa \
 
 * `-L/--labels `{:.language-bash$}：指定样品组名
 
+## 3. CummeRbund ##
 
-
-
-
-
-
-
-
-
+个人感觉CummeRbund不好用，不做介绍和讨论。
 
 
 ### 参考资料 ###
@@ -184,6 +178,8 @@ $ cuffdiff -p 14 -o diffOut -b hg19.fa \
 * [cufflinks安装介绍](http://cole-trapnell-lab.github.io/cufflinks/getting_started/#common-uses-of-the-cufflinks-package)
 
 * <a id="Roberts et.al., 2011">Roberts A</a>, Pimentel H, Trapnell C, Pachter L: **Identification of novel transcripts in annotated genomes using RNA-Seq.** *Bioinformatics*. 2011, 27(17):2325-9. [pdf](http://bioinformatics.oxfordjournals.org/content/early/2011/06/21/bioinformatics.btr355.full.pdf) 
+
+* [RNA-seq分析新三件套](http://www.ebiotrade.com/newsf/2015-3/2015316173503298.htm)
 
 
 ### 更新记录 ###

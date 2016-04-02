@@ -3,7 +3,7 @@ layout: post
 title: "确定TopHat中mate-inner-dist参数"
 date: 2015-05-23 19:08:19 +0800
 comments: true
-published: false
+published: true
 categories: Bioinfor
 ---
 
@@ -38,7 +38,7 @@ $ awk '{print $1}' hg19USCS.gff | sort -n | uniq -c
 samtools view accepted_hits.bam | head -1000 | awk '{print $3}' | sort -n | uniq -c
 {% endcodeblock %}
 
-第三步，筛选较长内含子，比如长度大于1000bp。MISO提供了`exon_utils`{:.language-bash}工具用于提取长内含子，但是我们没有能够成功运行过。因此这里提供一个R版本的脚本，比如基因注释文件名为`hg19USCS.gff`{:.language-bash}，输出筛选的文件名为`hg19USCS_selected.gff`{:.language-bash}。
+第三步，筛选较长外显子，比如长度大于1000bp。MISO提供了`exon_utils`{:.language-bash}工具用于提取长外显子，但是我们没有能够成功运行过。因此这里提供一个R版本的脚本，比如基因注释文件名为`hg19USCS.gff`{:.language-bash}，输出筛选的文件名为`hg19USCS_selected.gff`{:.language-bash}。
 
 {% codeblock lang:R R Script of Select exons with length > 1000bp%}
 gffFile <- read.table('hg19USCS.gff', stringsAsFactors = FALSE)
