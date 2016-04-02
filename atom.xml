@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2016-04-02T14:29:55+08:00</updated>
+  <updated>2016-04-02T23:33:55+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -1032,7 +1032,7 @@
     <link href="http://yulongniu.bionutshell.org/blog/2015/05/23/tophat-inner-distance/"/>
     <updated>2015-05-23T19:08:19+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2015/05/23/tophat-inner-distance</id>
-    <content type="html"><![CDATA[<p>对于双端测序RNA-seq数据，TopHat在运行时候，有两个参数<code class="language-bash">-r/--mate-inner-dist</code>和<code class="language-bash">--mate-std-dev</code>分别标识一对reads的间隔长度的期望平均值和标准差，其默认值分别为50bp和20bp。这两个参数本身是个估计值，用于TopHat在map过程中确定一对reads是否匹配到基因组正确位置。如果能够准确设定这两个数值，将会提升TopHat结果的准确性和完整性。</p>
+    <content type="html"><![CDATA[<p>对于双端测序RNA-seq数据，TopHat在运行时候，有两个参数<code class="language-bash">-r/--mate-inner-dist</code>和<code class="language-bash">--mate-std-dev</code>分别标识一对reads的间隔长度的期望平均值和标准差，其默认值分别为50bp和20bp。这两个参数本身是个估计值，用于TopHat在map过程中确定一对reads是否匹配到基因组正确位置。如果能够准确设定这两个数值，将会提升TopHat结果的准确性和完整性，参考<a href="http://yulongniu.bionutshell.org/blog/2014/07/23/rna-seq-analysis/">一个例子</a>。</p>
 
 <p>有两种方法获得这对参数的准确值：</p>
 
@@ -3612,7 +3612,7 @@ MAPQ = -10 \times log_{10}(pvalue)
 
 <h3 id="section-3">3.1 序列清洗</h3>
 
-<p>序列清洗主要是去除测序结果中的<a href="http://onetipperday.blogspot.sg/2013/06/illumina-hiseq2000-adapter.html">adapter</a>，</p>
+<p>序列清洗主要是去除测序结果中的<a href="http://onetipperday.blogspot.sg/2013/06/illumina-hiseq2000-adapter.html">adapter</a>或通用引物等。</p>
 
 <p>以下使用Illumina HiSeq2000平台，对一个人类样本的RNA测序。统计各种序列清洗方法和选择后的reads数目。原始数据两端测序reads分别为54,492,228和54,492,228。</p>
 
