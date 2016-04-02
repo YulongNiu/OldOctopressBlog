@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2016-04-02T14:19:18+08:00</updated>
+  <updated>2016-04-02T14:23:49+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -1032,7 +1032,7 @@
     <link href="http://yulongniu.bionutshell.org/blog/2015/05/23/tophat-inner-distance/"/>
     <updated>2015-05-23T19:08:19+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2015/05/23/tophat-inner-distance</id>
-    <content type="html"><![CDATA[<p>对于双端测序RNA-seq数据，TopHat在运行时候，有两个参数<code class="language-bash">-r/--mate-inner-dist</code>和<code class="language-bash">--mate-std-dev</code>分别标识一对reads的间隔长度的期望平均值和标准差，其默认值分别为50bp和20bp。这两个参数本身是个估计值，用于TopHat在map过程中确定一对reads是否匹配到基因组正确位置。如果能够准确设定这两个数值，将会提升TopHat结果的准确性和完整性，具体比较参考？？？？？？？</p>
+    <content type="html"><![CDATA[<p>对于双端测序RNA-seq数据，TopHat在运行时候，有两个参数<code class="language-bash">-r/--mate-inner-dist</code>和<code class="language-bash">--mate-std-dev</code>分别标识一对reads的间隔长度的期望平均值和标准差，其默认值分别为50bp和20bp。这两个参数本身是个估计值，用于TopHat在map过程中确定一对reads是否匹配到基因组正确位置。如果能够准确设定这两个数值，将会提升TopHat结果的准确性和完整性。</p>
 
 <p>有两种方法获得这对参数的准确值：</p>
 
@@ -4462,7 +4462,7 @@ insert是用于测序的目标片段，因为是包括在两个adapter之间，�
     <p><code class="language-bash">-r/--mate-inner-dist</code>：一对reads的间隔长度的期望平均值，默认值为50bp，<strong>建议添加</strong>。具体解释，参考<a href="http://blog.qiuworld.com:8080/archives/3007">RNA-seq差异表达分析工作流程</a>和<a href="http://www.plob.org/2012/12/04/4988.html">Tophat中-r/–mate-inner-dist参数</a>。</p>
   </li>
   <li>
-    <p><code class="language-bash">--mate-std-dev</code>：一对reads的间隔长度分布的标准差，默认值为20bp，<strong>建议添加</strong>。<code class="language-bash">-r/--mate-inner-dist</code>和<code class="language-bash">--mate-std-dev</code>的估计方法参考？？？？？？？</p>
+    <p><code class="language-bash">--mate-std-dev</code>：一对reads的间隔长度分布的标准差，默认值为20bp，<strong>建议添加</strong>。<code class="language-bash">-r/--mate-inner-dist</code>和<code class="language-bash">--mate-std-dev</code>的估计方法参考<a href="http://yulongniu.bionutshell.org/blog/2015/05/23/tophat-inner-distance/">确定TopHat中mate-inner-dist参数</a>。</p>
   </li>
   <li>
     <p><code class="language-bash">--library-type</code>：</p>
