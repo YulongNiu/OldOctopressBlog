@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2016-04-15T13:51:42+08:00</updated>
+  <updated>2016-04-15T19:20:58+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -295,6 +295,10 @@
     <p><code>Ctr-R</code>：反撤销</p>
   </li>
 </ul>
+
+<h2 id="section-5">2. 常用快捷键</h2>
+
+<p>常用的快捷键参考使用layer的说明文档。</p>
 
 ]]></content>
   </entry>
