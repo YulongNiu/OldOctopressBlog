@@ -26,9 +26,9 @@ In this page, I record some useful linkages including academic collaboration and
 
 ## Blogs ##
 
-* [糗世界](http://qiuworld.com/)
+* [糗世界](http://blog.qiubio.com:8080/)
 
-* [YGC](http://ygc.name/)
+* [YGC](https://guangchuangyu.github.io/)
 
 * [Wei Shen](http://blog.shenwei.me/)
 
@@ -37,3 +37,7 @@ In this page, I record some useful linkages including academic collaboration and
 * [塞迩斯](http://www.cellyse.com/) 
 
 * [Buskined bioinformatics](http://runsheng.github.io/)
+
+* [G. Corey Shan 单光宇](https://shanguangyu.com/) 
+
+
