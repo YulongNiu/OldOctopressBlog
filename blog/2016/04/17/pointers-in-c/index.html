@@ -319,7 +319,7 @@
         <p>形参为指针，可以改变指向的内容。</p>
       </li>
       <li>
-        <p>形参为数组，传入指针副本。因此，即便是数组名，也可以修改，即。如下代码合法。</p>
+        <p>形参为数组，传入指针副本。因此，即便是数组名，也可以修改，即可以把数组名当做一个指针用。如下代码合法。</p>
       </li>
     </ul>
   </li>
@@ -330,7 +330,7 @@
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="kt">void</span> <span class="nf">TestFun</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="kt">void</span> <span class="nf">TestFun</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="o">*</span><span class="n">a</span><span class="p">)</span> <span class="p">{</span>
 </span><span class="line">  <span class="p">...</span>
 </span><span class="line">  <span class="o">++</span><span class="n">a</span><span class="p">;</span>
 </span><span class="line">  <span class="p">...</span>
