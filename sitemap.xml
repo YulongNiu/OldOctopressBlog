@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://yulongniu.bionutshell.org/blog/2016/04/17/pointers-in-c/</loc>
+    <lastmod>2016-04-17T22:42:25+08:00</lastmod>
+  </url>
+  <url>
     <loc>http://yulongniu.bionutshell.org/blog/2015/10/25/xpath-xml/</loc>
     <lastmod>2015-10-25T19:05:33+08:00</lastmod>
   </url>
@@ -196,5 +200,8 @@
   </url>
   <url>
     <loc>http://yulongniu.bionutshell.org/posts/7/</loc>
+  </url>
+  <url>
+    <loc>http://yulongniu.bionutshell.org/posts/8/</loc>
   </url>
 </urlset>

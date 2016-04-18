@@ -184,6 +184,84 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2016-04-17T22:42:25+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2016/04/17/pointers-in-c/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2016/04/17/pointers-in-c/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2016/04/17/pointers-in-c/" itemprop="url">C语言指针记录</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="c">1. C语言指针基础</h2>
+
+<p>C语言的指针设计是一致和优雅的。C语言中“指针（pointer）”就是<strong>地址</strong>（所以不能用普通整数储存地址），“指针变量（pointer variable）”是存储地址的变量。一个指针变量，<strong>只能</strong>指向一个特定类型的变量，比如整数、浮点数、字符或者指针。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Initiate a pointer </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="kt">int</span> <span class="n">tmp1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">tmp2</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="cm">/* &quot;=&quot; does not mean &quot;assignment&quot;, it just means &quot;initiating&quot; */</span>
+</span><span class="line"><span class="cm">/* p is the address of tmp1, *p is equal to the value of tmp1*/</span>
+</span><span class="line"><span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">tmp1</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="kt">int</span> <span class="o">*</span><span class="n">q</span><span class="p">;</span>
+</span><span class="line"><span class="n">q</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">tmp2</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="cm">/* p points to tmp1, q points to tmp2, now the value of tmp2 is 1*/</span>
+</span><span class="line"><span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">*</span><span class="n">q</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="cm">/* p and q now both points to tmp1*/</span>
+</span><span class="line"><span class="n">q</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2016/04/17/pointers-in-c/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-10-25T19:05:33+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2015/10/25/xpath-xml/#disqus_thread" itemprop="discussionUrl"
@@ -445,57 +523,6 @@
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-06-02T16:49:41+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2015/06/02/download-ucsc-gene-mask/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2015/06/02/download-ucsc-gene-mask/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2015/06/02/download-ucsc-gene-mask/" itemprop="url">UCSC Table下载注释文件</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><p>在进行RNA-seq数据分析时，需要从<a href="http://genome.ucsc.edu/cgi-bin/hgTables">UCSC Table</a>下载各种注释信息。比如Cufflinks等要求的转录组注释信息、Cufflinks建议去除的rRNA/tRNA/线粒体组注释。</p>
-
-<h2 id="section">1. 基因注释信息</h2>
-
-<p>下载转录组Ensembl注释文件：</p>
-
-<p><img src="/images/hg19_ensembl.png" title="image" alt="UCSC下载Ensembl注释" /></p>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2015/06/02/download-ucsc-gene-mask/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -519,6 +546,8 @@
   
   <div id="recent_posts" class="list-group">
     
+    <a class="list-group-item " href="/blog/2016/04/17/pointers-in-c/">C语言指针记录</a>
+    
     <a class="list-group-item " href="/blog/2015/10/25/xpath-xml/">XML中XPath规则总结</a>
     
     <a class="list-group-item " href="/blog/2015/09/30/spacemacs-tutorial/">Spacemacs使用记录</a>
@@ -526,8 +555,6 @@
     <a class="list-group-item " href="/blog/2015/07/29/postgresql-usage/">PostgreSQL使用指南</a>
     
     <a class="list-group-item " href="/blog/2015/07/28/python-tips/">Python使用小技巧</a>
-    
-    <a class="list-group-item " href="/blog/2015/06/02/download-ucsc-gene-mask/">UCSC Table下载注释文件</a>
     
   </div>
 </section>
@@ -575,7 +602,7 @@
     
     
     <a class="list-group-item " href="/blog/categories/c/index.html">
-        <span class="badge">1</span>
+        <span class="badge">2</span>
         c
       </a>
     
