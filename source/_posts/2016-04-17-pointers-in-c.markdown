@@ -3,7 +3,7 @@ layout: post
 title: "C语言指针记录"
 date: 2016-04-17 22:42:25 +0800
 comments: true
-published: false
+published: true
 styles: [data-table]
 categories: c 
 ---
@@ -43,9 +43,7 @@ q = p;
 
 1. C语言只有一维数组，其中元素可以是数（整数或浮点数）、字符和指针（字符串、其他类型数组或者其他类型指针）。
 
-2. 数组类型为元素类型。
-
-3. 数组地址为第一个元素地址。可以使用数组名作为指向数组第一个元素的指针，但数组名<span style="color: red">不能</span>被修改，例如不能被重新赋值。因此，假如`a`数组，`a+i`等价与`&a[i]`，`*(a+i)`等价与`a[i]`。
+2. 数组地址为第一个元素地址。可以使用数组名作为指向数组第一个元素的指针，但数组名<span style="color: red">不能</span>被修改，例如不能被重新赋值。因此，假如`a`数组，`a+i`等价与`&a[i]`，`*(a+i)`等价与`a[i]`。
 
 ------------------
 
@@ -58,28 +56,21 @@ q = p;
   
 <sup>1</sup>：初始化声明表示在声明同时初始化的形式，比如`int a[3] = {1, 2, 3}`、`char a[] = 'hello'`或者`char a[] = {"hello", "world!"}`。
 
-<sup>1</sup>：在声明形式参数时，对应的指针类型。
+<sup>2</sup>：在函数中声明形参时，对应的指针类型。形参可以是完整类型或者元素类型，比如，形参`char *a[LEN]`是完整类型，形参`char **a`是元素类型；再比如，形参`int a[ROWNUM][COLNUM]`是完整类型，形参`int (*a)[COLNUM]`是元素类型；再比如，形参`char a[]`是完整类型，形参`char *a`是元素类型。编译器把数组型的形参视为指针。
 
 ------------------
 
-
-
-
-
-
 ## 4. 指针与函数 ##
 
-
-
-
+C语言传入函数的都是值（数组被当做指针传入），而且形参对应对象的一个副本。如果传入的指针，可以改变指向的内容；如果传入的是外部变量（即全局变量），可以改变外部变量。
 
 
 
 ## 5. 注意事项 ##
 
-1. 留意未初始化指针，修改未初始化指针所指向内容是<span style="color: red">危险</span>的。
+1. 留意未初始化指针，修改未初始化指针所指向内容是<span style="color: red">危险</span>的。字符指针<span style="color: red">必须</span>初始化，比如指向已有字符变量、字符串字面量或动态分配字符串。
 
-2. 
+2. 已有数组名<span style="color: red">不能被</span>重新赋值，<span style="color: red">不能</span>指向其他地址。
 
 ### 补充材料 ###
 
@@ -208,8 +199,9 @@ me
 ```
 {% endraw %}
 
+### 参考资料 ###
 
-
+* KN King: [C Programming: A Modern Approach, 2nd Edition](http://www.amazon.com/Programming-Modern-Approach-2nd-Edition/dp/0393979504), 2008.
 
 ### 更新记录 ###
 
