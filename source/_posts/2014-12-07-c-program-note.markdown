@@ -469,7 +469,9 @@ int main(void)
 
 * [C各种标准](http://port70.net/~nsz/c/)
 
-* [C函数库快速查询](http://ganquan.info/standard-c/) 
+* [C在线文档（推荐）](http://en.cppreference.com/w/) 
+
+* [C头快速查询](http://ganquan.info/standard-c/) 
 
 
 ### 更新记录 ###
