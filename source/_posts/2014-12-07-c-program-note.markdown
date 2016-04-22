@@ -434,7 +434,7 @@ printf("%3.0f %6.1f\n", fahr, celsius);
 
 * 在`for`语句中声明的计数变量，只能在for循环中使用。比如 `for(int i = 0; i < 10; i++){...}`{:.language-c}，变量`i`只能在循环内起作用。
 
-* 新增加表示布尔数值的头文件`<stdbool.h>`，使用方法
+* 新增加表示布尔数值的头文件`<stdbool.h>`，使用方法：
 
 {% codeblock lang:c bool in <span style="color: green">C99</span> %}
 #include <stdbool.h>
@@ -442,6 +442,10 @@ printf("%3.0f %6.1f\n", fahr, celsius);
 int main(void)
 {
   bool trueVal = true, falseVal = false;
+  
+  bool a1[10] = {false};
+  
+  bool a2[10][10] = {false};
 
   return 0;
 }
