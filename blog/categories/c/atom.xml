@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/c/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2016-04-23T13:40:46+08:00</updated>
+  <updated>2016-04-26T15:23:54+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -657,10 +657,10 @@ me
     <p>第一种储存为字符数组。<code>char a[6] = "hello";</code>合法，最后一个是空字符；<code>char a[6] = "hell";</code>合法，最后两个是空字符；省略长度，比如<code>char a[] = "hello";</code>合法，最后一个是空字符，自动分配6个字符空间；<code>char a[5] = "hello";</code>对于字符串非法，对于字符数组合法。</p>
   </li>
   <li>
-    <p>第二储存为字符指针。<code>char *b = "hello";</code>合法，声明字符指针；声明字符指针，将其指向已有字符变量、字符串字面量或动态分配字符串，合法；已有字符指针重新指向其他字符串，合法；声明字符指针，却不初始化，非法；声明字符指针，却不初始化，而且修改或赋值指向的字符，非法。</p>
+    <p>第二种储存为字符指针。<code>char *b = "hello";</code>合法，声明字符指针；声明字符指针，将其指向已有字符变量、字符串字面量或动态分配字符串，合法；已有字符指针重新指向其他字符串，合法；声明字符指针，却不初始化，非法；声明字符指针，却不初始化，而且修改或赋值指向的字符，非法。</p>
   </li>
   <li>
-    <p>字符数组可以修改元素，比如<code>a[0] = 'l';</code>；字符指针指向的字符不能修改，应该杜绝<s>*b = &#8216;l&#8217;;</s>之类的字符指针赋值，除非保证<code>b</code>是一个字符数组。</p>
+    <p>字符数组可以修改元素，比如<code>a[0] = 'l';</code>；字符指针指向的字符串不能修改，应该杜绝<s>*b = &#8216;l&#8217;;</s>之类的字符指针赋值，除非保证<code>b</code>是一个字符数组；对于操作字符串的函数，如果形参为字符指针，允许修改其指向的内容，比如<code>*b = 'l';</code>，因为默认（也只允许）传入参数是一个字符数组，而不是一个字符串字面量。</p>
   </li>
 </ul>
 
