@@ -337,7 +337,7 @@
   </tbody>
 </table>
 
-<p><sup>1</sup>：初始化声明表示在声明同时初始化的形式，比如<code>int a[3] = {1, 2, 3}</code>、<code>char a[] = 'hello'</code>或者<code>char a[] = {"hello", "world!"}</code>。</p>
+<p><sup>1</sup>：初始化声明表示在声明同时初始化的形式，比如<code>int a[3] = {1, 2, 3}</code>、<code>char a[] = 'hello'</code>或者<code>char *a[] = {"hello", "world!"}</code>。</p>
 
 <p><sup>2</sup>：在函数中声明形参时，对应的指针类型。形参可以是完整类型或者元素类型，比如，形参<code>char *a[LEN]</code>是完整类型，形参<code>char **a</code>是元素类型；再比如，形参<code>int a[ROWNUM][COLNUM]</code>是完整类型，形参<code>int (*a)[COLNUM]</code>是元素类型；再比如，形参<code>char a[]</code>是完整类型，形参<code>char *a</code>是元素类型。编译器把数组型的形参视为指针。</p>
 
