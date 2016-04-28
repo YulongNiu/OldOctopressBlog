@@ -70,7 +70,7 @@ q = p;
 | 元素为字符的数组（“字符串”）           | `char a[LEN]`           | `char *`                 | `char *p = &a[0]`或`char *p = a`           |
 | 元素为字符串指针的数组（“字符串数组”） | `char *a[LEN]`          | `char **`或`char *[LEN]` | `char **p = &a[0]`或`char **p = a`         | 
   
-<sup>1</sup>：初始化声明表示在声明同时初始化的形式，比如`int a[3] = {1, 2, 3}`、`char a[] = 'hello'`或者`char a[] = {"hello", "world!"}`。
+<sup>1</sup>：初始化声明表示在声明同时初始化的形式，比如`int a[3] = {1, 2, 3}`、`char a[] = 'hello'`或者`char *a[] = {"hello", "world!"}`。
 
 <sup>2</sup>：在函数中声明形参时，对应的指针类型。形参可以是完整类型或者元素类型，比如，形参`char *a[LEN]`是完整类型，形参`char **a`是元素类型；再比如，形参`int a[ROWNUM][COLNUM]`是完整类型，形参`int (*a)[COLNUM]`是元素类型；再比如，形参`char a[]`是完整类型，形参`char *a`是元素类型。编译器把数组型的形参视为指针。
 
