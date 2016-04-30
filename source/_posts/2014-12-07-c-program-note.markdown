@@ -109,9 +109,45 @@ for (int i = 0; i < size; i++) {
 
 * 使用指针数组储存，比如`char *a[5] = {"hello", "it", "is", "me", "!"};`；省略长度，`char *a[] = {"hello", "it", "is", "me", "!"};`合法；`char *a[5] = {"hello", "it", "is", "me"};`合法，最后一个是空指针（`NULL`）。
 
-### 1.3 函数 ###
+### 1.3 结构 ###
 
-#### 1.3.1 函数定义 ####
+结构长度：
+
+* 成员按照声明的顺序在内存依次排列。
+    
+* 第一个成员之前无间隙，因此方便指针指向结构。但成员之间或者最后一个成员之后，可能有间隙。
+    
+初始化：
+
+* 不需要初始化全部成员，剩下未初始化的成员使用0作为初始值，比如`""`作为空字符串。
+    
+* <span style="color: green">**C99**</span>使用符合字面量，比如`(struct test1) {.b = "test that", .c = 1};`。
+
+{% codeblock lang:c initialize struct %}
+struct test1 {
+  int a;
+  char b[10];
+  int c;
+};
+
+/* p1.c is 0 */
+struct test1 p1 = {1, "hello"};
+/* c99 */
+/* p1.a is 0 and p1.c is 3 */
+struct test1 p2 = {.b = "world", 3};
+{% endcodeblock %}
+
+### 1.4 联合 ###
+
+### 1.5 枚举 ###
+
+### 1.6 指针 ###
+
+参考[C语言指针记录](http://yulongniu.bionutshell.org/blog/2016/04/17/pointers-in-c/)。
+
+### 1.7 函数 ###
+
+#### 1.7.1 函数定义 ####
 
 * 函数不能返回数组，也不能返回两个数。
 
@@ -125,7 +161,7 @@ for (int i = 0; i < size; i++) {
 
 * 函数声明的形式为`int thisFun(double para1, int para2);`{:.language-c}。<span style="color: green">**C99**</span>规定：函数在调用前，必须事先声明或者定义。调用前声明有很多好处，比如避免实际参数的默认转换等。
 
-#### 1.3.2 数组型参数 ####
+#### 1.7.2 数组型参数 ####
 
 * 定义形参为一维数组的函数，普遍形式为：
 
@@ -251,15 +287,6 @@ int constOneArray(const int a[], int len) {
 }
 
 {% endcodeblock %}
-
-
-### 1.4 其他 ###
-
-* `structures`
-
-* `unions`
-
-* `pointers`
 
 ## 2. 操作符类型和优先级 ##
 
@@ -480,4 +507,4 @@ int main(void)
 
 ### 更新记录 ###
 
-2015年4月18日
+2015年4月30日
