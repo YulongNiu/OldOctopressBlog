@@ -111,13 +111,15 @@ for (int i = 0; i < size; i++) {
 
 ### 1.3 结构 ###
 
-结构长度：
+结构空间分配：
 
 * 成员按照声明的顺序在内存依次排列。
     
 * 第一个成员之前无间隙，因此方便指针指向结构。但成员之间或者最后一个成员之后，可能有间隙。
     
 初始化：
+
+* 结构中可以嵌套结构、联合、枚举、字符串等多种类型。
 
 * 不需要初始化全部成员，剩下未初始化的成员使用0作为初始值，比如`""`作为空字符串。
     
@@ -130,6 +132,11 @@ struct test1 {
   int c;
 };
 
+struct {
+  int a;
+  char b[10];
+} test2;
+
 /* p1.c is 0 */
 struct test1 p1 = {1, "hello"};
 /* c99 */
@@ -138,6 +145,34 @@ struct test1 p2 = {.b = "world", 3};
 {% endcodeblock %}
 
 ### 1.4 联合 ###
+
+联合空间分配：
+
+* 只为最大的成员分配空间。
+
+初始化：
+
+* 初始化与结构类似。
+
+* 如果联合包括两个及两个以上结构成员，而且这些结构中最初一个或多个成员类型匹配，那么这些匹配成员会同步。
+
+{% codeblock lang:c Initialization of union %}
+union test {
+  int a;
+  struct test1 {
+    int b1;
+    char b2[10];
+  } b;
+  struct test2 {
+    int c1;
+    int c2;
+  } c;
+} t1;
+
+t1.b.b1 = 10;
+/* t.c.c1 is 10 */
+printf("%d \n", t1.c.c1);
+{% endcodeblock %}
 
 ### 1.5 枚举 ###
 
