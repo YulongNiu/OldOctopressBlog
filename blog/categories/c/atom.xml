@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/c/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2016-04-30T17:19:19+08:00</updated>
+  <updated>2016-05-01T19:36:05+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -674,7 +674,7 @@ me
 
 <h3 id="section-7">1.3 结构</h3>
 
-<p>结构长度：</p>
+<p>结构空间分配：</p>
 
 <ul>
   <li>
@@ -688,6 +688,9 @@ me
 <p>初始化：</p>
 
 <ul>
+  <li>
+    <p>结构中可以嵌套结构、联合、枚举、字符串等多种类型。</p>
+  </li>
   <li>
     <p>不需要初始化全部成员，剩下未初始化的成员使用0作为初始值，比如<code>""</code>作为空字符串。</p>
   </li>
@@ -708,11 +711,21 @@ me
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
 </pre></td><td class='code'><pre><code class='c'><span class='line'><span class="k">struct</span> <span class="n">test1</span> <span class="p">{</span>
 </span><span class='line'>  <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
 </span><span class='line'>  <span class="kt">char</span> <span class="n">b</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
 </span><span class='line'>  <span class="kt">int</span> <span class="n">c</span><span class="p">;</span>
 </span><span class='line'><span class="p">};</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">struct</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="n">b</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span> <span class="n">test2</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="cm">/* p1.c is 0 &lt;em&gt;/</span>
 </span><span class='line'><span class="cm">struct test1 p1 = {1, “hello”};</span>
@@ -722,6 +735,56 @@ me
 </span></code></pre></td></tr></table></div></figure></p>
 
 <h3 id="section-8">1.4 联合</h3>
+
+<p>联合空间分配：</p>
+
+<ul>
+  <li>只为最大的成员分配空间。</li>
+</ul>
+
+<p>初始化：</p>
+
+<ul>
+  <li>
+    <p>初始化与结构类似。</p>
+  </li>
+  <li>
+    <p>如果联合包括两个及两个以上结构成员，而且这些结构中最初一个或多个成员类型匹配，那么这些匹配成员会同步。</p>
+  </li>
+</ul>
+
+<p><figure class='code'><figcaption><span>Initialization of union </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="k">union</span> <span class="n">test</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">struct</span> <span class="n">test1</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">b1</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">char</span> <span class="n">b2</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">}</span> <span class="n">b</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">struct</span> <span class="n">test2</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">c1</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">c2</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span> <span class="n">c</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span> <span class="n">t1</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">t1</span><span class="p">.</span><span class="n">b</span><span class="p">.</span><span class="n">b1</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span><span class='line'><span class="cm">/* t.c.c1 is 10 */</span>
+</span><span class='line'><span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="o">%</span><span class="n">d</span> <span class="err">\</span><span class="n">n</span><span class="err">”</span><span class="p">,</span> <span class="n">t1</span><span class="p">.</span><span class="n">c</span><span class="p">.</span><span class="n">c1</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h3 id="section-9">1.5 枚举</h3>
 
