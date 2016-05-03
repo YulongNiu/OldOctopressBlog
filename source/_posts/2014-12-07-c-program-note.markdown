@@ -188,7 +188,6 @@ int main(void)
 union test1 {
   int a;
   char b[10];
-  int c;
 };
 
 union {
@@ -196,15 +195,13 @@ union {
   char b[10];
 } p3;
 
-/* p1.c is 0 */
-union test1 p1 = {.a = 1};
+union test1 p1 = {0};
 
 /* c99 */
-/* p1.a is 0 and p1.c is 3 */
 union test1 p2 = {.b = "world"};
 
 /* c99 */
-(union test1){.c = 10};
+(union test1){.a = 10};
 
 {% endcodeblock %}
 
