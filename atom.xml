@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2016-05-04T00:23:39+08:00</updated>
+  <updated>2016-05-04T00:31:27+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -2896,13 +2896,9 @@ MAPQ = -10 \times log_{10}(pvalue)
 <span class="line-number">15</span>
 <span class="line-number">16</span>
 <span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
 </pre></td><td class="code"><pre><code class="c"><span class="line"><span class="k">union</span> <span class="n">test1</span> <span class="p">{</span>
 </span><span class="line">  <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
 </span><span class="line">  <span class="kt">char</span> <span class="n">b</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
-</span><span class="line">  <span class="kt">int</span> <span class="n">c</span><span class="p">;</span>
 </span><span class="line"><span class="p">};</span>
 </span><span class="line">
 </span><span class="line"><span class="k">union</span> <span class="p">{</span>
@@ -2910,15 +2906,13 @@ MAPQ = -10 \times log_{10}(pvalue)
 </span><span class="line">  <span class="kt">char</span> <span class="n">b</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
 </span><span class="line"><span class="p">}</span> <span class="n">p3</span><span class="p">;</span>
 </span><span class="line">
-</span><span class="line"><span class="cm">/* p1.c is 0 */</span>
-</span><span class="line"><span class="k">union</span> <span class="n">test1</span> <span class="n">p1</span> <span class="o">=</span> <span class="p">{.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">};</span>
+</span><span class="line"><span class="k">union</span> <span class="n">test1</span> <span class="n">p1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
 </span><span class="line">
 </span><span class="line"><span class="cm">/* c99 */</span>
-</span><span class="line"><span class="cm">/* p1.a is 0 and p1.c is 3 */</span>
 </span><span class="line"><span class="k">union</span> <span class="n">test1</span> <span class="n">p2</span> <span class="o">=</span> <span class="p">{.</span><span class="n">b</span> <span class="o">=</span> <span class="s">&quot;world&quot;</span><span class="p">};</span>
 </span><span class="line">
 </span><span class="line"><span class="cm">/* c99 */</span>
-</span><span class="line"><span class="p">(</span><span class="k">union</span> <span class="n">test1</span><span class="p">){.</span><span class="n">c</span> <span class="o">=</span> <span class="mi">10</span><span class="p">};</span>
+</span><span class="line"><span class="p">(</span><span class="k">union</span> <span class="n">test1</span><span class="p">){.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <ul>
