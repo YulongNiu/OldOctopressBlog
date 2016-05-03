@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2016-05-01T19:36:05+08:00</updated>
+  <updated>2016-05-04T00:23:39+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -2791,6 +2791,10 @@ MAPQ = -10 \times log_{10}(pvalue)
 <span class="line-number">14</span>
 <span class="line-number">15</span>
 <span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
 </pre></td><td class="code"><pre><code class="c"><span class="line"><span class="k">struct</span> <span class="n">test1</span> <span class="p">{</span>
 </span><span class="line">  <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
 </span><span class="line">  <span class="kt">char</span> <span class="n">b</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
@@ -2800,13 +2804,64 @@ MAPQ = -10 \times log_{10}(pvalue)
 </span><span class="line"><span class="k">struct</span> <span class="p">{</span>
 </span><span class="line">  <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
 </span><span class="line">  <span class="kt">char</span> <span class="n">b</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
-</span><span class="line"><span class="p">}</span> <span class="n">test2</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span> <span class="n">p3</span><span class="p">;</span>
 </span><span class="line">
 </span><span class="line"><span class="cm">/* p1.c is 0 */</span>
 </span><span class="line"><span class="k">struct</span> <span class="n">test1</span> <span class="n">p1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="s">&quot;hello&quot;</span><span class="p">};</span>
+</span><span class="line">
 </span><span class="line"><span class="cm">/* c99 */</span>
 </span><span class="line"><span class="cm">/* p1.a is 0 and p1.c is 3 */</span>
 </span><span class="line"><span class="k">struct</span> <span class="n">test1</span> <span class="n">p2</span> <span class="o">=</span> <span class="p">{.</span><span class="n">b</span> <span class="o">=</span> <span class="s">&quot;world&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
+</span><span class="line">
+</span><span class="line"><span class="cm">/* c99 */</span>
+</span><span class="line"><span class="p">(</span><span class="k">struct</span> <span class="n">test1</span><span class="p">){.</span><span class="n">c</span> <span class="o">=</span> <span class="mi">10</span><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>结构、联合和枚举都可以使用<code class="language-c">typedef</code>定义，总结如下：</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>initialize struct with typedef </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+</span><span class="line">   <span class="kt">int</span> <span class="n">ele1</span><span class="p">;</span>
+</span><span class="line">   <span class="kt">char</span> <span class="n">ele2</span><span class="p">;</span>
+</span><span class="line"> <span class="p">}</span> <span class="n">Test1</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="k">typedef</span> <span class="k">union</span> <span class="p">{</span>
+</span><span class="line">  <span class="kt">int</span> <span class="n">ele1</span><span class="p">;</span>
+</span><span class="line">  <span class="kt">double</span> <span class="n">ele2</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span> <span class="n">Test2</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="k">typedef</span> <span class="k">enum</span> <span class="p">{</span><span class="n">CIRCLE</span><span class="p">,</span> <span class="n">RECTANGLE</span><span class="p">}</span> <span class="n">Test3</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">  <span class="n">Test1</span> <span class="n">p1</span> <span class="o">=</span> <span class="p">{.</span><span class="n">ele1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">};</span>
+</span><span class="line">  <span class="n">Test2</span> <span class="n">p2</span> <span class="o">=</span> <span class="p">{.</span><span class="n">ele2</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">};</span>
+</span><span class="line">  <span class="n">Test3</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">CIRCLE</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line">  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="section-8">1.4 联合</h3>
@@ -2820,15 +2875,57 @@ MAPQ = -10 \times log_{10}(pvalue)
 <p>初始化：</p>
 
 <ul>
-  <li>
-    <p>初始化与结构类似。</p>
-  </li>
-  <li>
-    <p>如果联合包括两个及两个以上结构成员，而且这些结构中最初一个或多个成员类型匹配，那么这些匹配成员会同步。</p>
-  </li>
+  <li>初始化与结构类似。</li>
 </ul>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Initialization of union </span></figcaption>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>initialize union </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="k">union</span> <span class="n">test1</span> <span class="p">{</span>
+</span><span class="line">  <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+</span><span class="line">  <span class="kt">char</span> <span class="n">b</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+</span><span class="line">  <span class="kt">int</span> <span class="n">c</span><span class="p">;</span>
+</span><span class="line"><span class="p">};</span>
+</span><span class="line">
+</span><span class="line"><span class="k">union</span> <span class="p">{</span>
+</span><span class="line">  <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+</span><span class="line">  <span class="kt">char</span> <span class="n">b</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+</span><span class="line"><span class="p">}</span> <span class="n">p3</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="cm">/* p1.c is 0 */</span>
+</span><span class="line"><span class="k">union</span> <span class="n">test1</span> <span class="n">p1</span> <span class="o">=</span> <span class="p">{.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">};</span>
+</span><span class="line">
+</span><span class="line"><span class="cm">/* c99 */</span>
+</span><span class="line"><span class="cm">/* p1.a is 0 and p1.c is 3 */</span>
+</span><span class="line"><span class="k">union</span> <span class="n">test1</span> <span class="n">p2</span> <span class="o">=</span> <span class="p">{.</span><span class="n">b</span> <span class="o">=</span> <span class="s">&quot;world&quot;</span><span class="p">};</span>
+</span><span class="line">
+</span><span class="line"><span class="cm">/* c99 */</span>
+</span><span class="line"><span class="p">(</span><span class="k">union</span> <span class="n">test1</span><span class="p">){.</span><span class="n">c</span> <span class="o">=</span> <span class="mi">10</span><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>如果联合包括两个及两个以上结构成员，而且这些结构中最初一个或多个成员类型匹配，那么这些匹配成员会同步。</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>initialize union </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -2862,6 +2959,21 @@ MAPQ = -10 \times log_{10}(pvalue)
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="section-9">1.5 枚举</h3>
+
+<p>初始化：</p>
+
+<ul>
+  <li>枚举元素如不指定，从0开始，依次增加1；可以指定具体数值，指定数值可以相同，允许尾逗号，例如<code class="language-c">enum {THIS = 2, THAT = 10, THESE = 2,} test1;</code>。</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>initialize enum </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="k">enum</span> <span class="p">{</span><span class="n">FIRST</span><span class="p">,</span> <span class="n">SECOND</span><span class="p">}</span> <span class="n">p1</span><span class="p">;</span>
+</span><span class="line"><span class="k">enum</span> <span class="n">test1</span> <span class="p">{</span><span class="n">FIRST</span><span class="p">,</span> <span class="n">SECOND</span><span class="p">};</span>
+</span><span class="line"><span class="k">enum</span> <span class="n">test1</span> <span class="o">=</span> <span class="n">SECOND</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="section-10">1.6 指针</h3>
 
