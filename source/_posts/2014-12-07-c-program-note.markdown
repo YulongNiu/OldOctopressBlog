@@ -135,13 +135,42 @@ struct test1 {
 struct {
   int a;
   char b[10];
-} test2;
+} p3;
 
 /* p1.c is 0 */
 struct test1 p1 = {1, "hello"};
+
 /* c99 */
 /* p1.a is 0 and p1.c is 3 */
 struct test1 p2 = {.b = "world", 3};
+
+/* c99 */
+(struct test1){.c = 10};
+{% endcodeblock %}
+
+* 结构、联合和枚举都可以使用`typedef`{:.language-c}定义，总结如下：
+
+{% codeblock lang:c initialize struct with typedef %}
+typedef struct {
+   int ele1;
+   char ele2;
+ } Test1;
+
+typedef union {
+  int ele1;
+  double ele2;
+} Test2;
+
+typedef enum {CIRCLE, RECTANGLE} Test3;
+
+int main(void)
+{
+  Test1 p1 = {.ele1 = 1};
+  Test2 p2 = {.ele2 = 0.2};
+  Test3 p3 = CIRCLE;
+  
+  return 0;
+}
 {% endcodeblock %}
 
 ### 1.4 联合 ###
@@ -154,9 +183,34 @@ struct test1 p2 = {.b = "world", 3};
 
 * 初始化与结构类似。
 
+{% codeblock lang:c initialize union %}
+
+union test1 {
+  int a;
+  char b[10];
+  int c;
+};
+
+union {
+  int a;
+  char b[10];
+} p3;
+
+/* p1.c is 0 */
+union test1 p1 = {.a = 1};
+
+/* c99 */
+/* p1.a is 0 and p1.c is 3 */
+union test1 p2 = {.b = "world"};
+
+/* c99 */
+(union test1){.c = 10};
+
+{% endcodeblock %}
+
 * 如果联合包括两个及两个以上结构成员，而且这些结构中最初一个或多个成员类型匹配，那么这些匹配成员会同步。
 
-{% codeblock lang:c Initialization of union %}
+{% codeblock lang:c initialize union %}
 union test {
   int a;
   struct test1 {
@@ -175,6 +229,19 @@ printf("%d \n", t1.c.c1);
 {% endcodeblock %}
 
 ### 1.5 枚举 ###
+
+初始化：
+
+* 枚举元素如不指定，从0开始，依次增加1；可以指定具体数值，指定数值可以相同，允许尾逗号，例如`enum {THIS = 2, THAT = 10, THESE = 2,} test1;`{:.language-c}。
+
+{% codeblock lang:c initialize enum %}
+
+enum {FIRST, SECOND} p1;
+enum test1 {FIRST, SECOND};
+enum test1 = SECOND;
+
+{% endcodeblock %}
+
 
 ### 1.6 指针 ###
 
