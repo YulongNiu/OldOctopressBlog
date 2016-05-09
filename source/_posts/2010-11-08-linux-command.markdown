@@ -570,6 +570,19 @@ $ wget -c -t 0 -w 30 httplink
 
 * `-w`{:.language-bash}：表示每两次尝试的时间间隔
 
+{% codeblock lang:bash %}
+$ axel -n 8 -a -S5 httplink -o folder
+{% endcodeblock %}
+
+* `-n`{:.language-bash}：设定下载线程数
+
+* `-a`{:.language-bash}：简单进度条
+
+* `-S5`{:.language-bash}：搜索[filesearching.com](filesearching.com)镜像，以加快下载速度
+
+* `-o`{:.language-bash}：储存目录
+
+
 ## 34. 开机启动 ##
 
 {% codeblock lang:bash %}
@@ -675,4 +688,4 @@ $ crontab -e
 
 ### 更新记录 ###
 
-2015年9月1日
+2016年5月9日
