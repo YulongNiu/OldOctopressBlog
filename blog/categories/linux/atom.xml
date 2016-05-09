@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2016-05-04T00:31:27+08:00</updated>
+  <updated>2016-05-09T15:35:32+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -1583,6 +1583,25 @@
   </li>
 </ul>
 
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>axel -n <span class="m">8</span> -a -S5 httplink -o folder
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+  <li>
+    <p><code class="language-bash">-n</code>：设定下载线程数</p>
+  </li>
+  <li>
+    <p><code class="language-bash">-a</code>：简单进度条</p>
+  </li>
+  <li>
+    <p><code class="language-bash">-S5</code>：搜索<a href="filesearching.com">filesearching.com</a>镜像，以加快下载速度</p>
+  </li>
+  <li>
+    <p><code class="language-bash">-o</code>：储存目录</p>
+  </li>
+</ul>
+
 <h2 id="section-69">34. 开机启动</h2>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -1725,7 +1744,7 @@
 
 <h3 id="section-76">更新记录</h3>
 
-<p>2015年9月1日</p>
+<p>2016年5月9日</p>
 ]]></content>
   </entry>
   
