@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2016-05-09T15:35:32+08:00</updated>
+  <updated>2016-05-12T15:48:59+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -154,6 +154,12 @@
       <td><code>char **</code>或<code>char *[LEN]</code></td>
       <td><code>char **p = &amp;a[0]</code>或<code>char **p = a</code></td>
     </tr>
+    <tr>
+      <td>元素为结构、联合或枚举的数组</td>
+      <td><code>struct t a[LEN]</code></td>
+      <td><code>struct t *</code></td>
+      <td><code>struct t *p = &amp;a[0]</code>或<code>struct t *p = a</code></td>
+    </tr>
   </tbody>
 </table>
 
@@ -174,7 +180,7 @@
         <p>形参为指针，可以改变指向的内容。</p>
       </li>
       <li>
-        <p>形参为数组，传入指针（指向第一个元素地址）副本。因此，即便是数组名，也可以修改，即可以把数组名当做一个指针用。也可以使用指针传入部分数组。如下代码合法。</p>
+        <p>形参为数组，传入指针（指向第一个元素地址）副本。因此，即便是数组名，也可以修改，即可以把数组名当做一个指针用。也可以使用指针传入部分数组。如下代码合法：</p>
       </li>
     </ul>
   </li>
@@ -202,9 +208,24 @@
     <p>已有数组名<span style="color: red">不能被</span>重新赋值，<span style="color: red">不能</span>指向其他地址。</p>
   </li>
   <li>
-    <p><span style="color: red">不能</span>返回指向局部自动变量的指针，因为局部变量和对应指针在返回时销毁。</p>
+    <p>函数返回指针时，<span style="color: red">不能</span>返回指向局部自动变量的指针，因为局部变量和对应指针在返回时销毁。可以返回指针形式的形参、指向外部变量的指针、指向声明为<code class="language-c">static</code>的局部变量和指向动态分配内存的指针。如下代码合法：</p>
   </li>
 </ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>return pointer points to malloc </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="nf">Add</span><span class="p">(</span><span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">v</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">  <span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="n">new</span><span class="p">;</span>
+</span><span class="line">  <span class="n">new</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">node</span><span class="p">));</span>
+</span><span class="line">  <span class="p">...</span>
+</span><span class="line">  <span class="k">return</span> <span class="n">new</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="section-4">补充材料</h3>
 
