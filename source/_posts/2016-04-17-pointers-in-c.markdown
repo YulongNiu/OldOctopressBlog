@@ -63,12 +63,13 @@ q = p;
 
 ------------------
 
-| 数组类型                               | 初始化声明<sup>1</sup>             | 函数形参声明的指针形式<sup>2</sup>   | 第一个元素指针声明                         |
-|----------------------------------------+-------------------------+--------------------------+--------------------------------------------|
-| 元素为整数的数组                       | `int a[LEN]`            | `int *`                  | `int *p = &a[0]`或`int *p = a`             |
-| 元素为整数数组的数组（“二维数组”）     | `int a[ROWNUM][COLNUM]` | `int (*)[COLNUM]`        | `int *p = &a[0]`或`int (*p)[COLNUM] = a`　 |
-| 元素为字符的数组（“字符串”）           | `char a[LEN]`           | `char *`                 | `char *p = &a[0]`或`char *p = a`           |
-| 元素为字符串指针的数组（“字符串数组”） | `char *a[LEN]`          | `char **`或`char *[LEN]` | `char **p = &a[0]`或`char **p = a`         | 
+| 数组类型                               | 初始化声明<sup>1</sup>  | 函数形参声明的指针形式<sup>2</sup> | 第一个元素指针声明                         |
+|----------------------------------------+-------------------------+------------------------------------+--------------------------------------------|
+| 元素为整数的数组                       | `int a[LEN]`            | `int *`                            | `int *p = &a[0]`或`int *p = a`             |
+| 元素为整数数组的数组（“二维数组”）     | `int a[ROWNUM][COLNUM]` | `int (*)[COLNUM]`                  | `int *p = &a[0]`或`int (*p)[COLNUM] = a`　 |
+| 元素为字符的数组（“字符串”）           | `char a[LEN]`           | `char *`                           | `char *p = &a[0]`或`char *p = a`           |
+| 元素为字符串指针的数组（“字符串数组”） | `char *a[LEN]`          | `char **`或`char *[LEN]`           | `char **p = &a[0]`或`char **p = a`         |
+| 元素为结构、联合或枚举的数组          | `struct t a[LEN]`       | `struct t *`                       |`struct t *p = &a[0]`或`struct t *p = a`     |
   
 <sup>1</sup>：初始化声明表示在声明同时初始化的形式，比如`int a[3] = {1, 2, 3}`、`char a[] = 'hello'`或者`char *a[] = {"hello", "world!"}`。
 
@@ -82,7 +83,7 @@ q = p;
 
     * 形参为指针，可以改变指向的内容。
     
-    * 形参为数组，传入指针（指向第一个元素地址）副本。因此，即便是数组名，也可以修改，即可以把数组名当做一个指针用。也可以使用指针传入部分数组。如下代码合法。
+    * 形参为数组，传入指针（指向第一个元素地址）副本。因此，即便是数组名，也可以修改，即可以把数组名当做一个指针用。也可以使用指针传入部分数组。如下代码合法：
     
 {% codeblock lang:c %}
 void TestFun(int const *a) {
@@ -98,7 +99,17 @@ void TestFun(int const *a) {
 
 * 已有数组名<span style="color: red">不能被</span>重新赋值，<span style="color: red">不能</span>指向其他地址。
 
-* <span style="color: red">不能</span>返回指向局部自动变量的指针，因为局部变量和对应指针在返回时销毁。
+* 函数返回指针时，<span style="color: red">不能</span>返回指向局部自动变量的指针，因为局部变量和对应指针在返回时销毁。可以返回指针形式的形参、指向外部变量的指针、指向声明为`static`{:.language-c}的局部变量和指向动态分配内存的指针。如下代码合法：
+
+{% codeblock lang:c return pointer points to malloc %}
+struct node *Add(struct node *n, int v) {
+  struct node *new;
+  new = malloc(sizeof(struct node));
+  ...
+  return new;
+}
+{% endcodeblock %}
+
 
 ### 补充材料 ###
 
