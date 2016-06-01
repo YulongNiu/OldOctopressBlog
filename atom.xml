@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2016-05-12T15:48:59+08:00</updated>
+  <updated>2016-06-01T23:58:12+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -1759,7 +1759,7 @@ MAPQ = -10 \times log_{10}(pvalue)
       <td style="text-align: right">map至唯一位置</td>
     </tr>
     <tr>
-      <td style="text-align: left">30</td>
+      <td style="text-align: left">3</td>
       <td style="text-align: center">NH:i:2</td>
       <td style="text-align: right">map至2个位置</td>
     </tr>
