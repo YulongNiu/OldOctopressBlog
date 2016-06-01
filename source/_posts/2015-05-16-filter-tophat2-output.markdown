@@ -107,7 +107,7 @@ $ samtools view accepted_hits.bam | awk '{print $20}' | head -200 | sort --paral
 | MAPQ (tophat) | Tag            | 描述              |
 |:---------------+:----------------:+-------------------:|
 |            50 | NH:i:1         | map至唯一位置     |
-|            30 | NH:i:2         | map至2个位置      |
+|            3 | NH:i:2         | map至2个位置      |
 |             1 | NH:i:3/NH:i:4  | map至3个或4个位置 |
 |             0 | NH:i:n (n > 4) | map到多余4个位置  |
 
