@@ -184,6 +184,97 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-07-28T14:37:38+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2015/07/28/python-tips/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2015/07/28/python-tips/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2015/07/28/python-tips/" itemprop="url">Python使用小技巧</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><p>收集了一些使用Python过程中的小技巧或者常见错误。</p>
+
+<h2 id="while--if--break">1. While–if–break</h2>
+
+<p>适用情况：<strong>当需要执行一个循环，但是不能事先判断何时终止。</strong> 可以在循环内部加入判断，符合要求时跳出。比如，使用程序在某个目录下新建一个文件夹，如果文件名已经存在，需要重新生成文件名；否则，创建文件夹。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>While&#8211;if&#8211;break </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">import</span> <span class="nn">random</span><span class="o">,</span> <span class="nn">os</span>
+</span><span class="line">
+</span><span class="line"><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class="line">    <span class="n">letter</span> <span class="o">=</span> <span class="p">[</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">97</span><span class="p">,</span> <span class="mi">123</span><span class="p">)]</span>
+</span><span class="line">    <span class="n">folderName</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+</span><span class="line">    <span class="n">fn</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folderName</span><span class="p">)</span>
+</span><span class="line">    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class="line">        <span class="c"># get an unique name </span>
+</span><span class="line">        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+</span><span class="line">        <span class="k">break</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section">2. 链式比较操作</h2>
+
+<p>Python支持一个链式的比较操作。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>comparison chain </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">testNum</span> <span class="o">=</span> <span class="mi">10</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 链式比较操作</span>
+</span><span class="line"><span class="c"># 区别if not和if a is not None</span>
+</span><span class="line"><span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">testNum</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">):</span>
+</span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="s">&#39;It passed!&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2015/07/28/python-tips/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-06-02T16:49:41+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2015/06/02/download-ucsc-gene-mask/#disqus_thread" itemprop="discussionUrl"
@@ -410,67 +501,6 @@ MAPQ = -10 \times log_{10}(pvalue)
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-09T13:42:15+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2015/05/09/django-tutorial/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2015/05/09/django-tutorial/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2015/05/09/django-tutorial/" itemprop="url">Django使用介绍</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><p>本文是学习<a href="https://docs.djangoproject.com/en/1.8/intro/tutorial01/">Django Tutorial</a>的记录，目的为了帮助快速浏览和查找Django使用细节。</p>
-
-<h2 id="django">1. 安装Django</h2>
-
-<p>本文使用<a href="https://www.python.org/">Python 3.3.6</a>和<a href="http://www.postgresql.org/">PostgreSQL 9.3.6</a>学习Django。可以参考<a href="http://yulongniu.bionutshell.org/blog/2015/05/09/python-different-version/">“使用Pyenv控制多个版本Python”</a>和 <a href="http://yulongniu.bionutshell.org/blog/2015/05/08/install-use-postgresql/">“Fedora安装与使用PostgreSQL”</a>，安装对应版本Python和PostgreSQL。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 安装Django</span>
-</span><span class="line"><span class="nv">$ </span>pip install django
-</span><span class="line">
-</span><span class="line"><span class="c"># 安装PostgreSQL支持psycopg2 </span>
-</span><span class="line"><span class="nv">$ </span>pip install psycopg2
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2015/05/09/django-tutorial/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -494,6 +524,8 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <div id="recent_posts" class="list-group">
     
+    <a class="list-group-item " href="/blog/2016/07/21/subset-matrix-in-r/">为什么不推荐在Ｒ语言中随意按照下标操作矩阵</a>
+    
     <a class="list-group-item " href="/blog/2016/04/17/pointers-in-c/">C语言指针记录</a>
     
     <a class="list-group-item " href="/blog/2015/10/25/xpath-xml/">XML中XPath规则总结</a>
@@ -501,8 +533,6 @@ MAPQ = -10 \times log_{10}(pvalue)
     <a class="list-group-item " href="/blog/2015/09/30/spacemacs-tutorial/">Spacemacs使用记录</a>
     
     <a class="list-group-item " href="/blog/2015/07/29/postgresql-usage/">PostgreSQL使用指南</a>
-    
-    <a class="list-group-item " href="/blog/2015/07/28/python-tips/">Python使用小技巧</a>
     
   </div>
 </section>
@@ -520,7 +550,7 @@ MAPQ = -10 \times log_{10}(pvalue)
     
     
     <a class="list-group-item " href="/blog/categories/r/index.html">
-        <span class="badge">6</span>
+        <span class="badge">7</span>
         r
       </a>
     

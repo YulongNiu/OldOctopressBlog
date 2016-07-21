@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2016-06-01T23:58:12+08:00</updated>
+  <updated>2016-07-21T20:28:31+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -12,6 +12,71 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[为什么不推荐在Ｒ语言中随意按照下标操作矩阵]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2016/07/21/subset-matrix-in-r/"/>
+    <updated>2016-07-21T19:35:29+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2016/07/21/subset-matrix-in-r</id>
+    <content type="html"><![CDATA[<p>这篇博文的目的是展示R语言中下标操作矩阵的潜在问题。Ｒ语言提供了多种方法提取一个矩阵的单个或者部分元素，不同方法对应的效率在Hadley Wickham的<a href="http://adv-r.had.co.nz/Performance.html#language-performance">Advance R</a>中已有讨论。这些方法中，使用最广泛的是通过下标（行或者列）取值，即操作符<code class="language-R">[</code>。然而，这种方法存在潜在问题，即内存中会拷贝原始对象。</p>
+
+<p>举例：首先建立一个矩阵，之后取这个矩阵除了第一行之外的部分，接下来操作这个部分矩阵。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>manipulate </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td><td class="code"><pre><code class="R"><span class="line"><span class="c1">## step1: build matrix</span>
+</span><span class="line">n <span class="o">&lt;-</span> <span class="m">8000</span>
+</span><span class="line">tmp1 <span class="o">&lt;-</span> <span class="kt">matrix</span><span class="p">(</span>rnorm<span class="p">(</span>n <span class="o">*</span> n<span class="p">),</span> nrow <span class="o">=</span> n<span class="p">,</span> ncol <span class="o">=</span> n<span class="p">)</span>
+</span><span class="line"><span class="kp">gc</span><span class="p">()</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">## step2: manipulate a subset of matrix</span>
+</span><span class="line"><span class="kp">sink</span><span class="p">(</span><span class="s">&#39;/dev/null&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="kp">apply</span><span class="p">(</span>tmp1<span class="p">[</span><span class="m">2</span><span class="o">:</span>n<span class="p">,</span> <span class="p">],</span> <span class="m">1</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> x<span class="p">[</span><span class="m">1</span><span class="p">])</span>
+</span><span class="line"><span class="kp">sink</span><span class="p">()</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">## step3: garbage collection</span>
+</span><span class="line"><span class="kp">gc</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<!--more-->
+
+<p>内存使用情况如下：</p>
+
+<p><img src="http://yulongniu.bionutshell.org/images/R_apply_memory.png" title="image" alt="UCSC下载rRNA注释" /></p>
+
+<ul>
+  <li>
+    <p>标记１内存上升，因为建立了<code class="language-R">tmp1</code>的矩阵；</p>
+  </li>
+  <li>
+    <p>标记２内存再次上升，主要因为使用下标取矩阵操作，<code class="language-R">tmp1[2:n, ]</code>；</p>
+  </li>
+  <li>
+    <p>标记３内存下降，因为手动执行垃圾回收。</p>
+  </li>
+</ul>
+
+<p>可以明显看到内存中多余的垃圾对象。如果使用<code class="language-R">for</code>循环形式，就可以有效避免内存对象拷贝。虽然，Ｒ在内存空间不足时，会自动执行<code class="language-R">gc()</code>。但是，执行程序时，不能全指望自动垃圾回收，毕竟有时回收得并不及时，而新的对象又相继生成。这种情况下，内存空间不足就成为很严重的问题。</p>
+
+<p>R版本3.3.1。</p>
+
+<h3 id="section">更新记录</h3>
+
+<p>2015年7月21日</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[C语言指针记录]]></title>
@@ -5400,396 +5465,6 @@ insert是用于测序的目标片段，因为是包括在两个adapter之间，�
 <h3 id="section-1">更新记录</h3>
 
 <p>2015年6月10日</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[R使用parallel包并行计算]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2014/06/25/parallel-package/"/>
-    <updated>2014-06-25T10:10:20+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2014/06/25/parallel-package</id>
-    <content type="html"><![CDATA[<p>最新版本的R已经内置<span style="color: blue">parallel</span>包，<span style="color: blue">parallel</span>包是从<span style="color: blue"><a href="http://cran.r-project.org/web/packages/snow/index.html">snow</a></span>包和<span style="color: blue"><a href="http://cran.r-project.org/web/packages/multicore/index.html">multicore</a></span>包继承而来，包含了很多非常好用的函数。<span style="color: blue">parallel</span>包可以通过PVM（<span style="color: blue">rpvm</span>包）、MPI（<span style="color: blue"><a href="http://cran.r-project.org/web/packages/Rmpi/index.html">Rmpi</a></span>包）、NetWorkSpaces（<span style="color: blue"><a href="http://cran.r-project.org/web/packages/nws/index.html">nws</a></span>包）和raw sockets（如果以上3种都不能使用）平台进行分布计算，支持cluster和多核个人/服务器计算机。在Linux系统上，通常使用<a href="http://www.open-mpi.org/">openMPI</a>。</p>
-
-<h2 id="span-stylecolor-bluermpispan">1. 安装<span style="color: blue">Rmpi</span>包</h2>
-
-<p>因为使用openMPI，所以<span style="color: blue">parallel</span>包需要<span style="color: blue">Rmpi</span>包来设定节点，所以首先需要在计算机上安装openMPI。</p>
-
-<!--more-->
-
-<h3 id="linuxopenmpi">1.1 Linux系统下安装openMPI环境</h3>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 安装openmpi环境</span>
-</span><span class="line"><span class="c"># yum install openmpi openmpi-devel</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># 配置环境（安装时执行，可能之后运行也要执行）</span>
-</span><span class="line"><span class="c"># ldconfig /usr/lib64/openmpi/lib/</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>在<code class="language-bash">~/.bashrc</code>下写入</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">
-</span><span class="line"><span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;${LD_LIBRARY_PATH}${LD_LIBRARY_PATH:+:}/usr/lib64/openmpi/lib/&quot;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>载入<code class="language-bash">~/.bashrc</code></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">
-</span><span class="line"><span class="nv">$ </span><span class="nb">source</span> ~/.bashrc
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h3 id="rmpi">1.2 安装Rmpi包</h3>
-
-<p>在启动的R窗口中输入：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line">install.packages<span class="p">(</span><span class="s">&quot;Rmpi&quot;</span><span class="p">,</span>
-</span><span class="line">                 configure.args <span class="o">=</span>
-</span><span class="line">                 <span class="kt">c</span><span class="p">(</span><span class="s">&quot;--with-Rmpi-include=/usr/include/openmpi-x86_64/&quot;</span><span class="p">,</span>
-</span><span class="line">                   <span class="s">&quot;--with-Rmpi-libpath=/usr/lib64/openmpi/lib/&quot;</span><span class="p">,</span>
-</span><span class="line">                   <span class="s">&quot;--with-Rmpi-type=OPENMPI&quot;</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="span-stylecolor-blueparallelspan">2. 使用<span style="color: blue">parallel</span>包</h2>
-
-<h3 id="section">2.1 设定节点数</h3>
-
-<p>首先，需要设定cluster的节点（nodes）数目</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line">cl <span class="o">&lt;-</span> makeCluster<span class="p">(</span><span class="m">2</span><span class="p">,</span> type <span class="o">=</span> <span class="s">&quot;MPI&quot;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>这里对“节点数”设定做一些解释，如果使用cluster，可以直接设定cluster数据即可；如果是在小型服务器或者个人电脑上使用，最大节点数可以设定为“线程数（processor）-1”。比如一个双核四线程计算机，节点数目最大可以设定为3。这是因为<span style="color: blue">snow</span>包（<span style="color: blue">parallel</span>包的主要依赖包）在设计时，总是要保留一个<strong>“主线程”</strong>来处理和整合数据。</p>
-
-<p>在linux系统下，线程数可以通过 <code class="language-bash">$ nproc</code> 查看。</p>
-
-<h3 id="section-1">2.2 内置函数</h3>
-
-<p>使用<span style="color: blue">parallel</span>包中的内置并行运算函数
-比如使用<code class="language-r">parApply()</code>、<code class="language-r">parCapply()</code>、<code class="language-r">parRapply()</code>、<code class="language-r">parLapply()</code>和<code class="language-r">parSapply()</code>（如果返回矩阵，使用
-<code class="language-r">cbind()</code>）等函数。其中文档中指出，<code class="language-r">parApply()</code>函数对于<strong>二维矩阵</strong>的每一个单元进行操作，因此要慢一些。如果可能，使用<code class="language-r">parCapply()</code>和<code class="language-r">parRapply()</code>对列和行进行操作，以加快运行速度。</p>
-
-<h3 id="section-2">2.3 回收节点</h3>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line">stopCluster<span class="p">(</span>cl<span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h3 id="section-3">3. 并行计算的包依赖问题</h3>
-
-<p>在并行计算过程中，不可避免地会用到其他包辅助。这里涉及到<span style="color: blue">snow</span>包的一个设计原理：并行运算多个R进程，只有一个主进程载入完整的依赖包环境。这就意味着其他并行的R进程中也要载入依赖的包环境。</p>
-
-<p>有两个思路，第一个思路是修改<code class="language-bash">Rprofile.site</code>文件，让任意R进程在启动时都载入依赖的包。但是，不推荐这种做法，因为这样会增加R载入的速度；并且如果不同的代码用了不同的依赖包，就要不停地修改<code class="language-bash">Rprofile.site</code>文件。</p>
-
-<p>第二个思路是在新开的R进程中“动态”加载需要的包。所谓<strong>“动态”</strong>，没有什么高深的意思，就是“需要的时候加载即可”。根据需要，可以选择以下两种方法。</p>
-
-<ul>
-  <li>第一种方法是在直接在启动的R进程中加载包。</li>
-</ul>
-
-<p>这种方法非常直观，推荐。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="c1"># 以下代码摘抄自Parallel R，其中packages</span>
-</span><span class="line"><span class="c1"># 是一个要选择加载的package列表，</span>
-</span><span class="line"><span class="c1"># 比如c(&#39;bigmemory&#39;, &#39;foreach&#39;, &#39;doMC&#39;)</span>
-</span><span class="line">worker.init <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>packages<span class="p">)</span> <span class="p">{</span>
-</span><span class="line">  <span class="kr">for</span> <span class="p">(</span>p <span class="kr">in</span> packages<span class="p">)</span> <span class="p">{</span>
-</span><span class="line">    <span class="kn">library</span><span class="p">(</span>p<span class="p">,</span> character.only<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
-</span><span class="line">  <span class="p">}</span>
-</span><span class="line">  <span class="kc">NULL</span>
-</span><span class="line"><span class="p">}</span>
-</span><span class="line">clusterCall<span class="p">(</span>cl<span class="p">,</span> worker.init<span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;bigmemory&#39;</span><span class="p">,</span> <span class="s">&#39;foreach&#39;</span><span class="p">,</span> <span class="s">&#39;doMC&#39;</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>第二种方法是在调用函数中加入。</li>
-</ul>
-
-<p>这种方法不推荐，因为我们将看到这种方法是“投机”了<span style="color: blue">parallel</span>包的并行<code>apply</code>家族函数。原理是：<span style="color: blue">parallel</span>包中最主要的就是<code>apply</code>家族函数，比如<code class="language-r">parApply(cl = NULL, X, MARGIN, FUN, ...)</code>函数，是<span style="color: blue">base</span>包中<code class="language-r">apply()</code>的并行版本。其中会用到一个<code>FUN</code>函数，我们可以在这个函数中加载包，比如写入<code class="language-r">require('bigmemory')</code>等。这样，并行的R进程就会载入需要的包。举例如下：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line">Getft <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>i<span class="p">,</span> arg1<span class="p">,</span> arg2<span class="p">){</span>
-</span><span class="line">  <span class="kn">require</span><span class="p">(</span>packages<span class="p">)</span>
-</span><span class="line">  <span class="kc">...</span>
-</span><span class="line"><span class="p">}</span>
-</span><span class="line">
-</span><span class="line">adft <span class="o">&lt;-</span> parSapply<span class="p">(</span>cl<span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span> Getft<span class="p">,</span> argInput1<span class="p">,</span> argInput2<span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="span-stylecolor-bluebigmemoryspan">4. 与<span style="color: blue">bigmemory</span>包结合</h2>
-
-<p><span style="color: blue">parallel</span>包可以很好地与<span style="color: blue">bigmemory</span>包结合，进而进一步提升R操作大数据的能力。</p>
-
-<p>但是，有一个问题是<code class="language-r">parApply()</code>、<code class="language-r">parCapply()</code>、<code class="language-r">parRapply()</code>函数是不能直接调用<span style="color: blue">bigmemory</span>包的<code>big.memory</code>这种S4对象。当然也可以使用<code>mat[, ]</code>之类语句引用big.matrix对象。但是这会把矩阵全部载入内存，也就失去了<code>big.matrix</code>对象的意义，只有在内存允许的情况下这样操作。</p>
-
-<p>解决办法：</p>
-
-<blockquote>
-  <ol>
-    <li>
-      <p>将<code>big.matrix</code>对象的操作放在一个函数中，函数传入的是<code>big.matrix</code>的<code>description file</code>（描述文件），而不是<code>big.matrix</code>对象本身。</p>
-    </li>
-    <li>
-      <p>把这个函数作为<code class="language-r">parLapply()</code>和<code class="language-r">parSapply()</code>的<code>FUN</code>，达到分布计算，而又不直接引用<code>big.matrix</code>对象的目的。</p>
-    </li>
-    <li>
-      <p>这个思路的前提是：创建的<code>big.matrix</code>对象必须是“<strong>内存共享</strong>”的，否则不能将其分布到不同的节点计算。</p>
-    </li>
-  </ol>
-</blockquote>
-
-<p>举一个例子，完整版本见<a href="#final_version">补充材料：Final version</a>，这个例子中首先创建一个<code class="language-r">Getft()</code>函数，接受<code>adAllRowColDesc</code>和<code>adMatDesc</code>两个变量是<code>big.matrix</code>对象的描述文件。在这个函数中，<code class="language-r">attach.big.matrix()</code>通过描述文件引用<code>big.matrix</code>对象，并完成相关操作。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line">Getft <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>i<span class="p">,</span> adAllRowColDesc<span class="p">,</span> adMatDesc<span class="p">){</span>
-</span><span class="line">  adAllRowColData <span class="o">&lt;-</span> attach.big.matrix<span class="p">(</span>adAllRowColDesc<span class="p">)</span>
-</span><span class="line">  adMatData <span class="o">&lt;-</span> attach.big.matrix<span class="p">(</span>adMatDesc<span class="p">)</span>
-</span><span class="line">  rowIndex <span class="o">&lt;-</span> adAllRowColData<span class="p">[</span>i<span class="p">,</span> <span class="m">1</span><span class="p">]</span>
-</span><span class="line">  colIndex <span class="o">&lt;-</span> adAllRowColData<span class="p">[</span>i<span class="p">,</span> <span class="m">2</span><span class="p">]</span>
-</span><span class="line">  linkData <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>rowNames<span class="p">[</span>rowIndex<span class="p">],</span> rowNames<span class="p">[</span>colIndex<span class="p">],</span> adMatData<span class="p">[</span>rowIndex<span class="p">,</span> colIndex<span class="p">])</span>
-</span><span class="line">  <span class="kr">return</span><span class="p">(</span>linkData<span class="p">)</span>
-</span><span class="line"><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-<p>之后，使用<code class="language-r">parSapply()</code>函数调用<code class="language-r">Getft()</code>函数，使用<code>1:nrow(adAllRowCol)</code>作为“<strong>计数器</strong>”。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line">adft <span class="o">&lt;-</span> parSapply<span class="p">(</span>cl<span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="kp">nrow</span><span class="p">(</span>adAllRowCol<span class="p">),</span> Getft<span class="p">,</span> adAllRowColDescFile<span class="p">,</span> adMatDescFile<span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>如果需要处理的<code>big.matrix</code>对象不大，也可以直接使用<code class="language-r">parSapply()</code>函数，详细参考<a href="#bigmatrix_direct">补充材料：Bigmatrix direct version</a>。</p>
-
-<h2 id="span-stylecolor-blueforeachspan">5. 与<span style="color: blue">foreach</span>包比较</h2>
-
-<p>另外一个支持并行计算的包是<span style="color: blue">foreach</span>包，它天生与<code>big.matrix</code>对象匹配。所以，我也提供了使用<code class="language-r">foreach</code>版本，详细参考<a href="#foreach">补充材料：Foreach version</a>。</p>
-
-<p>通过测试可以发现，在数据量较少时（1000行左右），<code class="language-r">foreach</code><a href="#foreach">版本</a>和<code class="language-r">parSapply()</code><a href="#final_version">版本</a>速度基本持平。但是，数据量增大时（百万行），<code class="language-r">foreach</code><a href="#foreach">版本</a>速度明显减慢。原因是在使用<code class="language-r">foreach</code>并行计算时，计算开始时候需要建立索引。这个过程在循环数变大时，会变得非常缓慢。</p>
-
-<p>因此，我们可以看到，如果使用<span style="color: blue">foreach</span>包，会减少代码量，而且程序逻辑也非常清晰，但是遇到超大循环数，速度明显减慢。同时，如果使用<span style="color: blue">parallel</span>包，那么需要一些“技巧”才能与<code>big.matrix</code>对象有效融合。所以，我们的结论是原生态的R（包括提供的一些包）不适合做并行大数据计算。</p>
-
-<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
-
-<ul>
-  <li>
-    <p><a href="http://cran.r-project.org/web/views/HighPerformanceComputing.html">R task: High-Performance and Parallel Computing with R</a></p>
-  </li>
-  <li>
-    <p><a href="http://www.jstatsoft.org/v31/i01/paper">State of the Art in Parallel Computing with R</a>，这篇文章详细介绍了很多R并行计算的平台</p>
-  </li>
-  <li>
-    <p>Rmpi安装：<a href="http://www.stats.uwo.ca/faculty/yu/Rmpi/">1</a>, <a href="https://www.sharcnet.ca/help/index.php/Using_R_and_MPI">2</a>, <a href="http://www.cybaea.net/Blogs/R-tips-Installing-Rmpi-on-Fedora-Linux.html">3</a></p>
-  </li>
-  <li>
-    <p><a href="http://www.sfu.ca/~sblay/R/snow.html">snow包介绍</a></p>
-  </li>
-  <li>
-    <p><a href="http://www.stat.yale.edu/~mjk56/temp/bigmemory-vignette.pdf">The R Package bigmemory: Supporting Efficient Computation and Concurrent Programming with Large Data Sets.</a></p>
-  </li>
-  <li>
-    <p>书籍<a href="http://shop.oreilly.com/product/0636920021421.do">Parallel R</a></p>
-  </li>
-</ul>
-
-<h3 id="a-idappendixa"><a id="appendix">补充材料</a></h3>
-
-<ul>
-  <li><a id="final_version">Final version</a></li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>combine parSapply and big.matrix </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line">adj2ftBig <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>adMat<span class="p">,</span> adAllRowCol<span class="p">,</span> n <span class="o">=</span> <span class="m">2</span><span class="p">){</span>
-</span><span class="line">
-</span><span class="line">  <span class="c1"># INPUT: &#39;adMat&#39; should be a bigmatrix. &#39;adAllRowCol&#39; is the row and column combination, also is a bigmatrix</span>
-</span><span class="line">
-</span><span class="line">  <span class="kn">require</span><span class="p">(</span>bigmemory<span class="p">)</span>
-</span><span class="line">  <span class="kn">require</span><span class="p">(</span>parallel<span class="p">)</span>
-</span><span class="line">  cl <span class="o">&lt;-</span> makeCluster<span class="p">(</span>n<span class="p">,</span> type <span class="o">=</span> <span class="s">&quot;MPI&quot;</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line">  adMatDescFile <span class="o">&lt;-</span> describe<span class="p">(</span>adMat<span class="p">)</span>
-</span><span class="line">  adAllRowColDescFile <span class="o">&lt;-</span> describe<span class="p">(</span>adAllRowCol<span class="p">)</span>
-</span><span class="line">
-</span><span class="line">  rowNames <span class="o">&lt;-</span> <span class="kp">rownames</span><span class="p">(</span>adMat<span class="p">)</span>
-</span><span class="line">  colNames <span class="o">&lt;-</span> <span class="kp">colnames</span><span class="p">(</span>adMat<span class="p">)</span>
-</span><span class="line">
-</span><span class="line">  ignore <span class="o">&lt;-</span> clusterEvalQ<span class="p">(</span>cl<span class="p">,</span> <span class="p">{</span><span class="kn">library</span><span class="p">(</span>bigmemory<span class="p">);</span> <span class="kc">NULL</span><span class="p">})</span>
-</span><span class="line">
-</span><span class="line">  Getft <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>i<span class="p">,</span> adAllRowColDesc<span class="p">,</span> adMatDesc<span class="p">){</span>
-</span><span class="line">    adAllRowColData <span class="o">&lt;-</span> attach.big.matrix<span class="p">(</span>adAllRowColDesc<span class="p">)</span>
-</span><span class="line">    adMatData <span class="o">&lt;-</span> attach.big.matrix<span class="p">(</span>adMatDesc<span class="p">)</span>
-</span><span class="line">    rowIndex <span class="o">&lt;-</span> adAllRowColData<span class="p">[</span>i<span class="p">,</span> <span class="m">1</span><span class="p">]</span>
-</span><span class="line">    colIndex <span class="o">&lt;-</span> adAllRowColData<span class="p">[</span>i<span class="p">,</span> <span class="m">2</span><span class="p">]</span>
-</span><span class="line">    linkData <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>rowNames<span class="p">[</span>rowIndex<span class="p">],</span> rowNames<span class="p">[</span>colIndex<span class="p">],</span> adMatData<span class="p">[</span>rowIndex<span class="p">,</span> colIndex<span class="p">])</span>
-</span><span class="line">    <span class="kr">return</span><span class="p">(</span>linkData<span class="p">)</span>
-</span><span class="line">  <span class="p">}</span>
-</span><span class="line">
-</span><span class="line">  adft <span class="o">&lt;-</span> parSapply<span class="p">(</span>cl<span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="kp">nrow</span><span class="p">(</span>adAllRowCol<span class="p">),</span> Getft<span class="p">,</span> adAllRowColDescFile<span class="p">,</span> adMatDescFile<span class="p">)</span>
-</span><span class="line">
-</span><span class="line">  stopCluster<span class="p">(</span>cl<span class="p">)</span>
-</span><span class="line">
-</span><span class="line">  <span class="kr">return</span><span class="p">(</span>adft<span class="p">)</span>
-</span><span class="line"><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li><a id="bigmatrix_direct">Bigmatrix direct version</a></li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>directly use the big.matrix </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line">adj2ftBig3 <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>adMat<span class="p">,</span> adAllRowCol<span class="p">,</span> n <span class="o">=</span> <span class="m">2</span><span class="p">){</span>
-</span><span class="line">
-</span><span class="line">  <span class="c1"># INPUT: &#39;adMat&#39; is a matrix. &#39;adAllRowCol&#39; is the row and column combination, also a matrix.</span>
-</span><span class="line">
-</span><span class="line">  <span class="kn">library</span><span class="p">(</span>parallel<span class="p">)</span>
-</span><span class="line">  cl <span class="o">&lt;-</span> makeCluster<span class="p">(</span>n<span class="p">,</span> type <span class="o">=</span> <span class="s">&quot;MPI&quot;</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line">  rowNames <span class="o">&lt;-</span> <span class="kp">rownames</span><span class="p">(</span>adMat<span class="p">)</span>
-</span><span class="line">  colNames <span class="o">&lt;-</span> <span class="kp">colnames</span><span class="p">(</span>adMat<span class="p">)</span>
-</span><span class="line">
-</span><span class="line">  adft <span class="o">&lt;-</span> parRapply<span class="p">(</span>cl <span class="o">=</span> cl<span class="p">,</span> adAllRowCol<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="p">{</span>
-</span><span class="line">    linkData <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>rowNames<span class="p">[</span>x<span class="p">[</span><span class="m">1</span><span class="p">]],</span> colNames<span class="p">[</span>x<span class="p">[</span><span class="m">2</span><span class="p">]],</span> adMat<span class="p">[</span>x<span class="p">[</span><span class="m">1</span><span class="p">],</span> x<span class="p">[</span><span class="m">2</span><span class="p">]])</span>
-</span><span class="line">    <span class="kr">return</span><span class="p">(</span>linkData<span class="p">)</span>
-</span><span class="line">  <span class="p">})</span>
-</span><span class="line">
-</span><span class="line">  stopCluster<span class="p">(</span>cl<span class="p">)</span>
-</span><span class="line">
-</span><span class="line">  <span class="kr">return</span><span class="p">(</span>adft<span class="p">)</span>
-</span><span class="line"><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li><a id="foreach">Foreach version</a></li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>apply foreach to big.matrix </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line">adj2ftBig2 <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>adMat<span class="p">,</span> adAllRowCol<span class="p">,</span> n <span class="o">=</span> <span class="m">4</span><span class="p">){</span>
-</span><span class="line">
-</span><span class="line">  <span class="c1"># INPUT: &#39;adMat&#39; should be a bigmatrix. &#39;adAllRowCol&#39; is the row and column combination, also a bigmatrix.</span>
-</span><span class="line">
-</span><span class="line">  <span class="kn">library</span><span class="p">(</span>bigmemory<span class="p">)</span>
-</span><span class="line">  <span class="kn">library</span><span class="p">(</span>foreach<span class="p">)</span>
-</span><span class="line">  <span class="kn">library</span><span class="p">(</span>doMC<span class="p">)</span>
-</span><span class="line">  registerDoMC<span class="p">(</span>n<span class="p">)</span>
-</span><span class="line">
-</span><span class="line">  rowNames <span class="o">&lt;-</span> <span class="kp">rownames</span><span class="p">(</span>adMat<span class="p">)</span>
-</span><span class="line">  colNames <span class="o">&lt;-</span> <span class="kp">colnames</span><span class="p">(</span>adMat<span class="p">)</span>
-</span><span class="line">
-</span><span class="line">  adft <span class="o">&lt;-</span> foreach <span class="p">(</span>i <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="kp">nrow</span><span class="p">(</span>adAllRowCol<span class="p">),</span> <span class="m">.</span>combine <span class="o">=</span> <span class="kp">rbind</span><span class="p">,</span> <span class="m">.i</span>norder<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span> <span class="o">%dopar%</span> <span class="p">{</span>
-</span><span class="line">    <span class="kp">print</span><span class="p">(</span><span class="kp">paste</span><span class="p">(</span><span class="s">&#39;It is running &#39;</span><span class="p">,</span> i<span class="p">,</span> <span class="s">&#39; in total of &#39;</span><span class="p">,</span> <span class="kp">nrow</span><span class="p">(</span>adAllRowCol<span class="p">),</span> <span class="s">&#39;.&#39;</span><span class="p">,</span> sep <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="p">))</span>
-</span><span class="line">    linkData <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>rowNames<span class="p">[</span>adAllRowCol<span class="p">[</span>i<span class="p">,</span> <span class="m">1</span><span class="p">]],</span> colNames<span class="p">[</span>adAllRowCol<span class="p">[</span>i<span class="p">,</span> <span class="m">2</span><span class="p">]],</span> adMat<span class="p">[</span>adAllRowCol<span class="p">[</span>i<span class="p">,</span> <span class="m">1</span><span class="p">],</span> adAllRowCol<span class="p">[</span>i<span class="p">,</span> <span class="m">2</span><span class="p">]])</span>
-</span><span class="line">    <span class="kr">return</span><span class="p">(</span>linkData<span class="p">)</span>
-</span><span class="line">  <span class="p">}</span>
-</span><span class="line">
-</span><span class="line">  <span class="kr">return</span><span class="p">(</span>adft<span class="p">)</span>
-</span><span class="line"><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h3 id="section-4">更新记录</h3>
-
-<p>2015年12月30日</p>
 ]]></content>
   </entry>
   
