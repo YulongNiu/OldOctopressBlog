@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "为什么不推荐在Ｒ语言中随意按照下标操作矩阵"
+title: "为什么不推荐在R语言中随意按照下标操作矩阵"
 date: 2016-07-21 19:35:29 +0800
 comments: true
 categories: R
 ---
 
-这篇博文的目的是展示R语言中下标操作矩阵的潜在问题。Ｒ语言提供了多种方法提取一个矩阵的单个或者部分元素，不同方法对应的效率在Hadley Wickham的[Advance R](http://adv-r.had.co.nz/Performance.html#language-performance)中已有讨论。这些方法中，使用最广泛的是通过下标（行或者列）取值，即操作符`[`{:.language-R}。然而，这种方法存在潜在问题，即内存中会拷贝原始对象。
+这篇博文的目的是展示R语言中下标操作矩阵的潜在问题。R语言提供了多种方法提取一个矩阵的单个或者部分元素，不同方法对应的效率在Hadley Wickham的[Advance R](http://adv-r.had.co.nz/Performance.html#language-performance)中已有讨论。这些方法中，使用最广泛的是通过下标（行或者列）取值，即操作符`[`{:.language-R}。然而，这种方法存在潜在问题，即内存中会拷贝原始对象。
 
 举例：首先建立一个矩阵，之后取这个矩阵除了第一行之外的部分，接下来操作这个部分矩阵。
 
