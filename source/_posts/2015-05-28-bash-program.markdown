@@ -16,11 +16,22 @@ for i in *.zip
 do
     echo "$i"
 done
-{% endcodeblock %}
+{% endcodeblock %} 
 
 <!--more-->
 
-## 2. 字符串分割 ##
+## 2. 创建数组 ##
+
+{% codeblock lang:bash create array %}
+declare -a testArray={"element1" "element2"}
+echo ${testArray[0]}
+for i in "${testArray[@]}"
+do
+    echo "$i"
+done
+{% endcodeblock %} 
+
+## 3. 字符串分割 ##
 
 {% codeblock lang:bash Split strings%}
 # write in file "testsplit.sh"
@@ -37,16 +48,26 @@ a
 test
 {% endcodeblock %}
 
-## 3. 屏幕输出存入变量 ##
+## 4. 屏幕输出存入变量 ##
 
 某个bash命令，比如`ls -l`{:.language-bash}存入变量，之后引用变量。
-
 
 {% codeblock lang:bash Save Command Output into Variables%}
 # 注意等号前后不能加空格
 listOutput=`ls -l`
 echo "$listOutput"
 {% endcodeblock %}
+
+## 5. 文件末尾添加内容 ##
+
+{% codeblock lang:bash append %}
+touch testfile
+printf "hello\n" > testfile
+printf "world\n" >> testfile
+{% endcodeblock %} 
+
+
+
 
 
 
@@ -63,4 +84,4 @@ echo "$listOutput"
 
 ### 更新记录 ###
 
-2015年5月27日
+2016年9月1日
