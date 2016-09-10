@@ -12,13 +12,15 @@ categories: bioinfor
 
 2. [Ensembl FTP](http://uswest.ensembl.org/info/data/ftp/index.html) 
 
-3. [GENCODE](http://www.gencodegenes.org/)：只有人和大鼠，注释较好。
+3. [USCS FTP](http://hgdownload.cse.ucsc.edu/goldenPath/) 
 
-4. [iGenomes](http://support.illumina.com/sequencing/sequencing_software/igenome.html)：部分模式生物bowtie、bowtie2和BWA索引基因组。
+4. [GENCODE](http://www.gencodegenes.org/)：只有人和大鼠，注释较好。
+
+5. [iGenomes](http://support.illumina.com/sequencing/sequencing_software/igenome.html)：部分模式生物bowtie、bowtie2和BWA索引基因组。
 
 <!--more-->
 
-5. [HISAT2](https://ccb.jhu.edu/software/hisat2/index.shtml)：部分模式生物HISAT2索引基因组。
+6. [HISAT2](https://ccb.jhu.edu/software/hisat2/index.shtml)：部分模式生物HISAT2索引基因组。
 
 
 
