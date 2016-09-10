@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Fedora安装与使用PostgreSQL - 牛牛龙</title>
+  <title>清洗二代测序数据 - 牛牛龙</title>
   <meta name="author" content="Yulong Niu">
 
   
@@ -14,15 +14,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yulongniu.bionutshell.org/blog/2015/05/08/install-use-postgresql">
+  <link rel="canonical" href="http://yulongniu.bionutshell.org/blog/2014/07/28/clean-seq-data">
   <link href="/favicon.ico" type="image/png" rel="icon">
   <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
 
   <!-- http://opengraphprotocol.org/ -->
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2015/05/08/install-use-postgresql">
-  <meta property="og:title" content="Fedora安装与使用PostgreSQL - 牛牛龙">
+  <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2014/07/28/clean-seq-data">
+  <meta property="og:title" content="清洗二代测序数据 - 牛牛龙">
   
 
   <!-- mathjax config similar to math.stackexchange -->
@@ -180,7 +180,7 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-08T18:30:54+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-07-28T20:11:18+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="#disqus_thread" itemprop="discussionUrl"
              data-disqus-identifier="http://yulongniu.bionutshell.org">Comments</a>
@@ -189,26 +189,24 @@
     
     
     <h1 class="entry-title" itemprop="name headline">
-        Fedora安装与使用PostgreSQL
+        清洗二代测序数据
         
     </h1>
     
   </header>
 
 
-<div class="entry-content clearfix" itemprop="articleBody description"><h2 id="postgresql">1. 安装和开启postgresql</h2>
+<div class="entry-content clearfix" itemprop="articleBody description"><h2 id="fastqc">1. FastQC</h2>
 
-<p>Fedora直接使用<code class="language-bash">dnf</code>安装相关组件。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 安装PostgreSQL</span>
-</span><span class="line"><span class="c"># dnf install postgresql postgresql-server postgresql-contrib postgresql-devel pgadmin3</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p><strong>简介</strong>：<a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>是用于对二代测序数据质量快速检验的工具，可以输入fastq（fastq.gz）、sam或者bam文件。查看<a href="http://www.bioinformatics.nl/courses/RNAseq/FastQC_Manual.pdf">输出结果解释</a>。</p>
 
 <!--more-->
 
-<p>初始化（只需要执行一次）。如果出现类似<code class="language-bash">Data directory is not empty!</code>报错，可以尝试执行删除操作<code>rm -f -r /usr/local/pgsql/data</code></p>
+<p><strong>平台</strong>：所有平台。</p>
+
+<p><strong>安装</strong>： 依赖Java，下载后直接安装使用。</p>
+
+<p><strong>快速运行</strong>：</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -223,154 +221,145 @@
 <span class="line-number">11</span>
 <span class="line-number">12</span>
 <span class="line-number">13</span>
-<span class="line-number">14</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 初始化</span>
-</span><span class="line"><span class="c"># postgresql-setup --initdb --unit postgresql</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 输出分析结果至特定文档</span>
+</span><span class="line"><span class="nv">$ </span>fastqc seqFile1 --outdir setFolder1
 </span><span class="line">
-</span><span class="line"><span class="c"># 开启服务</span>
-</span><span class="line"><span class="c"># service postgresql start</span>
+</span><span class="line"><span class="c"># 支持批量处理测序数据</span>
+</span><span class="line"><span class="nv">$ </span>fastqc seqFile1 seqFile2 seqFileN
 </span><span class="line">
-</span><span class="line"><span class="c"># 查询工作状态</span>
-</span><span class="line"><span class="c"># service postgresql status</span>
+</span><span class="line"><span class="c"># 查看帮助信息</span>
+</span><span class="line"><span class="nv">$ </span>fastqc --help
 </span><span class="line">
-</span><span class="line"><span class="c"># 关闭服务</span>
-</span><span class="line"><span class="c"># service postgresql stop</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># 开机启动</span>
-</span><span class="line"><span class="c"># chkconfig postgresql on</span>
+</span><span class="line"><span class="c"># 查看一共分析了多少个reads，比如fastqc文件为“accepted_filtered_fastqc.zip”</span>
+</span><span class="line"><span class="nv">$ </span>unzip -p accepted_filtered_fastqc.zip accepted_filtered_fastqc/fastqc_data.txt <span class="p">|</span> <span class="se">\</span>
+</span><span class="line">      sed -n <span class="s1">&#39;7 p&#39;</span> <span class="p">|</span> <span class="se">\</span>
+</span><span class="line">      awk <span class="s1">&#39;{print $3}&#39;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h2 id="section">2. 创建用户和数据库</h2>
+<h2 id="trim-galore">2. Trim Galore!</h2>
 
-<p>为了方便使用，可以在PostgreSQL中创建一个与当前系统用户名相同的用户，比如目前系统登陆用户为Kitty。</p>
+<p><strong>简介</strong>：<a href="http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/">Trim Galore!</a>是对<a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>和<a href="https://cutadapt.readthedocs.org/en/stable/installation.html">Cutadapt</a>的包装。可以处理Illumina、Nextera 3和smallRNA测序平台的双端和单端数据，包括去除adapter和低质量reads。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<p><strong>平台</strong>：Linux</p>
+
+<p><strong>安装</strong>:</p>
+
+<ul>
+  <li>需要先分别安装FastQC和Cutadapt，其中Cutadapt安装使用</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Install Cutadapt</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># pip install cutadapt</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>快速运行</strong>：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Example code of runing the Cutadapt</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 进入home路径</span>
-</span><span class="line"><span class="c"># cd /home/</span>
-</span><span class="line">
-</span><span class="line">
-</span><span class="line"><span class="c"># 进入默认postgres用户，需要输入root密码。</span>
-</span><span class="line"><span class="c"># 之后系统命令提示符会变成类似“bash-4.3$”。</span>
-</span><span class="line"><span class="c"># su postgres</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># 创建用户</span>
-</span><span class="line"><span class="c"># -P：创建用户后立即创建密码</span>
-</span><span class="line"><span class="c"># -s：用户为superuser</span>
-</span><span class="line"><span class="c"># -e：打印消息</span>
-</span><span class="line">bash-4.3<span class="nv">$ </span>createuser -P -s -e Kitty
-</span><span class="line">
-</span><span class="line"><span class="c"># 创建数据库</span>
-</span><span class="line"><span class="c"># -O：制定用户</span>
-</span><span class="line">bash-4.3<span class="nv">$ </span>createdb -O Kitty testdb
-</span><span class="line">
-</span><span class="line"><span class="c"># 退出</span>
-</span><span class="line">bash-4.3<span class="nv">$ </span><span class="nb">exit</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># 再创建新的数据库时，不需要进入postgres。</span>
-</span><span class="line"><span class="c"># 直接在当前登录用户下创建即可。</span>
-</span><span class="line"><span class="c"># 由于PostgreSQL用户与系统登录用户相同，不需要指定PostgreSQL用户</span>
-</span><span class="line"><span class="nv">$ </span>creatdb testdb2
-</span><span class="line">
-</span><span class="line"><span class="c"># 删除数据库</span>
-</span><span class="line"><span class="nv">$ </span>dropdb testdb2
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 处理双端测序结果</span>
+</span><span class="line"><span class="nv">$ </span>trim_galore --quality <span class="m">20</span> --phred33 --stringency <span class="m">3</span> --length <span class="m">20</span> --paired <span class="se">\</span>
+</span><span class="line">              --gzip --output_dir human_trimgalore <span class="se">\</span>
+</span><span class="line">              mySeq_1_1.fastq.gz mySeq_1_2.fastq.gz
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>创建完用户和对应数据库后，可以登录数据库控制台。登录后，系统命令提示符会变成类似“testdb=#”。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 登录testdb数据库控制台</span>
-</span><span class="line"><span class="nv">$ </span>psql testdb
-</span><span class="line">
-</span><span class="line"><span class="c"># 完整登录命令</span>
-</span><span class="line"><span class="c"># -U：用户名</span>
-</span><span class="line"><span class="c"># -d：数据库</span>
-</span><span class="line"><span class="c"># -h：host，默认为local socket</span>
-</span><span class="line"><span class="c"># -p：端口</span>
-</span><span class="line"><span class="nv">$ </span>psql -U Kitty -d testdb -h /var/run/postgresql -p 5432
-</span><span class="line">
-</span><span class="line"><span class="c"># 查看PostgreSQL配制文件路径</span>
-</span><span class="line"><span class="nv">testdb</span><span class="o">=</span><span class="c"># SHOW config_file;</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># 查看所有用户</span>
-</span><span class="line"><span class="nv">testdb</span><span class="o">=</span><span class="c"># \du</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># 查看表格（table）</span>
-</span><span class="line"><span class="nv">testdb</span><span class="o">=</span><span class="c"># \dt</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># 查看所有数据库</span>
-</span><span class="line"><span class="nv">testdb</span><span class="o">=</span><span class="c"># \l</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># 退出</span>
-</span><span class="line"><span class="nv">testdb</span><span class="o">=</span><span class="c"># \q</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h3 id="section-1">参考资料</h3>
+<p><strong>重要参数解释</strong>：</p>
 
 <ul>
   <li>
-    <p><a href="http://www.postgresql.org/docs/9.4/interactive/index.html">PostgreSQL 9.4 Manuals</a></p>
+    <p><code class="language-bash$">--quality</code>：设定Phred quality score阈值，默认为20。</p>
   </li>
   <li>
-    <p><a href="http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html">PostgreSQL新手入门</a></p>
+    <p><code class="language-bash$">--phred33</code>：：选择<code class="language-bash">-phred33</code>或者<code class="language-bash">-phred64</code>，表示测序平台使用的Phred quality score。</p>
   </li>
   <li>
-    <p><a href="http://www.heatware.net/linux-unix/how-install-postgresql-8-4-centos-5/">初始化错误</a></p>
+    <p><code class="language-bash$">--adapter</code>：输入adapter序列。也可以不输入，Trim Galore!会自动寻找可能性最高的平台对应的adapter。自动搜选的平台三个，也直接显式输入这三种平台，即<code class="language-bash">--illumina</code>、<code class="language-bash">--nextera</code>和<code class="language-bash">--small_rna</code>。</p>
+  </li>
+  <li>
+    <p><code class="language-bash$">--stringency</code>：设定可以忍受的前后adapter重叠的碱基数，默认为1（非常苛刻）。可以适度放宽，因为后一个adapter几乎不可能被测序仪读到。</p>
+  </li>
+  <li>
+    <p><code class="language-bash$">--length</code>：设定输出reads长度阈值，小于设定值会被抛弃。</p>
+  </li>
+  <li>
+    <p><code class="language-bash$">--paired</code>：对于双端测序结果，一对reads中，如果有一个被剔除，那么另一个会被同样抛弃，而不管是否达到标准。</p>
+  </li>
+  <li>
+    <p><code class="language-bash$">--retain_unpaired</code>：对于双端测序结果，一对reads中，如果一个read达到标准，但是对应的另一个要被抛弃，达到标准的read会被单独保存为一个文件。</p>
+  </li>
+  <li>
+    <p><code class="language-bash$">--gzip</code>和<code class="language-bash$">--dont_gzip</code>：清洗后的数据zip打包或者不打包。</p>
+  </li>
+  <li>
+    <p><code class="language-bash$">--output_dir</code>：输入目录。需要提前建立目录，否则运行会报错。</p>
   </li>
 </ul>
 
-<h3 id="section-2">更新记录</h3>
+<h2 id="trimmomatic">3. Trimmomatic</h2>
 
-<p>2015年7月29日</p>
+<p><strong>简介</strong>：<a href="http://www.usadellab.org/cms/?page=trimmomatic">Trimmomatic</a>是针对Illumina高通量测序平台设计的接头去除和低质量reads清洗软件。软件中包括有Illumina平台常见接头序列，可以很方便处理单端和双端RNA-seq数据。Trimmomatic也支持自己设计要去除的接头序列文件。</p>
+
+<p><strong>平台</strong>：Java跨平台使用</p>
+
+<p><strong>快速运行</strong>：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Example code of runing the Trimmomatic </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 处理双端测序结果</span>
+</span><span class="line"><span class="nv">$ </span>java -jar /path/trimmomatic-0.33.jar PE<span class="se">\</span>
+</span><span class="line">       -threads <span class="m">12</span> -phred33 -trimlog mySeq_1-trim.log <span class="se">\</span>
+</span><span class="line">       mySeq_1_1.fastq.gz mySeq_1_2.fastq.gz <span class="se">\</span>
+</span><span class="line">       mySeq_1_1-trim.fastq.gz mySeq_1_1-unpair.fastq.gz <span class="se">\</span>
+</span><span class="line">       mySeq_1_2-trim.fastq.gz mySeq_1_2-unpair.fastq.gz <span class="se">\</span>
+</span><span class="line">       ILLUMINACLIP:/path/TruSeq3-PE.fa:2:30:10 <span class="se">\</span>
+</span><span class="line">       LEADING:3 <span class="se">\</span>
+</span><span class="line">       TRAILING:3 <span class="se">\</span>
+</span><span class="line">       SLIDINGWINDOW:4:15 <span class="se">\</span>
+</span><span class="line">       MINLEN:51
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>重要参数解释</strong>：</p>
+
+<ul>
+  <li>
+    <p><code class="language-bash">-threads</code>：设置线程数目。</p>
+  </li>
+  <li>
+    <p><code class="language-bash">-phred33</code>：选择<code class="language-bash">-phred33</code>或者<code class="language-bash">-phred64</code>，表示测序平台使用的Phred quality score。查询方法：首先，运行<a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>，在结果报告第一项会“猜出”测序平台。之后，查询平台对应Phred<a href="http://en.wikipedia.org/wiki/FASTQ_format">列表</a>。</p>
+  </li>
+  <li>
+    <p><code class="language-bash">-trimlog</code>：输出运行日志。日志中包括对每一个read具体选择数据，所以文件会比较大。</p>
+  </li>
+  <li>
+    <p><code class="language-bash">ILLUMINACLIP</code>：跟随四个参数，分别是<code class="language-bash">:&lt;fastaWithAdaptersEtc&gt;</code>为adaptesr文件完整路径（在Trimmomatic的默认安装目录下的 <code class="language-bash">adapter</code>，有整理好的）；<code class="language-bash">&lt;fastaWithAdaptersEtc&gt;</code>为seed matches（16bases）在匹配时的最大错配数目；<code class="language-bash">&lt;palindrome clip threshold&gt;</code>对于一对reads当得分超过30（约50 bases），seeds会被延伸和固定；<code class="language-bash">&lt;simple clip threshold&gt;</code>，对于单端reads当得分超过10（约17 bases），seeds会被延伸和固定。</p>
+  </li>
+  <li>
+    <p><code class="language-bash">LEADING</code>和<code class="language-bash">TRAILING</code>：分别为去除read头部和尾部的低质量（低于quality3）碱基数目。</p>
+  </li>
+  <li>
+    <p><code class="language-bash">SLIDINGWINDOW</code>：跟随两个参数，分别是 <code class="language-bash">&lt;windowSize&gt;</code>为扫描“窗口”长度；<code class="language-bash">&lt;requiredQuality&gt;</code>为窗口碱基质量的平均阈值，低于此会被删除。</p>
+  </li>
+  <li>
+    <p><code class="language-bash">MINLEN</code>：设置最短reads数目。需要根据下游alignment软件设定，比如<a href="http://bowtie-bio.sourceforge.net/index.shtml">Bowtie</a>适用于短序列，比如50bp以下；而<a href="http://bowtie-bio.sourceforge.net/bowtie2/index.shtml">Bowtie2</a>适用于50bp以上。<a href="http://ccb.jhu.edu/software/tophat/index.shtml">TopHat</a> 则根据实际使用Bowtie或者Bowtie2选择。</p>
+  </li>
+</ul>
+
+<h3 id="section">更新记录</h3>
+
+<p>2016年9月10日</p>
 </div>
 
 
@@ -394,13 +383,13 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-08T18:30:54+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-07-28T20:11:18+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
           
 
 <span class="glyphicon glyphicon-tags"></span>&nbsp;
 <span class="categories">
   
-    <a class='category' href='/blog/categories/linux/'>linux</a>
+    <a class='category' href='/blog/categories/bioinfor/'>bioinfor</a>
   
 </span>
 
@@ -409,7 +398,7 @@
         
           <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.bionutshell.org/blog/2015/05/08/install-use-postgresql/" data-via="" data-counturl="http://yulongniu.bionutshell.org/blog/2015/05/08/install-use-postgresql/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.bionutshell.org/blog/2014/07/28/clean-seq-data/" data-via="" data-counturl="http://yulongniu.bionutshell.org/blog/2014/07/28/clean-seq-data/" >Tweet</a>
   
   
   
@@ -419,10 +408,10 @@
         
           <ul class="meta text-muted pager">
             
-            <li class="previous"><a href="/blog/2014/12/08/c-program-note/" title="Previous Post: C语言学习记录">&laquo; C语言学习记录</a></li>
+            <li class="previous"><a href="/blog/2014/07/26/short-sequence-alignment/" title="Previous Post: 二代测序中的短序列比对">&laquo; 二代测序中的短序列比对</a></li>
             
             
-            <li class="next"><a href="/blog/2015/05/09/python-different-version/" title="Next Post: 使用Pyenv控制多个版本Python">使用Pyenv控制多个版本Python &raquo;</a></li>
+            <li class="next"><a href="/blog/2014/12/02/emacs-config-c/" title="Next Post: Emacs配置C语言编程环境">Emacs配置C语言编程环境 &raquo;</a></li>
             
           </ul>
         
@@ -547,8 +536,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://yulongniu.bionutshell.org/blog/2015/05/08/install-use-postgresql/';
-        var disqus_url = 'http://yulongniu.bionutshell.org/blog/2015/05/08/install-use-postgresql/';
+        var disqus_identifier = 'http://yulongniu.bionutshell.org/blog/2014/07/28/clean-seq-data/';
+        var disqus_url = 'http://yulongniu.bionutshell.org/blog/2014/07/28/clean-seq-data/';
         var disqus_script = 'embed.js';
       
     (function () {

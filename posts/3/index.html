@@ -184,6 +184,55 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-23T19:08:19+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2015/05/23/tophat-inner-distance/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2015/05/23/tophat-inner-distance/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2015/05/23/tophat-inner-distance/" itemprop="url">确定TopHat中mate-inner-dist参数</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><p>对于双端测序RNA-seq数据，TopHat在运行时候，有两个参数<code class="language-bash">-r/--mate-inner-dist</code>和<code class="language-bash">--mate-std-dev</code>分别标识一对reads的间隔长度的期望平均值和标准差，其默认值分别为50bp和20bp。这两个参数本身是个估计值，用于TopHat在map过程中确定一对reads是否匹配到基因组正确位置。如果能够准确设定这两个数值，将会提升TopHat结果的准确性和完整性，参考<a href="http://yulongniu.bionutshell.org/blog/2014/07/23/rna-seq-analysis/">一个例子</a>。</p>
+
+<p>有两种方法获得这对参数的准确值：</p>
+
+<p>第一种：获取RNA-seq实验建库方法，之后按照以下网址说明计算，<a href="http://blog.qiuworld.com:8080/archives/3007">RNA-seq差异表达分析工作流程</a>。</p>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2015/05/23/tophat-inner-distance/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-16T04:33:10+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2015/05/16/filter-tophat2-output/#disqus_thread" itemprop="discussionUrl"
@@ -433,177 +482,6 @@ MAPQ = -10 \times log_{10}(pvalue)
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-12-08T07:23:16+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2014/12/08/c-program-note/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2014/12/08/c-program-note/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2014/12/08/c-program-note/" itemprop="url">C语言学习记录</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="section">1. 基本数据类型</h2>
-
-<h3 id="section-1">1.1 算术类型</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>类型</th>
-      <th>解释</th>
-      <th>说明</th>
-      <th>注意事项</th>
-      <th>本地字节数</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>short</code></td>
-      <td>有符号短整数</td>
-      <td>完整形式<code>signed short int</code>，<code>singed</code>和<code>int</code>可以省略</td>
-      <td>最左边一位表示符号，<code>0</code>为正数，<code>1</code>为负数</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td><code>unsigned short</code></td>
-      <td>无符号短整数</td>
-      <td>完整形式<code>unsigned short int</code>，<code>int</code>可以省略</td>
-      <td>全部位占满</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td><code>int</code></td>
-      <td>有符号整数</td>
-      <td>完整形式<code>signed int</code>，<code>singed</code>可以省略</td>
-      <td>最左边一位表示符号，<code>0</code>为正数，<code>1</code>为负数</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <td><code>unsigned int</code></td>
-      <td>无符号整数</td>
-      <td> </td>
-      <td>全部位占满</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <td><code>long</code></td>
-      <td>有符号长整数</td>
-      <td>完整形式为<code>signed long int</code>，<code>singed</code>和<code>int</code>可以省略</td>
-      <td>最左边一位表示符号，<code>0</code>为正数，<code>1</code>为负数</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <td><code>unsigned long</code></td>
-      <td>无符号长整数</td>
-      <td>完整形式为<code>unsigned short int</code>，<code>int</code>可以省略</td>
-      <td>全部位占满</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <td><code>long long</code></td>
-      <td>无符号长长整数</td>
-      <td>完整形式为<code>signed long long int</code>，<code>singed</code>和<code>int</code>可以省略</td>
-      <td><span style="color: green"><strong>C99</strong></span>特有</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <td><code>unsigned long long </code></td>
-      <td>有符号长长整数</td>
-      <td>完整形式为<code>unsigned long long int</code>，<code>int</code>可以省略</td>
-      <td><span style="color: green"><strong>C99</strong></span>特有</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <td><code>char</code></td>
-      <td>字符</td>
-      <td>实质是“小整数”（可能比短整数占用字节更少）</td>
-      <td>分为<code>char</code>、<code>singed char</code>和<code>unsigned char</code>。使用<strong>单引号</strong>标记常量，比如<code>'A'</code>（<strong>值</strong>为65）</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td><code>_Bool</code></td>
-      <td>布尔型整数</td>
-      <td>实质是无符号整数</td>
-      <td>只能赋值0或1，赋值<code>_Bool</code>类型变量为非零值会导致赋值为1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td><code>float</code></td>
-      <td>单精度浮点数</td>
-      <td> </td>
-      <td> </td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <td><code>double</code></td>
-      <td>双精度浮点数</td>
-      <td> </td>
-      <td> </td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <td><code>long double</code></td>
-      <td>扩展精度浮点数</td>
-      <td> </td>
-      <td> </td>
-      <td>16</td>
-    </tr>
-  </tbody>
-</table>
-
-<ul>
-  <li>
-    <p>强制编辑器处理常量为长整数（十进制、八进制和十六进制），<code>1135L</code>；强制处理为无符号，<code>1135U</code>；混合使用，<code>1135UL</code>，<code>U</code>和<code>L</code>顺序和大小写不重要。
-<span style="color: green"><strong>C99</strong></span>中增加了<code>ll</code>或者<code>LL</code>后缀，强制<code>long long int</code>型整数，可以与<code>u</code>或<code>U</code>连用。<strong>避免无符号和有符号整数混用，特别是无符号和有符号整数比较，会产生意想不到的后果</strong>。</p>
-  </li>
-  <li>
-    <p>强制编辑器处理常量为单精度浮点数，<code>11.3f</code>，<code>11.3</code>会被认为是<code>double</code>型；强制为双精度，<code>11.3L</code>或者<code>11.3l</code>（这里看出使用<code>L</code>更好，因为<code>l</code>会被误认为数字<code>1</code>）。</p>
-  </li>
-  <li>
-    <p>强制类型转化表达式的一般形式为：<code>(int) floatNumber</code>。C语言把<code>(type)</code>视为一元运算符，所以其等级高于二元运算符。</p>
-  </li>
-  <li>
-    <p>类型定义一般形式为：<code>typedef int Newint;</code>，注意结尾的<code>；</code>。区别与使用宏定义类型，函数体内定义的<code>typdef</code>变量在函数体外无法使用，而宏可以作用于任何对应位置。</p>
-  </li>
-  <li>
-    <p><code>sizeof</code>运算符一般形式为：<code>sizeof(type)</code>，比如<code>sizeof(long int)</code>计算<code>int</code>类型占用多少个字节。<code>sizeof</code>表达式的类型是<code>size_t</code>（无符号整数），所以安全的方法是强制转换为<code>unsigned long</code>型，比如<code class="language-c">(unsigned long) sizeof(int)</code>。括号不是强制需要，加上括号防止因为优先级不同而引起歧义。可以应用与常量、变量或者表达式。</p>
-  </li>
-</ul>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2014/12/08/c-program-note/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -627,6 +505,8 @@ MAPQ = -10 \times log_{10}(pvalue)
   
   <div id="recent_posts" class="list-group">
     
+    <a class="list-group-item " href="/blog/2016/09/10/hisat2-faq/">HISAT2使用问答</a>
+    
     <a class="list-group-item " href="/blog/2016/09/10/reference-genome-location/">常用参考基因组下载地址</a>
     
     <a class="list-group-item " href="/blog/2016/07/21/subset-matrix-in-r/">为什么不推荐在R语言中随意按照下标操作矩阵</a>
@@ -634,8 +514,6 @@ MAPQ = -10 \times log_{10}(pvalue)
     <a class="list-group-item " href="/blog/2016/04/17/pointers-in-c/">C语言指针记录</a>
     
     <a class="list-group-item " href="/blog/2015/10/25/xpath-xml/">XML中XPath规则总结</a>
-    
-    <a class="list-group-item " href="/blog/2015/09/30/spacemacs-tutorial/">Spacemacs使用记录</a>
     
   </div>
 </section>
@@ -671,7 +549,7 @@ MAPQ = -10 \times log_{10}(pvalue)
     
     
     <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
-        <span class="badge">11</span>
+        <span class="badge">13</span>
         bioinfor
       </a>
     

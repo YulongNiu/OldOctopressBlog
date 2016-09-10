@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2016-09-10T14:41:19+08:00</updated>
+  <updated>2016-09-10T20:17:48+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -12,6 +12,75 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[HISAT2使用问答]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2016/09/10/hisat2-faq/"/>
+    <updated>2016-09-10T16:32:47+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2016/09/10/hisat2-faq</id>
+    <content type="html"><![CDATA[<p><a href="https://ccb.jhu.edu/software/hisat2/manual.shtml#the-hisat2-build-indexer">HISAT2</a>是一款用于“对应（map）”二代测序数据（全基因组、转录组和外显子组）至目标基因组的工具，用来替代<a href="http://ccb.jhu.edu/software/hisat/index.shtml">HISAT</a>和<a href="http://www.ccb.jhu.edu/software/tophat/index.shtml">TopHat2</a>。本文汇集一些使用HISAT2的常见问题问答。</p>
+
+<h2 id="hisat2">1. 如何解读HISAT2的输出统计？</h2>
+
+<p>一个常见的双端测序样本HISAT2输出统计：</p>
+
+<!--more-->
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">10000 reads; of these:
+</span><span class="line">  10000 (100.00%) were paired; of these:
+</span><span class="line">    650 (6.50%) aligned concordantly 0 times
+</span><span class="line">    8823 (88.23%) aligned concordantly exactly 1 time
+</span><span class="line">    527 (5.27%) aligned concordantly &gt;1 times
+</span><span class="line">    ----
+</span><span class="line">    650 pairs aligned concordantly 0 times; of these:
+</span><span class="line">      34 (5.23%) aligned discordantly 1 time
+</span><span class="line">    ----
+</span><span class="line">    616 pairs aligned 0 times concordantly or discordantly; of these:
+</span><span class="line">      1232 mates make up the pairs; of these:
+</span><span class="line">        660 (53.57%) aligned 0 times
+</span><span class="line">        571 (46.35%) aligned exactly 1 time
+</span><span class="line">        1 (0.08%) aligned &gt;1 times
+</span><span class="line">96.70% overall alignment rate</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>
+    <p>总共10000对reads；</p>
+  </li>
+  <li>
+    <p>8823对concordant pairs（一对既方向匹配又有合适距离的reads）有1次精确比对；527对concordant pairs有1次以上比对；34对disconcordant pairs;</p>
+  </li>
+  <li>
+    <p>616对不是concordant pairs，也不是disconcordant pairs中，571个reads有1次精确比对；1个read有1次以上比对；660个reads没有比对成功。</p>
+  </li>
+  <li>
+    <p>因此，整体比对率为1 - (660 / 2) / 10000</p>
+  </li>
+</ul>
+
+<h2 id="hisat2-1">2. 使用HISAT2前，是否需要对原始数据进行清洗？</h2>
+
+<p>需要。</p>
+
+<h3 id="section">更新记录</h3>
+
+<p>2016年9月10日</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[常用参考基因组下载地址]]></title>
@@ -28,7 +97,7 @@
     <p><a href="http://uswest.ensembl.org/info/data/ftp/index.html">Ensembl FTP</a></p>
   </li>
   <li>
-    <p><a href="http://hgdownload.cse.ucsc.edu/goldenPath/">USCS FTP</a></p>
+    <p><a href="http://hgdownload.cse.ucsc.edu/goldenPath/">UCSC FTP</a></p>
   </li>
   <li>
     <p><a href="http://www.gencodegenes.org/">GENCODE</a>：只有人和大鼠，注释较好。</p>
@@ -4347,6 +4416,178 @@ MAPQ = -10 \times log_{10}(pvalue)
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[清洗二代测序数据]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2014/07/28/clean-seq-data/"/>
+    <updated>2014-07-28T20:11:18+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2014/07/28/clean-seq-data</id>
+    <content type="html"><![CDATA[<h2 id="fastqc">1. FastQC</h2>
+
+<p><strong>简介</strong>：<a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>是用于对二代测序数据质量快速检验的工具，可以输入fastq（fastq.gz）、sam或者bam文件。查看<a href="http://www.bioinformatics.nl/courses/RNAseq/FastQC_Manual.pdf">输出结果解释</a>。</p>
+
+<!--more-->
+
+<p><strong>平台</strong>：所有平台。</p>
+
+<p><strong>安装</strong>： 依赖Java，下载后直接安装使用。</p>
+
+<p><strong>快速运行</strong>：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 输出分析结果至特定文档</span>
+</span><span class="line"><span class="nv">$ </span>fastqc seqFile1 --outdir setFolder1
+</span><span class="line">
+</span><span class="line"><span class="c"># 支持批量处理测序数据</span>
+</span><span class="line"><span class="nv">$ </span>fastqc seqFile1 seqFile2 seqFileN
+</span><span class="line">
+</span><span class="line"><span class="c"># 查看帮助信息</span>
+</span><span class="line"><span class="nv">$ </span>fastqc --help
+</span><span class="line">
+</span><span class="line"><span class="c"># 查看一共分析了多少个reads，比如fastqc文件为“accepted_filtered_fastqc.zip”</span>
+</span><span class="line"><span class="nv">$ </span>unzip -p accepted_filtered_fastqc.zip accepted_filtered_fastqc/fastqc_data.txt <span class="p">|</span> <span class="se">\</span>
+</span><span class="line">      sed -n <span class="s1">&#39;7 p&#39;</span> <span class="p">|</span> <span class="se">\</span>
+</span><span class="line">      awk <span class="s1">&#39;{print $3}&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="trim-galore">2. Trim Galore!</h2>
+
+<p><strong>简介</strong>：<a href="http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/">Trim Galore!</a>是对<a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>和<a href="https://cutadapt.readthedocs.org/en/stable/installation.html">Cutadapt</a>的包装。可以处理Illumina、Nextera 3和smallRNA测序平台的双端和单端数据，包括去除adapter和低质量reads。</p>
+
+<p><strong>平台</strong>：Linux</p>
+
+<p><strong>安装</strong>:</p>
+
+<ul>
+  <li>需要先分别安装FastQC和Cutadapt，其中Cutadapt安装使用</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Install Cutadapt</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># pip install cutadapt</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>快速运行</strong>：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Example code of runing the Cutadapt</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 处理双端测序结果</span>
+</span><span class="line"><span class="nv">$ </span>trim_galore --quality <span class="m">20</span> --phred33 --stringency <span class="m">3</span> --length <span class="m">20</span> --paired <span class="se">\</span>
+</span><span class="line">              --gzip --output_dir human_trimgalore <span class="se">\</span>
+</span><span class="line">              mySeq_1_1.fastq.gz mySeq_1_2.fastq.gz
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>重要参数解释</strong>：</p>
+
+<ul>
+  <li>
+    <p><code class="language-bash$">--quality</code>：设定Phred quality score阈值，默认为20。</p>
+  </li>
+  <li>
+    <p><code class="language-bash$">--phred33</code>：：选择<code class="language-bash">-phred33</code>或者<code class="language-bash">-phred64</code>，表示测序平台使用的Phred quality score。</p>
+  </li>
+  <li>
+    <p><code class="language-bash$">--adapter</code>：输入adapter序列。也可以不输入，Trim Galore!会自动寻找可能性最高的平台对应的adapter。自动搜选的平台三个，也直接显式输入这三种平台，即<code class="language-bash">--illumina</code>、<code class="language-bash">--nextera</code>和<code class="language-bash">--small_rna</code>。</p>
+  </li>
+  <li>
+    <p><code class="language-bash$">--stringency</code>：设定可以忍受的前后adapter重叠的碱基数，默认为1（非常苛刻）。可以适度放宽，因为后一个adapter几乎不可能被测序仪读到。</p>
+  </li>
+  <li>
+    <p><code class="language-bash$">--length</code>：设定输出reads长度阈值，小于设定值会被抛弃。</p>
+  </li>
+  <li>
+    <p><code class="language-bash$">--paired</code>：对于双端测序结果，一对reads中，如果有一个被剔除，那么另一个会被同样抛弃，而不管是否达到标准。</p>
+  </li>
+  <li>
+    <p><code class="language-bash$">--retain_unpaired</code>：对于双端测序结果，一对reads中，如果一个read达到标准，但是对应的另一个要被抛弃，达到标准的read会被单独保存为一个文件。</p>
+  </li>
+  <li>
+    <p><code class="language-bash$">--gzip</code>和<code class="language-bash$">--dont_gzip</code>：清洗后的数据zip打包或者不打包。</p>
+  </li>
+  <li>
+    <p><code class="language-bash$">--output_dir</code>：输入目录。需要提前建立目录，否则运行会报错。</p>
+  </li>
+</ul>
+
+<h2 id="trimmomatic">3. Trimmomatic</h2>
+
+<p><strong>简介</strong>：<a href="http://www.usadellab.org/cms/?page=trimmomatic">Trimmomatic</a>是针对Illumina高通量测序平台设计的接头去除和低质量reads清洗软件。软件中包括有Illumina平台常见接头序列，可以很方便处理单端和双端RNA-seq数据。Trimmomatic也支持自己设计要去除的接头序列文件。</p>
+
+<p><strong>平台</strong>：Java跨平台使用</p>
+
+<p><strong>快速运行</strong>：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Example code of runing the Trimmomatic </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 处理双端测序结果</span>
+</span><span class="line"><span class="nv">$ </span>java -jar /path/trimmomatic-0.33.jar PE<span class="se">\</span>
+</span><span class="line">       -threads <span class="m">12</span> -phred33 -trimlog mySeq_1-trim.log <span class="se">\</span>
+</span><span class="line">       mySeq_1_1.fastq.gz mySeq_1_2.fastq.gz <span class="se">\</span>
+</span><span class="line">       mySeq_1_1-trim.fastq.gz mySeq_1_1-unpair.fastq.gz <span class="se">\</span>
+</span><span class="line">       mySeq_1_2-trim.fastq.gz mySeq_1_2-unpair.fastq.gz <span class="se">\</span>
+</span><span class="line">       ILLUMINACLIP:/path/TruSeq3-PE.fa:2:30:10 <span class="se">\</span>
+</span><span class="line">       LEADING:3 <span class="se">\</span>
+</span><span class="line">       TRAILING:3 <span class="se">\</span>
+</span><span class="line">       SLIDINGWINDOW:4:15 <span class="se">\</span>
+</span><span class="line">       MINLEN:51
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>重要参数解释</strong>：</p>
+
+<ul>
+  <li>
+    <p><code class="language-bash">-threads</code>：设置线程数目。</p>
+  </li>
+  <li>
+    <p><code class="language-bash">-phred33</code>：选择<code class="language-bash">-phred33</code>或者<code class="language-bash">-phred64</code>，表示测序平台使用的Phred quality score。查询方法：首先，运行<a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>，在结果报告第一项会“猜出”测序平台。之后，查询平台对应Phred<a href="http://en.wikipedia.org/wiki/FASTQ_format">列表</a>。</p>
+  </li>
+  <li>
+    <p><code class="language-bash">-trimlog</code>：输出运行日志。日志中包括对每一个read具体选择数据，所以文件会比较大。</p>
+  </li>
+  <li>
+    <p><code class="language-bash">ILLUMINACLIP</code>：跟随四个参数，分别是<code class="language-bash">:&lt;fastaWithAdaptersEtc&gt;</code>为adaptesr文件完整路径（在Trimmomatic的默认安装目录下的 <code class="language-bash">adapter</code>，有整理好的）；<code class="language-bash">&lt;fastaWithAdaptersEtc&gt;</code>为seed matches（16bases）在匹配时的最大错配数目；<code class="language-bash">&lt;palindrome clip threshold&gt;</code>对于一对reads当得分超过30（约50 bases），seeds会被延伸和固定；<code class="language-bash">&lt;simple clip threshold&gt;</code>，对于单端reads当得分超过10（约17 bases），seeds会被延伸和固定。</p>
+  </li>
+  <li>
+    <p><code class="language-bash">LEADING</code>和<code class="language-bash">TRAILING</code>：分别为去除read头部和尾部的低质量（低于quality3）碱基数目。</p>
+  </li>
+  <li>
+    <p><code class="language-bash">SLIDINGWINDOW</code>：跟随两个参数，分别是 <code class="language-bash">&lt;windowSize&gt;</code>为扫描“窗口”长度；<code class="language-bash">&lt;requiredQuality&gt;</code>为窗口碱基质量的平均阈值，低于此会被删除。</p>
+  </li>
+  <li>
+    <p><code class="language-bash">MINLEN</code>：设置最短reads数目。需要根据下游alignment软件设定，比如<a href="http://bowtie-bio.sourceforge.net/index.shtml">Bowtie</a>适用于短序列，比如50bp以下；而<a href="http://bowtie-bio.sourceforge.net/bowtie2/index.shtml">Bowtie2</a>适用于50bp以上。<a href="http://ccb.jhu.edu/software/tophat/index.shtml">TopHat</a> 则根据实际使用Bowtie或者Bowtie2选择。</p>
+  </li>
+</ul>
+
+<h3 id="section">更新记录</h3>
+
+<p>2016年9月10日</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[二代测序中的短序列比对]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2014/07/26/short-sequence-alignment/"/>
     <updated>2014-07-26T02:04:25+08:00</updated>
@@ -4677,594 +4918,6 @@ insert是用于测序的目标片段，因为是包括在两个adapter之间，�
 <h3 id="section-7">更新记录</h3>
 
 <p>2015年5月19日</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress安装和使用]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2014/07/23/octopress-install/"/>
-    <updated>2014-07-23T01:45:46+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2014/07/23/octopress-install</id>
-    <content type="html"><![CDATA[<p>安装和使用Octopress的一些注意事项，详细的内容可以<a href="#Ref">参考网址</a>。</p>
-
-<h2 id="section">1. 安装</h2>
-
-<p>请参考<a href="http://octopress.org/">官网</a>，其他的博客介绍的安装已经失效或者错误。</p>
-
-<p>常用命令:</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 预览，可自动更新。使用Ctrl+c终止。</span>
-</span><span class="line"><span class="nv">$ </span>rake preview
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="ruby">2. Ruby版本调整</h2>
-
-<p>因为Octopress需要使用Ruby旧版本，推荐使用<a href="https://rvm.io/">RVM</a>安装Ruby 1.9.3版本。在安转过程中可能会出现<code>"gpg: Can't check signature: public key not found"</code>的错误提示，需要执行一下类似命名，添加公用匙。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>gpg2 --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>使用以下操作设定ruby版本：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span><span class="nb">source</span> ~/.rvm/scripts/rvm
-</span><span class="line"><span class="nv">$ </span>rvm use 1.9.3
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-<!--more-->
-
-<h2 id="section-1">3. 预览错误</h2>
-
-<p>如果在预览博文时出现<code class="language-bash">TCPServer Error: Address already in use - bind(2)</code>的错误，表示端口（Octopress默认4000）被占，解决办法:</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 获取占据4000端口程序的PID</span>
-</span><span class="line"><span class="nv">$ </span>lsof -wni tcp:4000
-</span><span class="line"><span class="nv">$ </span><span class="nb">kill</span> -9 PID
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-2">4. 更新博文</h2>
-
-<p>博文放置在<code class="language-bash">source/_posts</code>目录下。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>rake new_post<span class="o">[</span><span class="s2">&quot;new post&quot;</span><span class="o">]</span>
-</span><span class="line"><span class="nv">$ </span>git add .
-</span><span class="line"><span class="nv">$ </span>git commit -m <span class="s2">&quot;my comment&quot;</span>
-</span><span class="line"><span class="nv">$ </span>git push origin <span class="nb">source</span>
-</span><span class="line"><span class="nv">$ </span>rake generate
-</span><span class="line"><span class="nv">$ </span>rake deploy
-</span><span class="line">
-</span><span class="line"><span class="c"># 或者generate和deploy一步执行</span>
-</span><span class="line"><span class="nv">$ </span>rake gen_deploy
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-<p>如果需要在首页显示部分博文，在需要隔断的地方（博文markdown文件）加入：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="c">&lt;!--more--&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-3">5. 使用主题</h2>
-
-<p>当前博客使用的是<a href="http://kaworu.github.io/octopress/">octostrap</a>主题。</p>
-
-<ul>
-  <li>
-    <p><a href="http://kaworu.github.io/octostrap3/blog/2013/10/03/category-list-aside/">添加Category侧边栏</a></p>
-  </li>
-  <li>
-    <p><a href="http://kaworu.github.io/octostrap3/blog/2013/10/02/pick-a-theme-for-only-one-page/">每个页面更换主题</a></p>
-  </li>
-  <li>
-    <p><a href="http://kaworu.github.io/octostrap3/setup/pick-a-theme/">选择Bootstrap主题</a></p>
-  </li>
-</ul>
-
-<h2 id="section-4">6. 修改标签图标记</h2>
-
-<p>可以使用<a href="http://converticon.com/">在线转换工具</a>，将png格式图片转换为ico格式（比如32*32），例如文件<code>favicon.ico</code>。之后，将<code>favicon.ico</code>移动到<code class="language-bash">source/</code>目录下。之后修改文件<code class="language-bash">source/_includes/head.html</code>，找到<code>favicon.png</code>将其改为<code>favicon.ico</code>。</p>
-
-<h2 id="section-5">7. 404公益</h2>
-
-<p>在<code class="language-bash">source</code>文件夹下添加<em>404.markdown</em>文件，之后写入</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="o">---</span>
-</span><span class="line"><span class="nx">layout</span><span class="o">:</span> <span class="nx">page</span>
-</span><span class="line"><span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;404 Error&quot;</span>
-</span><span class="line"><span class="nx">date</span><span class="o">:</span> <span class="mi">2014</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">22</span>
-</span><span class="line"><span class="nx">comments</span><span class="o">:</span> <span class="kc">false</span>
-</span><span class="line"><span class="nx">sharing</span><span class="o">:</span> <span class="kc">false</span>
-</span><span class="line"><span class="nx">footer</span><span class="o">:</span> <span class="kc">false</span>
-</span><span class="line"><span class="o">---</span>
-</span><span class="line">
-</span><span class="line"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;http://www.qq.com/404/search_children.js?edition=small&quot;</span> <span class="nx">charset</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-6">8. 私密博文</h2>
-
-<p>Octopress提供了隐藏博文的功能，即使文章已经推送到了github，也可以不在博客主页显示。具体方法是在每篇markdown文件头部添加：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="ss">published</span><span class="p">:</span> <span class="kp">false</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>如果需要公开发表，将其删除或者改为：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="ss">published</span><span class="p">:</span> <span class="kp">true</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-7">9. 代码高亮设置</h2>
-
-<p>安装<code>coderay</code>和<code>kramdown</code></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>gem install coderay
-</span><span class="line"><span class="nv">$ </span>gem install kramdown
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>在<code class="language-bash">_config.yml</code>文件中写入：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">markdown: kramdown
-</span><span class="line">kramdown:
-</span><span class="line">  use_coderay: <span class="nb">true</span>
-</span><span class="line"><span class="nb">  </span>coderay:
-</span><span class="line">    coderay_line_numbers: table
-</span><span class="line">    coderay_css: class
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="kramdown">10. Kramdown语法小技巧</h2>
-
-<ul>
-  <li>代码高亮</li>
-</ul>
-
-<p>代码段高亮参考<a href="http://octopress.org/docs/plugins/codeblock/">Octopress codeblock</a>，其中<code>[lang:language]</code>设置高亮语言种类。<code>[url]</code>和<code>[linktext]</code>非必须。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">{% codeblock [lang:language] [title] [url] [link text] %}
-</span><span class="line">code snippet
-</span><span class="line">{% endcodeblock %}</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>行内引用代码使用
-<code>`source/_includes/custom/head.html`{:.language-bash}</code></p>
-
-<ul>
-  <li>四个空格或者一个Tab可以生成一个文本块</li>
-</ul>
-
-<h2 id="section-8">11. 链接在新的选择卡中打开</h2>
-
-<p>在<code class="language-bash">source/_includes/custom/head.html</code>的末尾添加：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="c">&lt;!-- link open with new tab  --&gt;</span>
-</span><span class="line"><span class="nt">&lt;script&gt;</span>
-</span><span class="line">  <span class="kd">function</span> <span class="nx">addBlankTargetForLinks</span> <span class="p">()</span> <span class="p">{</span>
-</span><span class="line">  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;a[href^=&quot;http&quot;]&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-</span><span class="line">  <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="s1">&#39;_blank&#39;</span><span class="p">);</span>
-</span><span class="line">  <span class="p">});</span>
-</span><span class="line">  <span class="p">}</span>
-</span><span class="line">
-</span><span class="line">  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;DOMNodeInserted&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-</span><span class="line">  <span class="nx">addBlankTargetForLinks</span><span class="p">();</span>
-</span><span class="line">  <span class="p">});</span>
-</span><span class="line"><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-9">12. 修改分页数</h2>
-
-<p>修改<code class="language-bash">_config.yml</code>文件</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 每页最多展示的博文数目</span>
-</span><span class="line">paginate: 5
-</span><span class="line">
-</span><span class="line"><span class="c"># 分页后博文地址</span>
-</span><span class="line">paginate_path: <span class="s2">&quot;posts/:num&quot;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-10">13. 添加图片</h2>
-
-<p>将需要添加的图片移动到目录<code class="language-bash">source/images/</code>，之后在正文中添加：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">&lt;img <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;[class names]&quot;</span> <span class="nv">src</span><span class="o">=</span><span class="s2">&quot;/path/to/image&quot;</span> <span class="nv">title</span><span class="o">=</span><span class="s2">&quot;[width] [height] [title text [alt text]]&quot;</span> &gt;
-</span><span class="line">
-</span><span class="line"><span class="c"># 例子</span>
-</span><span class="line">&lt;img <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;left&quot;</span> <span class="nv">src</span><span class="o">=</span><span class="s2">&quot;/images/testimg.png&quot;</span> <span class="nv">width</span><span class="o">=</span><span class="s2">&quot;350&quot;</span> <span class="nv">height</span><span class="o">=</span><span class="s2">&quot;350&quot;</span> <span class="nv">title</span><span class="o">=</span><span class="s2">&quot;image&quot;</span> <span class="nv">alt</span><span class="o">=</span><span class="s2">&quot;images&quot;</span>&gt;
-</span><span class="line">&lt;img <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;right&quot;</span> <span class="nv">src</span><span class="o">=</span><span class="s2">&quot;http://placekitten.com/300/500&quot;</span> <span class="nv">width</span><span class="o">=</span><span class="s2">&quot;150&quot;</span> <span class="nv">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span> <span class="nv">title</span><span class="o">=</span><span class="s2">&quot;Place Kitten #3&quot;</span> &gt;
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-11">14. 添加新页面</h2>
-
-<p>首先，添加新的页面：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">rake new_page<span class="o">[</span>ANewPage<span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>这会生成一个新的文件<code class="language-bash">source/anewpage/index.markdown</code>。之后，修改<code class="language-bash">source/_includes/custom/navigation.html</code>文件，根据自己主题，添加如下类似内容</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&lt;li {% if page.navbar == 'ANewPage' %}class="active"{% endif %}&gt;
-</span><span class="line">  &lt;a href="{{ root_url }}/anewpage"&gt;ANewPage&lt;/a&gt;
-</span><span class="line">&lt;/li&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-12">15. 添加表格</h2>
-
-<p>建立新文件<code>source/stylesheets/data-table.css</code>，写入以下内容，其中<code>#00B9E3</code>是表头的背景颜色，可以更改为自己喜欢的颜色：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>data-table </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-</pre></td><td class="code"><pre><code class="css"><span class="line"><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="p">{</span>
-</span><span class="line">  <span class="k">border-style</span><span class="o">:</span><span class="k">solid</span><span class="p">;</span>
-</span><span class="line">  <span class="k">border-width</span><span class="o">:</span><span class="m">1px</span><span class="p">;</span>
-</span><span class="line">  <span class="k">border-color</span><span class="o">:</span><span class="m">#e7e3e7</span><span class="p">;</span>
-</span><span class="line"><span class="p">}</span>
-</span><span class="line">
-</span><span class="line"><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">th</span><span class="o">,</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span> <span class="p">{</span>
-</span><span class="line">  <span class="k">border-style</span><span class="o">:</span><span class="k">dashed</span><span class="p">;</span>
-</span><span class="line">  <span class="k">border-width</span><span class="o">:</span><span class="m">1px</span><span class="p">;</span>
-</span><span class="line">  <span class="k">border-color</span><span class="o">:</span><span class="m">#e7e3e7</span><span class="p">;</span>
-</span><span class="line">  <span class="k">padding-left</span><span class="o">:</span> <span class="m">3px</span><span class="p">;</span>
-</span><span class="line">  <span class="k">padding-right</span><span class="o">:</span> <span class="m">3px</span><span class="p">;</span>
-</span><span class="line"><span class="p">}</span>
-</span><span class="line">
-</span><span class="line"><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">th</span> <span class="p">{</span>
-</span><span class="line">  <span class="k">border-style</span><span class="o">:</span><span class="k">solid</span><span class="p">;</span>
-</span><span class="line">  <span class="k">font-weight</span><span class="o">:</span><span class="k">bold</span><span class="p">;</span>
-</span><span class="line">  <span class="k">background</span><span class="o">:</span> <span class="sx">url(&quot;/images/noise.png?1330434582&quot;)</span> <span class="k">repeat</span> <span class="k">scroll</span> <span class="k">left</span> <span class="k">top</span> <span class="m">#00B9E3</span><span class="p">;</span>
-</span><span class="line"><span class="p">}</span>
-</span><span class="line">
-</span><span class="line"><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="o">],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="o">]</span> <span class="p">{</span>
-</span><span class="line">  <span class="k">text-align</span><span class="o">:</span><span class="k">left</span><span class="p">;</span>
-</span><span class="line"><span class="p">}</span>
-</span><span class="line">
-</span><span class="line"><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="o">],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="o">]</span> <span class="p">{</span>
-</span><span class="line">  <span class="k">text-align</span><span class="o">:</span><span class="k">right</span><span class="p">;</span>
-</span><span class="line"><span class="p">}</span>
-</span><span class="line">
-</span><span class="line"><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="o">],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="o">]</span> <span class="p">{</span>
-</span><span class="line">  <span class="k">text-align</span><span class="o">:</span><span class="k">center</span><span class="p">;</span>
-</span><span class="line"><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>之后，在<code>source/_includes/head.html</code>中修改或者添加：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">
-</span><span class="line">&lt;link href="{{ root_url }}/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css"&gt;
-</span><span class="line">{% if page.styles contains 'data-table' %}
-</span><span class="line">&lt;link href="{{ root_url }}/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" /&gt;
-</span><span class="line">{% endif %}
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>使用方法，在每篇博客头部位置添加<code>styles: [data-table]</code>，之后使用表格样式即可。如果使用Kramdown，表格对其方法如下：</p>
-
-<hr />
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left"><strong>X/Y</strong></th>
-      <th style="text-align: center"><strong>1(Presence)</strong></th>
-      <th style="text-align: center"><strong>0(Absence)</strong></th>
-      <th style="text-align: right"><strong>Sum</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left"><strong>1(Presence)</strong></td>
-      <td style="text-align: center">a</td>
-      <td style="text-align: center">b</td>
-      <td style="text-align: right">a+b</td>
-    </tr>
-  </tbody>
-  <tbody>
-    <tr>
-      <td style="text-align: left"><strong>0(Absence)</strong></td>
-      <td style="text-align: center">c</td>
-      <td style="text-align: center">d</td>
-      <td style="text-align: right">c+d</td>
-    </tr>
-  </tbody>
-  <tbody>
-    <tr>
-      <td style="text-align: left"><strong>Sum</strong></td>
-      <td style="text-align: center">a+c</td>
-      <td style="text-align: center">b+d</td>
-      <td style="text-align: right">n=a+b+c+d</td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">|---------------+---------------+--------------+---------|
-</span><span class="line">|**X/Y**        |**1(Presence)**|**0(Absence)**|**Sum**  |
-</span><span class="line">|:--------------|:-------------:|:------------:|--------:|
-</span><span class="line">|**1(Presence)**|a              |b             |a+b      |
-</span><span class="line">|---------------|---------------|--------------|---------|
-</span><span class="line">|**0(Absence)** |c              |d             |c+d      |
-</span><span class="line">|---------------|---------------|--------------|---------|
-</span><span class="line">|**Sum**        |a+c            |b+d           |n=a+b+c+d|
-</span><span class="line">|---------------|---------------|--------------|---------|</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>如果使用Emacs，可以使用Emacs的<a href="http://orgmode.org/">org模式</a>快速建立和编辑表格。</p>
-
-<h2 id="github">16. 重新克隆github上的博文和设置</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Re-set Octopress on local computer </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 注意切换到指定ruby版本</span>
-</span><span class="line"><span class="c"># 克隆source分支到本地，注意替换“YulongNiu”为自己的GitHub名称</span>
-</span><span class="line"><span class="nv">$ </span>git clone -b <span class="nb">source </span>git@github.com:YulongNiu/YulongNiu.github.io.git octopress
-</span><span class="line">
-</span><span class="line"><span class="c"># 安装bundle</span>
-</span><span class="line"><span class="nv">$ </span><span class="nb">cd </span>octopress
-</span><span class="line"><span class="nv">$ </span>gem install bundler
-</span><span class="line"><span class="nv">$ </span>bundle install
-</span><span class="line">
-</span><span class="line"><span class="c"># 克隆master分支到_deploy文件夹</span>
-</span><span class="line"><span class="nv">$ </span>mkdir _deploy
-</span><span class="line"><span class="nv">$ </span><span class="nb">cd </span>_deploy
-</span><span class="line"><span class="nv">$ </span>git init
-</span><span class="line"><span class="nv">$ </span>git remote add origin git@github.com:YulongNiu/YulongNiu.github.io.git
-</span><span class="line"><span class="nv">$ </span>git pull origin master
-</span><span class="line"><span class="nv">$ </span><span class="nb">cd</span> ..
-</span><span class="line"><span class="nv">$ </span>rake gen_deploy
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-13">17. 多台电脑共同编写博客</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Writing Octopress on more than one computer </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 设定好Octopress，假定Octopress目录为octopress</span>
-</span><span class="line"><span class="nv">$ </span><span class="nb">cd </span>octopress
-</span><span class="line"><span class="nv">$ </span>git pull origin <span class="nb">source</span>
-</span><span class="line"><span class="nv">$ </span><span class="nb">cd</span> ./_deploy
-</span><span class="line"><span class="nv">$ </span>git pull origin master
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h3 id="a-idrefa"><a id="Ref">参考资料</a></h3>
-
-<ul>
-  <li>
-    <p>Octopress安装和域名设置：<a href="http://tchen.me/posts/2012-12-16-first-blog.html">1</a>, <a href="http://beyondvincent.com/blog/2013/08/03/108-creating-a-github-blog-using-octopress/">2</a></p>
-  </li>
-  <li>
-    <p>Octopress其他配制：<a href="http://812lcl.com/blog/2013/10/26/octopressce-bian-lan-ji-ping-lun-xi-tong-ding-zhi/">1</a>, <a href="http://cn.soulmachine.me/blog/20130402/">2</a></p>
-  </li>
-  <li>
-    <p>添加多说：<a href="http://havee.me/internet/2013-02/add-duoshuo-commemt-system-into-octopress.html">1</a>, <a href="http://kaiimeng.cn/my-first-octopress-blog/">2</a>, <a href="http://cn.soulmachine.me/blog/20130402/">3</a></p>
-  </li>
-  <li>
-    <p>添加Mathjax支持：<a href="http://yanping.me/cn/blog/2012/03/10/octopress-with-latex/">1</a>, <a href="http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/">2</a>, <a href="http://adereth.github.io/blog/2013/11/29/colorful-equations/">Mathjax彩色公式</a></p>
-  </li>
-  <li>
-    <p><a href="http://kramdown.gettalong.org/syntax.html">Kramdown语法</a></p>
-  </li>
-  <li>
-    <p><a href="http://kramdown.gettalong.org/quickref.html">Kramdown演示</a></p>
-  </li>
-  <li>
-    <p><a href="http://i.rexdf.org/blog/2014/09/26/octopressbo-ke-geng-xin-ri-zhi/">pygments错误详细提示</a></p>
-  </li>
-  <li>
-    <p><a href="http://pygments.org/docs/lexers/">Octopress highlight language list</a></p>
-  </li>
-  <li>
-    <p>标记Octopress自身语法：<a href="http://stackoverflow.com/questions/15786144/how-to-escape-in-markdown-on-octopress">1</a>，<a href="http://stackoverflow.com/questions/3426182/how-to-escape-liquid-template-tags/13582517#13582517">2</a></p>
-  </li>
-  <li>
-    <p><a href="http://programus.github.io/blog/2012/03/07/add-table-data-css-for-octopress/">Octopress添加表格</a></p>
-  </li>
-  <li>
-    <p><a href="http://swalsh.org/blog/2014/09/07/migrating-octopress-to-a-new-computer/">Octopress重装或者多台电脑上并行写作同步</a></p>
-  </li>
-</ul>
-
-<h3 id="section-14">更新记录</h3>
-
-<p>2015年12月19日</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[My First Post]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2014/07/05/my-first-post/"/>
-    <updated>2014-07-05T10:04:38+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2014/07/05/my-first-post</id>
-    <content type="html"><![CDATA[<p>This is my first post. I want to say something. Then say something.</p>
-
-<p>This is a piece of html code <code class="language-html">&lt;html&gt;</code></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="k">def</span> <span class="nf">what?</span>
-</span><span class="line">  <span class="mi">42</span>
-</span><span class="line"><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<!-- more -->
-
-<ol>
-  <li>
-    <p>Mathjax supports.</p>
-
-    <script type="math/tex; mode=display">% &lt;![CDATA[
-\begin{align*}
-   & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
-   = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
-   & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
-   \phi(e_1, e_1) & \cdots & \phi(e_1, e_n) \\
-   \vdots & \ddots & \vdots \\
-   \phi(e_n, e_1) & \cdots & \phi(e_n, e_n)
- \end{array} \right)
-   \left( \begin{array}{c}
-   y_1 \\
-   \vdots \\
-   y_n
- \end{array} \right)
- \end{align*} %]]&gt;</script>
-  </li>
-  <li>
-    <p>Colorful mathjax euqation.</p>
-
-    <script type="math/tex; mode=display">\definecolor{energy}{RGB}{114,0,172}
- \definecolor{freq}{RGB}{45,177,93}
- \definecolor{spin}{RGB}{251,0,29}
- \definecolor{signal}{RGB}{18,110,213}
- \definecolor{circle}{RGB}{217,86,16}
- \definecolor{average}{RGB}{203,23,206}
- \color{energy} X_{\color{freq} k} \color{black} =
- \color{average} \frac{1}{N} \sum_{n=0}^{N-1}
- \color{signal}x_n \color{spin}
- e^{\mathrm{i} \color{circle} 2\pi \color{freq}k
- \color{average} \frac{n}{N}}</script>
-
-    <p>To find <font color="#7200AC">the energy</font></p>
-    <font color="2DB15D">at a particular frequency</font>
-    <p>,</p>
-    <font color="#FB001D">spin</font>
-    <font color="#126ED5">your
- signal</font>
-    <font color="#D04400">around a circle</font>
-    <font color="2DB15D">at that frequency</font>
-    <p>, and</p>
-    <font color="#CB17CE">average a bunch of points along that
- path</font>
-    <p>.</p>
-  </li>
-</ol>
-
-<ul>
-  <li>Show the block.</li>
-</ul>
-
-<blockquote>
-  <p>This is the block</p>
-</blockquote>
-
 ]]></content>
   </entry>
   
