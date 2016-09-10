@@ -12,7 +12,7 @@ categories: bioinfor
 
 2. [Ensembl FTP](http://uswest.ensembl.org/info/data/ftp/index.html) 
 
-3. [USCS FTP](http://hgdownload.cse.ucsc.edu/goldenPath/) 
+3. [UCSC FTP](http://hgdownload.cse.ucsc.edu/goldenPath/) 
 
 4. [GENCODE](http://www.gencodegenes.org/)：只有人和大鼠，注释较好。
 
