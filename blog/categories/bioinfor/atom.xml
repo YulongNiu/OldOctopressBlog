@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bioinfor | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/bioinfor/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2016-09-10T13:28:14+08:00</updated>
+  <updated>2016-09-10T14:41:19+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -26,6 +26,9 @@
   </li>
   <li>
     <p><a href="http://uswest.ensembl.org/info/data/ftp/index.html">Ensembl FTP</a></p>
+  </li>
+  <li>
+    <p><a href="http://hgdownload.cse.ucsc.edu/goldenPath/">USCS FTP</a></p>
   </li>
   <li>
     <p><a href="http://www.gencodegenes.org/">GENCODE</a>：只有人和大鼠，注释较好。</p>
