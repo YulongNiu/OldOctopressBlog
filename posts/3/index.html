@@ -184,6 +184,93 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-16T04:33:10+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2015/05/16/filter-tophat2-output/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2015/05/16/filter-tophat2-output/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2015/05/16/filter-tophat2-output/" itemprop="url">过滤TopHat分析双端测序的输出</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<h2 id="section">0. 结论</h2>
+
+<p>在使用TopHat2匹配双端测序结果后，建议根据成对reads的map基因组位置唯一、方向正确和距离合适的标准，筛选得到的匹配结果。比如，TopHat2可能生成<code class="language-bash">accepted_hits.bam</code>文件，处理方法如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Filter TopHat Outputs</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 首先查看bam文件头部有多少行</span>
+</span><span class="line"><span class="nv">$ </span>samtools view -H accepted_hits.bam <span class="p">|</span> wc -l
+</span><span class="line">86
+</span><span class="line">
+</span><span class="line"><span class="c"># 筛选成对且成功map到基因组唯一位置的reads，按照上一条输出结果，调整“NR &lt;= 86”</span>
+</span><span class="line"><span class="nv">$ </span>samtools view -h accepted_hits.bam <span class="p">|</span> <span class="se">\</span>
+</span><span class="line">    awk <span class="s1">&#39;{if (NR &lt;= 86) print $0}; {if($5 == 50 &amp;&amp; ($2 == 163 || $2 == 147 || $2 == 83 || $2 == 99)) print $0}&#39;</span> <span class="p">|</span> <span class="se">\</span>
+</span><span class="line">    samtools view -b - &gt; accepted_filtered.bam
+</span><span class="line">
+</span><span class="line"><span class="nv">$ </span>samtools view accepted_filtered.bam <span class="p">|</span> wc -l
+</span><span class="line">79143942
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="tophatsam">1. TopHat输出sam文件的第五列</h2>
+
+<p><a href="http://ccb.jhu.edu/software/tophat/manual.shtml">TopHat文档</a>没有解释其输出bam文件（比如<code class="language-bash">accepted_hits.bam</code>）的第五列的意义。按照<a href="http://bowtie-bio.sourceforge.net/bowtie2/index.shtml">Bowtie2</a>输出结果来看，是表示映射质量指标Mapping Quality scores（MAPQ），具体计算参考公式$\eqref{eq:1}$。</p>
+
+<script type="math/tex; mode=display">\begin{align}
+MAPQ = -10 \times log_{10}(pvalue)
+\label{eq:1}
+\end{align}</script>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2015/05/16/filter-tophat2-output/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-09T13:42:15+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2015/05/09/django-tutorial/#disqus_thread" itemprop="discussionUrl"
@@ -517,51 +604,6 @@
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-12-02T06:36:41+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2014/12/02/emacs-config-c/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2014/12/02/emacs-config-c/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2014/12/02/emacs-config-c/" itemprop="url">Emacs配置C语言编程环境</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><p>有很多优秀的C语言IDE用来实现高效的编程，比如<a href="https://www.jetbrains.com/clion/">CLion</a>。目前，CLion还在处于公开测试阶段，可以下载试用。本文介绍在Emacs下配置C/C++编程环境。</p>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2014/12/02/emacs-config-c/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -585,6 +627,8 @@
   
   <div id="recent_posts" class="list-group">
     
+    <a class="list-group-item " href="/blog/2016/09/10/reference-genome-location/">常用参考基因组下载地址</a>
+    
     <a class="list-group-item " href="/blog/2016/07/21/subset-matrix-in-r/">为什么不推荐在R语言中随意按照下标操作矩阵</a>
     
     <a class="list-group-item " href="/blog/2016/04/17/pointers-in-c/">C语言指针记录</a>
@@ -592,8 +636,6 @@
     <a class="list-group-item " href="/blog/2015/10/25/xpath-xml/">XML中XPath规则总结</a>
     
     <a class="list-group-item " href="/blog/2015/09/30/spacemacs-tutorial/">Spacemacs使用记录</a>
-    
-    <a class="list-group-item " href="/blog/2015/07/29/postgresql-usage/">PostgreSQL使用指南</a>
     
   </div>
 </section>
@@ -629,7 +671,7 @@
     
     
     <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
-        <span class="badge">10</span>
+        <span class="badge">11</span>
         bioinfor
       </a>
     
