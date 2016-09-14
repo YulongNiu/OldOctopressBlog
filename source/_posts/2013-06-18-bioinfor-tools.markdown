@@ -105,6 +105,9 @@ categories: Bioinfor
 
 * [Mascot](http://www.matrixscience.com/)
 
+* [OpenMS](http://www.openms.de/) 最大的开源质谱数据分析平台
+
+
 ## 6. 基因注释 ##
 
 * [Acembly](http://www.ncbi.nlm.nih.gov/IEB/Research/Acembly/index.html)
@@ -190,18 +193,11 @@ categories: Bioinfor
 
 * [构建进化树](http://www.plosone.org/article/info:doi/10.1371/journal.pone.0002566)
 
-
-
-
-
-
-
-
 ## 书籍推荐 ##
 
 * [a Little Book of R for Bioinformatics](http://a-little-book-of-r-for-bioinformatics.readthedocs.org/en/latest/index.html) 一本使用R语言介绍生物信息学书，提供源代码和示例。
 
 ### 更新记录 ###
 
-2015年6月6日
+2016年9月14日
 
