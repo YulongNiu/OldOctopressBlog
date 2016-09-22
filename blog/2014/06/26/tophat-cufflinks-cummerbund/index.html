@@ -258,7 +258,7 @@
     <p><code class="language-bash">--no-mixed</code>：只对于paired reads，只报告paired reads都成功map。TopHat默认不加这个参数，即如果对于一个read，如果没有找到alignment的concordant或者discordant mate，那么这一对read将分别寻找和报道各自的alignment。这个参数与<code class="language-bash">--no-discordant</code>不同，因为加上<code class="language-bash">--no-mixed</code>也可能报道discordant pairs（例如一对reads都成功alignment，但是方向或者之间距离不对）。</p>
   </li>
   <li>
-    <p><code class="language-bash$">-g/--max-multihits</code>：对于多个map的reads，设定报告数目，默认数值为20。需要注意，尽管这个参数可以设定为1，也不能用于设定唯一map的read。因为某个read有可能map到基因组多个位点，当设定为1时，只会返回得分最高的情况。</p>
+    <p><code>-g/--max-multihits</code>：对于多个map的reads，设定报告数目，默认数值为20。需要注意，尽管这个参数可以设定为1，也不能用于设定唯一map的read。因为某个read有可能map到基因组多个位点，当设定为1时，只会返回得分最高的情况。</p>
   </li>
 </ul>
 
@@ -306,13 +306,13 @@
 
 <ul>
   <li>
-    <p><code class="language-bash$">-p/--num-threads</code>：设置线程数，用于多核计算。</p>
+    <p><code>-p/--num-threads</code>：设置线程数，用于多核计算。</p>
   </li>
   <li>
-    <p><code class="language-bash$">-o/--output-dir</code>：输出文件夹。</p>
+    <p><code>-o/--output-dir</code>：输出文件夹。</p>
   </li>
   <li>
-    <p><code class="language-bash$">-g/--GTF-guide</code>：使用参考转录组注释文件指导组装过程，<strong>建议添加</strong>。加入这个参数和对应的注释文件，可以有效提高cufflinks转录本组装。输出的转录组是传入注释文件和cufflinks自行组装的联合。具体解释如下图<a href="#Roberts et.al., 2011">[Roberts et.al., 2011]</a>：</p>
+    <p><code>-g/--GTF-guide</code>：使用参考转录组注释文件指导组装过程，<strong>建议添加</strong>。加入这个参数和对应的注释文件，可以有效提高cufflinks转录本组装。输出的转录组是传入注释文件和cufflinks自行组装的联合。具体解释如下图<a href="#Roberts et.al., 2011">[Roberts et.al., 2011]</a>：</p>
   </li>
 </ul>
 
@@ -320,19 +320,19 @@
 
 <ul>
   <li>
-    <p><code class="language-bash$">-G/--GTF</code>：只对传入的转录组注释文件进行表达量估计，即生成的结果如<code class="language-bash">genes.fpkm_tracking</code>只包括转录组注释文件，而不包括cufflinks自己可能的组装。如果RNA-seq分析的目的是为了获得差异表达基因，而不是寻找新的转录本，建议添加，以加快运行速度。</p>
+    <p><code>-G/--GTF</code>：只对传入的转录组注释文件进行表达量估计，即生成的结果如<code class="language-bash">genes.fpkm_tracking</code>只包括转录组注释文件，而不包括cufflinks自己可能的组装。如果RNA-seq分析的目的是为了获得差异表达基因，而不是寻找新的转录本，建议添加，以加快运行速度。</p>
   </li>
   <li>
-    <p><code class="language-bash$">-b/--frag-bias-correct</code>：提供一个multifasta文件，可以提高转录丰度的准确度，<strong>建议添加</strong>。</p>
+    <p><code>-b/--frag-bias-correct</code>：提供一个multifasta文件，可以提高转录丰度的准确度，<strong>建议添加</strong>。</p>
   </li>
   <li>
-    <p><code class="language-bash$">-M/–mask-file</code>：需要去除的转录本，比如tRNA、rRNA和线粒体转录本，<strong>建议添加</strong>。在RNA-seq数据中，这些转录本量非常高。<a href="http://cole-trapnell-lab.github.io/cufflinks/cufflinks/index.html">cufflinks</a>提示剔除这些转录本，有助于提高转录量估计的准确程度。tRNA、rRNA和线粒体基因组注释信息提取，参考<a href="http://yulongniu.bionutshell.org/blog/2015/06/02/download-ucsc-gene-mask/">UCSC Table下载注释文件</a>。</p>
+    <p><code>-M/–mask-file</code>：需要去除的转录本，比如tRNA、rRNA和线粒体转录本，<strong>建议添加</strong>。在RNA-seq数据中，这些转录本量非常高。<a href="http://cole-trapnell-lab.github.io/cufflinks/cufflinks/index.html">cufflinks</a>提示剔除这些转录本，有助于提高转录量估计的准确程度。tRNA、rRNA和线粒体基因组注释信息提取，参考<a href="http://yulongniu.bionutshell.org/blog/2015/06/02/download-ucsc-gene-mask/">UCSC Table下载注释文件</a>。</p>
   </li>
   <li>
-    <p><code class="language-bash$">-u/--multi-read-correct</code>：处理map到基因组多个位置的reads，<strong>建议添加</strong>。对于TopHat，建议过滤掉这部分reads，过滤方法见<a href="http://yulongniu.bionutshell.org/blog/2015/05/16/filter-tophat2-output/">过滤TopHat分析双端测序的输出</a>。按照上述方法过滤这部分reads后，则不需要加这个参数。</p>
+    <p><code>-u/--multi-read-correct</code>：处理map到基因组多个位置的reads，<strong>建议添加</strong>。对于TopHat，建议过滤掉这部分reads，过滤方法见<a href="http://yulongniu.bionutshell.org/blog/2015/05/16/filter-tophat2-output/">过滤TopHat分析双端测序的输出</a>。按照上述方法过滤这部分reads后，则不需要加这个参数。</p>
   </li>
   <li>
-    <p><code class="language-bash$">--library-type</code>：设定测序方法，默认为<code class="language-bash">fr-unstranded</code>，可以用于典型的Illumina双端（paired-end）测序。</p>
+    <p><code>--library-type</code>：设定测序方法，默认为<code class="language-bash">fr-unstranded</code>，可以用于典型的Illumina双端（paired-end）测序。</p>
   </li>
 </ul>
 
@@ -347,19 +347,19 @@
 
 <ul>
   <li>
-    <p><code class="language-bash$">-p/--num-threads </code>：设置线程数，用于多核计算。</p>
+    <p><code>-p/--num-threads </code>：设置线程数，用于多核计算。</p>
   </li>
   <li>
-    <p><code class="language-bash$">-o/--output-dir</code>：输出文件夹。</p>
+    <p><code>-o/--output-dir</code>：输出文件夹。</p>
   </li>
   <li>
-    <p><code class="language-bash$">g/--ref-gtf</code>：参考转录组，<strong>建议添加</strong>。</p>
+    <p><code>g/--ref-gtf</code>：参考转录组，<strong>建议添加</strong>。</p>
   </li>
   <li>
-    <p><code class="language-bash$">g/--ref-gtf</code>：参考基因组序列，<strong>建议添加</strong>。</p>
+    <p><code>g/--ref-gtf</code>：参考基因组序列，<strong>建议添加</strong>。</p>
   </li>
   <li>
-    <p><code class="language-bash$">assemblies.txt</code>：是一个文件，写入需要组装转录本的路径。</p>
+    <p><code>assemblies.txt</code>：是一个文件，写入需要组装转录本的路径。</p>
   </li>
 </ul>
 
@@ -378,19 +378,19 @@
 
 <ul>
   <li>
-    <p><code class="language-bash$">-p/--num-threads </code>：设置线程数，用于多核计算。</p>
+    <p><code>-p/--num-threads </code>：设置线程数，用于多核计算。</p>
   </li>
   <li>
-    <p><code class="language-bash$">-o/--output-dir</code>：输出文件夹。</p>
+    <p><code>-o/--output-dir</code>：输出文件夹。</p>
   </li>
   <li>
-    <p><code class="language-bash$">-b/--frag-bias-correct </code>：参考基因组序列，<strong>建议添加</strong>。</p>
+    <p><code>-b/--frag-bias-correct </code>：参考基因组序列，<strong>建议添加</strong>。</p>
   </li>
   <li>
-    <p><code class="language-bash$">-M/--mask-file </code>：过滤序列GTF文件，放入这个文件中的序列都不会被计算，<strong>建议添加</strong>。</p>
+    <p><code>-M/--mask-file </code>：过滤序列GTF文件，放入这个文件中的序列都不会被计算，<strong>建议添加</strong>。</p>
   </li>
   <li>
-    <p><code class="language-bash$">-u/--multi-read-correct</code>：处理map到基因组多个位置的reads，<strong>建议添加</strong>。</p>
+    <p><code>-u/--multi-read-correct</code>：处理map到基因组多个位置的reads，<strong>建议添加</strong>。</p>
   </li>
 </ul>
 
@@ -411,22 +411,22 @@
 
 <ul>
   <li>
-    <p><code class="language-bash$">-p/--num-threads </code>：设置线程数，用于多核计算。</p>
+    <p><code>-p/--num-threads </code>：设置线程数，用于多核计算。</p>
   </li>
   <li>
-    <p><code class="language-bash$">-o/--output-dir</code>：输出文件夹。</p>
+    <p><code>-o/--output-dir</code>：输出文件夹。</p>
   </li>
   <li>
-    <p><code class="language-bash$">-b/--frag-bias-correct </code>：参考基因组序列，<strong>建议添加</strong>。</p>
+    <p><code>-b/--frag-bias-correct </code>：参考基因组序列，<strong>建议添加</strong>。</p>
   </li>
   <li>
-    <p><code class="language-bash$">-M/--mask-file </code>：过滤序列GTF文件，放入这个文件中的序列都不会被计算，<strong>建议添加</strong>。</p>
+    <p><code>-M/--mask-file </code>：过滤序列GTF文件，放入这个文件中的序列都不会被计算，<strong>建议添加</strong>。</p>
   </li>
   <li>
-    <p><code class="language-bash$">-u/--multi-read-correct</code>：处理map到基因组多个位置的reads，<strong>建议添加</strong>。</p>
+    <p><code>-u/--multi-read-correct</code>：处理map到基因组多个位置的reads，<strong>建议添加</strong>。</p>
   </li>
   <li>
-    <p><code class="language-bash$">-L/--labels </code>：指定样品组名</p>
+    <p><code>-L/--labels </code>：指定样品组名</p>
   </li>
 </ul>
 
@@ -530,6 +530,8 @@
   
   <div id="recent_posts" class="list-group">
     
+    <a class="list-group-item " href="/blog/2016/09/22/how-to-publish-in-nc/">如何在Nature Communications上发表文章</a>
+    
     <a class="list-group-item " href="/blog/2016/09/10/hisat2-faq/">HISAT2使用问答</a>
     
     <a class="list-group-item " href="/blog/2016/09/10/reference-genome-location/">常用参考基因组下载地址</a>
@@ -537,8 +539,6 @@
     <a class="list-group-item " href="/blog/2016/07/21/subset-matrix-in-r/">为什么不推荐在R语言中随意按照下标操作矩阵</a>
     
     <a class="list-group-item " href="/blog/2016/04/17/pointers-in-c/">C语言指针记录</a>
-    
-    <a class="list-group-item " href="/blog/2015/10/25/xpath-xml/">XML中XPath规则总结</a>
     
   </div>
 </section>
@@ -594,6 +594,12 @@
     <a class="list-group-item " href="/blog/categories/hcj/index.html">
         <span class="badge">1</span>
         hcj
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/share/index.html">
+        <span class="badge">1</span>
+        share
       </a>
     
   </div>

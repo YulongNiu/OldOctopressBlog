@@ -184,6 +184,66 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-10-25T19:05:33+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2015/10/25/xpath-xml/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2015/10/25/xpath-xml/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2015/10/25/xpath-xml/" itemprop="url">XML中XPath规则总结</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><p><a href="http://www.w3.org/TR/xpath-30/">XPath</a>提供了一种对XML节点、节点属性和内容快速查询的规则。在各种编程语言中都有实现，比如C语言的<a href="http://www.xmlsoft.org/">libxml2</a>和对应的R包 <a href="https://cran.r-project.org/web/packages/xml2/index.html">xml2</a>。</p>
+
+<h2 id="section">1. 查询规则</h2>
+
+<p>XPath查询集中在三个对象：节点、节点属性和节点内容。</p>
+
+<h3 id="section-1">1.1 选择节点</h3>
+
+<ul>
+  <li>
+    <p><code>/nodeA/nodeB</code>：nodeA为根节点，nodeA下的所有nodeB节点；等价于<code>nodeB</code>。</p>
+  </li>
+  <li>
+    <p><code>//nodeB</code>：所有nodeB节点，在R包xml2中（比如函数<code class="language-bash">xml_find_all()</code>），<code>//nodeB</code>搜索范围是整个文档，忽略当前节点；而<code>.//nodeB</code>搜索范围是当前节点之下。</p>
+  </li>
+</ul>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2015/10/25/xpath-xml/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-09-30T16:31:09+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2015/09/30/spacemacs-tutorial/#disqus_thread" itemprop="discussionUrl"
@@ -436,64 +496,6 @@
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-28T21:24:32+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2015/05/28/bash-program/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2015/05/28/bash-program/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2015/05/28/bash-program/" itemprop="url">Bash简易编程</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="section">1. 循环</h2>
-
-<p><code class="language-bash">for</code>循环体</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>for in Bash</span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="k">for</span> i in *.zip
-</span><span class="line"><span class="k">do</span>
-</span><span class="line">    <span class="nb">echo</span> <span class="s2">&quot;$i&quot;</span>
-</span><span class="line"><span class="k">done</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2015/05/28/bash-program/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -517,6 +519,8 @@
   
   <div id="recent_posts" class="list-group">
     
+    <a class="list-group-item " href="/blog/2016/09/22/how-to-publish-in-nc/">如何在Nature Communications上发表文章</a>
+    
     <a class="list-group-item " href="/blog/2016/09/10/hisat2-faq/">HISAT2使用问答</a>
     
     <a class="list-group-item " href="/blog/2016/09/10/reference-genome-location/">常用参考基因组下载地址</a>
@@ -524,8 +528,6 @@
     <a class="list-group-item " href="/blog/2016/07/21/subset-matrix-in-r/">为什么不推荐在R语言中随意按照下标操作矩阵</a>
     
     <a class="list-group-item " href="/blog/2016/04/17/pointers-in-c/">C语言指针记录</a>
-    
-    <a class="list-group-item " href="/blog/2015/10/25/xpath-xml/">XML中XPath规则总结</a>
     
   </div>
 </section>
@@ -581,6 +583,12 @@
     <a class="list-group-item " href="/blog/categories/hcj/index.html">
         <span class="badge">1</span>
         hcj
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/share/index.html">
+        <span class="badge">1</span>
+        share
       </a>
     
   </div>
