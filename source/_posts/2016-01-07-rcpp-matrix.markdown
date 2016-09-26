@@ -30,9 +30,10 @@ arma::mat TransferMatArma(Rcpp::NumericMatrix x, Rcpp::NumericVector y) {
 Rcpp::NumericVector TransferMatRcpp(arma::mat x, arma::vec y) {
     NumericVector ty(y.begin(), y.end());
     return ty;
+    
+// 不要使用as<IntegerVector>(wrap(y))，会有内存泄露。
 }
 {% endcodeblock %}
-
 
 
 
