@@ -4,7 +4,7 @@
   <title><![CDATA[Category: R | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/r/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2016-09-25T15:45:28+08:00</updated>
+  <updated>2016-09-26T20:49:47+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -509,7 +509,7 @@ LinkingTo:
 </code>
 </p>
 
-<p>最后，在包的<code class="language-bash">R/</code>目录下，添加一个文件<code class="language-bash">RcppChk.R</code>（文件名称自定），并写入：</p>
+<p>然后，在包的<code class="language-bash">R/</code>目录下，添加一个文件<code class="language-bash">RcppChk.R</code>（文件名称自定），并写入：</p>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -522,6 +522,8 @@ LinkingTo:
 </span></code></pre></td></tr></table></div></figure></p>
 
 <p>注意，修改<code class="language-bash">my-pkg-name</code>为自己的包名称。</p>
+
+<p>最后，所有cpp代码都写在src文件夹下。</p>
 
 <h2 id="description">3. 创建DESCRIPTION文件模板</h2>
 
