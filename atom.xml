@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2016-09-26T20:49:47+08:00</updated>
+  <updated>2016-09-27T00:18:25+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -782,6 +782,74 @@
 <h3 id="section-6">更新记录</h3>
 
 <p>201６年４月17日</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rcpp操作矩阵和向量集锦]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2016/01/07/rcpp-matrix/"/>
+    <updated>2016-01-07T20:50:41+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2016/01/07/rcpp-matrix</id>
+    <content type="html"><![CDATA[<p>收集和记录<span style="color: blue">Rcpp</span>或者<span style="color: blue">RcppArmadillo</span>操作矩阵和向量。</p>
+
+<h2 id="span-stylecolor-bluercppspan">1. <span style="color: blue">Rcpp</span></h2>
+
+<ul>
+  <li>可以使用逻辑下标（<code>LogicalVector</code>）对向量和列表<a href="http://gallery.rcpp.org/articles/subsetting/">取值</a>。</li>
+</ul>
+
+<h2 id="span-stylecolor-bluercpparmadillospan">2. <span style="color: blue">RcppArmadillo</span></h2>
+
+<p>基本类型是<code>mat</code>、<code>vec</code>（<code>colvec</code>）和<code>rowvec</code>。</p>
+
+<ul>
+  <li>Rcpp矩阵转换为RcppArmadillo矩阵，可以避免拷贝矩阵，以提升效率，<code class="language-cpp">mat(ptr_aux_mem, n_rows, n_cols, copy_aux_mem = true, strict = false) </code>。同样道理，可以转化向量。例如：</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>transfer matrix and vector </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class="cpp"><span class="line"><span class="n">arma</span><span class="o">::</span><span class="n">mat</span> <span class="n">TransferMatArma</span><span class="p">(</span><span class="n">Rcpp</span><span class="o">::</span><span class="n">NumericMatrix</span> <span class="n">x</span><span class="p">,</span> <span class="n">Rcpp</span><span class="o">::</span><span class="n">NumericVector</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">    <span class="n">mat</span> <span class="n">tx</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">begin</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="n">nrow</span><span class="p">(),</span> <span class="n">x</span><span class="p">.</span><span class="n">ncol</span><span class="p">(),</span> <span class="nb">false</span><span class="p">);</span>
+</span><span class="line">    <span class="n">mat</span> <span class="nf">ty</span><span class="p">(</span><span class="n">y</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">y</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="nb">false</span><span class="p">);</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">tx</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="n">Rcpp</span><span class="o">::</span><span class="n">NumericVector</span> <span class="n">TransferMatRcpp</span><span class="p">(</span><span class="n">arma</span><span class="o">::</span><span class="n">mat</span> <span class="n">x</span><span class="p">,</span> <span class="n">arma</span><span class="o">::</span><span class="n">vec</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">    <span class="n">NumericVector</span> <span class="n">ty</span><span class="p">(</span><span class="n">y</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">y</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">ty</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li>
+    <p><a href="http://arma.sourceforge.net/docs.html#adv_constructors_mat">Armadillo矩阵</a></p>
+  </li>
+  <li>
+    <p><a href="https://stackoverflow.com/questions/13038256/subset-of-a-rcpp-matrix-that-matches-a-logical-statement">StackOverflow中矩阵提取</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/petewerner/misc/wiki/RcppArmadillo-cheatsheet">RcppArmadillo和R对照表</a></p>
+  </li>
+  <li>
+    <p><a href="https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-quickref.pdf">Rcpp Quick Reference Guide</a></p>
+  </li>
+</ul>
+
+<h3 id="section">更新记录</h3>
+
+<p>2016年9月26日</p>
+
 ]]></content>
   </entry>
   
@@ -4630,31 +4698,31 @@ MAPQ = -10 \times log_{10}(pvalue)
 
 <ul>
   <li>
-    <p><code class="language-bash$">--quality</code>：设定Phred quality score阈值，默认为20。</p>
+    <p><code>--quality</code>：设定Phred quality score阈值，默认为20。</p>
   </li>
   <li>
-    <p><code class="language-bash$">--phred33</code>：：选择<code class="language-bash">-phred33</code>或者<code class="language-bash">-phred64</code>，表示测序平台使用的Phred quality score。</p>
+    <p><code>--phred33</code>：：选择<code class="language-bash">-phred33</code>或者<code class="language-bash">-phred64</code>，表示测序平台使用的Phred quality score。</p>
   </li>
   <li>
-    <p><code class="language-bash$">--adapter</code>：输入adapter序列。也可以不输入，Trim Galore!会自动寻找可能性最高的平台对应的adapter。自动搜选的平台三个，也直接显式输入这三种平台，即<code class="language-bash">--illumina</code>、<code class="language-bash">--nextera</code>和<code class="language-bash">--small_rna</code>。</p>
+    <p><code>--adapter</code>：输入adapter序列。也可以不输入，Trim Galore!会自动寻找可能性最高的平台对应的adapter。自动搜选的平台三个，也直接显式输入这三种平台，即<code class="language-bash">--illumina</code>、<code class="language-bash">--nextera</code>和<code class="language-bash">--small_rna</code>。</p>
   </li>
   <li>
-    <p><code class="language-bash$">--stringency</code>：设定可以忍受的前后adapter重叠的碱基数，默认为1（非常苛刻）。可以适度放宽，因为后一个adapter几乎不可能被测序仪读到。</p>
+    <p><code>--stringency</code>：设定可以忍受的前后adapter重叠的碱基数，默认为1（非常苛刻）。可以适度放宽，因为后一个adapter几乎不可能被测序仪读到。</p>
   </li>
   <li>
-    <p><code class="language-bash$">--length</code>：设定输出reads长度阈值，小于设定值会被抛弃。</p>
+    <p><code>--length</code>：设定输出reads长度阈值，小于设定值会被抛弃。</p>
   </li>
   <li>
-    <p><code class="language-bash$">--paired</code>：对于双端测序结果，一对reads中，如果有一个被剔除，那么另一个会被同样抛弃，而不管是否达到标准。</p>
+    <p><code>--paired</code>：对于双端测序结果，一对reads中，如果有一个被剔除，那么另一个会被同样抛弃，而不管是否达到标准。</p>
   </li>
   <li>
-    <p><code class="language-bash$">--retain_unpaired</code>：对于双端测序结果，一对reads中，如果一个read达到标准，但是对应的另一个要被抛弃，达到标准的read会被单独保存为一个文件。</p>
+    <p><code>--retain_unpaired</code>：对于双端测序结果，一对reads中，如果一个read达到标准，但是对应的另一个要被抛弃，达到标准的read会被单独保存为一个文件。</p>
   </li>
   <li>
-    <p><code class="language-bash$">--gzip</code>和<code class="language-bash$">--dont_gzip</code>：清洗后的数据zip打包或者不打包。</p>
+    <p><code>--gzip</code>和<code>--dont_gzip</code>：清洗后的数据zip打包或者不打包。</p>
   </li>
   <li>
-    <p><code class="language-bash$">--output_dir</code>：输入目录。需要提前建立目录，否则运行会报错。</p>
+    <p><code>--output_dir</code>：输入目录。需要提前建立目录，否则运行会报错。</p>
   </li>
 </ul>
 
@@ -4720,84 +4788,6 @@ MAPQ = -10 \times log_{10}(pvalue)
 <h3 id="section">更新记录</h3>
 
 <p>2016年9月10日</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[二代测序中的短序列比对]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2014/07/26/short-sequence-alignment/"/>
-    <updated>2014-07-26T02:04:25+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2014/07/26/short-sequence-alignment</id>
-    <content type="html"><![CDATA[<p>在二代测序数据分析中，非常重要的一步是将测得的短序列“对应”到基因组上。所使用的工具被称为“短序列比对工具（short sequence aligners）”。以下是一些常用工具的介绍。</p>
-
-<h2 id="bowtie">1. Bowtie</h2>
-
-<p><strong>简介</strong>：<a href="http://bowtie-bio.sourceforge.net/">Bowtie2</a>是现在广泛使用的序列比对工具。</p>
-
-<p><strong>运行方式</strong>：所有平台</p>
-
-<p><strong>特点</strong>：</p>
-
-<ul>
-  <li>
-    <p>相比较<a href="http://bowtie-bio.sourceforge.net/index.shtml">Bowtie1</a>，处理大于50bp的短序列，速度更快、也更敏感。Bowtie1在处理小于50bp的短序列上，效果更好。</p>
-  </li>
-  <li>
-    <p><a href="http://support.illumina.com/sequencing/sequencing_software/igenome.ilmn">iGenomes</a>提供一些事先编排（index）的基因组。
-<!--more--></p>
-  </li>
-</ul>
-
-<p><strong>快速运行</strong>：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 建立一系列FASTA文件目录</span>
-</span><span class="line"><span class="nv">$ </span>bowtie2-build /filePath/genomeFastaFile indexName
-</span><span class="line">
-</span><span class="line"><span class="c"># 从已经index文件中提取原始基因组</span>
-</span><span class="line"><span class="nv">$ </span>bowtie2-inspect indexName &gt; genomeFastaFile
-</span><span class="line">
-</span><span class="line"><span class="c"># unpaired序列比对</span>
-</span><span class="line"><span class="nv">$ </span>bowtie2 -p <span class="m">4</span> -x indexName -U readFiles -S samFileName
-</span><span class="line">
-</span><span class="line"><span class="c"># paired序列比对</span>
-</span><span class="line"><span class="nv">$ </span>bowtie2 -p <span class="m">4</span> -x indexName  -1 readFiles1 -2 readFiles2 -S eg2.sam
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>
-    <p><code>-p</code>：多线程</p>
-  </li>
-  <li>
-    <p><code>-x</code>：之后跟index名称</p>
-  </li>
-  <li>
-    <p><code>-U</code>：测序文件（比如Fasta，Fastq文件）</p>
-  </li>
-  <li>
-    <p><code>-1</code>/<code>-2</code>：标识paired文件</p>
-  </li>
-  <li>
-    <p><code>-S</code>：SAM格式输出文件</p>
-  </li>
-</ul>
-
-<h3 id="section">参考网址</h3>
-
-<ul>
-  <li><a href="http://lh3lh3.users.sourceforge.net/NGSalign.shtml">Heng Li总结的工具列表</a></li>
-</ul>
-
 ]]></content>
   </entry>
   
