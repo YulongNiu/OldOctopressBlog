@@ -1,22 +1,41 @@
 ---
 layout: post
-title: "Rcpp操作矩阵集锦"
+title: "Rcpp操作矩阵和向量集锦"
 date: 2016-01-07 20:50:41 +0800
 comments: true
-published: false
+published: true
 categories: R
 ---
 
-使用<span style="color: blue">Rcpp</span>或者<span style="color: blue">RcppArmadillo</span>操作矩阵。
+收集和记录<span style="color: blue">Rcpp</span>或者<span style="color: blue">RcppArmadillo</span>操作矩阵和向量。
 
 
 ## 1. <span style="color: blue">Rcpp</span> ##
 
+* 可以使用逻辑下标（`LogicalVector`）对向量和列表[取值](http://gallery.rcpp.org/articles/subsetting/)。
+
 ## 2. <span style="color: blue">RcppArmadillo</span> ##
 
-基本类型是`mat`。
+基本类型是`mat`、`vec`（`colvec`）和`rowvec`。
 
-Cpp矩阵转换时，可以避免拷贝矩阵，以提升效率，比如：`mat(ptr_aux_mem, n_rows, n_cols, copy_aux_mem = true, strict = false) `{:.language-cpp}。
+* Rcpp矩阵转换为RcppArmadillo矩阵，可以避免拷贝矩阵，以提升效率，`mat(ptr_aux_mem, n_rows, n_cols, copy_aux_mem = true, strict = false) `{:.language-cpp}。同样道理，可以转化向量。例如：
+
+{% codeblock lang:cpp transfer matrix and vector %}
+arma::mat TransferMatArma(Rcpp::NumericMatrix x, Rcpp::NumericVector y) {
+    mat tx(x.begin, x.nrow(), x.ncol(), false);
+    mat ty(y.begin(), y.size(), false);
+    return tx;
+}
+
+Rcpp::NumericVector TransferMatRcpp(arma::mat x, arma::vec y) {
+    NumericVector ty(y.begin(), y.end());
+    return ty;
+}
+{% endcodeblock %}
+
+
+
+
 
 ### <a id="Ref">参考网址</a> ###
 
