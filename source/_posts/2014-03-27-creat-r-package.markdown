@@ -41,7 +41,7 @@ LinkingTo:
 ```
 {% endraw %}
 
-最后，在包的`R/`{:.language-bash}目录下，添加一个文件`RcppChk.R`{:.language-bash}（文件名称自定），并写入：
+然后，在包的`R/`{:.language-bash}目录下，添加一个文件`RcppChk.R`{:.language-bash}（文件名称自定），并写入：
 
 {% codeblock lang:r %}
 #' @useDynLib my-pkg-name
@@ -51,6 +51,8 @@ NULL
 {% endcodeblock %}
 
 注意，修改`my-pkg-name`{:.language-bash}为自己的包名称。
+
+最后，所有cpp代码都写在src文件夹下。
 
 ## 3. 创建DESCRIPTION文件模板 ##
 
