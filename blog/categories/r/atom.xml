@@ -4,7 +4,7 @@
   <title><![CDATA[Category: R | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/r/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2016-09-27T00:56:43+08:00</updated>
+  <updated>2016-09-27T13:02:23+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -114,7 +114,7 @@
 <span class='line-number'>12</span>
 </pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">arma</span><span class="o">::</span><span class="n">mat</span> <span class="n">TransferMatArma</span><span class="p">(</span><span class="n">Rcpp</span><span class="o">::</span><span class="n">NumericMatrix</span> <span class="n">x</span><span class="p">,</span> <span class="n">Rcpp</span><span class="o">::</span><span class="n">NumericVector</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
 </span><span class='line'>    <span class="n">mat</span> <span class="n">tx</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">begin</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="n">nrow</span><span class="p">(),</span> <span class="n">x</span><span class="p">.</span><span class="n">ncol</span><span class="p">(),</span> <span class="nb">false</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">mat</span> <span class="nf">ty</span><span class="p">(</span><span class="n">y</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">y</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="nb">false</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">vec</span> <span class="nf">ty</span><span class="p">(</span><span class="n">y</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">y</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="nb">false</span><span class="p">);</span>
 </span><span class='line'>    <span class="k">return</span> <span class="n">tx</span><span class="p">;</span>
 </span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
@@ -122,9 +122,9 @@
 </span><span class='line'>    <span class="n">NumericVector</span> <span class="n">ty</span><span class="p">(</span><span class="n">y</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">y</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
 </span><span class='line'>    <span class="k">return</span> <span class="n">ty</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">// 不要使用as&lt;integervector&gt;(wrap(y))，会有内存泄露。</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">// 不要使用as&lt;IntegerVector&gt;(wrap(y))，会有内存泄露。</span>
 </span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></integervector></p>
+</span></code></pre></td></tr></table></div></figure></IntegerVector></p>
 
 <h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
 
