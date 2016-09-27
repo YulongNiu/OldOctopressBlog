@@ -23,7 +23,7 @@ categories: R
 {% codeblock lang:cpp transfer matrix and vector %}
 arma::mat TransferMatArma(Rcpp::NumericMatrix x, Rcpp::NumericVector y) {
     mat tx(x.begin, x.nrow(), x.ncol(), false);
-    mat ty(y.begin(), y.size(), false);
+    vec ty(y.begin(), y.size(), false);
     return tx;
 }
 
