@@ -182,12 +182,20 @@ categories: Bioinfor
 
 * [DOG](http://dog.biocuckoo.org/) 可视化蛋白质结构域
 
+## 15. 蛋白质相互作用 ##
+
+* [PSICQUIC/PSISCORE](http://www.ebi.ac.uk/Tools/webservices/psicquic/view/results.xhtml?conversationContext=2) 一个综合性蛋白质互作数据库，互作带有打分。[发表文章](https://www.ncbi.nlm.nih.gov/pubmed/21716279)
+
+* [STRING](http://string-db.org/)和对应的R/Bioconductor包[STRINGdb](https://www.bioconductor.org/packages/release/bioc/html/STRINGdb.html) 使用广泛的预测和实验验证的蛋白质互作数据库，STRINGdb包更提供了下载、benchmark和可视化等功能。
+
+* [I2D](http://ophid.utoronto.ca/ophidv2.204/index.jsp)包括了果蝇、人、鼠等模式生物蛋白质互作。
+
 
 ## 文章介绍 ##
 
 * [未知蛋白功能研究流程](http://www.nature.com/nrm/journal/v8/n12/abs/nrm2281.html)
 
-* 蛋白质相互作用 [1](http://www.ploscompbiol.org/article/info:doi/10.1371/journal.pcbi.0030042), [2](http://www.ploscompbiol.org/article/info:doi/10.1371/journal.pcbi.0030043)
+* 蛋白质相互作用 [实验方法综述](http://www.ploscompbiol.org/article/info:doi/10.1371/journal.pcbi.0030042), [计算方法综述](http://www.ploscompbiol.org/article/info:doi/10.1371/journal.pcbi.0030043), [机器学习](http://www.nature.com/nmeth/journal/v12/n1/abs/nmeth.3178.html)
 
 * [进化树方法选择](http://cshprotocols.cshlp.org/content/2008/4/pdb.ip49.full)
 
@@ -199,5 +207,5 @@ categories: Bioinfor
 
 ### 更新记录 ###
 
-2016年9月14日
+2016年10月20日
 
