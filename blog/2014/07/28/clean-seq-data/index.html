@@ -270,31 +270,31 @@
 
 <ul>
   <li>
-    <p><code class="language-bash$">--quality</code>：设定Phred quality score阈值，默认为20。</p>
+    <p><code>--quality</code>：设定Phred quality score阈值，默认为20。</p>
   </li>
   <li>
-    <p><code class="language-bash$">--phred33</code>：：选择<code class="language-bash">-phred33</code>或者<code class="language-bash">-phred64</code>，表示测序平台使用的Phred quality score。</p>
+    <p><code>--phred33</code>：：选择<code class="language-bash">-phred33</code>或者<code class="language-bash">-phred64</code>，表示测序平台使用的Phred quality score。</p>
   </li>
   <li>
-    <p><code class="language-bash$">--adapter</code>：输入adapter序列。也可以不输入，Trim Galore!会自动寻找可能性最高的平台对应的adapter。自动搜选的平台三个，也直接显式输入这三种平台，即<code class="language-bash">--illumina</code>、<code class="language-bash">--nextera</code>和<code class="language-bash">--small_rna</code>。</p>
+    <p><code>--adapter</code>：输入adapter序列。也可以不输入，Trim Galore!会自动寻找可能性最高的平台对应的adapter。自动搜选的平台三个，也直接显式输入这三种平台，即<code class="language-bash">--illumina</code>、<code class="language-bash">--nextera</code>和<code class="language-bash">--small_rna</code>。</p>
   </li>
   <li>
-    <p><code class="language-bash$">--stringency</code>：设定可以忍受的前后adapter重叠的碱基数，默认为1（非常苛刻）。可以适度放宽，因为后一个adapter几乎不可能被测序仪读到。</p>
+    <p><code>--stringency</code>：设定可以忍受的前后adapter重叠的碱基数，默认为1（非常苛刻）。可以适度放宽，因为后一个adapter几乎不可能被测序仪读到。</p>
   </li>
   <li>
-    <p><code class="language-bash$">--length</code>：设定输出reads长度阈值，小于设定值会被抛弃。</p>
+    <p><code>--length</code>：设定输出reads长度阈值，小于设定值会被抛弃。</p>
   </li>
   <li>
-    <p><code class="language-bash$">--paired</code>：对于双端测序结果，一对reads中，如果有一个被剔除，那么另一个会被同样抛弃，而不管是否达到标准。</p>
+    <p><code>--paired</code>：对于双端测序结果，一对reads中，如果有一个被剔除，那么另一个会被同样抛弃，而不管是否达到标准。</p>
   </li>
   <li>
-    <p><code class="language-bash$">--retain_unpaired</code>：对于双端测序结果，一对reads中，如果一个read达到标准，但是对应的另一个要被抛弃，达到标准的read会被单独保存为一个文件。</p>
+    <p><code>--retain_unpaired</code>：对于双端测序结果，一对reads中，如果一个read达到标准，但是对应的另一个要被抛弃，达到标准的read会被单独保存为一个文件。</p>
   </li>
   <li>
-    <p><code class="language-bash$">--gzip</code>和<code class="language-bash$">--dont_gzip</code>：清洗后的数据zip打包或者不打包。</p>
+    <p><code>--gzip</code>和<code>--dont_gzip</code>：清洗后的数据zip打包或者不打包。</p>
   </li>
   <li>
-    <p><code class="language-bash$">--output_dir</code>：输入目录。需要提前建立目录，否则运行会报错。</p>
+    <p><code>--output_dir</code>：输入目录。需要提前建立目录，否则运行会报错。</p>
   </li>
 </ul>
 
