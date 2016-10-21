@@ -50,6 +50,17 @@ $ gdrive delete 0BzTeuubJesi
 $ gdrive delete -r 0BzTeuubJesi
 {% endcodeblock %}
 
+## 4. 普通上传和下载 ##
+
+{% codeblock lang:bash %}
+# 上传文件至制定文件夹
+$ gdrive upload -p M1h4M1dGYUhpSFE myFile
+
+# 下载文件
+$ gdrive download 0BzTeuubJesi
+
+{% endcodeblock %}
+
 
 ## 5. 同步 ##
 {% codeblock lang:bash %}
