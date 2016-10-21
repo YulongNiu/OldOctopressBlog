@@ -184,6 +184,55 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2016-10-21T18:24:31+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2016/10/21/linux-sync-google-drive/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2016/10/21/linux-sync-google-drive/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2016/10/21/linux-sync-google-drive/" itemprop="url">命令行使用Google Drive</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><p>本文简单介绍<a href="https://github.com/prasmussen/gdrive">gdrive</a>，它是一个跨多个平台软件，提供命令行操作Google Drive。同类软件还有<a href="https://github.com/odeke-em/drive">drive</a>和<a href="https://www.thefanclub.co.za/overgrive">overGrive</a>（Linux下Google Drive界面客户端）。</p>
+
+<p>基本思路：对每一个上传至Google Drive的文件或文件夹都分配一个Id，所以云端操作需要指定Id。</p>
+
+<p>突出优点：自动同步，比较云端和本地文件后，决定上传、删除或者替换；同步加入版本控制，可以下载和删除不同版本文件。</p>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2016/10/21/linux-sync-google-drive/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2016-09-22T16:25:13+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2016/09/22/how-to-publish-in-nc/#disqus_thread" itemprop="discussionUrl"
@@ -396,84 +445,6 @@
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2016-04-17T22:42:25+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2016/04/17/pointers-in-c/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2016/04/17/pointers-in-c/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2016/04/17/pointers-in-c/" itemprop="url">C语言指针记录</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="c">1. C语言指针基础</h2>
-
-<p>C语言的指针设计是一致和优雅的。C语言中“指针（pointer）”就是<strong>地址</strong>（所以不能用普通整数储存地址），“指针变量（pointer variable）”是存储地址的变量。一个指针变量，<strong>只能</strong>指向一个特定类型的变量，比如整数、浮点数、字符或者指针。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Initiate a pointer </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="kt">int</span> <span class="n">tmp1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">tmp2</span><span class="p">;</span>
-</span><span class="line">
-</span><span class="line"><span class="cm">/* &quot;=&quot; does not mean &quot;assignment&quot;, it just means &quot;initiating&quot; */</span>
-</span><span class="line"><span class="cm">/* p is the address of tmp1, *p is equal to the value of tmp1*/</span>
-</span><span class="line"><span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">tmp1</span><span class="p">;</span>
-</span><span class="line">
-</span><span class="line"><span class="kt">int</span> <span class="o">*</span><span class="n">q</span><span class="p">;</span>
-</span><span class="line"><span class="n">q</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">tmp2</span><span class="p">;</span>
-</span><span class="line">
-</span><span class="line"><span class="cm">/* p points to tmp1, q points to tmp2, now the value of tmp2 is 1*/</span>
-</span><span class="line"><span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">*</span><span class="n">q</span><span class="p">;</span>
-</span><span class="line">
-</span><span class="line"><span class="cm">/* p and q now both points to tmp1*/</span>
-</span><span class="line"><span class="n">q</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2016/04/17/pointers-in-c/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -497,6 +468,8 @@
   
   <div id="recent_posts" class="list-group">
     
+    <a class="list-group-item " href="/blog/2016/10/21/linux-sync-google-drive/">命令行使用Google Drive</a>
+    
     <a class="list-group-item " href="/blog/2016/09/22/how-to-publish-in-nc/">如何在Nature Communications上发表文章</a>
     
     <a class="list-group-item " href="/blog/2016/09/10/hisat2-faq/">HISAT2使用问答</a>
@@ -504,8 +477,6 @@
     <a class="list-group-item " href="/blog/2016/09/10/reference-genome-location/">常用参考基因组下载地址</a>
     
     <a class="list-group-item " href="/blog/2016/07/21/subset-matrix-in-r/">为什么不推荐在R语言中随意按照下标操作矩阵</a>
-    
-    <a class="list-group-item " href="/blog/2016/04/17/pointers-in-c/">C语言指针记录</a>
     
   </div>
 </section>
@@ -517,7 +488,7 @@
     
     
     <a class="list-group-item " href="/blog/categories/linux/index.html">
-        <span class="badge">5</span>
+        <span class="badge">6</span>
         linux
       </a>
     

@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2016-10-20T02:15:36+08:00</updated>
+  <updated>2016-10-21T20:57:33+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -12,6 +12,123 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[命令行使用Google Drive]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2016/10/21/linux-sync-google-drive/"/>
+    <updated>2016-10-21T18:24:31+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2016/10/21/linux-sync-google-drive</id>
+    <content type="html"><![CDATA[<p>本文简单介绍<a href="https://github.com/prasmussen/gdrive">gdrive</a>，它是一个跨多个平台软件，提供命令行操作Google Drive。同类软件还有<a href="https://github.com/odeke-em/drive">drive</a>和<a href="https://www.thefanclub.co.za/overgrive">overGrive</a>（Linux下Google Drive界面客户端）。</p>
+
+<p>基本思路：对每一个上传至Google Drive的文件或文件夹都分配一个Id，所以云端操作需要指定Id。</p>
+
+<p>突出优点：自动同步，比较云端和本地文件后，决定上传、删除或者替换；同步加入版本控制，可以下载和删除不同版本文件。</p>
+
+<!--more-->
+
+<h2 id="section">1. 初始化</h2>
+
+<p><a href="https://github.com/prasmussen/gdrive">下载</a>系统对应版本，执行<code>gdrive about</code>，根据提示设置。</p>
+
+<h2 id="section-1">2. 查找</h2>
+
+<p><a href="https://developers.google.com/drive/v3/web/search-parameters">查找规则</a></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 查找所有文件夹，不包括垃圾箱，所有者为自己</span>
+</span><span class="line"><span class="nv">$ </span>gdrive list --query <span class="s2">&quot;mimeType = &#39;application/vnd.google-apps.folder&#39; and trashed = false and &#39;me&#39; in owners&quot;</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 加入上层目录Id</span>
+</span><span class="line">gdrive list --query <span class="s2">&quot;mimeType = &#39;application/vnd.google-apps.folder&#39; and trashed = false and &#39;me&#39; in owners and &#39;YUlPWWdLcy1mX2c&#39; in parents&quot;</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 查询信息</span>
+</span><span class="line">gdrive info YUlPWWdLcy1mX2c
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-2">3. 建立和删除</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 建立文件夹</span>
+</span><span class="line"><span class="nv">$ </span>gdrive mkdir newFolder
+</span><span class="line">
+</span><span class="line"><span class="c"># 建立下一层文件夹，-p指定上层目录Id</span>
+</span><span class="line"><span class="nv">$ </span>gdrive mkdir -p M1h4M1dGYUhpSFE newFolder
+</span><span class="line">
+</span><span class="line"><span class="c"># 删除文件（文件Id，非名称）</span>
+</span><span class="line"><span class="nv">$ </span>gdrive delete 0BzTeuubJesi
+</span><span class="line">
+</span><span class="line"><span class="c"># 删除文件夹（文件Id，非名称）</span>
+</span><span class="line"><span class="nv">$ </span>gdrive delete -r 0BzTeuubJesi
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-3">5. 同步</h2>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># gdrive sync会标记同步文件，因此不要在同步文件夹中使用gdrive upload或者网页上传文件。未标记文件会被忽略。</span>
+</span><span class="line"><span class="c"># 同步列表</span>
+</span><span class="line"><span class="nv">$ </span>gdrive sync list
+</span><span class="line">
+</span><span class="line"><span class="c"># 同步列表内容</span>
+</span><span class="line"><span class="nv">$ </span>gdrive sync content VUxydm5iMnM5LWs
+</span><span class="line">
+</span><span class="line"><span class="c"># 上传</span>
+</span><span class="line"><span class="nv">$ </span>gdrive sync upload myLocaldir 0BzTeuubJesi
+</span><span class="line">
+</span><span class="line"><span class="c"># 下载</span>
+</span><span class="line"><span class="nv">$ </span>gdrive sync download 0BzTeuubJesi myLocaldir
+</span><span class="line">
+</span><span class="line"><span class="c"># 查询所有版本</span>
+</span><span class="line">gdrive revision list YUlPWWdLcy1mX2c
+</span><span class="line">
+</span><span class="line"><span class="c"># 下载某一版本，最后两个Id分别为文件Id和版本Id</span>
+</span><span class="line">gdrive revision download YUlPWWdLcy1mX2c Y3JBWEJ5a0gwZndlR3hzWlZubFlUMWFnaHVnPQ
+</span><span class="line">
+</span><span class="line"><span class="c"># 删除某一版本</span>
+</span><span class="line">gdrive revision delete YUlPWWdLcy1mX2c Y3JBWEJ5a0gwZndlR3hzWlZubFlUMWFnaHVnPQ
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-4">更新记录</h3>
+
+<p>2016年10月21日</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[如何在Nature Communications上发表文章]]></title>
@@ -4620,178 +4737,6 @@ MAPQ = -10 \times log_{10}(pvalue)
 
 <p>2014年12月7日</p>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[清洗二代测序数据]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2014/07/28/clean-seq-data/"/>
-    <updated>2014-07-28T20:11:18+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2014/07/28/clean-seq-data</id>
-    <content type="html"><![CDATA[<h2 id="fastqc">1. FastQC</h2>
-
-<p><strong>简介</strong>：<a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>是用于对二代测序数据质量快速检验的工具，可以输入fastq（fastq.gz）、sam或者bam文件。查看<a href="http://www.bioinformatics.nl/courses/RNAseq/FastQC_Manual.pdf">输出结果解释</a>。</p>
-
-<!--more-->
-
-<p><strong>平台</strong>：所有平台。</p>
-
-<p><strong>安装</strong>： 依赖Java，下载后直接安装使用。</p>
-
-<p><strong>快速运行</strong>：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 输出分析结果至特定文档</span>
-</span><span class="line"><span class="nv">$ </span>fastqc seqFile1 --outdir setFolder1
-</span><span class="line">
-</span><span class="line"><span class="c"># 支持批量处理测序数据</span>
-</span><span class="line"><span class="nv">$ </span>fastqc seqFile1 seqFile2 seqFileN
-</span><span class="line">
-</span><span class="line"><span class="c"># 查看帮助信息</span>
-</span><span class="line"><span class="nv">$ </span>fastqc --help
-</span><span class="line">
-</span><span class="line"><span class="c"># 查看一共分析了多少个reads，比如fastqc文件为“accepted_filtered_fastqc.zip”</span>
-</span><span class="line"><span class="nv">$ </span>unzip -p accepted_filtered_fastqc.zip accepted_filtered_fastqc/fastqc_data.txt <span class="p">|</span> <span class="se">\</span>
-</span><span class="line">      sed -n <span class="s1">&#39;7 p&#39;</span> <span class="p">|</span> <span class="se">\</span>
-</span><span class="line">      awk <span class="s1">&#39;{print $3}&#39;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="trim-galore">2. Trim Galore!</h2>
-
-<p><strong>简介</strong>：<a href="http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/">Trim Galore!</a>是对<a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>和<a href="https://cutadapt.readthedocs.org/en/stable/installation.html">Cutadapt</a>的包装。可以处理Illumina、Nextera 3和smallRNA测序平台的双端和单端数据，包括去除adapter和低质量reads。</p>
-
-<p><strong>平台</strong>：Linux</p>
-
-<p><strong>安装</strong>:</p>
-
-<ul>
-  <li>需要先分别安装FastQC和Cutadapt，其中Cutadapt安装使用</li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Install Cutadapt</span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># pip install cutadapt</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><strong>快速运行</strong>：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Example code of runing the Cutadapt</span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 处理双端测序结果</span>
-</span><span class="line"><span class="nv">$ </span>trim_galore --quality <span class="m">20</span> --phred33 --stringency <span class="m">3</span> --length <span class="m">20</span> --paired <span class="se">\</span>
-</span><span class="line">              --gzip --output_dir human_trimgalore <span class="se">\</span>
-</span><span class="line">              mySeq_1_1.fastq.gz mySeq_1_2.fastq.gz
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><strong>重要参数解释</strong>：</p>
-
-<ul>
-  <li>
-    <p><code>--quality</code>：设定Phred quality score阈值，默认为20。</p>
-  </li>
-  <li>
-    <p><code>--phred33</code>：：选择<code class="language-bash">-phred33</code>或者<code class="language-bash">-phred64</code>，表示测序平台使用的Phred quality score。</p>
-  </li>
-  <li>
-    <p><code>--adapter</code>：输入adapter序列。也可以不输入，Trim Galore!会自动寻找可能性最高的平台对应的adapter。自动搜选的平台三个，也直接显式输入这三种平台，即<code class="language-bash">--illumina</code>、<code class="language-bash">--nextera</code>和<code class="language-bash">--small_rna</code>。</p>
-  </li>
-  <li>
-    <p><code>--stringency</code>：设定可以忍受的前后adapter重叠的碱基数，默认为1（非常苛刻）。可以适度放宽，因为后一个adapter几乎不可能被测序仪读到。</p>
-  </li>
-  <li>
-    <p><code>--length</code>：设定输出reads长度阈值，小于设定值会被抛弃。</p>
-  </li>
-  <li>
-    <p><code>--paired</code>：对于双端测序结果，一对reads中，如果有一个被剔除，那么另一个会被同样抛弃，而不管是否达到标准。</p>
-  </li>
-  <li>
-    <p><code>--retain_unpaired</code>：对于双端测序结果，一对reads中，如果一个read达到标准，但是对应的另一个要被抛弃，达到标准的read会被单独保存为一个文件。</p>
-  </li>
-  <li>
-    <p><code>--gzip</code>和<code>--dont_gzip</code>：清洗后的数据zip打包或者不打包。</p>
-  </li>
-  <li>
-    <p><code>--output_dir</code>：输入目录。需要提前建立目录，否则运行会报错。</p>
-  </li>
-</ul>
-
-<h2 id="trimmomatic">3. Trimmomatic</h2>
-
-<p><strong>简介</strong>：<a href="http://www.usadellab.org/cms/?page=trimmomatic">Trimmomatic</a>是针对Illumina高通量测序平台设计的接头去除和低质量reads清洗软件。软件中包括有Illumina平台常见接头序列，可以很方便处理单端和双端RNA-seq数据。Trimmomatic也支持自己设计要去除的接头序列文件。</p>
-
-<p><strong>平台</strong>：Java跨平台使用</p>
-
-<p><strong>快速运行</strong>：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Example code of runing the Trimmomatic </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 处理双端测序结果</span>
-</span><span class="line"><span class="nv">$ </span>java -jar /path/trimmomatic-0.33.jar PE<span class="se">\</span>
-</span><span class="line">       -threads <span class="m">12</span> -phred33 -trimlog mySeq_1-trim.log <span class="se">\</span>
-</span><span class="line">       mySeq_1_1.fastq.gz mySeq_1_2.fastq.gz <span class="se">\</span>
-</span><span class="line">       mySeq_1_1-trim.fastq.gz mySeq_1_1-unpair.fastq.gz <span class="se">\</span>
-</span><span class="line">       mySeq_1_2-trim.fastq.gz mySeq_1_2-unpair.fastq.gz <span class="se">\</span>
-</span><span class="line">       ILLUMINACLIP:/path/TruSeq3-PE.fa:2:30:10 <span class="se">\</span>
-</span><span class="line">       LEADING:3 <span class="se">\</span>
-</span><span class="line">       TRAILING:3 <span class="se">\</span>
-</span><span class="line">       SLIDINGWINDOW:4:15 <span class="se">\</span>
-</span><span class="line">       MINLEN:51
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><strong>重要参数解释</strong>：</p>
-
-<ul>
-  <li>
-    <p><code class="language-bash">-threads</code>：设置线程数目。</p>
-  </li>
-  <li>
-    <p><code class="language-bash">-phred33</code>：选择<code class="language-bash">-phred33</code>或者<code class="language-bash">-phred64</code>，表示测序平台使用的Phred quality score。查询方法：首先，运行<a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>，在结果报告第一项会“猜出”测序平台。之后，查询平台对应Phred<a href="http://en.wikipedia.org/wiki/FASTQ_format">列表</a>。</p>
-  </li>
-  <li>
-    <p><code class="language-bash">-trimlog</code>：输出运行日志。日志中包括对每一个read具体选择数据，所以文件会比较大。</p>
-  </li>
-  <li>
-    <p><code class="language-bash">ILLUMINACLIP</code>：跟随四个参数，分别是<code class="language-bash">:&lt;fastaWithAdaptersEtc&gt;</code>为adaptesr文件完整路径（在Trimmomatic的默认安装目录下的 <code class="language-bash">adapter</code>，有整理好的）；<code class="language-bash">&lt;fastaWithAdaptersEtc&gt;</code>为seed matches（16bases）在匹配时的最大错配数目；<code class="language-bash">&lt;palindrome clip threshold&gt;</code>对于一对reads当得分超过30（约50 bases），seeds会被延伸和固定；<code class="language-bash">&lt;simple clip threshold&gt;</code>，对于单端reads当得分超过10（约17 bases），seeds会被延伸和固定。</p>
-  </li>
-  <li>
-    <p><code class="language-bash">LEADING</code>和<code class="language-bash">TRAILING</code>：分别为去除read头部和尾部的低质量（低于quality3）碱基数目。</p>
-  </li>
-  <li>
-    <p><code class="language-bash">SLIDINGWINDOW</code>：跟随两个参数，分别是 <code class="language-bash">&lt;windowSize&gt;</code>为扫描“窗口”长度；<code class="language-bash">&lt;requiredQuality&gt;</code>为窗口碱基质量的平均阈值，低于此会被删除。</p>
-  </li>
-  <li>
-    <p><code class="language-bash">MINLEN</code>：设置最短reads数目。需要根据下游alignment软件设定，比如<a href="http://bowtie-bio.sourceforge.net/index.shtml">Bowtie</a>适用于短序列，比如50bp以下；而<a href="http://bowtie-bio.sourceforge.net/bowtie2/index.shtml">Bowtie2</a>适用于50bp以上。<a href="http://ccb.jhu.edu/software/tophat/index.shtml">TopHat</a> 则根据实际使用Bowtie或者Bowtie2选择。</p>
-  </li>
-</ul>
-
-<h3 id="section">更新记录</h3>
-
-<p>2016年9月10日</p>
 ]]></content>
   </entry>
   

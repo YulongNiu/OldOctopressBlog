@@ -184,6 +184,97 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2010-11-09T06:00:40+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2010/11/09/linux-command/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2010/11/09/linux-command/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2010/11/09/linux-command/" itemprop="url">Linux常用命令集锦</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="section">1. 压缩与解压缩</h2>
+
+<p><code class="language-bash">.tar.gz</code>格式文件</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 解压 </span>
+</span><span class="line"><span class="nv">$ </span>tar -zxvf /filePath/filename.tar.gz
+</span><span class="line">
+</span><span class="line"><span class="c"># 压缩 </span>
+</span><span class="line"><span class="nv">$ </span>tar -zcvf /filePath/filename.tar.gz /filePath/filename
+</span><span class="line">
+</span><span class="line"><span class="c"># 解压到特定文件夹</span>
+</span><span class="line"><span class="nv">$ </span>tar -zxvf /filePath/filename.tar.gz -C /filePath/filename
+</span><span class="line">
+</span><span class="line"><span class="c"># 压缩到特定文件夹</span>
+</span><span class="line"><span class="nv">$ </span>tar -zcvf /filePath/filename.tar.gz -C /filePath/filename
+</span><span class="line">
+</span><span class="line"><span class="c"># 压缩所有txt类型文件 </span>
+</span><span class="line"><span class="nv">$ </span>gzip *.txt
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code class="language-bash">.tar.bz2</code>格式文件</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 解压 </span>
+</span><span class="line"><span class="nv">$ </span>tar -jxvf /filePath/filename.taz.bz2
+</span><span class="line">
+</span><span class="line"><span class="c"># 压缩</span>
+</span><span class="line"><span class="nv">$ </span>tar -jcvf /filePath/filename.tar.bz2 /filePath/filename
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2010/11/09/linux-command/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2010-09-04T22:21:38+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2010/09/04/linux-install-r/#disqus_thread" itemprop="discussionUrl"
@@ -318,6 +409,8 @@
   
   <div id="recent_posts" class="list-group">
     
+    <a class="list-group-item " href="/blog/2016/10/21/linux-sync-google-drive/">命令行使用Google Drive</a>
+    
     <a class="list-group-item " href="/blog/2016/09/22/how-to-publish-in-nc/">如何在Nature Communications上发表文章</a>
     
     <a class="list-group-item " href="/blog/2016/09/10/hisat2-faq/">HISAT2使用问答</a>
@@ -325,8 +418,6 @@
     <a class="list-group-item " href="/blog/2016/09/10/reference-genome-location/">常用参考基因组下载地址</a>
     
     <a class="list-group-item " href="/blog/2016/07/21/subset-matrix-in-r/">为什么不推荐在R语言中随意按照下标操作矩阵</a>
-    
-    <a class="list-group-item " href="/blog/2016/04/17/pointers-in-c/">C语言指针记录</a>
     
   </div>
 </section>
@@ -338,7 +429,7 @@
     
     
     <a class="list-group-item " href="/blog/categories/linux/index.html">
-        <span class="badge">5</span>
+        <span class="badge">6</span>
         linux
       </a>
     

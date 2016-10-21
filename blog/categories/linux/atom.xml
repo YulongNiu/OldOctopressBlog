@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2016-10-20T02:15:36+08:00</updated>
+  <updated>2016-10-21T20:57:33+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -12,6 +12,123 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[命令行使用Google Drive]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2016/10/21/linux-sync-google-drive/"/>
+    <updated>2016-10-21T18:24:31+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2016/10/21/linux-sync-google-drive</id>
+    <content type="html"><![CDATA[<p>本文简单介绍<a href="https://github.com/prasmussen/gdrive">gdrive</a>，它是一个跨多个平台软件，提供命令行操作Google Drive。同类软件还有<a href="https://github.com/odeke-em/drive">drive</a>和<a href="https://www.thefanclub.co.za/overgrive">overGrive</a>（Linux下Google Drive界面客户端）。</p>
+
+<p>基本思路：对每一个上传至Google Drive的文件或文件夹都分配一个Id，所以云端操作需要指定Id。</p>
+
+<p>突出优点：自动同步，比较云端和本地文件后，决定上传、删除或者替换；同步加入版本控制，可以下载和删除不同版本文件。</p>
+
+<!--more-->
+
+<h2 id="section">1. 初始化</h2>
+
+<p><a href="https://github.com/prasmussen/gdrive">下载</a>系统对应版本，执行<code>gdrive about</code>，根据提示设置。</p>
+
+<h2 id="section-1">2. 查找</h2>
+
+<p><a href="https://developers.google.com/drive/v3/web/search-parameters">查找规则</a></p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 查找所有文件夹，不包括垃圾箱，所有者为自己</span>
+</span><span class='line'><span class="nv">$ </span>gdrive list –query “mimeType <span class="o">=</span> ‘application/vnd.google-apps.folder’ and <span class="nv">trashed</span> <span class="o">=</span> <span class="nb">false </span>and ‘me’ in owners”&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;id&quot;</span>&gt;加入上层目录Id&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;gdrive list –query “mimeType <span class="o">=</span> ‘application/vnd.google-apps.folder’ and <span class="nv">trashed</span> <span class="o">=</span> <span class="nb">false </span>and ‘me’ in owners and ‘YUlPWWdLcy1mX2c’ in parents”&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-2&quot;</span>&gt;查询信息&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;gdrive info YUlPWWdLcy1mX2c
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2 id="section-3">3. 建立和删除</h2>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 建立文件夹</span>
+</span><span class='line'><span class="nv">$ </span>gdrive mkdir newFolder&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;pid&quot;</span>&gt;建立下一层文件夹，-p指定上层目录Id&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>gdrive mkdir -p M1h4M1dGYUhpSFE newFolder&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;id-1&quot;</span>&gt;删除文件（文件Id，非名称）&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>gdrive delete 0BzTeuubJesi&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;id-2&quot;</span>&gt;删除文件夹（文件Id，非名称）&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>gdrive delete -r 0BzTeuubJesi
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2 id="section-4">5. 同步</h2>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># gdrive sync会标记同步文件，因此不要在同步文件夹中使用gdrive upload或者网页上传文件。未标记文件会被忽略。</span>
+</span><span class='line'><span class="c"># 同步列表</span>
+</span><span class='line'><span class="nv">$ </span>gdrive sync list&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-5&quot;</span>&gt;同步列表内容&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>gdrive sync content VUxydm5iMnM5LWs&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-6&quot;</span>&gt;上传&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>gdrive sync upload myLocaldir 0BzTeuubJesi&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-7&quot;</span>&gt;下载&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>gdrive sync download 0BzTeuubJesi myLocaldir&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-8&quot;</span>&gt;查询所有版本&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;gdrive revision list YUlPWWdLcy1mX2c&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;ididid&quot;</span>&gt;下载某一版本，最后两个Id分别为文件Id和版本Id&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;gdrive revision download YUlPWWdLcy1mX2c Y3JBWEJ5a0gwZndlR3hzWlZubFlUMWFnaHVnPQ&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-9&quot;</span>&gt;删除某一版本&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;gdrive revision delete YUlPWWdLcy1mX2c Y3JBWEJ5a0gwZndlR3hzWlZubFlUMWFnaHVnPQ
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h3 id="section-10">更新记录</h3>
+
+<p>2016年10月21日</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PostgreSQL使用指南]]></title>
@@ -1773,390 +1890,6 @@
 <h3 id="section-76">更新记录</h3>
 
 <p>2016年5月9日</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Linux常用软件集锦]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2010/07/08/linux-software/"/>
-    <updated>2010-07-08T11:09:31+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2010/07/08/linux-software</id>
-    <content type="html"><![CDATA[<p>本文收集了一些好用或者好玩的Linux软件，安装方法使用<a href="https://getfedora.org/">Fedora</a>系统示例。</p>
-
-<h2 id="section">1. 添加常用源</h2>
-
-<ul>
-  <li>
-    <p>添加<a href="http://rpmfusion.org/Configuration">rpmfusion</a>的free和nonfree源。</p>
-  </li>
-  <li>
-    <p>添加<a href="http://repo.fdzh.org/">FZUG</a>源。一个中文Fedora的源和社区，在Fedora下安装搜狗输入法、有道词典、百度云客户端等。</p>
-  </li>
-</ul>
-
-<h2 id="section-1">2. 辅助安装工具</h2>
-
-<ul>
-  <li>fed</li>
-</ul>
-
-<p><a href="http://folkswithhats.org/">fedy</a>是一个辅助在Fedora系统下，更容易安装Skypy、Chrome、Steam等的工具。</p>
-
-<!--more-->
-
-<h2 id="section-2">3. 影音</h2>
-
-<ul>
-  <li>VLC</li>
-</ul>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># yum install vlc</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<ul>
-  <li>Mplayer</li>
-</ul>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># yum install mplayer-gui xine smplayer</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<ul>
-  <li>录音工具Audacity</li>
-</ul>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># yum install audacity</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<ul>
-  <li>屏幕录制RecordMyDesktop</li>
-</ul>
-
-<p>Linux下有很多录制屏幕的软件，推荐RecordMyDesktop。可以自己选定屏幕区域和大小，也可以把界面缩小到屏幕的下方，变成一个小的按钮，以方便操作。录制的文件为ogv格式，推荐使用VLC打开。</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 安装方法</span>
-</span><span class='line'><span class="c"># yum install recordmydesktop&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-3&quot;</span>&gt;使用方法&lt;/h1&gt;
-</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>qt-recordMyDesktop
-</span></code></pre></td></tr></table></div></figure></p>
-
-<h2 id="section-4">4. 办公</h2>
-
-<ul>
-  <li>字典GoldenDict</li>
-</ul>
-
-<p>Linux下曾经风靡一时的字典StarDict，现在有了更加先进和方便的接班人<a href="http://goldendict.org/">GoldenDict</a> 。GoldenDict的主要特点有：</p>
-
-<ol>
-  <li>
-    <p>字典库丰富;</p>
-  </li>
-  <li>
-    <p>直接查询维基百科和其他网络字典;</p>
-  </li>
-  <li>
-    <p>支持字典分类、发音（字典库包括发音）、光标取词等。</p>
-  </li>
-</ol>
-
-<p><strong>安装方法：</strong></p>
-
-<p>参考GoldenDict的<a href="https://github.com/goldendict/goldendict">GitHub安装介绍</a>，字典发音需要安装Mplayer，Fedora安装可能依赖的库如下：</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># dnf install bzip2-devel gcc-c++ git hunspell-devel \</span>
-</span><span class='line'>libvorbis-devel libXtst-devel phonon-devel <span class="se">\</span>
-</span><span class='line'>qt-devel qtwebkit ffmpeg ffmpeg-devel <span class="se">\</span>
-</span><span class='line'>lzo lzo-devel eb eb-devel libao libao-devel <span class="se">\</span>
-</span><span class='line'>qtwebkit-devel libtiff-devel lzma-devel&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-5&quot;</span>&gt;安装字典&lt;/h1&gt;
-</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>git clone git://github.com/goldendict/goldendict.git
-</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>goldendict
-</span><span class='line'><span class="nv">$ </span>qmake-qt4 “CONFIG+<span class="o">=</span>zim_support” <span class="p">&amp;</span>amp<span class="p">;&amp;</span>amp<span class="p">;</span> make
-</span><span class='line'><span class="c"># make install</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p><strong>添加离线字典</strong></p>
-
-<ul>
-  <li>安装dictd-server</li>
-</ul>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># yum install dictd-server</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<ul>
-  <li>dsl文件处理</li>
-</ul>
-
-<p>GoldenDict只能识别dsl格式的字典文件，所以先进行处理。一般得到dsl文件内容如下：</p>
-
-<p>
-<code>
-mydict.dsl
-mydict.bmp
-mydict.ann
-mydict.images.rar
-mydict.sounds.rar
-</code>
-</p>
-
-<blockquote>
-  <p>压缩dsl文件：</p>
-</blockquote>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># dictzip mydict.dsl </span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<blockquote>
-  <p>解压images和sounds的所有文件到同一个文件夹，之后将其<a href="http://forum.ubuntu.org.cn/viewtopic.php?f=48&amp;t=316122&amp;start=0">全部压缩到一个文件夹中</a>：</p>
-</blockquote>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># find . -name “*” -print | zip -9 ../mydict.dsl.dz.files.zip -@</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<blockquote>
-  <p>最后，得到如下文件，使用GoldenDict载入即可，注意文件的命名都统一为<code>mydict</code>：</p>
-</blockquote>
-
-<p>
-<code>
-mydict.dsl.dz
-mydict.dsl.dz.files.zip
-mydict.ann
-mydict.bmp
-</code>
-</p>
-
-<p>以下是两张在GoldenDict中查询维基百科和大英百科的效果图。</p>
-
-<p><img src="http://yulongniu.bionutshell.org/images/linux_software_goldendict1.png" width="500" height="700" title="image" alt="images" /></p>
-
-<p><img src="http://yulongniu.bionutshell.org/images/linux_software_goldendict2.png" width="500" height="700" title="image" alt="images" /></p>
-
-<ul>
-  <li>chm阅读器</li>
-</ul>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># yum install kchmviewer</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<ul>
-  <li>文档注释工具Xournal</li>
-</ul>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># yum install xournal</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<ul>
-  <li>ePub文件阅读器</li>
-</ul>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># yum install fbreader</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<ul>
-  <li>djvu文件阅读器</li>
-</ul>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># yum install djvulibre</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<ul>
-  <li>Fedora 安装搜狗输入法</li>
-</ul>
-
-<p>参考<a href="http://www.8dlive.com/post/199.html">fedora 21 安装sogoupinyin 安装搜狗拼音</a></p>
-
-<ul>
-  <li>unrar解压工具</li>
-</ul>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># yum install unrar</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<ul>
-  <li>截屏工具KSnapshot</li>
-</ul>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># yum install ksnapshot</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<ul>
-  <li>图片转换工具<a href="http://www.imagemagick.org/">ImageMagick</a></li>
-</ul>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># yum install ImageMagick&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-6&quot;</span>&gt;设置转换图片质量，1质量最低，100质量最高&lt;/h1&gt;
-</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>convert -quality <span class="m">100</span> input.pdf output.jpg&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;px&quot;</span>&gt;设置像素，比如转换的是500px&lt;/h1&gt;
-</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>convert -density <span class="m">500</span> input.pdf output.jpg
-</span></code></pre></td></tr></table></div></figure></p>
-
-<ul>
-  <li>TeX文本编辑器</li>
-</ul>
-
-<p><a href="http://texstudio.sourceforge.net/">TeXstudio</a>支持自动补全、代码高亮、错误提示、文档预览、图片表格公式生成、LaTeX/PDFLaTeX/XeLaTeX。甚至还有一个“放大镜”，放大观察生成文档字体和公式细节。TeXstudio仍然保持持续更新的态势，以下是安装方法和一个阅览图。</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># yum install texstudio</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p><img src="http://yulongniu.bionutshell.org/images/linux_software_texstudio.jpg" width="500" height="700" title="image" alt="images" /></p>
-
-<ul>
-  <li>PDF文件编辑工具</li>
-</ul>
-
-<p><a href="http://community.coherentpdf.com/">cpdf</a>用于对PDF文件执行分割、合并和压缩等操作。下载预编译版本使用。</p>
-
-<p><figure class='code'><figcaption><span>Example of using cpdf</span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 选择第一页输出</span>
-</span><span class='line'><span class="nv">$ </span>cpdf pdfFile.pdf <span class="m">1</span> -o outPdfFile.pdf
-</span></code></pre></td></tr></table></div></figure></p>
-
-<h2 id="windows">5. 模拟Windows程序</h2>
-
-<ul>
-  <li>Wine</li>
-</ul>
-
-<p>Wine可以尽可能模拟Window软件</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># yum install wine</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p>同时可能需要Winetricks辅助</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># wget http://www.kegel.com/wine/winetricks</span>
-</span><span class='line'><span class="c"># chmod +x winetricks</span>
-</span><span class='line'><span class="c"># mv winetricks /usr/local/bin</span>
-</span><span class='line'><span class="c"># winetricks mfc42 </span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<ul>
-  <li>PlayOnLinux</li>
-</ul>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># wget http://rpm.playonlinux.com/playonlinux.repo</span>
-</span><span class='line'><span class="c"># mv playonlinux.repo /etc/yum.repos.d/</span>
-</span><span class='line'><span class="c"># yum update</span>
-</span><span class='line'><span class="c"># yum install playonlinux</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<h2 id="section-7">6. 驱动程序</h2>
-
-<ul>
-  <li>Fedora安装NVIDIA显卡驱动</li>
-</ul>
-
-<p>安装过程参考<a href="http://blog.csdn.net/icemango1209/article/details/18766353">Fedora 20安装Nvidia 显卡驱动</a>。需要注意关闭窗口界面，从而进入完全字符界面操作。</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 进入字符界面</span>
-</span><span class='line'><span class="c"># init 3&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-8&quot;</span>&gt;进入图形界面&lt;/h1&gt;
-</span><span class='line'>&lt;p&gt;# init 5
-</span></code></pre></td></tr></table></div></figure></p>
-
-<h2 id="samsung-ssd">7. Samsung SSD</h2>
-
-<p>三星固态硬盘支持Linux版本的<a href="http://www.samsung.com/global/business/semiconductor/minisite/SSD/global/html/support/server_downloads.html">Magician DC</a>。</p>
-
-<p><figure class='code'><figcaption><span>Samsung SSD Magician </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 列出SSD</span>
-</span><span class='line'><span class="c"># magician -L&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;ssd&quot;</span>&gt;列出指定SSD详细信息&lt;/h1&gt;
-</span><span class='line'>&lt;p&gt;# magician -d <span class="m">0</span> -I&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;ssdsmart&quot;</span>&gt;列出指定SSD的S.M.A.R.T信息&lt;/h1&gt;
-</span><span class='line'>&lt;p&gt;# magician -d <span class="m">0</span> -S
-</span><span class='line'><span class="c"># 列出制定SSD的温度</span>
-</span><span class='line'><span class="c"># magician -d 0 -S -t&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;trim&quot;</span>&gt;trim&lt;/h1&gt;
-</span><span class='line'>&lt;p&gt;# magician -d <span class="m">0</span> -T
-</span></code></pre></td></tr></table></div></figure></p>
-
-<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
-
-<ul>
-  <li><a href="http://xmodulo.com/convert-pdf-files-to-jpg-format-on-linux.html">pdf转换jpg/jpeg文件</a></li>
-</ul>
-
-<h3 id="section-9">更新记录</h3>
-
-<p>2015年12月17日</p>
-
 ]]></content>
   </entry>
   

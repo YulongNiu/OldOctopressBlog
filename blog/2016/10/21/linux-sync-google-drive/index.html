@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8">
-  <title>My First Post - 牛牛龙</title>
+  <title>命令行使用Google Drive - 牛牛龙</title>
   <meta name="author" content="Yulong Niu">
 
   
@@ -14,15 +14,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yulongniu.bionutshell.org/blog/2014/07/05/my-first-post">
+  <link rel="canonical" href="http://yulongniu.bionutshell.org/blog/2016/10/21/linux-sync-google-drive">
   <link href="/favicon.ico" type="image/png" rel="icon">
   <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
 
   <!-- http://opengraphprotocol.org/ -->
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2014/07/05/my-first-post">
-  <meta property="og:title" content="My First Post - 牛牛龙">
+  <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2016/10/21/linux-sync-google-drive">
+  <meta property="og:title" content="命令行使用Google Drive - 牛牛龙">
   
 
   <!-- mathjax config similar to math.stackexchange -->
@@ -64,7 +64,8 @@
 
 <!--enable to choose theme in octostrap-->
 
-  <link href="http://bootswatch.com/united/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="/assets/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
 
 
 
@@ -179,7 +180,7 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-07-05T10:04:38+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2016-10-21T18:24:31+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="#disqus_thread" itemprop="discussionUrl"
              data-disqus-identifier="http://yulongniu.bionutshell.org">Comments</a>
@@ -188,84 +189,121 @@
     
     
     <h1 class="entry-title" itemprop="name headline">
-        My First Post
+        命令行使用Google Drive
         
     </h1>
     
   </header>
 
 
-<div class="entry-content clearfix" itemprop="articleBody description"><p>This is my first post. I want to say something. Then say something.</p>
+<div class="entry-content clearfix" itemprop="articleBody description"><p>本文简单介绍<a href="https://github.com/prasmussen/gdrive">gdrive</a>，它是一个跨多个平台软件，提供命令行操作Google Drive。同类软件还有<a href="https://github.com/odeke-em/drive">drive</a>和<a href="https://www.thefanclub.co.za/overgrive">overGrive</a>（Linux下Google Drive界面客户端）。</p>
 
-<p>This is a piece of html code <code class="language-html">&lt;html&gt;</code></p>
+<p>基本思路：对每一个上传至Google Drive的文件或文件夹都分配一个Id，所以云端操作需要指定Id。</p>
+
+<p>突出优点：自动同步，比较云端和本地文件后，决定上传、删除或者替换；同步加入版本控制，可以下载和删除不同版本文件。</p>
+
+<!--more-->
+
+<h2 id="section">1. 初始化</h2>
+
+<p><a href="https://github.com/prasmussen/gdrive">下载</a>系统对应版本，执行<code>gdrive about</code>，根据提示设置。</p>
+
+<h2 id="section-1">2. 查找</h2>
+
+<p><a href="https://developers.google.com/drive/v3/web/search-parameters">查找规则</a></p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="k">def</span> <span class="nf">what?</span>
-</span><span class="line">  <span class="mi">42</span>
-</span><span class="line"><span class="k">end</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 查找所有文件夹，不包括垃圾箱，所有者为自己</span>
+</span><span class="line"><span class="nv">$ </span>gdrive list --query <span class="s2">&quot;mimeType = &#39;application/vnd.google-apps.folder&#39; and trashed = false and &#39;me&#39; in owners&quot;</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 加入上层目录Id</span>
+</span><span class="line">gdrive list --query <span class="s2">&quot;mimeType = &#39;application/vnd.google-apps.folder&#39; and trashed = false and &#39;me&#39; in owners and &#39;YUlPWWdLcy1mX2c&#39; in parents&quot;</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 查询信息</span>
+</span><span class="line">gdrive info YUlPWWdLcy1mX2c
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<!-- more -->
+<h2 id="section-2">3. 建立和删除</h2>
 
-<ol>
-  <li>
-    <p>Mathjax supports.</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 建立文件夹</span>
+</span><span class="line"><span class="nv">$ </span>gdrive mkdir newFolder
+</span><span class="line">
+</span><span class="line"><span class="c"># 建立下一层文件夹，-p指定上层目录Id</span>
+</span><span class="line"><span class="nv">$ </span>gdrive mkdir -p M1h4M1dGYUhpSFE newFolder
+</span><span class="line">
+</span><span class="line"><span class="c"># 删除文件（文件Id，非名称）</span>
+</span><span class="line"><span class="nv">$ </span>gdrive delete 0BzTeuubJesi
+</span><span class="line">
+</span><span class="line"><span class="c"># 删除文件夹（文件Id，非名称）</span>
+</span><span class="line"><span class="nv">$ </span>gdrive delete -r 0BzTeuubJesi
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-    <script type="math/tex; mode=display">% <![CDATA[
-\begin{align*}
-   & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
-   = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
-   & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
-   \phi(e_1, e_1) & \cdots & \phi(e_1, e_n) \\
-   \vdots & \ddots & \vdots \\
-   \phi(e_n, e_1) & \cdots & \phi(e_n, e_n)
- \end{array} \right)
-   \left( \begin{array}{c}
-   y_1 \\
-   \vdots \\
-   y_n
- \end{array} \right)
- \end{align*} %]]></script>
-  </li>
-  <li>
-    <p>Colorful mathjax euqation.</p>
+<h2 id="section-3">5. 同步</h2>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># gdrive sync会标记同步文件，因此不要在同步文件夹中使用gdrive upload或者网页上传文件。未标记文件会被忽略。</span>
+</span><span class="line"><span class="c"># 同步列表</span>
+</span><span class="line"><span class="nv">$ </span>gdrive sync list
+</span><span class="line">
+</span><span class="line"><span class="c"># 同步列表内容</span>
+</span><span class="line"><span class="nv">$ </span>gdrive sync content VUxydm5iMnM5LWs
+</span><span class="line">
+</span><span class="line"><span class="c"># 上传</span>
+</span><span class="line"><span class="nv">$ </span>gdrive sync upload myLocaldir 0BzTeuubJesi
+</span><span class="line">
+</span><span class="line"><span class="c"># 下载</span>
+</span><span class="line"><span class="nv">$ </span>gdrive sync download 0BzTeuubJesi myLocaldir
+</span><span class="line">
+</span><span class="line"><span class="c"># 查询所有版本</span>
+</span><span class="line">gdrive revision list YUlPWWdLcy1mX2c
+</span><span class="line">
+</span><span class="line"><span class="c"># 下载某一版本，最后两个Id分别为文件Id和版本Id</span>
+</span><span class="line">gdrive revision download YUlPWWdLcy1mX2c Y3JBWEJ5a0gwZndlR3hzWlZubFlUMWFnaHVnPQ
+</span><span class="line">
+</span><span class="line"><span class="c"># 删除某一版本</span>
+</span><span class="line">gdrive revision delete YUlPWWdLcy1mX2c Y3JBWEJ5a0gwZndlR3hzWlZubFlUMWFnaHVnPQ
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-    <script type="math/tex; mode=display">\definecolor{energy}{RGB}{114,0,172}
- \definecolor{freq}{RGB}{45,177,93}
- \definecolor{spin}{RGB}{251,0,29}
- \definecolor{signal}{RGB}{18,110,213}
- \definecolor{circle}{RGB}{217,86,16}
- \definecolor{average}{RGB}{203,23,206}
- \color{energy} X_{\color{freq} k} \color{black} =
- \color{average} \frac{1}{N} \sum_{n=0}^{N-1}
- \color{signal}x_n \color{spin}
- e^{\mathrm{i} \color{circle} 2\pi \color{freq}k
- \color{average} \frac{n}{N}}</script>
+<h3 id="section-4">更新记录</h3>
 
-    <p>To find <font color="#7200AC">the energy</font></p>
-    <font color="2DB15D">at a particular frequency</font>
-    <p>,</p>
-    <font color="#FB001D">spin</font>
-    <font color="#126ED5">your
- signal</font>
-    <font color="#D04400">around a circle</font>
-    <font color="2DB15D">at that frequency</font>
-    <p>, and</p>
-    <font color="#CB17CE">average a bunch of points along that
- path</font>
-    <p>.</p>
-  </li>
-</ol>
-
-<ul>
-  <li>Show the block.</li>
-</ul>
-
-<blockquote>
-  <p>This is the block</p>
-</blockquote>
+<p>2016年10月21日</p>
 
 </div>
 
@@ -290,13 +328,13 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-07-05T10:04:38+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2016-10-21T18:24:31+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
           
 
 <span class="glyphicon glyphicon-tags"></span>&nbsp;
 <span class="categories">
   
-    <a class='category' href='/blog/categories/saysomething/'>saysomething</a>
+    <a class='category' href='/blog/categories/linux/'>linux</a>
   
 </span>
 
@@ -305,7 +343,7 @@
         
           <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.bionutshell.org/blog/2014/07/05/my-first-post/" data-via="" data-counturl="http://yulongniu.bionutshell.org/blog/2014/07/05/my-first-post/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.bionutshell.org/blog/2016/10/21/linux-sync-google-drive/" data-via="" data-counturl="http://yulongniu.bionutshell.org/blog/2016/10/21/linux-sync-google-drive/" >Tweet</a>
   
   
   
@@ -315,10 +353,8 @@
         
           <ul class="meta text-muted pager">
             
-            <li class="previous"><a href="/blog/2014/06/26/tophat-cufflinks-cummerbund/" title="Previous Post: TopHat/Cufflinks/CummeRbund使用介绍">&laquo; TopHat/Cufflinks/CummeRbund使用介绍</a></li>
+            <li class="previous"><a href="/blog/2016/09/22/how-to-publish-in-nc/" title="Previous Post: 如何在Nature communications上发表文章">&laquo; 如何在Nature communications上发表文章</a></li>
             
-            
-            <li class="next"><a href="/blog/2014/07/23/octopress-install/" title="Next Post: Octopress安装和使用">Octopress安装和使用 &raquo;</a></li>
             
           </ul>
         
@@ -343,7 +379,7 @@
   
   <div id="recent_posts" class="list-group">
     
-    <a class="list-group-item " href="/blog/2016/10/21/linux-sync-google-drive/">命令行使用Google Drive</a>
+    <a class="list-group-item active" href="/blog/2016/10/21/linux-sync-google-drive/">命令行使用Google Drive</a>
     
     <a class="list-group-item " href="/blog/2016/09/22/how-to-publish-in-nc/">如何在Nature Communications上发表文章</a>
     
@@ -449,8 +485,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://yulongniu.bionutshell.org/blog/2014/07/05/my-first-post/';
-        var disqus_url = 'http://yulongniu.bionutshell.org/blog/2014/07/05/my-first-post/';
+        var disqus_identifier = 'http://yulongniu.bionutshell.org/blog/2016/10/21/linux-sync-google-drive/';
+        var disqus_url = 'http://yulongniu.bionutshell.org/blog/2016/10/21/linux-sync-google-drive/';
         var disqus_script = 'embed.js';
       
     (function () {
