@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2016-10-21T20:57:33+08:00</updated>
+  <updated>2016-10-21T21:12:10+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -78,7 +78,25 @@
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>gdrive delete -r 0BzTeuubJesi
 </span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="section-4">5. 同步</h2>
+<h2 id="section-4">4. 普通上传和下载</h2>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 上传文件至制定文件夹</span>
+</span><span class='line'><span class="nv">$ </span>gdrive upload -p M1h4M1dGYUhpSFE myFile&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-5&quot;</span>&gt;下载文件&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>gdrive download 0BzTeuubJesi&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2 id="section-6">5. 同步</h2>
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -104,26 +122,26 @@
 </span><span class='line'><span class="c"># 同步列表</span>
 </span><span class='line'><span class="nv">$ </span>gdrive sync list&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-5&quot;</span>&gt;同步列表内容&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-7&quot;</span>&gt;同步列表内容&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>gdrive sync content VUxydm5iMnM5LWs&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-6&quot;</span>&gt;上传&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-8&quot;</span>&gt;上传&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>gdrive sync upload myLocaldir 0BzTeuubJesi&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-7&quot;</span>&gt;下载&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-9&quot;</span>&gt;下载&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>gdrive sync download 0BzTeuubJesi myLocaldir&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-8&quot;</span>&gt;查询所有版本&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-10&quot;</span>&gt;查询所有版本&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;gdrive revision list YUlPWWdLcy1mX2c&lt;/p&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;ididid&quot;</span>&gt;下载某一版本，最后两个Id分别为文件Id和版本Id&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;gdrive revision download YUlPWWdLcy1mX2c Y3JBWEJ5a0gwZndlR3hzWlZubFlUMWFnaHVnPQ&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-9&quot;</span>&gt;删除某一版本&lt;/h1&gt;
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-11&quot;</span>&gt;删除某一版本&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;gdrive revision delete YUlPWWdLcy1mX2c Y3JBWEJ5a0gwZndlR3hzWlZubFlUMWFnaHVnPQ
 </span></code></pre></td></tr></table></div></figure></p>
 
-<h3 id="section-10">更新记录</h3>
+<h3 id="section-12">更新记录</h3>
 
 <p>2016年10月21日</p>
 
