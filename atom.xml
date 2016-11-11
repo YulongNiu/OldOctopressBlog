@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2016-10-21T21:12:10+08:00</updated>
+  <updated>2016-11-11T16:58:35+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -12,6 +12,148 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[两个git的rebase命令应用]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2016/11/11/git-rebase-examples/"/>
+    <updated>2016-11-11T16:24:39+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2016/11/11/git-rebase-examples</id>
+    <content type="html"><![CDATA[<p>介绍两个<code>git rebase</code>的应用场景，一个是合并commits记录，另一个是贡献代码。</p>
+
+<h2 id="commit">1. 合并commit记录</h2>
+
+<p>假定有多条commits，按照离当前时间从近至远依次为：<code>c1</code>、<code>b2</code>、<code>b1</code>和<code>a1</code>。希望合并<code>c1</code>、<code>b2</code>和<code>b1</code>，即只保留<code>c1</code>和<code>a1</code>。操作流程如下：</p>
+
+<!--more-->
+
+<ul>
+  <li>打开交互式rebase</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>interactive rebase </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>git rebase -i sha1id-of-a1
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>标记合并commits</li>
+</ul>
+
+<p>弹出的文本编辑器初始可能为：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">pick sha1id-of-c1 c1
+</span><span class="line">pick sha1id-of-b2 b2
+</span><span class="line">pick sha1id-of-b1 b1
+</span><span class="line">...</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>修改为：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">pick sha1id-of-c1 c1
+</span><span class="line">squash sha1id-of-b2 b2
+</span><span class="line">squash sha1id-of-b1 b1
+</span><span class="line">...</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>记录合并commits</li>
+</ul>
+
+<p>在弹出的文本编辑器中标记和注释commits</p>
+
+<ul>
+  <li>提交远程</li>
+</ul>
+
+<p>由于本地和远程记录不一致，需要强制合并。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>force push </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>git push -f origin mybranch
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section">2. 贡献代码</h2>
+
+<ul>
+  <li>Fork项目</li>
+</ul>
+
+<p>Fork在GitHub对应的项目（famous/project，master分支）至自己账户（my/project），克隆至本地并添加远程地址：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>clone project </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>git clone https://github.com/my/project.git
+</span><span class="line"><span class="nv">$ </span>git remote add upstream https://github.com/famous/project.git
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>建立分支并提交修改</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>commit </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>git checkout -b devbranch
+</span><span class="line"><span class="nv">$ </span>git commit -a -m <span class="s1">&#39;these commits&#39;</span>
+</span><span class="line"><span class="nv">$ </span>git push origin devbranch
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>获取和合并最新远程修改</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>commit </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>git checkout master
+</span><span class="line"><span class="nv">$ </span>git pull upstream master
+</span><span class="line"><span class="nv">$ </span>git checkout devbranch
+</span><span class="line">
+</span><span class="line"><span class="nv">$ </span>git rebase master
+</span><span class="line"><span class="c">## compare and merge the latest commits</span>
+</span><span class="line"><span class="nv">$ </span>git rebase --continue
+</span><span class="line">
+</span><span class="line"><span class="c">## force push</span>
+</span><span class="line"><span class="nv">$ </span>git push -f origin devbranch
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>发起pull request。</li>
+</ul>
+
+<h3 id="section-1">参考资料</h3>
+
+<ol>
+  <li>
+    <p><a href="http://itspg.logdown.com/posts/1731-git-squash-master-commits">合并分支</a></p>
+  </li>
+  <li>
+    <p><a href="https://segmentfault.com/a/1190000000736629">贡献代码</a></p>
+  </li>
+</ol>
+
+<h3 id="section-2">更新记录</h3>
+
+<p>2016年11月11日</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[命令行使用Google Drive]]></title>
@@ -4161,596 +4303,6 @@ MAPQ = -10 \times log_{10}(pvalue)
 <h3 id="section-18">更新记录</h3>
 
 <p>2015年4月30日</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Emacs配置C语言编程环境]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2014/12/02/emacs-config-c/"/>
-    <updated>2014-12-02T06:36:41+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2014/12/02/emacs-config-c</id>
-    <content type="html"><![CDATA[<p>有很多优秀的C语言IDE用来实现高效的编程，比如<a href="https://www.jetbrains.com/clion/">CLion</a>。目前，CLion还在处于公开测试阶段，可以下载试用。本文介绍在Emacs下配置C/C++编程环境。</p>
-
-<!--more-->
-
-<h2 id="section">1. 安装和基本配置</h2>
-
-<h3 id="section-1">1.1. 安装需求</h3>
-
-<ul>
-  <li>安装<a href="http://www.gnu.org/software/global/">GNU Global</a></li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># dnf install global llvm llvm-devel clang* </span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>安装Emacs的<code>helm</code>、<code>helm-swoop</code>、<code>helm-gtags</code>、<code>sr-speedbar</code>、<code>smartparens</code>、<code>google-c-style</code>、<code>auto-complete</code>、<code>auto-complete-c-headers</code>、<code>auto-complete-clang</code>包。</li>
-</ul>
-
-<h3 id="emacs">1.2. Emacs配置</h3>
-
-<p>将<a href="#c-mode-config">附加环境设置</a>添加到Emacs设置文件，比如<code class="language-bash">~/.emacs</code>，此环境配置参考<a href="https://github.com/tuhdo/emacs-c-ide-demo/blob/master/custom/setup-helm.el">tuhdo</a>。</p>
-
-<h2 id="section-2">2. 文件操作</h2>
-
-<h3 id="section-3">2.1. 查找</h3>
-
-<ul>
-  <li>当前buffer查找函数、类的定义</li>
-</ul>
-
-<blockquote>
-  <p><code>C-c h i</code>（helm-semantic-or-imenu）：可以输入部分关键词、空格等，以快速搜索。</p>
-</blockquote>
-
-<ul>
-  <li>当前project查找定义</li>
-</ul>
-
-<blockquote>
-  <ol>
-    <li>
-      <p><code>M-.</code>（helm-gtags-dwim）：输入查找内容。<code>M-,</code>（tags-loop-continue）：返回上一个buffer。</p>
-    </li>
-    <li>
-      <p><code>C-j</code>（helm-gtags-select）：列出当前project所有定义，并且查找。</p>
-    </li>
-  </ol>
-</blockquote>
-
-<ul>
-  <li>查找引用</li>
-</ul>
-
-<blockquote>
-  <ol>
-    <li>
-      <p><code>C-c g r</code>（helm-gtags-find-rtags）：光标停留在函数内部，查找该函数名；如果光标停留在函数名，查找该函数的所有引用。</p>
-    </li>
-    <li>
-      <p><code>C-c g s</code>（helm-gtags-find-symbol）：光标停留在变量时的查找。</p>
-    </li>
-  </ol>
-</blockquote>
-
-<ul>
-  <li>查找当前函数引用的函数</li>
-</ul>
-
-<blockquote>
-  <p><code>C-c g a</code>（helm-gtags-tags-in-this-function）</p>
-</blockquote>
-
-<ul>
-  <li>查找文件</li>
-</ul>
-
-<blockquote>
-  <p><code>C-c g P</code>（elm-gtags-find-files）</p>
-</blockquote>
-
-<h3 id="section-4">2.2. 列出源码树</h3>
-
-<ul>
-  <li>开启和关闭</li>
-</ul>
-
-<blockquote>
-  <p><code>M-x sr-speedbar-open RET</code>：开启。<code>M-x sr-speedbar-close RET</code>：关闭。</p>
-</blockquote>
-
-<ul>
-  <li>操作</li>
-</ul>
-
-<blockquote>
-  <ol>
-    <li>
-      <p><code>b</code>和<code>f</code>切换到当前buffer和所有文件列表。</p>
-    </li>
-    <li>
-      <p><code>=</code>：展开。<code>g</code>：收回。</p>
-    </li>
-    <li>
-      <p><code>U</code>：上一级目录。</p>
-    </li>
-  </ol>
-</blockquote>
-
-<h3 id="section-5">2.3 代码补全</h3>
-
-<p>代码补全使用<code>auto-complete</code>、<code>auto-complete-c-headers</code>、<code>semantic</code>包。在使用<code>auto-complete-c-headers</code>自动补全头文件名称时，使用以下命令获得头文件路径：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>gcc -xc -E -v -
-</span><span class="line"><span class="nv">$ </span>gcc -xc++ -E -v -
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><img src="http://yulongniu.bionutshell.org/images/emacs_config_c_autocomplete.png" width="900" height="900" title="image" alt="images" /></p>
-
-<h2 id="debug">3. 编译和debug</h2>
-
-<h3 id="gcc">3.1 使用gcc编译</h3>
-
-<p>使用<code>M-x compile</code>对源文件进行编译链接；或者开启ansi-term模式<code>M-x ansi-term</code>，进入shell操作。一个直接编译–汇编–链接的简单例子：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>gcc helloworld.c -o helloworld
-</span><span class="line"><span class="nv">$ </span>./helloworld
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-6">附加内容</h2>
-
-<p><a id="c-mode-config">C/C++的Emacs编程环境设置</a></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Emacs configure </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-<span class="line-number">41</span>
-<span class="line-number">42</span>
-<span class="line-number">43</span>
-<span class="line-number">44</span>
-<span class="line-number">45</span>
-<span class="line-number">46</span>
-<span class="line-number">47</span>
-<span class="line-number">48</span>
-<span class="line-number">49</span>
-<span class="line-number">50</span>
-<span class="line-number">51</span>
-<span class="line-number">52</span>
-<span class="line-number">53</span>
-<span class="line-number">54</span>
-<span class="line-number">55</span>
-<span class="line-number">56</span>
-<span class="line-number">57</span>
-<span class="line-number">58</span>
-<span class="line-number">59</span>
-<span class="line-number">60</span>
-<span class="line-number">61</span>
-<span class="line-number">62</span>
-<span class="line-number">63</span>
-<span class="line-number">64</span>
-<span class="line-number">65</span>
-<span class="line-number">66</span>
-<span class="line-number">67</span>
-<span class="line-number">68</span>
-<span class="line-number">69</span>
-<span class="line-number">70</span>
-<span class="line-number">71</span>
-<span class="line-number">72</span>
-<span class="line-number">73</span>
-<span class="line-number">74</span>
-<span class="line-number">75</span>
-<span class="line-number">76</span>
-<span class="line-number">77</span>
-<span class="line-number">78</span>
-<span class="line-number">79</span>
-<span class="line-number">80</span>
-<span class="line-number">81</span>
-<span class="line-number">82</span>
-<span class="line-number">83</span>
-<span class="line-number">84</span>
-<span class="line-number">85</span>
-<span class="line-number">86</span>
-<span class="line-number">87</span>
-<span class="line-number">88</span>
-<span class="line-number">89</span>
-<span class="line-number">90</span>
-<span class="line-number">91</span>
-<span class="line-number">92</span>
-<span class="line-number">93</span>
-<span class="line-number">94</span>
-<span class="line-number">95</span>
-<span class="line-number">96</span>
-<span class="line-number">97</span>
-<span class="line-number">98</span>
-<span class="line-number">99</span>
-<span class="line-number">100</span>
-<span class="line-number">101</span>
-<span class="line-number">102</span>
-<span class="line-number">103</span>
-<span class="line-number">104</span>
-<span class="line-number">105</span>
-<span class="line-number">106</span>
-<span class="line-number">107</span>
-<span class="line-number">108</span>
-<span class="line-number">109</span>
-<span class="line-number">110</span>
-<span class="line-number">111</span>
-<span class="line-number">112</span>
-<span class="line-number">113</span>
-<span class="line-number">114</span>
-<span class="line-number">115</span>
-<span class="line-number">116</span>
-<span class="line-number">117</span>
-<span class="line-number">118</span>
-<span class="line-number">119</span>
-<span class="line-number">120</span>
-<span class="line-number">121</span>
-<span class="line-number">122</span>
-<span class="line-number">123</span>
-<span class="line-number">124</span>
-<span class="line-number">125</span>
-<span class="line-number">126</span>
-<span class="line-number">127</span>
-<span class="line-number">128</span>
-<span class="line-number">129</span>
-<span class="line-number">130</span>
-<span class="line-number">131</span>
-<span class="line-number">132</span>
-<span class="line-number">133</span>
-<span class="line-number">134</span>
-<span class="line-number">135</span>
-<span class="line-number">136</span>
-<span class="line-number">137</span>
-<span class="line-number">138</span>
-<span class="line-number">139</span>
-<span class="line-number">140</span>
-<span class="line-number">141</span>
-<span class="line-number">142</span>
-<span class="line-number">143</span>
-<span class="line-number">144</span>
-<span class="line-number">145</span>
-<span class="line-number">146</span>
-<span class="line-number">147</span>
-<span class="line-number">148</span>
-<span class="line-number">149</span>
-<span class="line-number">150</span>
-<span class="line-number">151</span>
-<span class="line-number">152</span>
-<span class="line-number">153</span>
-<span class="line-number">154</span>
-<span class="line-number">155</span>
-<span class="line-number">156</span>
-<span class="line-number">157</span>
-<span class="line-number">158</span>
-<span class="line-number">159</span>
-<span class="line-number">160</span>
-<span class="line-number">161</span>
-<span class="line-number">162</span>
-<span class="line-number">163</span>
-<span class="line-number">164</span>
-<span class="line-number">165</span>
-<span class="line-number">166</span>
-<span class="line-number">167</span>
-<span class="line-number">168</span>
-<span class="line-number">169</span>
-<span class="line-number">170</span>
-<span class="line-number">171</span>
-<span class="line-number">172</span>
-<span class="line-number">173</span>
-<span class="line-number">174</span>
-<span class="line-number">175</span>
-<span class="line-number">176</span>
-<span class="line-number">177</span>
-<span class="line-number">178</span>
-<span class="line-number">179</span>
-<span class="line-number">180</span>
-<span class="line-number">181</span>
-<span class="line-number">182</span>
-<span class="line-number">183</span>
-<span class="line-number">184</span>
-<span class="line-number">185</span>
-<span class="line-number">186</span>
-<span class="line-number">187</span>
-<span class="line-number">188</span>
-<span class="line-number">189</span>
-<span class="line-number">190</span>
-<span class="line-number">191</span>
-<span class="line-number">192</span>
-<span class="line-number">193</span>
-<span class="line-number">194</span>
-<span class="line-number">195</span>
-<span class="line-number">196</span>
-<span class="line-number">197</span>
-<span class="line-number">198</span>
-<span class="line-number">199</span>
-<span class="line-number">200</span>
-<span class="line-number">201</span>
-<span class="line-number">202</span>
-<span class="line-number">203</span>
-<span class="line-number">204</span>
-<span class="line-number">205</span>
-<span class="line-number">206</span>
-<span class="line-number">207</span>
-<span class="line-number">208</span>
-<span class="line-number">209</span>
-<span class="line-number">210</span>
-<span class="line-number">211</span>
-<span class="line-number">212</span>
-<span class="line-number">213</span>
-</pre></td><td class="code"><pre><code class="emacs-lisp"><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-</span><span class="line"><span class="c1">;set up helm</span>
-</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;helm-config</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;helm-grep</span><span class="p">)</span>
-</span><span class="line"><span class="c1">;; The default &quot;C-x c&quot; is quite close to &quot;C-x C-c&quot;, which quits Emacs.</span>
-</span><span class="line"><span class="c1">;; Changed to &quot;C-c h&quot;. Note: We must set &quot;C-c h&quot; globally, because we</span>
-</span><span class="line"><span class="c1">;; cannot change `helm-command-prefix-key&#39; once `helm-config&#39; is loaded.</span>
-</span><span class="line"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c h&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-command-prefix</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">global-unset-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-x c&quot;</span><span class="p">))</span>
-</span><span class="line">
-</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;&lt;tab&gt;&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-execute-persistent-action</span><span class="p">)</span> <span class="c1">; rebihnd tab to do persistent action</span>
-</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-i&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-execute-persistent-action</span><span class="p">)</span> <span class="c1">; make TAB works in terminal</span>
-</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-z&quot;</span><span class="p">)</span>  <span class="ss">&#39;helm-select-action</span><span class="p">)</span> <span class="c1">; list actions using C-z</span>
-</span><span class="line">
-</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-grep-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;&lt;return&gt;&quot;</span><span class="p">)</span>  <span class="ss">&#39;helm-grep-mode-jump-other-window</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-grep-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;n&quot;</span><span class="p">)</span>  <span class="ss">&#39;helm-grep-mode-jump-other-window-forward</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-grep-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;p&quot;</span><span class="p">)</span>  <span class="ss">&#39;helm-grep-mode-jump-other-window-backward</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">executable-find</span> <span class="s">&quot;curl&quot;</span><span class="p">)</span>
-</span><span class="line">  <span class="p">(</span><span class="k">setq</span> <span class="nv">helm-google-suggest-use-curl-p</span> <span class="no">t</span><span class="p">))</span>
-</span><span class="line">
-</span><span class="line"><span class="p">(</span><span class="k">setq</span>
-</span><span class="line"> <span class="nv">helm-scroll-amount</span> <span class="mi">4</span> <span class="c1">; scroll 4 lines other window using M-&lt;next&gt;/M-&lt;prior&gt;</span>
-</span><span class="line"> <span class="nv">helm-quick-update</span> <span class="no">t</span> <span class="c1">; do not display invisible candidates</span>
-</span><span class="line"> <span class="nv">helm-ff-search-library-in-sexp</span> <span class="no">t</span> <span class="c1">; search for library in `require&#39; and `declare-function&#39; sexp.</span>
-</span><span class="line"> <span class="nv">helm-split-window-in-side-p</span> <span class="no">t</span> <span class="c1">;; open helm buffer inside current window, not occupy whole other window</span>
-</span><span class="line"> <span class="nv">helm-candidate-number-limit</span> <span class="mi">500</span> <span class="c1">; limit the number of displayed canidates</span>
-</span><span class="line"> <span class="nv">helm-ff-file-name-history-use-recentf</span> <span class="no">t</span>
-</span><span class="line"> <span class="nv">helm-move-to-line-cycle-in-source</span> <span class="no">t</span> <span class="c1">; move to end or beginning of source when reaching top or bottom of source.</span>
-</span><span class="line"> <span class="nv">helm-buffers-fuzzy-matching</span> <span class="no">t</span>          <span class="c1">; fuzzy matching buffer names when non-nil</span>
-</span><span class="line">                                        <span class="c1">; useful in helm-mini that lists buffers</span>
-</span><span class="line">
-</span><span class="line"> <span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;helm-sources-using-default-as-input</span> <span class="ss">&#39;helm-source-man-pages</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-x&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-M-x</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-y&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-show-kill-ring</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-x b&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-mini</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-x C-f&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-find-files</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-h SPC&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-all-mark-rings</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c h o&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-occur</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c h C-c w&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-wikipedia-suggest</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c h x&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-register</span><span class="p">)</span>
-</span><span class="line"><span class="c1">;; (global-set-key (kbd &quot;C-x r j&quot;) &#39;jump-to-register)</span>
-</span><span class="line">
-</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="ss">&#39;help-command</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-f&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-apropos</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="ss">&#39;help-command</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;r&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-info-emacs</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="ss">&#39;help-command</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-l&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-locate-library</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">;; use helm to list eshell history</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;eshell-mode-hook</span>
-</span><span class="line">          <span class="nf">#&#39;</span><span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
-</span><span class="line">              <span class="p">(</span><span class="nv">define-key</span> <span class="nv">eshell-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-l&quot;</span><span class="p">)</span>  <span class="ss">&#39;helm-eshell-history</span><span class="p">)))</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">;;; Save current position to mark ring</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;helm-goto-line-before-hook</span> <span class="ss">&#39;helm-save-current-pos-to-mark-ring</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">;; show minibuffer history with Helm</span>
-</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">minibuffer-local-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-p&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-minibuffer-history</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">minibuffer-local-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-n&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-minibuffer-history</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[remap</span> <span class="nv">find-tag]</span> <span class="ss">&#39;helm-etags-select</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[remap</span> <span class="nv">list-buffers]</span> <span class="ss">&#39;helm-buffers-list</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-</span><span class="line"><span class="c1">;; PACKAGE: helm-swoop                ;;</span>
-</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-</span><span class="line"><span class="c1">;; Locate the helm-swoop folder to your path</span>
-</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;helm-swoop</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">;; Change the keybinds to whatever you like :)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c h o&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-swoop</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c s&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-multi-swoop-all</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">;; When doing isearch, hand the word over to helm-swoop</span>
-</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">isearch-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-i&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-swoop-from-isearch</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">;; From helm-swoop to helm-multi-swoop-all</span>
-</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-swoop-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-i&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-multi-swoop-all-from-helm-swoop</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">;; Save buffer when helm-multi-swoop-edit complete</span>
-</span><span class="line"><span class="p">(</span><span class="k">setq</span> <span class="nv">helm-multi-swoop-edit-save</span> <span class="no">t</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">;; If this value is t, split window inside the current window</span>
-</span><span class="line"><span class="p">(</span><span class="k">setq</span> <span class="nv">helm-swoop-split-with-multiple-windows</span> <span class="no">t</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">;; Split direcion. &#39;split-window-vertically or &#39;split-window-horizontally</span>
-</span><span class="line"><span class="p">(</span><span class="k">setq</span> <span class="nv">helm-swoop-split-direction</span> <span class="ss">&#39;split-window-vertically</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">;; If nil, you can slightly boost invoke speed in exchange for text color</span>
-</span><span class="line"><span class="p">(</span><span class="k">setq</span> <span class="nv">helm-swoop-speed-or-color</span> <span class="no">t</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="p">(</span><span class="nv">helm-mode</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;setup-helm</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;setup-helm</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="k">setq</span>
-</span><span class="line"> <span class="nv">helm-gtags-ignore-case</span> <span class="no">t</span>
-</span><span class="line"> <span class="nv">helm-gtags-auto-update</span> <span class="no">t</span>
-</span><span class="line"> <span class="nv">helm-gtags-use-input-at-cursor</span> <span class="no">t</span>
-</span><span class="line"> <span class="nv">helm-gtags-pulse-at-cursor</span> <span class="no">t</span>
-</span><span class="line"> <span class="nv">helm-gtags-prefix-key</span> <span class="s">&quot;\C-cg&quot;</span>
-</span><span class="line"> <span class="nv">helm-gtags-suggested-key-mapping</span> <span class="no">t</span>
-</span><span class="line"> <span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;helm-gtags</span><span class="p">)</span>
-</span><span class="line"><span class="c1">;; Enable helm-gtags-mode</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;dired-mode-hook</span> <span class="ss">&#39;helm-gtags-mode</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;eshell-mode-hook</span> <span class="ss">&#39;helm-gtags-mode</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;c-mode-hook</span> <span class="ss">&#39;helm-gtags-mode</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;c++-mode-hook</span> <span class="ss">&#39;helm-gtags-mode</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;asm-mode-hook</span> <span class="ss">&#39;helm-gtags-mode</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-gtags-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c g a&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-gtags-tags-in-this-function</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-gtags-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-j&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-gtags-select</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-gtags-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-.&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-gtags-dwim</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-gtags-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-,&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-gtags-pop-stack</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-gtags-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c &lt;&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-gtags-previous-history</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-gtags-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c &gt;&quot;</span><span class="p">)</span> <span class="ss">&#39;helm-gtags-next-history</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;</span>
-</span><span class="line"><span class="c1">;enable semantic mode</span>
-</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;</span>
-</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;cc-mode</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;semantic</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="p">(</span><span class="nv">global-semanticdb-minor-mode</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">global-semantic-idle-scheduler-mode</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">global-semantic-idle-summary-mode</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">global-semantic-stickyfunc-mode</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="p">(</span><span class="nv">semantic-mode</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;</span>
-</span><span class="line"><span class="c1">;open hs-mode</span>
-</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;c-mode-common-hook</span>   <span class="ss">&#39;hs-minor-mode</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;</span>
-</span><span class="line"><span class="c1">;google-c-style</span>
-</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;c-mode-common-hook</span> <span class="ss">&#39;google-set-c-style</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;c-mode-common-hook</span> <span class="ss">&#39;google-make-newline-indent</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;</span>
-</span><span class="line"><span class="c1">;smartparens</span>
-</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;</span>
-</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;smartparens-config</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">show-smartparens-global-mode</span> <span class="no">t</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">smartparens-global-mode</span> <span class="no">t</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-</span><span class="line"><span class="c1">; auto-complete</span>
-</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;auto-complete</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;auto-complete-config</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">ac-config-default</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-</span><span class="line"><span class="c1">;; auto-complete-c-headers </span>
-</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-</span><span class="line"><span class="p">(</span><span class="nb">defun</span> <span class="nv">my:ac-c-header-init</span><span class="p">()</span>
-</span><span class="line">  <span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;auto-complete-c-headers</span><span class="p">)</span>
-</span><span class="line">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;ac-sources</span> <span class="ss">&#39;ac-source-c-headers</span><span class="p">)</span>
-</span><span class="line">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;achead:include-directories</span> <span class="o">&#39;</span><span class="s">&quot;/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2&quot;</span><span class="p">)</span>
-</span><span class="line">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;achead:include-directories</span> <span class="o">&#39;</span><span class="s">&quot;/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/x86_64-redhat-linux&quot;</span><span class="p">)</span>
-</span><span class="line">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;achead:include-directories</span> <span class="o">&#39;</span><span class="s">&quot;/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/backward&quot;</span><span class="p">)</span>
-</span><span class="line">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;achead:include-directories</span> <span class="o">&#39;</span><span class="s">&quot;/usr/lib/gcc/x86_64-redhat-linux/4.9.2/include&quot;</span><span class="p">)</span>
-</span><span class="line">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;achead:include-directories</span> <span class="o">&#39;</span><span class="s">&quot;/usr/local/include&quot;</span><span class="p">)</span>
-</span><span class="line">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;achead:include-directories</span> <span class="o">&#39;</span><span class="s">&quot;/usr/include&quot;</span><span class="p">)</span>
-</span><span class="line">  <span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;c++-mode-hook</span> <span class="ss">&#39;my:ac-c-header-init</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;c-mode-hook</span> <span class="ss">&#39;my:ac-c-header-init</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-</span><span class="line"><span class="c1">;; auto-complete-clang </span>
-</span><span class="line"><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-</span><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;auto-complete-clang</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="k">setq</span> <span class="nv">ac-auto-start</span> <span class="no">t</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="k">setq</span> <span class="nv">ac-quick-help-delay</span> <span class="mf">0.5</span><span class="p">)</span>
-</span><span class="line"><span class="c1">;; (ac-set-trigger-key &quot;TAB&quot;)</span>
-</span><span class="line"><span class="c1">;; (define-key ac-mode-map  [(control tab)] &#39;auto-complete)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">define-key</span> <span class="nv">ac-mode-map</span>  <span class="nv">[</span><span class="p">(</span><span class="nv">control</span> <span class="nv">tab</span><span class="p">)</span><span class="nv">]</span> <span class="ss">&#39;auto-complete</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-ac-config</span> <span class="p">()</span>
-</span><span class="line">  <span class="p">(</span><span class="k">setq</span> <span class="nv">ac-clang-flags</span>
-</span><span class="line">	<span class="p">(</span><span class="nb">mapcar</span><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">item</span><span class="p">)(</span><span class="nv">concat</span> <span class="s">&quot;-I&quot;</span> <span class="nv">item</span><span class="p">))</span>
-</span><span class="line">	       <span class="p">(</span><span class="nv">split-string</span>
-</span><span class="line">		<span class="s">&quot;</span>
-</span><span class="line"><span class="s">/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2</span>
-</span><span class="line"><span class="s">/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/x86_64-redhat-linux</span>
-</span><span class="line"><span class="s">/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/backward</span>
-</span><span class="line"><span class="s">/usr/lib/gcc/x86_64-redhat-linux/4.9.2/include</span>
-</span><span class="line"><span class="s">/usr/local/include</span>
-</span><span class="line"><span class="s">/usr/include&quot;</span>
-</span><span class="line">		<span class="p">)))</span>
-</span><span class="line">  <span class="p">(</span><span class="nv">setq-default</span> <span class="nv">ac-sources</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">ac-source-abbrev</span> <span class="nv">ac-source-dictionary</span> <span class="nv">ac-source-words-in-same-mode-buffers</span><span class="p">))</span>
-</span><span class="line">  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;emacs-lisp-mode-hook</span> <span class="ss">&#39;ac-emacs-lisp-mode-setup</span><span class="p">)</span>
-</span><span class="line">  <span class="c1">;; (add-hook &#39;c-mode-common-hook &#39;ac-cc-mode-setup)</span>
-</span><span class="line">  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;ruby-mode-hook</span> <span class="ss">&#39;ac-ruby-mode-setup</span><span class="p">)</span>
-</span><span class="line">  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;css-mode-hook</span> <span class="ss">&#39;ac-css-mode-setup</span><span class="p">)</span>
-</span><span class="line">  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;auto-complete-mode-hook</span> <span class="ss">&#39;ac-common-setup</span><span class="p">)</span>
-</span><span class="line">  <span class="p">(</span><span class="nv">global-auto-complete-mode</span> <span class="no">t</span><span class="p">))</span>
-</span><span class="line"><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-ac-cc-mode-setup</span> <span class="p">()</span>
-</span><span class="line">  <span class="p">(</span><span class="k">setq</span> <span class="nv">ac-sources</span> <span class="p">(</span><span class="nb">append</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">ac-source-clang</span> <span class="nv">ac-source-yasnippet</span><span class="p">)</span> <span class="nv">ac-sources</span><span class="p">)))</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;c-mode-common-hook</span> <span class="ss">&#39;my-ac-cc-mode-setup</span><span class="p">)</span>
-</span><span class="line"><span class="c1">;; ac-source-gtags</span>
-</span><span class="line"><span class="p">(</span><span class="nv">my-ac-config</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h3 id="section-7">参考资料</h3>
-
-<ul>
-  <li>
-    <p><a href="http://tuhdo.github.io/c-ide.html#sec-1-3">C/C++ Development Environment for Emacs</a></p>
-  </li>
-  <li>
-    <p><a href="https://www.youtube.com/watch?v=HTUE03LnaXA">YouTube Vedio</a></p>
-  </li>
-</ul>
-
-<h3 id="section-8">更新记录</h3>
-
-<p>2014年12月7日</p>
-
 ]]></content>
   </entry>
   

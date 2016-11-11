@@ -184,6 +184,80 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2016-07-21T19:35:29+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2016/07/21/subset-matrix-in-r/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2016/07/21/subset-matrix-in-r/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2016/07/21/subset-matrix-in-r/" itemprop="url">为什么不推荐在R语言中随意按照下标操作矩阵</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><p>这篇博文的目的是展示R语言中下标操作矩阵的潜在问题。R语言提供了多种方法提取一个矩阵的单个或者部分元素，不同方法对应的效率在Hadley Wickham的<a href="http://adv-r.had.co.nz/Performance.html#language-performance">Advance R</a>中已有讨论。这些方法中，使用最广泛的是通过下标（行或者列）取值，即操作符<code class="language-R">[</code>。然而，这种方法存在潜在问题，即内存中会拷贝原始对象。</p>
+
+<p>举例：首先建立一个矩阵，之后取这个矩阵除了第一行之外的部分，接下来操作这个部分矩阵。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>manipulate </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td><td class="code"><pre><code class="R"><span class="line"><span class="c1">## step1: build matrix</span>
+</span><span class="line">n <span class="o">&lt;-</span> <span class="m">8000</span>
+</span><span class="line">tmp1 <span class="o">&lt;-</span> <span class="kt">matrix</span><span class="p">(</span>rnorm<span class="p">(</span>n <span class="o">*</span> n<span class="p">),</span> nrow <span class="o">=</span> n<span class="p">,</span> ncol <span class="o">=</span> n<span class="p">)</span>
+</span><span class="line"><span class="kp">gc</span><span class="p">()</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">## step2: manipulate a subset of matrix</span>
+</span><span class="line"><span class="kp">sink</span><span class="p">(</span><span class="s">&#39;/dev/null&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="kp">apply</span><span class="p">(</span>tmp1<span class="p">[</span><span class="m">2</span><span class="o">:</span>n<span class="p">,</span> <span class="p">],</span> <span class="m">1</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> x<span class="p">[</span><span class="m">1</span><span class="p">])</span>
+</span><span class="line"><span class="kp">sink</span><span class="p">()</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">## step3: garbage collection</span>
+</span><span class="line"><span class="kp">gc</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2016/07/21/subset-matrix-in-r/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2016-04-17T22:42:25+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2016/04/17/pointers-in-c/#disqus_thread" itemprop="discussionUrl"
@@ -451,90 +525,6 @@
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-07-29T18:24:10+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2015/07/29/postgresql-usage/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2015/07/29/postgresql-usage/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2015/07/29/postgresql-usage/" itemprop="url">PostgreSQL使用指南</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="section">1. 查询</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Query </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-</pre></td><td class="code"><pre><code class="psql"><span class="line"><span class="c1">-- 选取特定的一列或者多列</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">-- 选取全部列</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="o">*</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">-- 去除重复，选取一列或多列中唯一元素</span>
-</span><span class="line"><span class="c1">-- 如输入多列，则去除多列组合后的重复</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">-- 指定输出列数</span>
-</span><span class="line"><span class="c1">-- a是输出行数，b是输出起始行（第一行计为0）</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="k">column</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line"><span class="k">LIMIT</span> <span class="n">a</span> <span class="k">OFFSET</span> <span class="n">b</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2015/07/29/postgresql-usage/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -558,6 +548,8 @@
   
   <div id="recent_posts" class="list-group">
     
+    <a class="list-group-item " href="/blog/2016/11/11/git-rebase-examples/">两个git的rebase命令应用</a>
+    
     <a class="list-group-item " href="/blog/2016/10/21/linux-sync-google-drive/">命令行使用Google Drive</a>
     
     <a class="list-group-item " href="/blog/2016/09/22/how-to-publish-in-nc/">如何在Nature Communications上发表文章</a>
@@ -565,8 +557,6 @@
     <a class="list-group-item " href="/blog/2016/09/10/hisat2-faq/">HISAT2使用问答</a>
     
     <a class="list-group-item " href="/blog/2016/09/10/reference-genome-location/">常用参考基因组下载地址</a>
-    
-    <a class="list-group-item " href="/blog/2016/07/21/subset-matrix-in-r/">为什么不推荐在R语言中随意按照下标操作矩阵</a>
     
   </div>
 </section>
@@ -578,7 +568,7 @@
     
     
     <a class="list-group-item " href="/blog/categories/linux/index.html">
-        <span class="badge">6</span>
+        <span class="badge">7</span>
         linux
       </a>
     
