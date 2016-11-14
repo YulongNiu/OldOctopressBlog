@@ -42,7 +42,7 @@ setClass(Class, representation, prototype, contains=character(),
 >
 > * contains：父类名，表示继承关系。
 >
-> * prototype：带名字的列表或`prototype()`，设定默认值。不建议添加。设定时，要结合`validity`定义，不要把默认值设定得无法通过检查。
+> * prototype：带名字的列表或`prototype()`，设定默认值。不建议添加，如果不设定，会自动指定一个符合类型的空对象。设定时，要结合`validity`定义，因为默认值不会被检查，即使不符合`validity`定义，也可以通过`validObject()`检查。
 >
 > * validity：函数，检查创建对象是否符合该类要求。建议添加，也可以使用`setValidity()`后期添加。
 >
@@ -74,6 +74,9 @@ setClass(Class = 'trickNum',
          slots = c(number = 'numeric'),
          contains = 'trick')
 
+setClass(Class = 'trickMult',
+         slots = c(trick1 = 'trick', trick2 = 'trick'))
+
 ## from setClass() help document, extend from built-in data type
 setClass("numWithId", 
          slots = c(id = "character"),
@@ -83,13 +86,48 @@ setClass("numWithId",
 numNoSlot <- setClass("numWithId", contains = "numeric")
 {% endcodeblock %}
 
-### 2.2 创建对象 ##
+### 2.2 创建、查看和删除对象 ##
 
+创建对象：
 
+{% raw %}
+```
+new(Class, ...)
+```
+{% endraw %}
+
+> * Class：类名。
+> 
+> * ...：各个slot赋值。如果没有赋值，则使用初始化值。
+
+查看对象和类的函数：
+
+* `getClass('className')`：查询一个类的情况，也包括该类的继承情况。返回结果的“Subclasses”表示含有的子类，“Extends”表示父类是什么。
+
+* `getSlots('className')`：查询某一个class的slots。
+
+* `slotNames(objName)`：查询一个对象的slots名称。
+
+* `@`和`slot(objName, 'slotName')`：查询一个对象的slot的值。也可以使用`@ <- value`和`slot(objName, 'slotName') <- value`赋值，只会检查类型，不会检查`validity`设定。
+
+* `.hasSlot(objName, 'slotName')`：查询一个对象是否有某个slot。
+
+删除对象：
+
+* `removeClass('className')`：删除类。
 
 ## 3. 确认检查 ##
 
-创建对象时，会有两种检查机制。1. 自动检查每个slot赋值类型是否正确，这种检查会一直被子类和slot含有该类的类（简称“slot含有类”）继承。2. 如果设定了`validity`，这种检查将一直被子类继承，但是slot含有类不会去检查slot赋值是否正确。对于这种情况，将`validObject(object, test = FALSE, complete = FALSE)`函数的`complete`参数设定为`TRUE`，可以检查出问题。
+创建对象时：
+
+1. 自动检查每个slot赋值类型是否正确，这种检查会一直被子类和slot含有该类的类（简称“slot含有类”）继承。
+
+2. 如果设定了`validity`，这种检查将一直被子类继承，但是slot含有类不会去检查slot赋值是否正确。对于这种情况，将`validObject(object, test = FALSE, complete = FALSE)`函数的`complete`参数设定为`TRUE`，可以检查出问题。
+
+修改slot时：
+
+使用`slot()`和`@`，只会检查slot类型是否正确，不会检查`validity`设定。不建议用户直接使用`@`。
+
 
 推荐在`setClass()`建立类时，同时设定好`validity`，而不是使用`setValidity(Class, method, where = topenv(parent.frame()))`后续设定。
 
