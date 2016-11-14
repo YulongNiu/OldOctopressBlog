@@ -24,7 +24,7 @@ ftype(method)
 
 <!--more-->
 
-## 2. 建立类 ##
+## 2. 类 ##
 
 ### 2.1 建立新类 ###
 
@@ -42,7 +42,7 @@ setClass(Class, representation, prototype, contains=character(),
 >
 > * contains：父类名，表示继承关系。
 >
-> * prototype：带名字的列表或`prototype()`，设定默认值。不建议添加，如果不设定，会自动指定一个符合类型的空对象。设定时，要结合`validity`定义，因为默认值不会被检查，即使不符合`validity`定义，也可以通过`validObject()`检查。
+> * prototype：带名字的列表或`prototype()`，设定默认值。除了空值外，不建议添。如果不设定，会自动指定一个符合类型的空值。设定时，要结合`validity`定义，因为默认值不会被检查，因为即使不符合`validity`定义，也可以通过`validObject()`检查。
 >
 > * validity：函数，检查创建对象是否符合该类要求。建议添加，也可以使用`setValidity()`后期添加。
 >
@@ -100,7 +100,7 @@ new(Class, ...)
 > 
 > * ...：各个slot赋值。如果没有赋值，则使用初始化值。
 
-查看对象和类的函数：
+查看对象和类：
 
 * `getClass('className')`：查询一个类的情况，也包括该类的继承情况。返回结果的“Subclasses”表示含有的子类，“Extends”表示父类是什么。
 
@@ -108,13 +108,13 @@ new(Class, ...)
 
 * `slotNames(objName)`：查询一个对象的slots名称。
 
-* `@`和`slot(objName, 'slotName')`：查询一个对象的slot的值。也可以使用`@ <- value`和`slot(objName, 'slotName') <- value`赋值，只会检查类型，不会检查`validity`设定。
+* `@`和`slot(objName, 'slotName')`：查询一个对象的slot的值。也可以使用`@ <- somVal`和`slot(objName, 'slotName') <- someVal`赋值，只会检查slot对应的类型，不会检查`validity`设定。一定不要执行`slot(objName, 'slotName', check = FALSE) <- someVal`，否则连类型都不检查。
 
 * `.hasSlot(objName, 'slotName')`：查询一个对象是否有某个slot。
 
 删除对象：
 
-* `removeClass('className')`：删除类。
+* `removeClass('className')`：删除类，但是会保留这个类的方法和子类。
 
 ## 3. 确认检查 ##
 
@@ -159,6 +159,20 @@ validObject(tm1)
 ## return FALSE
 validObject(tm1, complete = TRUE)
 {% endcodeblock %}
+
+
+## 4. 方法 ##
+
+### 4.1 建立方法 ###
+
+### 4.2 创建、查看和删除方法 ###
+
+
+查看方法：
+
+* 
+
+
 
 
 ### 参考资料 ###
