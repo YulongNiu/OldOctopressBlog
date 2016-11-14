@@ -1,0 +1,105 @@
+---
+layout: post
+title: "R面向对象编程S4"
+date: 2012-05-05 15:19:36 +0800
+comments: true
+published: true
+categories: R
+---
+
+
+## 1. 一些S3的铺垫 ##
+
+在博文“[Linux安装R语言包](http://yulongniu.bionutshell.org/blog/2010/09/04/linux-install-r/)”描述了如何查看一个函数的源代码，其中涉及了例如`methods()`函数，用来查看一个S3泛函（S3 generic）的方法。在<span style="color: blue">pryr</span>包中，提供了更加便捷的查看方法。
+
+{% codeblock lang:R  pryr check objects and methods%}
+library('pryr')
+
+## object is base type, S3, S4 or RC
+otype(obj)
+
+## function is genetic or method
+ftype(method)
+{% endcodeblock %}
+
+<!--more-->
+
+## 2. 建立类 ##
+
+### 2.1 建立新类 ###
+
+{% raw %}
+```
+setClass(Class, representation, prototype, contains=character(),
+         validity, access, where, version, sealed, package,
+         S3methods = FALSE, slots)
+```
+{% endraw %}
+
+> * Class：类名。
+> 
+> * slots：带名字的列表或者字符向量，名字表示slot，内容表示slot对应的类名。
+>
+> * contains：父类名，表示继承关系。
+>
+> * prototype：带名字的列表或`prototype()`，设定默认值。不建议添加。
+>
+> * validity：函数，检查创建对象是否符合该类要求。建议添加，也可以使用`setValidity()`后期添加。
+>
+> * where：环境（少用）。
+> 
+> * sealed：是否封闭，如果设定为`TRUE`，其他`setClass()`函数不能调用该类。
+>
+> * package：包名（少用）
+> 
+> * S3methods/representation/access/version：在3.0.0版本后不建议使用。
+
+例子：
+
+{% codeblock lang:R Set new S4 classes %}
+## new class
+setClass(Class = 'trick',
+         slots = c(id = 'character', time = 'matrix'),
+         validity = function(object) {
+           if (length(object@id) != nrow(object@time)) {
+             warns <- paste('length of id is', length(object@id), 'is not equal to row number of time', nrow(object@time))
+             return(warns)
+           } else {
+             return(TRUE)
+           }},
+         prototype = list(id = character(), time = matrix(0, 0, 0))
+         )
+
+setClass(Class = 'tricknum',
+         slots = c(number = 'numeric'),
+         contains = 'trick')
+
+## from setClass() help document, extend from built-in data type
+setClass("numWithId", 
+         slots = c(id = "character"),
+         contains = "numeric")
+
+## without slots
+numNoSlot <- setClass("numWithId", contains = "numeric")
+{% endcodeblock %}
+
+### 2.2 创建对象 ##
+
+
+
+## 3. 确认检查 ##
+
+
+
+
+
+### 参考资料 ###
+
+1. [A (Not So) Short Introduction to S4](https://cran.r-project.org/doc/contrib/Genolini-S4tutorialV0-5en.pdf) 
+
+2. [贡献代码](https://segmentfault.com/a/1190000000736629)
+
+
+### 更新记录 ###
+
+2016年11月14日
