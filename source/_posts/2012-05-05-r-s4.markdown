@@ -67,8 +67,7 @@ setClass(Class = 'trick',
            } else {
              return(TRUE)
            }},
-         prototype = list(id = character(), time = matrix(0, 0, 0))
-         )
+         prototype = list(id = character(), time = matrix(0, 0, 0)))
 
 setClass(Class = 'trickNum',
          slots = c(number = 'numeric'),
@@ -150,7 +149,7 @@ tn1 <- new('trickNum', id = letters[1:3], time = matrix(1:9, ncol = 3), number =
 
 * `slotNames(objName)`：查询一个对象的slots名称。
 
-* `@`和`slot(objName, 'slotName')`：查询一个对象的slot的值。也可以使用`@ <- somVal`和`slot(objName, 'slotName') <- someVal`赋值，只会检查slot对应的类型，不会检查`validity`设定。一定不要执行`slot(objName, 'slotName', check = FALSE) <- someVal`，否则连类型都不检查。
+* `@`和`slot(objName, 'slotName')`：查询一个对象的slot的值。也可以使用`@ <- somVal`和`slot(objName, 'slotName') <- someVal`赋值，只会检查slot对应的类型，不会检查`validity`设定。一定不要执行`slot(objName, 'slotName', check = FALSE) <- someVal`，否则连类型都不检查。`@`定义在<span style="color: blue">base</span>包，`slot()`在<span style="color: blue">methods</span>包。
 
 * `.hasSlot(objName, 'slotName')`：查询一个对象是否有某个slot。
 
@@ -162,6 +161,40 @@ tn1 <- new('trickNum', id = letters[1:3], time = matrix(1:9, ncol = 3), number =
 
 ### 3.1 建立方法 ###
 
+建立方法时，使用是否存在该方法的泛函：
+
+* 如果不存在，首先使用`setGeneric()`建立泛函；
+
+* 如果存在，使用`setMethod()`建立具体方法。
+
+{% raw %}
+```
+setGeneric(name, def= , group=list(), valueClass=character(),
+           where= , package= , signature= , useAsDefault= ,
+           genericFunction= , simpleInheritanceOnly = )
+```
+{% endraw %}
+
+> * name：字符串，泛函名称。
+> 
+> * def：函数，定义新的泛函，比如结合`standardGeneric()`函数。
+>
+> * group：字符串，指示该泛函所属的泛函组。
+>
+> * valueClass：字符向量，一个或多个类，强制规定该泛函返回类型必须符合或包括类。
+>
+> * where：环境（少用）。
+> 
+> * package：包名，一般自动识别。
+>
+> * signature：名字向量。
+>
+> * useAsDefault：推翻默认设置。
+>
+> * genericFunction：不建议使用。
+>
+> * simpleInheritanceOnly：逻辑值。
+
 {% raw %}
 ```
 setMethod(f, signature=character(), definition,
@@ -172,7 +205,7 @@ setMethod(f, signature=character(), definition,
 
 > * f：字符串，泛函名称。
 > 
-> * signature：字符向量，表示对应的类名。
+> * signature：字符向量，表示对应的类名。两个特殊类`"missing"`和`"ANY"`，分别表示对应的变量“不能出现在方法调用中”和“可以是任何类”。如果一个变量没有被指定，则默认为`"ANY"`。
 >
 > * definition：函数，定义方法。在创建函数时，特别是扩展已有泛函，`f(para)`中的变量与原始泛函的数量和名称一致。比如在`print(x, ...)`，变量是`x`和`...`。而在`show(object)`中，变量是`x`。可以使用`args()`查看泛函的参数。
 >
@@ -242,6 +275,9 @@ validObject(tm1, complete = TRUE)
 ### 参考资料 ###
 
 1. [A (Not So) Short Introduction to S4](https://cran.r-project.org/doc/contrib/Genolini-S4tutorialV0-5en.pdf) 
+
+2. [Advance R -- S4](http://adv-r.had.co.nz/S4.html) 
+
 
 ### 更新记录 ###
 
