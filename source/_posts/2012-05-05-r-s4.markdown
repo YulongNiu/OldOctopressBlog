@@ -205,7 +205,7 @@ setMethod(f, signature=character(), definition,
 
 > * f：字符串，泛函名称。
 > 
-> * signature：字符向量，表示对应的类名。两个特殊类`"missing"`和`"ANY"`，分别表示对应的变量“不能出现在方法调用中”和“可以是任何类”。如果一个变量没有被指定，则默认为`"ANY"`。
+> * signature：字符向量，表示`definition`函数变量对应的类名。两个特殊类`"missing"`和`"ANY"`，分别表示对应的变量“不能出现在方法调用中”和“可以是任何类”。如果一个变量没有被指定，则默认为`"ANY"`。个人推测，这个设定是为了满足“泛函和扩展函数形式一致”的设计。
 >
 > * definition：函数，定义方法。在创建函数时，特别是扩展已有泛函，`f(para)`中的变量与原始泛函的数量和名称一致。比如在`print(x, ...)`，变量是`x`和`...`。而在`show(object)`中，变量是`x`。可以使用`args()`查看泛函的参数。
 >
@@ -215,12 +215,51 @@ setMethod(f, signature=character(), definition,
 >
 > * sealed：是否封闭，如果设定为`TRUE`，其他`setMethod()`不能重新定义该方法，但可以被删除和重新指定。
 
-### 3.2 创建、查看和删除方法 ###
+方法和泛函的关系非常密切，某一个方法必须建立在一个特定泛函下。对于一个对象，可以用同一个一个方法处理多个不同情况。
 
+{% codeblock lang:R Set methods %}
+## plot() is initially not a S4 generic function, 
+## but was automatically created.
+## it is equalt to setGeneric('plot')
+setMethod(f = 'plot',
+          signature = c(x = 'trick'),
+          definition = function(x, y, ...) {
+            matplot(x = slot(x, 'time'), pch = slot(x, 'id'))
+          })
+
+## set new generic function
+setGeneric(name = 'Add', def = function(x, y, ...){standardGeneric('Add')})
+
+## test "missing" class
+setMethod(f = 'Add',
+          signature = c(x = 'trick', y = 'missing'),
+          definition = function(x, y, ...) {
+            slot(x, 'time') <- slot(x, 'time') + 1
+            return(x)
+          })
+
+## another function
+setMethod(f = 'Add',
+          signature = c(x = 'trick', y = 'numeric'),
+          definition = function(x, y, ...) {
+            slot(x, 'time') <- slot(x, 'time') + y
+            return(x)
+          })
+
+Add(t1)
+Add(t1, 2)
+{% endcodeblock %}
+
+### 3.2 创建、查看和删除方法 ###
 
 查看方法：
 
-* 
+* `methods('fun')`：查看某个函数的具体信息，根据结果判断是否为S4。
+
+* `findMethods('genfun')`：查看某个泛函的具体信息。
+
+* `showMethods('genfun', classes = 'myClass')`：某个泛函的总结信息，可以指定类。
+
 
 
 ## 4. 确认检查 ##
