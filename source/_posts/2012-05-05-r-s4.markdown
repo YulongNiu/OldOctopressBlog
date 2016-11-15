@@ -83,6 +83,9 @@ setClass("numWithId",
 
 ## without slots
 numNoSlot <- setClass("numWithId", contains = "numeric")
+
+## simplest class
+setClass(Class = 'simpleClass')
 {% endcodeblock %}
 
 ### 2.2 创建、查看和删除对象 ##
@@ -296,7 +299,7 @@ Add(tn1, -1, callNext = TRUE, isabs = TRUE)
 
 * `findMethods('genfun')`：查看某个泛函的代码。
 
-* `showMethods('genfun', classes = 'myClass')`：某个泛函的总结信息，可以指定类。
+* `showMethods('genfun', classes = 'myClass')`：某个泛函的总结信息，可以指定类。也可以只声明`classes`，从而查看某些类的全部方法。
 
 * `getMethod('myMethod', 'myClass')`和`selectMethod('genfun', 'myClass')`：查看某个类的某个方法的具体代码，前者只查找制定的类，后者会向父类查找直到找到为止。
 
