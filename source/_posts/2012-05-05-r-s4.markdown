@@ -48,7 +48,7 @@ setClass(Class, representation, prototype, contains=character(),
 >
 > * where：环境（少用）。
 > 
-> * sealed：是否封闭，如果设定为`TRUE`，其他`setClass()`函数不能调用该类。
+> * sealed：是否封闭，如果设定为`TRUE`，其他`setClass()`不能调用该类。
 >
 > * package：包名（少用）
 > 
@@ -100,6 +100,48 @@ new(Class, ...)
 > 
 > * ...：各个slot赋值。如果没有赋值，则使用初始化值。
 
+在使用`new()`建立新的对象之前，会经历“初始化”。初始化可以对新建对象做一些事先固定的操作，比如给某一个slot添加名字等。这需要使用`setMethod`重新定义`initialize()`泛函，这个过程必须考虑使用`callNextMethod()`，以方便子类继承和调用slot。同时，重新定义过程需要考虑“空对象”问题。
+
+{% codeblock lang:R initialize %}
+## first initialize can not be correctly inherited
+setMethod(f = 'initialize',
+          signature = 'trick',
+          definition = function(.Object, id = character(), time = matrix(0, 0, 0)) {
+
+            colNum <- ncol(time)
+            if (colNum > 0) {
+              colnames(time) <- paste0(letters[1:colNum], 1:colNum)
+            } else {}
+
+            .Object@id <- id
+            .Object@time <- time
+
+            return(.Object)
+          })
+
+t1 <- new('trick', id = letters[1:3], time = matrix(1:9, ncol = 3))
+## error
+try(new('trickNum', id = letters[1:3], time = matrix(1:9, ncol = 3), number = 5:6))
+
+## second initialize using callNextMethod() works well
+setMethod(f = 'initialize',
+          signature = 'trick',
+          definition = function(.Object, ...) {
+
+            .Object <- callNextMethod()
+
+            colNum <- ncol(.Object@time)
+            if (colNum > 0) {
+              colnames(.Object@time) <- paste0(letters[1:colNum], 1:colNum)
+            } else {}
+
+            return(.Object)
+          })
+t1 <- new('trick', id = letters[1:3], time = matrix(1:9, ncol = 3))
+tn1 <- new('trickNum', id = letters[1:3], time = matrix(1:9, ncol = 3), number = 5:6)
+{% endcodeblock %}
+
+
 查看对象和类：
 
 * `getClass('className')`：查询一个类的情况，也包括该类的继承情况。返回结果的“Subclasses”表示含有的子类，“Extends”表示父类是什么。
@@ -116,7 +158,39 @@ new(Class, ...)
 
 * `removeClass('className')`：删除类，但是会保留这个类的方法和子类。
 
-## 3. 确认检查 ##
+## 3. 方法 ##
+
+### 3.1 建立方法 ###
+
+{% raw %}
+```
+setMethod(f, signature=character(), definition,
+          where = topenv(parent.frame()),
+          valueClass = NULL, sealed = FALSE)
+```
+{% endraw %}
+
+> * f：字符串，泛函名称。
+> 
+> * signature：字符向量，表示对应的类名。
+>
+> * definition：函数，定义方法。在创建函数时，特别是扩展已有泛函，`f(para)`中的变量与原始泛函的数量和名称一致。比如在`print(x, ...)`，变量是`x`和`...`。而在`show(object)`中，变量是`x`。可以使用`args()`查看泛函的参数。
+>
+> * where：环境（少用）。
+> 
+> * valueClass：废弃变量。
+>
+> * sealed：是否封闭，如果设定为`TRUE`，其他`setMethod()`不能重新定义该方法，但可以被删除和重新指定。
+
+### 3.2 创建、查看和删除方法 ###
+
+
+查看方法：
+
+* 
+
+
+## 4. 确认检查 ##
 
 创建对象时：
 
@@ -161,16 +235,6 @@ validObject(tm1, complete = TRUE)
 {% endcodeblock %}
 
 
-## 4. 方法 ##
-
-### 4.1 建立方法 ###
-
-### 4.2 创建、查看和删除方法 ###
-
-
-查看方法：
-
-* 
 
 
 
