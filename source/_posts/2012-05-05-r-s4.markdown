@@ -169,6 +169,8 @@ tn1 <- new('trickNum', id = letters[1:3], time = matrix(1:9, ncol = 3), number =
 
 * `.hasSlot(objName, 'slotName')`：查询一个对象是否有某个slot。
 
+* `is(myObj, 'myClass')`：判断某个对象是否属于类，会向上查找父类，如果对象属于父类，也返回`TRUE`。`is(MyOb)`，返回某个对象的类和所有父类。
+
 删除对象：
 
 * `removeClass('className')`：删除类，但是会保留这个类的方法和子类。
@@ -231,7 +233,7 @@ setMethod(f, signature=character(), definition,
 >
 > * sealed：是否封闭，如果设定为`TRUE`，其他`setMethod()`不能重新定义该方法，但可以被删除和重新指定。
 
-对于一个对象，可以用一个泛函处理多个不同情况。同时，子类会自动继承父类的方法。但是，如果子类定义了与父类名称相同的方法，则父类方法不再起作用。需要强制“回溯”父类方法，使用`callNextMethod()`。
+对于一个对象，可以用一个泛函处理多个不同情况，比如不同的类（包括`"missing"`和`"ANY"`）、父类/子类、。同时，子类会自动继承父类的方法。但是，如果子类定义了与父类名称相同的方法，则父类方法不再起作用。需要强制“回溯”父类方法，使用`callNextMethod()`。
 
 {% codeblock lang:R Set methods %}
 ## plot() is initially not a S4 generic function, 
@@ -377,8 +379,13 @@ validObject(tm1)
 validObject(tm1, complete = TRUE)
 {% endcodeblock %}
 
+## 5. 继承 ##
 
-## 5. 确认检查 ##
+### 5.1 类转换 ###
+
+`setClass()`的`contains`参数规定了继承的父类，很直接的继承关系。
+
+
 
 ## 6. 建立对象流程 ##
 
@@ -395,7 +402,7 @@ validObject(tm1, complete = TRUE)
 
 ### 参考资料 ###
 
-1. [A (Not So) Short Introduction to S4](https://cran.r-project.org/doc/contrib/Genolini-S4tutorialV0-5en.pdf) 
+1. [A (Not So) Short Introduction to S4](https://cran.r-project.org/doc/contrib/Genolini-S4tutorialV0-5en.pdf)：详细的S4介绍。
 
 2. [Advance R -- S4](http://adv-r.had.co.nz/S4.html) 
 
