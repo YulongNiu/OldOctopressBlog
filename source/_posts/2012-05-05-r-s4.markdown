@@ -289,6 +289,26 @@ setMethod(f = 'Add',
           })
 Add(tn1, -1)
 Add(tn1, -1, callNext = TRUE, isabs = TRUE)
+
+## set "[" and "[<-"
+setMethod(f = "[",
+          signature = c(x = 'trickNum'),
+          definition = function(x, i, j, ..., drop) {
+            return(slot(x, i))
+          })
+
+setMethod(f = "[<-",
+          signature = 'trickNum',
+          definition = function(x, i, j, ..., value) {
+            slot(x, i) <- value
+            validObject(x)
+            return(x)
+          })
+
+tn1['time']
+try(tn1['joke'])
+tn1['id'] <- LETTERS[1:3]
+try(tn1['id'] <- LETTERS[1:4])
 {% endcodeblock %}
 
 ### 3.2 创建、查看和删除方法 ###
@@ -305,6 +325,11 @@ Add(tn1, -1, callNext = TRUE, isabs = TRUE)
 
 * `existsMethod('myMethod', 'myClass')`和`hasMethod('genfun', 'myClass')`：判断某个类是否有某个方法，前者只查找制定的类，后者会向父类查找直到找到为止。
 
+删除方法：
+
+* `removeGeneric('genfun')`：删除泛函。
+
+* `removeMethods('myMethod')`：删除方法。
 
 ## 4. 确认检查 ##
 
@@ -313,6 +338,8 @@ Add(tn1, -1, callNext = TRUE, isabs = TRUE)
 1. 自动检查每个slot赋值类型是否正确，这种检查会一直被子类和slot含有该类的类（简称“slot含有类”）继承。
 
 2. 如果设定了`validity`，这种检查将一直被子类继承，但是slot含有类不会去检查slot赋值是否正确。对于这种情况，将`validObject(object, test = FALSE, complete = FALSE)`函数的`complete`参数设定为`TRUE`，可以检查出问题。
+
+3. 如何自定义了`initialize()`方法，建议使用`callNextMethod()`的形式，这样会进行`setClass()`的`validity`检查。
 
 修改slot时：
 
@@ -351,8 +378,19 @@ validObject(tm1, complete = TRUE)
 {% endcodeblock %}
 
 
+## 5. 确认检查 ##
 
+## 6. 建立对象流程 ##
 
+1. 把所有对象写入一个文件`AllClass.R`，所有泛函写入`AllGeneric.R`。
+
+2. `setClass()`建立一个类，同时添加`validity`验证。
+
+3. 自定义`initialize()`（可选，建议使用默认设置）。
+
+4. 自定义构造函数，比如类似类名，`MyClass <- function(slot1, ...){new('myClass', slot1 = slot1, ...)}`（可选，建议把`initialize()`内容放入）。
+
+5. 自定义`show()`，用于合理展示类。例如，一个大的矩阵，可以只展示一部分。而`print()`用于展示类的全部信息。
 
 
 ### 参考资料 ###
