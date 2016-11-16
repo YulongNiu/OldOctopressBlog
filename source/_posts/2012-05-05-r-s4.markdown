@@ -42,7 +42,7 @@ setClass(Class, representation, prototype, contains=character(),
 >
 > * contains：父类名，表示继承关系。
 >
-> * prototype：带名字的列表或`prototype()`，设定默认值。除了空值外，不建议添。如果不设定，会自动指定一个符合类型的空值。设定时，要结合`validity`定义，因为默认值不会被检查，因为即使不符合`validity`定义，也可以通过`validObject()`检查。
+> * prototype：带名字的列表或`prototype()`，设定默认值。不建议添加，如果不设定，会自动指定一个符合类型的空值。设定时，要结合`validity`定义，因为默认值不会被检查，因为即使不符合`validity`定义，也可以通过`validObject()`检查。
 >
 > * validity：函数，检查创建对象是否符合该类要求。建议添加，也可以使用`setValidity()`后期添加。
 >
@@ -102,7 +102,7 @@ new(Class, ...)
 > 
 > * ...：各个slot赋值。如果没有赋值，则使用初始化值。
 
-在使用`new()`建立新的对象之前，会经历“初始化”。初始化可以对新建对象做一些事先固定的操作，比如给某一个slot添加名字等。这需要使用`setMethod()`重新定义`initialize()`泛函，这个过程考虑使用`callNextMethod()`，以保证子类也能够继承初始化，同时需要考虑“空对象”问题。由于`callNextMethod()`是向父类搜索，在有很多继承关系时，搜索结果会变得难以预测，因此尽量减少使用。
+在使用`new()`建立新的对象之前，会经历“初始化”。初始化可以对新建对象做一些事先固定的操作，比如给某一个slot添加名字等。这需要使用`setMethod()`重新定义`initialize()`泛函，考虑使用`callNextMethod()`，以保证子类也能够继承初始化，同时需要考虑“空对象”问题。由于`callNextMethod()`是向父类搜索，在有很多继承关系时，搜索结果会变得难以预测，因此尽量减少使用。
 {% codeblock lang:R initialize %}
 ## first initialize can not be correctly inherited
 setMethod(f = 'initialize',
@@ -177,7 +177,7 @@ tn1 <- new('trickNum', id = letters[1:3], time = matrix(1:9, ncol = 3), number =
 
 ### 3.1 建立方法 ###
 
-方法和泛函的关系非常密切，某一个方法必须建立在一个特定泛函下。因此，建立方法时，使用是否存在该方法的泛函：
+方法和泛函的关系非常密切，某一个方法必须建立在一个特定泛函下。因此，建立方法时，首先确定该方法是否存在泛函：
 
 * 如果不存在，首先使用`setGeneric()`建立泛函；
 
@@ -231,7 +231,7 @@ setMethod(f, signature=character(), definition,
 >
 > * sealed：是否封闭，如果设定为`TRUE`，其他`setMethod()`不能重新定义该方法，但可以被删除和重新指定。
 
-对于一个对象，可以用一个泛函处理多个不同情况。同时，子类会自动继承父类的方法。但是，如果用子类定义了与父类名称相同的方法，则父类方法不再起作用。如果强制“回溯”父类方法，使用`callNextMethod()`。
+对于一个对象，可以用一个泛函处理多个不同情况。同时，子类会自动继承父类的方法。但是，如果子类定义了与父类名称相同的方法，则父类方法不再起作用。需要强制“回溯”父类方法，使用`callNextMethod()`。
 
 {% codeblock lang:R Set methods %}
 ## plot() is initially not a S4 generic function, 
