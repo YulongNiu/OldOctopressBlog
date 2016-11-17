@@ -323,7 +323,6 @@ tn1['id'] <- LETTERS[1:3]
 try(tn1['id'] <- LETTERS[1:4])
 
 ## define "numData" and "numData<-"
-
 setGeneric(name = 'numData', def = function(x, ...){standardGeneric('numData')})
 setGeneric(name = 'numData<-', def = function(x, value, ...){standardGeneric('numData<-')})
 
@@ -415,7 +414,7 @@ validObject(tm1, complete = TRUE)
 
 ### 5.1 类转换 ###
 
-`setClass()`的`contains`参数规定了继承的父类，很直接的继承关系。使用`as()`（不改变原始对象的值）和`as() <- value`进行转换。
+`setClass()`的`contains`参数规定了继承的父类，很直接的继承关系（simple inheritance）。使用`as()`（不改变原始对象的值）和`as() <- value`进行转换。
 
 `as(myObj, 'myClass')`分为三种情况：
 
@@ -427,13 +426,75 @@ validObject(tm1, complete = TRUE)
 
 `as(myObj, 'myClass') <- value`有四种特殊情况：
 
-* `as(objSon, 'classFather') <- objSon`等同于`as(objSon, 'classFather')`。
+* `as(objSon, 'classFather') <- objSon`行为等同于`as(objSon, 'classFather')`，但改变对象值。
 
-* `as(objFather, 'classSon') <- objFather`等同于`as(objFather, 'classSon')`。
+* `as(objFather, 'classSon') <- objFather`行为等同于`as(objFather, 'classSon')`，但改变对象值。
 
-* `as(objSon, 'classFather') <- objFather`父类slots的值“遗传”给子类。
+* `as(objSon, 'classFather') <- objFather`父类slots的值“遗传”给子类，返回`classSon`类的对象。
 
 * `as(objFather, 'classSon') <- objFather`报错。
+
+还可以使用`setIs()`显示继承（explicit inheritance）。
+
+{% raw %}
+```
+setIs(class1, class2, test=NULL, coerce=NULL, replace=NULL,
+      by = character(), where = topenv(parent.frame()), classDef =,
+      extensionObject = NULL, doComplete = TRUE)
+```
+{% endraw %}
+
+> * class1：字符串，需要转换的类。
+> 
+> * class2：字符串，目标类。
+>
+> * test：转化检查，不推荐。
+>
+> * coerce：函数，一个参数，例如`from`。目的是从`from`中提取和处理一些slots，之后用这些处理后的slot建立一个`class2`的对象。coerce对应的函数就是将`class1`转化成`class2`，因此要返回一个`class2`的对象。这也意味着`class1`将成为`class2`的一个子类。
+>
+> * replace：函数，目的是实现类似`as(objSon,"classFather") <- objFather`。所以变量设为两个，例如`to`和`value`，最后返回处理好的`to`。
+> 
+> * by：不建议使用。
+>
+> * where：设定环境。
+>
+> * classDef：不建议使用。
+>
+> * useAsDefault：推翻默认设置。
+>
+> * extensionObject/doComplete：不建议使用。
+
+{% codeblock lang:R explicit coerce %}
+setClass(Class = 'trickNumMat',
+         slots = c(number = 'matrix',
+                   id = 'character',
+                   time = 'matrix'))
+setIs(class1 = 'trickNum',
+      class2 = 'trickNumMat',
+      coerce = function(from) {
+        toObj <- new('trickNumMat',
+                     number = as.matrix(from@number),
+                     id = from@id,
+                     time = from@time)
+        return(toObj)
+      },
+      replace = function(from, value) {
+        from@number = as.numeric(value@number)
+        from@id = value@id
+        from@time = value@time
+
+        return(from)
+      })
+as(tn1, 'trickNumMat')
+tnm1 <- new('trickNumMat',
+            number = matrix(rnorm(1:9), nrow = 3),
+            id = LETTERS[1:3],
+            time = matrix(1:9, ncol = 3))
+as(tn1, 'trickNumMat') <- tnm1
+{% endcodeblock %}
+
+
+
 
 ## 6. 建立对象注意事项 ##
 
@@ -460,3 +521,4 @@ validObject(tm1, complete = TRUE)
 ### 更新记录 ###
 
 2016年11月14日
+
