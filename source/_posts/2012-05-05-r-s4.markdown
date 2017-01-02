@@ -434,7 +434,7 @@ validObject(tm1, complete = TRUE)
 
 * `as(objFather, 'classSon') <- objFather`报错。
 
-还可以使用`setIs()`显示继承（explicit inheritance）。
+还可以使用`setIs()`显示继承（explicit inheritance）。但是，`setIs()`使得`class1`变成`class2`的子类，`class2`的一些方法可能失效。因为，两个类的slots可能有很大的不同。因此，使用`as()`将`class1`转换成`class2`，再使`class2`的方法。
 
 {% raw %}
 ```
@@ -493,6 +493,7 @@ tnm1 <- new('trickNumMat',
 as(tn1, 'trickNumMat') <- tnm1
 {% endcodeblock %}
 
+### 5.1 虚类 ###
 
 
 
