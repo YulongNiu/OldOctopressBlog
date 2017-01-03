@@ -436,7 +436,7 @@ validObject(tm1, complete = TRUE)
 
 * `as(objFather, 'classSon') <- objSon`报错。
 
-还可以使用`setIs()`显示继承（explicit inheritance）。但是，`setIs()`使得`class1`变成`class2`的子类，`class2`的一些方法可能失效。因为，两个类的slots可能有很大的不同。因此，使用`as()`将`class1`转换成`class2`，再使`class2`的方法。
+使用`setIs()`显示继承（explicit inheritance），尽量少用或使用`setAs()`代替。但是，`setIs()`使得`class1`变成`class2`的子类，`class2`的一些方法可能失效。因为，两个类的slots可能有很大的不同。因此，使用`as()`将`class1`转换成`class2`，再使`class2`的方法。
 
 {% raw %}
 ```
@@ -452,9 +452,9 @@ setIs(class1, class2, test=NULL, coerce=NULL, replace=NULL,
 >
 > * test：转化检查，不推荐。
 >
-> * coerce：函数，一个参数，例如`from`。目的是从`from`中提取和处理一些slots，之后用这些处理后的slot建立一个`class2`的对象。coerce对应的函数就是将`class1`转化成`class2`，因此要返回一个`class2`的对象。这也意味着`class1`将成为`class2`的一个子类。
+> * coerce：函数，一个参数，例如`from`。目的是从`from`中提取和处理一些slots，之后用这些处理后的slot建立一个`class2`的对象并返回。coerce对应的函数就是将`class1`转化成`class2`，因此要返回一个`class2`的对象。这也意味着`class1`将成为`class2`的一个子类。使用showMethods("coerce")查询内建的coerce函数。
 >
-> * replace：函数，目的是实现类似`as(objSon,"classFather") <- objFather`。所以变量设为两个，例如`to`和`value`，最后返回处理好的`to`。
+> * replace：函数，目的是实现类似`as(obj,"class2") <- value`。变量可以设为两个，例如`from`和`value`，最后返回处理好的`from`。
 > 
 > * by：不建议使用。
 >
@@ -466,7 +466,35 @@ setIs(class1, class2, test=NULL, coerce=NULL, replace=NULL,
 >
 > * extensionObject/doComplete：不建议使用。
 
+{% raw %}
+```
+setAs(from, to, def, replace, where = topenv(parent.frame()))
+```
+{% endraw %}
+
+> * from：字符串，需要转换的类。
+> 
+> * to：字符串，目标类。
+>
+> * def：函数，参数`from`（`from`或`to`），目的是将`from`转化成`to`。
+>
+> * replace：函数，参数`from`和`value`，目的是实现类似`as(obj,"to") <- value`。
+>
+> * where：设定环境。
+
+
 {% codeblock lang:R explicit coerce %}
+t2 <- new('trick', id = LETTERS[3:1], time = matrix(9:1, ncol = 3))
+tn2 <- new('trickNum', id = LETTERS[3:1], time = matrix(10:2, ncol = 3), number = 5:6)
+
+as(tn2, 'trick')
+as(t2, 'trickNum')
+
+as(tn2, 'trick') <- tn1
+as(tn2, 'trick') <- t2
+try(as(t2, 'trickNum') <- tn1)
+try(as(t2, 'trickNum') <- t1)
+
 setClass(Class = 'trickNumMat',
          slots = c(number = 'matrix',
                    id = 'character',
@@ -495,8 +523,48 @@ tnm1 <- new('trickNumMat',
 as(tn1, 'trickNumMat') <- tnm1
 {% endcodeblock %}
 
-### 5.1 虚类 ###
+### 5.2 虚类 ###
 
+S4允许创建一个称为“虚类”的类。对于虚类，可以构建方法，可以创建子类，但是不能创造一个属于虚类的对象。虚类是为了解决“交集”的问题，即创建的多个新类中可能含有共同的slots。因此，将这些共同的slots处理成虚类，之后建立属于虚类的方法。这样，虚类下属的子类就能顺利继承。创建方法：第一种，`setClass()`函数的变量`contains`中加入`VIRTUAL`；第二种，`setClass()`函数只含有变量`Class`。
+
+
+{% codeblock lang:R virtual class %}
+setClass(Class = 'trickVirtual',
+         contains = c(id = 'character', 'VIRTUAL'))
+setClass(Class = 'trickA',
+         contains = 'trickVirtual',
+         slots = c(number = 'numeric'))
+setClass(Class = 'trickB',
+         contains = 'trickVirtual',
+         slots = c(log = 'logical'))
+getClass('trickVirtual')
+
+setClass(Class = 'testVirtual')
+getClass('testVirtual')
+{% endcodeblock %}
+
+### 5.3 类群 ###
+
+类群是为了解决“并集”的问题，即把功能相似的类合成一个“类群”，每次使用时只用其中的一个。因此，创建的“类群”是一个父类。使用`isClassUnion(Class)`检验某个类是否为类群，使用`setClassUnion(name, members, where)`创建类群。在使用类群时，默认使用的是第一个定义的类。每一个类群是一个虚类。
+
+{% raw %}
+```
+setClassUnion(name, members, where)
+```
+{% endraw %}
+
+> * name：字符串，类群名。
+> 
+> * members：字符向量，一个或多个已定义的类。可以后续使用`setIs()`向类群中添加已定义的类。
+>
+> * where：设定环境。
+
+{% codeblock lang:R Union %}
+setClassUnion("trickUnion", c("logical", "numeric"))
+setClass("trickUA", contains = 'trickUnion', slots = c(id = 'numeric'))
+new('trickUA', 1:10, id = 1)
+getClass('trickUnion')
+{% endcodeblock %}
 
 
 ## 6. 建立对象注意事项 ##
