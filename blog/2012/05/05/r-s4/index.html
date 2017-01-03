@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>R面向对象编程S4 - 牛牛龙</title>
+  <meta name="author" content="Yulong Niu">
+
+  
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://yulongniu.bionutshell.org/blog/2012/05/05/r-s4">
+  <link href="/favicon.ico" type="image/png" rel="icon">
+  <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
+
+  <!-- http://opengraphprotocol.org/ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2012/05/05/r-s4">
+  <meta property="og:title" content="R面向对象编程S4 - 牛牛龙">
+  
+
+  <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script src="/javascripts/libs/jquery/jquery-2.0.3.min.js"></script>
+
+<!--enable to choose theme in octostrap-->
+
+  <link href="/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="/assets/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+
+
+
+<!-- link open with new tab  -->
+<script>
+  function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+  $(this).attr('target', '_blank');
+  });
+  }
+  
+  $(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+  });
+</script>
+
+
+  
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  
+
+  
+   <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-53073828-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+  <body   >
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div id="wrap">
+      <header role="banner">
+        <nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">牛牛龙</a>
+        </div>
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a rel="index" href="/">Blog</a>
+                </li>
+                <li >
+                    <a href="/blog/archives">Archives</a>
+                </li>
+		<li >
+                  <a href="/whoami">WhoAmI</a>
+                </li>
+		<li >
+                  <a href="/link">Link</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="subscribe-rss" href="/atom.xml" title="subscribe via RSS">
+                        <span class="visible-xs">RSS</span>
+                        <img class="hidden-xs" src="/images/rss.png" alt="RSS">
+                    </a>
+                </li>
+                
+            </ul>
+            
+                <form class="search navbar-form navbar-right" action="https://www.google.com/search" method="GET">
+                    <input type="hidden" name="q" value="site:yulongniu.bionutshell.org">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="q" placeholder="Search">
+                    </div>
+                </form>
+            
+        </div>
+    </div>
+</nav>
+
+
+      </header>
+      <div id="main" role="main" class="container">
+        <div id="content">
+          <div class="row">
+  <div class="page-content col-md-9" itemscope itemtype="http://schema.org/Blog">
+    <meta itemprop="name" content="牛牛龙" />
+    
+    <meta itemprop="url" content="http://yulongniu.bionutshell.org" />
+    <article class="hentry" role="article" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+      
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2012-05-05T15:19:36+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org">Comments</a>
+        
+      </p>
+    
+    
+    <h1 class="entry-title" itemprop="name headline">
+        R面向对象编程S4
+        
+    </h1>
+    
+  </header>
+
+
+<div class="entry-content clearfix" itemprop="articleBody description"><h2 id="s3">1. 一些S3的铺垫</h2>
+
+<p>在博文“<a href="http://yulongniu.bionutshell.org/blog/2010/09/04/linux-install-r/">Linux安装R语言包</a>”描述了如何查看一个函数的源代码，其中涉及了例如<code>methods()</code>函数，用来查看一个S3泛函（S3 generic）的方法。在<span style="color: blue">pryr</span>包中，提供了更加便捷的查看方法。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>pryr check objects and methods</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="R"><span class="line"><span class="kn">library</span><span class="p">(</span><span class="s">&#39;pryr&#39;</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">## object is base type, S3, S4 or RC</span>
+</span><span class="line">otype<span class="p">(</span>obj<span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">## function is genetic or method</span>
+</span><span class="line">ftype<span class="p">(</span>method<span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<!--more-->
+
+<h2 id="section">2. 类</h2>
+
+<h3 id="section-1">2.1 建立新类</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">setClass(Class, representation, prototype, contains=character(),
+</span><span class="line">         validity, access, where, version, sealed, package,
+</span><span class="line">         S3methods = FALSE, slots)</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<blockquote>
+  <ul>
+    <li>
+      <p>Class：类名。</p>
+    </li>
+    <li>
+      <p>slots：带名字的列表或者字符向量，名字表示slot，内容表示slot对应的类名。</p>
+    </li>
+    <li>
+      <p>contains：父类名，表示继承关系。</p>
+    </li>
+    <li>
+      <p>prototype：带名字的列表或<code>prototype()</code>，设定默认值。不建议添加，如果不设定，会自动指定一个符合类型的空值。设定时，要结合<code>validity</code>定义，因为默认值不会被检查，因为即使不符合<code>validity</code>定义，也可以通过<code>validObject()</code>检查。</p>
+    </li>
+    <li>
+      <p>validity：函数，检查创建对象是否符合该类要求。建议添加，也可以使用<code>setValidity()</code>后期添加。</p>
+    </li>
+    <li>
+      <p>where：环境（少用）。</p>
+    </li>
+    <li>
+      <p>sealed：是否封闭，如果设定为<code>TRUE</code>，其他<code>setClass()</code>不能调用该类。</p>
+    </li>
+    <li>
+      <p>package：包名（少用）</p>
+    </li>
+    <li>
+      <p>S3methods/representation/access/version：在3.0.0版本后不建议使用。</p>
+    </li>
+  </ul>
+</blockquote>
+
+<p>例子：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Set new S4 classes </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+</pre></td><td class="code"><pre><code class="R"><span class="line"><span class="c1">## new class</span>
+</span><span class="line">setClass<span class="p">(</span>Class <span class="o">=</span> <span class="s">&#39;trick&#39;</span><span class="p">,</span>
+</span><span class="line">         slots <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>id <span class="o">=</span> <span class="s">&#39;character&#39;</span><span class="p">,</span> time <span class="o">=</span> <span class="s">&#39;matrix&#39;</span><span class="p">),</span>
+</span><span class="line">         validity <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>object<span class="p">)</span> <span class="p">{</span>
+</span><span class="line">           <span class="kr">if</span> <span class="p">(</span><span class="kp">length</span><span class="p">(</span>object<span class="o">@</span>id<span class="p">)</span> <span class="o">!=</span> <span class="kp">nrow</span><span class="p">(</span>object<span class="o">@</span>time<span class="p">))</span> <span class="p">{</span>
+</span><span class="line">             warns <span class="o">&lt;-</span> <span class="kp">paste</span><span class="p">(</span><span class="s">&#39;length of id is&#39;</span><span class="p">,</span> <span class="kp">length</span><span class="p">(</span>object<span class="o">@</span>id<span class="p">),</span> <span class="s">&#39;is not equal to row number of time&#39;</span><span class="p">,</span> <span class="kp">nrow</span><span class="p">(</span>object<span class="o">@</span>time<span class="p">))</span>
+</span><span class="line">             <span class="kr">return</span><span class="p">(</span>warns<span class="p">)</span>
+</span><span class="line">           <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+</span><span class="line">             <span class="kr">return</span><span class="p">(</span><span class="kc">TRUE</span><span class="p">)</span>
+</span><span class="line">           <span class="p">}},</span>
+</span><span class="line">         prototype <span class="o">=</span> <span class="kt">list</span><span class="p">(</span>id <span class="o">=</span> <span class="kt">character</span><span class="p">(),</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)))</span>
+</span><span class="line">
+</span><span class="line">setClass<span class="p">(</span>Class <span class="o">=</span> <span class="s">&#39;trickNum&#39;</span><span class="p">,</span>
+</span><span class="line">         slots <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>number <span class="o">=</span> <span class="s">&#39;numeric&#39;</span><span class="p">),</span>
+</span><span class="line">         contains <span class="o">=</span> <span class="s">&#39;trick&#39;</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">setClass<span class="p">(</span>Class <span class="o">=</span> <span class="s">&#39;trickMult&#39;</span><span class="p">,</span>
+</span><span class="line">         slots <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>trick1 <span class="o">=</span> <span class="s">&#39;trick&#39;</span><span class="p">,</span> trick2 <span class="o">=</span> <span class="s">&#39;trick&#39;</span><span class="p">))</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">## from setClass() help document, extend from built-in data type</span>
+</span><span class="line">setClass<span class="p">(</span><span class="s">&quot;numWithId&quot;</span><span class="p">,</span>
+</span><span class="line">         slots <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>id <span class="o">=</span> <span class="s">&quot;character&quot;</span><span class="p">),</span>
+</span><span class="line">         contains <span class="o">=</span> <span class="s">&quot;numeric&quot;</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">numWI1 <span class="o">&lt;-</span> new<span class="p">(</span><span class="s">&#39;numWithId&#39;</span><span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">])</span>
+</span><span class="line"><span class="c1">## retrieve data of numWI1</span>
+</span><span class="line">numWI1<span class="o">@</span><span class="m">.</span>Data
+</span><span class="line">
+</span><span class="line"><span class="c1">## without slots</span>
+</span><span class="line">numNoSlot <span class="o">&lt;-</span> setClass<span class="p">(</span><span class="s">&quot;num&quot;</span><span class="p">,</span> contains <span class="o">=</span> <span class="s">&quot;numeric&quot;</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">## simplest class</span>
+</span><span class="line">setClass<span class="p">(</span>Class <span class="o">=</span> <span class="s">&#39;simpleClass&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-2">2.2 创建、查看和删除对象</h3>
+
+<p>创建对象：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">new(Class, ...)</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<blockquote>
+  <ul>
+    <li>
+      <p>Class：类名。</p>
+    </li>
+    <li>
+      <p>…：各个slot赋值。如果没有赋值，则使用初始化值。</p>
+    </li>
+  </ul>
+</blockquote>
+
+<p>在使用<code>new()</code>建立新的对象之前，会经历“初始化”。初始化可以对新建对象做一些事先固定的操作，比如给某一个slot添加名字等。这需要使用<code>setMethod()</code>重新定义<code>initialize()</code>泛函，考虑使用<code>callNextMethod()</code>，以保证子类也能够继承初始化，同时需要考虑“空对象”问题。由于<code>callNextMethod()</code>是向父类搜索，在有很多继承关系时，搜索结果会变得难以预测，因此尽量减少使用。</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>initialize </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+</pre></td><td class="code"><pre><code class="R"><span class="line"><span class="c1">## first initialize can not be correctly inherited</span>
+</span><span class="line">setMethod<span class="p">(</span>f <span class="o">=</span> <span class="s">&#39;initialize&#39;</span><span class="p">,</span>
+</span><span class="line">          signature <span class="o">=</span> <span class="s">&#39;trick&#39;</span><span class="p">,</span>
+</span><span class="line">          definition <span class="o">=</span> <span class="kr">function</span><span class="p">(</span><span class="m">.</span>Object<span class="p">,</span> id <span class="o">=</span> <span class="kt">character</span><span class="p">(),</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span> <span class="p">{</span>
+</span><span class="line">
+</span><span class="line">            colNum <span class="o">&lt;-</span> <span class="kp">ncol</span><span class="p">(</span>time<span class="p">)</span>
+</span><span class="line">            <span class="kr">if</span> <span class="p">(</span>colNum <span class="o">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">              <span class="kp">colnames</span><span class="p">(</span>time<span class="p">)</span> <span class="o">&lt;-</span> <span class="kp">paste0</span><span class="p">(</span><span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span>colNum<span class="p">],</span> <span class="m">1</span><span class="o">:</span>colNum<span class="p">)</span>
+</span><span class="line">            <span class="p">}</span> <span class="kr">else</span> <span class="p">{}</span>
+</span><span class="line">
+</span><span class="line">            <span class="m">.</span>Object<span class="o">@</span>id <span class="o">&lt;-</span> id
+</span><span class="line">            <span class="m">.</span>Object<span class="o">@</span>time <span class="o">&lt;-</span> time
+</span><span class="line">
+</span><span class="line">            <span class="kr">return</span><span class="p">(</span><span class="m">.</span>Object<span class="p">)</span>
+</span><span class="line">          <span class="p">})</span>
+</span><span class="line">t1 <span class="o">&lt;-</span> new<span class="p">(</span><span class="s">&#39;trick&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">3</span><span class="p">))</span>
+</span><span class="line"><span class="kp">try</span><span class="p">(</span>new<span class="p">(</span><span class="s">&#39;trickNum&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">3</span><span class="p">),</span> number <span class="o">=</span> <span class="m">5</span><span class="o">:</span><span class="m">6</span><span class="p">))</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">## second initialize can not be correctly inherited</span>
+</span><span class="line">setMethod<span class="p">(</span>f <span class="o">=</span> <span class="s">&#39;initialize&#39;</span><span class="p">,</span>
+</span><span class="line">          signature <span class="o">=</span> <span class="s">&#39;trick&#39;</span><span class="p">,</span>
+</span><span class="line">          definition <span class="o">=</span> <span class="kr">function</span><span class="p">(</span><span class="m">.</span>Object<span class="p">,</span> <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">
+</span><span class="line">            colNum <span class="o">&lt;-</span> <span class="kp">ncol</span><span class="p">(</span><span class="m">.</span>Object<span class="o">@</span>time<span class="p">)</span>
+</span><span class="line">            <span class="kr">if</span> <span class="p">(</span>colNum <span class="o">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">              <span class="kp">colnames</span><span class="p">(</span><span class="m">.</span>Object<span class="o">@</span>time<span class="p">)</span> <span class="o">&lt;-</span> <span class="kp">paste0</span><span class="p">(</span><span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span>colNum<span class="p">],</span> <span class="m">1</span><span class="o">:</span>colNum<span class="p">)</span>
+</span><span class="line">            <span class="p">}</span> <span class="kr">else</span> <span class="p">{}</span>
+</span><span class="line">
+</span><span class="line">            <span class="kr">return</span><span class="p">(</span><span class="m">.</span>Object<span class="p">)</span>
+</span><span class="line">          <span class="p">})</span>
+</span><span class="line"><span class="kp">try</span><span class="p">(</span>new<span class="p">(</span><span class="s">&#39;trick&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">3</span><span class="p">)))</span>
+</span><span class="line"><span class="c1">## not as expected, all slots are empty</span>
+</span><span class="line"><span class="kp">try</span><span class="p">(</span>new<span class="p">(</span><span class="s">&#39;trickNum&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">3</span><span class="p">),</span> number <span class="o">=</span> <span class="m">5</span><span class="o">:</span><span class="m">6</span><span class="p">))</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">## third initialize using callNextMethod() works well</span>
+</span><span class="line">setMethod<span class="p">(</span>f <span class="o">=</span> <span class="s">&#39;initialize&#39;</span><span class="p">,</span>
+</span><span class="line">          signature <span class="o">=</span> <span class="s">&#39;trick&#39;</span><span class="p">,</span>
+</span><span class="line">          definition <span class="o">=</span> <span class="kr">function</span><span class="p">(</span><span class="m">.</span>Object<span class="p">,</span> <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">
+</span><span class="line">            <span class="m">.</span>Object <span class="o">&lt;-</span> callNextMethod<span class="p">()</span>
+</span><span class="line">
+</span><span class="line">            colNum <span class="o">&lt;-</span> <span class="kp">ncol</span><span class="p">(</span><span class="m">.</span>Object<span class="o">@</span>time<span class="p">)</span>
+</span><span class="line">            <span class="kr">if</span> <span class="p">(</span>colNum <span class="o">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">              <span class="kp">colnames</span><span class="p">(</span><span class="m">.</span>Object<span class="o">@</span>time<span class="p">)</span> <span class="o">&lt;-</span> <span class="kp">paste0</span><span class="p">(</span><span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span>colNum<span class="p">],</span> <span class="m">1</span><span class="o">:</span>colNum<span class="p">)</span>
+</span><span class="line">            <span class="p">}</span> <span class="kr">else</span> <span class="p">{}</span>
+</span><span class="line">
+</span><span class="line">            <span class="kr">return</span><span class="p">(</span><span class="m">.</span>Object<span class="p">)</span>
+</span><span class="line">          <span class="p">})</span>
+</span><span class="line">t1 <span class="o">&lt;-</span> new<span class="p">(</span><span class="s">&#39;trick&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">3</span><span class="p">))</span>
+</span><span class="line">tn1 <span class="o">&lt;-</span> new<span class="p">(</span><span class="s">&#39;trickNum&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">3</span><span class="p">),</span> number <span class="o">=</span> <span class="m">5</span><span class="o">:</span><span class="m">6</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>查看对象和类：</p>
+
+<ul>
+  <li>
+    <p><code>getClass('className')</code>：查询一个类的情况，也包括该类的继承情况。返回结果的“Subclasses”表示含有的子类，“Extends”表示父类是什么。</p>
+  </li>
+  <li>
+    <p><code>getSlots('className')</code>：查询某一个class的slots。</p>
+  </li>
+  <li>
+    <p><code>slotNames(objName)</code>：查询一个对象的slots名称。</p>
+  </li>
+  <li>
+    <p><code>@</code>和<code>slot(objName, 'slotName')</code>：查询一个对象的slot的值。也可以使用<code>objName@slotName &lt;- somVal</code>和<code>slot(objName, 'slotName') &lt;- someVal</code>赋值，只会检查slot对应的类型，不会检查<code>validity</code>设定。一定不要执行<code>slot(objName, 'slotName', check = FALSE) &lt;- someVal</code>，否则连类型都不检查。<code>@</code>定义在<span style="color: blue">base</span>包，<code>slot()</code>在<span style="color: blue">methods</span>包。</p>
+  </li>
+  <li>
+    <p><code>.hasSlot(objName, 'slotName')</code>：查询一个对象是否有某个slot。</p>
+  </li>
+  <li>
+    <p><code>is(myObj, 'myClass')</code>：判断某个对象是否属于类，会向上查找父类，如果对象属于父类，也返回<code>TRUE</code>。<code>is(MyOb)</code>，返回某个对象的类和所有父类。</p>
+  </li>
+</ul>
+
+<p>删除对象：</p>
+
+<ul>
+  <li><code>removeClass('className')</code>：删除类，但是会保留这个类的方法和子类。</li>
+</ul>
+
+<h2 id="section-3">3. 方法</h2>
+
+<h3 id="section-4">3.1 建立方法</h3>
+
+<p>方法和泛函的关系非常密切，某一个方法必须建立在一个特定泛函下。因此，建立方法时，首先确定该方法是否存在泛函：</p>
+
+<ul>
+  <li>
+    <p>如果不存在，首先使用<code>setGeneric()</code>建立泛函；</p>
+  </li>
+  <li>
+    <p>如果存在，使用<code>setMethod()</code>建立具体方法。</p>
+  </li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">setGeneric(name, def= , group=list(), valueClass=character(),
+</span><span class="line">           where= , package= , signature= , useAsDefault= ,
+</span><span class="line">           genericFunction= , simpleInheritanceOnly = )</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<blockquote>
+  <ul>
+    <li>
+      <p>name：字符串，泛函名称。</p>
+    </li>
+    <li>
+      <p>def：函数，定义新的泛函，比如结合<code>standardGeneric()</code>函数。</p>
+    </li>
+    <li>
+      <p>group：字符串，指示该泛函所属的泛函组。</p>
+    </li>
+    <li>
+      <p>valueClass：字符向量，一个或多个类，强制规定该泛函返回类型必须符合或包括类。</p>
+    </li>
+    <li>
+      <p>where：环境（少用）。</p>
+    </li>
+    <li>
+      <p>package：包名，一般自动识别。</p>
+    </li>
+    <li>
+      <p>signature：名字向量。</p>
+    </li>
+    <li>
+      <p>useAsDefault：推翻默认设置。</p>
+    </li>
+    <li>
+      <p>genericFunction：不建议使用。</p>
+    </li>
+    <li>
+      <p>simpleInheritanceOnly：逻辑值。</p>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">setMethod(f, signature=character(), definition,
+</span><span class="line">          where = topenv(parent.frame()),
+</span><span class="line">          valueClass = NULL, sealed = FALSE)</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<blockquote>
+  <ul>
+    <li>
+      <p>f：字符串，泛函名称。</p>
+    </li>
+    <li>
+      <p>signature：字符向量，指定<code>definition</code>中函数变量对应的类名。两个特殊类<code>"missing"</code>和<code>"ANY"</code>，分别表示对应的变量“不能出现在方法调用中”和“可以是任何类”。如果一个变量没有被指定，则默认为<code>"ANY"</code>。</p>
+    </li>
+    <li>
+      <p>definition：函数，定义方法。在创建函数时，特别是扩展已有泛函，<code>f(para)</code>中的变量与原始泛函的数量和名称一致。比如在<code>print(x, ...)</code>，变量是<code>x</code>和<code>...</code>。而在<code>show(object)</code>中，变量是<code>x</code>。可以使用<code>args()</code>查看泛函的参数。同时，函数中可以含有未被定义的变量<code>...</code>，后面<code>setMethod()</code>方法可以添加泛函声明变量之外的变量；如果没有<code>...</code>，后续方法只能操作泛函申明的变量。</p>
+    </li>
+    <li>
+      <p>where：环境（少用）。</p>
+    </li>
+    <li>
+      <p>valueClass：废弃变量。</p>
+    </li>
+    <li>
+      <p>sealed：是否封闭，如果设定为<code>TRUE</code>，其他<code>setMethod()</code>不能重新定义该方法，但可以被删除和重新指定。</p>
+    </li>
+  </ul>
+</blockquote>
+
+<p>对于一个对象，可以用一个泛函处理多个不同情况，比如不同的类（包括<code>"missing"</code>和<code>"ANY"</code>）、父类/子类。同时，子类会自动继承父类的方法。但是，如果子类定义了与父类名称相同的方法，则父类方法不再起作用。需要强制“回溯”父类方法，使用<code>callNextMethod()</code>。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Set methods </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+</pre></td><td class="code"><pre><code class="R"><span class="line"><span class="c1">## plot() is initially not a S4 generic function, </span>
+</span><span class="line"><span class="c1">## but was automatically created.</span>
+</span><span class="line"><span class="c1">## it is equalt to setGeneric(&#39;plot&#39;)</span>
+</span><span class="line">setMethod<span class="p">(</span>f <span class="o">=</span> <span class="s">&#39;plot&#39;</span><span class="p">,</span>
+</span><span class="line">          signature <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>x <span class="o">=</span> <span class="s">&#39;trick&#39;</span><span class="p">),</span>
+</span><span class="line">          definition <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">            matplot<span class="p">(</span>x <span class="o">=</span> slot<span class="p">(</span>x<span class="p">,</span> <span class="s">&#39;time&#39;</span><span class="p">),</span> pch <span class="o">=</span> slot<span class="p">(</span>x<span class="p">,</span> <span class="s">&#39;id&#39;</span><span class="p">))</span>
+</span><span class="line">          <span class="p">})</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">## set new generic function</span>
+</span><span class="line">setGeneric<span class="p">(</span>name <span class="o">=</span> <span class="s">&#39;Add&#39;</span><span class="p">,</span> def <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> <span class="kc">...</span><span class="p">){</span><span class="kp">standardGeneric</span><span class="p">(</span><span class="s">&#39;Add&#39;</span><span class="p">)})</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">## test &quot;missing&quot; class</span>
+</span><span class="line">setMethod<span class="p">(</span>f <span class="o">=</span> <span class="s">&#39;Add&#39;</span><span class="p">,</span>
+</span><span class="line">          signature <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>x <span class="o">=</span> <span class="s">&#39;trick&#39;</span><span class="p">,</span> y <span class="o">=</span> <span class="s">&#39;missing&#39;</span><span class="p">),</span>
+</span><span class="line">          definition <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">            slot<span class="p">(</span>x<span class="p">,</span> <span class="s">&#39;time&#39;</span><span class="p">)</span> <span class="o">&lt;-</span> slot<span class="p">(</span>x<span class="p">,</span> <span class="s">&#39;time&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="m">1</span>
+</span><span class="line">            <span class="kr">return</span><span class="p">(</span>x<span class="p">)</span>
+</span><span class="line">          <span class="p">})</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">## another function</span>
+</span><span class="line">setMethod<span class="p">(</span>f <span class="o">=</span> <span class="s">&#39;Add&#39;</span><span class="p">,</span>
+</span><span class="line">          signature <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>x <span class="o">=</span> <span class="s">&#39;trick&#39;</span><span class="p">,</span> y <span class="o">=</span> <span class="s">&#39;numeric&#39;</span><span class="p">),</span>
+</span><span class="line">          definition <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">            slot<span class="p">(</span>x<span class="p">,</span> <span class="s">&#39;time&#39;</span><span class="p">)</span> <span class="o">&lt;-</span> slot<span class="p">(</span>x<span class="p">,</span> <span class="s">&#39;time&#39;</span><span class="p">)</span> <span class="o">+</span> y
+</span><span class="line">            <span class="kr">return</span><span class="p">(</span>x<span class="p">)</span>
+</span><span class="line">          <span class="p">})</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">## with one more parameter &quot;isabs&quot;</span>
+</span><span class="line"><span class="c1">## which is not defined in the generic function</span>
+</span><span class="line"><span class="c1">## thank for &quot;...&quot;</span>
+</span><span class="line">setMethod<span class="p">(</span>f <span class="o">=</span> <span class="s">&#39;Add&#39;</span><span class="p">,</span>
+</span><span class="line">          signature <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>x <span class="o">=</span> <span class="s">&#39;trick&#39;</span><span class="p">,</span> y <span class="o">=</span> <span class="s">&#39;numeric&#39;</span><span class="p">),</span>
+</span><span class="line">          definition <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> isabs <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">            slot<span class="p">(</span>x<span class="p">,</span> <span class="s">&#39;time&#39;</span><span class="p">)</span> <span class="o">&lt;-</span> slot<span class="p">(</span>x<span class="p">,</span> <span class="s">&#39;time&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="kp">ifelse</span><span class="p">(</span>isabs<span class="p">,</span> <span class="kp">abs</span><span class="p">(</span>y<span class="p">),</span> y<span class="p">)</span>
+</span><span class="line">            <span class="kr">return</span><span class="p">(</span>x<span class="p">)</span>
+</span><span class="line">          <span class="p">})</span>
+</span><span class="line"><span class="c1">## getMethod</span>
+</span><span class="line">getMethod<span class="p">(</span><span class="s">&#39;Add&#39;</span><span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;trick&#39;</span><span class="p">,</span> <span class="s">&#39;numeric&#39;</span><span class="p">))</span>
+</span><span class="line">
+</span><span class="line">Add<span class="p">(</span>t1<span class="p">)</span>
+</span><span class="line">Add<span class="p">(</span>t1<span class="p">,</span> <span class="m">-1</span><span class="p">)</span>
+</span><span class="line">Add<span class="p">(</span>t1<span class="p">,</span> <span class="m">-1</span><span class="p">,</span> isabs <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+</span><span class="line">Add<span class="p">(</span>tn1<span class="p">,</span> <span class="m">-1</span><span class="p">,</span> isabs <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">## test callNextMethod()</span>
+</span><span class="line">setMethod<span class="p">(</span>f <span class="o">=</span> <span class="s">&#39;Add&#39;</span><span class="p">,</span>
+</span><span class="line">          signature <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>x <span class="o">=</span> <span class="s">&#39;trickNum&#39;</span><span class="p">,</span> y <span class="o">=</span> <span class="s">&#39;numeric&#39;</span><span class="p">),</span>
+</span><span class="line">          definition <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> callNext <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">            <span class="kr">if</span> <span class="p">(</span>callNext<span class="p">)</span> <span class="p">{</span>
+</span><span class="line">              x <span class="o">&lt;-</span> callNextMethod<span class="p">()</span>
+</span><span class="line">            <span class="p">}</span> <span class="kr">else</span> <span class="p">{}</span>
+</span><span class="line">            slot<span class="p">(</span>x<span class="p">,</span> <span class="s">&#39;number&#39;</span><span class="p">)</span> <span class="o">&lt;-</span> slot<span class="p">(</span>x<span class="p">,</span> <span class="s">&#39;number&#39;</span><span class="p">)</span> <span class="o">+</span> y
+</span><span class="line">            <span class="kr">return</span><span class="p">(</span>x<span class="p">)</span>
+</span><span class="line">          <span class="p">})</span>
+</span><span class="line">Add<span class="p">(</span>tn1<span class="p">,</span> <span class="m">-1</span><span class="p">)</span>
+</span><span class="line">Add<span class="p">(</span>tn1<span class="p">,</span> <span class="m">-1</span><span class="p">,</span> callNext <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> isabs <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-5">3.2 获取和修改对象</h3>
+
+<p>重置<code>[</code>、<code>[[</code>和<code>$</code>获取对象。重置<code>[&lt;-</code>、<code>[[&lt;-</code>和<code>$&lt;-</code>修改对象（改变原始对象），建议使用<code>validObject()</code>检查修改后的对象。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>get and reset </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+</pre></td><td class="code"><pre><code class="R"><span class="line"><span class="c1">## set &quot;[&quot; and &quot;[&lt;-&quot;</span>
+</span><span class="line">setMethod<span class="p">(</span>f <span class="o">=</span> <span class="s">&quot;[&quot;</span><span class="p">,</span>
+</span><span class="line">          signature <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>x <span class="o">=</span> <span class="s">&#39;trickNum&#39;</span><span class="p">),</span>
+</span><span class="line">          definition <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> i<span class="p">,</span> j<span class="p">,</span> <span class="kc">...</span><span class="p">,</span> <span class="kp">drop</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">            <span class="kr">return</span><span class="p">(</span>slot<span class="p">(</span>x<span class="p">,</span> i<span class="p">))</span>
+</span><span class="line">          <span class="p">})</span>
+</span><span class="line">
+</span><span class="line">setMethod<span class="p">(</span>f <span class="o">=</span> <span class="s">&quot;[&lt;-&quot;</span><span class="p">,</span>
+</span><span class="line">          signature <span class="o">=</span> <span class="s">&#39;trickNum&#39;</span><span class="p">,</span>
+</span><span class="line">          definition <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> i<span class="p">,</span> j<span class="p">,</span> <span class="kc">...</span><span class="p">,</span> value<span class="p">)</span> <span class="p">{</span>
+</span><span class="line">            slot<span class="p">(</span>x<span class="p">,</span> i<span class="p">)</span> <span class="o">&lt;-</span> value
+</span><span class="line">            validObject<span class="p">(</span>x<span class="p">)</span>
+</span><span class="line">            <span class="kr">return</span><span class="p">(</span>x<span class="p">)</span>
+</span><span class="line">          <span class="p">})</span>
+</span><span class="line">
+</span><span class="line">tn1<span class="p">[</span><span class="s">&#39;time&#39;</span><span class="p">]</span>
+</span><span class="line"><span class="kp">try</span><span class="p">(</span>tn1<span class="p">[</span><span class="s">&#39;joke&#39;</span><span class="p">])</span>
+</span><span class="line">tn1<span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kc">LETTERS</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">]</span>
+</span><span class="line"><span class="kp">try</span><span class="p">(</span>tn1<span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kc">LETTERS</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">])</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">## define &quot;numData&quot; and &quot;numData&lt;-&quot;</span>
+</span><span class="line">setGeneric<span class="p">(</span>name <span class="o">=</span> <span class="s">&#39;numData&#39;</span><span class="p">,</span> def <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> <span class="kc">...</span><span class="p">){</span><span class="kp">standardGeneric</span><span class="p">(</span><span class="s">&#39;numData&#39;</span><span class="p">)})</span>
+</span><span class="line">setGeneric<span class="p">(</span>name <span class="o">=</span> <span class="s">&#39;numData&lt;-&#39;</span><span class="p">,</span> def <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> value<span class="p">,</span> <span class="kc">...</span><span class="p">){</span><span class="kp">standardGeneric</span><span class="p">(</span><span class="s">&#39;numData&lt;-&#39;</span><span class="p">)})</span>
+</span><span class="line">
+</span><span class="line">setMethod<span class="p">(</span>f <span class="o">=</span> <span class="s">&quot;numData&quot;</span><span class="p">,</span>
+</span><span class="line">          signature <span class="o">=</span> <span class="s">&#39;numWithId&#39;</span><span class="p">,</span>
+</span><span class="line">          definition <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">            <span class="kr">return</span><span class="p">(</span>x<span class="o">@</span><span class="m">.</span>Data<span class="p">)</span>
+</span><span class="line">          <span class="p">})</span>
+</span><span class="line">
+</span><span class="line">setMethod<span class="p">(</span>f <span class="o">=</span> <span class="s">&quot;numData&lt;-&quot;</span><span class="p">,</span>
+</span><span class="line">          signature <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>x <span class="o">=</span> <span class="s">&#39;numWithId&#39;</span><span class="p">,</span> value <span class="o">=</span> <span class="s">&#39;numeric&#39;</span><span class="p">),</span>
+</span><span class="line">          definition <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> value<span class="p">,</span> <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">            x<span class="o">@</span><span class="m">.</span>Data <span class="o">=</span> value
+</span><span class="line">            validObject<span class="p">(</span>x<span class="p">)</span>
+</span><span class="line">            <span class="kr">return</span><span class="p">(</span>x<span class="p">)</span>
+</span><span class="line">          <span class="p">})</span>
+</span><span class="line">
+</span><span class="line">numData<span class="p">(</span>numWI1<span class="p">)</span>
+</span><span class="line">numData<span class="p">(</span>numWI1<span class="p">)</span> <span class="o">&lt;-</span> <span class="m">10</span><span class="o">:</span><span class="m">1</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-6">3.3 查看和删除方法</h3>
+
+<p>查看方法：</p>
+
+<ul>
+  <li>
+    <p><code>methods('fun')</code>：查看某个函数的具体信息，根据结果判断是否为S4。</p>
+  </li>
+  <li>
+    <p><code>findMethods('genfun')</code>：查看某个泛函的代码。</p>
+  </li>
+  <li>
+    <p><code>showMethods('genfun', classes = 'myClass')</code>：某个泛函的总结信息，可以指定类。也可以只声明<code>classes</code>，从而查看某些类的全部方法。</p>
+  </li>
+  <li>
+    <p><code>getMethod('myMethod', 'myClass')</code>和<code>selectMethod('genfun', 'myClass')</code>：查看某个类的某个方法的具体代码，前者只查找制定的类，后者会向父类查找直到找到为止。</p>
+  </li>
+  <li>
+    <p><code>existsMethod('myMethod', 'myClass')</code>和<code>hasMethod('genfun', 'myClass')</code>：判断某个类是否有某个方法，前者只查找制定的类，后者会向父类查找直到找到为止。</p>
+  </li>
+</ul>
+
+<p>删除方法：</p>
+
+<ul>
+  <li>
+    <p><code>removeGeneric('genfun')</code>：删除泛函。</p>
+  </li>
+  <li>
+    <p><code>removeMethods('myMethod')</code>：删除方法。</p>
+  </li>
+</ul>
+
+<h2 id="section-7">4. 确认检查</h2>
+
+<p>创建对象时：</p>
+
+<ol>
+  <li>
+    <p>自动检查每个slot赋值类型是否正确，这种检查会一直被子类和slot含有该类的类（简称“slot含有类”）继承。</p>
+  </li>
+  <li>
+    <p>如果设定了<code>validity</code>，这种检查将一直被子类继承，但是slot含有类不会去检查slot赋值是否正确。对于这种情况，将<code>validObject(object, test = FALSE, complete = FALSE)</code>函数的<code>complete</code>参数设定为<code>TRUE</code>，可以检查出问题。</p>
+  </li>
+  <li>
+    <p>如果自定义了<code>initialize()</code>方法，建议使用<code>callNextMethod()</code>的形式，这样会进行<code>setClass()</code>的<code>validity</code>检查。</p>
+  </li>
+</ol>
+
+<p>修改slot时：</p>
+
+<p>使用<code>slot()</code>和<code>@</code>，只会检查slot类型是否正确，不会检查<code>validity</code>设定。不建议用户直接使用<code>@</code>。</p>
+
+<p>推荐在<code>setClass()</code>建立类时，同时设定好<code>validity</code>，而不是使用<code>setValidity(Class, method, where = topenv(parent.frame()))</code>后续设定。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>validate </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+</pre></td><td class="code"><pre><code class="R"><span class="line"><span class="c1">## correct &quot;trick&quot; obj</span>
+</span><span class="line">t1 <span class="o">&lt;-</span> new<span class="p">(</span><span class="s">&#39;trick&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">3</span><span class="p">))</span>
+</span><span class="line"><span class="c1">## not validated &quot;trick&quot; obj</span>
+</span><span class="line">t2 <span class="o">&lt;-</span> t1
+</span><span class="line">t2<span class="o">@</span>id <span class="o">&lt;-</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">]</span>
+</span><span class="line"><span class="c1">## return FALSE</span>
+</span><span class="line">validObject<span class="p">(</span>t2<span class="p">)</span>
+</span><span class="line"><span class="c1">## error</span>
+</span><span class="line"><span class="kp">try</span><span class="p">(</span>new<span class="p">(</span><span class="s">&#39;trick&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> time <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">))</span>
+</span><span class="line"><span class="kp">try</span><span class="p">(</span>new<span class="p">(</span><span class="s">&#39;trick&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">8</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">4</span><span class="p">)))</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">## correct &quot;trickNum&quot; obj</span>
+</span><span class="line">tn1 <span class="o">&lt;-</span> new<span class="p">(</span><span class="s">&#39;trickNum&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">3</span><span class="p">),</span> number <span class="o">=</span> <span class="m">5</span><span class="o">:</span><span class="m">6</span><span class="p">)</span>
+</span><span class="line"><span class="c1">## error because can not pass &quot;trick&quot; validate</span>
+</span><span class="line"><span class="kp">try</span><span class="p">(</span>new<span class="p">(</span><span class="s">&#39;trickNum&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> time <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">,</span> number <span class="o">=</span> <span class="m">5</span><span class="o">:</span><span class="m">6</span><span class="p">))</span>
+</span><span class="line"><span class="kp">try</span><span class="p">(</span>new<span class="p">(</span><span class="s">&#39;trickNum&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">8</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">4</span><span class="p">),</span> number <span class="o">=</span> <span class="m">5</span><span class="o">:</span><span class="m">6</span><span class="p">))</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">## error</span>
+</span><span class="line"><span class="kp">try</span><span class="p">(</span>new<span class="p">(</span><span class="s">&#39;trickMult&#39;</span><span class="p">,</span> trick1 <span class="o">=</span> new<span class="p">(</span><span class="s">&#39;trick&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> time <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">)))</span>
+</span><span class="line"><span class="kp">try</span><span class="p">(</span>new<span class="p">(</span><span class="s">&#39;trickMult&#39;</span><span class="p">,</span> trick1 <span class="o">=</span> new<span class="p">(</span><span class="s">&#39;trick&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">8</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">4</span><span class="p">))))</span>
+</span><span class="line">
+</span><span class="line">tm1 <span class="o">&lt;-</span> new<span class="p">(</span><span class="s">&#39;trickMult&#39;</span><span class="p">,</span> trick1 <span class="o">=</span> t2<span class="p">)</span>
+</span><span class="line"><span class="c1">## return TRUE</span>
+</span><span class="line">validObject<span class="p">(</span>tm1<span class="p">)</span>
+</span><span class="line"><span class="c1">## return FALSE</span>
+</span><span class="line">validObject<span class="p">(</span>tm1<span class="p">,</span> complete <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-8">5. 继承</h2>
+
+<h3 id="section-9">5.1 类转换</h3>
+
+<p><code>setClass()</code>的<code>contains</code>参数规定了继承的父类，很直接的继承关系（simple inheritance）。使用<code>as()</code>（不改变原始对象的值）和<code>as() &lt;- value</code>进行转换。</p>
+
+<p><code>as(myObj, 'myClass')</code>分为三种情况：</p>
+
+<ul>
+  <li>
+    <p><code>myObj</code>是子类对象，<code>myClass</code>是父类，返回只含有父类的slots（“剪枝”）。</p>
+  </li>
+  <li>
+    <p><code>myObj</code>是父类对象，<code>myClass</code>是子类，返回多余的子类slots填充默认值。</p>
+  </li>
+  <li>
+    <p><code>myObj</code>是<code>myClass</code>的一个对象，没有变化。</p>
+  </li>
+</ul>
+
+<p><code>as(myObj, 'myClass') &lt;- value</code>有四种特殊情况：</p>
+
+<ul>
+  <li>
+    <p><code>as(objSon1, 'classFather') &lt;- objSon2</code>行为等同于<code>objSon1 &lt;- objSon2</code>。</p>
+  </li>
+  <li>
+    <p><code>as(objSon, 'classFather') &lt;- objFather</code>父类slots的值“遗传”给子类，返回<code>classSon</code>类的对象。</p>
+  </li>
+  <li>
+    <p><code>as(objFather1, 'classSon') &lt;- objFather2</code>报错。</p>
+  </li>
+  <li>
+    <p><code>as(objFather, 'classSon') &lt;- objSon</code>报错。</p>
+  </li>
+</ul>
+
+<p>使用<code>setIs()</code>显示继承（explicit inheritance），尽量少用或使用<code>setAs()</code>代替。但是，<code>setIs()</code>使得<code>class1</code>变成<code>class2</code>的子类，<code>class2</code>的一些方法可能失效。因为，两个类的slots可能有很大的不同。因此，使用<code>as()</code>将<code>class1</code>转换成<code>class2</code>，再使<code>class2</code>的方法。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">setIs(class1, class2, test=NULL, coerce=NULL, replace=NULL,
+</span><span class="line">      by = character(), where = topenv(parent.frame()), classDef =,
+</span><span class="line">      extensionObject = NULL, doComplete = TRUE)</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<blockquote>
+  <ul>
+    <li>
+      <p>class1：字符串，需要转换的类。</p>
+    </li>
+    <li>
+      <p>class2：字符串，目标类。</p>
+    </li>
+    <li>
+      <p>test：转化检查，不推荐。</p>
+    </li>
+    <li>
+      <p>coerce：函数，一个参数，例如<code>from</code>。目的是从<code>from</code>中提取和处理一些slots，之后用这些处理后的slot建立一个<code>class2</code>的对象并返回。coerce对应的函数就是将<code>class1</code>转化成<code>class2</code>，因此要返回一个<code>class2</code>的对象。这也意味着<code>class1</code>将成为<code>class2</code>的一个子类。使用showMethods(“coerce”)查询内建的coerce函数。</p>
+    </li>
+    <li>
+      <p>replace：函数，目的是实现类似<code>as(obj,"class2") &lt;- value</code>。变量可以设为两个，例如<code>from</code>和<code>value</code>，最后返回处理好的<code>from</code>。</p>
+    </li>
+    <li>
+      <p>by：不建议使用。</p>
+    </li>
+    <li>
+      <p>where：设定环境。</p>
+    </li>
+    <li>
+      <p>classDef：不建议使用。</p>
+    </li>
+    <li>
+      <p>useAsDefault：推翻默认设置。</p>
+    </li>
+    <li>
+      <p>extensionObject/doComplete：不建议使用。</p>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">setAs(from, to, def, replace, where = topenv(parent.frame()))</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<blockquote>
+  <ul>
+    <li>
+      <p>from：字符串，需要转换的类。</p>
+    </li>
+    <li>
+      <p>to：字符串，目标类。</p>
+    </li>
+    <li>
+      <p>def：函数，参数<code>from</code>（<code>from</code>或<code>to</code>），目的是将<code>from</code>转化成<code>to</code>。</p>
+    </li>
+    <li>
+      <p>replace：函数，参数<code>from</code>和<code>value</code>，目的是实现类似<code>as(obj,"to") &lt;- value</code>。</p>
+    </li>
+    <li>
+      <p>where：设定环境。</p>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>explicit coerce </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+</pre></td><td class="code"><pre><code class="R"><span class="line">t2 <span class="o">&lt;-</span> new<span class="p">(</span><span class="s">&#39;trick&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">LETTERS</span><span class="p">[</span><span class="m">3</span><span class="o">:</span><span class="m">1</span><span class="p">],</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">9</span><span class="o">:</span><span class="m">1</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">3</span><span class="p">))</span>
+</span><span class="line">tn2 <span class="o">&lt;-</span> new<span class="p">(</span><span class="s">&#39;trickNum&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">LETTERS</span><span class="p">[</span><span class="m">3</span><span class="o">:</span><span class="m">1</span><span class="p">],</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">10</span><span class="o">:</span><span class="m">2</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">3</span><span class="p">),</span> number <span class="o">=</span> <span class="m">5</span><span class="o">:</span><span class="m">6</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">as<span class="p">(</span>tn2<span class="p">,</span> <span class="s">&#39;trick&#39;</span><span class="p">)</span>
+</span><span class="line">as<span class="p">(</span>t2<span class="p">,</span> <span class="s">&#39;trickNum&#39;</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">as<span class="p">(</span>tn2<span class="p">,</span> <span class="s">&#39;trick&#39;</span><span class="p">)</span> <span class="o">&lt;-</span> tn1
+</span><span class="line">as<span class="p">(</span>tn2<span class="p">,</span> <span class="s">&#39;trick&#39;</span><span class="p">)</span> <span class="o">&lt;-</span> t2
+</span><span class="line"><span class="kp">try</span><span class="p">(</span>as<span class="p">(</span>t2<span class="p">,</span> <span class="s">&#39;trickNum&#39;</span><span class="p">)</span> <span class="o">&lt;-</span> tn1<span class="p">)</span>
+</span><span class="line"><span class="kp">try</span><span class="p">(</span>as<span class="p">(</span>t2<span class="p">,</span> <span class="s">&#39;trickNum&#39;</span><span class="p">)</span> <span class="o">&lt;-</span> t1<span class="p">)</span>
+</span><span class="line">
+</span><span class="line">setClass<span class="p">(</span>Class <span class="o">=</span> <span class="s">&#39;trickNumMat&#39;</span><span class="p">,</span>
+</span><span class="line">         slots <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>number <span class="o">=</span> <span class="s">&#39;matrix&#39;</span><span class="p">,</span>
+</span><span class="line">                   id <span class="o">=</span> <span class="s">&#39;character&#39;</span><span class="p">,</span>
+</span><span class="line">                   time <span class="o">=</span> <span class="s">&#39;matrix&#39;</span><span class="p">))</span>
+</span><span class="line">setIs<span class="p">(</span>class1 <span class="o">=</span> <span class="s">&#39;trickNum&#39;</span><span class="p">,</span>
+</span><span class="line">      class2 <span class="o">=</span> <span class="s">&#39;trickNumMat&#39;</span><span class="p">,</span>
+</span><span class="line">      coerce <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>from<span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        toObj <span class="o">&lt;-</span> new<span class="p">(</span><span class="s">&#39;trickNumMat&#39;</span><span class="p">,</span>
+</span><span class="line">                     number <span class="o">=</span> <span class="kp">as.matrix</span><span class="p">(</span>from<span class="o">@</span>number<span class="p">),</span>
+</span><span class="line">                     id <span class="o">=</span> from<span class="o">@</span>id<span class="p">,</span>
+</span><span class="line">                     time <span class="o">=</span> from<span class="o">@</span>time<span class="p">)</span>
+</span><span class="line">        <span class="kr">return</span><span class="p">(</span>toObj<span class="p">)</span>
+</span><span class="line">      <span class="p">},</span>
+</span><span class="line">      replace <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>from<span class="p">,</span> value<span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        from<span class="o">@</span>number <span class="o">=</span> <span class="kp">as.numeric</span><span class="p">(</span>value<span class="o">@</span>number<span class="p">)</span>
+</span><span class="line">        from<span class="o">@</span>id <span class="o">=</span> value<span class="o">@</span>id
+</span><span class="line">        from<span class="o">@</span>time <span class="o">=</span> value<span class="o">@</span>time
+</span><span class="line">
+</span><span class="line">        <span class="kr">return</span><span class="p">(</span>from<span class="p">)</span>
+</span><span class="line">      <span class="p">})</span>
+</span><span class="line">as<span class="p">(</span>tn1<span class="p">,</span> <span class="s">&#39;trickNumMat&#39;</span><span class="p">)</span>
+</span><span class="line">tnm1 <span class="o">&lt;-</span> new<span class="p">(</span><span class="s">&#39;trickNumMat&#39;</span><span class="p">,</span>
+</span><span class="line">            number <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span>rnorm<span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">),</span> nrow <span class="o">=</span> <span class="m">3</span><span class="p">),</span>
+</span><span class="line">            id <span class="o">=</span> <span class="kc">LETTERS</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span>
+</span><span class="line">            time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">3</span><span class="p">))</span>
+</span><span class="line">as<span class="p">(</span>tn1<span class="p">,</span> <span class="s">&#39;trickNumMat&#39;</span><span class="p">)</span> <span class="o">&lt;-</span> tnm1
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-10">5.2 虚类</h3>
+
+<p>S4允许创建一个称为“虚类”的类。对于虚类，可以构建方法，可以创建子类，但是不能创造一个属于虚类的对象。虚类是为了解决“交集”的问题，即创建的多个新类中可能含有共同的slots。因此，将这些共同的slots处理成虚类，之后建立属于虚类的方法。这样，虚类下属的子类就能顺利继承。创建方法：第一种，<code>setClass()</code>函数的变量<code>contains</code>中加入<code>VIRTUAL</code>；第二种，<code>setClass()</code>函数只含有变量<code>Class</code>。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>virtual class </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td><td class="code"><pre><code class="R"><span class="line">setClass<span class="p">(</span>Class <span class="o">=</span> <span class="s">&#39;trickVirtual&#39;</span><span class="p">,</span>
+</span><span class="line">         contains <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>id <span class="o">=</span> <span class="s">&#39;character&#39;</span><span class="p">,</span> <span class="s">&#39;VIRTUAL&#39;</span><span class="p">))</span>
+</span><span class="line">setClass<span class="p">(</span>Class <span class="o">=</span> <span class="s">&#39;trickA&#39;</span><span class="p">,</span>
+</span><span class="line">         contains <span class="o">=</span> <span class="s">&#39;trickVirtual&#39;</span><span class="p">,</span>
+</span><span class="line">         slots <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>number <span class="o">=</span> <span class="s">&#39;numeric&#39;</span><span class="p">))</span>
+</span><span class="line">setClass<span class="p">(</span>Class <span class="o">=</span> <span class="s">&#39;trickB&#39;</span><span class="p">,</span>
+</span><span class="line">         contains <span class="o">=</span> <span class="s">&#39;trickVirtual&#39;</span><span class="p">,</span>
+</span><span class="line">         slots <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>log <span class="o">=</span> <span class="s">&#39;logical&#39;</span><span class="p">))</span>
+</span><span class="line">getClass<span class="p">(</span><span class="s">&#39;trickVirtual&#39;</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">setClass<span class="p">(</span>Class <span class="o">=</span> <span class="s">&#39;testVirtual&#39;</span><span class="p">)</span>
+</span><span class="line">getClass<span class="p">(</span><span class="s">&#39;testVirtual&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-11">5.3 类群</h3>
+
+<p>类群是为了解决“并集”的问题，即把功能相似的类合成一个“类群”，每次使用时只用其中的一个。因此，创建的“类群”是一个父类。使用<code>isClassUnion(Class)</code>检验某个类是否为类群，使用<code>setClassUnion(name, members, where)</code>创建类群。在使用类群时，默认使用的是第一个定义的类。每一个类群是一个虚类。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">setClassUnion(name, members, where)</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<blockquote>
+  <ul>
+    <li>
+      <p>name：字符串，类群名。</p>
+    </li>
+    <li>
+      <p>members：字符向量，一个或多个已定义的类。可以后续使用<code>setIs()</code>向类群中添加已定义的类。</p>
+    </li>
+    <li>
+      <p>where：设定环境。</p>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Union </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="R"><span class="line">setClassUnion<span class="p">(</span><span class="s">&quot;trickUnion&quot;</span><span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;logical&quot;</span><span class="p">,</span> <span class="s">&quot;numeric&quot;</span><span class="p">))</span>
+</span><span class="line">setClass<span class="p">(</span><span class="s">&quot;trickUA&quot;</span><span class="p">,</span> contains <span class="o">=</span> <span class="s">&#39;trickUnion&#39;</span><span class="p">,</span> slots <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>id <span class="o">=</span> <span class="s">&#39;numeric&#39;</span><span class="p">))</span>
+</span><span class="line">new<span class="p">(</span><span class="s">&#39;trickUA&#39;</span><span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span> id <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+</span><span class="line">getClass<span class="p">(</span><span class="s">&#39;trickUnion&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-12">6. 建立对象注意事项</h2>
+
+<ol>
+  <li>
+    <p>把所有对象写入一个文件<code>AllClass.R</code>，所有泛函写入<code>AllGeneric.R</code>。</p>
+  </li>
+  <li>
+    <p><code>setClass()</code>建立一个类，同时添加<code>validity</code>验证。</p>
+  </li>
+  <li>
+    <p>自定义<code>initialize()</code>（可选，建议使用默认设置）。</p>
+  </li>
+  <li>
+    <p>自定义构造函数，比如类似类名，<code>MyClass &lt;- function(slot1, ...){new('myClass', slot1 = slot1, ...)}</code>（可选，建议把<code>initialize()</code>内容放入）。</p>
+  </li>
+  <li>
+    <p>自定义<code>show()</code>，用于合理展示类。例如，一个大的矩阵，可以只展示一部分。而<code>print()</code>用于展示类的全部信息。</p>
+  </li>
+  <li>
+    <p>修改slot后，对返回的对象进行<code>validObject()</code>检查。</p>
+  </li>
+</ol>
+
+<h3 id="section-13">参考资料</h3>
+
+<ol>
+  <li>
+    <p><a href="https://cran.r-project.org/doc/contrib/Genolini-S4tutorialV0-5en.pdf">A (Not So) Short Introduction to S4</a>：详细的S4介绍。</p>
+  </li>
+  <li>
+    <p><a href="http://adv-r.had.co.nz/S4.html">Advance R – S4</a></p>
+  </li>
+</ol>
+
+<h3 id="section-14">更新记录</h3>
+
+<p>2016年11月14日</p>
+
+</div>
+
+
+      <footer>
+        <p class="meta text-muted">
+          
+  
+
+<span class="glyphicon glyphicon-user"></span> <span class="byline author vcard" itemprop="author" itemscope itemtype="http://schema.org/Person">Posted by <span class="fn" itemprop="name">Yulong Niu</span></span>
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2012-05-05T15:19:36+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+          
+
+<span class="glyphicon glyphicon-tags"></span>&nbsp;
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/r/'>r</a>
+  
+</span>
+
+
+        </p>
+        
+          <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.bionutshell.org/blog/2012/05/05/r-s4/" data-via="" data-counturl="http://yulongniu.bionutshell.org/blog/2012/05/05/r-s4/" >Tweet</a>
+  
+  
+  
+</div>
+
+        
+        
+          <ul class="meta text-muted pager">
+            
+            <li class="previous"><a href="/blog/2012/05/03/r-tricks/" title="Previous Post: R小技巧集锦">&laquo; R小技巧集锦</a></li>
+            
+            
+            <li class="next"><a href="/blog/2012/05/30/r-package-and-roxygen2/" title="Next Post: R包制作和roxygen2使用说明">R包制作和roxygen2使用说明 &raquo;</a></li>
+            
+          </ul>
+        
+      </footer>
+    </article>
+    
+      <section>
+        <h2>Comments</h2>
+        <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+      </section>
+    
+  </div>
+
+  
+  <aside class="sidebar col-md-3">
+    
+      <section class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Recent Posts</h3>
+  </div>
+  
+  <div id="recent_posts" class="list-group">
+    
+    <a class="list-group-item " href="/blog/2016/11/11/git-rebase-examples/">两个git的rebase命令应用</a>
+    
+    <a class="list-group-item " href="/blog/2016/10/21/linux-sync-google-drive/">命令行使用Google Drive</a>
+    
+    <a class="list-group-item " href="/blog/2016/09/22/how-to-publish-in-nc/">如何在Nature Communications上发表文章</a>
+    
+    <a class="list-group-item " href="/blog/2016/09/10/hisat2-faq/">HISAT2使用问答</a>
+    
+    <a class="list-group-item " href="/blog/2016/09/10/reference-genome-location/">常用参考基因组下载地址</a>
+    
+  </div>
+</section>
+<section class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Categories</h3>
+  </div>
+  <div class="list-group">
+    
+    
+    <a class="list-group-item " href="/blog/categories/linux/index.html">
+        <span class="badge">7</span>
+        linux
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/r/index.html">
+        <span class="badge">9</span>
+        r
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/lisp/index.html">
+        <span class="badge">6</span>
+        lisp
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/ppr/index.html">
+        <span class="badge">5</span>
+        ppr
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
+        <span class="badge">13</span>
+        bioinfor
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/saysomething/index.html">
+        <span class="badge">1</span>
+        saysomething
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/c/index.html">
+        <span class="badge">2</span>
+        c
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/hcj/index.html">
+        <span class="badge">1</span>
+        hcj
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/share/index.html">
+        <span class="badge">1</span>
+        share
+      </a>
+    
+  </div>
+</section>
+
+
+
+
+
+
+    
+  </aside>
+  
+</div>
+
+        </div>
+      </div>
+    </div>
+    <footer role="contentinfo"><div class="container">
+    <p class="text-muted credits">
+  Copyright &copy; 2017 - Yulong Niu<br>
+  <small>
+      <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>,
+      <span class="credit">customized with <a href="https://github.com/kAworu/octostrap3">octostrap3</a></span>.
+  </small>
+</p>
+
+</div>
+</footer>
+    
+
+<script type="text/javascript">
+      var disqus_shortname = 'yulongniu';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://yulongniu.bionutshell.org/blog/2012/05/05/r-s4/';
+        var disqus_url = 'http://yulongniu.bionutshell.org/blog/2012/05/05/r-s4/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+<script src="/assets/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/javascripts/modernizr-2.0.js"></script>
+
+
+  </body>
+</html>
