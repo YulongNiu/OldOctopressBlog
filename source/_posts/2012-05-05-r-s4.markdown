@@ -301,7 +301,7 @@ Add(tn1, -1, callNext = TRUE, isabs = TRUE)
 
 ### 3.2 获取和修改对象 ###
 
-重置`[`、`[[`和`$`获取对象。重置`[<-`、`[[<-`和`$<-`修改对象（改变原始对象），建议使用`validObject()`检查修改后的对象。使用`setGroupGeneric()`定义新的泛函组，使用`callGeneric()`调用泛函组，比如：
+重置`[`、`[[`和`$`获取对象。重置`[<-`、`[[<-`和`$<-`修改对象（改变原始对象），建议使用`validObject()`检查修改后的对象。
 
 {% codeblock lang:R get and reset %}
 ## set "[" and "[<-"
@@ -348,7 +348,7 @@ numData(numWI1) <- 10:1
 
 ### 3.3 泛函组 ###
 
-S4允许将一类方法定义为“泛函组（group generic functions）”。已经定义的泛函组，比如`ops`，通过`?S4groupGeneric`查看。
+S4允许将一类方法定义为“泛函组（group generic functions）”。已经定义的泛函组，比如`ops`，通过`?S4groupGeneric`查看。使用`setGroupGeneric()`定义新的泛函组，使用`callGeneric()`调用泛函组，比如：
 
 {% codeblock lang:R group generic functions %}
 setMethod('Ops',
