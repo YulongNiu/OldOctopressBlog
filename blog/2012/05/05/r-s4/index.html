@@ -692,7 +692,7 @@
 
 <h3 id="section-5">3.2 获取和修改对象</h3>
 
-<p>重置<code>[</code>、<code>[[</code>和<code>$</code>获取对象。重置<code>[&lt;-</code>、<code>[[&lt;-</code>和<code>$&lt;-</code>修改对象（改变原始对象），建议使用<code>validObject()</code>检查修改后的对象。使用<code>setGroupGeneric()</code>定义新的泛函组，使用<code>callGeneric()</code>调用泛函组，比如：</p>
+<p>重置<code>[</code>、<code>[[</code>和<code>$</code>获取对象。重置<code>[&lt;-</code>、<code>[[&lt;-</code>和<code>$&lt;-</code>修改对象（改变原始对象），建议使用<code>validObject()</code>检查修改后的对象。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>get and reset </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
@@ -779,7 +779,7 @@
 
 <h3 id="section-6">3.3 泛函组</h3>
 
-<p>S4允许将一类方法定义为“泛函组（group generic functions）”。已经定义的泛函组，比如<code>ops</code>，通过<code>?S4groupGeneric</code>查看。</p>
+<p>S4允许将一类方法定义为“泛函组（group generic functions）”。已经定义的泛函组，比如<code>ops</code>，通过<code>?S4groupGeneric</code>查看。使用<code>setGroupGeneric()</code>定义新的泛函组，使用<code>callGeneric()</code>调用泛函组，比如：</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>group generic functions </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
