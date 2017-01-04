@@ -187,7 +187,7 @@ person("Yihui", "Xie", email = "xie@yihui.name", role = c("aut", "cre")))
 
 * `@aliases`：命名一个函数的别名，将指向同一个文档；`@family`：如果几个函数共用一个family name，它们将在seealso中交叉链接；`@seealso`：其他函数的超链接；`@rdname`：将多个函数合并在一个文档中。这些标记用于在HTML帮助文档中，可能出现这些超级链接或者文档合并。
 
-* 对`data`{.language-bash}文件夹下的R data file进行注释。R data file通常以.RData或者.rda作为文件名扩展。[参考数据注释](http://r-pkgs.had.co.nz/data.html#documenting-data)。
+* 对`data`文件夹下的R data file进行注释。R data file通常以.RData或者.rda作为文件名扩展。[参考数据注释](http://r-pkgs.had.co.nz/data.html#documenting-data)。
 
 
 ## 4. 写vignittes文件 ##

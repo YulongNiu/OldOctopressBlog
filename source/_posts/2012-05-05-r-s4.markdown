@@ -606,6 +606,9 @@ getClass('trickUnion')
 
 2. [Advance R -- S4](http://adv-r.had.co.nz/S4.html) 
 
+3. [S4 System Development in Bioconductor](https://www.bioconductor.org/help/course-materials/2010/AdvancedR/S4InBioconductor.pdf) 
+
+
 
 ### 更新记录 ###
 
