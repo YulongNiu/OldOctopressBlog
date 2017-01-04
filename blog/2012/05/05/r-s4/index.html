@@ -242,7 +242,7 @@
       <p>contains：父类名，表示继承关系。</p>
     </li>
     <li>
-      <p>prototype：带名字的列表或<code>prototype()</code>，设定默认值。不建议添加，如果不设定，会自动指定一个符合类型的空值。设定时，要结合<code>validity</code>定义，因为默认值不会被检查，因为即使不符合<code>validity</code>定义，也可以通过<code>validObject()</code>检查。</p>
+      <p>prototype：带名setGroupGeneric字的列表或<code>prototype()</code>，设定默认值。不建议添加，如果不设定，会自动指定一个符合类型的空值。设定时，要结合<code>validity</code>定义，因为默认值不会被检查，因为即使不符合<code>validity</code>定义，也可以通过<code>validObject()</code>检查。</p>
     </li>
     <li>
       <p>validity：函数，检查创建对象是否符合该类要求。建议添加，也可以使用<code>setValidity()</code>后期添加。</p>
@@ -692,7 +692,7 @@
 
 <h3 id="section-5">3.2 获取和修改对象</h3>
 
-<p>重置<code>[</code>、<code>[[</code>和<code>$</code>获取对象。重置<code>[&lt;-</code>、<code>[[&lt;-</code>和<code>$&lt;-</code>修改对象（改变原始对象），建议使用<code>validObject()</code>检查修改后的对象。</p>
+<p>重置<code>[</code>、<code>[[</code>和<code>$</code>获取对象。重置<code>[&lt;-</code>、<code>[[&lt;-</code>和<code>$&lt;-</code>修改对象（改变原始对象），建议使用<code>validObject()</code>检查修改后的对象。使用<code>setGroupGeneric()</code>定义新的泛函组，使用<code>callGeneric()</code>调用泛函组，比如：</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>get and reset </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
@@ -777,7 +777,36 @@
 </span><span class="line">numData<span class="p">(</span>numWI1<span class="p">)</span> <span class="o">&lt;-</span> <span class="m">10</span><span class="o">:</span><span class="m">1</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h3 id="section-6">3.3 查看和删除方法</h3>
+<h3 id="section-6">3.3 泛函组</h3>
+
+<p>S4允许将一类方法定义为“泛函组（group generic functions）”。已经定义的泛函组，比如<code>ops</code>，通过<code>?S4groupGeneric</code>查看。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>group generic functions </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class="R"><span class="line">setMethod<span class="p">(</span><span class="s">&#39;Ops&#39;</span><span class="p">,</span>
+</span><span class="line">          signature<span class="p">(</span>e1<span class="o">=</span><span class="s">&#39;trick&#39;</span><span class="p">,</span> e2<span class="o">=</span><span class="s">&#39;trick&#39;</span><span class="p">),</span>
+</span><span class="line">          <span class="kr">function</span><span class="p">(</span>e1<span class="p">,</span> e2<span class="p">)</span> <span class="p">{</span>
+</span><span class="line">            e1<span class="o">@</span>time <span class="o">&lt;-</span> callGeneric<span class="p">(</span>slot<span class="p">(</span>e1<span class="p">,</span> <span class="s">&#39;time&#39;</span><span class="p">),</span> slot<span class="p">(</span>e2<span class="p">,</span> <span class="s">&#39;time&#39;</span><span class="p">))</span>
+</span><span class="line">            validObject<span class="p">(</span>e1<span class="p">)</span>
+</span><span class="line">            <span class="kr">return</span><span class="p">(</span>e1<span class="p">)</span>
+</span><span class="line">          <span class="p">})</span>
+</span><span class="line">
+</span><span class="line">t1 <span class="o">&lt;-</span> new<span class="p">(</span><span class="s">&#39;trick&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">3</span><span class="p">))</span>
+</span><span class="line">t2 <span class="o">&lt;-</span> new<span class="p">(</span><span class="s">&#39;trick&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">9</span><span class="o">:</span><span class="m">1</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">3</span><span class="p">))</span>
+</span><span class="line">t1 <span class="o">+</span> t2
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-7">3.4 查看和删除方法</h3>
 
 <p>查看方法：</p>
 
@@ -810,7 +839,7 @@
   </li>
 </ul>
 
-<h2 id="section-7">4. 确认检查</h2>
+<h2 id="section-8">4. 确认检查</h2>
 
 <p>创建对象时：</p>
 
@@ -887,9 +916,9 @@
 </span><span class="line">validObject<span class="p">(</span>tm1<span class="p">,</span> complete <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h2 id="section-8">5. 继承</h2>
+<h2 id="section-9">5. 继承</h2>
 
-<h3 id="section-9">5.1 类转换</h3>
+<h3 id="section-10">5.1 类转换</h3>
 
 <p><code>setClass()</code>的<code>contains</code>参数规定了继承的父类，很直接的继承关系（simple inheritance）。使用<code>as()</code>（不改变原始对象的值）和<code>as() &lt;- value</code>进行转换。</p>
 
@@ -1068,7 +1097,7 @@
 </span><span class="line">as<span class="p">(</span>tn1<span class="p">,</span> <span class="s">&#39;trickNumMat&#39;</span><span class="p">)</span> <span class="o">&lt;-</span> tnm1
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h3 id="section-10">5.2 虚类</h3>
+<h3 id="section-11">5.2 虚类</h3>
 
 <p>S4允许创建一个称为“虚类”的类。对于虚类，可以构建方法，可以创建子类，但是不能创造一个属于虚类的对象。虚类是为了解决“交集”的问题，即创建的多个新类中可能含有共同的slots。因此，将这些共同的slots处理成虚类，之后建立属于虚类的方法。这样，虚类下属的子类就能顺利继承。创建方法：第一种，<code>setClass()</code>函数的变量<code>contains</code>中加入<code>VIRTUAL</code>；第二种，<code>setClass()</code>函数只含有变量<code>Class</code>。</p>
 
@@ -1099,7 +1128,7 @@
 </span><span class="line">getClass<span class="p">(</span><span class="s">&#39;testVirtual&#39;</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h3 id="section-11">5.3 类群</h3>
+<h3 id="section-12">5.3 类群</h3>
 
 <p>类群是为了解决“并集”的问题，即把功能相似的类合成一个“类群”，每次使用时只用其中的一个。因此，创建的“类群”是一个父类。使用<code>isClassUnion(Class)</code>检验某个类是否为类群，使用<code>setClassUnion(name, members, where)</code>创建类群。在使用类群时，默认使用的是第一个定义的类。每一个类群是一个虚类。</p>
 
@@ -1131,7 +1160,7 @@
 </span><span class="line">getClass<span class="p">(</span><span class="s">&#39;trickUnion&#39;</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h2 id="section-12">6. 建立对象注意事项</h2>
+<h2 id="section-13">6. 建立对象注意事项</h2>
 
 <ol>
   <li>
@@ -1154,7 +1183,7 @@
   </li>
 </ol>
 
-<h3 id="section-13">参考资料</h3>
+<h3 id="section-14">参考资料</h3>
 
 <ol>
   <li>
@@ -1165,9 +1194,9 @@
   </li>
 </ol>
 
-<h3 id="section-14">更新记录</h3>
+<h3 id="section-15">更新记录</h3>
 
-<p>2016年11月14日</p>
+<p>2017年12月4日</p>
 
 </div>
 
