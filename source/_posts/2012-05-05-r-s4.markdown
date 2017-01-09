@@ -370,6 +370,8 @@ t1 + t2
 
 * `methods('fun')`：查看某个函数的具体信息，根据结果判断是否为S4。
 
+* `getGeneric('genfun')`：查看某个泛函的定义。
+
 * `findMethods('genfun')`：查看某个泛函的代码。
 
 * `showMethods('genfun', classes = 'myClass')`：某个泛函的总结信息，可以指定类。也可以只声明`classes`，从而查看某些类的全部方法。
