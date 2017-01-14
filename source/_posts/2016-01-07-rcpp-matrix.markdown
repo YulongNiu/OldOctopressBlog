@@ -18,7 +18,21 @@ categories: R
 
 基本类型是`mat`、`vec`（`colvec`）和`rowvec`。
 
-* Rcpp矩阵转换为RcppArmadillo矩阵，可以避免拷贝矩阵，以提升效率，`mat(ptr_aux_mem, n_rows, n_cols, copy_aux_mem = true, strict = false) `{:.language-cpp}。同样道理，可以转化向量。例如：
+* 属性
+  
+    * 对于矩阵，行数：`m.n_rows;`；列数：`m.n_cols;`；元素总数：`m.size();`或`size(m);`。对于向量，元素数：`v.n_elem;`。
+
+* 特殊向量或矩阵
+
+   * 全是1或0：`ones<mat>(3, 4);`，`zeros<vec>(10);`。
+
+* 取值
+
+   * 对于向量，连续取值：`v.subvec(1stIdx, lastIdx);`；非连续，可以考虑使用`find()`函数，比如：`v.elem(find(v > 0));`。
+   
+   * 对于矩阵，连续取值：`m.col(Idx);`/`m.row(Idx);`/`m.cols(Idx);`/`m.rows(Idx);`/`m.submat(1stRowIdx, lastRowIdx, 1stColIdx, lastColIdx);`；非连续，`m.submat(vecRowIdx, vecColIdx);`。
+
+* Rcpp矩阵转换为RcppArmadillo矩阵，可以避免拷贝矩阵，以提升效率，`mat(ptr_aux_mem, n_rows, n_cols, copy_aux_mem = true, strict = false)`{:.language-cpp}。同样道理，可以转化向量。例如：
 
 {% codeblock lang:cpp transfer matrix and vector %}
 arma::mat TransferMatArma(Rcpp::NumericMatrix x, Rcpp::NumericVector y) {
