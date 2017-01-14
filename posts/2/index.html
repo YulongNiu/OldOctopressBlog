@@ -362,7 +362,35 @@
 <p>基本类型是<code>mat</code>、<code>vec</code>（<code>colvec</code>）和<code>rowvec</code>。</p>
 
 <ul>
-  <li>Rcpp矩阵转换为RcppArmadillo矩阵，可以避免拷贝矩阵，以提升效率，<code class="language-cpp">mat(ptr_aux_mem, n_rows, n_cols, copy_aux_mem = true, strict = false) </code>。同样道理，可以转化向量。例如：</li>
+  <li>
+    <p>属性</p>
+
+    <ul>
+      <li>对于矩阵，行数：<code>m.n_rows;</code>；列数：<code>m.n_cols;</code>；元素总数：<code>m.size();</code>或<code>size(m);</code>。对于向量，元素数：<code>v.n_elem;</code>。</li>
+    </ul>
+  </li>
+  <li>
+    <p>特殊向量或矩阵</p>
+
+    <ul>
+      <li>全是1或0：<code>ones&lt;mat&gt;(3, 4);</code>，<code>zeros&lt;vec&gt;(10);</code>。</li>
+    </ul>
+  </li>
+  <li>
+    <p>取值</p>
+
+    <ul>
+      <li>
+        <p>对于向量，连续取值：<code>v.subvec(1stIdx, lastIdx);</code>；非连续，可以考虑使用<code>find()</code>函数，比如：<code>v.elem(find(v &gt; 0));</code>。</p>
+      </li>
+      <li>
+        <p>对于矩阵，连续取值：<code>m.col(Idx);</code>/<code>m.row(Idx);</code>/<code>m.cols(Idx);</code>/<code>m.rows(Idx);</code>/<code>m.submat(1stRowIdx, lastRowIdx, 1stColIdx, lastColIdx);</code>；非连续，<code>m.submat(vecRowIdx, vecColIdx);</code>。</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Rcpp矩阵转换为RcppArmadillo矩阵，可以避免拷贝矩阵，以提升效率，<code class="language-cpp">mat(ptr_aux_mem, n_rows, n_cols, copy_aux_mem = true, strict = false)</code>。同样道理，可以转化向量。例如：</p>
+  </li>
 </ul>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>transfer matrix and vector </span></figcaption>
