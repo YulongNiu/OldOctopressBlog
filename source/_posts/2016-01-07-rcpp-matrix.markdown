@@ -52,6 +52,27 @@ Rcpp::NumericVector TransferMatRcpp(arma::mat x, arma::vec y) {
 }
 {% endcodeblock %}
 
+* 使用`.each_col()`/`.each_row()`/`.for_each()`替代`apply()`
+
+{% codeblock lang:cpp replace apply() %}
+arma::mat TestMat(arma::mat M, double a) {
+
+  M.for_each([a](mat::elem_type& val) {
+      val = val > 0 ? val : a;
+    });
+
+  M.each_row([](rowvec& r) {
+      r /= r.max();
+    });
+
+  return M;
+}
+{% endcodeblock %}
+
+
+
+
+
 
 
 
