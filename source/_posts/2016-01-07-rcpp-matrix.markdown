@@ -20,11 +20,13 @@ categories: R
 
 * 属性
   
-    * 对于矩阵，行数：`m.n_rows;`；列数：`m.n_cols;`；元素总数：`m.size();`或`size(m);`。对于向量，元素数：`v.n_elem;`。
+    * 对于矩阵，行数：`m.n_rows;`；列数：`m.n_cols;`；维度：`m.size();`或`size(m);`。对于向量，元素数：`v.n_elem;`。
 
 * 特殊向量或矩阵
 
-   * 全是1或0：`ones<mat>(3, 4);`，`zeros<vec>(10);`。
+   * 全是0`ones<mat>(3, 4);`/`vec(10, fill::ones);`/；全是1`zeros<vec>(10);`/`mat(3, 4, fill::zeros);`；全是某个数`mat a(4, 5); a.fill(123.4);`。
+   
+   * 连续向量，规定长度`linspace<vec>(0, 5, 6);`；连续向量，规定间距`regspace<vec>(0, 2, 9);`。
 
 * 取值
 
@@ -36,12 +38,13 @@ categories: R
 
 {% codeblock lang:cpp transfer matrix and vector %}
 arma::mat TransferMatArma(Rcpp::NumericMatrix x, Rcpp::NumericVector y) {
-    mat tx(x.begin, x.nrow(), x.ncol(), false);
+    mat tx(x.begin(), x.nrow(), x.ncol(), false);
     vec ty(y.begin(), y.size(), false);
     return tx;
 }
 
 Rcpp::NumericVector TransferMatRcpp(arma::mat x, arma::vec y) {
+    NumericMatrix tx(x.n_rows, x.n_cols, x.begin());
     NumericVector ty(y.begin(), y.end());
     return ty;
     
@@ -62,11 +65,13 @@ Rcpp::NumericVector TransferMatRcpp(arma::mat x, arma::vec y) {
 
 * [Rcpp Quick Reference Guide](https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-quickref.pdf) 
 
+* [Rcpp note](http://statr.me/rcpp-note/) 
+
 
 
 ### 更新记录 ###
 
-2016年9月26日
+2017年1月15日
 
 
 
