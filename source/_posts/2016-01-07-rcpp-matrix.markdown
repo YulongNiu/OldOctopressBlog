@@ -69,6 +69,8 @@ arma::mat TestMat(arma::mat M, double a) {
 }
 {% endcodeblock %}
 
+* 使用`sum(M, 0);`和`sum(M, 1);`分别替代`colSums(M)`和`rowSums(M)`。
+
 
 
 
