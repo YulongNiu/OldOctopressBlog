@@ -213,14 +213,19 @@
     <p>属性</p>
 
     <ul>
-      <li>对于矩阵，行数：<code>m.n_rows;</code>；列数：<code>m.n_cols;</code>；元素总数：<code>m.size();</code>或<code>size(m);</code>。对于向量，元素数：<code>v.n_elem;</code>。</li>
+      <li>对于矩阵，行数：<code>m.n_rows;</code>；列数：<code>m.n_cols;</code>；维度：<code>m.size();</code>或<code>size(m);</code>。对于向量，元素数：<code>v.n_elem;</code>。</li>
     </ul>
   </li>
   <li>
     <p>特殊向量或矩阵</p>
 
     <ul>
-      <li>全是1或0：<code>ones&lt;mat&gt;(3, 4);</code>，<code>zeros&lt;vec&gt;(10);</code>。</li>
+      <li>
+        <p>全是0<code>ones&lt;mat&gt;(3, 4);</code>/<code>vec(10, fill::ones);</code>/；全是1<code>zeros&lt;vec&gt;(10);</code>/<code>mat(3, 4, fill::zeros);</code>；全是某个数<code>mat a(4, 5); a.fill(123.4);</code>。</p>
+      </li>
+      <li>
+        <p>连续向量，规定长度<code>linspace&lt;vec&gt;(0, 5, 6);</code>；连续向量，规定间距<code>regspace&lt;vec&gt;(0, 2, 9);</code>。</p>
+      </li>
     </ul>
   </li>
   <li>
@@ -253,14 +258,16 @@
 <span class="line-number">10</span>
 <span class="line-number">11</span>
 <span class="line-number">12</span>
+<span class="line-number">13</span>
 </pre></td><td class="code"><pre><code class="cpp"><span class="line"><span class="n">arma</span><span class="o">::</span><span class="n">mat</span> <span class="n">TransferMatArma</span><span class="p">(</span><span class="n">Rcpp</span><span class="o">::</span><span class="n">NumericMatrix</span> <span class="n">x</span><span class="p">,</span> <span class="n">Rcpp</span><span class="o">::</span><span class="n">NumericVector</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
-</span><span class="line">    <span class="n">mat</span> <span class="n">tx</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">begin</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="n">nrow</span><span class="p">(),</span> <span class="n">x</span><span class="p">.</span><span class="n">ncol</span><span class="p">(),</span> <span class="nb">false</span><span class="p">);</span>
+</span><span class="line">    <span class="n">mat</span> <span class="n">tx</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">x</span><span class="p">.</span><span class="n">nrow</span><span class="p">(),</span> <span class="n">x</span><span class="p">.</span><span class="n">ncol</span><span class="p">(),</span> <span class="nb">false</span><span class="p">);</span>
 </span><span class="line">    <span class="n">vec</span> <span class="nf">ty</span><span class="p">(</span><span class="n">y</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">y</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="nb">false</span><span class="p">);</span>
 </span><span class="line">    <span class="k">return</span> <span class="n">tx</span><span class="p">;</span>
 </span><span class="line"><span class="p">}</span>
 </span><span class="line">
 </span><span class="line"><span class="n">Rcpp</span><span class="o">::</span><span class="n">NumericVector</span> <span class="n">TransferMatRcpp</span><span class="p">(</span><span class="n">arma</span><span class="o">::</span><span class="n">mat</span> <span class="n">x</span><span class="p">,</span> <span class="n">arma</span><span class="o">::</span><span class="n">vec</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
-</span><span class="line">    <span class="n">NumericVector</span> <span class="n">ty</span><span class="p">(</span><span class="n">y</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">y</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span><span class="line">    <span class="n">NumericMatrix</span> <span class="n">tx</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="n">n_cols</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="n">begin</span><span class="p">());</span>
+</span><span class="line">    <span class="n">NumericVector</span> <span class="nf">ty</span><span class="p">(</span><span class="n">y</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">y</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
 </span><span class="line">    <span class="k">return</span> <span class="n">ty</span><span class="p">;</span>
 </span><span class="line">
 </span><span class="line"><span class="c1">// 不要使用as&lt;IntegerVector&gt;(wrap(y))，会有内存泄露。</span>
@@ -282,11 +289,14 @@
   <li>
     <p><a href="https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-quickref.pdf">Rcpp Quick Reference Guide</a></p>
   </li>
+  <li>
+    <p><a href="http://statr.me/rcpp-note/">Rcpp note</a></p>
+  </li>
 </ul>
 
 <h3 id="section">更新记录</h3>
 
-<p>2016年9月26日</p>
+<p>2017年1月15日</p>
 
 </div>
 
