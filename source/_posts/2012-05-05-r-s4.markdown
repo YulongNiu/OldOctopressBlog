@@ -92,6 +92,14 @@ numNoSlot <- setClass("num", contains = "numeric")
 setClass(Class = 'simpleClass')
 {% endcodeblock %}
 
+使用`setOldClass()`转换S3类型对象。
+
+{% codeblock lang:R transfer S3 class to S4 %}
+structure(list(), class = 'TestS3Class')
+
+setOldClass('TestS3Class')
+{% endcodeblock %}
+
 ### 2.2 创建、查看和删除对象 ##
 
 创建对象：
