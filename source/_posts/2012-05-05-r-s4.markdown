@@ -92,7 +92,7 @@ numNoSlot <- setClass("num", contains = "numeric")
 setClass(Class = 'simpleClass')
 {% endcodeblock %}
 
-使用`setOldClass()`转换S3类型对象。
+使用`setOldClass()`转换S3类型对象，使用`getClass('oldClass')`查询oldClass。
 
 {% codeblock lang:R transfer S3 class to S4 %}
 structure(list(), class = 'TestS3Class')
@@ -618,9 +618,10 @@ getClass('trickUnion')
 
 3. [S4 System Development in Bioconductor](https://www.bioconductor.org/help/course-materials/2010/AdvancedR/S4InBioconductor.pdf) 
 
+4. [R Programming for Bioinformatics](https://www.crcpress.com/R-Programming-for-Bioinformatics/Gentleman/p/book/9781420063677) 
 
 
 ### 更新记录 ###
 
-2017年12月4日
+2017年2月2日
 
