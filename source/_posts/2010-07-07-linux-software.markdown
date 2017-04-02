@@ -279,9 +279,9 @@ Wine可以尽可能模拟Window软件
 # magician -d 0 -T
 {% endcodeblock %}
 
+## 8. SD卡录入镜像 ##
 
-
-
+推荐使用[Etcher](https://etcher.io/)录入镜像至SD卡。
 
 
 ### <a id="Ref">参考网址</a> ###
@@ -290,7 +290,7 @@ Wine可以尽可能模拟Window软件
 
 ### 更新记录 ###
 
-2015年12月17日
+2017年4月2日
 
 
 
