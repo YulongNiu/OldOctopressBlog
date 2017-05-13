@@ -32,15 +32,11 @@ In this page, I record some useful linkages including academic collaboration and
 
 * [Wei Shen](http://blog.shenwei.me/)
 
-* [BJC俱乐部](http://bio985.com/)：一个生物信息学的圈子
-
-* [塞迩斯](http://www.cellyse.com/) 
-
 * [Buskined bioinformatics](http://runsheng.github.io/)
 
 * [G. Corey Shan 单光宇](https://shanguangyu.com/) 
 
-* [小小羊](https://xiaofeiyangyang.github.io/)
+* [小小羊](https://yangfangs.github.io/)
 
 
 
