@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8">
-  <title>为什么不推荐在R语言中随意按照下标操作矩阵 - 牛牛龙</title>
+  <title>探索Java基本类型的二进制表示 - 牛牛龙</title>
   <meta name="author" content="Yulong Niu">
 
   
@@ -14,15 +14,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yulongniu.bionutshell.org/blog/2016/07/21/subset-matrix-in-r">
+  <link rel="canonical" href="http://yulongniu.bionutshell.org/blog/2017/05/16/java-binary">
   <link href="/favicon.ico" type="image/png" rel="icon">
   <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
 
   <!-- http://opengraphprotocol.org/ -->
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2016/07/21/subset-matrix-in-r">
-  <meta property="og:title" content="为什么不推荐在R语言中随意按照下标操作矩阵 - 牛牛龙">
+  <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2017/05/16/java-binary">
+  <meta property="og:title" content="探索Java基本类型的二进制表示 - 牛牛龙">
   
 
   <!-- mathjax config similar to math.stackexchange -->
@@ -85,6 +85,8 @@
 
   
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
   
 
   
@@ -180,7 +182,7 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2016-07-21T19:35:29+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2017-05-16T20:17:46+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="#disqus_thread" itemprop="discussionUrl"
              data-disqus-identifier="http://yulongniu.bionutshell.org">Comments</a>
@@ -189,70 +191,190 @@
     
     
     <h1 class="entry-title" itemprop="name headline">
-        为什么不推荐在R语言中随意按照下标操作矩阵
+        探索Java基本类型的二进制表示
         
     </h1>
     
   </header>
 
 
-<div class="entry-content clearfix" itemprop="articleBody description"><p>这篇博文的目的是展示R语言中下标操作矩阵的潜在问题。R语言提供了多种方法提取一个矩阵的单个或者部分元素，不同方法对应的效率在Hadley Wickham的<a href="http://adv-r.had.co.nz/Performance.html#language-performance">Advance R</a>中已有讨论。这些方法中，使用最广泛的是通过下标（行或者列）取值，即操作符<code class="language-R">[</code>。然而，这种方法存在潜在问题，即内存中会拷贝原始对象。</p>
+<div class="entry-content clearfix" itemprop="articleBody description"><h2 id="section">1. 基本数据类型</h2>
 
-<p>举例：首先建立一个矩阵，之后取这个矩阵除了第一行之外的部分，接下来操作这个部分矩阵。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>manipulate </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-</pre></td><td class="code"><pre><code class="R"><span class="line"><span class="c1">## step1: build matrix</span>
-</span><span class="line">n <span class="o">&lt;-</span> <span class="m">8000</span>
-</span><span class="line">tmp1 <span class="o">&lt;-</span> <span class="kt">matrix</span><span class="p">(</span>rnorm<span class="p">(</span>n <span class="o">*</span> n<span class="p">),</span> nrow <span class="o">=</span> n<span class="p">,</span> ncol <span class="o">=</span> n<span class="p">)</span>
-</span><span class="line"><span class="kp">gc</span><span class="p">()</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">## step2: manipulate a subset of matrix</span>
-</span><span class="line"><span class="kp">sink</span><span class="p">(</span><span class="s">&#39;/dev/null&#39;</span><span class="p">)</span>
-</span><span class="line"><span class="kp">apply</span><span class="p">(</span>tmp1<span class="p">[</span><span class="m">2</span><span class="o">:</span>n<span class="p">,</span> <span class="p">],</span> <span class="m">1</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> x<span class="p">[</span><span class="m">1</span><span class="p">])</span>
-</span><span class="line"><span class="kp">sink</span><span class="p">()</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">## step3: garbage collection</span>
-</span><span class="line"><span class="kp">gc</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>Java有<a href="https://docs.oracle.com/javase/specs/jls/se8/html/jls-4.html#jls-4.2">八种</a>基本数据类型（primitive data type），分别是<code>boolean</code>、<code>char</code>、<code>byte</code>、<code>short</code>、<code>int</code>、<code>long</code>、<code>float</code>和<code>double</code>，所占用的比特数如下表所示。</p>
 
 <!--more-->
 
-<p>内存使用情况如下：</p>
+<table>
+  <thead>
+    <tr>
+      <th>Data type</th>
+      <th>Bit</th>
+      <th>Range</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>boolean</code></td>
+      <td>not precisely defined</td>
+      <td><code>True</code> or <code>false</code></td>
+    </tr>
+    <tr>
+      <td><code>char</code></td>
+      <td>unsigned 16</td>
+      <td>$2^{16}$</td>
+    </tr>
+    <tr>
+      <td><code>byte</code></td>
+      <td>signed 8</td>
+      <td>$2^{-7}$ ~ $2^7-1$</td>
+    </tr>
+    <tr>
+      <td><code>short</code></td>
+      <td>signed 16</td>
+      <td>$2^{-15}$ ~ $2^{15}-1$</td>
+    </tr>
+    <tr>
+      <td><code>int</code></td>
+      <td>signed 32</td>
+      <td>$2^{-31}$ ~ $2^{31}-1$</td>
+    </tr>
+    <tr>
+      <td><code>long</code></td>
+      <td>signed 64</td>
+      <td>$2^{-63}$ ~ $2^{63}-1$</td>
+    </tr>
+    <tr>
+      <td><code>float</code></td>
+      <td>signed 32</td>
+      <td>$\pm (1-2^{-24}) * 2^{128}$ 精度$2^{-126}$</td>
+    </tr>
+    <tr>
+      <td><code>double</code></td>
+      <td>signed 64</td>
+      <td>$\pm (1-2^{-53}) * 2^{1024}$ 精度$2^{-1022}$</td>
+    </tr>
+  </tbody>
+</table>
 
-<p><img src="/images/R_apply_memory.png" title="image" alt="UCSC下载rRNA注释" /></p>
+<h2 id="section-1">2. 整数二进制表示和范围</h2>
+
+<p>以<code>byte</code>类型为例，每个整数占用了8个比特，最左边比特位表示正负（0为正，1为负）。例如，$1$表示为$0000 0001_2$。因此，能表示的最大正整数为$0111 1111_2$，即</p>
+
+<script type="math/tex; mode=display">2^0 + 2^1 + 2^2 + \cdots + 2^6 = 2^7 - 1</script>
+
+<p>由于要满足$-1 + 1 = 0$，所以$-1$表示为$1111 1111_2$，$-2$表示为$1111 1110_2$。类似于正整数，可以得到能表示的最大负整数为$1000 0001_2$，即$-(2^7 - 1)$。</p>
+
+<p>但是，这里出现一个问题：出现了两个0，一个是$+0$（$0000 0000_2$），一个是$-0$（$1000 0000_2$）。因此，规定$1000 0000_2$为最大负整数$-2^7$。</p>
+
+<h2 id="section-2">3. 浮点数二进制表示和范围</h2>
+
+<p>JAVA使用<a href="https://en.wikipedia.org/wiki/IEEE_floating_point">IEEE 754</a>标准表示浮点数，其二级制表示分为三个部分：1. 最左边比特位表示正负（0为正，1为负）；2. 指数（<code>float</code>有8个比特位，<code>double</code>有11比特位）；3. 尾数（<code>float</code>有23个比特位，<code>double</code>有52比特位）。同时，由于指数需要区分正负，所以<code>float</code>指数位转为十进制后需要减去$2^7-1$，而<code>double</code>需要减去$2^{10}-1$。</p>
+
+<p>以<code>float</code>为例，最大的二进制表示为$0 11111110 11111111111111111111111_2$：</p>
 
 <ul>
   <li>
-    <p>标记1内存上升，因为建立了<code class="language-R">tmp1</code>的矩阵；</p>
+    <p>最右比特位是0；</p>
   </li>
   <li>
-    <p>标记2内存再次上升，主要因为使用下标取矩阵操作，<code class="language-R">tmp1[2:n, ]</code>；</p>
+    <p>指数为$1111 1110_2$，即$127$；</p>
   </li>
   <li>
-    <p>标记3内存下降，因为手动执行垃圾回收。</p>
+    <p>尾数全为1，即：</p>
   </li>
 </ul>
 
-<p>可以明显看到内存中多余的垃圾对象。如果使用<code class="language-R">for</code>循环形式，就可以有效避免内存对象拷贝。虽然，R在内存空间不足时，会自动执行<code class="language-R">gc()</code>。但是，执行程序时，不能全指望自动垃圾回收，毕竟有时回收得并不及时，而新的对象又相继生成。这种情况下，内存空间不足就成为很严重的问题。</p>
+<script type="math/tex; mode=display">2^0 + 2^{-1} + 2^{-2} + \cdots + 2^{-23} = 2-2^{-23}</script>
 
-<p>R版本3.3.1。</p>
+<p>该数为$(1-2^{-24}) * 2^{128}$。</p>
 
-<h3 id="section">更新记录</h3>
+<p>同理，最小非0正数为$0 00000001 00000000000000000000000_2$，即$2^{-126}$。</p>
 
-<p>2016年7月21日</p>
+<p>存在$0 00000000 00000000000000000000000_2$是$+0$，而$1 00000000 00000000000000000000000_2$是$-0$。</p>
 
+<p>$0 11111111 00000000000000000000000_2$是$\infty$，而$1 11111111 00000000000000000000000_2$是$-\infty$。</p>
+
+<h2 id="n">4. 关于2的n次方的有趣事实</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>n次方</th>
+      <th>十进制</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>64</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>128</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>256</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>512</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>1024（千）</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>1048576（百万）</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>1073741824（十亿）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="section-3">参考资料</h3>
+
+<ol>
+  <li>
+    <p><a href="https://docs.oracle.com/javase/specs/index.html">The Java Language Specification, Java SE 8 Edition</a></p>
+  </li>
+  <li>
+    <p><a href="http://introcs.cs.princeton.edu/java/home/">Introduction to Programming in Java</a></p>
+  </li>
+  <li>
+    <p><a href="https://en.wikipedia.org/wiki/Two's_complement">Wiki Two’s complement</a></p>
+  </li>
+  <li>
+    <p><a href="http://cs-fundamentals.com/java-programming/java-primitive-data-types.php">Java Primitive Data Types. Size, Range and Default Value of Basic Data Types</a></p>
+  </li>
+</ol>
+
+<h3 id="section-4">更新记录</h3>
+
+<p>2017年5月16日</p>
 </div>
 
 
@@ -276,13 +398,13 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2016-07-21T19:35:29+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2017-05-16T20:17:46+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
           
 
 <span class="glyphicon glyphicon-tags"></span>&nbsp;
 <span class="categories">
   
-    <a class='category' href='/blog/categories/r/'>r</a>
+    <a class='category' href='/blog/categories/java/'>java</a>
   
 </span>
 
@@ -291,7 +413,7 @@
         
           <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.bionutshell.org/blog/2016/07/21/subset-matrix-in-r/" data-via="" data-counturl="http://yulongniu.bionutshell.org/blog/2016/07/21/subset-matrix-in-r/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.bionutshell.org/blog/2017/05/16/java-binary/" data-via="" data-counturl="http://yulongniu.bionutshell.org/blog/2017/05/16/java-binary/" >Tweet</a>
   
   
   
@@ -301,10 +423,8 @@
         
           <ul class="meta text-muted pager">
             
-            <li class="previous"><a href="/blog/2016/04/17/pointers-in-c/" title="Previous Post: C语言指针记录">&laquo; C语言指针记录</a></li>
+            <li class="previous"><a href="/blog/2016/11/11/git-rebase-examples/" title="Previous Post: 两个git的rebase命令应用">&laquo; 两个git的rebase命令应用</a></li>
             
-            
-            <li class="next"><a href="/blog/2016/09/10/reference-genome-location/" title="Next Post: 常用参考基因组下载地址">常用参考基因组下载地址 &raquo;</a></li>
             
           </ul>
         
@@ -329,7 +449,7 @@
   
   <div id="recent_posts" class="list-group">
     
-    <a class="list-group-item " href="/blog/2017/05/16/java-binary/">探索Java基本类型的二进制表示</a>
+    <a class="list-group-item active" href="/blog/2017/05/16/java-binary/">探索Java基本类型的二进制表示</a>
     
     <a class="list-group-item " href="/blog/2016/11/11/git-rebase-examples/">两个git的rebase命令应用</a>
     
@@ -441,8 +561,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://yulongniu.bionutshell.org/blog/2016/07/21/subset-matrix-in-r/';
-        var disqus_url = 'http://yulongniu.bionutshell.org/blog/2016/07/21/subset-matrix-in-r/';
+        var disqus_identifier = 'http://yulongniu.bionutshell.org/blog/2017/05/16/java-binary/';
+        var disqus_url = 'http://yulongniu.bionutshell.org/blog/2017/05/16/java-binary/';
         var disqus_script = 'embed.js';
       
     (function () {
