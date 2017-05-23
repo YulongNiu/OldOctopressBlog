@@ -13,16 +13,16 @@ Java有[八种](https://docs.oracle.com/javase/specs/jls/se8/html/jls-4.html#jls
 
 <!--more-->
 
-| Data type | Bit         | Range                  |
-|-----------|-------------|------------------------|
-| `boolean` | 1           | `True` or `false`      |
-| `char`    | unsigned 16 | $2^{16}$               |
-| `byte`    | signed 8    | $2^{-7}$ ~ $2^7-1$     |
-| `short`   | signed 16   | $2^{-15}$ ~ $2^{15}-1$ |
-| `int`     | signed 32   | $2^{-31}$ ~ $2^{31}-1$ |
-| `long`    | signed 64   | $2^{-63}$ ~ $2^{63}-1$ |
-| `float`   | signed 32   |                        |
-| `double`  | signed 64   |                        |
+| Data type | Bit                   | Range                       |
+|-----------|-----------------------|-----------------------------|
+| `boolean` | not precisely defined | `True` or `false`           |
+| `char`    | unsigned 16           | $2^{16}$                    |
+| `byte`    | signed 8              | $2^{-7}$ ~ $2^7-1$          |
+| `short`   | signed 16             | $2^{-15}$ ~ $2^{15}-1$      |
+| `int`     | signed 32             | $2^{-31}$ ~ $2^{31}-1$      |
+| `long`    | signed 64             | $2^{-63}$ ~ $2^{63}-1$      |
+| `float`   | signed 32             | $\pm (1-2^{-24}) * 2^{128}$ 精度$2^{-126}$   |
+| `double`  | signed 64             | $\pm (1-2^{-53}) * 2^{1024}$ 精度$2^{-1022}$ |
 
 
 ## 2. 整数二进制表示和范围 ##
@@ -39,9 +39,46 @@ $$
 
 ## 3. 浮点数二进制表示和范围 ##
 
-浮点数的二级制表示分为三个部分：1. 最左边比特位表示正负；2. 指数（`float`有8个比特位，`double`有11比特位）；3. 尾数（`float`有23个比特位，`double`有52比特位）。
+JAVA使用[IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point)标准表示浮点数，其二级制表示分为三个部分：1. 最左边比特位表示正负（0为正，1为负）；2. 指数（`float`有8个比特位，`double`有11比特位）；3. 尾数（`float`有23个比特位，`double`有52比特位）。同时，由于指数需要区分正负，所以`float`指数位转为十进制后需要减去$2^7-1$，而`double`需要减去$2^{10}-1$。
+
+以`float`为例，最大的二进制表示为$0 11111110 11111111111111111111111_2$：
+
+* 最右比特位是0；
+
+* 指数为$1111 1110_2$，即$127$；
+
+* 尾数全为1，即：
+
+$$
+2^0 + 2^{-1} + 2^{-2} + \cdots + 2^{-23} = 2-2^{-23}
+$$
+
+该数为$(1-2^{-24}) * 2^{128}$。
+
+同理，最小非0正数为$0 00000001 00000000000000000000000_2$，即$2^{-126}$。
+
+存在$0 00000000 00000000000000000000000_2$是$+0$，而$1 00000000 00000000000000000000000_2$是$-0$。
+
+$0 11111111 00000000000000000000000_2$是$\infty$，而$1 11111111 00000000000000000000000_2$是$-\infty$。
+
+
 
 ## 4. 关于2的n次方的有趣事实 ##
+
+| n次方 |             十进制 |
+|-------|--------------------|
+|     1 |                  2 |
+|     2 |                  4 |
+|     3 |                  8 |
+|     4 |                 16 |
+|     5 |                 32 |
+|     6 |                 64 |
+|     7 |                128 |
+|     8 |                256 |
+|     9 |                512 |
+|    10 |         1024（千） |
+|    20 |    1048576（百万） |
+|    30 | 1073741824（十亿） |
 
 
 ### 参考资料 ###
@@ -51,6 +88,9 @@ $$
 2. [Introduction to Programming in Java](http://introcs.cs.princeton.edu/java/home/)
 
 3. [Wiki Two's complement](https://en.wikipedia.org/wiki/Two's_complement) 
+
+4. [Java Primitive Data Types. Size, Range and Default Value of Basic Data Types](http://cs-fundamentals.com/java-programming/java-primitive-data-types.php) 
+
 
 
 ### 更新记录 ###

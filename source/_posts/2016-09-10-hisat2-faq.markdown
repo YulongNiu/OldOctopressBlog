@@ -12,7 +12,7 @@ categories: bioinfor
 
 一个常见的双端测序样本HISAT2输出统计：
 
-<!--more-->    
+<!--more-->
 
 {% raw %}
 ```
