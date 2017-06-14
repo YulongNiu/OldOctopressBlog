@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2017-05-31T21:29:59+08:00</updated>
+  <updated>2017-06-14T14:30:37+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -795,12 +795,12 @@ squash sha1id-of-b1 b1
 <h2 id="section">1. 连接远程主机</h2>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ssh -NT -R <span class="m">8080</span> usrname@host
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ssh -NT -D <span class="m">8080</span> usrname@host
 </span></code></pre></td></tr></table></div></figure></p>
 
 <!--more-->
 
-<p>其中，<code>-N</code>表示只连接远程主机，不打开远程shell；<code>-T</code>表示不分配TTY；<code>-R</code>表示某端口数据都通过SSH传向远程主机；<code>8080</code>可以设置为其他端口。</p>
+<p>其中，<code>-N</code>表示只连接远程主机，不打开远程shell；<code>-T</code>表示不分配TTY；<code>-D</code>表示某端口数据都通过SSH传向远程主机；<code>8080</code>可以设置为其他端口。</p>
 
 <h2 id="chrome">2. 添加Chrome浏览器支持</h2>
 
