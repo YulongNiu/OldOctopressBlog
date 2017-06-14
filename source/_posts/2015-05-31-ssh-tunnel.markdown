@@ -11,12 +11,12 @@ SSH建立端口转发分为两步：
 ## 1. 连接远程主机 ##
 
 {% codeblock lang:bash %}
-$ ssh -NT -R 8080 usrname@host
+$ ssh -NT -D 8080 usrname@host
 {% endcodeblock %}
 
 <!--more-->
 
-其中，`-N`表示只连接远程主机，不打开远程shell；`-T`表示不分配TTY；`-R`表示某端口数据都通过SSH传向远程主机；`8080`可以设置为其他端口。
+其中，`-N`表示只连接远程主机，不打开远程shell；`-T`表示不分配TTY；`-D`表示某端口数据都通过SSH传向远程主机；`8080`可以设置为其他端口。
 
 
 ## 2. 添加Chrome浏览器支持 ##
