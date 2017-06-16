@@ -208,7 +208,6 @@ $b
 
 rpy2的R对象拥有`ro`{:.language-python}属性，可以用于向量式操作。
 
-
 {% codeblock lang:python vector in rpy2 %}
 >>> from rpy2.robjects import r
 >>> from rpy2.robjects.vectors import IntVector
