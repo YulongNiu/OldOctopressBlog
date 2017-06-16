@@ -206,6 +206,21 @@ $b
 >>> tmpMat.rx(True, 'b')
 {% endcodeblock %}
 
+rpy2的R对象拥有`ro`{:.language-python}属性，可以用于向量式操作。
+
+
+{% codeblock lang:python vector in rpy2 %}
+>>> from rpy2.robjects import r
+>>> from rpy2.robjects.vectors import IntVector
+
+>>> tmp1 = IntVector([1, 2, 3])
+>>> tmp2 = IntVector([1, 2, 0])
+>>> tmp1.rx(tmp2.ro > 0)
+R object with classes: ('integer',) mapped to:
+<IntVector - Python:0x7f304047b248 / R:0x4cffa08>
+[       1,        2]
+{% endcodeblock %}
+
 
 ### 2.3 特殊对象 ###
 
@@ -304,7 +319,7 @@ $b
 
 ### 更新记录 ###
 
-2015年7月26日
+2016年6月16日
 
 
 
