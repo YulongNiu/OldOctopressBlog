@@ -3,6 +3,7 @@ layout: post
 title: "模拟退火算法的思考"
 date: 2017-07-23 21:11:42 +0800
 comments: true
+published: false
 categories: bioinfor
 ---
 
@@ -27,6 +28,8 @@ $$
 * 《如何求解问题-现代启发式方法》
 
 * 中文科普[1](https://www.cnblogs.com/ranjiewen/p/6084052.html)、[2](https://www.cnblogs.com/heaad/archive/2010/12/20/1911614.html)
+
+* [More on Markov chains, Examples and Applications](http://www.stat.yale.edu/~pollard/Courses/251.spring2013/Handouts/Chang-MoreMC.pdf)
 
 ### 更新记录 ###
 

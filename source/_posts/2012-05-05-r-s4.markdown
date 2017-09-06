@@ -207,7 +207,7 @@ setGeneric(name, def= , group=list(), valueClass=character(),
 
 > * name：字符串，泛函名称。
 > 
-> * def：函数，定义新的泛函，比如结合`standardGeneric()`函数。
+> * def：函数，定义新的泛函，比如结合`standardGeneric()`函数。参数默认值在这里定义，后面的具体方法中参数默认值无效。
 >
 > * group：字符串，指示该泛函所属的泛函组。
 >
