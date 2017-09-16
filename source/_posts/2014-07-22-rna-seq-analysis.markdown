@@ -49,7 +49,7 @@ GO和pathway分析 -->
 -----------------------
 
 | Method                         | #Trimmed    | #Mapped*    | #Filtered  |
-|--------------------------------+-------------+-------------+------------|
+|--------------------------------|-------------|-------------|------------|
 | r50-notrim                     | 108,984,456 | 109,278,388 | 79,143,942 |
 | r50-nomixed-notrim             | 108,984,456 | 103,548,800 | 79,143,942 |
 | r50-nomixed-trimmomatic-min20  | 104,164,622 | 116,315,394 | 80,337,256 |
@@ -112,21 +112,20 @@ GO和pathway分析 -->
 >
 > 一个常见测序片段类似与`adapter--barcode--insert--adapter`{:.language-bash}。测序开始时前几个碱基无法测得，第一个adapter在数据输出时被去除；由于测序仪读长限制，第二个adapter通常无法测得。所以，经常得到类似 `barcode--部分insert`{:.language-bash}的read。最后，把barcode去除，只保留测度insert的片段，这个操作的术语是demultiplexing。
 >
-> 需要注意的是，[Illumina TruSeq](http://www.illumina.com/documents/products/datasheets/datasheet_truseq_sample_prep_kits.pdf)样品库制备方法中，barcode是在adapter中部，而且是与insert分开测序。而[Illumina Nextera Mate Pair](http://res.illumina.com/documents/products/technotes/technote_nextera_matepair_data_processing.pdf)样品库制备中，adapter在目标序列中部。
+> 需要注意的是，[Illumina TruSeq](http://www.illumina.com/documents/products/datasheets/datasheet_truseq_sample_prep_kits.pdf)样品库制备方法中，barcode是在adapter中部，而且是与insert分开测序。而[Illumina Nextera Mate Pair](https://support.illumina.com/content/dam/illumina-support/documents/documentation/chemistry_documentation/samplepreps_nextera/nexteramatepair/nextera-mate-pair-reference-guide-15035209-02.pdf)样品库制备中，adapter在目标序列中部。
 
 * **Concordant Pairs**和**Discordant Pairs**：根据[Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#paired-inputs)的解释，concordant pairs表示一对reads在alignment时，既方向匹配又有合适距离（Bowtie2中是200bp～500bp）。如果上述方向和距离，任意一个条件不满足，则称为discordant pairs。
 
 * **chrN_random**和**chrUn**：基因组文件中通常含有类似`chr9_gl000198_random`{:.language-bash}和`chrUn_gl000211`{:.language-bash}的基因组。根据[UCSC](https://genome.ucsc.edu/FAQ/FAQdownloads.html#download11)解释，`chrN_random`{:.language-bash}包括基因组已知但具体位置未知序列，或者位置已知但具体内容未完成序列。`ChrUn`{:.language-bash}中包括一些具体位置未知的序列。
 
-* **chrN_xxx_hap1**：转录组注释文件中会出现类似`chr6_apd_hap1`{:.language-bash}和`chr6_dbb_hap3`{:.language-bash}的基因组注释。根据[UCSC解释](http://genome.ucsc.edu/cgi-bin/hgGateway?org=Human&db=hg19)这些基因组是[单倍型(haplotype)]基因组(http://hapmap.ncbi.nlm.nih.gov/originhaplotype.html.en)。
-
+* **chrN_xxx_hap1**：转录组注释文件中会出现类似`chr6_apd_hap1`{:.language-bash}和`chr6_dbb_hap3`{:.language-bash}的基因组注释。根据[UCSC解释](http://genome.ucsc.edu/cgi-bin/hgGateway?org=Human&db=hg19)这些基因组是[单倍型(haplotype)基因组](http://hapmap.ncbi.nlm.nih.gov/originhaplotype.html.en)。
 
 
 ### 参考网址 ###
 
 * 推荐幻灯片[RNA-seq quality control and pre-processing](http://www.slideshare.net/mikaelhuss/all-bio-rnaseqqc?from_action=save)
 
-* [Bioconductor详细流程](http://faculty.ucr.edu/~tgirke/HTML_Presentations/Manuals/Workshop_Dec_12_16_2013/Rrnaseq/Rrna)
+* [Bioconductor详细流程](https://www.bioconductor.org/help/workflows/rnaseqGene/)
 
 * RPKM和FPKM：[1](http://jefworks.com/rpkm-and-fpkm-explained/)、 [2](http://www.cureffi.org/2013/09/12/counts-vs-fpkms-in-rna-seq/)和[3一个计算RPKM的例子](http://www.partek.com/Tutorials/microarray/User_Guides/UnderstandingReads.pdf)
 
@@ -136,24 +135,16 @@ GO和pathway分析 -->
 
 * [多少个read才够](http://www.rna-seqblog.com/how-many-reads-are-enough/)
 
-* [高通量测序常用名词汇总](http://www.macrogencn.com/_d275872179.htm)
-
 * [Bowtie2对一些常用名词解释](http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#paired-inputs) 
-
 
 * [二代测序中barcodes index的介绍](http://www.plob.org/2014/11/09/8672.html)
 
 * Illumina样品制备参考：[Illumina TruSeq DNA Adapters De-Mystified](https://www.med.unc.edu/pharm/calabreselab/files/tufts-sequencing-primer)和[Illumina adapter and primer sequences](http://bioinformatics.cvr.ac.uk/blog/illumina-adapter-and-primer-sequences/)
 
-* [Quality Control and Trimming of RNA-seq data](http://www.research.janahang.com/quality-control-and-trimming-of-rna-seq-data/)
-
 * [Best Practices and Suggestions for Read Alignment](http://cgrlucb.wikispaces.com/file/view/readMapping.pdf)
 
 * [Using RNA-seq to quantify gene levels and assay for differential expression](http://barcwiki.wi.mit.edu/wiki/SOPs/rna-seq-diff-expressions) 
 
-
-
-
 ### 更新记录 ###
 
-2015年5月19日
+2017年9月16日
