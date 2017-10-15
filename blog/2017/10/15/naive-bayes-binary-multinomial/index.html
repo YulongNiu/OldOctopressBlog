@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8">
-  <title>构建和展示进化树软件使用心得 - 牛牛龙</title>
+  <title>朴素贝叶斯分类器应用于二元数据类型的尝试 - 牛牛龙</title>
   <meta name="author" content="Yulong Niu">
 
   
@@ -14,15 +14,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yulongniu.bionutshell.org/blog/2014/05/02/phylo-tool-summary">
+  <link rel="canonical" href="http://yulongniu.bionutshell.org/blog/2017/10/15/naive-bayes-binary-multinomial">
   <link href="/favicon.ico" type="image/png" rel="icon">
   <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
 
   <!-- http://opengraphprotocol.org/ -->
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2014/05/02/phylo-tool-summary">
-  <meta property="og:title" content="构建和展示进化树软件使用心得 - 牛牛龙">
+  <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2017/10/15/naive-bayes-binary-multinomial">
+  <meta property="og:title" content="朴素贝叶斯分类器应用于二元数据类型的尝试 - 牛牛龙">
   
 
   <!-- mathjax config similar to math.stackexchange -->
@@ -180,7 +180,7 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-05-02T05:13:59+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2017-10-15T17:38:16+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="#disqus_thread" itemprop="discussionUrl"
              data-disqus-identifier="http://yulongniu.bionutshell.org">Comments</a>
@@ -189,93 +189,163 @@
     
     
     <h1 class="entry-title" itemprop="name headline">
-        构建和展示进化树软件使用心得
+        朴素贝叶斯分类器应用于二元数据类型的尝试
         
     </h1>
     
   </header>
 
 
-<div class="entry-content clearfix" itemprop="articleBody description"><h2 id="section">构建进化树</h2>
+<div class="entry-content clearfix" itemprop="articleBody description"><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
 
-<h3 id="phyml">1. PhyML</h3>
+<h3 id="section">简介</h3>
 
-<p><strong>构建进化树方法</strong>：Maximum Likelihood</p>
-
-<p><strong>评估</strong>：选择bootstrap或者Likelihood-ratio test</p>
-
-<p><strong>运行方式</strong>：所有平台和<a href="http://atgc.lirmm.fr/phyml/">网页</a></p>
-
-<p><strong>心得</strong>：理论上支持4000条序列，小于2000000个字符。但是，对于个人电脑，通常100-200条序列比较合适。命令行运行时，可以选择非常简介的默认模式运行。在默认模式下，bootstrap需要手动开启。安装和使用非常方便，直接下载后可以直接使用。同时，bootstrap可以通过MPI分布计算，但是需要从源代码安装。</p>
-
-<p><strong>快速运行</strong>：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">phyml -i align_file.phy --no_memory_check
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>朴素贝叶斯分类器是一种简单、有效的分类器，其难点在于估算条件概率。比如，一个数据集拥有$N$个相互独立的特征，$C$个分组，对于$C_j$条件概率模型为：</p>
 
 <!--more-->
 
-<ul>
-  <li><code>-i</code>：后跟需要Phylip格式文件</li>
-  <li><code>--no_memory_check</code>：不用检查内存，防止程序运行时跳出</li>
-</ul>
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+\begin{split}
+p(C_j|F_1,\cdots,F_n) &= \frac{p(F_1,\cdots,F_n|C_j)p(C_j)}{p(F_1,\cdots,F_n)} \\
+&= p(F_1|C_j) \cdots p(F_n|C_j)p(C_j)(1/p(F_1,\cdots,F_n))
+\end{split}
+\label{eq:1}
+\end{align} %]]></script>
 
-<h3 id="raxml">2. RAxML</h3>
+<p>由于$1/p(F_1,\cdots,F_n)$在不同分组中为定值，因此：</p>
 
-<p><strong>构建进化树方法</strong>：Maximum Likelihood</p>
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+\begin{split}
+p(C_j|F_1,\cdots,F_n) &\propto p(C_j)\prod_{i=1}^{N}p(F_i|C_j)
+\end{split}
+\label{eq:2}
+\end{align} %]]></script>
 
-<p><strong>运行方式</strong>：所有<a href="http://www.exelixis-lab.org/">平台</a>和网页。</p>
+<p>其中，$p(C_j)$通常容易求得，即$C_j$分组在测试数据集中出现的频率。而$p(F_i\ \vert C_j)$则根据不同的测试数据类型，有不同的估计值。</p>
 
-<p><strong>心得</strong>：推荐<a href="http://www.phylo.org/portal2/login!input.action">网页运行</a>，支持数据的存放和其他构建进化树的方法。本地安装支持MPI和PThreads的分布计算，但是安装有些复杂，需要仔细阅读文档。</p>
+<p>以下讨论两种二元数据类型，例如某个数据集有三种特征量：</p>
 
-<p><strong>快速运行1</strong>：</p>
+<script type="math/tex; mode=display">F = 
+\left[
+\begin{array}{f}
+F_1\\
+F_2\\
+F_3
+\end{array}
+\right]</script>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">raxmlHPC-PTHREADS-AVX -x <span class="m">12345</span> -p <span class="m">12345</span> -# <span class="m">100</span> -m GTRGAMMA -T <span class="m">4</span> -s align_file.phy -n TEST
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<h3 id="section-1">伯努利分布</h3>
 
-<ul>
-  <li><code>-x</code>：bootstrap运行时设定随机数，用于结果重现</li>
-  <li><code>-p</code>：parsimony推断时设定随机数，用于结果重现</li>
-  <li><code>-#</code>：bootstrap次数。也可以设定为autoMRE，最大次数是1000。</li>
-  <li><code>-m</code>：设定使用的模型，GTRGAMMA为核苷酸序列适用模型</li>
-  <li><code>-T</code>：设定线程数，不要超过最大线程</li>
-  <li><code>-s</code>：输入文件，Phylip或者fasta文件</li>
-  <li><code>-n</code>：输入文件记号</li>
-</ul>
+<p>每一个特征量的取值都为$0$或$1$。分组$C_j$含有两个已知样本为：</p>
 
-<p><strong>快速运行2</strong>：</p>
+<script type="math/tex; mode=display">C_{j1} = 
+\left[
+\begin{array}{cj1}
+0\\
+1\\
+0
+\end{array}
+\right]</script>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">raxmlHPC-PTHREADS-AVX -f a -x <span class="m">12345</span> -p <span class="m">12345</span> -# autoMRE -m GTRCAT -T <span class="m">4</span> -s align_file.phy -n TEST
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<script type="math/tex; mode=display">C_{j2} = 
+\left[
+\begin{array}{cj2}
+0\\
+0\\
+1
+\end{array}
+\right]</script>
 
-<ul>
-  <li><code>-f a</code>：选定算法，快速bootstrap</li>
-</ul>
+<p>某个预测样本为：</p>
 
-<h2 id="section-1">展示进化树</h2>
+<script type="math/tex; mode=display">C_{jp1} = 
+\left[
+\begin{array}{cjp1}
+1\\
+0\\
+1
+\end{array}
+\right]</script>
 
-<h3 id="itol">1. iTOL</h3>
+<p>由于$p(F_i \vert C_j)$不能为0，根据<a href="https://en.wikipedia.org/wiki/Rule_of_succession">Rule of succession</a>得各个特征的条件概率为：</p>
 
-<p><strong>运行方式</strong>：<a href="http://itol.embl.de/">网页</a></p>
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+\begin{split}
+p(F1|C_j) &= \frac{0+1}{2+2} &= 1/4 \\
+p(F2|C_j) &= \frac{1+1}{2+2} &= 1/2 \\
+p(F3|C_j) &= \frac{1+1}{2+2} &= 1/2
+\end{split}
+\end{align*} %]]></script>
 
-<p><strong>心得</strong>：</p>
+<h3 id="section-2">二项分布</h3>
+
+<p>每一个特征量的取值都一个元素为$0$或$1$的向量（长度可不等）。分组$C_j$含有两个已知样本为：</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+C_{j1} = 
+\left[
+\begin{array}{cj1}
+0 & 1 & 0 & 1\\
+1 & 0 & 1\\
+0 & 0
+\end{array}
+\right] %]]></script>
+
+<script type="math/tex; mode=display">% <![CDATA[
+C_{j2} = 
+\left[
+\begin{array}{cj2}
+0 & 1 & 1 & 1\\
+1 & 1 & 1\\
+0 & 0
+\end{array}
+\right] %]]></script>
+
+<p>某个预测样本为：</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+C_{jp1} = 
+\left[
+\begin{array}{cjp1}
+0 & 0 & 1 & 1\\
+1 & 0 & 1\\
+0 & 0
+\end{array}
+\right] %]]></script>
+
+<p>各个特征的条件概率为：</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+\begin{split}
+p(F1|C_j) &= \left(\frac{3+1}{8+2}\right)^2 \times \left(\frac{5+1}{8+2}\right)^2 \\
+p(F2|C_j) &= \left(\frac{5+1}{6+2}\right)^2 \times \left(\frac{1+1}{6+2}\right) \\
+p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
+\end{split}
+\end{align*} %]]></script>
+
+<h3 id="section-3">优化</h3>
+
+<p>当特征较多时，会面临多个小数（$p$值）相乘。可以取对数后再相加，即$\sum\log{p}$。</p>
+
+<h3 id="section-4">参考资料</h3>
 
 <ul>
   <li>
-    <p>用户可以添加很多自定义的项目，丰富和完善自己的进化树，比如添加柱状图、蛋白结构域、heatmap、基因平行转移（horizontal gene transfer）等；</p>
+    <p><a href="https://www.inf.ed.ac.uk/teaching/courses/inf2b/learnnotes/inf2b-learn-note07-2up.pdf">Text Classification using Naive Bayes</a></p>
   </li>
   <li>
-    <p>如果输入NCBI taxonomy编号，能够自动转化成物种名称；支持鼠标点击交互式运行，非常方便。
-心得：可以在网站上建立自己的帐号，之后设定不同的project展示和存放自己的项目。尝试构建了2000条左右的序列，显示完全没有问题。</p>
+    <p><a href="https://nlp.stanford.edu/IR-book/html/htmledition/naive-bayes-text-classification-1.html">Naive Bayes text classification</a></p>
   </li>
 </ul>
 
-<h3 id="section-2">更新记录</h3>
-
-<p>2014年5月1日</p>
 </div>
 
 
@@ -299,7 +369,7 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-05-02T05:13:59+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2017-10-15T17:38:16+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
           
 
 <span class="glyphicon glyphicon-tags"></span>&nbsp;
@@ -314,7 +384,7 @@
         
           <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.bionutshell.org/blog/2014/05/02/phylo-tool-summary/" data-via="" data-counturl="http://yulongniu.bionutshell.org/blog/2014/05/02/phylo-tool-summary/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.bionutshell.org/blog/2017/10/15/naive-bayes-binary-multinomial/" data-via="" data-counturl="http://yulongniu.bionutshell.org/blog/2017/10/15/naive-bayes-binary-multinomial/" >Tweet</a>
   
   
   
@@ -324,10 +394,8 @@
         
           <ul class="meta text-muted pager">
             
-            <li class="previous"><a href="/blog/2014/03/28/creat-r-package/" title="Previous Post: 创建R包的最简流程">&laquo; 创建R包的最简流程</a></li>
+            <li class="previous"><a href="/blog/2017/06/14/shadowsocks-setup/" title="Previous Post: Shadowsocks设置推荐">&laquo; Shadowsocks设置推荐</a></li>
             
-            
-            <li class="next"><a href="/blog/2014/06/25/parallel-package/" title="Next Post: R使用parallel包并行计算">R使用parallel包并行计算 &raquo;</a></li>
             
           </ul>
         
@@ -352,7 +420,7 @@
   
   <div id="recent_posts" class="list-group">
     
-    <a class="list-group-item " href="/blog/2017/10/15/naive-bayes-binary-multinomial/">朴素贝叶斯分类器应用于二元数据类型的尝试</a>
+    <a class="list-group-item active" href="/blog/2017/10/15/naive-bayes-binary-multinomial/">朴素贝叶斯分类器应用于二元数据类型的尝试</a>
     
     <a class="list-group-item " href="/blog/2017/06/14/shadowsocks-setup/">Shadowsocks设置推荐</a>
     
@@ -464,8 +532,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://yulongniu.bionutshell.org/blog/2014/05/02/phylo-tool-summary/';
-        var disqus_url = 'http://yulongniu.bionutshell.org/blog/2014/05/02/phylo-tool-summary/';
+        var disqus_identifier = 'http://yulongniu.bionutshell.org/blog/2017/10/15/naive-bayes-binary-multinomial/';
+        var disqus_url = 'http://yulongniu.bionutshell.org/blog/2017/10/15/naive-bayes-binary-multinomial/';
         var disqus_script = 'embed.js';
       
     (function () {

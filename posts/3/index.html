@@ -184,6 +184,182 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2016-01-07T20:50:41+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2016/01/07/rcpp-matrix/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2016/01/07/rcpp-matrix/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2016/01/07/rcpp-matrix/" itemprop="url">Rcpp操作矩阵和向量集锦</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><p>收集和记录<span style="color: blue">Rcpp</span>或者<span style="color: blue">RcppArmadillo</span>操作矩阵和向量。</p>
+
+<h2 id="span-stylecolor-bluercppspan">1. <span style="color: blue">Rcpp</span></h2>
+
+<ul>
+  <li>可以使用逻辑下标（<code>LogicalVector</code>）对向量和列表<a href="http://gallery.rcpp.org/articles/subsetting/">取值</a>。</li>
+</ul>
+
+<h2 id="span-stylecolor-bluercpparmadillospan">2. <span style="color: blue">RcppArmadillo</span></h2>
+
+<p>基本类型是<code>mat</code>、<code>vec</code>（<code>colvec</code>）和<code>rowvec</code>。</p>
+
+<ul>
+  <li>
+    <p>属性</p>
+
+    <ul>
+      <li>对于矩阵，行数：<code>m.n_rows;</code>；列数：<code>m.n_cols;</code>；维度：<code>m.size();</code>或<code>size(m);</code>。对于向量，元素数：<code>v.n_elem;</code>。</li>
+    </ul>
+  </li>
+  <li>
+    <p>特殊向量或矩阵</p>
+
+    <ul>
+      <li>
+        <p>全是0<code>ones&lt;mat&gt;(3, 4);</code>/<code>vec(10, fill::ones);</code>/；全是1<code>zeros&lt;vec&gt;(10);</code>/<code>mat(3, 4, fill::zeros);</code>；全是某个数<code>mat a(4, 5); a.fill(123.4);</code>。</p>
+      </li>
+      <li>
+        <p>连续向量，规定长度<code>linspace&lt;vec&gt;(0, 5, 6);</code>；连续向量，规定间距<code>regspace&lt;vec&gt;(0, 2, 9);</code>。</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>取值</p>
+
+    <ul>
+      <li>
+        <p>对于向量，连续取值：<code>v.subvec(1stIdx, lastIdx);</code>；非连续，可以考虑使用<code>find()</code>函数，比如：<code>v.elem(find(v &gt; 0));</code>。</p>
+      </li>
+      <li>
+        <p>对于矩阵，连续取值：<code>m.col(Idx);</code>/<code>m.row(Idx);</code>/<code>m.cols(Idx);</code>/<code>m.rows(Idx);</code>/<code>m.submat(1stRowIdx, lastRowIdx, 1stColIdx, lastColIdx);</code>；非连续，<code>m.submat(vecRowIdx, vecColIdx);</code>。</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Rcpp矩阵转换为RcppArmadillo矩阵，可以避免拷贝矩阵，以提升效率，<code class="language-cpp">mat(ptr_aux_mem, n_rows, n_cols, copy_aux_mem = true, strict = false)</code>。同样道理，可以转化向量。例如：</p>
+  </li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>transfer matrix and vector </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+</pre></td><td class="code"><pre><code class="cpp"><span class="line"><span class="n">arma</span><span class="o">::</span><span class="n">mat</span> <span class="n">TransferMatArma</span><span class="p">(</span><span class="n">Rcpp</span><span class="o">::</span><span class="n">NumericMatrix</span> <span class="n">x</span><span class="p">,</span> <span class="n">Rcpp</span><span class="o">::</span><span class="n">NumericVector</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">    <span class="n">mat</span> <span class="n">tx</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">x</span><span class="p">.</span><span class="n">nrow</span><span class="p">(),</span> <span class="n">x</span><span class="p">.</span><span class="n">ncol</span><span class="p">(),</span> <span class="nb">false</span><span class="p">);</span>
+</span><span class="line">    <span class="n">vec</span> <span class="nf">ty</span><span class="p">(</span><span class="n">y</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">y</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="nb">false</span><span class="p">);</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">tx</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="n">Rcpp</span><span class="o">::</span><span class="n">NumericVector</span> <span class="n">TransferMatRcpp</span><span class="p">(</span><span class="n">arma</span><span class="o">::</span><span class="n">mat</span> <span class="n">x</span><span class="p">,</span> <span class="n">arma</span><span class="o">::</span><span class="n">vec</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">    <span class="n">NumericMatrix</span> <span class="n">tx</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="n">n_cols</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="n">begin</span><span class="p">());</span>
+</span><span class="line">    <span class="n">NumericVector</span> <span class="nf">ty</span><span class="p">(</span><span class="n">y</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">y</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">ty</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">// 不要使用as&lt;IntegerVector&gt;(wrap(y))，会有内存泄露。</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>使用<code>.each_col()</code>/<code>.each_row()</code>/<code>.for_each()</code>替代<code>apply()</code></li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>replace apply() </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td><td class="code"><pre><code class="cpp"><span class="line"><span class="n">arma</span><span class="o">::</span><span class="n">mat</span> <span class="n">TestMat</span><span class="p">(</span><span class="n">arma</span><span class="o">::</span><span class="n">mat</span> <span class="n">M</span><span class="p">,</span> <span class="kt">double</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">
+</span><span class="line">  <span class="n">M</span><span class="p">.</span><span class="n">for_each</span><span class="p">([</span><span class="n">a</span><span class="p">](</span><span class="n">mat</span><span class="o">::</span><span class="n">elem_type</span><span class="o">&amp;</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">      <span class="n">val</span> <span class="o">=</span> <span class="n">val</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="nl">val</span> <span class="p">:</span> <span class="n">a</span><span class="p">;</span>
+</span><span class="line">    <span class="p">});</span>
+</span><span class="line">
+</span><span class="line">  <span class="n">M</span><span class="p">.</span><span class="n">each_row</span><span class="p">([](</span><span class="n">rowvec</span><span class="o">&amp;</span> <span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">      <span class="n">r</span> <span class="o">/=</span> <span class="n">r</span><span class="p">.</span><span class="n">max</span><span class="p">();</span>
+</span><span class="line">    <span class="p">});</span>
+</span><span class="line">
+</span><span class="line">  <span class="k">return</span> <span class="n">M</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>使用<code>sum(M, 0);</code>和<code>sum(M, 1);</code>分别替代<code>colSums(M)</code>和<code>rowSums(M)</code>。</li>
+</ul>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li>
+    <p><a href="http://arma.sourceforge.net/docs.html#adv_constructors_mat">Armadillo矩阵</a></p>
+  </li>
+  <li>
+    <p><a href="https://stackoverflow.com/questions/13038256/subset-of-a-rcpp-matrix-that-matches-a-logical-statement">StackOverflow中矩阵提取</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/petewerner/misc/wiki/RcppArmadillo-cheatsheet">RcppArmadillo和R对照表</a></p>
+  </li>
+  <li>
+    <p><a href="https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-quickref.pdf">Rcpp Quick Reference Guide</a></p>
+  </li>
+  <li>
+    <p><a href="http://statr.me/rcpp-note/">Rcpp note</a></p>
+  </li>
+</ul>
+
+<h3 id="section">更新记录</h3>
+
+<p>2017年1月15日</p>
+
+</div>
+  
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-10-25T19:05:33+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2015/10/25/xpath-xml/#disqus_thread" itemprop="discussionUrl"
@@ -445,57 +621,6 @@
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-06-02T16:49:41+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2015/06/02/download-ucsc-gene-mask/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2015/06/02/download-ucsc-gene-mask/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2015/06/02/download-ucsc-gene-mask/" itemprop="url">UCSC Table下载注释文件</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><p>在进行RNA-seq数据分析时，需要从<a href="http://genome.ucsc.edu/cgi-bin/hgTables">UCSC Table</a>下载各种注释信息。比如Cufflinks等要求的转录组注释信息、Cufflinks建议去除的rRNA/tRNA/线粒体组注释。</p>
-
-<h2 id="section">1. 基因注释信息</h2>
-
-<p>下载转录组Ensembl注释文件：</p>
-
-<p><img src="/images/hg19_ensembl.png" title="image" alt="UCSC下载Ensembl注释" /></p>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2015/06/02/download-ucsc-gene-mask/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -519,6 +644,8 @@
   
   <div id="recent_posts" class="list-group">
     
+    <a class="list-group-item " href="/blog/2017/10/15/naive-bayes-binary-multinomial/">朴素贝叶斯分类器应用于二元数据类型的尝试</a>
+    
     <a class="list-group-item " href="/blog/2017/06/14/shadowsocks-setup/">Shadowsocks设置推荐</a>
     
     <a class="list-group-item " href="/blog/2017/05/16/java-binary/">探索Java基本类型的二进制表示</a>
@@ -526,8 +653,6 @@
     <a class="list-group-item " href="/blog/2016/11/11/git-rebase-examples/">两个git的rebase命令应用</a>
     
     <a class="list-group-item " href="/blog/2016/10/21/linux-sync-google-drive/">命令行使用Google Drive</a>
-    
-    <a class="list-group-item " href="/blog/2016/09/22/how-to-publish-in-nc/">如何在Nature Communications上发表文章</a>
     
   </div>
 </section>
@@ -563,7 +688,7 @@
     
     
     <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
-        <span class="badge">13</span>
+        <span class="badge">14</span>
         bioinfor
       </a>
     

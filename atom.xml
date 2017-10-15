@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2017-10-05T19:30:18+08:00</updated>
+  <updated>2017-10-15T21:00:08+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -12,6 +12,164 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[朴素贝叶斯分类器应用于二元数据类型的尝试]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2017/10/15/naive-bayes-binary-multinomial/"/>
+    <updated>2017-10-15T17:38:16+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2017/10/15/naive-bayes-binary-multinomial</id>
+    <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<h3 id="section">简介</h3>
+
+<p>朴素贝叶斯分类器是一种简单、有效的分类器，其难点在于估算条件概率。比如，一个数据集拥有$N$个相互独立的特征，$C$个分组，对于$C_j$条件概率模型为：</p>
+
+<!--more-->
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align}
+\begin{split}
+p(C_j|F_1,\cdots,F_n) &= \frac{p(F_1,\cdots,F_n|C_j)p(C_j)}{p(F_1,\cdots,F_n)} \\
+&= p(F_1|C_j) \cdots p(F_n|C_j)p(C_j)(1/p(F_1,\cdots,F_n))
+\end{split}
+\label{eq:1}
+\end{align} %]]&gt;</script>
+
+<p>由于$1/p(F_1,\cdots,F_n)$在不同分组中为定值，因此：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align}
+\begin{split}
+p(C_j|F_1,\cdots,F_n) &\propto p(C_j)\prod_{i=1}^{N}p(F_i|C_j)
+\end{split}
+\label{eq:2}
+\end{align} %]]&gt;</script>
+
+<p>其中，$p(C_j)$通常容易求得，即$C_j$分组在测试数据集中出现的频率。而$p(F_i\ \vert C_j)$则根据不同的测试数据类型，有不同的估计值。</p>
+
+<p>以下讨论两种二元数据类型，例如某个数据集有三种特征量：</p>
+
+<script type="math/tex; mode=display">F = 
+\left[
+\begin{array}{f}
+F_1\\
+F_2\\
+F_3
+\end{array}
+\right]</script>
+
+<h3 id="section-1">伯努利分布</h3>
+
+<p>每一个特征量的取值都为$0$或$1$。分组$C_j$含有两个已知样本为：</p>
+
+<script type="math/tex; mode=display">C_{j1} = 
+\left[
+\begin{array}{cj1}
+0\\
+1\\
+0
+\end{array}
+\right]</script>
+
+<script type="math/tex; mode=display">C_{j2} = 
+\left[
+\begin{array}{cj2}
+0\\
+0\\
+1
+\end{array}
+\right]</script>
+
+<p>某个预测样本为：</p>
+
+<script type="math/tex; mode=display">C_{jp1} = 
+\left[
+\begin{array}{cjp1}
+1\\
+0\\
+1
+\end{array}
+\right]</script>
+
+<p>由于$p(F_i \vert C_j)$不能为0，根据<a href="https://en.wikipedia.org/wiki/Rule_of_succession">Rule of succession</a>得各个特征的条件概率为：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align*}
+\begin{split}
+p(F1|C_j) &= \frac{0+1}{2+2} &= 1/4 \\
+p(F2|C_j) &= \frac{1+1}{2+2} &= 1/2 \\
+p(F3|C_j) &= \frac{1+1}{2+2} &= 1/2
+\end{split}
+\end{align*} %]]&gt;</script>
+
+<h3 id="section-2">二项分布</h3>
+
+<p>每一个特征量的取值都一个元素为$0$或$1$的向量（长度可不等）。分组$C_j$含有两个已知样本为：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+C_{j1} = 
+\left[
+\begin{array}{cj1}
+0 & 1 & 0 & 1\\
+1 & 0 & 1\\
+0 & 0
+\end{array}
+\right] %]]&gt;</script>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+C_{j2} = 
+\left[
+\begin{array}{cj2}
+0 & 1 & 1 & 1\\
+1 & 1 & 1\\
+0 & 0
+\end{array}
+\right] %]]&gt;</script>
+
+<p>某个预测样本为：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+C_{jp1} = 
+\left[
+\begin{array}{cjp1}
+0 & 0 & 1 & 1\\
+1 & 0 & 1\\
+0 & 0
+\end{array}
+\right] %]]&gt;</script>
+
+<p>各个特征的条件概率为：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align*}
+\begin{split}
+p(F1|C_j) &= \left(\frac{3+1}{8+2}\right)^2 \times \left(\frac{5+1}{8+2}\right)^2 \\
+p(F2|C_j) &= \left(\frac{5+1}{6+2}\right)^2 \times \left(\frac{1+1}{6+2}\right) \\
+p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
+\end{split}
+\end{align*} %]]&gt;</script>
+
+<h3 id="section-3">优化</h3>
+
+<p>当特征较多时，会面临多个小数（$p$值）相乘。可以取对数后再相加，即$\sum\log{p}$。</p>
+
+<h3 id="section-4">参考资料</h3>
+
+<ul>
+  <li>
+    <p><a href="https://www.inf.ed.ac.uk/teaching/courses/inf2b/learnnotes/inf2b-learn-note07-2up.pdf">Text Classification using Naive Bayes</a></p>
+  </li>
+  <li>
+    <p><a href="https://nlp.stanford.edu/IR-book/html/htmledition/naive-bayes-text-classification-1.html">Naive Bayes text classification</a></p>
+  </li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Shadowsocks设置推荐]]></title>
@@ -3136,136 +3294,6 @@ MAPQ = -10 \times log_{10}(pvalue)
 <h3 id="section-2">更新记录</h3>
 
 <p>2015年5月25日</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Django使用介绍]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2015/05/09/django-tutorial/"/>
-    <updated>2015-05-09T13:42:15+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2015/05/09/django-tutorial</id>
-    <content type="html"><![CDATA[<p>本文是学习<a href="https://docs.djangoproject.com/en/1.8/intro/tutorial01/">Django Tutorial</a>的记录，目的为了帮助快速浏览和查找Django使用细节。</p>
-
-<h2 id="django">1. 安装Django</h2>
-
-<p>本文使用<a href="https://www.python.org/">Python 3.3.6</a>和<a href="http://www.postgresql.org/">PostgreSQL 9.3.6</a>学习Django。可以参考<a href="http://yulongniu.bionutshell.org/blog/2015/05/09/python-different-version/">“使用Pyenv控制多个版本Python”</a>和 <a href="http://yulongniu.bionutshell.org/blog/2015/05/08/install-use-postgresql/">“Fedora安装与使用PostgreSQL”</a>，安装对应版本Python和PostgreSQL。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 安装Django</span>
-</span><span class="line"><span class="nv">$ </span>pip install django
-</span><span class="line">
-</span><span class="line"><span class="c"># 安装PostgreSQL支持psycopg2 </span>
-</span><span class="line"><span class="nv">$ </span>pip install psycopg2
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<!--more-->
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 检查Django版本</span>
-</span><span class="line"><span class="nv">$ </span>python -c <span class="s2">&quot;import django; print(django.get_version())&quot;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section">2. 创建项目</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 创建名为mysite的项目</span>
-</span><span class="line"><span class="nv">$ </span>django-admin startproject mysite
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>之后，配制数据库。修改<code class="language-bash">mysite/settings.py</code>对应位置。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>mysite/settings.py</span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># Database</span>
-</span><span class="line"><span class="c"># https://docs.djangoproject.com/en/1.8/ref/settings/#databases</span>
-</span><span class="line">
-</span><span class="line"><span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
-</span><span class="line">    <span class="s">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
-</span><span class="line">        <span class="s">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s">&#39;django.db.backends.postgresql_psycopg2&#39;</span><span class="p">,</span>
-</span><span class="line">        <span class="s">&#39;NAME&#39;</span><span class="p">:</span> <span class="s">&#39;testdb&#39;</span><span class="p">,</span>
-</span><span class="line">        <span class="s">&#39;USER&#39;</span><span class="p">:</span> <span class="s">&#39;userName&#39;</span><span class="p">,</span>
-</span><span class="line">        <span class="s">&#39;PASSWORD&#39;</span><span class="p">:</span> <span class="s">&#39;passWord&#39;</span><span class="p">,</span>
-</span><span class="line">        <span class="s">&#39;HOST&#39;</span><span class="p">:</span> <span class="s">&#39;/var/run/postgresql&#39;</span><span class="p">,</span>
-</span><span class="line">        <span class="s">&#39;PORT&#39;</span><span class="p">:</span> <span class="s">&#39;5432&#39;</span><span class="p">,</span>
-</span><span class="line">    <span class="p">}</span>
-</span><span class="line"><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 配制好数据库后，链接数据库</span>
-</span><span class="line"><span class="nv">$ </span>python manage.py migrate
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>开启Django测试网络服务器</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>python manage.py runserver
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="app">3. 创建app</h2>
-
-<p>首先， 创建新的app，比如<code class="language-bash">polls</code></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>python manage.py startapp polls
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>其次，修改app</p>
-
-<p>app文件位置<code class="language-bash">polls/models.py</code>，之后在项目配制文件<code class="language-bash">mysite/settings.py</code>中添加app，最后添加app。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 添加app</span>
-</span><span class="line"><span class="nv">$ </span>python manage.py makemigrations polls
-</span><span class="line">
-</span><span class="line"><span class="c"># 如果有数据库操作，可以打印具体的数据库操作脚本</span>
-</span><span class="line"><span class="nv">$ </span>python manage.py sqlmigrate polls 0001
-</span><span class="line">
-</span><span class="line"><span class="c"># 也可以检查</span>
-</span><span class="line"><span class="nv">$ </span>python manage.py check
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>最后，链接app与数据库</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>python manage.py migrate
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
-
-<ul>
-  <li><a href="https://docs.djangoproject.com/en/1.8/intro/tutorial01/">Django Tutorial</a></li>
-</ul>
-
-<h3 id="section-1">更新记录</h3>
-
-<p>2015年5月9日</p>
 ]]></content>
   </entry>
   
