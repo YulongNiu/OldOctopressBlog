@@ -169,3 +169,7 @@ $$
 * [Naive Bayes text classification](https://nlp.stanford.edu/IR-book/html/htmledition/naive-bayes-text-classification-1.html) 
 
 
+### 更新记录 ###
+
+2017年7月15日
+
