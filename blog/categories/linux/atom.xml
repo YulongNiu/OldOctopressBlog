@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2017-10-16T12:20:36+08:00</updated>
+  <updated>2017-10-16T18:07:28+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -30,7 +30,7 @@
 
 <h2 id="shadowsocks-1">3. 自己配置Shadowsocks</h2>
 
-<h2 id="section-1">3.1 软件准备</h2>
+<h3 id="section-1">3.1 软件准备</h3>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -42,7 +42,7 @@
 </span><span class='line'><span class="c"># pip install –upgrade shadowsocks</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="section-2">3.2 配置文件</h2>
+<h3 id="section-2">3.2 配置文件</h3>
 
 <p>文件位置<code>/etc/shadowsocks.json</code>，设置模板：</p>
 
@@ -62,21 +62,44 @@
 </code>
 </p>
 
-<h2 id="section-3">3.3 启动</h2>
+<h3 id="section-3">3.3 启动</h3>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># ssserver -c /etc/shadowsocks.json -d start</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
+<h2 id="tcp-bbr">4. 使用TCP BBR加速</h2>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># echo “net.core.default_qdisc=fq” » /etc/sysctl.conf</span>
+</span><span class='line'><span class="c"># echo “net.ipv4.tcp_congestion_control=bbr” » /etc/sysctl.conf&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;sysctl--p&quot;</span>&gt;sysctl -p&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;sysctl-netipv4tcpavailablecongestioncontrol&quot;</span>&gt;sysctl net.ipv4.tcp_available_congestion_control&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# sysctl net.ipv4.tcp_congestion_control
+</span></code></pre></td></tr></table></div></figure></p>
+
 <h3 id="section-4">参考资料</h3>
 
 <ol>
-  <li><a href="http://nga.178.com/read.php?tid=8798506">更改谷歌语言偏好</a></li>
+  <li>
+    <p><a href="http://nga.178.com/read.php?tid=8798506">更改谷歌语言偏好</a></p>
+  </li>
+  <li>
+    <p><a href="https://dirtysalt.github.io/blogs/boost-shadowsocks-with-tcp-bbr.html">通过TCP BBR为ShadowSocks加速</a></p>
+  </li>
 </ol>
 
 <h3 id="section-5">更新记录</h3>
 
-<p>2017年6月14日</p>
+<p>2017年10月16日</p>
 ]]></content>
   </entry>
   

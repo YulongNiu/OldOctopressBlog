@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2017-10-16T12:20:36+08:00</updated>
+  <updated>2017-10-16T18:07:28+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -26,7 +26,7 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 
 <h3 id="section">简介</h3>
 
-<p>朴素贝叶斯分类器是一种简单、有效的分类器，其难点在于估算条件概率。比如，一个数据集拥有$N$个相互独立的特征，$C$个分组，对于$C_j$条件概率模型为：</p>
+<p>朴素贝叶斯分类器（Naive Bayes classifier）是一种简单、有效的分类器，其难点在于估算条件概率。比如，一个数据集拥有$N$个相互独立的特征，$C$个分组，对于$C_j$条件概率模型为：</p>
 
 <!--more-->
 
@@ -199,7 +199,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
 
 <h2 id="shadowsocks-1">3. 自己配置Shadowsocks</h2>
 
-<h2 id="section-1">3.1 软件准备</h2>
+<h3 id="section-1">3.1 软件准备</h3>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -211,7 +211,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
 </span><span class="line"><span class="c"># pip install --upgrade shadowsocks</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h2 id="section-2">3.2 配置文件</h2>
+<h3 id="section-2">3.2 配置文件</h3>
 
 <p>文件位置<code>/etc/shadowsocks.json</code>，设置模板：</p>
 
@@ -238,21 +238,44 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
 </span><span class="line">    "method":"aes-256-cfb"
 </span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h2 id="section-3">3.3 启动</h2>
+<h3 id="section-3">3.3 启动</h3>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># ssserver -c /etc/shadowsocks.json -d start</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<h2 id="tcp-bbr">4. 使用TCP BBR加速</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># echo &quot;net.core.default_qdisc=fq&quot; &gt;&gt; /etc/sysctl.conf</span>
+</span><span class="line"><span class="c"># echo &quot;net.ipv4.tcp_congestion_control=bbr&quot; &gt;&gt; /etc/sysctl.conf</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># sysctl -p</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># sysctl net.ipv4.tcp_available_congestion_control</span>
+</span><span class="line"><span class="c"># sysctl net.ipv4.tcp_congestion_control</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
 <h3 id="section-4">参考资料</h3>
 
 <ol>
-  <li><a href="http://nga.178.com/read.php?tid=8798506">更改谷歌语言偏好</a></li>
+  <li>
+    <p><a href="http://nga.178.com/read.php?tid=8798506">更改谷歌语言偏好</a></p>
+  </li>
+  <li>
+    <p><a href="https://dirtysalt.github.io/blogs/boost-shadowsocks-with-tcp-bbr.html">通过TCP BBR为ShadowSocks加速</a></p>
+  </li>
 </ol>
 
 <h3 id="section-5">更新记录</h3>
 
-<p>2017年6月14日</p>
+<p>2017年10月16日</p>
 ]]></content>
   </entry>
   
