@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bioinfor | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/bioinfor/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2017-10-17T10:28:05+08:00</updated>
+  <updated>2017-10-17T14:32:09+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -24,7 +24,27 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
 
-<h3 id="section">简介</h3>
+<h3 id="section">1. 贝叶斯定理</h3>
+
+<p>已知事件$A$和$B$，则条件概率为：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align}
+\begin{split}
+P(A|B) &= \frac{P(A,B)}{P(B)} \\
+P(B|A) &= \frac{P(A,B)}{P(A)}
+\end{split}
+\label{eq:1}
+\end{align} %]]&gt;</script>
+
+<p>可以推导出：</p>
+
+<script type="math/tex; mode=display">\begin{align}
+P(B|A) = \frac{P(A|B)P(B)}{P(A)}
+\label{eq:2}
+\end{align}</script>
+
+<h3 id="section-1">2. 分类器简介</h3>
 
 <p>朴素贝叶斯分类器（Naive Bayes classifier）是一种简单、有效的分类器，其难点在于估算条件概率。比如，一个数据集拥有$N$个相互独立的特征，$C$个分组，对于$C_j$条件概率模型为：</p>
 
@@ -36,7 +56,7 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 p(C_j|F_1,\cdots,F_n) &= \frac{p(F_1,\cdots,F_n|C_j)p(C_j)}{p(F_1,\cdots,F_n)} \\
 &= p(F_1|C_j) \cdots p(F_n|C_j)p(C_j)(1/p(F_1,\cdots,F_n))
 \end{split}
-\label{eq:1}
+\label{eq:3}
 \end{align} %]]&gt;</script>
 
 <p>由于$1/p(F_1,\cdots,F_n)$在不同分组中为定值，因此：</p>
@@ -46,7 +66,7 @@ p(C_j|F_1,\cdots,F_n) &= \frac{p(F_1,\cdots,F_n|C_j)p(C_j)}{p(F_1,\cdots,F_n)} \
 \begin{split}
 p(C_j|F_1,\cdots,F_n) &\propto p(C_j)\prod_{i=1}^{N}p(F_i|C_j)
 \end{split}
-\label{eq:2}
+\label{eq:4}
 \end{align} %]]&gt;</script>
 
 <p>其中，$p(C_j)$通常容易求得，即$C_j$分组在测试数据集中出现的频率。而$p(F_i\ \vert C_j)$则根据不同的测试数据类型，有不同的估计值。</p>
@@ -62,7 +82,7 @@ F_3
 \end{array}
 \right]</script>
 
-<h3 id="section-1">伯努利分布</h3>
+<h3 id="section-2">3. 伯努利分布</h3>
 
 <p>每一个特征量的取值都为$0$或$1$。分组$C_j$含有两个已知样本为：</p>
 
@@ -106,7 +126,7 @@ p(F3|C_j) &= \frac{1+1}{2+2} &= 1/2
 \end{split}
 \end{align*} %]]&gt;</script>
 
-<h3 id="section-2">二项分布</h3>
+<h3 id="section-3">4. 二项分布</h3>
 
 <p>每一个特征量的取值都一个元素为$0$或$1$的向量（长度可不等）。分组$C_j$含有两个已知样本为：</p>
 
@@ -153,7 +173,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
 \end{split}
 \end{align*} %]]&gt;</script>
 
-<h3 id="section-3">优化</h3>
+<h3 id="section-4">优化</h3>
 
 <ol>
   <li>
@@ -164,7 +184,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
   </li>
 </ol>
 
-<h3 id="section-4">参考资料</h3>
+<h3 id="section-5">参考资料</h3>
 
 <ul>
   <li>
@@ -175,7 +195,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
   </li>
 </ul>
 
-<h3 id="section-5">更新记录</h3>
+<h3 id="section-6">更新记录</h3>
 
 <p>2017年7月15日</p>
 

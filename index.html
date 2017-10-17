@@ -203,7 +203,27 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
 
-<h3 id="section">简介</h3>
+<h3 id="section">1. 贝叶斯定理</h3>
+
+<p>已知事件$A$和$B$，则条件概率为：</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+\begin{split}
+P(A|B) &= \frac{P(A,B)}{P(B)} \\
+P(B|A) &= \frac{P(A,B)}{P(A)}
+\end{split}
+\label{eq:1}
+\end{align} %]]></script>
+
+<p>可以推导出：</p>
+
+<script type="math/tex; mode=display">\begin{align}
+P(B|A) = \frac{P(A|B)P(B)}{P(A)}
+\label{eq:2}
+\end{align}</script>
+
+<h3 id="section-1">2. 分类器简介</h3>
 
 <p>朴素贝叶斯分类器（Naive Bayes classifier）是一种简单、有效的分类器，其难点在于估算条件概率。比如，一个数据集拥有$N$个相互独立的特征，$C$个分组，对于$C_j$条件概率模型为：</p>
 
