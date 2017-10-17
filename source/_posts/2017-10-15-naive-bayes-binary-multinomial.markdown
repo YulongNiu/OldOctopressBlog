@@ -12,7 +12,30 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
 
-### 简介 ###
+### 1. 贝叶斯定理 ###
+
+已知事件$A$和$B$，则条件概率为：
+
+$$
+\begin{align}
+\begin{split}
+P(A|B) &= \frac{P(A,B)}{P(B)} \\
+P(B|A) &= \frac{P(A,B)}{P(A)}
+\end{split}
+\label{eq:1}
+\end{align}
+$$
+
+可以推导出：
+
+$$
+\begin{align}
+P(B|A) = \frac{P(A|B)P(B)}{P(A)}
+\label{eq:2}
+\end{align}
+$$
+
+### 2. 分类器简介 ###
 
 朴素贝叶斯分类器（Naive Bayes classifier）是一种简单、有效的分类器，其难点在于估算条件概率。比如，一个数据集拥有$N$个相互独立的特征，$C$个分组，对于$C_j$条件概率模型为：
 
@@ -24,7 +47,7 @@ $$
 p(C_j|F_1,\cdots,F_n) &= \frac{p(F_1,\cdots,F_n|C_j)p(C_j)}{p(F_1,\cdots,F_n)} \\
 &= p(F_1|C_j) \cdots p(F_n|C_j)p(C_j)(1/p(F_1,\cdots,F_n))
 \end{split}
-\label{eq:1}
+\label{eq:3}
 \end{align}
 $$
 
@@ -35,7 +58,7 @@ $$
 \begin{split}
 p(C_j|F_1,\cdots,F_n) &\propto p(C_j)\prod_{i=1}^{N}p(F_i|C_j)
 \end{split}
-\label{eq:2}
+\label{eq:4}
 \end{align}
 $$
 
@@ -54,7 +77,7 @@ F_3
 \right]
 $$
 
-### 伯努利分布 ###
+### 3. 伯努利分布 ###
 
 每一个特征量的取值都为$0$或$1$。分组$C_j$含有两个已知样本为：
 
@@ -105,7 +128,7 @@ p(F3|C_j) &= \frac{1+1}{2+2} &= 1/2
 \end{align*}
 $$
 
-### 二项分布 ###
+### 4. 二项分布 ###
 
 每一个特征量的取值都一个元素为$0$或$1$的向量（长度可不等）。分组$C_j$含有两个已知样本为：
 
