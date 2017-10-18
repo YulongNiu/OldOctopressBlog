@@ -4,7 +4,7 @@ title: "最大熵模型"
 date: 2017-10-16 13:16:12 +0800
 comments: true
 categories: bioinfor
-published: false
+published: true
 ---
 
 <script type="text/x-mathjax-config">
@@ -13,14 +13,14 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
 
-### 简介 ###
+### 1. 熵和条件熵 ###
 
-最大熵原理可以表述为，在满足$k+1$个约束条件的模型集合中，选取熵$H(p)$最大的模型。
+对于随机变量$X$，熵为：
 
 $$
 \begin{align}
 \begin{split}
-H(p) = -\sum_{x}p(x)\log{p(x)}
+H(X) = -\sum_{x}p(x)\log{p(x)}
 \end{split}
 \label{eq:1}
 \end{align}
@@ -28,7 +28,32 @@ $$
 
 <!--more-->
 
-约束条件为：
+其中：
+
+$$
+\begin{align}
+\begin{split}
+-\sum_{x}p(x) = 1
+\end{split}
+\label{eq:2}
+\end{align}
+$$
+
+同样道理，对于任意随机变量$X$和$Y$，联合熵为：
+
+$$
+\begin{align}
+\begin{split}
+H(X,Y) = -\sum_{x \in X, y \in Y}p(x,y)\log{p(x,y)}
+\end{split}
+\label{eq:3}
+\end{align}
+$$
+
+
+### 2. 最大熵原理简介 ###
+
+最大熵原理可以表述为，在满足$k+1$个约束条件的模型集合中，选取熵$H(p)$最大的模型。约束条件为：
 
 $$
 \begin{align}
@@ -80,7 +105,10 @@ $$
 其中
 
 $$
+\begin{align}
 Z = \sum\limits_x \exp\left(\sum\limits_{j=1}^{k}\lambda_j f_j(x)\right)
+\label{eq:4}
+\end{align}
 $$
 
 将$\eqref{eq:3}$带入约束条件$\eqref{eq:2}$中，即可解得$\lambda_j$。

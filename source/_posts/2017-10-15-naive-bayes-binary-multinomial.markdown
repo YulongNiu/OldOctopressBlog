@@ -16,11 +16,13 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 
 已知事件$A$和$B$，则条件概率为：
 
+<!--more-->
+
 $$
 \begin{align}
 \begin{split}
-P(A|B) &= \frac{P(A,B)}{P(B)} \\
-P(B|A) &= \frac{P(A,B)}{P(A)}
+P(A | B) &= \frac{P(A,B)}{P(B)} \\
+P(B | A) &= \frac{P(A,B)}{P(A)}
 \end{split}
 \label{eq:1}
 \end{align}
@@ -38,8 +40,6 @@ $$
 ### 2. 分类器简介 ###
 
 朴素贝叶斯分类器（Naive Bayes classifier）是一种简单、有效的分类器，其难点在于估算条件概率。比如，一个数据集拥有$N$个相互独立的特征，$C$个分组，对于$C_j$条件概率模型为：
-
-<!--more-->
 
 $$
 \begin{align}
@@ -167,7 +167,7 @@ C_{jp1} =
 \right]
 $$
 
-各个特征的条件概率为：
+各个特征的条件git pull origin master概率为：
 
 $$
 \begin{align*}
