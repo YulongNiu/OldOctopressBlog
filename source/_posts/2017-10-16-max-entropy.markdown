@@ -20,7 +20,7 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 $$
 \begin{align}
 \begin{split}
-H(X) = -\sum_{x}p(x)\log{p(x)}
+H(X) = -\sum_{x \in X}p(x)\log{p(x)}
 \end{split}
 \label{eq:1}
 \end{align}
@@ -33,7 +33,7 @@ $$
 $$
 \begin{align}
 \begin{split}
--\sum_{x}p(x) = 1
+\sum_{x \in X}p(x) = 1
 \end{split}
 \label{eq:2}
 \end{align}
@@ -50,6 +50,19 @@ H(X,Y) = -\sum_{x \in X, y \in Y}p(x,y)\log{p(x,y)}
 \end{align}
 $$
 
+基于$X$的$Y$的熵为条件熵：
+
+$$
+\begin{align}
+\begin{split}
+H(Y|X) &= H(X, Y) - H(X) \\
+&= -\sum_{x \in X, y \in Y}p(x,y)\log{p(x,y)} + \sum_{x \in X}p(x)\log{p(x)} \\
+&= -\sum_{x \in X, y \in Y}p(x,y)\log{p(x,y)} + \sum_{x \in X, y \in Y}p(x, y)\log{p(x)} \\
+&= -\sum_{x \in X, y \in Y}p(x, y)\log \frac{p(x, y)}{p(x)}
+\end{split}
+\label{eq:4}
+\end{align}
+$$
 
 ### 2. 最大熵原理简介 ###
 
@@ -63,7 +76,7 @@ $$
 \vdots \\
 \sum_{x}p(x)f_k(x) &= \tau_k
 \end{split}
-\label{eq:2}
+\label{eq:5}
 \end{align}
 $$
 
@@ -98,7 +111,7 @@ $$
 $$
 \begin{align}
 p(x) = \frac{1}{Z}\exp\left(\sum\limits_{j=1}^{k}\lambda_j f_j(x)\right)
-\label{eq:3}
+\label{eq:6}
 \end{align}
 $$
 
@@ -107,7 +120,7 @@ $$
 $$
 \begin{align}
 Z = \sum\limits_x \exp\left(\sum\limits_{j=1}^{k}\lambda_j f_j(x)\right)
-\label{eq:4}
+\label{eq:7}
 \end{align}
 $$
 
