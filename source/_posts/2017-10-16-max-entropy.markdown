@@ -126,7 +126,33 @@ $$
 
 将$\eqref{eq:3}$带入约束条件$\eqref{eq:2}$中，即可解得$\lambda_j$。
 
+### 3. 最大熵应用例子 ###
+
+根据参考资料2的例子，应用最大熵模型。例子简述为：
+
+> 三种食物的售价分别为1、2和3元，平均一餐花费1.75元。
+>
+> 估算每种食物被购买的概率。
+
+建立最大熵模型：
+
+$$
+\begin{align*}
+\begin{split}
+max \quad & H(p) = \sum_{x}p(x) \log p(x) \\
+s.t. \quad & \sum_{x}p(x)x = 1.75 \\
+\quad & \sum_{x}p(x) = 1
+\end{split}
+\end{align*}
+$$
+
+解方程得：$p(x_1) = 0.466$、 $p(x_2) = 0.318$、$p(x_3) = 0.216$
+
 ### 参考资料 ###
+
+* [A Brief Maxent Tutorial](https://www.cs.cmu.edu/afs/cs/user/aberger/www/html/tutorial/tutorial.html)
+
+* [Chapter 9 Principle of Maximum Entropy: Simple Form](http://www-mtl.mit.edu/Courses/6.050/2003/notes/chapter9.pdf)
 
 * [“熵”不起：从熵、最大熵原理到最大熵模型](http://spaces.ac.cn/archives/3552/)
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "朴素贝叶斯分类器应用于二元数据类型的尝试"
+title: "朴素贝叶斯分类器应用于二元数据类型"
 date: 2017-10-15 17:38:16 +0800
 comments: true
 categories: bioinfor
