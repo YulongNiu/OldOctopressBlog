@@ -4,7 +4,6 @@ title: "最大熵模型"
 date: 2017-10-16 13:16:12 +0800
 comments: true
 categories: bioinfor
-published: true
 ---
 
 <script type="text/x-mathjax-config">
