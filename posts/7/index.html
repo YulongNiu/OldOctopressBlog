@@ -184,6 +184,78 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-07-23T01:45:46+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2014/07/23/octopress-install/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2014/07/23/octopress-install/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2014/07/23/octopress-install/" itemprop="url">Octopress安装和使用</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><p>安装和使用Octopress的一些注意事项，详细的内容可以<a href="#Ref">参考网址</a>。</p>
+
+<h2 id="section">1. 安装</h2>
+
+<p>请参考<a href="http://octopress.org/">官网</a>，其他的博客介绍的安装已经失效或者错误。</p>
+
+<p>常用命令:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 预览，可自动更新。使用Ctrl+c终止。</span>
+</span><span class="line"><span class="nv">$ </span>rake preview
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="ruby">2. Ruby版本调整</h2>
+
+<p>因为Octopress需要使用Ruby旧版本，推荐使用<a href="https://rvm.io/">RVM</a>安装Ruby 1.9.3版本。在安转过程中可能会出现<code>"gpg: Can't check signature: public key not found"</code>的错误提示，需要执行一下类似命名，添加公用匙。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>gpg2 --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>使用以下操作设定ruby版本：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span><span class="nb">source</span> ~/.rvm/scripts/rvm
+</span><span class="line"><span class="nv">$ </span>rvm use 1.9.3
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2014/07/23/octopress-install/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-07-05T10:04:38+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2014/07/05/my-first-post/#disqus_thread" itemprop="discussionUrl"
@@ -375,61 +447,6 @@
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-03-28T02:53:05+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2014/03/28/creat-r-package/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2014/03/28/creat-r-package/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2014/03/28/creat-r-package/" itemprop="url">创建R包的最简流程</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><p>一个最简单创建R包的流程。</p>
-
-<h2 id="section">1. 载入工具包</h2>
-
-<p>安装并载入<span style="color: blue">devtools</span>包和<span style="color: blue">roxygen2</span>包。<span style="color: blue">devtools</span>包提供了一些包的检查、安装和打包的基本工具。<span style="color: blue">roxygen2</span>包则使得书写R帮助文档变得轻松简单。如果习惯使用Emacs，可以结合<a href="http://ess.r-project.org/">ESS</a>建立R包，可以将R代码和帮助文档有效组合在一起，便于管理。当然，也可以使用<a href="http://www.rstudio.com/">Rstudio</a>。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="kn">library</span><span class="p">(</span><span class="s">&#39;devtools&#39;</span><span class="p">)</span>
-</span><span class="line"><span class="kn">library</span><span class="p">(</span><span class="s">&#39;roxygen2&#39;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2014/03/28/creat-r-package/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -453,6 +470,8 @@
   
   <div id="recent_posts" class="list-group">
     
+    <a class="list-group-item " href="/blog/2017/10/22/google-distance/">Normalized Google Distance解释</a>
+    
     <a class="list-group-item " href="/blog/2017/10/16/max-entropy/">最大熵模型</a>
     
     <a class="list-group-item " href="/blog/2017/10/15/naive-bayes-binary-multinomial/">朴素贝叶斯分类器应用于二元数据类型</a>
@@ -460,8 +479,6 @@
     <a class="list-group-item " href="/blog/2017/06/14/shadowsocks-setup/">Shadowsocks设置推荐</a>
     
     <a class="list-group-item " href="/blog/2017/05/16/java-binary/">探索Java基本类型的二进制表示</a>
-    
-    <a class="list-group-item " href="/blog/2016/11/11/git-rebase-examples/">两个git的rebase命令应用</a>
     
   </div>
 </section>
@@ -497,7 +514,7 @@
     
     
     <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
-        <span class="badge">15</span>
+        <span class="badge">16</span>
         bioinfor
       </a>
     

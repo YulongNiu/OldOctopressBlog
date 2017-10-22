@@ -184,6 +184,68 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2012-05-03T10:17:02+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2012/05/03/r-tricks/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2012/05/03/r-tricks/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2012/05/03/r-tricks/" itemprop="url">R小技巧集锦</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><p>持续更新R语言编程中的一些小技巧，包括一些易错点。
+但是，需要注意的，<strong>一旦需要使用一些非常稀奇古怪的技巧时，可以尝试反思是否是自己数据结构或者算法出了问题。</strong></p>
+
+<h2 id="iflanguage-relselanguage-r">1. <code class="language-r">if</code>爱你，<code class="language-r">else</code>就要和你在一起，又要给你一些距离</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="kr">if</span> <span class="p">(</span>con<span class="p">){</span>
+</span><span class="line">  expr
+</span><span class="line">  <span class="p">}</span> <span class="kp">else</span><span class="p">{</span>
+</span><span class="line">  expr2
+</span><span class="line">  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code class="language-r">if...else..</code>结构中，<code class="language-r">}</code>与<code class="language-r">else</code>必须在同一行。</p>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2012/05/03/r-tricks/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2011-08-13T05:20:57+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2011/08/13/emacs-ess-tips/#disqus_thread" itemprop="discussionUrl"
@@ -473,75 +535,11 @@
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2010-07-08T11:09:31+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2010/07/08/linux-software/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2010/07/08/linux-software/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2010/07/08/linux-software/" itemprop="url">Linux常用软件集锦</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><p>本文收集了一些好用或者好玩的Linux软件，安装方法使用<a href="https://getfedora.org/">Fedora</a>系统示例。</p>
-
-<h2 id="section">1. 添加常用源</h2>
-
-<ul>
-  <li>
-    <p>添加<a href="http://rpmfusion.org/Configuration">rpmfusion</a>的free和nonfree源。</p>
-  </li>
-  <li>
-    <p>添加<a href="http://repo.fdzh.org/">FZUG</a>源。一个中文Fedora的源和社区，在Fedora下安装搜狗输入法、有道词典、百度云客户端等。</p>
-  </li>
-</ul>
-
-<h2 id="section-1">2. 辅助安装工具</h2>
-
-<ul>
-  <li>fed</li>
-</ul>
-
-<p><a href="http://folkswithhats.org/">fedy</a>是一个辅助在Fedora系统下，更容易安装Skypy、Chrome、Steam等的工具。</p>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2010/07/08/linux-software/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
       
-        <li class="previous disabled"><a href="#">&larr;&nbsp;Older</a></li>
+        <li class="previous"><a href="/posts/11">&larr;&nbsp;Older</a></li>
       
       <li><a href="/blog/archives">Blog Archives</a></li>
       
@@ -560,6 +558,8 @@
   
   <div id="recent_posts" class="list-group">
     
+    <a class="list-group-item " href="/blog/2017/10/22/google-distance/">Normalized Google Distance解释</a>
+    
     <a class="list-group-item " href="/blog/2017/10/16/max-entropy/">最大熵模型</a>
     
     <a class="list-group-item " href="/blog/2017/10/15/naive-bayes-binary-multinomial/">朴素贝叶斯分类器应用于二元数据类型</a>
@@ -567,8 +567,6 @@
     <a class="list-group-item " href="/blog/2017/06/14/shadowsocks-setup/">Shadowsocks设置推荐</a>
     
     <a class="list-group-item " href="/blog/2017/05/16/java-binary/">探索Java基本类型的二进制表示</a>
-    
-    <a class="list-group-item " href="/blog/2016/11/11/git-rebase-examples/">两个git的rebase命令应用</a>
     
   </div>
 </section>
@@ -604,7 +602,7 @@
     
     
     <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
-        <span class="badge">15</span>
+        <span class="badge">16</span>
         bioinfor
       </a>
     

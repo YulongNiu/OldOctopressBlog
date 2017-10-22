@@ -184,6 +184,61 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-03-28T02:53:05+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2014/03/28/creat-r-package/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2014/03/28/creat-r-package/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2014/03/28/creat-r-package/" itemprop="url">创建R包的最简流程</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><p>一个最简单创建R包的流程。</p>
+
+<h2 id="section">1. 载入工具包</h2>
+
+<p>安装并载入<span style="color: blue">devtools</span>包和<span style="color: blue">roxygen2</span>包。<span style="color: blue">devtools</span>包提供了一些包的检查、安装和打包的基本工具。<span style="color: blue">roxygen2</span>包则使得书写R帮助文档变得轻松简单。如果习惯使用Emacs，可以结合<a href="http://ess.r-project.org/">ESS</a>建立R包，可以将R代码和帮助文档有效组合在一起，便于管理。当然，也可以使用<a href="http://www.rstudio.com/">Rstudio</a>。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line"><span class="kn">library</span><span class="p">(</span><span class="s">&#39;devtools&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="kn">library</span><span class="p">(</span><span class="s">&#39;roxygen2&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2014/03/28/creat-r-package/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-03-18T03:37:45+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2014/03/18/circos-notes/#disqus_thread" itemprop="discussionUrl"
@@ -454,64 +509,6 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2012-08-21T19:33:47+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2012/08/21/python-r-rpy2/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2012/08/21/python-r-rpy2/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2012/08/21/python-r-rpy2/" itemprop="url">Python中使用rpy2模块调用R</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><p>需要在python中调用R，实在是一种无奈的选择。如果能在一门语言中独立完成课题，是一个比较理想的做法。但是，这种想法也不太现实，毕竟每一种语言都有自己的长处。如果能取长补短，综合使用各种语言，也能起到不错的效果。</p>
-
-<p>现在遇到的问题是，如何在python中调用R？这其中包括了如何调用R的对象（函数和包），R和python的对象如何互相转换，以及如何调用R的脚本（外界参数的输入）。python提供了一个模块<a href="http://rpy.sourceforge.net/">rpy2</a> ，可以较好地完成这项工作。rpy2只是提供了一个Python调用R的接口，因此也直接继承了所有R的缺点。一个有意思的项目是<a href="http://www.renjin.org/">renjin</a>，一个基于JVM的R语言解释器。</p>
-
-<p>本文着重记录一些使用过程中的注意事项和小技巧，如有不一致则以<a href="http://rpy.sourceforge.net/rpy2/doc-2.5/html/">官方文档</a>为准。</p>
-
-<h2 id="section">1. 安装</h2>
-
-<p>rpy2作为Python的一个模块，其<a href="http://rpy.sourceforge.net/rpy2/doc-2.5/html/overview.html#installation">安装</a>非常方便。需要做的准备工作是在本地安装好R。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Install rpy2 from pip </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># pip install rpy2</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2012/08/21/python-r-rpy2/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -535,6 +532,8 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
   
   <div id="recent_posts" class="list-group">
     
+    <a class="list-group-item " href="/blog/2017/10/22/google-distance/">Normalized Google Distance解释</a>
+    
     <a class="list-group-item " href="/blog/2017/10/16/max-entropy/">最大熵模型</a>
     
     <a class="list-group-item " href="/blog/2017/10/15/naive-bayes-binary-multinomial/">朴素贝叶斯分类器应用于二元数据类型</a>
@@ -542,8 +541,6 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
     <a class="list-group-item " href="/blog/2017/06/14/shadowsocks-setup/">Shadowsocks设置推荐</a>
     
     <a class="list-group-item " href="/blog/2017/05/16/java-binary/">探索Java基本类型的二进制表示</a>
-    
-    <a class="list-group-item " href="/blog/2016/11/11/git-rebase-examples/">两个git的rebase命令应用</a>
     
   </div>
 </section>
@@ -579,7 +576,7 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
     
     
     <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
-        <span class="badge">15</span>
+        <span class="badge">16</span>
         bioinfor
       </a>
     
