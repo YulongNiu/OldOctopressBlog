@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bioinfor | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/bioinfor/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2017-10-17T14:32:09+08:00</updated>
+  <updated>2017-10-22T12:32:18+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -14,7 +14,158 @@
 
   
   <entry>
-    <title type="html"><![CDATA[朴素贝叶斯分类器应用于二元数据类型的尝试]]></title>
+    <title type="html"><![CDATA[最大熵模型]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2017/10/16/max-entropy/"/>
+    <updated>2017-10-16T13:16:12+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2017/10/16/max-entropy</id>
+    <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<h3 id="section">1. 熵和条件熵</h3>
+
+<p>对于随机变量$X$，熵为：</p>
+
+<script type="math/tex; mode=display">\begin{align}
+\begin{split}
+H(X) = -\sum_{x \in X}p(x)\log{p(x)}
+\end{split}
+\label{eq:1}
+\end{align}</script>
+
+<!--more-->
+
+<p>其中：</p>
+
+<script type="math/tex; mode=display">\begin{align}
+\begin{split}
+\sum_{x \in X}p(x) = 1
+\end{split}
+\label{eq:2}
+\end{align}</script>
+
+<p>同样道理，对于任意随机变量$X$和$Y$，联合熵为：</p>
+
+<script type="math/tex; mode=display">\begin{align}
+\begin{split}
+H(X,Y) = -\sum_{x \in X, y \in Y}p(x,y)\log{p(x,y)}
+\end{split}
+\label{eq:3}
+\end{align}</script>
+
+<p>基于$X$的$Y$的熵为条件熵：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align}
+\begin{split}
+H(Y|X) &= H(X, Y) - H(X) \\
+&= -\sum_{x \in X, y \in Y}p(x,y)\log{p(x,y)} + \sum_{x \in X}p(x)\log{p(x)} \\
+&= -\sum_{x \in X, y \in Y}p(x,y)\log{p(x,y)} + \sum_{x \in X, y \in Y}p(x, y)\log{p(x)} \\
+&= -\sum_{x \in X, y \in Y}p(x, y)\log \frac{p(x, y)}{p(x)}
+\end{split}
+\label{eq:4}
+\end{align} %]]&gt;</script>
+
+<h3 id="section-1">2. 最大熵原理简介</h3>
+
+<p>最大熵原理可以表述为，在满足$k+1$个约束条件的模型集合中，选取熵$H(p)$最大的模型。约束条件为：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align}
+\begin{split}
+\sum_{x}p(x) &= 1 \\
+\sum_{x}p(x)f_1(x) &= \tau_1 \\
+\vdots \\
+\sum_{x}p(x)f_k(x) &= \tau_k
+\end{split}
+\label{eq:5}
+\end{align} %]]&gt;</script>
+
+<p>使用拉格朗日乘子法求解带上述有约束的极值，即：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align*}
+\begin{split}
+L(p) = -\sum_{x}p(x)\log{p(x)} &+ \\
+\lambda_0(\sum_{x}p(x) - 1) &+ \\
+\lambda_1(\sum_{x}p(x)f_1(x) - \tau_1) &+ \\
+\cdots &+\\
+\lambda_k(\sum_{x}p(x)f_1(x) - \tau_k)
+\end{split}
+\end{align*} %]]&gt;</script>
+
+<p>$L(p)$对每一个$p(x)$偏导数$\frac{\partial L(p)}{\partial p(x)}$为0，即：</p>
+
+<script type="math/tex; mode=display">-\log{p(x)} - 1 + \lambda_0 + \sum_{j=1}^{k}\lambda_j f_j(x) = 0</script>
+
+<p>解得</p>
+
+<script type="math/tex; mode=display">p(x) = \frac{\exp\left(\sum\limits_{j=1}^{k}\lambda_j f_j(x)\right)}{\exp(1 - \lambda_0)}</script>
+
+<p>由约束条件$\sum\limits_x p(x)=1$得：</p>
+
+<script type="math/tex; mode=display">\begin{align}
+p(x) = \frac{1}{Z}\exp\left(\sum\limits_{j=1}^{k}\lambda_j f_j(x)\right)
+\label{eq:6}
+\end{align}</script>
+
+<p>其中</p>
+
+<script type="math/tex; mode=display">\begin{align}
+Z = \sum\limits_x \exp\left(\sum\limits_{j=1}^{k}\lambda_j f_j(x)\right)
+\label{eq:7}
+\end{align}</script>
+
+<p>将$\eqref{eq:3}$带入约束条件$\eqref{eq:2}$中，即可解得$\lambda_j$。</p>
+
+<h3 id="section-2">3. 最大熵应用例子</h3>
+
+<p>根据参考资料2的例子，应用最大熵模型。例子简述为：</p>
+
+<blockquote>
+  <p>三种食物的售价分别为1、2和3元，平均一餐花费1.75元。</p>
+
+  <p>估算每种食物被购买的概率。</p>
+</blockquote>
+
+<p>建立最大熵模型：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align*}
+\begin{split}
+max \quad & H(p) = \sum_{x}p(x) \log p(x) \\
+s.t. \quad & \sum_{x}p(x)x = 1.75 \\
+\quad & \sum_{x}p(x) = 1
+\end{split}
+\end{align*} %]]&gt;</script>
+
+<p>解方程得：$p(x_1) = 0.466$、 $p(x_2) = 0.318$、$p(x_3) = 0.216$</p>
+
+<h3 id="section-3">参考资料</h3>
+
+<ul>
+  <li>
+    <p><a href="https://www.cs.cmu.edu/afs/cs/user/aberger/www/html/tutorial/tutorial.html">A Brief Maxent Tutorial</a></p>
+  </li>
+  <li>
+    <p><a href="http://www-mtl.mit.edu/Courses/6.050/2003/notes/chapter9.pdf">Chapter 9 Principle of Maximum Entropy: Simple Form</a></p>
+  </li>
+  <li>
+    <p><a href="http://spaces.ac.cn/archives/3552/">“熵”不起：从熵、最大熵原理到最大熵模型</a></p>
+  </li>
+</ul>
+
+<h3 id="section-4">更新记录</h3>
+
+<p>2017年7月15日</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[朴素贝叶斯分类器应用于二元数据类型]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2017/10/15/naive-bayes-binary-multinomial/"/>
     <updated>2017-10-15T17:38:16+08:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2017/10/15/naive-bayes-binary-multinomial</id>
@@ -28,11 +179,13 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 
 <p>已知事件$A$和$B$，则条件概率为：</p>
 
+<!--more-->
+
 <script type="math/tex; mode=display">% &lt;![CDATA[
 \begin{align}
 \begin{split}
-P(A|B) &= \frac{P(A,B)}{P(B)} \\
-P(B|A) &= \frac{P(A,B)}{P(A)}
+P(A | B) &= \frac{P(A,B)}{P(B)} \\
+P(B | A) &= \frac{P(A,B)}{P(A)}
 \end{split}
 \label{eq:1}
 \end{align} %]]&gt;</script>
@@ -47,8 +200,6 @@ P(B|A) = \frac{P(A|B)P(B)}{P(A)}
 <h3 id="section-1">2. 分类器简介</h3>
 
 <p>朴素贝叶斯分类器（Naive Bayes classifier）是一种简单、有效的分类器，其难点在于估算条件概率。比如，一个数据集拥有$N$个相互独立的特征，$C$个分组，对于$C_j$条件概率模型为：</p>
-
-<!--more-->
 
 <script type="math/tex; mode=display">% &lt;![CDATA[
 \begin{align}
@@ -162,7 +313,7 @@ C_{jp1} =
 \end{array}
 \right] %]]&gt;</script>
 
-<p>各个特征的条件概率为：</p>
+<p>各个特征的条件git pull origin master概率为：</p>
 
 <script type="math/tex; mode=display">% &lt;![CDATA[
 \begin{align*}
@@ -371,103 +522,6 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
 
 <p>2015年6月1日</p>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[确定TopHat中mate-inner-dist参数]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2015/05/23/tophat-inner-distance/"/>
-    <updated>2015-05-23T19:08:19+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2015/05/23/tophat-inner-distance</id>
-    <content type="html"><![CDATA[<p>对于双端测序RNA-seq数据，TopHat在运行时候，有两个参数<code class="language-bash">-r/--mate-inner-dist</code>和<code class="language-bash">--mate-std-dev</code>分别标识一对reads的间隔长度的期望平均值和标准差，其默认值分别为50bp和20bp。这两个参数本身是个估计值，用于TopHat在map过程中确定一对reads是否匹配到基因组正确位置。如果能够准确设定这两个数值，将会提升TopHat结果的准确性和完整性，参考<a href="http://yulongniu.bionutshell.org/blog/2014/07/23/rna-seq-analysis/">一个例子</a>。</p>
-
-<p>有两种方法获得这对参数的准确值：</p>
-
-<p>第一种：获取RNA-seq实验建库方法，之后按照以下网址说明计算，<a href="http://blog.qiuworld.com:8080/archives/3007">RNA-seq差异表达分析工作流程</a>。</p>
-
-<!--more-->
-
-<p>第二种：根据RNA-seq数据进行估算，具体步骤为：</p>
-
-<ol>
-  <li>
-    <p>使用TopHat默认参数先跑一遍。</p>
-  </li>
-  <li>
-    <p>使用<a href="http://miso.readthedocs.org/en/fastmiso/#computing-the-insert-length-distribution-and-its-statistics">MISO</a>的<code class="language-bash">pe_utils</code>工具估算。</p>
-  </li>
-</ol>
-
-<p>以下详细介绍<code class="language-bash">pe_utils</code>使用方法。</p>
-
-<p>第一步， 下载对应物种的基因注释文件GTF或者GFF，比如<a href="http://genome.ucsc.edu/cgi-bin/hgTables?command=start">USCS Table Browser</a>（<code class="language-bash">output format</code>选择<code class="language-bash">GTF</code>）或者使用MISO提供的<a href="http://miso.readthedocs.org/en/fastmiso/#human-mouse-gene-models-for-isoform-centric-analyses">Ensembl版本</a>。如果GTF文件，使用<a href="https://cole-trapnell-lab.github.io/cufflinks/file_formats/">Cufflinks</a>的<code class="language-bash">gffread</code>工具进行转换。</p>
-
-<p>第二步，确定TopHat运行结果的bam文件与基因注释GFF文件，两者基因组命名方法一致。有的使用类似<code class="language-bash">chr1</code>命名，而另外一些使用<code class="language-bash">1</code>。如果不一致，建议修改GFF文件。</p>
-
-<p><figure class='code'><figcaption><span>Summary Chromosomes’ Names</span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 查看GFF文件中基因组命名</span>
-</span><span class='line'><span class="nv">$ </span>awk ‘<span class="o">{</span>print <span class="nv">$1</span><span class="o">}</span>’ hg19USCS.gff <span class="p">|</span> sort -n <span class="p">|</span> uniq -c&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;bam&quot;</span>&gt;查看bam文件中基因组命名&lt;/h1&gt;
-</span><span class='line'>&lt;p&gt;samtools view accepted_hits.bam <span class="p">|</span> head -1000 <span class="p">|</span> awk ‘<span class="o">{</span>print <span class="nv">$3</span><span class="o">}</span>’ <span class="p">|</span> sort -n <span class="p">|</span> uniq -c
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p>第三步，筛选较长外显子，比如长度大于1000bp。MISO提供了<code class="language-bash">exon_utils</code>工具用于提取长外显子，但是我们没有能够成功运行过。因此这里提供一个R版本的脚本，比如基因注释文件名为<code class="language-bash">hg19USCS.gff</code>，输出筛选的文件名为<code class="language-bash">hg19USCS_selected.gff</code>。</p>
-
-<p><figure class='code'><figcaption><span>R Script of Select exons with length &gt; 1000bp</span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='R'><span class='line'>gffFile <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> read.table<span class="p">(</span>‘hg19USCS.gff’<span class="p">,</span> stringsAsFactors <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>gffExon <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> gffFile<span class="p">[</span>gffFile<span class="p">[,</span> <span class="m">3</span><span class="p">]</span> <span class="o">==</span> ‘exon’<span class="p">,</span> <span class="p">]</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>exonLen <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> <span class="kp">abs</span><span class="p">(</span>gffExon<span class="p">[,</span> <span class="m">5</span><span class="p">]</span> <span class="o">-</span> gffExon<span class="p">[,</span> <span class="m">4</span><span class="p">])</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>gffExonSelect <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> gffExon<span class="p">[</span>exonLen <span class="o">&amp;</span>gt<span class="p">;</span><span class="o">=</span> <span class="m">1000</span><span class="p">,</span> <span class="p">]</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>write.table<span class="p">(</span>gffExonSelect<span class="p">,</span> ‘hg19USCS_selected.gff’<span class="p">,</span>
-</span><span class='line'>            row.names <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> col.names <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span>
-</span><span class='line'>            quote <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> sep <span class="o">=</span> ‘\<span class="kp">t</span>’<span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p>第四步，使用<code class="language-bash">pe_utils</code>，实例如下：</p>
-
-<p><figure class='code'><figcaption><span>An example of how to use pe_utils</span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 输入bam文件和GFF文件</span>
-</span><span class='line'><span class="nv">$ </span>pe_utils –compute-insert-len accepted_hits.bam hg19USCS_selected.gff –output-dir insert-dist/&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;insert-distacceptedfilteredbaminsertlen&quot;</span>&gt;在insert-dist会出现类似accepted_filtered.bam.insert_len文件&lt;/h1&gt;
-</span><span class='line'>&lt;p&gt;# -r/–mate-inner-dist估计值为mean
-</span><span class='line'><span class="c"># –mate-std-dev估计值为sdev</span>
-</span><span class='line'><span class="nv">$ </span>head -1 accepted_filtered.bam.insert_len
-</span><span class='line'><span class="c">#mean=165.3,sdev=45.2,dispersion=3.5,num_pairs=5622239</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<h3 id="section">更新记录</h3>
-
-<p>2015年5月23日</p>
 ]]></content>
   </entry>
   

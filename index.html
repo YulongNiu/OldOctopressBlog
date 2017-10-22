@@ -184,6 +184,66 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2017-10-16T13:16:12+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2017/10/16/max-entropy/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2017/10/16/max-entropy/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2017/10/16/max-entropy/" itemprop="url">最大熵模型</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<h3 id="section">1. 熵和条件熵</h3>
+
+<p>对于随机变量$X$，熵为：</p>
+
+<script type="math/tex; mode=display">\begin{align}
+\begin{split}
+H(X) = -\sum_{x \in X}p(x)\log{p(x)}
+\end{split}
+\label{eq:1}
+\end{align}</script>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2017/10/16/max-entropy/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2017-10-15T17:38:16+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2017/10/15/naive-bayes-binary-multinomial/#disqus_thread" itemprop="discussionUrl"
@@ -192,7 +252,7 @@
       </p>
     
     
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2017/10/15/naive-bayes-binary-multinomial/" itemprop="url">朴素贝叶斯分类器应用于二元数据类型的尝试</a></h2>
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2017/10/15/naive-bayes-binary-multinomial/" itemprop="url">朴素贝叶斯分类器应用于二元数据类型</a></h2>
     
   </header>
 
@@ -206,26 +266,6 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 <h3 id="section">1. 贝叶斯定理</h3>
 
 <p>已知事件$A$和$B$，则条件概率为：</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-\begin{split}
-P(A|B) &= \frac{P(A,B)}{P(B)} \\
-P(B|A) &= \frac{P(A,B)}{P(A)}
-\end{split}
-\label{eq:1}
-\end{align} %]]></script>
-
-<p>可以推导出：</p>
-
-<script type="math/tex; mode=display">\begin{align}
-P(B|A) = \frac{P(A|B)P(B)}{P(A)}
-\label{eq:2}
-\end{align}</script>
-
-<h3 id="section-1">2. 分类器简介</h3>
-
-<p>朴素贝叶斯分类器（Naive Bayes classifier）是一种简单、有效的分类器，其难点在于估算条件概率。比如，一个数据集拥有$N$个相互独立的特征，$C$个分组，对于$C_j$条件概率模型为：</p>
 
 </div>
   
@@ -381,55 +421,6 @@ P(B|A) = \frac{P(A|B)P(B)}{P(A)}
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2016-10-21T18:24:31+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2016/10/21/linux-sync-google-drive/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2016/10/21/linux-sync-google-drive/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2016/10/21/linux-sync-google-drive/" itemprop="url">命令行使用Google Drive</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><p>本文简单介绍<a href="https://github.com/prasmussen/gdrive">gdrive</a>，它是一个跨多个平台软件，提供命令行操作Google Drive。同类软件还有<a href="https://github.com/odeke-em/drive">drive</a>和<a href="https://www.thefanclub.co.za/overgrive">overGrive</a>（Linux下Google Drive界面客户端）。</p>
-
-<p>基本思路：对每一个上传至Google Drive的文件或文件夹都分配一个Id，所以云端操作需要指定Id。</p>
-
-<p>突出优点：自动同步，比较云端和本地文件后，决定上传、删除或者替换；同步加入版本控制，可以下载和删除不同版本文件。</p>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2016/10/21/linux-sync-google-drive/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -453,15 +444,15 @@ P(B|A) = \frac{P(A|B)P(B)}{P(A)}
   
   <div id="recent_posts" class="list-group">
     
-    <a class="list-group-item " href="/blog/2017/10/15/naive-bayes-binary-multinomial/">朴素贝叶斯分类器应用于二元数据类型的尝试</a>
+    <a class="list-group-item " href="/blog/2017/10/16/max-entropy/">最大熵模型</a>
+    
+    <a class="list-group-item " href="/blog/2017/10/15/naive-bayes-binary-multinomial/">朴素贝叶斯分类器应用于二元数据类型</a>
     
     <a class="list-group-item " href="/blog/2017/06/14/shadowsocks-setup/">Shadowsocks设置推荐</a>
     
     <a class="list-group-item " href="/blog/2017/05/16/java-binary/">探索Java基本类型的二进制表示</a>
     
     <a class="list-group-item " href="/blog/2016/11/11/git-rebase-examples/">两个git的rebase命令应用</a>
-    
-    <a class="list-group-item " href="/blog/2016/10/21/linux-sync-google-drive/">命令行使用Google Drive</a>
     
   </div>
 </section>
@@ -497,7 +488,7 @@ P(B|A) = \frac{P(A|B)P(B)}{P(A)}
     
     
     <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
-        <span class="badge">14</span>
+        <span class="badge">15</span>
         bioinfor
       </a>
     

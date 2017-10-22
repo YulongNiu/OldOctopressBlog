@@ -184,6 +184,84 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2016-04-17T22:42:25+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2016/04/17/pointers-in-c/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2016/04/17/pointers-in-c/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2016/04/17/pointers-in-c/" itemprop="url">C语言指针记录</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="c">1. C语言指针基础</h2>
+
+<p>C语言的指针设计是一致和优雅的。C语言中“指针（pointer）”就是<strong>地址</strong>（所以不能用普通整数储存地址），“指针变量（pointer variable）”是存储地址的变量。一个指针变量，<strong>只能</strong>指向一个特定类型的变量，比如整数、浮点数、字符或者指针。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Initiate a pointer </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="kt">int</span> <span class="n">tmp1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">tmp2</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="cm">/* &quot;=&quot; does not mean &quot;assignment&quot;, it just means &quot;initiating&quot; */</span>
+</span><span class="line"><span class="cm">/* p is the address of tmp1, *p is equal to the value of tmp1*/</span>
+</span><span class="line"><span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">tmp1</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="kt">int</span> <span class="o">*</span><span class="n">q</span><span class="p">;</span>
+</span><span class="line"><span class="n">q</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">tmp2</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="cm">/* p points to tmp1, q points to tmp2, now the value of tmp2 is 1*/</span>
+</span><span class="line"><span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">*</span><span class="n">q</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="cm">/* p and q now both points to tmp1*/</span>
+</span><span class="line"><span class="n">q</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2016/04/17/pointers-in-c/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2016-01-07T20:50:41+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2016/01/07/rcpp-matrix/#disqus_thread" itemprop="discussionUrl"
@@ -530,97 +608,6 @@
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-07-28T14:37:38+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2015/07/28/python-tips/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2015/07/28/python-tips/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2015/07/28/python-tips/" itemprop="url">Python使用小技巧</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><p>收集了一些使用Python过程中的小技巧或者常见错误。</p>
-
-<h2 id="while--if--break">1. While–if–break</h2>
-
-<p>适用情况：<strong>当需要执行一个循环，但是不能事先判断何时终止。</strong> 可以在循环内部加入判断，符合要求时跳出。比如，使用程序在某个目录下新建一个文件夹，如果文件名已经存在，需要重新生成文件名；否则，创建文件夹。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>While&#8211;if&#8211;break </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">import</span> <span class="nn">random</span><span class="o">,</span> <span class="nn">os</span>
-</span><span class="line">
-</span><span class="line"><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-</span><span class="line">    <span class="n">letter</span> <span class="o">=</span> <span class="p">[</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">97</span><span class="p">,</span> <span class="mi">123</span><span class="p">)]</span>
-</span><span class="line">    <span class="n">folderName</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
-</span><span class="line">    <span class="n">fn</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folderName</span><span class="p">)</span>
-</span><span class="line">    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">True</span><span class="p">:</span>
-</span><span class="line">        <span class="c"># get an unique name </span>
-</span><span class="line">        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
-</span><span class="line">        <span class="k">break</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section">2. 链式比较操作</h2>
-
-<p>Python支持一个链式的比较操作。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>comparison chain </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">testNum</span> <span class="o">=</span> <span class="mi">10</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># 链式比较操作</span>
-</span><span class="line"><span class="c"># 区别if not和if a is not None</span>
-</span><span class="line"><span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">testNum</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">):</span>
-</span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="s">&#39;It passed!&#39;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2015/07/28/python-tips/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -644,15 +631,15 @@
   
   <div id="recent_posts" class="list-group">
     
-    <a class="list-group-item " href="/blog/2017/10/15/naive-bayes-binary-multinomial/">朴素贝叶斯分类器应用于二元数据类型的尝试</a>
+    <a class="list-group-item " href="/blog/2017/10/16/max-entropy/">最大熵模型</a>
+    
+    <a class="list-group-item " href="/blog/2017/10/15/naive-bayes-binary-multinomial/">朴素贝叶斯分类器应用于二元数据类型</a>
     
     <a class="list-group-item " href="/blog/2017/06/14/shadowsocks-setup/">Shadowsocks设置推荐</a>
     
     <a class="list-group-item " href="/blog/2017/05/16/java-binary/">探索Java基本类型的二进制表示</a>
     
     <a class="list-group-item " href="/blog/2016/11/11/git-rebase-examples/">两个git的rebase命令应用</a>
-    
-    <a class="list-group-item " href="/blog/2016/10/21/linux-sync-google-drive/">命令行使用Google Drive</a>
     
   </div>
 </section>
@@ -688,7 +675,7 @@
     
     
     <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
-        <span class="badge">14</span>
+        <span class="badge">15</span>
         bioinfor
       </a>
     

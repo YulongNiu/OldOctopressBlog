@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8">
-  <title>朴素贝叶斯分类器应用于二元数据类型的尝试 - 牛牛龙</title>
+  <title>朴素贝叶斯分类器应用于二元数据类型 - 牛牛龙</title>
   <meta name="author" content="Yulong Niu">
 
   
@@ -22,7 +22,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:type" content="website">
   <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2017/10/15/naive-bayes-binary-multinomial">
-  <meta property="og:title" content="朴素贝叶斯分类器应用于二元数据类型的尝试 - 牛牛龙">
+  <meta property="og:title" content="朴素贝叶斯分类器应用于二元数据类型 - 牛牛龙">
   
 
   <!-- mathjax config similar to math.stackexchange -->
@@ -189,7 +189,7 @@
     
     
     <h1 class="entry-title" itemprop="name headline">
-        朴素贝叶斯分类器应用于二元数据类型的尝试
+        朴素贝叶斯分类器应用于二元数据类型
         
     </h1>
     
@@ -206,11 +206,13 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 
 <p>已知事件$A$和$B$，则条件概率为：</p>
 
+<!--more-->
+
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{align}
 \begin{split}
-P(A|B) &= \frac{P(A,B)}{P(B)} \\
-P(B|A) &= \frac{P(A,B)}{P(A)}
+P(A | B) &= \frac{P(A,B)}{P(B)} \\
+P(B | A) &= \frac{P(A,B)}{P(A)}
 \end{split}
 \label{eq:1}
 \end{align} %]]></script>
@@ -225,8 +227,6 @@ P(B|A) = \frac{P(A|B)P(B)}{P(A)}
 <h3 id="section-1">2. 分类器简介</h3>
 
 <p>朴素贝叶斯分类器（Naive Bayes classifier）是一种简单、有效的分类器，其难点在于估算条件概率。比如，一个数据集拥有$N$个相互独立的特征，$C$个分组，对于$C_j$条件概率模型为：</p>
-
-<!--more-->
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{align}
@@ -340,7 +340,7 @@ C_{jp1} =
 \end{array}
 \right] %]]></script>
 
-<p>各个特征的条件概率为：</p>
+<p>各个特征的条件git pull origin master概率为：</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{align*}
@@ -428,6 +428,8 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
             <li class="previous"><a href="/blog/2017/06/14/shadowsocks-setup/" title="Previous Post: Shadowsocks设置推荐">&laquo; Shadowsocks设置推荐</a></li>
             
             
+            <li class="next"><a href="/blog/2017/10/16/max-entropy/" title="Next Post: 最大熵模型">最大熵模型 &raquo;</a></li>
+            
           </ul>
         
       </footer>
@@ -451,15 +453,15 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
   
   <div id="recent_posts" class="list-group">
     
-    <a class="list-group-item active" href="/blog/2017/10/15/naive-bayes-binary-multinomial/">朴素贝叶斯分类器应用于二元数据类型的尝试</a>
+    <a class="list-group-item " href="/blog/2017/10/16/max-entropy/">最大熵模型</a>
+    
+    <a class="list-group-item active" href="/blog/2017/10/15/naive-bayes-binary-multinomial/">朴素贝叶斯分类器应用于二元数据类型</a>
     
     <a class="list-group-item " href="/blog/2017/06/14/shadowsocks-setup/">Shadowsocks设置推荐</a>
     
     <a class="list-group-item " href="/blog/2017/05/16/java-binary/">探索Java基本类型的二进制表示</a>
     
     <a class="list-group-item " href="/blog/2016/11/11/git-rebase-examples/">两个git的rebase命令应用</a>
-    
-    <a class="list-group-item " href="/blog/2016/10/21/linux-sync-google-drive/">命令行使用Google Drive</a>
     
   </div>
 </section>
@@ -495,7 +497,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
     
     
     <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
-        <span class="badge">14</span>
+        <span class="badge">15</span>
         bioinfor
       </a>
     
