@@ -16,8 +16,7 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 
 ### 1. NGD原始定义 ###
 
-[维基百科](https://en.wikipedia.org/wiki/Normalized_Google_distance)的定义
-为：
+[维基百科](https://en.wikipedia.org/wiki/Normalized_Google_distance)的定义为：
 
 <!--more-->
 
@@ -39,8 +38,8 @@ Choi and Rashid在2008年的文章（参考资料1）提出一种针对向量的
 $$
 \begin{align}
 \begin{split}
-NGD(X, Y) &= \frac{\max\{\sum X, \sum Y\} - \sum \min\{(X, Y)\}}{\sum X + \sum Y - \min\{\sum X, \sum Y\}} \\
-&= \frac{\max\{\sum X, \sum Y\} - \sum \min\{(X, Y)\}}{\max\{\sum X, \sum Y\}}
+NGD(X, Y) &= \frac{\max\{\sum X, \sum Y\} - \sum \min(X, Y)}{\sum X + \sum Y - \min\{\sum X, \sum Y\}} \\
+&= \frac{\max\{\sum X, \sum Y\} - \sum \min(X, Y)}{\max\{\sum X, \sum Y\}}
 \end{split}
 \label{eq:2}
 \end{align}
@@ -54,7 +53,7 @@ $$
 \begin{align}
 \begin{split}
 NGS(X, Y) &= 1 - NGD(X, Y) \\
-&= \frac{\sum \min\{(X, Y)\}}{\max\{\sum X, \sum Y\}}
+&= \frac{\sum \min(X, Y)}{\max\{\sum X, \sum Y\}}
 \end{split}
 \label{eq:3}
 \end{align}
