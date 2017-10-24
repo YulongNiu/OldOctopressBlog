@@ -184,6 +184,70 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2012-05-05T15:19:36+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2012/05/05/r-s4/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2012/05/05/r-s4/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2012/05/05/r-s4/" itemprop="url">R面向对象编程S4</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="s3">1. 一些S3的铺垫</h2>
+
+<p>在博文“<a href="http://yulongniu.bionutshell.org/blog/2010/09/04/linux-install-r/">Linux安装R语言包</a>”描述了如何查看一个函数的源代码，其中涉及了例如<code>methods()</code>函数，用来查看一个S3泛函（S3 generic）的方法。在<span style="color: blue">pryr</span>包中，提供了更加便捷的查看方法。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>pryr check objects and methods</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="R"><span class="line"><span class="kn">library</span><span class="p">(</span><span class="s">&#39;pryr&#39;</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">## object is base type, S3, S4 or RC</span>
+</span><span class="line">otype<span class="p">(</span>obj<span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">## function is genetic or method</span>
+</span><span class="line">ftype<span class="p">(</span>method<span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2012/05/05/r-s4/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2012-05-03T10:17:02+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2012/05/03/r-tricks/#disqus_thread" itemprop="discussionUrl"
@@ -469,72 +533,6 @@
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2010-09-04T22:21:38+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2010/09/04/linux-install-r/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2010/09/04/linux-install-r/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2010/09/04/linux-install-r/" itemprop="url">Linux安装R语言包</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="r">1. R包介绍</h2>
-
-<p>R的包（package）通常有两种:</p>
-
-<ul>
-  <li>
-    <p>二进制代码包（Binary package）：这种包属于即得即用型（ready-to-use），但是依赖与平台，比如Windows和Linux平台下不同。</p>
-  </li>
-  <li>
-    <p>源代码包（Source package）: 此类包可以跨平台使用，但用之前需要处理或者编译（compiled）。同时，源代码包可以查看到程序源代码，便于查找、修改和引用。</p>
-  </li>
-</ul>
-
-<h2 id="r-1">2. R包安装</h2>
-
-<h3 id="section">2.1 源代码安装</h3>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># R CMD INSTALL /.../myPackage.tar.gz</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>使用此方法，需要解决包依赖问题，即安装此包所依赖的包，安装过程有提示。</p>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2010/09/04/linux-install-r/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -558,6 +556,8 @@
   
   <div id="recent_posts" class="list-group">
     
+    <a class="list-group-item " href="/blog/2017/10/24/bray-curtis-distance/">Bray-Curtis Distance解释</a>
+    
     <a class="list-group-item " href="/blog/2017/10/22/google-distance/">Normalized Google Distance解释</a>
     
     <a class="list-group-item " href="/blog/2017/10/16/max-entropy/">最大熵模型</a>
@@ -565,8 +565,6 @@
     <a class="list-group-item " href="/blog/2017/10/15/naive-bayes-binary-multinomial/">朴素贝叶斯分类器应用于二元数据类型</a>
     
     <a class="list-group-item " href="/blog/2017/06/14/shadowsocks-setup/">Shadowsocks设置推荐</a>
-    
-    <a class="list-group-item " href="/blog/2017/05/16/java-binary/">探索Java基本类型的二进制表示</a>
     
   </div>
 </section>
@@ -602,7 +600,7 @@
     
     
     <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
-        <span class="badge">16</span>
+        <span class="badge">17</span>
         bioinfor
       </a>
     

@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2017-10-23T14:53:46+08:00</updated>
+  <updated>2017-10-24T15:00:38+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -12,6 +12,53 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Bray-Curtis Distance解释]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2017/10/24/bray-curtis-distance/"/>
+    <updated>2017-10-24T12:26:00+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2017/10/24/bray-curtis-distance</id>
+    <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="math/tex; mode=display">\newcommand{\sumup}[1] {\sum\limits_{i=1}^{n} #1}</script>
+
+<p>Bray-Curtis distance（BCD）的定义为：</p>
+
+<!--more-->
+
+<script type="math/tex; mode=display">\begin{align}
+\begin{split}
+BCD(X, Y) = \frac{\sumup{|x_i - y_j|}}{\sumup{x_i} + \sumup{y_i}}
+\end{split}
+\label{eq:1}
+\end{align}</script>
+
+<p>其中，$X$和$Y$分别为长度为$n$的数值向量。根据$\eqref{eq:1}$可以得出：$BCD$的取值范围为$[0, 1]$；当$X$和$Y$完全相同时，$BCD$为0；反之，$BCD$为1。</p>
+
+<p>同样，Bray-Curtis similarity（BCS）或Bray-Curtis index为：</p>
+
+<script type="math/tex; mode=display">\begin{align}
+\begin{split}
+BCS(X, Y) = 1 - BCD(X, Y)
+\end{split}
+\label{eq:2}
+\end{align}</script>
+
+<h3 id="section">参考资料</h3>
+
+<ul>
+  <li><a href="http://84.89.132.1/~michael/stanford/maeb6.pdf">Chapter 6 Measures of distance and correlation between variables</a></li>
+</ul>
+
+<h3 id="section-1">更新记录</h3>
+
+<p>2017年10月22日</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Normalized Google Distance解释]]></title>
@@ -23,6 +70,8 @@ MathJax.Hub.Config({
 TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
+
+<script type="math/tex; mode=display">\newcommand{\sumup}[1] {\sum\limits_{i=1}^{n} #1}</script>
 
 <p>本文尝试探索Normalized Google distance（简称NGD）的定义和拓展应用。</p>
 
@@ -48,13 +97,13 @@ NGD(x, y) = \frac{\max\{\log f(x), \log f(y)\} - \log f(x, y)}{\log N - \min\{\l
 <script type="math/tex; mode=display">% &lt;![CDATA[
 \begin{align}
 \begin{split}
-NGD(X, Y) &= \frac{\max\{\sum X, \sum Y\} - \sum \min(X, Y)}{\sum X + \sum Y - \min\{\sum X, \sum Y\}} \\
-&= \frac{\max\{\sum X, \sum Y\} - \sum \min(X, Y)}{\max\{\sum X, \sum Y\}}
+NGD(X, Y) &= \frac{\max\left\{\sumup{x_i}, \sumup{y_i}\right\} - \sumup{\min(x_i, y_i)}}{\sumup{x_i} + \sumup{y_i} - \sumup{\min(x_i, y_i)}} \\
+&= \frac{\max\left\{\sumup{x_i}, \sumup{y_i}\right\} - \sumup{\min(x_i, y_i)}}{\max\left\{\sumup{x_i}, \sumup{y_i}\right\}}
 \end{split}
 \label{eq:2}
 \end{align} %]]&gt;</script>
 
-<p>其中，$X$和$Y$分别为两个等长的数值向量，$\min{(X, Y)}$为$X$和$Y$中各个元素最小值所组成的数值向量。根据$\eqref{eq:2}$可以得出：$NGD$的取值范围为$[0, 1]$；当$X$和$Y$完全相同时，$NGD$为0；反之，$NGD$为1。</p>
+<p>其中，$X$和$Y$分别为长度为$n$的数值向量，$\min(x_i, y_i)$为$x_i$和$y_i$中各个元素最小值所组成的数值向量。根据$\eqref{eq:2}$可以得出：$NGD$的取值范围为$[0, 1]$；当$X$和$Y$完全相同时，$NGD$为0；反之，$NGD$为1。</p>
 
 <p>由此，可以得到normalized Google similarity（NGS）为：</p>
 
@@ -62,7 +111,7 @@ NGD(X, Y) &= \frac{\max\{\sum X, \sum Y\} - \sum \min(X, Y)}{\sum X + \sum Y - \
 \begin{align}
 \begin{split}
 NGS(X, Y) &= 1 - NGD(X, Y) \\
-&= \frac{\sum \min(X, Y)}{\max\{\sum X, \sum Y\}}
+&= \frac{\sumup{\min(x_i, y_i)}}{\max\left\{\sumup{x_i}, \sumup{y_i}\right\}}
 \end{split}
 \label{eq:3}
 \end{align} %]]&gt;</script>
@@ -2865,115 +2914,6 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
 <h3 id="section-2">更新记录</h3>
 
 <p>2017年5月31日</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Bash简易编程]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2015/05/28/bash-program/"/>
-    <updated>2015-05-28T21:24:32+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2015/05/28/bash-program</id>
-    <content type="html"><![CDATA[<h2 id="section">1. 循环</h2>
-
-<p><code class="language-bash">for</code>循环体</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>for in Bash</span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="k">for</span> i in *.zip
-</span><span class="line"><span class="k">do</span>
-</span><span class="line">    <span class="nb">echo</span> <span class="s2">&quot;$i&quot;</span>
-</span><span class="line"><span class="k">done</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<!--more-->
-
-<h2 id="section-1">2. 创建数组</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>create array </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nb">declare</span> -a <span class="nv">testArray</span><span class="o">={</span><span class="s2">&quot;element1&quot;</span> <span class="s2">&quot;element2&quot;</span><span class="o">}</span>
-</span><span class="line"><span class="nb">echo</span> <span class="k">${</span><span class="nv">testArray</span><span class="p">[0]</span><span class="k">}</span>
-</span><span class="line"><span class="k">for</span> i in <span class="s2">&quot;${testArray[@]}&quot;</span>
-</span><span class="line"><span class="k">do</span>
-</span><span class="line">    <span class="nb">echo</span> <span class="s2">&quot;$i&quot;</span>
-</span><span class="line"><span class="k">done</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-2">3. 字符串分割</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Split strings</span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># write in file &quot;testsplit.sh&quot;</span>
-</span><span class="line"><span class="nv">IFS</span><span class="o">=</span><span class="s1">&#39;,&#39;</span> <span class="nb">read</span> -ra splitArray <span class="o">&lt;&lt;&lt;</span> <span class="s2">&quot;This,is,a,test&quot;</span>
-</span><span class="line"><span class="k">for</span> i in <span class="s2">&quot;${splitArray[@]}&quot;</span>
-</span><span class="line"><span class="k">do</span>
-</span><span class="line">    <span class="nb">echo</span> <span class="s2">&quot;$i&quot;</span>
-</span><span class="line"><span class="k">done</span>
-</span><span class="line">
-</span><span class="line"><span class="nv">$ </span>bash testsplit.sh
-</span><span class="line">This
-</span><span class="line">is
-</span><span class="line">a
-</span><span class="line"><span class="nb">test</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-3">4. 屏幕输出存入变量</h2>
-
-<p>某个bash命令，比如<code class="language-bash">ls -l</code>存入变量，之后引用变量。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Save Command Output into Variables</span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 注意等号前后不能加空格</span>
-</span><span class="line"><span class="nv">listOutput</span><span class="o">=</span><span class="sb">`</span>ls -l<span class="sb">`</span>
-</span><span class="line"><span class="nb">echo</span> <span class="s2">&quot;$listOutput&quot;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-4">5. 文件末尾添加内容</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>append </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">touch testfile
-</span><span class="line"><span class="nb">printf</span> <span class="s2">&quot;hello\n&quot;</span> &gt; testfile
-</span><span class="line"><span class="nb">printf</span> <span class="s2">&quot;world\n&quot;</span> &gt;&gt; testfile
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h3 id="section-5">参考网址</h3>
-
-<ul>
-  <li>
-    <p><a href="http://stackoverflow.com/questions/918886/how-do-i-split-a-string-on-a-delimiter-in-bash">How do I split a string on a delimiter in Bash?</a></p>
-  </li>
-  <li>
-    <p><a href="http://stackoverflow.com/questions/4651437/how-to-set-a-bash-variable-equal-to-the-output-from-a-command">How to set a BASH variable equal to the output from a command?</a></p>
-  </li>
-</ul>
-
-<h3 id="section-6">更新记录</h3>
-
-<p>2016年9月1日</p>
 ]]></content>
   </entry>
   
