@@ -12,6 +12,10 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
 
+$$
+\newcommand{\sumup}[1] {\sum\limits_{i=1}^{n} #1}
+$$
+
 本文尝试探索Normalized Google distance（简称NGD）的定义和拓展应用。
 
 ### 1. NGD原始定义 ###
@@ -38,14 +42,14 @@ Choi and Rashid在2008年的文章（参考资料1）提出一种针对向量的
 $$
 \begin{align}
 \begin{split}
-NGD(X, Y) &= \frac{\max\{\sum X, \sum Y\} - \sum \min(X, Y)}{\sum X + \sum Y - \min\{\sum X, \sum Y\}} \\
-&= \frac{\max\{\sum X, \sum Y\} - \sum \min(X, Y)}{\max\{\sum X, \sum Y\}}
+NGD(X, Y) &= \frac{\max\left\{\sumup{x_i}, \sumup{y_i}\right\} - \sumup{\min(x_i, y_i)}}{\sumup{x_i} + \sumup{y_i} - \sumup{\min(x_i, y_i)}} \\
+&= \frac{\max\left\{\sumup{x_i}, \sumup{y_i}\right\} - \sumup{\min(x_i, y_i)}}{\max\left\{\sumup{x_i}, \sumup{y_i}\right\}}
 \end{split}
 \label{eq:2}
 \end{align}
 $$
 
-其中，$X$和$Y$分别为两个等长的数值向量，$\min\{(X, Y)\}$为$X$和$Y$中各个元素最小值所组成的数值向量。根据$\eqref{eq:2}$可以得出：$NGD$的取值范围为$[0, 1]$；当$X$和$Y$完全相同时，$NGD$为0；反之，$NGD$为1。
+其中，$X$和$Y$分别为长度为$n$的数值向量，$\min(x_i, y_i)$为$x_i$和$y_i$中各个元素最小值所组成的数值向量。根据$\eqref{eq:2}$可以得出：$NGD$的取值范围为$[0, 1]$；当$X$和$Y$完全相同时，$NGD$为0；反之，$NGD$为1。
 
 由此，可以得到normalized Google similarity（NGS）为：
 
@@ -53,7 +57,7 @@ $$
 \begin{align}
 \begin{split}
 NGS(X, Y) &= 1 - NGD(X, Y) \\
-&= \frac{\sum \min(X, Y)}{\max\{\sum X, \sum Y\}}
+&= \frac{\sumup{\min(x_i, y_i)}}{\max\left\{\sumup{x_i}, \sumup{y_i}\right\}}
 \end{split}
 \label{eq:3}
 \end{align}
