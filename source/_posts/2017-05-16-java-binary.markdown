@@ -17,10 +17,10 @@ Java有[八种](https://docs.oracle.com/javase/specs/jls/se8/html/jls-4.html#jls
 |-----------|-----------------------|-----------------------------|
 | `boolean` | not precisely defined | `True` or `false`           |
 | `char`    | unsigned 16           | $2^{16}$                    |
-| `byte`    | signed 8              | $2^{-7}$ ~ $2^7-1$          |
-| `short`   | signed 16             | $2^{-15}$ ~ $2^{15}-1$      |
-| `int`     | signed 32             | $2^{-31}$ ~ $2^{31}-1$      |
-| `long`    | signed 64             | $2^{-63}$ ~ $2^{63}-1$      |
+| `byte`    | signed 8              | $-2^{7}$ ~ $2^7-1$          |
+| `short`   | signed 16             | $-2^{15}$ ~ $2^{15}-1$      |
+| `int`     | signed 32             | $-2^{31}$ ~ $2^{31}-1$      |
+| `long`    | signed 64             | $-2^{63}$ ~ $2^{63}-1$      |
 | `float`   | signed 32             | $\pm (1-2^{-24}) * 2^{128}$ 精度$2^{-126}$   |
 | `double`  | signed 64             | $\pm (1-2^{-53}) * 2^{1024}$ 精度$2^{-1022}$ |
 
