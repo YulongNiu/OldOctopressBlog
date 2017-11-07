@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2017-10-24T22:10:18+08:00</updated>
+  <updated>2017-11-07T18:01:13+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -2233,6 +2233,239 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[一些共轭先验]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2015/08/02/conjugate-priors/"/>
+    <updated>2015-08-02T15:53:54+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2015/08/02/conjugate-priors</id>
+    <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="math/tex; mode=display">\newcommand{\md}{\mathrm{d}}</script>
+
+<p><a href="https://en.wikipedia.org/wiki/Conjugate_prior#cite_note-beta_rate-6">共轭先验（Conjugate prior）</a>在贝叶斯估计中被广泛应用，本文尝试详细推理一些常见分布的共轭先验证。</p>
+
+<!--more-->
+
+<p>贝叶斯公式：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align}
+\begin{split}
+f(\theta | x) &= \frac{f(\theta, x)}{f(x)} \\
+&= \frac{f(x | \theta)f(\theta)}{\int f(x | \theta)f(\theta) \md \theta}
+\end{split}
+\label{eq:1}
+\end{align} %]]&gt;</script>
+
+<h2 id="section">1. 离散分布</h2>
+
+<h3 id="section-1">1.1 伯努利分布</h3>
+
+<p>伯努利分布（Bernoulli distribution）的概率质量函数为：</p>
+
+<script type="math/tex; mode=display">\begin{align}
+\begin{split}
+f(k;p) = p^k (1-p)^{1-k} \quad \mathrm{for} \quad k \in \{0, 1\}
+\end{split}
+\label{eq:2}
+\end{align}</script>
+
+<p>对于随机变量$X_i \in \{X_1, X_2, \dots, X_m\}$易得，$p$的极大似然估计（Maximum Likelihood Estimator, MLE）为$\hat{p}=\frac{\sum_{i=1}^{m}k_i}{m}$。</p>
+
+<p>该分布的共轭先验为Beta分布$\mathrm{Beta}(\alpha, \beta)$，即对于随机变量$X_i$：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align}
+\begin{split}
+f(p|X_i) &= \frac{p^{k_i} (1-p)^{1-k_i} \frac{1}{\mathrm{B}(\alpha, \beta)} p^{\alpha - 1} (1-p)^{\beta -1}}{f(X_i)} \\
+&=\frac{\frac{1}{\mathrm{B}(\alpha, \beta)} p^{k_i+\alpha-1}(1-p)^{\beta - k_i}}{\int_0^1 \frac{1}{\mathrm{B}(\alpha, \beta)} p^{k_i+\alpha-1}(1-p)^{\beta - k_i} \md p} \\
+&= \frac{p^{k_i+\alpha-1}(1-p)^{\beta - k_i}}{\mathrm{B}(k_i+\alpha, \beta+1 -k_i)} \\
+&= \mathrm{Beta}(k_i+\alpha, \beta+1-k_i)
+\end{split}
+\label{eq:3}
+\end{align} %]]&gt;</script>
+
+<p>根据$\eqref{eq:3}$易得，$f(p \vert X_1, X_2, \dots, X_m) = \mathrm{Beta}(\sum_{i=1}^{m}k_i+\alpha, \beta+m-\sum_{i=1}^{m}k_i)$，期望$\hat{p}=\frac{\sum_{i=1}^{m}k_i+\alpha}{m+\alpha+\beta}$。特别，当$\alpha=1$和$\beta=1$时，即共轭先验为$0-1$之间的均匀分布，$\hat{p}=\frac{\sum_{i=1}^{m}k_i+1}{m+2}$。</p>
+
+<h3 id="section-2">1.2 二项分布</h3>
+
+<p>二项分布（binomial distribution）的概率质量函数为：</p>
+
+<script type="math/tex; mode=display">\begin{align}
+\begin{split}
+f(k;n,p) = \binom{n}{k} p^k (1-p)^{n-k}
+\end{split}
+\label{eq:4}
+\end{align}</script>
+
+<p>对于随机变量$X_i \in \{X_1, X_2, \dots, X_m\}$易得，MLE为$\hat{p}=\frac{\sum_{i=1}^{m}k_i}{nm}$。</p>
+
+<p>该分布的共轭先验为Beta分布$\mathrm{Beta}(\alpha, \beta)$。因此，类似于$\eqref{eq:3}$，$f(p \vert X_1, X_2, \dots, X_m) = \mathrm{Beta}(\sum_{i=1}^{m}k_i+\alpha, \beta+nm-\sum_{i=1}^{m}k_i)$，期望$\hat{p}=\frac{\sum_{i=1}^{m}k_i+\alpha}{nm+\alpha+\beta}$。</p>
+
+<h3 id="section-3">1.3 负二项分布</h3>
+
+<p>负二项（negative binomial distribution）的概率质量函数为：</p>
+
+<script type="math/tex; mode=display">\begin{align}
+\begin{split}
+f(k;r,p) = \binom{r+k-1}{k} p^k (1-p)^{r}
+\end{split}
+\label{eq:5}
+\end{align}</script>
+
+<p>对于随机变量$X_i \in \{X_1, X_2, \dots, X_m\}$易得，MLE为$\hat{p}=\frac{\sum_{i=1}^{m}k_i}{mr+\sum_{i=1}^{m}k_i}$。</p>
+
+<p>该分布的共轭先验为Beta分布$\mathrm{Beta}(\alpha, \beta)$。因此，类似于$\eqref{eq:3}$，$f(p \vert X_1, X_2, \dots, X_m) = \mathrm{Beta}(\sum_{i=1}^{m}k_i+\alpha, \beta+mr)$，期望$\hat{p}=\frac{\sum_{i=1}^{m}k_i+\alpha}{mr+\sum_{i=1}^{m}k_i+\alpha+\beta}$。</p>
+
+<h3 id="section-4">1.4 多项分布</h3>
+
+<p>多项二项（multinomial distribution）的概率质量函数为：</p>
+
+<script type="math/tex; mode=display">\begin{align}
+\begin{split}
+f(x_1, x_2,\dots,x_k;n,p_1,p_2,\dots,p_k) = \frac{n!}{x_1!x_2!\dots x_k!}p_1^{x_1}p_2^{x_2}\dots p_k^{x_k} \quad \mathrm{for} \quad \sum_{i=1}^k p_i=1 \quad \sum_{i=1}^k x_i=n
+\end{split}
+\label{eq:6}
+\end{align}</script>
+
+<p>对于随机变量$X_j \in \{X_1, X_2, \dots, X_m\}$易得，MLE为$\hat{p_i}=\frac{\sum_{j=1}^{m}x_{ij}}{\sum_{i=1}^{k}\sum_{j=1}^{m}x_{ij}}$。</p>
+
+<p>该分布的共轭先验为Dirichlet分布$\mathrm{Dir}(\alpha_1,\alpha_2,\dots,\alpha_k)$，即对于随机变量$X_i$：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align}
+\begin{split}
+f(p_1,p_2,\dots,p_k|X_1) &= \frac{\frac{n!}{x_{11}!x_{21}!\dots x_{k1}!}p_1^{x_{11}}p_2^{x_{21}}\dots p_k^{x_{k1}} \frac{1}{\mathrm{B}(\boldsymbol{\alpha})} p_1^{\alpha_1-1} p_2^{\alpha_2-1} \dots p_k^{\alpha_k-1}}{f(X_i)} \\
+&= \frac{p_1^{\alpha_1+x_{11}-1} p_2^{\alpha_2+x_{21}-1} \dots p_k^{\alpha_k+x_{k1}-1}}{\int_0^1 \int_0^{1-p_1} \cdots \int_0^{1-\sum_{i=1}^{k-2} p_i}p_1^{\alpha_1+x_{11}-1} p_2^{\alpha_2+x_{21}-1} \dots (1-\sum_{i=1}^{k-1}p_i)^{\alpha_k+x_{k1}-1} \md p_1 \md p_2 \dots \md p_{k-1}} \\
+&=\frac{\mathrm{\Gamma}\left(\sum_{i=1}^{k}(\alpha_i+x_{i1})\right)}{\prod_{i=1}^{k}\mathrm{\Gamma}(\alpha_i+x_{i1})}p_1^{\alpha_1+x_{11}-1} p_2^{\alpha_2+x_{21}-1} \dots p_k^{\alpha_k+x_{k1}-1} \\
+&=\mathrm{Dir}(\alpha_1+x_{11},\alpha_2+x_{21},\dots,\alpha_k+x_{k1})
+\end{split}
+\label{eq:7}
+\end{align} %]]&gt;</script>
+
+<p>根据$\eqref{eq:7}$易得，$f(p_1,p_2,\dots,p_k \vert X_1, X_2, \dots, X_m) = \mathrm{Dir}(\alpha_1+\sum_{j=1}^{m}x_{1j},\alpha_2+\sum_{j=1}^{m}x_{2j},\dots,\alpha_k+\sum_{j=1}^{m}x_{kj})$，期望为$\hat{p_i}=\frac{\sum_{j=1}^{m}x_{ij}+\alpha_i}{\sum_{i=1}^{k}\sum_{j=1}^{m}x_{ij} + \sum_{i=1}^{k}\alpha_i}$。特别，当$\alpha_1=\alpha_2=\dots=\alpha_k=1$时，$\hat{p_i}=\frac{\sum_{j=1}^{m}x_{ij}+1}{\sum_{i=1}^{k}\sum_{j=1}^{m}x_{ij}+k}$。</p>
+
+<h3 id="section-5">1.5 泊松分布</h3>
+
+<p>泊松分布（Poisson distribution）的概率质量函数为：</p>
+
+<script type="math/tex; mode=display">\begin{align}
+\begin{split}
+f(k;\lambda) = \frac{\lambda^k \mathrm{e}^{-\lambda}}{k!}
+\end{split}
+\label{eq:8}
+\end{align}</script>
+
+<p>对于随机变量$X_j \in \{X_1, X_2, \dots, X_m\}$易得，MLE为$\hat{\lambda}=\frac{\sum_{i=1}^m k_i}{m}$。</p>
+
+<p>该分布的共轭先验为Gamma分布$\mathrm{Gamma}(\alpha, \beta)$，即对于随机变量$X_i$：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align}
+\begin{split}
+f(\lambda|X_i) &= \frac{\frac{1}{k_i!}\lambda^{k_i} \mathrm{e}^{-\lambda}\frac{1}{\mathrm{\Gamma}(\alpha)}\beta^\alpha \lambda^{\alpha-1}\mathrm{e}^{-\beta\lambda}}{f(X_i)} \\
+&= \frac{\lambda^{k_i+\alpha-1}\mathrm{e}^{-(\beta+1)\lambda}}{\int_0^\infty \lambda^{k_i+\alpha-1}\mathrm{e}^{-(\beta+1)\lambda} \md \lambda} \\
+&= \frac{(\beta+1)^{k_i+\alpha} \lambda^{k_i+\alpha-1}\mathrm{e}^{-(\beta+1)\lambda}}{\mathrm{\Gamma}(k_i+\alpha)} \\
+&= \mathrm{Gamma}(k_i+\alpha, \beta+1)
+\end{split}
+\label{eq:9}
+\end{align} %]]&gt;</script>
+
+<p>根据$\eqref{eq:9}$易得，$f(\lambda \vert X_1, X_2, \dots, X_m) = \mathrm{Gamma}(\sum_{i=1}^{m}k_i+\alpha, \beta+m)$，期望$\hat{p}=\frac{\sum_{i=1}^{m}k_i+\alpha}{\beta+m}$。</p>
+
+<h2 id="section-6">2. 连续分布</h2>
+
+<h3 id="section-7">2.1 指数分布</h3>
+
+<p>指数分布（exponential distribution）的概率密度函数为：</p>
+
+<script type="math/tex; mode=display">\begin{align}
+\begin{split}
+f(x;\lambda) = \lambda \mathrm{e}^{-\lambda x} \quad \mathrm{for} \quad x\ge0
+\end{split}
+\label{eq:10}
+\end{align}</script>
+
+<p>对于随机变量$X_j \in \{X_1, X_2, \dots, X_m\}$易得，MLE为$\hat{\lambda}=\frac{m}{\sum_{i=1}^m k_i}$。</p>
+
+<p>该分布的共轭先验为Gamma分布$\mathrm{Gamma}(\alpha, \beta)$。因此，类似于$\eqref{eq:9}$，$f(\lambda \vert X_1, X_2, \dots, X_m) = \mathrm{Gamma}(\alpha+m, \beta+\sum_{i=1}^{m}k_i)$，期望$\hat{p}=\frac{\alpha+m}{\beta+\sum_{i=1}^{m}k_i}$</p>
+
+<h3 id="section-8">2.2 已知方差的正态分布</h3>
+
+<p>正态分布的概率密度函数为：</p>
+
+<script type="math/tex; mode=display">\begin{align}
+\begin{split}
+f(x; \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \mathrm{e}^{-\frac{(x-\mu)^2}{2\sigma^2}}
+\end{split}
+\label{eq:11}
+\end{align}</script>
+
+<p>对于随机变量$X_j \in \{X_1, X_2, \dots, X_m\}$易得，MLE为$\hat{\sigma}^2=\frac{\sum_{i=1}^m(x_i-\mu)^2}{m}$。</p>
+
+<p>该分布的共轭先验为inverse Gamma分布$\mathrm{Inv-Gamma}(\alpha, \beta)$，即对于随机变量$X_i$：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align}
+\begin{split}
+f(\sigma^2|X_i) &= \frac{\frac{1}{\sqrt{2\pi}} \frac{1}{\sigma} \mathrm{e}^{-\frac{(x_i-\mu)^2}{2\sigma^2}} \frac{\beta^\alpha}{\mathrm{\Gamma}(\alpha)} \sigma^{2(-\alpha-1)}\mathrm{e}^{-\frac{\beta}{\sigma^2}}}{f(X_i)} \\
+&=\frac{\sigma^{2\left(-\alpha-\frac{3}{2}\right)} e^{\frac{(x_i-\mu)^2+2\beta}{2\sigma^2}}}{\int_0^\infty \sigma^{2\left(-\alpha-\frac{3}{2}\right)} e^{\frac{(x_i-\mu)^2+2\beta}{2\sigma^2}} \md \sigma^2} \\
+&= \frac{\left(\beta+\frac{(x_i-\mu)^2}{2}\right)^{\left(-\alpha-\frac{1}{2}\right)}}{\mathrm{\Gamma}\left(\alpha+\frac{1}{2}\right)} \sigma^{2\left(-\alpha-\frac{3}{2}\right)} e^{\frac{(x_i-\mu)^2+2\beta}{2\sigma^2}}\\
+&= \mathrm{Inv-Gamma}(\alpha+\frac{1}{2}, \beta+\frac{(x_i-\mu)^2}{2})
+\end{split}
+\label{eq:12}
+\end{align} %]]&gt;</script>
+
+<p>根据$\eqref{eq:12}$易得，$f(\sigma^2 \vert X_1, X_2, \dots, X_m) = \mathrm{Inv-Gamma}(\alpha+\frac{m}{2}, \beta+\frac{\sum_{i=1}^m(x_i-\mu)^2}{2})$，期望$\hat{\sigma}^2=\frac{\beta+\frac{\sum_{i=1}^m(x_i-\mu)^2}{2}}{\alpha+\frac{m}{2}-1}$。</p>
+
+<h2 id="section-9">3. 一些积分证明</h2>
+
+<h3 id="beta">3.1 多元beta函数</h3>
+
+<p>$\int_0^1 \int_0^{1-p_1} \cdots \int_0^{1-\sum_{i=1}^{k-2} p_i}p_1^{\alpha_1-1} p_2^{\alpha_2-1} \dots (1-\sum_{i=1}^{k-1}p_i)^{\alpha_k-1} \md p_1 \md p_2 \dots \md p_{k-1} = \frac{\mathrm{\Gamma}\left(\sum_{i=1}^{k}(\alpha_i)\right)}{\prod_{i=1}^{k}\mathrm{\Gamma}(\alpha_i)} \quad \mathrm{for} \quad \sum_{i=1}^k p_i=1$</p>
+
+<p>令$p_{k-1} = (1-\sum_{i=1}^{k-2}p_i)u$，考察积分：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align*}
+\begin{split}
+\int_0^{1-\sum_{i=1}^{k-2} p_i} p_{k-1}^{\alpha_{k-1}-1} (1-\sum_{i=1}^{k-1}p_i)^{\alpha_k-1} \md p_{k-1} &= \left(1-\sum_{i=1}^{k-2}p_i \right)^{\alpha_{k-1}+\alpha_k-2} \int_0^1 u^{\alpha_{k-1}-1}(1-u)^{\alpha_k-1} \md u \\
+&= \left(1-\sum_{i=1}^{k-2}p_i \right)^{\alpha_{k-1}+\alpha_k-2} \frac{\mathrm{\Gamma}(\alpha_{k-1})\mathrm{\Gamma}(\alpha_{k})}{\mathrm{\Gamma}(\alpha_{k-1} + \alpha_{k})}
+\end{split}
+\end{align*} %]]&gt;</script>
+
+<p>迭代相乘后即得。</p>
+
+<h3 id="gamma">3.2 Gamma积分</h3>
+
+<p>$\int_0^\infty \frac{x^{\alpha-1}}{\mathrm{e}^{\lambda x}} \md x=\frac{\mathrm{\Gamma}(\alpha)}{\lambda^\alpha}$</p>
+
+<p>令$\lambda x=u$：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align*}
+\begin{split}
+\int_0^\infty \frac{x^{\alpha-1}}{\mathrm{e}^{\lambda x}} \md x &= \lambda^{-\alpha} \int_0^\infty \frac{u^{\alpha-1}}{\mathrm{e}^u} \md u \\
+&= \frac{\mathrm{\Gamma}(\alpha)}{\lambda^\alpha}
+\end{split}
+\end{align*} %]]&gt;</script>
+
+<h3 id="section-10">参考资料</h3>
+
+<ul>
+  <li><a href="https://people.eecs.berkeley.edu/~jordan/courses/260-spring10/other-readings/chapter9.pdf">Chapter 9 The exponential family: Conjugate priors</a></li>
+</ul>
+
+<h3 id="section-11">更新记录</h3>
+
+<p>2017年7月15日</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[PostgreSQL使用指南]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2015/07/29/postgresql-usage/"/>
     <updated>2015-07-29T18:24:10+08:00</updated>
@@ -2876,44 +3109,6 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
 
 <p>2015年6月1日</p>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SSH建立端口转发]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2015/05/31/ssh-tunnel/"/>
-    <updated>2015-05-31T21:14:02+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2015/05/31/ssh-tunnel</id>
-    <content type="html"><![CDATA[<p>SSH建立端口转发分为两步：</p>
-
-<h2 id="section">1. 连接远程主机</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>ssh -NT -D <span class="m">8080</span> usrname@host
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<!--more-->
-
-<p>其中，<code>-N</code>表示只连接远程主机，不打开远程shell；<code>-T</code>表示不分配TTY；<code>-D</code>表示某端口数据都通过SSH传向远程主机；<code>8080</code>可以设置为其他端口。</p>
-
-<h2 id="chrome">2. 添加Chrome浏览器支持</h2>
-
-<p>添加<a href="https://chrome.google.com/webstore/detail/proxy-switchysharp/dpplabbmogkhghncfbfdeeokoefdjegm?hl=en">Proxy SwitchySharp插件</a>，之后在SOCKS host栏目中填入地址<code>127.0.0.1</code>，端口<code>8080</code>并启用即可。</p>
-
-<h3 id="section-1">参考网址</h3>
-
-<ul>
-  <li>
-    <p><a href="http://www.pchou.info/linux/2015/11/01/ssh-tunnel.html">SSH隧道翻墙的原理和实现</a></p>
-  </li>
-  <li>
-    <p><a href="http://www.ruanyifeng.com/blog/2011/12/ssh_port_forwarding.html">SSH原理与运用（二）：远程操作与端口转发</a></p>
-  </li>
-</ul>
-
-<h3 id="section-2">更新记录</h3>
-
-<p>2017年5月31日</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Saysomething | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/saysomething/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2017-10-24T22:10:18+08:00</updated>
+  <updated>2017-11-07T18:01:13+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -66,21 +66,10 @@
  \color{signal}x_n \color{spin}
  e^{\mathrm{i} \color{circle} 2\pi \color{freq}k
  \color{average} \frac{n}{N}}</script>
-
-    <p>To find <font color="#7200AC">the energy</font></p>
-    <font color="2DB15D">at a particular frequency</font>
-    <p>,</p>
-    <font color="#FB001D">spin</font>
-    <font color="#126ED5">your
- signal</font>
-    <font color="#D04400">around a circle</font>
-    <font color="2DB15D">at that frequency</font>
-    <p>, and</p>
-    <font color="#CB17CE">average a bunch of points along that
- path</font>
-    <p>.</p>
   </li>
 </ol>
+
+<p>To find <font color="#7200AC">the energy</font> <font color="2DB15D">at a particular frequency</font>, <font color="#FB001D">spin</font> <font color="#126ED5">your signal</font> <font color="#D04400">around a circle</font> <font color="2DB15D">at that frequency</font>, and <font color="#CB17CE">average a bunch of points along that path</font>.</p>
 
 <ul>
   <li>Show the block.</li>

@@ -184,6 +184,73 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-09T00:14:10+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2015/05/09/python-different-version/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2015/05/09/python-different-version/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2015/05/09/python-different-version/" itemprop="url">使用Pyenv控制多个版本Python</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><p>同时在一台电脑上使用多个版本的Python，可以通过<a href="https://github.com/yyuu/pyenv">pyenv</a>控制和管理。</p>
+
+<h2 id="section">1. 安装方法</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>git clone git://github.com/yyuu/pyenv.git ~/.pyenv
+</span><span class="line">
+</span><span class="line"><span class="c"># 写入路径信息</span>
+</span><span class="line"><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;export PYENV_ROOT=&quot;$HOME/.pyenv&quot;&#39;</span> &gt;&gt; ~/.bashrc
+</span><span class="line"><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;export PATH=&quot;$PYENV_ROOT/bin:$PATH&quot;&#39;</span> &gt;&gt; ~/.bashrc
+</span><span class="line"><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;eval &quot;$(pyenv init -)&quot;&#39;</span> &gt;&gt; ~/.bashrc
+</span><span class="line">
+</span><span class="line"><span class="c"># 重新载入</span>
+</span><span class="line"><span class="nv">$ </span><span class="nb">source</span> ~/.bashrc
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2015/05/09/python-different-version/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-05-08T18:30:54+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2015/05/08/install-use-postgresql/#disqus_thread" itemprop="discussionUrl"
@@ -481,65 +548,6 @@
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-07-26T02:04:25+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2014/07/26/short-sequence-alignment/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2014/07/26/short-sequence-alignment/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2014/07/26/short-sequence-alignment/" itemprop="url">二代测序中的短序列比对</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><p>在二代测序数据分析中，非常重要的一步是将测得的短序列“对应”到基因组上。所使用的工具被称为“短序列比对工具（short sequence aligners）”。以下是一些常用工具的介绍。</p>
-
-<h2 id="bowtie">1. Bowtie</h2>
-
-<p><strong>简介</strong>：<a href="http://bowtie-bio.sourceforge.net/">Bowtie2</a>是现在广泛使用的序列比对工具。</p>
-
-<p><strong>运行方式</strong>：所有平台</p>
-
-<p><strong>特点</strong>：</p>
-
-<ul>
-  <li>
-    <p>相比较<a href="http://bowtie-bio.sourceforge.net/index.shtml">Bowtie1</a>，处理大于50bp的短序列，速度更快、也更敏感。Bowtie1在处理小于50bp的短序列上，效果更好。</p>
-  </li>
-  <li>
-    <p><a href="http://support.illumina.com/sequencing/sequencing_software/igenome.ilmn">iGenomes</a>提供一些事先编排（index）的基因组。
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2014/07/26/short-sequence-alignment/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -607,7 +615,7 @@
     
     
     <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
-        <span class="badge">17</span>
+        <span class="badge">18</span>
         bioinfor
       </a>
     
