@@ -1,6 +1,6 @@
 ---
 layout: post
-bootstrap_theme_url: http://bootswatch.com/united/bootstrap.css
+bootstrap_theme_url: https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/united/bootstrap.min.css
 title: "My first post"
 date: 2014-07-04 22:04:38 -0400
 comments: true
@@ -54,13 +54,7 @@ end
     \color{average} \frac{n}{N}}
     $$
 
-    To find <font color="#7200AC">the energy</font>
-    <font color="2DB15D">at a particular frequency</font>,
-    <font color="#FB001D">spin</font> <font color="#126ED5">your
-    signal</font> <font color="#D04400">around a circle</font>
-    <font color="2DB15D">at that frequency</font>, and
-    <font color="#CB17CE">average a bunch of points along that
-    path</font>.
+To find <font color="#7200AC">the energy</font> <font color="2DB15D">at a particular frequency</font>, <font color="#FB001D">spin</font> <font color="#126ED5">your signal</font> <font color="#D04400">around a circle</font> <font color="2DB15D">at that frequency</font>, and <font color="#CB17CE">average a bunch of points along that path</font>.
 
 * Show the block.
 

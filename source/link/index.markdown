@@ -1,7 +1,7 @@
 ---
 layout: page
-bootstrap_theme_url: http://bootswatch.com/cerulean/bootstrap.min.css
-title: ""
+bootstrap_theme_url: https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css
+title: "Links"
 date: 2014-12-15 17:55
 comments: true
 sharing: true
@@ -25,8 +25,6 @@ In this page, I record some useful linkages including academic collaboration and
 
 
 ## Blogs ##
-
-* [糗世界](http://blog.qiubio.com:8080/)
 
 * [YGC](https://guangchuangyu.github.io/)
 

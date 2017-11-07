@@ -146,7 +146,7 @@ $$
 
 对于随机变量$X_j \in \\{X_1, X_2, \dots, X_m\\}$易得，MLE为$\hat{\lambda}=\frac{\sum_{i=1}^m k_i}{m}$。
 
-该分布的共轭先验为Gamma分布$\mathrm{Gamma}(\alpha, \beta)$，，即对于随机变量$X_i$：
+该分布的共轭先验为Gamma分布$\mathrm{Gamma}(\alpha, \beta)$，即对于随机变量$X_i$：
 
 $$
 \begin{align}
@@ -163,6 +163,38 @@ $$
 根据$\eqref{eq:9}$易得，$f(\lambda \vert X_1, X_2, \dots, X_m) = \mathrm{Gamma}(\sum_{i=1}^{m}k_i+\alpha, \beta+m)$，期望$\hat{p}=\frac{\sum_{i=1}^{m}k_i+\alpha}{\beta+m}$。
 
 ## 2. 连续分布 ##
+
+### 2.1 指数分布 ###
+
+指数分布（exponential distribution）的概率密度函数为：
+
+$$
+\begin{align}
+\begin{split}
+f(x;\lambda) = \lambda \mathrm{e}^{-\lambda x} \quad \mathrm{for} \quad x\ge0
+\end{split}
+\label{eq:10}
+\end{align}
+$$
+
+对于随机变量$X_j \in \\{X_1, X_2, \dots, X_m\\}$易得，MLE为$\hat{\lambda}=\frac{m}{\sum_{i=1}^m k_i}$。
+
+该分布的共轭先验为Gamma分布$\mathrm{Gamma}(\alpha, \beta)$。因此，类似于$\eqref{eq:9}$，$f(\lambda \vert X_1, X_2, \dots, X_m) = \mathrm{Gamma}(\alpha+m, \beta+\sum_{i=1}^{m}k_i)$，期望$\hat{p}=\frac{\alpha+m}{\beta+\sum_{i=1}^{m}k_i}$
+
+### 2.2 已知方差的正态分布 ###
+
+正态分布的概率密度函数为：
+
+$$
+\begin{align}
+\begin{split}
+f(x; \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \mathrm{e}^{-\frac{(x-\mu)^2}{2\sigma^2}}
+\end{split}
+\label{eq:11}
+\end{align}
+$$
+
+对于随机变量$X_j \in \\{X_1, X_2, \dots, X_m\\}$易得，MLE为$\hat{\sigma}^2=\frac{\sum_{i=1}^m(x_i-\mu)^2}{m}$。
 
 
 
@@ -199,6 +231,7 @@ $$
 \end{split}
 \end{align*}
 $$
+
 
 
 
