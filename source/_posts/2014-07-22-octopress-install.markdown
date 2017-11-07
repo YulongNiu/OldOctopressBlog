@@ -1,6 +1,6 @@
 ---
 layout: post
-bootstrap_theme_url: http://bootswatch.com/flatly/bootstrap.min.css
+bootstrap_theme_url: https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css
 title: "Octopress安装和使用"
 date: 2014-07-22 13:45:46 -0400
 comments: true

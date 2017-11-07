@@ -196,7 +196,21 @@ $$
 
 对于随机变量$X_j \in \\{X_1, X_2, \dots, X_m\\}$易得，MLE为$\hat{\sigma}^2=\frac{\sum_{i=1}^m(x_i-\mu)^2}{m}$。
 
+该分布的共轭先验为inverse Gamma分布$\mathrm{Inv-Gamma}(\alpha, \beta)$，即对于随机变量$X_i$：
 
+$$
+\begin{align}
+\begin{split}
+f(\sigma^2|X_i) &= \frac{\frac{1}{\sqrt{2\pi}} \frac{1}{\sigma} \mathrm{e}^{-\frac{(x_i-\mu)^2}{2\sigma^2}} \frac{\beta^\alpha}{\mathrm{\Gamma}(\alpha)} \sigma^{2(-\alpha-1)}\mathrm{e}^{-\frac{\beta}{\sigma^2}}}{f(X_i)} \\
+&=\frac{\sigma^{2\left(-\alpha-\frac{3}{2}\right)} e^{\frac{(x_i-\mu)^2+2\beta}{2\sigma^2}}}{\int_0^\infty \sigma^{2\left(-\alpha-\frac{3}{2}\right)} e^{\frac{(x_i-\mu)^2+2\beta}{2\sigma^2}} \md \sigma^2} \\
+&= \frac{\left(\beta+\frac{(x_i-\mu)^2}{2}\right)^{\left(-\alpha-\frac{1}{2}\right)}}{\mathrm{\Gamma}\left(\alpha+\frac{1}{2}\right)} \sigma^{2\left(-\alpha-\frac{3}{2}\right)} e^{\frac{(x_i-\mu)^2+2\beta}{2\sigma^2}}\\
+&= \mathrm{Inv-Gamma}(\alpha+\frac{1}{2}, \beta+\frac{(x_i-\mu)^2}{2})
+\end{split}
+\label{eq:12}
+\end{align}
+$$
+
+根据$\eqref{eq:12}$易得，$f(\sigma^2 \vert X_1, X_2, \dots, X_m) = \mathrm{Inv-Gamma}(\alpha+\frac{m}{2}, \beta+\frac{\sum_{i=1}^m(x_i-\mu)^2}{2})$，期望$\hat{\sigma}^2=\frac{\beta+\frac{\sum_{i=1}^m(x_i-\mu)^2}{2}}{\alpha+\frac{m}{2}-1}$。
 
 ## 3. 一些积分证明 ##
 
