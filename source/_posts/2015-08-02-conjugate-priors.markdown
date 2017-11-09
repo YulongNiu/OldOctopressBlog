@@ -181,7 +181,7 @@ $$
 
 该分布的共轭先验为Gamma分布$\mathrm{Gamma}(\alpha, \beta)$。因此，类似于$\eqref{eq:9}$，$f(\lambda \vert X_1, X_2, \dots, X_m) = \mathrm{Gamma}(\alpha+m, \beta+\sum_{i=1}^{m}k_i)$，期望$\hat{p}=\frac{\alpha+m}{\beta+\sum_{i=1}^{m}k_i}$
 
-### 2.2 已知方差的正态分布 ###
+### 2.2 已知均值的正态分布 ###
 
 正态分布的概率密度函数为：
 
@@ -257,4 +257,4 @@ $$
 
 ### 更新记录 ###
 
-2017年7月15日
+2017年11月9日
