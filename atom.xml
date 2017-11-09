@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2017-11-07T18:01:13+08:00</updated>
+  <updated>2017-11-09T09:38:13+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -2393,7 +2393,7 @@ f(x;\lambda) = \lambda \mathrm{e}^{-\lambda x} \quad \mathrm{for} \quad x\ge0
 
 <p>该分布的共轭先验为Gamma分布$\mathrm{Gamma}(\alpha, \beta)$。因此，类似于$\eqref{eq:9}$，$f(\lambda \vert X_1, X_2, \dots, X_m) = \mathrm{Gamma}(\alpha+m, \beta+\sum_{i=1}^{m}k_i)$，期望$\hat{p}=\frac{\alpha+m}{\beta+\sum_{i=1}^{m}k_i}$</p>
 
-<h3 id="section-8">2.2 已知方差的正态分布</h3>
+<h3 id="section-8">2.2 已知均值的正态分布</h3>
 
 <p>正态分布的概率密度函数为：</p>
 
@@ -2461,7 +2461,7 @@ f(\sigma^2|X_i) &= \frac{\frac{1}{\sqrt{2\pi}} \frac{1}{\sigma} \mathrm{e}^{-\fr
 
 <h3 id="section-11">更新记录</h3>
 
-<p>2017年7月15日</p>
+<p>2017年11月9日</p>
 ]]></content>
   </entry>
   
