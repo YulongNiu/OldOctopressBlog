@@ -24,7 +24,7 @@ $\newcommand{\entropfrac}[2]{\frac{#1}{#2} \log \left( \frac{#1}{#2} \right)}$
 
 ------------------
 
-|---------------+---------------+--------------+---------|
+|---------------|---------------|--------------|---------|
 |**X/Y**        |**1(Presence)**|**0(Absence)**|**Sum**  |
 |:-------------:|:-------------:|:------------:|:-------:|
 |**1(Presence)**|a              |b             |a+b      |
@@ -60,7 +60,7 @@ I(X;Y) = \sum_{x \in \{0, 1\}}\sum_{y \in \{0, 1\}} p(x,y) \log\left(\frac{p(x,y
 \end{equation}
 $$
 
-$p(x)$ is the probability that a symbol (here is 0 or 1) appears in the gene vector X regardless that what the symbol is in gene vector Y. $p(y)$ has a similar definition of $p(x). $$p(x, y)$ is probability of a symbol combination appears in gene vector X and Y. In this example, there are four kinds of symbol combination $(1, 1)$, $(1, 0)$, $(0, 1)$ and $(1, 1)$.
+$p(x)$ is the probability that a symbol (here is 0 or 1) appears in the gene vector X regardless that what the symbol is in gene vector Y. $p(y)$ has a similar definition of $p(x). $$p(x, y)$ is probability of a symbol combination appears in gene vector X and Y. In this example, there are four kinds of symbol combination $(1, 1)$, $(1, 0)$, $(0, 1)$ and $(0, 0)$.
 
 If we use the binary table to illustrate this equation, the $\eqref{eq:1}$ is:
 
