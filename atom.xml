@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2017-11-21T22:21:15+08:00</updated>
+  <updated>2017-12-05T01:41:11+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -550,7 +550,11 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
 </span><span class="line"><span class="c"># sysctl net.ipv4.tcp_congestion_control</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h3 id="section-4">参考资料</h3>
+<h2 id="section-4">5. 全局配置</h2>
+
+<p>配合privoxy完成全局应用，参考<a href="https://www.zfl9.com/ss-local.html">具体设置步骤</a>。</p>
+
+<h3 id="section-5">参考资料</h3>
 
 <ol>
   <li>
@@ -561,7 +565,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
   </li>
 </ol>
 
-<h3 id="section-5">更新记录</h3>
+<h3 id="section-6">更新记录</h3>
 
 <p>2017年10月16日</p>
 ]]></content>
