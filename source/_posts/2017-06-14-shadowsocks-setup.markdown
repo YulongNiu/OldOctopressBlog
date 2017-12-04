@@ -66,6 +66,9 @@ Shadowsocks在主流平台上都有[客户端](https://shadowsocks.org/en/downlo
 # sysctl net.ipv4.tcp_congestion_control
 {% endcodeblock %}
 
+## 5. 全局配置 ##
+
+配合privoxy完成全局应用，参考[具体设置步骤](https://www.zfl9.com/ss-local.html)。
 
 ### 参考资料 ###
 
