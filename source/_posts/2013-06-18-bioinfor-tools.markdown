@@ -108,13 +108,15 @@ categories: Bioinfor
 * [OpenMS](http://www.openms.de/) 最大的开源质谱数据分析平台
 
 
-## 6. 基因注释 ##
+## 6. 基因/蛋白质注释 ##
 
 * [Acembly](http://www.ncbi.nlm.nih.gov/IEB/Research/Acembly/index.html)
 
 * [KEGG](http://rest.kegg.jp/list/hsa)
 
 * [PANTHER](http://www.pantherdb.org/)
+
+* [InterPro](https://www.ebi.ac.uk/interpro/) 分析蛋白质序列特征、家族等信息，对应一个本地Linux版本工具[InterProScan](https://www.ebi.ac.uk/interpro/interproscan.html)
 
 ## 7. 基因名转换 ##
 
@@ -184,11 +186,18 @@ categories: Bioinfor
 
 ## 15. 蛋白质相互作用 ##
 
-* [PSICQUIC/PSISCORE](http://www.ebi.ac.uk/Tools/webservices/psicquic/view/results.xhtml?conversationContext=2) 一个综合性蛋白质互作数据库，互作带有打分。[发表文章](https://www.ncbi.nlm.nih.gov/pubmed/21716279)
+* [PSICQUIC/PSISCORE](http://www.ebi.ac.uk/Tools/webservices/psicquic/view/results.xhtml?conversationContext=2) 一个综合性蛋白质互作数据库，互作带有打分，[发表文章](https://www.ncbi.nlm.nih.gov/pubmed/21716279)。这个数据库和[IntAct]有重复。
 
 * [STRING](http://string-db.org/)和对应的R/Bioconductor包[STRINGdb](https://www.bioconductor.org/packages/release/bioc/html/STRINGdb.html) 使用广泛的预测和实验验证的蛋白质互作数据库，STRINGdb包更提供了下载、benchmark和可视化等功能。
 
-* [I2D](http://ophid.utoronto.ca/ophidv2.204/index.jsp)包括了果蝇、人、鼠等模式生物蛋白质互作。
+* [I2D](http://ophid.utoronto.ca/ophidv2.204/index.jsp) 包括了果蝇、人、鼠等模式生物蛋白质互作。
+
+* [BioGRID](https://thebiogrid.org/) 多个物种。
+
+* [Human Protein Reference Database](http://hprd.org/index_html) 体内/体外相互作用。
+
+* [3did](https://3did.irbbarcelona.org/) 结构域相互作用。
+
 
 
 ## 文章介绍 ##
@@ -207,5 +216,5 @@ categories: Bioinfor
 
 ### 更新记录 ###
 
-2016年10月20日
+2017年12月16日
 
