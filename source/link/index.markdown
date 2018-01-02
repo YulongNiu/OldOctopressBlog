@@ -26,6 +26,8 @@ In this page, I record some useful linkages including academic collaboration and
 
 ## Blogs ##
 
+* [糗世界](http://qiubio.com/)
+
 * [YGC](https://guangchuangyu.github.io/)
 
 * [Wei Shen](http://blog.shenwei.me/)
@@ -35,6 +37,9 @@ In this page, I record some useful linkages including academic collaboration and
 * [G. Corey Shan 单光宇](https://shanguangyu.com/) 
 
 * [小小羊](https://yangfangs.github.io/)
+
+* [苏州月不落](https://godinlove.github.io/)
+
 
 
 
