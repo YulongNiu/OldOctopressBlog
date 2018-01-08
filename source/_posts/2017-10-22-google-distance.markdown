@@ -67,7 +67,7 @@ $$
 
 ### 参考资料 ###
 
-* [Adapting Normalized Google Similarity in Protein Sequence Comparison](https://www.cs.cmu.edu/afs/cs/user/aberger/www/html/tutorial/tutorial.html)
+* [Adapting Normalized Google Similarity in Protein Sequence Comparison](http://ieeexplore.ieee.org/document/4631601/?reload=true)
 
 ### 更新记录 ###
 
