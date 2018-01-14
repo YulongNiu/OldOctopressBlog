@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bioinfor | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/bioinfor/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-01-08T17:39:19+08:00</updated>
+  <updated>2018-01-14T17:12:21+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -430,7 +430,7 @@ C_{jp1} =
 \end{array}
 \right] %]]&gt;</script>
 
-<p>各个特征的条件git pull origin master概率为：</p>
+<p>各个特征的条件概率为：</p>
 
 <script type="math/tex; mode=display">% &lt;![CDATA[
 \begin{align*}
@@ -448,7 +448,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
     <p>当特征较多时，会面临多个小数（$p$值）相乘。可以取对数后再相加，即$\sum\log{p}$。</p>
   </li>
   <li>
-    <p>虽然上文讨论的是二元数据，但是朴素贝叶斯分类器也适用于连续或者离散数据类型。</p>
+    <p>虽然上文讨论的是二元数据，但是朴素贝叶斯分类器也适用于连续型或者其他离散型数据类型。</p>
   </li>
 </ol>
 
