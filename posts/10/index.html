@@ -184,6 +184,74 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2012-06-25T08:01:36+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2012/06/25/emacs-extend-skills/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2012/06/25/emacs-extend-skills/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2012/06/25/emacs-extend-skills/" itemprop="url">Emacs高级使用技巧</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="emacs">1. Emacs配置文件位置</h2>
+
+<p>在Fedora系统下，Emacs的配置文件位置是<code class="language-bash">~/.emacs</code>。在Emacs配置文件中添加内容后，使用<code class="language-emacs-lisp">M-x eval-buffer</code>，使当前配置生效。编译代码以加快加载速度，<code class="language-eamcs-lisp">M-x byte-compile-file</code>。</p>
+
+<p>使用Eamcs解释器<code class="language-emacs-lisp">M-x ielm</code>。</p>
+
+<h2 id="emacs-1">2. Emacs自带的包管理系统</h2>
+
+<p>在Emacs24之后，自带包管理系统，使用<code class="language-bash">M-x eval-buffer</code>进入。可以添加<a href="http://melpa.org/">MELPA源</a>、<a href="https://marmalade-repo.org/">marmalade源</a>、<a href="http://elpa.gnu.org/packages/">GNU源</a>。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Add repositories of Emacs packages</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="emacs-lisp"><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;package</span><span class="p">)</span>
+</span><span class="line"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
+</span><span class="line">	     <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;melpa&quot;</span> <span class="o">.</span> <span class="s">&quot;http://melpa.milkbox.net/packages/&quot;</span><span class="p">))</span>
+</span><span class="line"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
+</span><span class="line">	     <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;gnu&quot;</span> <span class="o">.</span> <span class="s">&quot;http://elpa.gnu.org/packages/&quot;</span><span class="p">))</span>
+</span><span class="line"><span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2012/06/25/emacs-extend-skills/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2012-05-30T07:46:59+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2012/05/30/r-package-and-roxygen2/#disqus_thread" itemprop="discussionUrl"
@@ -418,79 +486,6 @@
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2011-08-13T02:57:17+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2011/08/13/emacs-tips/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2011/08/13/emacs-tips/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2011/08/13/emacs-tips/" itemprop="url">Emacs使用技巧</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="section">1. 安装</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 安装Emacs</span>
-</span><span class="line"><span class="c"># yum install emacs </span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-1">2. 窗口和文件操作</h2>
-
-<p>Emacs的按键操作，约定<code>C</code>代表<code>Ctrl</code>键，<code>M</code>代表<code>Alt</code>键，<code>RET</code>表示Enter键。<code>C-x</code>对应字符扩展，比如<code>C-x C-b</code>表示列出所有buffer；<code>M-x</code>对应命令扩展，比如<code>M-x replace-string</code>（可以用TAB补全）表示字符替换。</p>
-
-<ul>
-  <li><code>C-x 2</code>或<code>C-x 3</code>：</li>
-</ul>
-
-<blockquote>
-  <ol>
-    <li>
-      <p>将窗口分割成两个或者三个。</p>
-    </li>
-    <li>
-      <p><code>C-x 1</code>：只保留一个窗口。</p>
-    </li>
-    <li>
-      <p><code>C-x n</code>：开n个窗口</p>
-    </li>
-  </ol>
-</blockquote>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2011/08/13/emacs-tips/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -558,7 +553,7 @@
     
     
     <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
-        <span class="badge">18</span>
+        <span class="badge">19</span>
         bioinfor
       </a>
     
