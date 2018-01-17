@@ -1,0 +1,85 @@
+---
+layout: post
+title: "探索EM算法"
+date: 2013-07-13 19:23:22 +0800
+comments: true
+categories: bioinfor
+---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+$$
+\newcommand{\P}{\mathrm{P}}
+$$
+
+$$
+\DeclareMathOperator*{\argmin}{arg\,min} 
+$$
+
+## EM算法的推出 ##
+
+考虑观测数据$Y=\\{y_1, y_2, \dots, y_m\\}$，其中不可观测数据为$Z=\\{z_1, z_2, \dots, z_k\\}$，需要估计的参数为$\theta=\\{\theta_1, \theta_2, \dots, \theta_t\\}$。$Z$可以是离散或连续型随机变量，以下过程中假设$Z$为离散型（$Z$为连续型，则全概率公式由求和改为积分）。则观测数据的对数似然函数为：
+
+$$
+\begin{align}
+\begin{split}
+L(\theta) &= \log\left(\prod_{j=1}^m \P(y_j|\theta)\right) \\
+&= \sum_{j=1}^m \log\left( \sum_{z \in Z} \P(y_j, z|\theta)\right)
+\end{split}
+\label{eq:1}
+\end{align}
+$$
+
+为了使$L(\theta)$最大，很容易想到对$\theta$偏导求极值。但有一个困难，即$Z$不可观测，导致的直接后果是对数套求和，计算难度增加。直觉是，**否能找到一个方法，将求和放在对数外面？**一个常用的技巧是转化为不等式，[Jensen's inequality](https://en.wikipedia.org/wiki/Jensen%27s_inequality)描述了积分的函数与函数的积分的关系。由于$\log(x)$是凹函数，尝试考察某一次特定的$\theta^{(n)}$取值后，$L(\theta)$与$L(\theta^{(n)})$的差：
+
+$$
+\begin{align}
+\begin{split}
+L(\theta) - L(\theta^{(n)}) &= \sum_{j=1}^m \log\left( \sum_{z \in Z} \P(y_j, z|\theta)\right) - L(\theta^{(n)}) \\
+&= \sum_{j=1}^m \log\left( \sum_{z \in Z} \P(z|y_j, \theta^{(n)}) \frac{\P(y_j, z|\theta)}{\P(z|y_j, \theta^{(n)})}\right) - L(\theta^{(n)}) \\
+&\geq \sum_{j=1}^m  \sum_{z \in Z} \P(z|y_j, \theta^{(n)}) \log \left( \frac{\P(y_j, z|\theta)}{\P(z|y_j, \theta^{(n)})} \right) \\
+&- \sum_{j=1}^m \sum_{z \in Z} \P(z|y_j, \theta^{(n)}) \log(\P(y_j|\theta^{n})) \\
+&= \sum_{j=1}^m  \sum_{z \in Z} \P(z|y_j, \theta^{(n)}) \log\left(\frac{\P(y_j, z|\theta)}{\P(y_j, z|\theta^{(n)})} \right)
+\end{split}
+\label{eq:2}
+\end{align}
+$$
+
+从$\eqref{eq:2}$可以得到$L(\theta)$的一个下限：
+
+$$
+\begin{align}
+\begin{split}
+L(\theta) \geq L(\theta^{(n)}) + \sum_{j=1}^m  \sum_{z \in Z} \P(z|y_j, \theta^{(n)}) \log\left(\frac{\P(y_j, z|\theta)}{\P(y_j, z|\theta^{(n)})} \right)
+\end{split}
+\label{eq:3}
+\end{align}
+$$
+
+当$\theta=\theta^{(n)}$时，等号成立。有意思的是，由于$\theta^{(n)}$已知，$\eqref{eq:3}$的右半部分极大化要比$\eqref{eq:1}$简单很多，尽管右边的极值是一个下限，此时的$\theta$的估计值为：
+
+$$
+\begin{align}
+\begin{split}
+\theta^{(n+1)} &= \argmin_\theta \left( L(\theta^{(n)}) + \sum_{j=1}^m  \sum_{z \in Z} \P(z|y_j, \theta^{(n)}) \log\left(\frac{\P(y_j, z|\theta)}{\P(y_j, z|\theta^{(n)})} \right) \right) \\
+&=  \argmin_\theta \left(\sum_{j=1}^m  \sum_{z \in Z} \P(z|y_j, \theta^{(n)}) \log\left(\P(y_j, z|\theta)\right) \right)
+\end{split}
+\label{eq:4}
+\end{align}
+$$
+
+EM算法的核心是通过迭代$L(\theta)$的下限极大化，进而逼近极值。EM算法每次迭代，都会靠近$L(\theta)$，但是最终可能得到局部最优。因此，EM算法对初始值敏感，可以多选几个初始值，对比结果。
+
+
+
+### 参考资料 ###
+
+* 李航《统计学习方法》
+
+* [The Expectation Maximization Algorithm A short tutorial](https://www.cs.utah.edu/~piyush/teaching/EM_algorithm.pdf)
+
+* [What is the expectation maximization algorithm?](What is the expectation maximization algorithm?)
