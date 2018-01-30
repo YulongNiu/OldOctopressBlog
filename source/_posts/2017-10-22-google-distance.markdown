@@ -37,7 +37,7 @@ $$
 
 ### 2. NGD定义延伸 ###
 
-Choi and Rashid在2008年的文章（参考资料1）提出一种针对向量的$NGD$定义：
+Choi and Rashid在2008年的[文章](#Ref)提出一种针对向量的$NGD$定义：
 
 $$
 \begin{align}
@@ -65,7 +65,7 @@ $$
 
 一个例子：$X = (1, 2, 0, 3)$和$Y = (0, 2, 1, 1)$，则$NGD = 0.5$和$NGS = 0.5$。
 
-### 参考资料 ###
+### <a id="Ref">参考资料</a> ###
 
 * [Adapting Normalized Google Similarity in Protein Sequence Comparison](http://ieeexplore.ieee.org/document/4631601/?reload=true)
 
