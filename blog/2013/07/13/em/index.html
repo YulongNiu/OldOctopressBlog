@@ -210,6 +210,8 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 
 <p>考虑观测数据$Y=\{y_1, y_2, \dots, y_m\}$，其中不可观测数据为$Z=\{z_1, z_2, \dots, z_k\}$，需要估计的参数为$\theta=\{\theta_1, \theta_2, \dots, \theta_t\}$。$Z$可以是离散或连续型随机变量，以下过程中假设$Z$为离散型（$Z$为连续型，则全概率公式由求和改为积分）。则观测数据的对数似然函数为：</p>
 
+<!--more-->
+
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{align}
 \begin{split}
@@ -255,19 +257,60 @@ L(\theta) \geq L(\theta^{(n)}) + \sum_{j=1}^m  \sum_{z \in Z} \P(z|y_j, \theta^{
 
 <p>EM算法的核心是通过迭代$L(\theta)$的下限极大化，进而逼近极值。EM算法每次迭代，都会靠近$L(\theta)$，但是最终可能得到局部最优。因此，EM算法对初始值敏感，可以多选几个初始值，对比结果。</p>
 
-<h3 id="section">参考资料</h3>
+<h2 id="em-1">EM算法应用：双硬币</h2>
+
+<p><a href="#Ref">参考资料2</a>中使用EM算法解决两个硬币的例子，具体描述为：每次从两个硬币中选择一个，抛$N$次并记录正反面，同样的“选硬币-抛$N$次”进行$m$次，估计两个硬币正面出现的概率。观测数据$Y=\{y_1, y_2, \dots, y_m\}$为每次正面朝上的次数，不可观测数据$Z=\{z_1, z_2\}$为每次选择的硬币，估计参数为$\theta=\{\theta_1, \theta_2\}$。</p>
+
+<p>对于第$n$次迭代，观察$\P(z_1|y_j, \theta^{(n)})$为：</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+\begin{split}
+\P(z_1|y_j, \theta^{(n)}) &= \frac{\P(z_1, y_j|\theta^{(n)})}{\sum\limits_{z \in Z}\P(z, y_j|\theta^{(n)})} \\
+&= \frac{\theta_1^{(n)y_j} (1-\theta_1^{(n)})^{N-y_j}}{\theta_1^{(n)y_j} (1-\theta_1^{(n)})^{N-y_j} + \theta_2^{(n)y_j} (1-\theta_2^{(n)})^{N-y_j}} \\
+&= \mu_{1j}
+\end{split}
+\end{align*} %]]></script>
+
+<p>根据全概率公式易得$\P(z_2|y_j, \theta^{(n)}) = 1-\mu_{1j} = \mu_{2j}$</p>
+
+<p>根据$\eqref{eq:4}$得，</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+\begin{split}
+\sum_{j=1}^m \left( \mu_{1j}\log\left(\theta_1^{y_j} (1-\theta_1)^{N-y_j}\right) + \mu_{2j}\log\left(\theta_2^{y_j} (1-\theta_2)^{N-y_j}\right) \right)
+\end{split}
+\end{align*}</script>
+
+<p>分别对$\theta_1$和$\theta_2$求导，得第$n+1$次$\theta$为：</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+\begin{split}
+\theta_1^{(n+1)} &= \frac{\sum\limits_{j=1}^m \mu_{1j} y_j}{N\sum\limits
+_{j=1}^m \mu_{1j}} \\
+\theta_2^{(n+1)} &= \frac{\sum\limits_{j=1}^m \mu_{2j} y_j}{N\sum\limits_{j=1}^m \mu_{2j}} \\
+\end{split}
+\end{align*} %]]></script>
+
+<h3 id="a-idrefa"><a id="Ref">参考资料</a></h3>
 
 <ul>
   <li>
     <p>李航《统计学习方法》</p>
   </li>
   <li>
-    <p><a href="https://www.cs.utah.edu/~piyush/teaching/EM_algorithm.pdf">The Expectation Maximization Algorithm A short tutorial</a></p>
+    <p>Do CB, Batzoglou S: What is the expectation maximization algorithm? Nat Biotechnol. 2008;26(8):897-9.</p>
   </li>
   <li>
-    <p><a href="What is the expectation maximization algorithm?">What is the expectation maximization algorithm?</a></p>
+    <p><a href="https://www.cs.utah.edu/~piyush/teaching/EM_algorithm.pdf">The Expectation Maximization Algorithm A short tutorial</a></p>
   </li>
 </ul>
+
+<h3 id="section">更新记录</h3>
+
+<p>2018年1月30日</p>
+
 </div>
 
 

@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-01-17T23:14:00+08:00</updated>
+  <updated>2018-01-31T00:19:44+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -92,7 +92,7 @@ NGD(x, y) = \frac{\max\{\log f(x), \log f(y)\} - \log f(x, y)}{\log N - \min\{\l
 
 <h3 id="ngd-1">2. NGD定义延伸</h3>
 
-<p>Choi and Rashid在2008年的文章（参考资料1）提出一种针对向量的$NGD$定义：</p>
+<p>Choi and Rashid在2008年的<a href="#Ref">文章</a>提出一种针对向量的$NGD$定义：</p>
 
 <script type="math/tex; mode=display">% &lt;![CDATA[
 \begin{align}
@@ -118,13 +118,13 @@ NGS(X, Y) &= 1 - NGD(X, Y) \\
 
 <p>一个例子：$X = (1, 2, 0, 3)$和$Y = (0, 2, 1, 1)$，则$NGD = 0.5$和$NGS = 0.5$。</p>
 
-<h3 id="section">参考资料</h3>
+<h3 id="a-idrefa"><a id="Ref">参考资料</a></h3>
 
 <ul>
   <li><a href="http://ieeexplore.ieee.org/document/4631601/?reload=true">Adapting Normalized Google Similarity in Protein Sequence Comparison</a></li>
 </ul>
 
-<h3 id="section-1">更新记录</h3>
+<h3 id="section">更新记录</h3>
 
 <p>2017年10月21日</p>
 ]]></content>
