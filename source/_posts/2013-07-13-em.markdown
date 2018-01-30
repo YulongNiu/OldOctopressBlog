@@ -105,7 +105,7 @@ $$
 \end{align*}
 $$
 
-分别对$\theta_1$和$\theta_2$求导，得第$n+1$次$\theta$为：
+分别对$\theta_1$和$\theta_2$求导取极限，得第$n+1$次$\theta$为：
 
 $$
 \begin{align*}
