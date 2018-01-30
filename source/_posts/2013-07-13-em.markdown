@@ -93,7 +93,7 @@ $$
 \end{align*}
 $$
 
-根据全概率公式易得$\P(z_2\|y_j, \theta^{(n)}) = 1-\mu_{1j} = \mu_{2j}$
+易得$\P(z_2\|y_j, \theta^{(n)}) = 1-\mu_{1j} = \mu_{2j}$
 
 根据$\eqref{eq:4}$得，
 
