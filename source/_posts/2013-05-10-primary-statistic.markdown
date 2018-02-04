@@ -30,7 +30,7 @@ $$
 \end{align}
 $$
 
-常用的技巧构造乘法系数，例如$\P(Y) = \sum\limits_{i=1}^{n}P(x_i\|\theta)P(Z)$
+常用的技巧构造乘法系数，例如$\P(Y) = \sum\limits_{i=1}^{n}P(x_i\|\theta)P(Y)$
 
 ## 2. 全概率公式 ##
 
