@@ -17,7 +17,7 @@ In this page, I record some useful linkages including academic collaboration and
 
 * My supervisors
 
-    * [Dr. Yi Yang](http://life.scu.edu.cn/webContent.asp?id=965&type=shiziduiwu) in Sichuan University, China (中国四川大学) 
+    * [Dr. Yi Yang](http://life.scu.edu.cn/webContent.asp?articleId=965&type=shiziduiwu) in Sichuan University, China (中国四川大学) 
 
     * Dr. Kambiz Alavian in [Imperial College London](http://www.imperial.ac.uk/people/k.alavian) and in [Yale University](http://endocrinology.yale.edu/people/kambiz_alavian.profile)
 
