@@ -656,10 +656,6 @@ $ crontab -e
 # cat /var/log/messages
 {% endcodeblock %}
 
-{% codeblock lang:bash Install Mono %}
-# dnf install mono-devel
-{% endcodeblock %}
-
 打开相关程序
 
 {% codeblock lang:bash Run dll %}
