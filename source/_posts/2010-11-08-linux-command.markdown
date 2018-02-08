@@ -658,14 +658,9 @@ $ crontab -e
 
 打开相关程序
 
-{% codeblock lang:bash Run dll %}
-$ mono myapp.dll
+{% codeblock lang:bash %}
+# cat /var/log/messages
 {% endcodeblock %}
-
-
-
-
-
 
 
 ### 参考资料 ###
