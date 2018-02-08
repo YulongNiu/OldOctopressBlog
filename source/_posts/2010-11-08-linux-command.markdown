@@ -648,7 +648,7 @@ $ crontab -r
 $ crontab -e
 {% endcodeblock %}
 
-## 38. .net程序 ##
+## 38. dotnet程序 ##
 
 使用mono打开，首先安装：
 
