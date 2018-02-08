@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-02-09T01:02:46+08:00</updated>
+  <updated>2018-02-09T01:03:49+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -32,18 +32,21 @@
 
 <h3 id="section-1">3.1 软件准备</h3>
 
-<p>{% codeblock lang:bash %}
-# apt-get install python-setuptools m2crypto supervisor
-# apt-get install python-pip
-# pip install –upgrade pip
-# pip install –upgrade shadowsocks
-{% endcodeblock %}</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># apt-get install python-setuptools m2crypto supervisor</span>
+</span><span class='line'><span class="c"># apt-get install python-pip</span>
+</span><span class='line'><span class="c"># pip install –upgrade pip</span>
+</span><span class='line'><span class="c"># pip install –upgrade shadowsocks</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h3 id="section-2">3.2 配置文件</h3>
 
 <p>文件位置<code>/etc/shadowsocks.json</code>，设置模板：</p>
 
-<p>{% raw %}
+<p>
 <code>
 {
     "server":"***.***.***.***",
@@ -57,25 +60,31 @@
     "method":"aes-256-cfb"
 }
 </code>
-{% endraw %}</p>
+</p>
 
 <h3 id="section-3">3.3 启动</h3>
 
-<p>{% codeblock lang:bash %}
-# ssserver -c /etc/shadowsocks.json -d start
-{% endcodeblock %}</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># ssserver -c /etc/shadowsocks.json -d start</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="tcp-bbr">4. 使用TCP BBR加速</h2>
 
-<p>{% codeblock lang:bash %}
-# echo “net.core.default_qdisc=fq” » /etc/sysctl.conf
-# echo “net.ipv4.tcp_congestion_control=bbr” » /etc/sysctl.conf</p>
-
-<h1 id="sysctl--p">sysctl -p</h1>
-
-<h1 id="sysctl-netipv4tcpavailablecongestioncontrol">sysctl net.ipv4.tcp_available_congestion_control</h1>
-<p># sysctl net.ipv4.tcp_congestion_control
-{% endcodeblock %}</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># echo “net.core.default_qdisc=fq” » /etc/sysctl.conf</span>
+</span><span class='line'><span class="c"># echo “net.ipv4.tcp_congestion_control=bbr” » /etc/sysctl.conf&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;sysctl--p&quot;</span>&gt;sysctl -p&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;sysctl-netipv4tcpavailablecongestioncontrol&quot;</span>&gt;sysctl net.ipv4.tcp_available_congestion_control&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;# sysctl net.ipv4.tcp_congestion_control
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="section-4">5. 全局配置</h2>
 
@@ -115,9 +124,10 @@
   <li>打开交互式rebase</li>
 </ul>
 
-<p>{% codeblock lang:bash interactive rebase %}
-$ git rebase -i sha1id-of-a1
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>interactive rebase </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git rebase -i sha1id-of-a1
+</span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
   <li>标记合并commits</li>
@@ -125,25 +135,25 @@ $ git rebase -i sha1id-of-a1
 
 <p>弹出的文本编辑器初始可能为：</p>
 
-<p>{% raw %}
+<p>
 <code>
 pick sha1id-of-c1 c1
 pick sha1id-of-b2 b2
 pick sha1id-of-b1 b1
 ...
 </code>
-{% endraw %}</p>
+</p>
 
 <p>修改为：</p>
 
-<p>{% raw %}
+<p>
 <code>
 pick sha1id-of-c1 c1
 squash sha1id-of-b2 b2
 squash sha1id-of-b1 b1
 ...
 </code>
-{% endraw %}</p>
+</p>
 
 <ul>
   <li>记录合并commits</li>
@@ -157,9 +167,10 @@ squash sha1id-of-b1 b1
 
 <p>由于本地和远程记录不一致，需要强制合并。</p>
 
-<p>{% codeblock lang:bash force push %}
-$ git push -f origin mybranch
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>force push </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git push -f origin mybranch
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="section">2. 贡献代码</h2>
 
@@ -169,37 +180,52 @@ $ git push -f origin mybranch
 
 <p>Fork在GitHub对应的项目（famous/project，master分支）至自己账户（my/project），克隆至本地并添加远程地址：</p>
 
-<p>{% codeblock lang:bash clone project %}
-$ git clone https://github.com/my/project.git
-$ git remote add upstream https://github.com/famous/project.git
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>clone project </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git clone https://github.com/my/project.git
+</span><span class='line'><span class="nv">$ </span>git remote add upstream https://github.com/famous/project.git
+</span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
   <li>建立分支并提交修改</li>
 </ul>
 
-<p>{% codeblock lang:bash commit %}
-$ git checkout -b devbranch
-$ git commit -a -m ‘these commits’
-$ git push origin devbranch
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>commit </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout -b devbranch
+</span><span class='line'><span class="nv">$ </span>git commit -a -m ‘these commits’
+</span><span class='line'><span class="nv">$ </span>git push origin devbranch
+</span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
   <li>获取和合并最新远程修改</li>
 </ul>
 
-<p>{% codeblock lang:bash commit %}
-$ git checkout master
-$ git pull upstream master
-$ git checkout devbranch</p>
-
-<p>$ git rebase master
-## compare and merge the latest commits
-$ git rebase –continue</p>
-
-<h2 id="force-push">force push</h2>
-<p>$ git push -f origin devbranch
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>commit </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout master
+</span><span class='line'><span class="nv">$ </span>git pull upstream master
+</span><span class='line'><span class="nv">$ </span>git checkout devbranch&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>git rebase master
+</span><span class='line'><span class="c">## compare and merge the latest commits</span>
+</span><span class='line'><span class="nv">$ </span>git rebase –continue&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h2 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;force-push&quot;</span>&gt;force push&lt;/h2&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>git push -f origin devbranch
+</span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
   <li>发起pull request。</li>
@@ -244,68 +270,112 @@ $ git rebase –continue</p>
 
 <p><a href="https://developers.google.com/drive/v3/web/search-parameters">查找规则</a></p>
 
-<p>{% codeblock lang:bash %}
-# 查找所有文件夹，不包括垃圾箱，所有者为自己
-$ gdrive list –query “mimeType = ‘application/vnd.google-apps.folder’ and trashed = false and ‘me’ in owners”</p>
-
-<h1 id="id">加入上层目录Id</h1>
-<p>gdrive list –query “mimeType = ‘application/vnd.google-apps.folder’ and trashed = false and ‘me’ in owners and ‘YUlPWWdLcy1mX2c’ in parents”</p>
-
-<h1 id="section-2">查询信息</h1>
-<p>gdrive info YUlPWWdLcy1mX2c
-{% endcodeblock %}</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 查找所有文件夹，不包括垃圾箱，所有者为自己</span>
+</span><span class='line'><span class="nv">$ </span>gdrive list –query “mimeType <span class="o">=</span> ‘application/vnd.google-apps.folder’ and <span class="nv">trashed</span> <span class="o">=</span> <span class="nb">false </span>and ‘me’ in owners”&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;id&quot;</span>&gt;加入上层目录Id&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;gdrive list –query “mimeType <span class="o">=</span> ‘application/vnd.google-apps.folder’ and <span class="nv">trashed</span> <span class="o">=</span> <span class="nb">false </span>and ‘me’ in owners and ‘YUlPWWdLcy1mX2c’ in parents”&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-2&quot;</span>&gt;查询信息&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;gdrive info YUlPWWdLcy1mX2c
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="section-3">3. 建立和删除</h2>
 
-<p>{% codeblock lang:bash %}
-# 建立文件夹
-$ gdrive mkdir newFolder</p>
-
-<h1 id="pid">建立下一层文件夹，-p指定上层目录Id</h1>
-<p>$ gdrive mkdir -p M1h4M1dGYUhpSFE newFolder</p>
-
-<h1 id="id-1">删除文件（文件Id，非名称）</h1>
-<p>$ gdrive delete 0BzTeuubJesi</p>
-
-<h1 id="id-2">删除文件夹（文件Id，非名称）</h1>
-<p>$ gdrive delete -r 0BzTeuubJesi
-{% endcodeblock %}</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 建立文件夹</span>
+</span><span class='line'><span class="nv">$ </span>gdrive mkdir newFolder&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;pid&quot;</span>&gt;建立下一层文件夹，-p指定上层目录Id&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>gdrive mkdir -p M1h4M1dGYUhpSFE newFolder&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;id-1&quot;</span>&gt;删除文件（文件Id，非名称）&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>gdrive delete 0BzTeuubJesi&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;id-2&quot;</span>&gt;删除文件夹（文件Id，非名称）&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>gdrive delete -r 0BzTeuubJesi
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="section-4">4. 普通上传和下载</h2>
 
-<p>{% codeblock lang:bash %}
-# 上传文件至制定文件夹
-$ gdrive upload -p M1h4M1dGYUhpSFE myFile</p>
-
-<h1 id="section-5">下载文件</h1>
-<p>$ gdrive download 0BzTeuubJesi</p>
-
-<p>{% endcodeblock %}</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 上传文件至制定文件夹</span>
+</span><span class='line'><span class="nv">$ </span>gdrive upload -p M1h4M1dGYUhpSFE myFile&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-5&quot;</span>&gt;下载文件&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>gdrive download 0BzTeuubJesi&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="section-6">5. 同步</h2>
-<p>{% codeblock lang:bash %}
-# gdrive sync会标记同步文件，因此不要在同步文件夹中使用gdrive upload或者网页上传文件。未标记文件会被忽略。
-# 同步列表
-$ gdrive sync list</p>
-
-<h1 id="section-7">同步列表内容</h1>
-<p>$ gdrive sync content VUxydm5iMnM5LWs</p>
-
-<h1 id="section-8">上传</h1>
-<p>$ gdrive sync upload myLocaldir 0BzTeuubJesi</p>
-
-<h1 id="section-9">下载</h1>
-<p>$ gdrive sync download 0BzTeuubJesi myLocaldir</p>
-
-<h1 id="section-10">查询所有版本</h1>
-<p>gdrive revision list YUlPWWdLcy1mX2c</p>
-
-<h1 id="ididid">下载某一版本，最后两个Id分别为文件Id和版本Id</h1>
-<p>gdrive revision download YUlPWWdLcy1mX2c Y3JBWEJ5a0gwZndlR3hzWlZubFlUMWFnaHVnPQ</p>
-
-<h1 id="section-11">删除某一版本</h1>
-<p>gdrive revision delete YUlPWWdLcy1mX2c Y3JBWEJ5a0gwZndlR3hzWlZubFlUMWFnaHVnPQ
-{% endcodeblock %}</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># gdrive sync会标记同步文件，因此不要在同步文件夹中使用gdrive upload或者网页上传文件。未标记文件会被忽略。</span>
+</span><span class='line'><span class="c"># 同步列表</span>
+</span><span class='line'><span class="nv">$ </span>gdrive sync list&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-7&quot;</span>&gt;同步列表内容&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>gdrive sync content VUxydm5iMnM5LWs&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-8&quot;</span>&gt;上传&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>gdrive sync upload myLocaldir 0BzTeuubJesi&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-9&quot;</span>&gt;下载&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>gdrive sync download 0BzTeuubJesi myLocaldir&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-10&quot;</span>&gt;查询所有版本&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;gdrive revision list YUlPWWdLcy1mX2c&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;ididid&quot;</span>&gt;下载某一版本，最后两个Id分别为文件Id和版本Id&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;gdrive revision download YUlPWWdLcy1mX2c Y3JBWEJ5a0gwZndlR3hzWlZubFlUMWFnaHVnPQ&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-11&quot;</span>&gt;删除某一版本&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;gdrive revision delete YUlPWWdLcy1mX2c Y3JBWEJ5a0gwZndlR3hzWlZubFlUMWFnaHVnPQ
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h3 id="section-12">更新记录</h3>
 
@@ -321,26 +391,44 @@ $ gdrive sync list</p>
     <id>http://yulongniu.bionutshell.org/blog/2015/07/29/postgresql-usage</id>
     <content type="html"><![CDATA[<h2 id="section">1. 查询</h2>
 
-<p>{% codeblock lang:psql Query %}
-– 选取特定的一列或者多列
-SELECT column1, column2
-FROM dataset</p>
-
-<p>– 选取全部列
-SELECT *
-FROM dataset</p>
-
-<p>– 去除重复，选取一列或多列中唯一元素
-– 如输入多列，则去除多列组合后的重复
-SELECT DISTINCT column1, column2
-FROM dataset</p>
-
-<p>– 指定输出列数
-– a是输出行数，b是输出起始行（第一行计为0）
-SELECT column
-FROM dataset
-LIMIT a OFFSET b
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>Query </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class="err">–</span> <span class="err">选取特定的一列或者多列</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">选取全部列</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="o">*</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">去除重复，选取一列或多列中唯一元素</span>
+</span><span class='line'><span class="err">–</span> <span class="err">如输入多列，则去除多列组合后的重复</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">指定输出列数</span>
+</span><span class='line'><span class="err">–</span> <span class="n">a</span><span class="err">是输出行数，</span><span class="n">b</span><span class="err">是输出起始行（第一行计为</span><span class="mf">0</span><span class="err">）</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="k">column</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
+</span><span class='line'><span class="k">LIMIT</span> <span class="n">a</span> <span class="k">OFFSET</span> <span class="n">b</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <!--more-->
 
@@ -355,25 +443,42 @@ LIMIT a OFFSET b
 
 <h2 id="section-1">2. 排序</h2>
 
-<p>{% codeblock lang:psql Ordering %}
-– 按照一列或者多列升序排序
-– 可以按照“不查询”的列排序
-– 先按照column2排，再按照column5排
-SELECT column1, column2, column3
-FROM dataset
-ORDER BY column2, column5</p>
-
-<p>– 降序
-– DESC只作用于最靠近的唯一一列，即column2，不作用于column5
-SELECT column1, column2, column3
-FROM dataset
-ORDER BY column2 DESC, column5</p>
-
-<p>–使用查询列相对编号
-SELECT column1, column2, column3
-FROM dataset
-ORDER BY 2, column5
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>Ordering </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class="err">–</span> <span class="err">按照一列或者多列升序排序</span>
+</span><span class='line'><span class="err">–</span> <span class="err">可以按照“不查询”的列排序</span>
+</span><span class='line'><span class="err">–</span> <span class="err">先按照</span><span class="n">column2</span><span class="err">排，再按照</span><span class="n">column5</span><span class="err">排</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span><span class="p">,</span> <span class="n">column3</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
+</span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column2</span><span class="p">,</span> <span class="n">column5</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">降序</span>
+</span><span class='line'><span class="err">–</span> <span class="k">DESC</span><span class="err">只作用于最靠近的唯一一列，即</span><span class="n">column2</span><span class="err">，不作用于</span><span class="n">column5</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span><span class="p">,</span> <span class="n">column3</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
+</span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column2</span> <span class="k">DESC</span><span class="p">,</span> <span class="n">column5</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–使用查询列相对编号</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span><span class="p">,</span> <span class="n">column3</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
+</span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="mf">2</span><span class="p">,</span> <span class="n">column5</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
   <li>
@@ -392,38 +497,68 @@ ORDER BY 2, column5
 
 <h2 id="section-2">3. 筛选</h2>
 
-<p>{% codeblock lang:psql Filter %}
-– ORDER BY语句需要在WHERE之后
-– AND表示“且”， OR表示“或”，第一个条件满足即终止
-– AND和OR可有任意多个
-SELECT column1, column2
-FROM dataset 
-WHERE (column3 = a OR column3 = b) AND column1 = c
-ORDER BY column3</p>
-
-<p>– 多个OR语句使用IN代替，比如上述例子为：
-SELECT column1, column2
-FROM dataset 
-WHERE column3 IN (a, b) AND column1 = c
-ORDER BY column3</p>
-
-<p>– NOT与IN连用
-SELECT column1, column2
-FROM dataset 
-WHERE column3 NOT IN (a, b)</p>
-
-<p>– BETWEEN a AND b语句，a必须小于等于b
-– 如a等于b，则相当于筛选与a（或者b）相等数值
-SELECT column1, column2
-FROM dataset
-WHERE column1 BETWEEN a AND b</p>
-
-<p>–筛选NULL值使用IS NULL
-–筛选非NULL值使用IS NOT NULL
-SELECT column1, column2
-FROM dataset
-WHERE column1 IS NULL
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>Filter </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class="err">–</span> <span class="k">ORDER</span> <span class="k">BY</span><span class="err">语句需要在</span><span class="k">WHERE</span><span class="err">之后</span>
+</span><span class='line'><span class="err">–</span> <span class="k">AND</span><span class="err">表示“且”，</span> <span class="k">OR</span><span class="err">表示“或”，第一个条件满足即终止</span>
+</span><span class='line'><span class="err">–</span> <span class="k">AND</span><span class="err">和</span><span class="k">OR</span><span class="err">可有任意多个</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="p">(</span><span class="n">column3</span> <span class="o">=</span> <span class="n">a</span> <span class="k">OR</span> <span class="n">column3</span> <span class="o">=</span> <span class="n">b</span><span class="p">)</span> <span class="k">AND</span> <span class="n">column1</span> <span class="o">=</span> <span class="n">c</span>
+</span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column3</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">多个</span><span class="k">OR</span><span class="err">语句使用</span><span class="k">IN</span><span class="err">代替，比如上述例子为：</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="n">column3</span> <span class="k">IN</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">AND</span> <span class="n">column1</span> <span class="o">=</span> <span class="n">c</span>
+</span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column3</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="k">NOT</span><span class="err">与</span><span class="k">IN</span><span class="err">连用</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="n">column3</span> <span class="k">NOT</span> <span class="k">IN</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="k">BETWEEN</span> <span class="n">a</span> <span class="k">AND</span> <span class="n">b</span><span class="err">语句，</span><span class="n">a</span><span class="err">必须小于等于</span><span class="n">b</span>
+</span><span class='line'><span class="err">–</span> <span class="err">如</span><span class="n">a</span><span class="err">等于</span><span class="n">b</span><span class="err">，则相当于筛选与</span><span class="n">a</span><span class="err">（或者</span><span class="n">b</span><span class="err">）相等数值</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="n">column1</span> <span class="k">BETWEEN</span> <span class="n">a</span> <span class="k">AND</span> <span class="n">b</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–筛选</span><span class="k">NULL</span><span class="err">值使用</span><span class="k">IS</span> <span class="k">NULL</span>
+</span><span class='line'><span class="err">–筛选非</span><span class="k">NULL</span><span class="err">值使用</span><span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="n">column1</span> <span class="k">IS</span> <span class="k">NULL</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
   <li>
@@ -445,20 +580,32 @@ WHERE column1 IS NULL
 
 <h2 id="section-3">4. 模式匹配</h2>
 
-<p>{% codeblock lang:psql Pattern Matching %}
-– LIKE和NOT LIKE支持对字符串的模式匹配
-– “_”匹配单一一个字符
-– “%”匹配0个或多个字符
-SELECT column1, column2
-FROM dataset
-WHERE column1 LIKE ‘F_y%’</p>
-
-<p>– SIMILAR TO和NOT SIMILAR TO支持正则匹配
-– 正则匹配中，仍然使用“_”和“%”
-SELECT column1, column2
-FROM dataset
-WHERE column1 SIMILAR TO ‘[^JM]%’
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>Pattern Matching </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class="err">–</span> <span class="k">LIKE</span><span class="err">和</span><span class="k">NOT</span> <span class="k">LIKE</span><span class="err">支持对字符串的模式匹配</span>
+</span><span class='line'><span class="err">–</span> <span class="err">“</span><span class="n">_</span><span class="err">”匹配单一一个字符</span>
+</span><span class='line'><span class="err">–</span> <span class="err">“</span><span class="o">%</span><span class="err">”匹配</span><span class="mf">0</span><span class="err">个或多个字符</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="n">column1</span> <span class="k">LIKE</span> <span class="err">‘</span><span class="n">F_y</span><span class="o">%</span><span class="err">’</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="k">SIMILAR</span> <span class="k">TO</span><span class="err">和</span><span class="k">NOT</span> <span class="k">SIMILAR</span> <span class="k">TO</span><span class="err">支持正则匹配</span>
+</span><span class='line'><span class="err">–</span> <span class="err">正则匹配中，仍然使用“</span><span class="n">_</span><span class="err">”和“</span><span class="o">%</span><span class="err">”</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="n">column1</span> <span class="k">SIMILAR</span> <span class="k">TO</span> <span class="err">‘</span><span class="p">[</span><span class="o">^</span><span class="n">JM</span><span class="p">]</span><span class="o">%</span><span class="err">’</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
   <li>
@@ -477,33 +624,58 @@ WHERE column1 SIMILAR TO ‘[^JM]%’
 
 <h2 id="section-4">5. 函数</h2>
 
-<p>{% codeblock lang:psql Function %}
-–数学计算
-SELECT column1, column2 * column3 AS newName
-FROM dataset</p>
-
-<p>– 字符串连接
-SELECT RTRIM(column1) || ‘ (‘ || RTRIM(column1) || ‘)’ AS newName
-FROM dataset
-ORDER BY column1</p>
-
-<p>– 使用函数
-SELECT column1, UPPER(column2) AS newName
-FROM dataset</p>
-
-<p>– 筛选日期
-SELECT column1, columnDate 
-FROM dataset
-WHERE DATE_PART(‘year’, columnDate) = 2015</p>
-
-<p>– 汇总数据
-SELECT AVG(DISTINCT column1) AS newName1,
-       SUM(column2) AS newName2,
-       MAX(column3) AS newName3,
-       MIN(column4) AS newName4
-FROM Products 
-WHERE vend_id = ‘DLL01’
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>Function </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class="err">–数学计算</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span> <span class="o">*</span> <span class="n">column3</span> <span class="k">AS</span> <span class="n">newName</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">字符串连接</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">RTRIM</span><span class="p">(</span><span class="n">column1</span><span class="p">)</span> <span class="o">||</span> <span class="err">‘</span> <span class="p">(</span><span class="err">‘</span> <span class="o">||</span> <span class="n">RTRIM</span><span class="p">(</span><span class="n">column1</span><span class="p">)</span> <span class="o">||</span> <span class="err">‘</span><span class="p">)</span><span class="err">’</span> <span class="k">AS</span> <span class="n">newName</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
+</span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column1</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">使用函数</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">UPPER</span><span class="p">(</span><span class="n">column2</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">筛选日期</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">columnDate</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="n">DATE_PART</span><span class="p">(</span><span class="err">‘</span><span class="k">year</span><span class="err">’</span><span class="p">,</span> <span class="n">columnDate</span><span class="p">)</span> <span class="o">=</span> <span class="mf">2015</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">汇总数据</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">AVG</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="n">column1</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName1</span><span class="p">,</span>
+</span><span class='line'>       <span class="n">SUM</span><span class="p">(</span><span class="n">column2</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName2</span><span class="p">,</span>
+</span><span class='line'>       <span class="n">MAX</span><span class="p">(</span><span class="n">column3</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName3</span><span class="p">,</span>
+</span><span class='line'>       <span class="n">MIN</span><span class="p">(</span><span class="n">column4</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName4</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">Products</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="n">vend_id</span> <span class="o">=</span> <span class="err">‘</span><span class="n">DLL01</span><span class="err">’</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
   <li>
@@ -519,15 +691,22 @@ WHERE vend_id = ‘DLL01’
 
 <h2 id="section-5">6. 分组</h2>
 
-<p>{% codeblock lang:psql Group %}
-– 分组的意思是对一列或者多列数据归总
-SELECT column1, column2, COUNT(<em>) AS newName 
-FROM dataset
-WHERE column4 &gt; 3
-GROUP BY column1, column2
-HAVING COUNT(</em>) &gt; 1
-ORDER BY newName
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>Group </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class="err">–</span> <span class="err">分组的意思是对一列或者多列数据归总</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span><span class="p">,</span> <span class="n">COUNT</span><span class="p">(</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">dataset</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="n">column4</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="mf">3</span>
+</span><span class='line'><span class="k">GROUP</span> <span class="k">BY</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
+</span><span class='line'><span class="k">HAVING</span> <span class="n">COUNT</span><span class="p">(</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="mf">1</span>
+</span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">newName</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
   <li>
@@ -709,9 +888,9 @@ ORDER BY newName
 
 <h2 id="section">1. 连接远程主机</h2>
 
-<p>{% codeblock lang:bash %}
-$ ssh -NT -D 8080 usrname@host
-{% endcodeblock %}</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ssh -NT -D <span class="m">8080</span> usrname@host
+</span></code></pre></td></tr></table></div></figure></p>
 
 <!--more-->
 
