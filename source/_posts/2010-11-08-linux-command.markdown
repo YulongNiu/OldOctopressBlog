@@ -652,6 +652,10 @@ $ crontab -e
 
 使用mono打开，首先安装：
 
+{% codeblock lang:bash %}
+# cat /var/log/messages
+{% endcodeblock %}
+
 {% codeblock lang:bash Install Mono %}
 # dnf install mono-devel
 {% endcodeblock %}
