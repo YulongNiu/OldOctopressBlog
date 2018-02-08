@@ -648,6 +648,19 @@ $ crontab -r
 $ crontab -e
 {% endcodeblock %}
 
+## 38. .net程序 ##
+
+使用mono打开，首先安装：
+
+{% codeblock lang:bash Install Mono %}
+# dnf install mono-devel
+{% endcodeblock %}
+
+打开相关程序
+
+{% codeblock lang:bash Run dll %}
+$ mono myapp.dll
+{% endcodeblock %}
 
 
 
@@ -685,7 +698,6 @@ $ crontab -e
 
 
 
-
 ### 更新记录 ###
 
-2016年5月9日
+2018年3月9日
