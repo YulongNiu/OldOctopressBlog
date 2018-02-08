@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bioinfor | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/bioinfor/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-02-08T23:15:18+08:00</updated>
+  <updated>2018-02-09T00:58:12+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -483,7 +483,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
 
 <!--more-->
 
-<p>
+<p>{% raw %}
 <code>
 10000 reads; of these:
   10000 (100.00%) were paired; of these:
@@ -501,7 +501,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
         1 (0.08%) aligned &gt;1 times
 96.70% overall alignment rate
 </code>
-</p>
+{% endraw %}</p>
 
 <ul>
   <li>
