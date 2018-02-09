@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/c/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-02-09T01:05:18+08:00</updated>
+  <updated>2018-02-09T14:34:46+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -22,22 +22,36 @@
 
 <p>C语言的指针设计是一致和优雅的。C语言中“指针（pointer）”就是<strong>地址</strong>（所以不能用普通整数储存地址），“指针变量（pointer variable）”是存储地址的变量。一个指针变量，<strong>只能</strong>指向一个特定类型的变量，比如整数、浮点数、字符或者指针。</p>
 
-<p>{% codeblock lang:c Initiate a pointer %}
-int tmp1 = 1, tmp2;</p>
-
-<p>/* “=” does not mean “assignment”, it just means “initiating” <em>/
-/</em> p is the address of tmp1, <em>p is equal to the value of tmp1</em>/
-int *p = &amp;tmp1;</p>
-
-<p>int *q;
-q = &amp;tmp2;</p>
-
-<p>/* p points to tmp1, q points to tmp2, now the value of tmp2 is 1*/
-*p = *q;</p>
-
-<p>/* p and q now both points to tmp1*/
-q = p;
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>Initiate a pointer </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">int</span> <span class="n">tmp1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">tmp2</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="cm">/* “=” does not mean “assignment”, it just means “initiating” &lt;em&gt;/</span>
+</span><span class='line'><span class="cm">/&lt;/em&gt; p is the address of tmp1, &lt;em&gt;p is equal to the value of tmp1&lt;/em&gt;/</span>
+</span><span class='line'><span class="cm">int *p = &amp;amp;tmp1;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">&lt;p&gt;int *q;</span>
+</span><span class='line'><span class="cm">q = &amp;amp;tmp2;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">&lt;p&gt;/* p points to tmp1, q points to tmp2, now the value of tmp2 is 1*/</span>
+</span><span class='line'><span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">*</span><span class="n">q</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="cm">/* p and q now both points to tmp1*/</span>
+</span><span class='line'><span class="n">q</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <!--more-->
 
@@ -172,13 +186,17 @@ q = p;
   </li>
 </ul>
 
-<p>{% codeblock lang:c %}
-void TestFun(int const *a) {
-  …
-  ++a;
-  …
-}
-{% endcodeblock %}</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">void</span> <span class="nf">TestFun</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="o">*</span><span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="err">…</span>
+</span><span class='line'>  <span class="o">++</span><span class="n">a</span><span class="p">;</span>
+</span><span class='line'>  <span class="err">…</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="section-3">5. 注意事项</h2>
 
@@ -194,14 +212,20 @@ void TestFun(int const *a) {
   </li>
 </ul>
 
-<p>{% codeblock lang:c return pointer points to malloc %}
-struct node *Add(struct node *n, int v) {
-  struct node *new;
-  new = malloc(sizeof(struct node));
-  …
-  return new;
-}
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>return pointer points to malloc </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="nf">Add</span><span class="p">(</span><span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">v</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="n">new</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">new</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">node</span><span class="p">));</span>
+</span><span class='line'>  <span class="err">…</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">new</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h3 id="section-4">补充材料</h3>
 
@@ -209,101 +233,190 @@ struct node *Add(struct node *n, int v) {
   <li><a id="pointer_array">Pointers and arrays in C</a></li>
 </ul>
 
-<p>{% codeblock lang:c Using pointers to operate arrays in c %}
-#include <stdio.h></stdio.h></p>
-
-<h1 id="define-n-5">define N 5</h1>
-
-<p>void PrintVal(int <em>a);
-void PrintArray(int *a, int length);
-void PrintString(char *a, int length);
-void Print2Array(int colnum, int rownum, int (</em>a)[colnum]);
-void Print2Array2(int colnum, int rownum, int **a);
-void PrintStringArray(char *a[], int length);
-void PrintStringArray2(char **a, int length);</p>
-
-<p>int main(void)
-{
-  int testVal = 2;
-  PrintVal(&amp;testVal);
-  printf(“\n”);</p>
-
-<p>int testArray[N] = {2, 3, 5};
-  PrintArray(testArray, N);
-  printf(“\n”);</p>
-
-<p>char testString[N] = “hell”;
-  PrintString(testString, N);
-  printf(“\n”);</p>
-
-<p>int test2Array[N][N] = {{1, 2, 3, 4, 5}};
-  Print2Array(N, N, test2Array);
-  int *test2Array2[N] = {test2Array[0], test2Array[1], test2Array[2], test2Array[3], test2Array[4]};
-  Print2Array2(N, N, test2Array2);</p>
-
-<p>char *testStringArray[N] = {“Hello,”, “it”, “is”, “me”, “!”};
-  PrintStringArray(testStringArray, N);
-  PrintStringArray2(testStringArray, N);</p>
-
-<p>return 0;
-}</p>
-
-<p>void PrintVal(int *a) {
-  printf(“%3d”, *a);
-}</p>
-
-<p>void PrintArray(int *a, int length) {
-  int *p;
-  for (p = a; p &lt; a + length; ++p) {
-    printf(“%3d”, *p);
-  }
-}</p>
-
-<p>void PrintString(char *a, int length) {
-  char *p;
-  for (p = a; p &lt; a + length; ++p) {
-    printf(“%c”, *p);
-  }
-}</p>
-
-<p>void Print2Array(int colnum, int rownum, int (<em>a)[colnum]) {
-  int (</em>p)[colnum];
-  for (p = a; p &lt; a + colnum; ++p) {
-    for (int *q = *p; q &lt; *p + rownum; ++q) {
-      printf(“%3d”, *q);
-    }
-    printf(“\n”);
-  }
-}</p>
-
-<p>void Print2Array2(int colnum, int rownum, int **a) {
-  int **p;
-  for (p = a; p &lt; a + colnum; ++p) {
-    for (int *q = *p; q &lt; *p + rownum; ++q) {
-      printf(“%3d”, *q);
-    }
-    printf(“\n”);
-  }
-}</p>
-
-<p>void PrintStringArray(char *a[], int length) {
-  char **p;
-  for (p = a; p &lt; a + length; ++p) {
-    printf(“%s\n”, *p);
-  }
-}</p>
-
-<p>void PrintStringArray2(char **a, int length) {
-  char **p;
-  for (p = a; p &lt; a + length; ++p) {
-    printf(“%s\n”, *p);
-  }
-}
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>Using pointers to operate arrays in c </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;stdio.h&gt;&lt;/stdio.h&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;define-n-5&quot;</span><span class="o">&gt;</span><span class="n">define</span> <span class="n">N</span> <span class="mi">5</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">void</span> <span class="n">PrintVal</span><span class="p">(</span><span class="kt">int</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">a</span><span class="p">);</span>
+</span><span class='line'><span class="kt">void</span> <span class="nf">PrintArray</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">length</span><span class="p">);</span>
+</span><span class='line'><span class="kt">void</span> <span class="nf">PrintString</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">length</span><span class="p">);</span>
+</span><span class='line'><span class="kt">void</span> <span class="nf">Print2Array</span><span class="p">(</span><span class="kt">int</span> <span class="n">colnum</span><span class="p">,</span> <span class="kt">int</span> <span class="n">rownum</span><span class="p">,</span> <span class="kt">int</span> <span class="p">(</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">a</span><span class="p">)[</span><span class="n">colnum</span><span class="p">]);</span>
+</span><span class='line'><span class="kt">void</span> <span class="nf">Print2Array2</span><span class="p">(</span><span class="kt">int</span> <span class="n">colnum</span><span class="p">,</span> <span class="kt">int</span> <span class="n">rownum</span><span class="p">,</span> <span class="kt">int</span> <span class="o">**</span><span class="n">a</span><span class="p">);</span>
+</span><span class='line'><span class="kt">void</span> <span class="nf">PrintStringArray</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">length</span><span class="p">);</span>
+</span><span class='line'><span class="kt">void</span> <span class="nf">PrintStringArray2</span><span class="p">(</span><span class="kt">char</span> <span class="o">**</span><span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">length</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">testVal</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">PrintVal</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">testVal</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="err">“\</span><span class="n">n</span><span class="err">”</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">int</span> <span class="n">testArray</span><span class="p">[</span><span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">};</span>
+</span><span class='line'>  <span class="n">PrintArray</span><span class="p">(</span><span class="n">testArray</span><span class="p">,</span> <span class="n">N</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="err">“\</span><span class="n">n</span><span class="err">”</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">char</span> <span class="n">testString</span><span class="p">[</span><span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="err">“</span><span class="n">hell</span><span class="err">”</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">PrintString</span><span class="p">(</span><span class="n">testString</span><span class="p">,</span> <span class="n">N</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="err">“\</span><span class="n">n</span><span class="err">”</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">int</span> <span class="n">test2Array</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">Print2Array</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">test2Array</span><span class="p">);</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="o">*</span><span class="n">test2Array2</span><span class="p">[</span><span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">test2Array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">test2Array</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">test2Array</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">test2Array</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">test2Array</span><span class="p">[</span><span class="mi">4</span><span class="p">]};</span>
+</span><span class='line'>  <span class="n">Print2Array2</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">test2Array2</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">char</span> <span class="o">*</span><span class="n">testStringArray</span><span class="p">[</span><span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="err">“</span><span class="n">Hello</span><span class="p">,</span><span class="err">”</span><span class="p">,</span> <span class="err">“</span><span class="n">it</span><span class="err">”</span><span class="p">,</span> <span class="err">“</span><span class="n">is</span><span class="err">”</span><span class="p">,</span> <span class="err">“</span><span class="n">me</span><span class="err">”</span><span class="p">,</span> <span class="err">“</span><span class="o">!</span><span class="err">”</span><span class="p">};</span>
+</span><span class='line'>  <span class="n">PrintStringArray</span><span class="p">(</span><span class="n">testStringArray</span><span class="p">,</span> <span class="n">N</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">PrintStringArray2</span><span class="p">(</span><span class="n">testStringArray</span><span class="p">,</span> <span class="n">N</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">void</span> <span class="n">PrintVal</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="o">%</span><span class="mi">3</span><span class="n">d</span><span class="err">”</span><span class="p">,</span> <span class="o">*</span><span class="n">a</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">void</span> <span class="n">PrintArray</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">length</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">p</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span> <span class="n">p</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">length</span><span class="p">;</span> <span class="o">++</span><span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="o">%</span><span class="mi">3</span><span class="n">d</span><span class="err">”</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">void</span> <span class="n">PrintString</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">length</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">p</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span> <span class="n">p</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">length</span><span class="p">;</span> <span class="o">++</span><span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="o">%</span><span class="n">c</span><span class="err">”</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">void</span> <span class="n">Print2Array</span><span class="p">(</span><span class="kt">int</span> <span class="n">colnum</span><span class="p">,</span> <span class="kt">int</span> <span class="n">rownum</span><span class="p">,</span> <span class="kt">int</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">a</span><span class="p">)[</span><span class="n">colnum</span><span class="p">])</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="p">(</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">p</span><span class="p">)[</span><span class="n">colnum</span><span class="p">];</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">p</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span> <span class="n">p</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">colnum</span><span class="p">;</span> <span class="o">++</span><span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">q</span> <span class="o">=</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span> <span class="n">q</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="o">*</span><span class="n">p</span> <span class="o">+</span> <span class="n">rownum</span><span class="p">;</span> <span class="o">++</span><span class="n">q</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="o">%</span><span class="mi">3</span><span class="n">d</span><span class="err">”</span><span class="p">,</span> <span class="o">*</span><span class="n">q</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="n">printf</span><span class="p">(</span><span class="err">“\</span><span class="n">n</span><span class="err">”</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">void</span> <span class="n">Print2Array2</span><span class="p">(</span><span class="kt">int</span> <span class="n">colnum</span><span class="p">,</span> <span class="kt">int</span> <span class="n">rownum</span><span class="p">,</span> <span class="kt">int</span> <span class="o">**</span><span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="o">**</span><span class="n">p</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">p</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span> <span class="n">p</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">colnum</span><span class="p">;</span> <span class="o">++</span><span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">q</span> <span class="o">=</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span> <span class="n">q</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="o">*</span><span class="n">p</span> <span class="o">+</span> <span class="n">rownum</span><span class="p">;</span> <span class="o">++</span><span class="n">q</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="o">%</span><span class="mi">3</span><span class="n">d</span><span class="err">”</span><span class="p">,</span> <span class="o">*</span><span class="n">q</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="n">printf</span><span class="p">(</span><span class="err">“\</span><span class="n">n</span><span class="err">”</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">void</span> <span class="n">PrintStringArray</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">length</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="o">**</span><span class="n">p</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">p</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span> <span class="n">p</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">length</span><span class="p">;</span> <span class="o">++</span><span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="o">%</span><span class="n">s</span><span class="err">\</span><span class="n">n</span><span class="err">”</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">void</span> <span class="n">PrintStringArray2</span><span class="p">(</span><span class="kt">char</span> <span class="o">**</span><span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">length</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="o">**</span><span class="n">p</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">p</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span> <span class="n">p</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">length</span><span class="p">;</span> <span class="o">++</span><span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="o">%</span><span class="n">s</span><span class="err">\</span><span class="n">n</span><span class="err">”</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>输出结果为：</p>
 
-<p>{% raw %}
+<p>
 <code>
   2
   2  3  5  0  0
@@ -329,7 +442,7 @@ is
 me
 !
 </code>
-{% endraw %}</p>
+</p>
 
 <h3 id="section-5">参考资料</h3>
 
@@ -529,17 +642,26 @@ me
 
 <p><span style="color: green"><strong>C99</strong></span>允许声明变长数组。但是，变长数组的声明和初始化不能在一条语句中。正确的做法是：先声明变长数组，之后初始化。比如：</p>
 
-<p>{% codeblock lang:c Initialization of variable-length array (VLA) C99 %}
-int size;
-printf(“Enter size of array: “);
-scanf(“%d”, &amp;size);
-int square[size];</p>
-
-<p>/* initial square */
-for (int i = 0; i &lt; size; i++) {
-  square[i] = 0;
-}
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>Initialization of variable-length array (VLA) C99 </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">int</span> <span class="n">size</span><span class="p">;</span>
+</span><span class='line'><span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="n">Enter</span> <span class="n">size</span> <span class="n">of</span> <span class="nl">array</span><span class="p">:</span> <span class="err">“</span><span class="p">);</span>
+</span><span class='line'><span class="n">scanf</span><span class="p">(</span><span class="err">“</span><span class="o">%</span><span class="n">d</span><span class="err">”</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">size</span><span class="p">);</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">square</span><span class="p">[</span><span class="n">size</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="cm">/* initial square */</span>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">square</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h4 id="section-5">1.2.4 字符串</h4>
 
@@ -598,55 +720,95 @@ for (int i = 0; i &lt; size; i++) {
   </li>
 </ul>
 
-<p>{% codeblock lang:c initialize struct %}
-struct test1 {
-  int a;
-  char b[10];
-  int c;
-};</p>
-
-<p>struct {
-  int a;
-  char b[10];
-} p3;</p>
-
-<p>/* p1.c is 0 */
-struct test1 p1 = {1, “hello”};</p>
-
-<p>/* c99 <em>/
-/</em> p1.a is 0 and p1.c is 3 */
-struct test1 p2 = {.b = “world”, 3};</p>
-
-<p>/* c99 */
-(struct test1){.c = 10};
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>initialize struct </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="k">struct</span> <span class="n">test1</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="n">b</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">c</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">struct</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="n">b</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span> <span class="n">p3</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="cm">/* p1.c is 0 */</span>
+</span><span class='line'><span class="k">struct</span> <span class="n">test1</span> <span class="n">p1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="err">“</span><span class="n">hello</span><span class="err">”</span><span class="p">};</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="cm">/* c99 &lt;em&gt;/</span>
+</span><span class='line'><span class="cm">/&lt;/em&gt; p1.a is 0 and p1.c is 3 */</span>
+</span><span class='line'><span class="k">struct</span> <span class="n">test1</span> <span class="n">p2</span> <span class="o">=</span> <span class="p">{.</span><span class="n">b</span> <span class="o">=</span> <span class="err">“</span><span class="n">world</span><span class="err">”</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="cm">/* c99 */</span>
+</span><span class='line'><span class="p">(</span><span class="k">struct</span> <span class="n">test1</span><span class="p">){.</span><span class="n">c</span> <span class="o">=</span> <span class="mi">10</span><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
   <li>结构、联合和枚举都可以使用<code class="language-c">typedef</code>定义，总结如下：</li>
 </ul>
 
-<p>{% codeblock lang:c initialize struct with typedef %}
-typedef struct {
-   int ele1;
-   char ele2;
- } Test1;</p>
-
-<p>typedef union {
-  int ele1;
-  double ele2;
-} Test2;</p>
-
-<p>typedef enum {CIRCLE, RECTANGLE} Test3;</p>
-
-<p>int main(void)
-{
-  Test1 p1 = {.ele1 = 1};
-  Test2 p2 = {.ele2 = 0.2};
-  Test3 p3 = CIRCLE;</p>
-
-<p>return 0;
-}
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>initialize struct with typedef </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+</span><span class='line'>   <span class="kt">int</span> <span class="n">ele1</span><span class="p">;</span>
+</span><span class='line'>   <span class="kt">char</span> <span class="n">ele2</span><span class="p">;</span>
+</span><span class='line'> <span class="p">}</span> <span class="n">Test1</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">typedef</span> <span class="k">union</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">ele1</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">double</span> <span class="n">ele2</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span> <span class="n">Test2</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">typedef</span> <span class="k">enum</span> <span class="p">{</span><span class="n">CIRCLE</span><span class="p">,</span> <span class="n">RECTANGLE</span><span class="p">}</span> <span class="n">Test3</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">Test1</span> <span class="n">p1</span> <span class="o">=</span> <span class="p">{.</span><span class="n">ele1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">};</span>
+</span><span class='line'>  <span class="n">Test2</span> <span class="n">p2</span> <span class="o">=</span> <span class="p">{.</span><span class="n">ele2</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">};</span>
+</span><span class='line'>  <span class="n">Test3</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">CIRCLE</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h3 id="section-8">1.4 联合</h3>
 
@@ -662,49 +824,87 @@ typedef struct {
   <li>初始化与结构类似。</li>
 </ul>
 
-<p>{% codeblock lang:c initialize union %}</p>
-
-<p>union test1 {
-  int a;
-  char b[10];
-};</p>
-
-<p>union {
-  int a;
-  char b[10];
-} p3;</p>
-
-<p>union test1 p1 = {0};</p>
-
-<p>/* c99 */
-union test1 p2 = {.b = “world”};</p>
-
-<p>/* c99 */
-(union test1){.a = 10};</p>
-
-<p>{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>initialize union </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">union</span> <span class="n">test1</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="n">b</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+</span><span class='line'><span class="p">};</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">union</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="n">b</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span> <span class="n">p3</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">union</span> <span class="n">test1</span> <span class="n">p1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="cm">/* c99 */</span>
+</span><span class='line'><span class="k">union</span> <span class="n">test1</span> <span class="n">p2</span> <span class="o">=</span> <span class="p">{.</span><span class="n">b</span> <span class="o">=</span> <span class="err">“</span><span class="n">world</span><span class="err">”</span><span class="p">};</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="cm">/* c99 */</span>
+</span><span class='line'><span class="p">(</span><span class="k">union</span> <span class="n">test1</span><span class="p">){.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">};</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
   <li>如果联合包括两个及两个以上结构成员，而且这些结构中最初一个或多个成员类型匹配，那么这些匹配成员会同步。</li>
 </ul>
 
-<p>{% codeblock lang:c initialize union %}
-union test {
-  int a;
-  struct test1 {
-    int b1;
-    char b2[10];
-  } b;
-  struct test2 {
-    int c1;
-    int c2;
-  } c;
-} t1;</p>
-
-<p>t1.b.b1 = 10;
-/* t.c.c1 is 10 */
-printf(“%d \n”, t1.c.c1);
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>initialize union </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="k">union</span> <span class="n">test</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">struct</span> <span class="n">test1</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">b1</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">char</span> <span class="n">b2</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">}</span> <span class="n">b</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">struct</span> <span class="n">test2</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">c1</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">c2</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span> <span class="n">c</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span> <span class="n">t1</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">t1</span><span class="p">.</span><span class="n">b</span><span class="p">.</span><span class="n">b1</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span><span class='line'><span class="cm">/* t.c.c1 is 10 */</span>
+</span><span class='line'><span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="o">%</span><span class="n">d</span> <span class="err">\</span><span class="n">n</span><span class="err">”</span><span class="p">,</span> <span class="n">t1</span><span class="p">.</span><span class="n">c</span><span class="p">.</span><span class="n">c1</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h3 id="section-9">1.5 枚举</h3>
 
@@ -714,13 +914,22 @@ printf(“%d \n”, t1.c.c1);
   <li>枚举元素如不指定，从0开始，依次增加1；可以指定具体数值，指定数值可以相同，允许尾逗号，例如<code class="language-c">enum {THIS = 2, THAT = 10, THESE = 2,} test1;</code>。</li>
 </ul>
 
-<p>{% codeblock lang:c initialize enum %}</p>
-
-<p>enum {FIRST, SECOND} p1;
-enum test1 {FIRST, SECOND};
-enum test1 = SECOND;</p>
-
-<p>{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>initialize enum </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">enum</span> <span class="p">{</span><span class="n">FIRST</span><span class="p">,</span> <span class="n">SECOND</span><span class="p">}</span> <span class="n">p1</span><span class="p">;</span>
+</span><span class='line'><span class="k">enum</span> <span class="n">test1</span> <span class="p">{</span><span class="n">FIRST</span><span class="p">,</span> <span class="n">SECOND</span><span class="p">};</span>
+</span><span class='line'><span class="k">enum</span> <span class="n">test1</span> <span class="o">=</span> <span class="n">SECOND</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h3 id="section-10">1.6 指针</h3>
 
@@ -757,20 +966,32 @@ enum test1 = SECOND;</p>
   <li>定义形参为一维数组的函数，普遍形式为：</li>
 </ul>
 
-<p>{% codeblock lang:c Definition of function using array as the parameter %}
-/* 一维数组长度不是必须 */
-int oneArrayFun(int a[], int len) {
-…
-}</p>
-
-<p>/* 函数声明 <em>/ 
-int oneArrayFun(int a[], int len);
-/</em> 省略形参声明 */
-int oneArrayFun(int [], int);</p>
-
-<p>/* 实际调用 */
-oneArrayFun(testArry, testLen);
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>Definition of function using array as the parameter </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cm">/* 一维数组长度不是必须 */</span>
+</span><span class='line'><span class="kt">int</span> <span class="nf">oneArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">len</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="err">…</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="cm">/* 函数声明 &lt;em&gt;/ </span>
+</span><span class='line'><span class="cm">int oneArrayFun(int a[], int len);</span>
+</span><span class='line'><span class="cm">/&lt;/em&gt; 省略形参声明 */</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">oneArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="p">[],</span> <span class="kt">int</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="cm">/* 实际调用 */</span>
+</span><span class='line'><span class="n">oneArrayFun</span><span class="p">(</span><span class="n">testArry</span><span class="p">,</span> <span class="n">testLen</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
   <li>
@@ -784,113 +1005,199 @@ oneArrayFun(testArry, testLen);
   </li>
 </ul>
 
-<p>{% codeblock lang:c Definition of function using array as the parameter %}
-/* 比如二维数组，行不是必须，但必须制定列 */
-#define COL 10</p>
-
-<p>int twoArrayFun(int a[][COL], int row) {
-…
-}</p>
-
-<p>/* 函数声明 <em>/ 
-int twoArrayFun(int a[][COL], int row);
-/</em> 省略形参声明 */
-int twoArrayFun(int [][COL], int);</p>
-
-<p>/* 实际调用 */
-twoArrayFun(testArry, testRow);
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>Definition of function using array as the parameter </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cm">/* 比如二维数组，行不是必须，但必须制定列 */</span>
+</span><span class='line'><span class="cp">#define COL 10&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">int</span> <span class="n">twoArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[][</span><span class="n">COL</span><span class="p">],</span> <span class="kt">int</span> <span class="n">row</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="err">…</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="cm">/* 函数声明 &lt;em&gt;/ </span>
+</span><span class='line'><span class="cm">int twoArrayFun(int a[][COL], int row);</span>
+</span><span class='line'><span class="cm">/&lt;/em&gt; 省略形参声明 */</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">twoArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="p">[][</span><span class="n">COL</span><span class="p">],</span> <span class="kt">int</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="cm">/* 实际调用 */</span>
+</span><span class='line'><span class="n">twoArrayFun</span><span class="p">(</span><span class="n">testArry</span><span class="p">,</span> <span class="n">testRow</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
   <li><span style="color: green"><strong>C99</strong></span>可以声明任意变长数组作为函数参数，普遍形式为：</li>
 </ul>
 
-<p>{% codeblock lang:c Definition of function using VLA as the parameter in <span style="color: green">C99</span> %}
-/* 一维VLA */
-int oneArrayFun(int len, int a[len]) {
-…
-}</p>
-
-<p>/* 一维VLA声明的各种形式 <em>/ 
-int oneArrayFun(int len, int a[len]);
-int oneArrayFun(int len, int a[</em>]);
-int oneArrayFun(int, int [*]);
-int oneArrayFun(int len, int a[]);
-int oneArrayFun(int, int []);</p>
-
-<p>/* 实际调用 */
-oneArrayFun(testArry, testLen);</p>
-
-<p>/* 二维VLA */
-int twoArrayFun(int row, int col, int a[row][col]) {
-…
-}</p>
-
-<p>/* 二维VLA声明的各种形式 <em>/ 
-int twoArrayFun(int row, int col, int a[row][col]); 
-int twoArrayFun(int row, int col, int a[</em>][<em>]); 
-int twoArrayFun(int row, int col, int a[][col]); 
-int twoArrayFun(int row, int col, int a[][</em>]); 
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>Definition of function using VLA as the parameter in <span style="color: green">C99</span> </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cm">/* 一维VLA */</span>
+</span><span class='line'><span class="kt">int</span> <span class="nf">oneArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">len</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">len</span><span class="p">])</span> <span class="p">{</span>
+</span><span class='line'><span class="err">…</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="cm">/* 一维VLA声明的各种形式 &lt;em&gt;/ </span>
+</span><span class='line'><span class="cm">int oneArrayFun(int len, int a[len]);</span>
+</span><span class='line'><span class="cm">int oneArrayFun(int len, int a[&lt;/em&gt;]);</span>
+</span><span class='line'><span class="cm">int oneArrayFun(int, int [*]);</span>
+</span><span class='line'><span class="cm">int oneArrayFun(int len, int a[]);</span>
+</span><span class='line'><span class="cm">int oneArrayFun(int, int []);&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">&lt;p&gt;/* 实际调用 */</span>
+</span><span class='line'><span class="n">oneArrayFun</span><span class="p">(</span><span class="n">testArry</span><span class="p">,</span> <span class="n">testLen</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="cm">/* 二维VLA */</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">twoArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">])</span> <span class="p">{</span>
+</span><span class='line'><span class="err">…</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;/*</span> <span class="err">二维</span><span class="n">VLA</span><span class="err">声明的各种形式</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;/</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">twoArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]);</span>
+</span><span class='line'><span class="kt">int</span> <span class="nf">twoArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">][</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">]);</span>
+</span><span class='line'><span class="kt">int</span> <span class="nf">twoArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[][</span><span class="n">col</span><span class="p">]);</span>
+</span><span class='line'><span class="kt">int</span> <span class="nf">twoArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[][</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
   <li><span style="color: green"><strong>C99</strong></span>允许在数组参数中使用关键字<code>static</code>，但只能用于第一维。好处是编译器更快访问数组，比如：</li>
 </ul>
 
-<p>{% codeblock lang:c Use static in <span style="color: green">C99</span> %}
-/* 一维数组长度至少为5 */
-int oneArrayFun(int a[static 5], int len) {
-…
-}
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>Use static in <span style="color: green">C99</span> </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cm">/* 一维数组长度至少为5 */</span>
+</span><span class='line'><span class="kt">int</span> <span class="nf">oneArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="k">static</span> <span class="mi">5</span><span class="p">],</span> <span class="kt">int</span> <span class="n">len</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="err">…</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
   <li><span style="color: green"><strong>C99</strong></span>允许使用<strong>复合字面量</strong>。复合字面量是“左值”，可以包括常量或者常量表达式，形式与数组初始化类似；也可以使用<code>const</code>修饰。</li>
 </ul>
 
-<p>{% codeblock lang:c Use static in <span style="color: green">C99</span> %}
-#include <stdio.h></stdio.h></p>
-
-<p>int oneArray(int a[], int len);</p>
-
-<p>int main(void)
-{
-  printf(“Sum is %d. \n”, oneArray((int []){1, 2, 3, 4, 5}, 5));</p>
-
-<p>int i = 1, j = 2, k = 3;
-  printf(“Sum is %d. \n”, oneArray((int [5]){i, j, k}, 5));</p>
-
-<p>printf(“Sum is %d. \n”, oneArray((int [5]){1, 3, 5, 7}, 4));</p>
-
-<p>printf(“Sum is %d. \n”,
-         constOneArray((const int [5]){1, 1, 1, 1}, 3));</p>
-
-<p>return 0;
-}</p>
-
-<p>int oneArray(int a[], int len) {</p>
-
-<p>int sum = 0;</p>
-
-<p>for (int i = 0; i &lt; len; i ++) {
-    sum += a[i];
-  }</p>
-
-<p>return sum;
-}</p>
-
-<p>int constOneArray(const int a[], int len) {</p>
-
-<p>int sum = 0;</p>
-
-<p>for (int i = 0; i &lt; len; i ++) {
-    sum += a[i];
-  }</p>
-
-<p>return sum;
-}</p>
-
-<p>{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>Use static in <span style="color: green">C99</span> </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;stdio.h&gt;&lt;/stdio.h&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">int</span> <span class="n">oneArray</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">len</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="n">Sum</span> <span class="n">is</span> <span class="o">%</span><span class="n">d</span><span class="p">.</span> <span class="err">\</span><span class="n">n</span><span class="err">”</span><span class="p">,</span> <span class="n">oneArray</span><span class="p">((</span><span class="kt">int</span> <span class="p">[]){</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="mi">5</span><span class="p">));</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="n">Sum</span> <span class="n">is</span> <span class="o">%</span><span class="n">d</span><span class="p">.</span> <span class="err">\</span><span class="n">n</span><span class="err">”</span><span class="p">,</span> <span class="n">oneArray</span><span class="p">((</span><span class="kt">int</span> <span class="p">[</span><span class="mi">5</span><span class="p">]){</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">},</span> <span class="mi">5</span><span class="p">));</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="n">Sum</span> <span class="n">is</span> <span class="o">%</span><span class="n">d</span><span class="p">.</span> <span class="err">\</span><span class="n">n</span><span class="err">”</span><span class="p">,</span> <span class="n">oneArray</span><span class="p">((</span><span class="kt">int</span> <span class="p">[</span><span class="mi">5</span><span class="p">]){</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">},</span> <span class="mi">4</span><span class="p">));</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="n">Sum</span> <span class="n">is</span> <span class="o">%</span><span class="n">d</span><span class="p">.</span> <span class="err">\</span><span class="n">n</span><span class="err">”</span><span class="p">,</span>
+</span><span class='line'>         <span class="n">constOneArray</span><span class="p">((</span><span class="k">const</span> <span class="kt">int</span> <span class="p">[</span><span class="mi">5</span><span class="p">]){</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="mi">3</span><span class="p">));</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">int</span> <span class="n">oneArray</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">len</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">len</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">sum</span> <span class="o">+=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">int</span> <span class="n">constOneArray</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">len</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">len</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">sum</span> <span class="o">+=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="section-14">2. 操作符类型和优先级</h2>
 
@@ -941,11 +1248,14 @@ int oneArrayFun(int a[static 5], int len) {
   </li>
 </ul>
 
-<p>{% codeblock Definition of EOF in C lang:c %}
-#ifndef EOF
-# define EOF (-1)
-#endif
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>Definition of EOF in C </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#ifndef EOF</span>
+</span><span class='line'><span class="cp"># define EOF (-1)</span>
+</span><span class='line'><span class="cp">#endif</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
   <li>
@@ -1031,23 +1341,30 @@ int oneArrayFun(int a[static 5], int len) {
   </li>
 </ul>
 
-<p>{% codeblock lang:c Undefined behavior in C %}
-# can not decide whether “++”, “=”, or “+” is the first
-a = i + i++;
-i = i++;
-a[i] = i++;</p>
-
-<h1 id="is-not-comma-operator">”,” is not comma operator</h1>
-<p>printf(“%d %d\n”, ++i, i);
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>Undefined behavior in C </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp"># can not decide whether “++”, “=”, or “+” is the first</span>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span><span class='line'><span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span><span class='line'><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">++</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;is-not-comma-operator&quot;</span><span class="o">&gt;</span><span class="err">”</span><span class="p">,</span><span class="err">”</span> <span class="n">is</span> <span class="n">not</span> <span class="n">comma</span> <span class="n">operator</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="o">%</span><span class="n">d</span> <span class="o">%</span><span class="n">d</span><span class="err">\</span><span class="n">n</span><span class="err">”</span><span class="p">,</span> <span class="o">++</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="section-17">5. 标准库</h2>
 
 <h3 id="include-stdiohlanguage-c">5.1 <code class="language-c">#include &lt;stdio.h&gt;</code></h3>
 
-<p>{% codeblock lang:c %}
-printf(“%3.0f %6.1f\n”, fahr, celsius);
-{% endcodeblock %}</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="o">%</span><span class="mf">3.0f</span> <span class="o">%</span><span class="mf">6.1f</span><span class="err">\</span><span class="n">n</span><span class="err">”</span><span class="p">,</span> <span class="n">fahr</span><span class="p">,</span> <span class="n">celsius</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p><code>%m.pX</code>：格式串模板，<code>m</code>表示要显示的最小字段宽度，<code>p</code>表示精度，<code>X</code>表示类型。</p>
 
@@ -1177,35 +1494,55 @@ printf(“%3.0f %6.1f\n”, fahr, celsius);
   </li>
 </ul>
 
-<p>{% codeblock lang:c bool in <span style="color: green">C99</span> %}
-#include <stdbool.h></stdbool.h></p>
-
-<p>int main(void)
-{
-  bool trueVal = true, falseVal = false;</p>
-
-<p>bool a1[10] = {false};</p>
-
-<p>bool a2[10][10] = {false};</p>
-
-<p>return 0;
-}
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>bool in <span style="color: green">C99</span> </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;stdbool.h&gt;&lt;/stdbool.h&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="kt">bool</span> <span class="n">trueVal</span> <span class="o">=</span> <span class="nb">true</span><span class="p">,</span> <span class="n">falseVal</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">bool</span> <span class="n">a1</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="nb">false</span><span class="p">};</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">bool</span> <span class="n">a2</span><span class="p">[</span><span class="mi">10</span><span class="p">][</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="nb">false</span><span class="p">};</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <ul>
   <li>允许使用<code>typedef</code>定义占用特定位数（是“比特数”，不是“字节数”）的整数，比如：</li>
 </ul>
 
-<p>{% codeblock lang:c typedef 32 bit integer %}
-#include <stdint.h></stdint.h></p>
-
-<p>int main(void)
-{
-  typedef int32_t Int32;</p>
-
-<p>return 0;
-}
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>typedef 32 bit integer </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;stdint.h&gt;&lt;/stdint.h&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">typedef</span> <span class="kt">int32_t</span> <span class="n">Int32</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h3 id="a-idrefa"><a id="Ref">参考资料</a></h3>
 
