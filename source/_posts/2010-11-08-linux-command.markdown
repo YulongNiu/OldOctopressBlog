@@ -648,20 +648,6 @@ $ crontab -r
 $ crontab -e
 {% endcodeblock %}
 
-## 38. dotnet程序 ##
-
-使用mono打开，首先安装：
-
-{% codeblock lang:bash %}
-# cat /var/log/messages
-{% endcodeblock %}
-
-打开相关程序
-
-{% codeblock lang:bash %}
-$ mono libGLU.so
-{% endcodeblock %}
-
 
 ### 参考资料 ###
 
