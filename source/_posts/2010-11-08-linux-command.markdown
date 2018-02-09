@@ -659,7 +659,7 @@ $ crontab -e
 打开相关程序
 
 {% codeblock lang:bash %}
-$ locate libGLU.so
+$ mono libGLU.so
 {% endcodeblock %}
 
 
