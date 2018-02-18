@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8">
-  <title>构建和展示进化树软件使用心得 - 牛牛龙</title>
+  <title>牛牛龙</title>
   <meta name="author" content="Yulong Niu">
 
   
@@ -14,15 +14,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yulongniu.bionutshell.org/blog/2014/05/02/phylo-tool-summary">
+  <link rel="canonical" href="http://yulongniu.bionutshell.org/posts/12">
   <link href="/favicon.ico" type="image/png" rel="icon">
   <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
 
   <!-- http://opengraphprotocol.org/ -->
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2014/05/02/phylo-tool-summary">
-  <meta property="og:title" content="构建和展示进化树软件使用心得 - 牛牛龙">
+  <meta property="og:url" content="http://yulongniu.bionutshell.org/posts/12">
+  <meta property="og:title" content="牛牛龙">
   
 
   <!-- mathjax config similar to math.stackexchange -->
@@ -158,12 +158,16 @@
       <div id="main" role="main" class="container">
         <div id="content">
           <div class="row">
-  <div class="page-content col-md-9" itemscope itemtype="http://schema.org/Blog">
+  <div class="page-content col-md-9">
+    <div class="blog-index" itemscope itemtype="http://schema.org/Blog">
     <meta itemprop="name" content="牛牛龙" />
     
     <meta itemprop="url" content="http://yulongniu.bionutshell.org" />
-    <article class="hentry" role="article" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
       
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
   <header class="page-header">
     
       <p class="meta text-muted text-uppercase">
@@ -180,172 +184,68 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-05-02T05:13:59+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2010-07-08T11:09:31+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
-           | <a href="#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org">Comments</a>
+           | <a href="/blog/2010/07/08/linux-software/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2010/07/08/linux-software/">Comments</a>
         
       </p>
     
     
-    <h1 class="entry-title" itemprop="name headline">
-        构建和展示进化树软件使用心得
-        
-    </h1>
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2010/07/08/linux-software/" itemprop="url">Linux常用软件集锦</a></h2>
     
   </header>
 
 
-<div class="entry-content clearfix" itemprop="articleBody description"><h2 id="section">构建进化树</h2>
+  <div class="entry-content clearfix" itemprop="articleBody description"><p>本文收集了一些好用或者好玩的Linux软件，安装方法使用<a href="https://getfedora.org/">Fedora</a>系统示例。</p>
 
-<h3 id="phyml">1. PhyML</h3>
-
-<p><strong>构建进化树方法</strong>：Maximum Likelihood</p>
-
-<p><strong>评估</strong>：选择bootstrap或者Likelihood-ratio test</p>
-
-<p><strong>运行方式</strong>：所有平台和<a href="http://atgc.lirmm.fr/phyml/">网页</a></p>
-
-<p><strong>心得</strong>：理论上支持4000条序列，小于2000000个字符。但是，对于个人电脑，通常100-200条序列比较合适。命令行运行时，可以选择非常简介的默认模式运行。在默认模式下，bootstrap需要手动开启。安装和使用非常方便，直接下载后可以直接使用。同时，bootstrap可以通过MPI分布计算，但是需要从源代码安装。</p>
-
-<p><strong>快速运行</strong>：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">phyml -i align_file.phy --no_memory_check
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<!--more-->
-
-<ul>
-  <li><code>-i</code>：后跟需要Phylip格式文件</li>
-  <li><code>--no_memory_check</code>：不用检查内存，防止程序运行时跳出</li>
-</ul>
-
-<h3 id="raxml">2. RAxML</h3>
-
-<p><strong>构建进化树方法</strong>：Maximum Likelihood</p>
-
-<p><strong>运行方式</strong>：所有<a href="http://www.exelixis-lab.org/">平台</a>和网页。</p>
-
-<p><strong>心得</strong>：推荐<a href="http://www.phylo.org/portal2/login!input.action">网页运行</a>，支持数据的存放和其他构建进化树的方法。本地安装支持MPI和PThreads的分布计算，但是安装有些复杂，需要仔细阅读文档。</p>
-
-<p><strong>快速运行1</strong>：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">raxmlHPC-PTHREADS-AVX -x <span class="m">12345</span> -p <span class="m">12345</span> -# <span class="m">100</span> -m GTRGAMMA -T <span class="m">4</span> -s align_file.phy -n TEST
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li><code>-x</code>：bootstrap运行时设定随机数，用于结果重现</li>
-  <li><code>-p</code>：parsimony推断时设定随机数，用于结果重现</li>
-  <li><code>-#</code>：bootstrap次数。也可以设定为autoMRE，最大次数是1000。</li>
-  <li><code>-m</code>：设定使用的模型，GTRGAMMA为核苷酸序列适用模型</li>
-  <li><code>-T</code>：设定线程数，不要超过最大线程</li>
-  <li><code>-s</code>：输入文件，Phylip或者fasta文件</li>
-  <li><code>-n</code>：输入文件记号</li>
-</ul>
-
-<p><strong>快速运行2</strong>：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">raxmlHPC-PTHREADS-AVX -f a -x <span class="m">12345</span> -p <span class="m">12345</span> -# autoMRE -m GTRCAT -T <span class="m">4</span> -s align_file.phy -n TEST
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li><code>-f a</code>：选定算法，快速bootstrap</li>
-</ul>
-
-<h2 id="section-1">展示进化树</h2>
-
-<h3 id="itol">1. iTOL</h3>
-
-<p><strong>运行方式</strong>：<a href="http://itol.embl.de/">网页</a></p>
-
-<p><strong>心得</strong>：</p>
+<h2 id="section">1. 添加常用源</h2>
 
 <ul>
   <li>
-    <p>用户可以添加很多自定义的项目，丰富和完善自己的进化树，比如添加柱状图、蛋白结构域、heatmap、基因平行转移（horizontal gene transfer）等；</p>
+    <p>添加<a href="http://rpmfusion.org/Configuration">rpmfusion</a>的free和nonfree源。</p>
   </li>
   <li>
-    <p>如果输入NCBI taxonomy编号，能够自动转化成物种名称；支持鼠标点击交互式运行，非常方便。
-心得：可以在网站上建立自己的帐号，之后设定不同的project展示和存放自己的项目。尝试构建了2000条左右的序列，显示完全没有问题。</p>
+    <p>添加<a href="http://repo.fdzh.org/">FZUG</a>源。一个中文Fedora的源和社区，在Fedora下安装搜狗输入法、有道词典、百度云客户端等。</p>
   </li>
 </ul>
 
-<h3 id="section-2">更新记录</h3>
+<h2 id="section-1">2. 辅助安装工具</h2>
 
-<p>2014年5月1日</p>
+<ul>
+  <li>fed</li>
+</ul>
+
+<p><a href="http://folkswithhats.org/">fedy</a>是一个辅助在Fedora系统下，更容易安装Skypy、Chrome、Steam等的工具。</p>
+
 </div>
-
-
-      <footer>
-        <p class="meta text-muted">
-          
-  
-
-<span class="glyphicon glyphicon-user"></span> <span class="byline author vcard" itemprop="author" itemscope itemtype="http://schema.org/Person">Posted by <span class="fn" itemprop="name">Yulong Niu</span></span>
-
-          
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-05-02T05:13:59+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-          
-
-<span class="glyphicon glyphicon-tags"></span>&nbsp;
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/bioinfor/'>bioinfor</a>
-  
-</span>
-
-
-        </p>
-        
-          <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.bionutshell.org/blog/2014/05/02/phylo-tool-summary/" data-via="" data-counturl="http://yulongniu.bionutshell.org/blog/2014/05/02/phylo-tool-summary/" >Tweet</a>
   
   
+    <footer>
+      <a class="btn btn-default" href="/blog/2010/07/08/linux-software/">Read on &rarr;</a>
+    </footer>
   
-</div>
 
-        
-        
-          <ul class="meta text-muted pager">
-            
-            <li class="previous"><a href="/blog/2014/03/28/creat-r-package/" title="Previous Post: 创建R包的最简流程">&laquo; 创建R包的最简流程</a></li>
-            
-            
-            <li class="next"><a href="/blog/2014/06/25/parallel-package/" title="Next Post: R使用parallel包并行计算">R使用parallel包并行计算 &raquo;</a></li>
-            
-          </ul>
-        
-      </footer>
-    </article>
-    
-      <section>
-        <h2>Comments</h2>
-        <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-      </section>
-    
+
+        </article>
+      
+    </div>
+
+    <ul class="pager">
+      
+        <li class="previous disabled"><a href="#">&larr;&nbsp;Older</a></li>
+      
+      <li><a href="/blog/archives">Blog Archives</a></li>
+      
+        <li class="next"><a href="/posts/11">Newer&nbsp;&rarr;</a></li>
+      
+    </ul>
   </div>
 
   
-  <aside class="sidebar col-md-3">
-    
-      <section class="panel panel-default">
+    <aside class="sidebar col-md-3">
+      
+        <section class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Recent Posts</h3>
   </div>
@@ -438,8 +338,8 @@
 
 
 
-    
-  </aside>
+      
+    </aside>
   
 </div>
 
@@ -463,10 +363,7 @@
       var disqus_shortname = 'yulongniu';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://yulongniu.bionutshell.org/blog/2014/05/02/phylo-tool-summary/';
-        var disqus_url = 'http://yulongniu.bionutshell.org/blog/2014/05/02/phylo-tool-summary/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

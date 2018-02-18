@@ -184,6 +184,68 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2018-02-17T18:23:29+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2018/02/17/estimate-rna-seq/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2018/02/17/estimate-rna-seq/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2018/02/17/estimate-rna-seq/" itemprop="url">通过RNA-Seq评估基因表达量的模型</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="math/tex; mode=display">\newcommand{\tildel}{\widetilde{l_t}}</script>
+
+<script type="math/tex; mode=display">\newcommand{\P}{\mathrm{P}}</script>
+
+<script type="math/tex; mode=display">\DeclareMathOperator*{\argmax}{arg\,max}</script>
+
+<p>本文基于<a href="#Ref">参考资料1</a>，展示RNA-Seq在评估基因表达量模型的细节。</p>
+
+<h2 id="section">1. 符号表示</h2>
+
+<p>$K$个长度为$l_i$的转录序列$t_i$，构成转录本的集合$T=\{t_1, t_2, \dots, t_K\}$。单个转录组中，每个转录序列$t_i$有$c_i$个拷贝数，全部转录序列的总拷贝数为$M$。单个转录序列的相对丰度为$\rho_i=\frac{c_i}{\sum\limits_{t \in T}c_t} = \frac{c_i}{M}$，易得$\sum\limits_{i=1}^K \rho_i= 1$。</p>
+
+<p>单个转录组中，全部转录片段构成集合$F=\{f_1, f_2, \dots, f_N\}$，总转录片段数目为$N=|F|$。比对到的转录序列$t_i$上的转录片段，构成集合$F_t \in F$，对应的转录片段数目为$X_t=|F_t|$。
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2018/02/17/estimate-rna-seq/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2017-10-24T12:26:00+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2017/10/24/bray-curtis-distance/#disqus_thread" itemprop="discussionUrl"
@@ -388,53 +450,6 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2017-06-14T23:49:13+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2017/06/14/shadowsocks-setup/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2017/06/14/shadowsocks-setup/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2017/06/14/shadowsocks-setup/" itemprop="url">Shadowsocks设置推荐</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="shadowsocks">1. Shadowsocks客户端</h2>
-
-<p>Shadowsocks在主流平台上都有<a href="https://shadowsocks.org/en/download/clients.html">客户端</a>，下载直接使用即可。对于Linux平台，可能还需要在Chrome浏览器中安装<a href="https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif?hl=en">SwitchyOmega</a>插件。</p>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2017/06/14/shadowsocks-setup/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -458,6 +473,8 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
   
   <div id="recent_posts" class="list-group">
     
+    <a class="list-group-item " href="/blog/2018/02/17/estimate-rna-seq/">通过RNA-Seq评估基因表达量的模型</a>
+    
     <a class="list-group-item " href="/blog/2017/10/24/bray-curtis-distance/">Bray-Curtis Distance解释</a>
     
     <a class="list-group-item " href="/blog/2017/10/22/google-distance/">Normalized Google Distance解释</a>
@@ -465,8 +482,6 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
     <a class="list-group-item " href="/blog/2017/10/16/max-entropy/">最大熵模型</a>
     
     <a class="list-group-item " href="/blog/2017/10/15/naive-bayes-binary-multinomial/">朴素贝叶斯分类器应用于二元数据类型</a>
-    
-    <a class="list-group-item " href="/blog/2017/06/14/shadowsocks-setup/">Shadowsocks设置推荐</a>
     
   </div>
 </section>
@@ -502,7 +517,7 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
     
     
     <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
-        <span class="badge">20</span>
+        <span class="badge">21</span>
         bioinfor
       </a>
     
