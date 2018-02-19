@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bioinfor | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/bioinfor/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-02-18T22:28:17+08:00</updated>
+  <updated>2018-02-19T15:18:25+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -145,7 +145,7 @@ L &= \prod_{f \in F_t} \prod_{t \in T} \frac{\alpha_t}{\tildel} \\
 <script type="math/tex; mode=display">% &lt;![CDATA[
 \begin{align}
 \begin{split}
-\theta^{(n+1)} &= \argmax_\theta \left( 
+\alpha^{(n+1)} &= \argmax_\theta \left( 
 \sum_{f \in F} \sum_{k=1}^{K} \lambda_k \log\left(
 \alpha_k \frac{y_k}{\widetilde{l_k}}
 \right)
