@@ -150,7 +150,7 @@ $$
 $$
 \begin{align}
 \begin{split}
-\theta^{(n+1)} &= \argmax_\theta \left( 
+\alpha^{(n+1)} &= \argmax_\theta \left( 
 \sum_{f \in F} \sum_{k=1}^{K} \lambda_k \log\left(
 \alpha_k \frac{y_k}{\widetilde{l_k}}
 \right)
