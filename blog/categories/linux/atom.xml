@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-02-19T15:20:53+08:00</updated>
+  <updated>2018-04-02T17:41:22+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -381,6 +381,74 @@ squash sha1id-of-b1 b1
 
 <p>2016年10月21日</p>
 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Docker使用记录]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2016/03/11/docker-use/"/>
+    <updated>2016-03-11T16:53:51+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2016/03/11/docker-use</id>
+    <content type="html"><![CDATA[<p>关于Docker的安装和使用，有详细的<a href="https://docs.docker.com/">文档</a>可供参考。本文收集一些有趣和重要的记录。</p>
+
+<h2 id="docker">1. 普通用户权限执行Docker</h2>
+
+<p>创建<code>docker</code>用户组并添加普通用户。</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo groupadd docker
+</span><span class='line'><span class="nv">$ </span>sudo usermod -aG docker myUserName
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>注销后，再次登录即可。</p>
+
+<!--more-->
+
+<h2 id="docker-1">2. Docker命令集锦</h2>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 测试Docker</span>
+</span><span class='line'><span class="nv">$ </span>docker run hello-world&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;docker-2&quot;</span>&gt;Docker镜象列表&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>docker image ls&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;docker-3&quot;</span>&gt;Docker容器列表&lt;/h1&gt;
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>docker container ls
+</span><span class='line'><span class="nv">$ </span>docker container ls –all
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2 id="section">3. 运行镜象</h2>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 运行Docker</span>
+</span><span class='line'><span class="nv">$ </span>docker run -it –rm myDockerImage myCommand
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li>
+    <p><a href="https://docs.docker.com/">Docker官方文档</a></p>
+  </li>
+  <li>
+    <p><a href="https://www.gitbook.com/book/yeasy/docker_practice/details">Docker — 从入门到实践</a></p>
+  </li>
+</ul>
+
+<h3 id="section-1">更新记录</h3>
+
+<p>2018年4月1日</p>
 ]]></content>
   </entry>
   
@@ -876,44 +944,6 @@ squash sha1id-of-b1 b1
 <h3 id="section-11">更新记录</h3>
 
 <p>2015年7月29日</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SSH建立端口转发]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2015/05/31/ssh-tunnel/"/>
-    <updated>2015-05-31T21:14:02+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2015/05/31/ssh-tunnel</id>
-    <content type="html"><![CDATA[<p>SSH建立端口转发分为两步：</p>
-
-<h2 id="section">1. 连接远程主机</h2>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ssh -NT -D <span class="m">8080</span> usrname@host
-</span></code></pre></td></tr></table></div></figure></p>
-
-<!--more-->
-
-<p>其中，<code>-N</code>表示只连接远程主机，不打开远程shell；<code>-T</code>表示不分配TTY；<code>-D</code>表示某端口数据都通过SSH传向远程主机；<code>8080</code>可以设置为其他端口。</p>
-
-<h2 id="chrome">2. 添加Chrome浏览器支持</h2>
-
-<p>添加<a href="https://chrome.google.com/webstore/detail/proxy-switchysharp/dpplabbmogkhghncfbfdeeokoefdjegm?hl=en">Proxy SwitchySharp插件</a>，之后在SOCKS host栏目中填入地址<code>127.0.0.1</code>，端口<code>8080</code>并启用即可。</p>
-
-<h3 id="section-1">参考网址</h3>
-
-<ul>
-  <li>
-    <p><a href="http://www.pchou.info/linux/2015/11/01/ssh-tunnel.html">SSH隧道翻墙的原理和实现</a></p>
-  </li>
-  <li>
-    <p><a href="http://www.ruanyifeng.com/blog/2011/12/ssh_port_forwarding.html">SSH原理与运用（二）：远程操作与端口转发</a></p>
-  </li>
-</ul>
-
-<h3 id="section-2">更新记录</h3>
-
-<p>2017年5月31日</p>
 ]]></content>
   </entry>
   

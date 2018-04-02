@@ -184,6 +184,94 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2013-05-10T00:29:47+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2013/05/10/primary-statistic/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2013/05/10/primary-statistic/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2013/05/10/primary-statistic/" itemprop="url">统计学基本知识汇总</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="math/tex; mode=display">\newcommand{\P}{\mathrm{P}}</script>
+
+<h2 id="section">1. 完备事件</h2>
+
+<p>对于完备事件组$X = \{x_1, x_2, \dots, x_n\}$：</p>
+
+<script type="math/tex; mode=display">\begin{align}
+\begin{split}
+\P(x_1) + \P(x_2) + \dots + \P(x_n) = 1
+\end{split}
+\label{eq:1}
+\end{align}</script>
+
+<p>常用的技巧构造乘法系数，例如$\P(Y) = \sum\limits_{i=1}^{n}P(x_i|\theta)P(Y)$</p>
+
+<h2 id="section-1">2. 全概率公式</h2>
+
+<p>对于完备事件组$X = \{x_1, x_2, \dots, x_n\}$，事件$Y$的全概率公式：</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+\begin{split}
+\P(Y) &= \P(Y, x_1) + \P(Y, x_2) + \dots + \P(Y, x_n) \\
+&= \P(x_1)\P(Y|x_1) + \P(x_2)\P(Y|x_2) + \dots + \P(x_n)\P(Y|x_n)
+\end{split}
+\label{eq:2}
+\end{align} %]]></script>
+
+<p>使用概率密度函数表示为：</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+\begin{split}
+f(Y) &= \int_{-\infty}^{+\infty}f(Y, x) \mathrm{d}x \\
+&= \int_{-\infty}^{+\infty}f(Y|x)f(x) \mathrm{d}x
+\end{split}
+\label{eq:3}
+\end{align} %]]></script>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2013/05/10/primary-statistic/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2012-08-21T19:33:47+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2012/08/21/python-r-rpy2/#disqus_thread" itemprop="discussionUrl"
@@ -397,70 +485,6 @@
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2012-05-05T15:19:36+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2012/05/05/r-s4/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2012/05/05/r-s4/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2012/05/05/r-s4/" itemprop="url">R面向对象编程S4</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="s3">1. 一些S3的铺垫</h2>
-
-<p>在博文“<a href="http://yulongniu.bionutshell.org/blog/2010/09/04/linux-install-r/">Linux安装R语言包</a>”描述了如何查看一个函数的源代码，其中涉及了例如<code>methods()</code>函数，用来查看一个S3泛函（S3 generic）的方法。在<span style="color: blue">pryr</span>包中，提供了更加便捷的查看方法。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>pryr check objects and methods</span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class="R"><span class="line"><span class="kn">library</span><span class="p">(</span><span class="s">&#39;pryr&#39;</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">## object is base type, S3, S4 or RC</span>
-</span><span class="line">otype<span class="p">(</span>obj<span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">## function is genetic or method</span>
-</span><span class="line">ftype<span class="p">(</span>method<span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2012/05/05/r-s4/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -504,7 +528,7 @@
     
     
     <a class="list-group-item " href="/blog/categories/linux/index.html">
-        <span class="badge">9</span>
+        <span class="badge">10</span>
         linux
       </a>
     

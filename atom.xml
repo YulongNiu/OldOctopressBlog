@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-02-19T15:20:53+08:00</updated>
+  <updated>2018-04-02T17:41:22+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -1986,6 +1986,74 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[Docker使用记录]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2016/03/11/docker-use/"/>
+    <updated>2016-03-11T16:53:51+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2016/03/11/docker-use</id>
+    <content type="html"><![CDATA[<p>关于Docker的安装和使用，有详细的<a href="https://docs.docker.com/">文档</a>可供参考。本文收集一些有趣和重要的记录。</p>
+
+<h2 id="docker">1. 普通用户权限执行Docker</h2>
+
+<p>创建<code>docker</code>用户组并添加普通用户。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>sudo groupadd docker
+</span><span class="line"><span class="nv">$ </span>sudo usermod -aG docker myUserName
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>注销后，再次登录即可。</p>
+
+<!--more-->
+
+<h2 id="docker-1">2. Docker命令集锦</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 测试Docker</span>
+</span><span class="line"><span class="nv">$ </span>docker run hello-world
+</span><span class="line">
+</span><span class="line"><span class="c"># Docker镜象列表</span>
+</span><span class="line"><span class="nv">$ </span>docker image ls
+</span><span class="line">
+</span><span class="line"><span class="c"># Docker容器列表</span>
+</span><span class="line"><span class="nv">$ </span>docker container ls
+</span><span class="line"><span class="nv">$ </span>docker container ls --all
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section">3. 运行镜象</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 运行Docker</span>
+</span><span class="line"><span class="nv">$ </span>docker run -it --rm myDockerImage myCommand
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li>
+    <p><a href="https://docs.docker.com/">Docker官方文档</a></p>
+  </li>
+  <li>
+    <p><a href="https://www.gitbook.com/book/yeasy/docker_practice/details">Docker — 从入门到实践</a></p>
+  </li>
+</ul>
+
+<h3 id="section-1">更新记录</h3>
+
+<p>2018年4月1日</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Rcpp操作矩阵和向量集锦]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2016/01/07/rcpp-matrix/"/>
     <updated>2016-01-07T20:50:41+08:00</updated>
@@ -3145,82 +3213,6 @@ f(\sigma^2|X_i) &= \frac{\frac{1}{\sqrt{2\pi}} \frac{1}{\sigma} \mathrm{e}^{-\fr
 <h3 id="section-11">更新记录</h3>
 
 <p>2015年7月29日</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Python使用小技巧]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2015/07/28/python-tips/"/>
-    <updated>2015-07-28T14:37:38+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2015/07/28/python-tips</id>
-    <content type="html"><![CDATA[<p>收集了一些使用Python过程中的小技巧或者常见错误。</p>
-
-<h2 id="while--if--break">1. While–if–break</h2>
-
-<p>适用情况：<strong>当需要执行一个循环，但是不能事先判断何时终止。</strong> 可以在循环内部加入判断，符合要求时跳出。比如，使用程序在某个目录下新建一个文件夹，如果文件名已经存在，需要重新生成文件名；否则，创建文件夹。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>While&#8211;if&#8211;break </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">import</span> <span class="nn">random</span><span class="o">,</span> <span class="nn">os</span>
-</span><span class="line">
-</span><span class="line"><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-</span><span class="line">    <span class="n">letter</span> <span class="o">=</span> <span class="p">[</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">97</span><span class="p">,</span> <span class="mi">123</span><span class="p">)]</span>
-</span><span class="line">    <span class="n">folderName</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
-</span><span class="line">    <span class="n">fn</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folderName</span><span class="p">)</span>
-</span><span class="line">    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">True</span><span class="p">:</span>
-</span><span class="line">        <span class="c"># get an unique name </span>
-</span><span class="line">        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
-</span><span class="line">        <span class="k">break</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section">2. 链式比较操作</h2>
-
-<p>Python支持一个链式的比较操作。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>comparison chain </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">testNum</span> <span class="o">=</span> <span class="mi">10</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># 链式比较操作</span>
-</span><span class="line"><span class="c"># 区别if not和if a is not None</span>
-</span><span class="line"><span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">testNum</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">):</span>
-</span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="s">&#39;It passed!&#39;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<!--more-->
-
-<h3 id="section-1">参考网址</h3>
-
-<ul>
-  <li>
-    <p><a href="https://wiki.python.org/moin/FrontPage">Python Wiki</a></p>
-  </li>
-  <li>
-    <p><a href="http://blog.shenwei.me/python-note/#more-3951">Wei Shen’s Python note</a></p>
-  </li>
-  <li>
-    <p><a href="http://www.codefrom.com/c/214">十个我希望早点知道的python方法</a></p>
-  </li>
-</ul>
-
-<h3 id="section-2">更新记录</h3>
-
-<p>2015年7月27日</p>
-
 ]]></content>
   </entry>
   

@@ -184,6 +184,66 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-03-18T03:37:45+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2014/03/18/circos-notes/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2014/03/18/circos-notes/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2014/03/18/circos-notes/" itemprop="url">Circos Notes</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><p>Mapping data onto a Circos figure requires that you identify what patterns in your data are (a) likely to be important and (b) likely to be present, and create a figure that exposes such patterns. Remember, if the pattern exists, you can’t afford to miss it. If it doesn’t exist, you can’t afford to be fooled into thinking that it’s there, or left wondering whether it’s occluded by other data.</p>
+
+<h2 id="run-circos">1. Run circos</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line">bin/circos
+</span><span class="line">-png
+</span><span class="line">-svg
+</span><span class="line">-conf etc/circos.conf
+</span><span class="line">-outputdir /path/to/your/output/directory
+</span><span class="line">-outputfile yourimage.png
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2014/03/18/circos-notes/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2013-11-10T14:21:16+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2013/11/10/mutual-information/#disqus_thread" itemprop="discussionUrl"
@@ -451,94 +511,6 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2013-05-10T00:29:47+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2013/05/10/primary-statistic/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2013/05/10/primary-statistic/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2013/05/10/primary-statistic/" itemprop="url">统计学基本知识汇总</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-TeX: { equationNumbers: { autoNumber: "AMS" } }
-});
-</script>
-
-<script type="math/tex; mode=display">\newcommand{\P}{\mathrm{P}}</script>
-
-<h2 id="section">1. 完备事件</h2>
-
-<p>对于完备事件组$X = \{x_1, x_2, \dots, x_n\}$：</p>
-
-<script type="math/tex; mode=display">\begin{align}
-\begin{split}
-\P(x_1) + \P(x_2) + \dots + \P(x_n) = 1
-\end{split}
-\label{eq:1}
-\end{align}</script>
-
-<p>常用的技巧构造乘法系数，例如$\P(Y) = \sum\limits_{i=1}^{n}P(x_i|\theta)P(Y)$</p>
-
-<h2 id="section-1">2. 全概率公式</h2>
-
-<p>对于完备事件组$X = \{x_1, x_2, \dots, x_n\}$，事件$Y$的全概率公式：</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-\begin{split}
-\P(Y) &= \P(Y, x_1) + \P(Y, x_2) + \dots + \P(Y, x_n) \\
-&= \P(x_1)\P(Y|x_1) + \P(x_2)\P(Y|x_2) + \dots + \P(x_n)\P(Y|x_n)
-\end{split}
-\label{eq:2}
-\end{align} %]]></script>
-
-<p>使用概率密度函数表示为：</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-\begin{split}
-f(Y) &= \int_{-\infty}^{+\infty}f(Y, x) \mathrm{d}x \\
-&= \int_{-\infty}^{+\infty}f(Y|x)f(x) \mathrm{d}x
-\end{split}
-\label{eq:3}
-\end{align} %]]></script>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2013/05/10/primary-statistic/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -582,7 +554,7 @@ f(Y) &= \int_{-\infty}^{+\infty}f(Y, x) \mathrm{d}x \\
     
     
     <a class="list-group-item " href="/blog/categories/linux/index.html">
-        <span class="badge">9</span>
+        <span class="badge">10</span>
         linux
       </a>
     
