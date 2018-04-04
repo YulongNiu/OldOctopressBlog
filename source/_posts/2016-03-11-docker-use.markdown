@@ -33,13 +33,24 @@ $ docker image ls
 # Docker容器列表
 $ docker container ls
 $ docker container ls --all
+
+# 列出容器
+$ docker ps
+$ docker ps -al
 {% endcodeblock %}
 
 ## 3. 运行镜象 ##
 
 {% codeblock lang:bash %}
-# 运行Docker
 $ docker run -it --rm myDockerImage myCommand
+{% endcodeblock %}
+
+## 4. 挂载卷 ##
+
+挂载文件目录至容器，可以挂载多个。
+
+{% codeblock lang:bash %}
+$ docker run -it --rm -v /localpath/data:/data -v /localpath/file:/file myDockerImage myCommand
 {% endcodeblock %}
 
 ### <a id="Ref">参考网址</a> ###
@@ -50,4 +61,4 @@ $ docker run -it --rm myDockerImage myCommand
 
 ### 更新记录 ###
 
-2018年4月1日
+2018年4月4日
