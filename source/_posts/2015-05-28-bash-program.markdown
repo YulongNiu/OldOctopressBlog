@@ -66,11 +66,11 @@ printf "hello\n" > testfile
 printf "world\n" >> testfile
 {% endcodeblock %} 
 
+## 6. 传入sudo密码 ##
 
-
-
-
-
+{% codeblock lang:bash append %}
+echo "myPassword" | sudo -S myCommond
+{% endcodeblock %} 
 
 
 ### 参考网址 ###
@@ -79,9 +79,6 @@ printf "world\n" >> testfile
 
 * [How to set a BASH variable equal to the output from a command?](http://stackoverflow.com/questions/4651437/how-to-set-a-bash-variable-equal-to-the-output-from-a-command) 
 
-
-
-
 ### 更新记录 ###
 
-2016年9月1日
+2018年4月7日
