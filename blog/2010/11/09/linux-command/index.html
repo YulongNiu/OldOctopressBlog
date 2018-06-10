@@ -673,7 +673,7 @@
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">UUID</span><span class="o">=</span>12D345251F34 /media/D ntfs defaults <span class="m">0</span> 0
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h2 id="yum">19. yum服务相关</h2>
+<h2 id="dnf">19. dnf服务相关</h2>
 
 <p>以下命令都可以配合<code class="language-bash">grep</code>使用</p>
 
@@ -707,34 +707,34 @@
 <span class="line-number">28</span>
 <span class="line-number">29</span>
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 安装最快源插件</span>
-</span><span class="line"><span class="c"># yum install yum-plugin-fastestmirror</span>
+</span><span class="line"><span class="c"># dnf install dnf-plugin-fastestmirror</span>
 </span><span class="line">
 </span><span class="line"><span class="c"># 安装并行下载工具</span>
-</span><span class="line"><span class="c"># yum install yum-axelget</span>
+</span><span class="line"><span class="c"># dnf install dnf-axelget</span>
 </span><span class="line">
-</span><span class="line"><span class="c"># 终止yum安装</span>
+</span><span class="line"><span class="c"># 终止dnf安装</span>
 </span><span class="line"><span class="c"># rm -f /var/run/yum.pid</span>
 </span><span class="line">
 </span><span class="line"><span class="c"># 查询包</span>
-</span><span class="line"><span class="c"># yum search pkg</span>
+</span><span class="line"><span class="c"># dnf search pkg</span>
 </span><span class="line">
 </span><span class="line"><span class="c"># 重新安装包</span>
-</span><span class="line"><span class="c"># yum reinstall pkg</span>
+</span><span class="line"><span class="c"># dnf reinstall pkg</span>
 </span><span class="line">
 </span><span class="line"><span class="c"># 升级包</span>
-</span><span class="line"><span class="c"># yum update pkg</span>
+</span><span class="line"><span class="c"># dnf update pkg</span>
 </span><span class="line">
 </span><span class="line"><span class="c"># 卸载包</span>
-</span><span class="line"><span class="c"># yum remove pkg</span>
+</span><span class="line"><span class="c"># dnf remove pkg</span>
 </span><span class="line">
 </span><span class="line"><span class="c"># 查询已安装包信息</span>
-</span><span class="line"><span class="c"># yum info pkg</span>
+</span><span class="line"><span class="c"># dnf info pkg</span>
 </span><span class="line">
 </span><span class="line"><span class="c"># 查看仓库包列表</span>
-</span><span class="line"><span class="c"># yum list pkg*</span>
+</span><span class="line"><span class="c"># dnf list pkg*</span>
 </span><span class="line">
 </span><span class="line"><span class="c"># 查看已安装的包</span>
-</span><span class="line"><span class="c"># yum list installed</span>
+</span><span class="line"><span class="c"># dnf list installed</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h2 id="section-13">20. 修改配置文件</h2>
@@ -820,7 +820,7 @@
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># yum install apt</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># dnf install apt</span>
 </span><span class="line"><span class="c"># apt-get update</span>
 </span><span class="line"><span class="c"># apt-get pkg</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
@@ -941,7 +941,7 @@
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 安装lm_sensors工具</span>
-</span><span class="line"><span class="c"># yum install lm_sensors</span>
+</span><span class="line"><span class="c"># dnf install lm_sensors</span>
 </span><span class="line"><span class="nv">$ </span>sensors
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
