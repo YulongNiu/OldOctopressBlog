@@ -349,40 +349,40 @@ CentOS需要手动挂在NTFS分区，下载并安装[NTFS-3G](http://www.tuxera.
 UUID=12D345251F34 /media/D ntfs defaults 0 0
 {% endcodeblock %}
 
-## 19. yum服务相关 ##
+## 19. dnf服务相关 ##
 
 以下命令都可以配合`grep`{:.language-bash}使用
 
 {% codeblock lang:bash %}
 # 安装最快源插件
-# yum install yum-plugin-fastestmirror
+# dnf install dnf-plugin-fastestmirror
 
 # 安装并行下载工具
-# yum install yum-axelget
+# dnf install dnf-axelget
 
-# 终止yum安装
-# rm -f /var/run/yum.pid
+# 终止dnf安装
+# rm -f /var/run/dnf.pid
 
 # 查询包
-# yum search pkg
+# dnf search pkg
 
 # 重新安装包
-# yum reinstall pkg
+# dnf reinstall pkg
 
 # 升级包
-# yum update pkg
+# dnf update pkg
 
 # 卸载包
-# yum remove pkg
+# dnf remove pkg
 
 # 查询已安装包信息
-# yum info pkg
+# dnf info pkg
 
 # 查看仓库包列表
-# yum list pkg*
+# dnf list pkg*
 
 # 查看已安装的包
-# yum list installed
+# dnf list installed
 {% endcodeblock %}
 
 ## 20. 修改配置文件 ##
@@ -436,7 +436,7 @@ $ alien -d filename.rpm
 * 第二种方法是直接使用`apt`{:.language-bash}，非常方便，配置方法如下
 
 {% codeblock lang:bash %}
-# yum install apt
+# dnf install apt
 # apt-get update
 # apt-get pkg
 {% endcodeblock %}
@@ -525,7 +525,7 @@ $ nproc
 
 {% codeblock lang:bash %}
 # 安装lm_sensors工具
-# yum install lm_sensors
+# dnf install lm_sensors
 $ sensors
 {% endcodeblock %}
 
