@@ -361,7 +361,7 @@ UUID=12D345251F34 /media/D ntfs defaults 0 0
 # dnf install dnf-axelget
 
 # 终止dnf安装
-# rm -f /var/run/dnf.pid
+# rm -f /var/run/yum.pid
 
 # 查询包
 # dnf search pkg
