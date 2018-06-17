@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-06-10T19:12:32+08:00</updated>
+  <updated>2018-06-17T20:35:55+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -736,7 +736,23 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
 
 <h2 id="section-4">5. 全局配置</h2>
 
-<p>配合privoxy完成全局应用，参考<a href="https://www.zfl9.com/ss-local.html">具体设置步骤</a>。</p>
+<p>使用proxychains全局调用Shadowsocks。</p>
+
+<p>首先，安装和配置proxychains：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># dnf install -y proxychains-ng</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># echo &#39;socks5    127.0.0.1    1080&#39; &gt;&gt; /etc/proxychains.conf</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>之后，打开Shadowsocks后，在需要使用的命令行前加入<code>proxychains4</code>，例如：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>proxychains4 git push origin master
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="section-5">参考资料</h3>
 
