@@ -68,7 +68,21 @@ Shadowsocks在主流平台上都有[客户端](https://shadowsocks.org/en/downlo
 
 ## 5. 全局配置 ##
 
-配合privoxy完成全局应用，参考[具体设置步骤](https://www.zfl9.com/ss-local.html)。
+使用proxychains全局调用Shadowsocks。
+
+首先，安装和配置proxychains：
+
+{% codeblock lang:bash %}
+# dnf install -y proxychains-ng
+
+# echo 'socks5    127.0.0.1    1080' >> /etc/proxychains.conf
+{% endcodeblock %}
+
+之后，打开Shadowsocks后，在需要使用的命令行前加入`proxychains4`，例如：
+
+{% codeblock lang:bash %}
+$ proxychains4 git push origin master
+{% endcodeblock %}
 
 ### 参考资料 ###
 
