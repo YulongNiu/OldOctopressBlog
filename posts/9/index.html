@@ -184,6 +184,67 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-05-02T05:13:59+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2014/05/02/phylo-tool-summary/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2014/05/02/phylo-tool-summary/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2014/05/02/phylo-tool-summary/" itemprop="url">构建和展示进化树软件使用心得</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="section">构建进化树</h2>
+
+<h3 id="phyml">1. PhyML</h3>
+
+<p><strong>构建进化树方法</strong>：Maximum Likelihood</p>
+
+<p><strong>评估</strong>：选择bootstrap或者Likelihood-ratio test</p>
+
+<p><strong>运行方式</strong>：所有平台和<a href="http://atgc.lirmm.fr/phyml/">网页</a></p>
+
+<p><strong>心得</strong>：理论上支持4000条序列，小于2000000个字符。但是，对于个人电脑，通常100-200条序列比较合适。命令行运行时，可以选择非常简介的默认模式运行。在默认模式下，bootstrap需要手动开启。安装和使用非常方便，直接下载后可以直接使用。同时，bootstrap可以通过MPI分布计算，但是需要从源代码安装。</p>
+
+<p><strong>快速运行</strong>：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line">phyml -i align_file.phy --no_memory_check
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2014/05/02/phylo-tool-summary/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-03-28T02:53:05+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2014/03/28/creat-r-package/#disqus_thread" itemprop="discussionUrl"
@@ -429,63 +490,6 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2013-07-13T19:23:22+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2013/07/13/em/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2013/07/13/em/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2013/07/13/em/" itemprop="url">探索EM算法</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-TeX: { equationNumbers: { autoNumber: "AMS" } }
-});
-</script>
-
-<script type="math/tex; mode=display">\newcommand{\P}{\mathrm{P}}</script>
-
-<script type="math/tex; mode=display">\DeclareMathOperator*{\argmax}{arg\,max}</script>
-
-<h2 id="em">EM算法的推出</h2>
-
-<p>考虑观测数据$Y=\{y_1, y_2, \dots, y_m\}$，其中不可观测数据为$Z=\{z_1, z_2, \dots, z_k\}$，需要估计的参数为$\theta=\{\theta_1, \theta_2, \dots, \theta_t\}$。$Z$可以是离散或连续型随机变量，以下过程中假设$Z$为离散型（$Z$为连续型，则全概率公式由求和改为积分）。则观测数据的对数似然函数为：</p>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2013/07/13/em/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -547,7 +551,7 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
     
     
     <a class="list-group-item " href="/blog/categories/ppr/index.html">
-        <span class="badge">5</span>
+        <span class="badge">6</span>
         ppr
       </a>
     

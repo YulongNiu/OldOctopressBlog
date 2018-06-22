@@ -184,6 +184,63 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2013-07-13T19:23:22+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2013/07/13/em/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2013/07/13/em/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2013/07/13/em/" itemprop="url">探索EM算法</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="math/tex; mode=display">\newcommand{\P}{\mathrm{P}}</script>
+
+<script type="math/tex; mode=display">\DeclareMathOperator*{\argmax}{arg\,max}</script>
+
+<h2 id="em">EM算法的推出</h2>
+
+<p>考虑观测数据$Y=\{y_1, y_2, \dots, y_m\}$，其中不可观测数据为$Z=\{z_1, z_2, \dots, z_k\}$，需要估计的参数为$\theta=\{\theta_1, \theta_2, \dots, \theta_t\}$。$Z$可以是离散或连续型随机变量，以下过程中假设$Z$为离散型（$Z$为连续型，则全概率公式由求和改为积分）。则观测数据的对数似然函数为：</p>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2013/07/13/em/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2013-06-19T04:42:10+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2013/06/19/bioinfor-tools/#disqus_thread" itemprop="discussionUrl"
@@ -448,74 +505,6 @@ f(Y) &= \int_{-\infty}^{+\infty}f(Y, x) \mathrm{d}x \\
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2012-06-25T08:01:36+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2012/06/25/emacs-extend-skills/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2012/06/25/emacs-extend-skills/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2012/06/25/emacs-extend-skills/" itemprop="url">Emacs高级使用技巧</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="emacs">1. Emacs配置文件位置</h2>
-
-<p>在Fedora系统下，Emacs的配置文件位置是<code class="language-bash">~/.emacs</code>。在Emacs配置文件中添加内容后，使用<code class="language-emacs-lisp">M-x eval-buffer</code>，使当前配置生效。编译代码以加快加载速度，<code class="language-eamcs-lisp">M-x byte-compile-file</code>。</p>
-
-<p>使用Eamcs解释器<code class="language-emacs-lisp">M-x ielm</code>。</p>
-
-<h2 id="emacs-1">2. Emacs自带的包管理系统</h2>
-
-<p>在Emacs24之后，自带包管理系统，使用<code class="language-bash">M-x eval-buffer</code>进入。可以添加<a href="http://melpa.org/">MELPA源</a>、<a href="https://marmalade-repo.org/">marmalade源</a>、<a href="http://elpa.gnu.org/packages/">GNU源</a>。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Add repositories of Emacs packages</span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class="emacs-lisp"><span class="line"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;package</span><span class="p">)</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
-</span><span class="line">	     <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;melpa&quot;</span> <span class="o">.</span> <span class="s">&quot;http://melpa.milkbox.net/packages/&quot;</span><span class="p">))</span>
-</span><span class="line"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
-</span><span class="line">	     <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;gnu&quot;</span> <span class="o">.</span> <span class="s">&quot;http://elpa.gnu.org/packages/&quot;</span><span class="p">))</span>
-</span><span class="line"><span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2012/06/25/emacs-extend-skills/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -577,7 +566,7 @@ f(Y) &= \int_{-\infty}^{+\infty}f(Y, x) \mathrm{d}x \\
     
     
     <a class="list-group-item " href="/blog/categories/ppr/index.html">
-        <span class="badge">5</span>
+        <span class="badge">6</span>
         ppr
       </a>
     

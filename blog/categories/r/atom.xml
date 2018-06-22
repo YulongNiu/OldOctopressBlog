@@ -4,7 +4,7 @@
   <title><![CDATA[Category: R | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/r/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-06-17T20:35:55+08:00</updated>
+  <updated>2018-06-23T01:24:11+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -90,6 +90,8 @@
 <ul>
   <li>可以使用逻辑下标（<code>LogicalVector</code>）对向量和列表<a href="http://gallery.rcpp.org/articles/subsetting/">取值</a>。</li>
 </ul>
+
+<!--more-->
 
 <h2 id="span-stylecolor-bluercpparmadillospan">2. <span style="color: blue">RcppArmadillo</span></h2>
 

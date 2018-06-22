@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ppr | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/ppr/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-06-17T20:35:55+08:00</updated>
+  <updated>2018-06-23T01:24:11+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -85,6 +85,69 @@
 <h3 id="section-3">更新记录</h3>
 
 <p>2015年7月27日</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Python打包和上传PyPI]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2015/05/23/python-pkg/"/>
+    <updated>2015-05-23T01:03:26+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2015/05/23/python-pkg</id>
+    <content type="html"><![CDATA[<p>一个简单的Python包创建和上传PyPI流程。</p>
+
+<h2 id="section">1. 打包</h2>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">## 安装相关工具</span>
+</span><span class='line'>pip install –upgrade setuptools wheel twine
+</span></code></pre></td></tr></table></div></figure></p>
+
+<!--more-->
+
+<p>当Python包代码完成后，在根目录下创建<code>setup.py</code>文件，具体参考<a href="https://github.com/pypa/sampleproject/blob/master/setup.py">sampleproject</a>。</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">## 进入Python包目录</span>
+</span><span class='line'><span class="c">## 测试</span>
+</span><span class='line'>python setup.py <span class="nb">test</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h2 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-1&quot;</span>&gt;打包&lt;/h2&gt;
+</span><span class='line'>&lt;p&gt;python setup.py sdist bdist_wheel
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2 id="pypi">2. 上传PyPI</h2>
+
+<p><a href="https://pypi.org/">PyPI</a>注册帐号。</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">## 进入Python包目录</span>
+</span><span class='line'><span class="c">## 上传</span>
+</span><span class='line'>twine upload dist/*
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li>
+    <p><a href="https://packaging.python.org/tutorials/packaging-projects/">Packaging Python Projects</a></p>
+  </li>
+  <li>
+    <p><a href="https://pypi.org/project/twine/">twine package</a></p>
+  </li>
+</ul>
+
+<h3 id="section-2">更新记录</h3>
+
+<p>2018年6月23日</p>
 
 ]]></content>
   </entry>
@@ -888,684 +951,6 @@ code snippet
 <h3 id="section-16">更新记录</h3>
 
 <p>2015年12月19日</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Python中使用rpy2模块调用R]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2012/08/21/python-r-rpy2/"/>
-    <updated>2012-08-21T19:33:47+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2012/08/21/python-r-rpy2</id>
-    <content type="html"><![CDATA[<p>需要在python中调用R，实在是一种无奈的选择。如果能在一门语言中独立完成课题，是一个比较理想的做法。但是，这种想法也不太现实，毕竟每一种语言都有自己的长处。如果能取长补短，综合使用各种语言，也能起到不错的效果。</p>
-
-<p>现在遇到的问题是，如何在python中调用R？这其中包括了如何调用R的对象（函数和包），R和python的对象如何互相转换，以及如何调用R的脚本（外界参数的输入）。python提供了一个模块<a href="http://rpy.sourceforge.net/">rpy2</a> ，可以较好地完成这项工作。rpy2只是提供了一个Python调用R的接口，因此也直接继承了所有R的缺点。一个有意思的项目是<a href="http://www.renjin.org/">renjin</a>，一个基于JVM的R语言解释器。</p>
-
-<p>本文着重记录一些使用过程中的注意事项和小技巧，如有不一致则以<a href="http://rpy.sourceforge.net/rpy2/doc-2.5/html/">官方文档</a>为准。</p>
-
-<h2 id="section">1. 安装</h2>
-
-<p>rpy2作为Python的一个模块，其<a href="http://rpy.sourceforge.net/rpy2/doc-2.5/html/overview.html#installation">安装</a>非常方便。需要做的准备工作是在本地安装好R。</p>
-
-<p><figure class='code'><figcaption><span>Install rpy2 from pip </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># pip install rpy2</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<!--more-->
-
-<h2 id="pythonr">2. python调用R对象</h2>
-
-<h3 id="rpy2robjectslanguage-python">2.1 使用<code class="language-python">rpy2.robjects</code></h3>
-
-<p>在rpy2中调用R对象，实际上是开启了一个R的交互进程。主要思路是将R的代码写入一个字符串内，之后执行即可。</p>
-
-<p>对于R代码，将一段R代码写成一行，尽管看起来很丑陋而且不推荐，一样可以执行。但是，反过来，对于Python代码则没有这么简单。因为，Python代码是靠缩进来划分代码的区域，假若一段代码中有两个循环嵌套，如果将代码写成一行，执行起来就要麻烦的多（很可能要依赖空格的多少进行解释）。</p>
-
-<p>调用方法：</p>
-
-<p><figure class='code'><figcaption><span>Call R objects </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">from</span> <span class="nn">rpy2.robjects</span> <span class="kn">import</span> <span class="n">r</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p>有三种方式可以选择：</p>
-
-<ol>
-  <li>
-    <p>使用<code class="language-python">r.obj</code>，比如 <code class="language-python">r.c(1, 3)</code>。</p>
-
-    <blockquote>
-      <p>这种方法虽然方便，但是对于名称中有“点号”的函数会出问题，比如 <code class="language-r">data.frame</code>或者 <code class="language-r">read.csv</code>等。</p>
-    </blockquote>
-  </li>
-  <li>
-    <p>使用<code class="language-python">r['obj']</code>，比如 <code class="language-python">r['c'](1, 3)</code>。</p>
-
-    <blockquote>
-      <ul>
-        <li>
-          <p>这种方法几乎可以调用任何R的函数，而且写法与原始调用很相似，无非是<code class="language-python">r['func'](value1, para2 = value2)</code>。</p>
-        </li>
-        <li>
-          <p>如果一个R函数中的变量名是有“点号”的，不能直接赋值，需要构建一个字典形式，比如 <code class="language-python">r['func'](value1, para2 = value, **{para.3: value3})</code>。</p>
-        </li>
-        <li>
-          <p>如果一个</p>
-        </li>
-      </ul>
-    </blockquote>
-  </li>
-  <li>
-    <p>使用<code class="language-python">r('obj')</code>，比如 <code class="language-python">r('c(1, 3)')</code>。</p>
-
-    <blockquote>
-      <p>这种方法从某种程度上讲是万能的，因为总是可以将任意长度的R代码写成一个Python字符串，之后通过<code class="language-python">r('Rcode')</code>调用执行。</p>
-    </blockquote>
-  </li>
-</ol>
-
-<p><figure class='code'><figcaption><span>Example of Calling R objects from rpy2.objects </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># import r</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="kn">from</span> <span class="nn">rpy2.robjects</span> <span class="kn">import</span> <span class="n">r</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span> <span class="nb">id</span><span class="o">=</span><span class="s">&quot;creat-an-r-function&quot;</span><span class="o">&gt;</span><span class="n">creat</span> <span class="n">an</span> <span class="n">R</span> <span class="n">function</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>      <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">r</span><span class="p">(</span><span class="err">‘</span><span class="s">&#39;’f &amp;lt;- function(r){pi * r}’’’)</span>
-</span><span class='line'><span class="n">r</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-</span><span class='line'><span class="p">[</span><span class="mf">9.424778</span><span class="p">]</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span> <span class="nb">id</span><span class="o">=</span><span class="s">&quot;internal-function-in-r&quot;</span><span class="o">&gt;</span><span class="n">internal</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">R</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>      <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">r</span><span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="o">&gt;</span><span class="err">‘</span><span class="n">ls</span><span class="err">’</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span> <span class="nb">id</span><span class="o">=</span><span class="s">&quot;two-ways-of-getting-paste-function-in-r&quot;</span><span class="o">&gt;</span><span class="n">two</span> <span class="n">ways</span> <span class="n">of</span> <span class="n">getting</span> <span class="err">‘</span><span class="n">paste</span><span class="err">’</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">R</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c"># first: direct use R function</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s">&quot;l, collapse =&quot;</span> <span class="n">title</span><span class="o">=</span><span class="s">&quot;-&quot;</span><span class="o">&gt;</span><span class="err">‘</span><span class="n">paste</span><span class="err">’</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span><span class="p">)</span>
-</span><span class='line'><span class="c"># second: eavl R codes</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">coder</span> <span class="o">=</span> <span class="err">‘</span><span class="n">paste</span><span class="p">(</span><span class="o">%</span><span class="n">s</span><span class="p">,</span> <span class="n">collapse</span> <span class="o">=</span> <span class="err">“</span><span class="o">-</span><span class="err">“</span><span class="p">)</span><span class="err">’</span> <span class="o">%</span> <span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">r_repr</span><span class="p">())</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">(</span><span class="n">coder</span><span class="p">))</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span> <span class="nb">id</span><span class="o">=</span><span class="s">&quot;call-python-function&quot;</span><span class="o">&gt;</span><span class="n">call</span> <span class="n">Python</span> <span class="n">function</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>      <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">l</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="err">‘</span><span class="n">letters</span><span class="err">’</span><span class="p">]</span>
-</span><span class='line'><span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
-</span><span class='line'><span class="mi">26</span>
-</span><span class='line'><span class="nb">dir</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></p>
-    </blockquote>
-  </blockquote>
-</blockquote>
-
-<h3 id="r">2.2 创建R对象和提取对象的数值</h3>
-
-<p>创建向量，可以使用<code class="language-python">rpy2.robjects.vectors</code>中提供的一系列函数，将一个Python的元组、列表或者字符串转换为R的向量。其中包括 <code class="language-python">StrVector()</code>、<code class="language-python">IntVector()</code>、<code class="language-python">FloatVector()</code>、<code class="language-python">FactorVector()</code>和<code>BoolVector()</code>，分别提供了转换字符、整数、浮点、因子和布尔向量。</p>
-
-<p>创建列表，可以使用<code class="language-python">ListVector()</code>将Python的字典转换为R的列表。</p>
-
-<p>创建矩阵和数据框（data.frame）建议直接使用R函数<code class="language-r">matrix()</code>和<code class="language-r">data.frame()</code>。尽管如此，rpy2提供了 <code class="language-python">DataFram()</code>将Python的字典转换成R的数据框（列顺序可能与输入不一致，Python字典特性造成），<span style="color: blue">注意</span>会把字符串自动转换成因子。</p>
-
-<p>以上这些构建的R对象，有一系列的属性和方法，比如<code class="language-python">names</code>，可以访问和赋值。</p>
-
-<p><figure class='code'><figcaption><span>Build R objects </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-</pre></td><td class='code'><pre><code class='Python'><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="kn">from</span> <span class="nn">rpy2.robjects</span> <span class="kn">import</span> <span class="n">r</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="kn">from</span> <span class="nn">rpy2.robjects.vectors</span> <span class="kn">import</span> <span class="n">StrVector</span><span class="p">,</span> <span class="n">IntVector</span><span class="p">,</span> <span class="n">ListVector</span><span class="p">,</span> <span class="n">DataFrame</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span> <span class="nb">id</span><span class="o">=</span><span class="s">&quot;build-r-vector&quot;</span><span class="o">&gt;</span><span class="n">build</span> <span class="n">R</span> <span class="n">vector</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>      <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">testVec</span> <span class="o">=</span> <span class="n">IntVector</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
-</span><span class='line'><span class="n">testVec</span> <span class="o">=</span> <span class="n">StrVector</span><span class="p">((</span><span class="err">‘</span><span class="n">a</span><span class="err">’</span><span class="p">,</span> <span class="err">‘</span><span class="n">nice</span><span class="err">’</span><span class="p">,</span> <span class="err">‘</span><span class="n">day</span><span class="err">’</span><span class="p">))</span>
-</span><span class='line'><span class="n">testVec</span> <span class="o">=</span> <span class="n">StrVector</span><span class="p">(</span><span class="err">‘</span><span class="n">abc</span><span class="err">’</span><span class="p">)</span>
-</span><span class='line'><span class="n">testVec</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="n">StrVector</span><span class="p">((</span><span class="err">‘</span><span class="n">name1</span><span class="err">’</span><span class="p">,</span> <span class="err">‘</span><span class="n">name2</span><span class="err">’</span><span class="p">,</span> <span class="err">‘</span><span class="n">name3</span><span class="err">’</span><span class="p">))</span>
-</span><span class='line'><span class="nb">dir</span><span class="p">(</span><span class="n">testVec</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span> <span class="nb">id</span><span class="o">=</span><span class="s">&quot;build-list-with-names&quot;</span><span class="o">&gt;</span><span class="n">build</span> <span class="n">List</span> <span class="k">with</span> <span class="n">names</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>      <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">testList</span> <span class="o">=</span> <span class="n">ListVector</span><span class="p">({</span><span class="err">‘</span><span class="n">a</span><span class="err">’</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="err">‘</span><span class="n">nice</span><span class="err">’</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="err">‘</span><span class="n">day</span><span class="err">’</span><span class="p">:</span> <span class="mi">3</span><span class="p">})</span>
-</span><span class='line'><span class="n">testList</span><span class="o">.</span><span class="n">names</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span> <span class="nb">id</span><span class="o">=</span><span class="s">&quot;build-matrix&quot;</span><span class="o">&gt;</span><span class="n">build</span> <span class="n">matrix</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>      <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">m</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">IntVector</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">]),</span> <span class="n">nrow</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
-</span><span class='line'><span class="n">m</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">nrow</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span> <span class="nb">id</span><span class="o">=</span><span class="s">&quot;build-dataframe&quot;</span><span class="o">&gt;</span><span class="n">build</span> <span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c"># use R function, string vector are automatically transformed as factors</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">dataf</span> <span class="o">=</span> <span class="n">r</span><span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s">&quot;S = StrVector([&#39;x&#39;,&quot;</span> <span class="n">title</span><span class="o">=</span><span class="s">&quot;y&#39;, &#39;z&#39;]), F = StrVector(&#39;acb&quot;</span><span class="o">&gt;</span><span class="err">‘</span><span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="err">’</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span><span class="p">)</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">dataf</span>
-</span><span class='line'><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">DataFrame</span> <span class="o">-</span> <span class="n">Python</span><span class="p">:</span><span class="mh">0x7f072235f7e8</span> <span class="o">/</span> <span class="n">R</span><span class="p">:</span><span class="mh">0x19fb250</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
-</span><span class='line'><span class="p">[</span><span class="n">FactorVector</span><span class="p">,</span> <span class="n">FactorVector</span><span class="p">]</span>
-</span><span class='line'>  <span class="n">S</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="k">class</span> <span class="err">‘</span><span class="nc">rpy2</span><span class="o">.</span><span class="n">robjects</span><span class="o">.</span><span class="n">vectors</span><span class="o">.</span><span class="n">FactorVector</span><span class="err">’</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
-</span><span class='line'>  <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">FactorVector</span> <span class="o">-</span> <span class="n">Python</span><span class="p">:</span><span class="mh">0x7f072235f518</span> <span class="o">/</span> <span class="n">R</span><span class="p">:</span><span class="mh">0x1978fa8</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
-</span><span class='line'><span class="p">[</span>       <span class="mi">1</span><span class="p">,</span>        <span class="mi">2</span><span class="p">,</span>        <span class="mi">3</span><span class="p">]</span>
-</span><span class='line'>  <span class="n">F</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="k">class</span> <span class="err">‘</span><span class="nc">rpy2</span><span class="o">.</span><span class="n">robjects</span><span class="o">.</span><span class="n">vectors</span><span class="o">.</span><span class="n">FactorVector</span><span class="err">’</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
-</span><span class='line'>  <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">FactorVector</span> <span class="o">-</span> <span class="n">Python</span><span class="p">:</span><span class="mh">0x7f072235f440</span> <span class="o">/</span> <span class="n">R</span><span class="p">:</span><span class="mh">0x18e9c20</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
-</span><span class='line'><span class="p">[</span>       <span class="mi">1</span><span class="p">,</span>        <span class="mi">3</span><span class="p">,</span>        <span class="mi">2</span><span class="p">]</span>
-</span><span class='line'><span class="c"># use string vector “as it is”</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">datav</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">({</span><span class="err">‘</span><span class="n">S</span><span class="err">’</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">I</span><span class="p">(</span><span class="n">StrVector</span><span class="p">([</span><span class="err">‘</span><span class="n">x</span><span class="err">’</span><span class="p">,</span> <span class="err">‘</span><span class="n">y</span><span class="err">’</span><span class="p">,</span> <span class="err">‘</span><span class="n">z</span><span class="err">’</span><span class="p">])),</span> <span class="err">‘</span><span class="n">F</span><span class="err">’</span><span class="p">:</span> <span class="n">StrVector</span><span class="p">(</span><span class="err">‘</span><span class="n">acb</span><span class="err">’</span><span class="p">)})</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">datav</span>
-</span><span class='line'><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">DataFrame</span> <span class="o">-</span> <span class="n">Python</span><span class="p">:</span><span class="mh">0x7f072235f638</span> <span class="o">/</span> <span class="n">R</span><span class="p">:</span><span class="mh">0x1155ff8</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
-</span><span class='line'><span class="p">[</span><span class="n">StrVector</span><span class="p">,</span> <span class="n">FactorVector</span><span class="p">]</span>
-</span><span class='line'>  <span class="n">S</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="k">class</span> <span class="err">‘</span><span class="nc">rpy2</span><span class="o">.</span><span class="n">robjects</span><span class="o">.</span><span class="n">vectors</span><span class="o">.</span><span class="n">StrVector</span><span class="err">’</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
-</span><span class='line'>  <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">StrVector</span> <span class="o">-</span> <span class="n">Python</span><span class="p">:</span><span class="mh">0x7f07222d95f0</span> <span class="o">/</span> <span class="n">R</span><span class="p">:</span><span class="mh">0x23b0168</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
-</span><span class='line'><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
-</span><span class='line'>  <span class="n">F</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="k">class</span> <span class="err">‘</span><span class="nc">rpy2</span><span class="o">.</span><span class="n">robjects</span><span class="o">.</span><span class="n">vectors</span><span class="o">.</span><span class="n">FactorVector</span><span class="err">’</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
-</span><span class='line'>  <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">FactorVector</span> <span class="o">-</span> <span class="n">Python</span><span class="p">:</span><span class="mh">0x7f07222d9488</span> <span class="o">/</span> <span class="n">R</span><span class="p">:</span><span class="mh">0x10e7e70</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
-</span><span class='line'><span class="p">[</span>       <span class="mi">1</span><span class="p">,</span>        <span class="mi">3</span><span class="p">,</span>        <span class="mi">2</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p>在rpy2中构建的对象，可以使用名字、索引或者布尔值进行提取或者修改，<span style="color: blue">注意</span>Python从0开始索引，而R从1开始。R对象的提供了方法<code class="language-python">rx()</code>相当于R的 <code class="language-r">[</code>操作，而<code class="language-python">rx2()</code>相当于<code class="language-r">[[</code>操作。</p>
-
-<p><figure class='code'><figcaption><span>Extract values </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="kn">from</span> <span class="nn">rpy2.robjects</span> <span class="kn">import</span> <span class="n">r</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="kn">from</span> <span class="nn">rpy2.robjects.vectors</span> <span class="kn">import</span> <span class="n">StrVector</span><span class="p">,</span> <span class="n">IntVector</span><span class="p">,</span> <span class="n">BoolVector</span><span class="p">,</span> <span class="n">ListVector</span><span class="p">,</span> <span class="n">DataFrame</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span> <span class="nb">id</span><span class="o">=</span><span class="s">&quot;vector&quot;</span><span class="o">&gt;</span><span class="n">vector</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>      <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">testVec</span> <span class="o">=</span> <span class="n">IntVector</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
-</span><span class='line'><span class="n">testVec</span><span class="o">.</span><span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span class='line'><span class="n">testVec</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="n">StrVector</span><span class="p">((</span><span class="err">‘</span><span class="n">name1</span><span class="err">’</span><span class="p">,</span> <span class="err">‘</span><span class="n">name2</span><span class="err">’</span><span class="p">,</span> <span class="err">‘</span><span class="n">name3</span><span class="err">’</span><span class="p">))</span>
-</span><span class='line'><span class="c"># assign values</span>
-</span><span class='line'><span class="n">testVec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span>
-</span><span class='line'><span class="n">testVec</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">IntVector</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">101</span><span class="p">])</span>
-</span><span class='line'><span class="n">testVec</span><span class="p">[</span><span class="n">testVec</span><span class="o">.</span><span class="n">names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="err">‘</span><span class="n">name2</span><span class="err">’</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">10</span>
-</span><span class='line'><span class="c"># using the rx() method</span>
-</span><span class='line'><span class="n">testVec</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="err">‘</span><span class="n">name2</span><span class="err">’</span><span class="p">)</span>
-</span><span class='line'><span class="n">testVec</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-</span><span class='line'><span class="n">testVec</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-</span><span class='line'><span class="n">testVec</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">IntVector</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">]))</span>
-</span><span class='line'><span class="n">testVec</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">BoolVector</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">]))</span>
-</span><span class='line'><span class="c"># empty vector returns</span>
-</span><span class='line'><span class="n">testVec</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</span><span class='line'><span class="c"># error because R cannot determine the last element </span>
-</span><span class='line'><span class="n">testVec</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span> <span class="p">]</span> <span class="o">=</span> <span class="n">IntVector</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">101</span><span class="p">])</span>
-</span><span class='line'><span class="c"># error because rx() is a method</span>
-</span><span class='line'><span class="n">testVec</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">IntVector</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span> <span class="o">=</span> <span class="n">IntVector</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">101</span><span class="p">])</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span> <span class="nb">id</span><span class="o">=</span><span class="s">&quot;list-and-matrix&quot;</span><span class="o">&gt;</span><span class="nb">list</span> <span class="ow">and</span> <span class="n">matrix</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>      <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">tmp</span> <span class="o">=</span> <span class="n">r</span><span class="p">(</span><span class="err">“</span><span class="nb">list</span><span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="n">nrow</span> <span class="o">=</span> <span class="mi">2</span><span class="p">),</span> <span class="n">b</span> <span class="o">=</span> <span class="err">‘</span><span class="n">Hello</span><span class="err">’</span><span class="p">)</span><span class="err">”</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span> <span class="n">tmp</span>
-</span><span class='line'><span class="err">$</span><span class="n">a</span>
-</span><span class='line'>     <span class="p">[,</span><span class="mi">1</span><span class="p">]</span> <span class="p">[,</span><span class="mi">2</span><span class="p">]</span> <span class="p">[,</span><span class="mi">3</span><span class="p">]</span> <span class="p">[,</span><span class="mi">4</span><span class="p">]</span> <span class="p">[,</span><span class="mi">5</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">1</span><span class="p">,]</span>    <span class="mi">1</span>    <span class="mi">3</span>    <span class="mi">5</span>    <span class="mi">7</span>    <span class="mi">9</span>
-</span><span class='line'><span class="p">[</span><span class="mi">2</span><span class="p">,]</span>    <span class="mi">2</span>    <span class="mi">4</span>    <span class="mi">6</span>    <span class="mi">8</span>   <span class="mi">10</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">$</span><span class="n">b</span>
-</span><span class='line'><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="err">“</span><span class="n">Hello</span><span class="err">”</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">tmp</span><span class="o">.</span><span class="n">names</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">tmp</span><span class="o">.</span><span class="n">names</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">tmp</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="err">‘</span><span class="n">a</span><span class="err">’</span><span class="p">)</span>
-</span><span class='line'><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">ListVector</span> <span class="o">-</span> <span class="n">Python</span><span class="p">:</span><span class="mh">0x8afd86c</span> <span class="o">/</span> <span class="n">R</span><span class="p">:</span><span class="mh">0x8cf71c0</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
-</span><span class='line'><span class="p">[</span><span class="n">Matrix</span><span class="p">]</span>
-</span><span class='line'>  <span class="n">a</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="k">class</span> <span class="err">‘</span><span class="nc">rpy2</span><span class="o">.</span><span class="n">robjects</span><span class="o">.</span><span class="n">vectors</span><span class="o">.</span><span class="n">Matrix</span><span class="err">’</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
-</span><span class='line'>  <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">Matrix</span> <span class="o">-</span> <span class="n">Python</span><span class="p">:</span><span class="mh">0x8b013cc</span> <span class="o">/</span> <span class="n">R</span><span class="p">:</span><span class="mh">0x97de388</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
-</span><span class='line'><span class="p">[</span>       <span class="mi">1</span><span class="p">,</span>        <span class="mi">2</span><span class="p">,</span>        <span class="mi">3</span><span class="p">,</span> <span class="err">…</span><span class="p">,</span>        <span class="mi">8</span><span class="p">,</span>        <span class="mi">9</span><span class="p">,</span>       <span class="mi">10</span><span class="p">]</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">tmp</span><span class="o">.</span><span class="n">rx2</span><span class="p">(</span><span class="err">‘</span><span class="n">a</span><span class="err">’</span><span class="p">)</span>
-</span><span class='line'><span class="c"># same as the former one</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">tmp</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">tmp</span><span class="o">.</span><span class="n">rx2</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span><span class='line'><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">Matrix</span> <span class="o">-</span> <span class="n">Python</span><span class="p">:</span><span class="mh">0x8b01b4c</span> <span class="o">/</span> <span class="n">R</span><span class="p">:</span><span class="mh">0x97de388</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
-</span><span class='line'><span class="p">[</span>       <span class="mi">1</span><span class="p">,</span>        <span class="mi">2</span><span class="p">,</span>        <span class="mi">3</span><span class="p">,</span> <span class="err">…</span><span class="p">,</span>        <span class="mi">8</span><span class="p">,</span>        <span class="mi">9</span><span class="p">,</span>       <span class="mi">10</span><span class="p">]</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">tmp</span><span class="p">[</span><span class="n">tmp</span><span class="o">.</span><span class="n">names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="err">‘</span><span class="n">b</span><span class="err">’</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">9</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span> <span class="nb">id</span><span class="o">=</span><span class="s">&quot;operate-matrix&quot;</span><span class="o">&gt;</span><span class="n">operate</span> <span class="n">matrix</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>      <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">tmpMat</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">rx2</span><span class="p">(</span><span class="err">‘</span><span class="n">a</span><span class="err">’</span><span class="p">)</span>
-</span><span class='line'><span class="c"># first element of ‘a’</span>
-</span><span class='line'><span class="n">tmpMat</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class='line'><span class="c"># first row of ‘a’</span>
-</span><span class='line'><span class="n">tmpMat</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
-</span><span class='line'><span class="n">tmpMat</span><span class="o">.</span><span class="n">rx</span>
-</span><span class='line'><span class="n">tmpMat</span><span class="o">.</span><span class="n">colnames</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="err">‘</span><span class="n">letters</span><span class="err">’</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
-</span><span class='line'><span class="n">tmpMat</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">IntVector</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
-</span><span class='line'><span class="n">tmpMat</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">BoolVector</span><span class="p">((</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">)))</span>
-</span><span class='line'><span class="n">tmpMat</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="err">‘</span><span class="n">b</span><span class="err">’</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></p>
-    </blockquote>
-  </blockquote>
-</blockquote>
-
-<p>rpy2的R对象拥有<code class="language-python">ro</code>属性，可以用于向量式操作。</p>
-
-<p><figure class='code'><figcaption><span>vector in rpy2 </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="kn">from</span> <span class="nn">rpy2.robjects</span> <span class="kn">import</span> <span class="n">r</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="kn">from</span> <span class="nn">rpy2.robjects.vectors</span> <span class="kn">import</span> <span class="n">IntVector</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>      <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">tmp1</span> <span class="o">=</span> <span class="n">IntVector</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
-</span><span class='line'><span class="n">tmp2</span> <span class="o">=</span> <span class="n">IntVector</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-</span><span class='line'><span class="n">tmp1</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">tmp2</span><span class="o">.</span><span class="n">ro</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="mi">0</span><span class="p">)</span>
-</span><span class='line'><span class="n">R</span> <span class="nb">object</span> <span class="k">with</span> <span class="n">classes</span><span class="p">:</span> <span class="p">(</span><span class="err">‘</span><span class="n">integer</span><span class="err">’</span><span class="p">,)</span> <span class="n">mapped</span> <span class="n">to</span><span class="p">:</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">IntVector</span> <span class="o">-</span> <span class="n">Python</span><span class="p">:</span><span class="mh">0x7f304047b248</span> <span class="o">/</span> <span class="n">R</span><span class="p">:</span><span class="mh">0x4cffa08</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
-</span><span class='line'><span class="p">[</span>       <span class="mi">1</span><span class="p">,</span>        <span class="mi">2</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<h3 id="section-1">2.3 特殊对象</h3>
-
-<ul>
-  <li>
-    <p>R中的<code class="language-r">NA</code>通过<code class="language-python">rpy2.robjects.NA_Integer</code>或<code class="language-python">rpy2.robjects.NA_Character</code>等引用。</p>
-  </li>
-  <li>
-    <p>全局变量使用<code class="language-python">rpy2.robjects.globalenv</code>。</p>
-
-    <blockquote>
-      <p>特别是遇到Python找不到一个R对象时（此时R对象可能通过<code class="language-python">r('Rcode')</code>调用），留意将R对象转变成全局变量。</p>
-    </blockquote>
-  </li>
-</ul>
-
-<p><figure class='code'><figcaption><span>Special objects </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="kn">from</span> <span class="nn">rpy2.robjects</span> <span class="kn">import</span> <span class="n">r</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="kn">from</span> <span class="nn">rpy2.robjects.vectors</span> <span class="kn">import</span> <span class="n">StrVector</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="kn">from</span> <span class="nn">rpy2.robjects</span> <span class="kn">import</span> <span class="n">globalenv</span><span class="p">,</span> <span class="n">NA_Character</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span> <span class="nb">id</span><span class="o">=</span><span class="s">&quot;test-string-na&quot;</span><span class="o">&gt;</span><span class="n">test</span> <span class="n">string</span> <span class="n">NA</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>      <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">testNA</span> <span class="o">=</span> <span class="n">StrVector</span><span class="p">([</span><span class="err">‘</span><span class="n">a</span><span class="err">’</span><span class="p">,</span> <span class="err">‘</span><span class="n">b</span><span class="err">’</span><span class="p">,</span> <span class="err">‘</span><span class="n">c</span><span class="err">’</span><span class="p">])</span>
-</span><span class='line'><span class="n">testNA</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">NA_Character</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span> <span class="nb">id</span><span class="o">=</span><span class="s">&quot;test-global-objects&quot;</span><span class="o">&gt;</span><span class="n">test</span> <span class="k">global</span> <span class="n">objects</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>      <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">testGlobal</span> <span class="o">=</span> <span class="n">StrVector</span><span class="p">([</span><span class="err">‘</span><span class="n">a</span><span class="err">’</span><span class="p">,</span> <span class="err">‘</span><span class="n">b</span><span class="err">’</span><span class="p">,</span> <span class="err">‘</span><span class="n">c</span><span class="err">’</span><span class="p">])</span>
-</span><span class='line'><span class="n">globalenv</span><span class="p">[</span><span class="err">‘</span><span class="n">testGlobal</span><span class="err">’</span><span class="p">]</span> <span class="o">=</span> <span class="n">testGlobal</span>
-</span><span class='line'><span class="n">connectVec</span> <span class="o">=</span> <span class="n">r</span><span class="p">(</span><span class="err">“</span><span class="n">paste</span><span class="p">(</span><span class="n">testGlobal</span><span class="p">,</span> <span class="n">collapse</span> <span class="o">=</span> <span class="err">‘</span><span class="o">-</span><span class="err">‘</span><span class="p">)</span><span class="err">”</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></p>
-    </blockquote>
-  </blockquote>
-</blockquote>
-
-<h3 id="section-2">2.4 载入和使用包</h3>
-
-<p>使用<code class="language-python">rpy2.robjects.packages.importr</code>调用R包：</p>
-
-<p><figure class='code'><figcaption><span>import R packags </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="kn">from</span> <span class="nn">rpy2.robjects.packages</span> <span class="kn">import</span> <span class="n">importr</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>      <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">base</span> <span class="o">=</span> <span class="n">importr</span><span class="p">(</span><span class="err">‘</span><span class="n">base</span><span class="err">’</span><span class="p">)</span>
-</span><span class='line'><span class="n">stats</span> <span class="o">=</span> <span class="n">importr</span><span class="p">(</span><span class="err">‘</span><span class="n">stats</span><span class="err">’</span><span class="p">)</span>
-</span><span class='line'><span class="n">affy</span> <span class="o">=</span> <span class="n">importr</span><span class="p">(</span><span class="err">‘</span><span class="n">affy</span><span class="err">’</span><span class="p">)</span>
-</span><span class='line'><span class="n">stats</span><span class="o">.</span><span class="n">rnorm</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></p>
-    </blockquote>
-  </blockquote>
-</blockquote>
-
-<p>如果想引用一个包中的隐变量，也很简单，只要载入包，然后所有r命令化成成字符串，之后引用即可（这种方法是万能的），比如：</p>
-
-<p><figure class='code'><figcaption><span>Hidden objects in R packages  </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="kn">from</span> <span class="nn">rpy2.robjects.packages</span> <span class="kn">import</span> <span class="n">importr</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">blockquote</span><span class="o">&gt;</span>
-</span><span class='line'>      <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">importr</span><span class="p">(</span><span class="err">‘</span><span class="n">hwriter</span><span class="err">’</span><span class="p">)</span>
-</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">r</span><span class="p">(</span><span class="err">‘</span><span class="n">hwriter</span><span class="p">:::</span><span class="n">hwrite</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">matrix</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="err">’</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</span><span class='line'><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="err">“</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">table</span> <span class="n">border</span><span class="o">=</span><span class="s">&quot;1&quot;</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>\<span class="n">n</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">tr</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>\<span class="n">n</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">td</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="mi">1</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">/</span><span class="n">td</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">td</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="mi">3</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">/</span><span class="n">td</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">td</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="mi">5</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">/</span><span class="n">td</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">td</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="mi">7</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">/</span><span class="n">td</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">td</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="mi">9</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">/</span><span class="n">td</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">/</span><span class="n">tr</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>\<span class="n">n</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">tr</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>\<span class="n">n</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">td</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="mi">2</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">/</span><span class="n">td</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">td</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="mi">4</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">/</span><span class="n">td</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">td</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="mi">6</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">/</span><span class="n">td</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">td</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="mi">8</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">/</span><span class="n">td</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">td</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="mi">10</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">/</span><span class="n">td</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">/</span><span class="n">tr</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>\<span class="n">n</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">/</span><span class="n">table</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>\<span class="n">n</span><span class="err">”</span>
-</span></code></pre></td></tr></table></div></figure></p>
-    </blockquote>
-  </blockquote>
-</blockquote>
-
-<h2 id="rpython">3. R对象转换成Python对象</h2>
-
-<p>推荐使用<code class="language-python">tuple()</code>或者<code class="language-python">list()</code>函数，将R对象转换成Python的元组或者列表对象。</p>
-
-<p><figure class='code'><figcaption><span>Transform R objects to Python ones </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">r</span><span class="p">(</span><span class="err">‘</span><span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="err">’</span><span class="p">)</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</span><span class='line'><span class="err">‘</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span>\<span class="n">n</span><span class="err">’</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">)</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">list</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</span><span class='line'><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">]</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">r</span><span class="p">(</span><span class="err">‘</span><span class="n">matrix</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="err">’</span><span class="p">)</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="k">print</span> <span class="n">b</span>
-</span><span class='line'>     <span class="p">[,</span><span class="mi">1</span><span class="p">]</span> <span class="p">[,</span><span class="mi">2</span><span class="p">]</span> <span class="p">[,</span><span class="mi">3</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">1</span><span class="p">,]</span>    <span class="mi">1</span>    <span class="mi">3</span>    <span class="mi">5</span>
-</span><span class='line'><span class="p">[</span><span class="mi">2</span><span class="p">,]</span>    <span class="mi">2</span>    <span class="mi">4</span>    <span class="mi">6</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
-</span><span class='line'><span class="err">»</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">list</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-</span><span class='line'><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<h2 id="section-3">5. 注意事项</h2>
-
-<ul>
-  <li>
-    <p>分清楚需要调用的R还是Python的对象；</p>
-  </li>
-  <li>
-    <p>善于使用构建好的rpy2对象的属性和方法，比如<code class="language-python">rpy2Obj.len</code>；</p>
-  </li>
-  <li>
-    <p>如果函数有警告（warnings），在ipython等IDE上能够执行，但是如果是脚本或者与网页服务器交互，则会产生错误。解决办法：</p>
-
-    <blockquote>
-      <ol>
-        <li>
-          <p>鲁莽的解决很简单，强行忽略R的警告，<code class="language-r">options(warn = -1)</code>或者R代码放入函数中<code class="language-r">suppressWarnings()</code>。</p>
-        </li>
-        <li>
-          <p>第二种办法，如果是自己代码中使用了R的 <code class="language-r">warning()</code>函数，则将warning信息换成字符串，之后单独输出。</p>
-        </li>
-      </ol>
-    </blockquote>
-  </li>
-  <li>
-    <p>rpy2不是万能药，它直接继承了R的所有好和不好。</p>
-  </li>
-</ul>
-
-<h3 id="section-4">参考资料</h3>
-
-<ul>
-  <li><a href="http://stackoverflow.com/questions/2125218/python-and-rpy2-calling-plot-function-with-options-that-have-in-them">stackoverflow: Python and Rpy2: Calling plot function with options that have “.” in them</a></li>
-</ul>
-
-<h3 id="section-5">更新记录</h3>
-
-<p>2016年6月16日</p>
 
 ]]></content>
   </entry>
