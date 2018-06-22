@@ -14,6 +14,8 @@ categories: R
 
 * 可以使用逻辑下标（`LogicalVector`）对向量和列表[取值](http://gallery.rcpp.org/articles/subsetting/)。
 
+<!--more-->
+
 ## 2. <span style="color: blue">RcppArmadillo</span> ##
 
 基本类型是`mat`、`vec`（`colvec`）和`rowvec`。
