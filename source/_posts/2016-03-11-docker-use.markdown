@@ -53,6 +53,34 @@ $ docker run -it --rm myDockerImage myCommand
 $ docker run -it --rm -v /localpath/data:/data -v /localpath/file:/file myDockerImage myCommand
 {% endcodeblock %}
 
+## 5. 保存和本地载入镜像 ##
+
+{% codeblock lang:bash %}
+# 查看镜像列表
+$ docker images
+
+# 保存镜像
+$ docker save -o dockerImage.tar /example/dockerImage
+
+# 载入镜像
+$ docker load --input dockerImage.tar
+{% endcodeblock %}
+
+## 6. 修改镜像和容器储存位置 ##
+
+查看镜像储存位置，例如`/var/lib/docker`
+
+{% codeblock lang:bash %}
+$ docker info | grep "Docker Root Dir"
+{% endcodeblock %}
+
+移动镜像和容器存储位置
+
+{% codeblock lang:bash %}
+$ mv /var/lib/docker /localpath/docker
+$ ln -s /localpath/docker /var/lib/docker
+{% endcodeblock %}
+
 ### <a id="Ref">参考网址</a> ###
 
 * [Docker官方文档](https://docs.docker.com/)
@@ -61,4 +89,4 @@ $ docker run -it --rm -v /localpath/data:/data -v /localpath/file:/file myDocker
 
 ### 更新记录 ###
 
-2018年4月4日
+2018年7月9日
