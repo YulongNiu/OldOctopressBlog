@@ -68,7 +68,7 @@ printf "world\n" >> testfile
 
 ## 6. 传入sudo密码 ##
 
-{% codeblock lang:bash append %}
+{% codeblock lang:bash sudo password %}
 echo "myPassword" | sudo -S myCommond
 {% endcodeblock %} 
 
