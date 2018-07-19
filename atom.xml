@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-07-09T12:37:00+08:00</updated>
+  <updated>2018-07-20T00:58:17+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -12,6 +12,156 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[使用RcppParallel并行计算]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2018/07/19/rcppparallel-test/"/>
+    <updated>2018-07-19T22:19:24+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2018/07/19/rcppparallel-test</id>
+    <content type="html"><![CDATA[<p>在之前的<a href="http://yulongniu.bionutshell.org/blog/2014/06/25/parallel-package/">博文</a>中，我详细讨论了使用多种R包实现并行计算。其中，提到一个非常重要的问题：</p>
+
+<pre><code>当循环数很大时（1万以上），`foreach`会变得非常慢。
+</code></pre>
+
+<p>这个问题在Florian Privé的<a href="https://privefl.github.io/blog/a-guide-to-parallelism-in-r/">A guide to parallelism in R</a>中也提到，解释是<code>foreach</code>每次只合并100个循环结果。</p>
+
+<!--more-->
+
+<p>这篇博文里，我尝试使用<span style="color: blue">RcppParallel</span>包调用<code>C++</code>的并行方法。结论是：<strong>在循环数很大时，<span style="color: blue">RcppParallel</span>包提供的并行方法优于<code>foreach</code></strong>。</p>
+
+<p>一个简单的测试场景：对一个数值向量的每个元素做平方根运算，结果按原始顺序返回。在<a href="https://gist.github.com/YulongNiu/add0d9f066299613b64b8458fd5d741a">Gist1</a>和<a href="https://gist.github.com/YulongNiu/9331ea0d3ef46f0571c5f2dc061c3f8a">Gist2</a>中，分别实现了：</p>
+
+<ul>
+  <li>
+    <p><code>SqrtR</code>：用循环非并行操作每个元素。这种方法在<code>R</code>语言编程中不推荐，而应该尽量“向量化”操作。</p>
+  </li>
+  <li>
+    <p><code>SqrtRPara</code>：<code>foreach</code>并行版本。</p>
+  </li>
+  <li>
+    <p><code>SqrtCpp</code>：<code>C++</code>非并行版本。</p>
+  </li>
+  <li>
+    <p><code>SqrtCppPara</code>：<span style="color: blue">RcppParallel</span>包的<code>C++</code>并行版本。</p>
+  </li>
+  <li>
+    <p><code>sqrt</code>：R内置的向量化方法，<code>C</code>非并行版本。</p>
+  </li>
+</ul>
+
+<p>首先，比较5种实现效率，并行计算调用8个线程（Intel i7-4790 CPU@3.6GHz）。测试结果显示<code>SqrtRPara</code>（使用<code>foreach</code>）和非向量化的R版本<code>SqrtR</code>效率较低。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>5 versions </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line">tmp1 &lt;- runif<span class="o">(</span>10e3<span class="o">)</span>
+</span><span class="line">
+</span><span class="line">all.equal<span class="o">(</span>SqrtCpp<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">          sqrt<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">          SqrtR<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">          SqrtRPara<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">          SqrtCppPara<span class="o">(</span>tmp1<span class="o">))</span>
+</span><span class="line">
+</span><span class="line"><span class="c">## TRUE</span>
+</span><span class="line">
+</span><span class="line">microbenchmark<span class="o">(</span>
+</span><span class="line">  SqrtCpp<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">  sqrt<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">  SqrtRPara<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">  SqrtR<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">  SqrtCppPara<span class="o">(</span>tmp1<span class="o">))</span>
+</span><span class="line">
+</span><span class="line"><span class="c">## Unit: microseconds</span>
+</span><span class="line"><span class="c">##               expr         min           lq         mean       median</span>
+</span><span class="line"><span class="c">##      SqrtCpp(tmp1)      55.936      70.8940 8.512877e+01      76.3405</span>
+</span><span class="line"><span class="c">##         sqrt(tmp1)      35.801      46.1545 4.984745e+01      49.2785</span>
+</span><span class="line"><span class="c">##    SqrtRPara(tmp1) 1467517.454 1525986.5995 1.574319e+06 1571794.1885</span>
+</span><span class="line"><span class="c">##        SqrtR(tmp1)    3009.722    3092.6530 4.208856e+03    3165.9255</span>
+</span><span class="line"><span class="c">##  SqrtCppPara(tmp1)      23.432      57.3595 9.719465e+01      93.6050</span>
+</span><span class="line"><span class="c">##            uq         max neval</span>
+</span><span class="line"><span class="c">##       82.8530     837.569   100</span>
+</span><span class="line"><span class="c">##       53.2275      96.710   100</span>
+</span><span class="line"><span class="c">##  1607484.0645 1768153.919   100</span>
+</span><span class="line"><span class="c">##     3461.4475   55492.891   100</span>
+</span><span class="line"><span class="c">##      107.2245    1144.543   100</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>然后，增加循环数，比较效率较高的前三种方法。测试结果显示调用<span style="color: blue">RcppParallel</span>包的<code>C++</code>并行版本<code>SqrtCppPara</code>胜出。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>top 3 versions </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line">tmp1 &lt;- runif<span class="o">(</span>10e6<span class="o">)</span>
+</span><span class="line">
+</span><span class="line">all.equal<span class="o">(</span>SqrtCpp<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">          sqrt<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">          SqrtCppPara<span class="o">(</span>tmp1<span class="o">))</span>
+</span><span class="line">
+</span><span class="line"><span class="c">## TRUE</span>
+</span><span class="line">
+</span><span class="line">microbenchmark<span class="o">(</span>
+</span><span class="line">  SqrtCpp<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">  sqrt<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">  SqrtCppPara<span class="o">(</span>tmp1<span class="o">))</span>
+</span><span class="line">
+</span><span class="line"><span class="c">## Unit: milliseconds</span>
+</span><span class="line"><span class="c">##               expr      min       lq     mean   median       uq       max neval</span>
+</span><span class="line"><span class="c">##      SqrtCpp(tmp1) 76.68263 78.55146 82.51442 79.48709 87.03026 100.56873   100</span>
+</span><span class="line"><span class="c">##         sqrt(tmp1) 52.19705 53.67441 58.16940 54.60512 66.67642  70.94672   100</span>
+</span><span class="line"><span class="c">##  SqrtCppPara(tmp1) 37.10116 38.34199 42.23896 39.17889 42.98785  61.94529   100</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li><a href="http://gallery.rcpp.org/articles/parallel-vector-sum/">Summing a Vector in Parallel with RcppParallel</a></li>
+</ul>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[通过RNA-Seq评估基因表达量的模型]]></title>
@@ -2786,501 +2936,6 @@ f(\sigma^2|X_i) &= \frac{\frac{1}{\sqrt{2\pi}} \frac{1}{\sigma} \mathrm{e}^{-\fr
 <h3 id="section-11">更新记录</h3>
 
 <p>2017年11月9日</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PostgreSQL使用指南]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2015/07/29/postgresql-usage/"/>
-    <updated>2015-07-29T18:24:10+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2015/07/29/postgresql-usage</id>
-    <content type="html"><![CDATA[<h2 id="section">1. 查询</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Query </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-</pre></td><td class="code"><pre><code class="psql"><span class="line"><span class="c1">-- 选取特定的一列或者多列</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">-- 选取全部列</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="o">*</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">-- 去除重复，选取一列或多列中唯一元素</span>
-</span><span class="line"><span class="c1">-- 如输入多列，则去除多列组合后的重复</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">-- 指定输出列数</span>
-</span><span class="line"><span class="c1">-- a是输出行数，b是输出起始行（第一行计为0）</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="k">column</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line"><span class="k">LIMIT</span> <span class="n">a</span> <span class="k">OFFSET</span> <span class="n">b</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<!--more-->
-
-<ul>
-  <li>
-    <p>使用<code class="language-bash">;</code>结束一条SQL语句，本文中省略；</p>
-  </li>
-  <li>
-    <p>返回未排序数据；</p>
-  </li>
-</ul>
-
-<h2 id="section-1">2. 排序</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Ordering </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-</pre></td><td class="code"><pre><code class="psql"><span class="line"><span class="c1">-- 按照一列或者多列升序排序</span>
-</span><span class="line"><span class="c1">-- 可以按照“不查询”的列排序</span>
-</span><span class="line"><span class="c1">-- 先按照column2排，再按照column5排</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span><span class="p">,</span> <span class="n">column3</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line"><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column2</span><span class="p">,</span> <span class="n">column5</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">-- 降序</span>
-</span><span class="line"><span class="c1">-- DESC只作用于最靠近的唯一一列，即column2，不作用于column5</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span><span class="p">,</span> <span class="n">column3</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line"><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column2</span> <span class="k">DESC</span><span class="p">,</span> <span class="n">column5</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">--使用查询列相对编号</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span><span class="p">,</span> <span class="n">column3</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line"><span class="k">ORDER</span> <span class="k">BY</span> <span class="mf">2</span><span class="p">,</span> <span class="n">column5</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>
-    <p>使用相对列查询时，不查询的列，比如上述例子的column5，不能用数字代替。</p>
-  </li>
-  <li>
-    <p>使用相对列查询有风险，不采用。</p>
-  </li>
-  <li>
-    <p>升序关键字为<code class="language-psql">ASC</code>，通常升序为默认。</p>
-  </li>
-  <li>
-    <p><code class="language-psql">ORDER BY</code>必须在制定列和数据集后出现。</p>
-  </li>
-</ul>
-
-<h2 id="section-2">3. 筛选</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Filter </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-</pre></td><td class="code"><pre><code class="psql"><span class="line"><span class="c1">-- ORDER BY语句需要在WHERE之后</span>
-</span><span class="line"><span class="c1">-- AND表示“且”， OR表示“或”，第一个条件满足即终止</span>
-</span><span class="line"><span class="c1">-- AND和OR可有任意多个</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line"><span class="k">WHERE</span> <span class="p">(</span><span class="n">column3</span> <span class="o">=</span> <span class="n">a</span> <span class="k">OR</span> <span class="n">column3</span> <span class="o">=</span> <span class="n">b</span><span class="p">)</span> <span class="k">AND</span> <span class="n">column1</span> <span class="o">=</span> <span class="n">c</span>
-</span><span class="line"><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column3</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">-- 多个OR语句使用IN代替，比如上述例子为：</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line"><span class="k">WHERE</span> <span class="n">column3</span> <span class="k">IN</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">AND</span> <span class="n">column1</span> <span class="o">=</span> <span class="n">c</span>
-</span><span class="line"><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column3</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">-- NOT与IN连用</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line"><span class="k">WHERE</span> <span class="n">column3</span> <span class="k">NOT</span> <span class="k">IN</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">-- BETWEEN a AND b语句，a必须小于等于b</span>
-</span><span class="line"><span class="c1">-- 如a等于b，则相当于筛选与a（或者b）相等数值</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line"><span class="k">WHERE</span> <span class="n">column1</span> <span class="k">BETWEEN</span> <span class="n">a</span> <span class="k">AND</span> <span class="n">b</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">--筛选NULL值使用IS NULL</span>
-</span><span class="line"><span class="c1">--筛选非NULL值使用IS NOT NULL</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line"><span class="k">WHERE</span> <span class="n">column1</span> <span class="k">IS</span> <span class="k">NULL</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>
-    <p><a href="http://www.postgresql.org/docs/9.4/static/functions-comparison.html#FUNCTIONS-COMPARISON-TABLE">PostgreSQL支持的比较符</a>：<code class="language-psql">&lt;</code>、<code class="language-psql">&lt;=</code>、<code class="language-psql">&gt;</code>、<code class="language-psql">&gt;=</code>、<code class="language-psql">=</code>和<code class="language-psql">!=</code>（“不等于”也可以表示为<code class="language-psql">&lt;&gt;</code>）。</p>
-  </li>
-  <li>
-    <p>筛选字符串条件，需要对筛选串加引号，比如例子中<code class="language-psql">a</code>为<code class="language-psql">"testStr"</code>。</p>
-  </li>
-  <li>
-    <p>合理使用括号，强制规定<code class="language-psql">AND</code>和<code class="language-psql">OR</code>先后顺序。</p>
-  </li>
-  <li>
-    <p><code class="language-psql">IN</code>语句执行效率高，并且可以嵌套多层<code class="language-psql">SELECT</code>语句（每个<code class="language-psql">SELECT</code>只返回一列数据）。</p>
-  </li>
-  <li>
-    <p>尽量在数据库查询过程，而非自己后续手写，完成数据筛选，因为：1. SQL数据库操作通常比自己手写效率高；2. 便于后续扩展。</p>
-  </li>
-</ul>
-
-<h2 id="section-3">4. 模式匹配</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Pattern Matching </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-</pre></td><td class="code"><pre><code class="psql"><span class="line"><span class="c1">-- LIKE和NOT LIKE支持对字符串的模式匹配</span>
-</span><span class="line"><span class="c1">-- “_”匹配单一一个字符</span>
-</span><span class="line"><span class="c1">-- “%”匹配0个或多个字符</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line"><span class="k">WHERE</span> <span class="n">column1</span> <span class="k">LIKE</span> <span class="s1">&#39;F_y%&#39;</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">-- SIMILAR TO和NOT SIMILAR TO支持正则匹配</span>
-</span><span class="line"><span class="c1">-- 正则匹配中，仍然使用“_”和“%”</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line"><span class="k">WHERE</span> <span class="n">column1</span> <span class="k">SIMILAR</span> <span class="k">TO</span> <span class="s1">&#39;[^JM]%&#39;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>
-    <p>PostgreSQL支持<code class="language-psql">ILIKE</code>和<code class="language-psql">NOT ILIKE</code>忽略大小写敏感搜索，这不是标准SQL语法。</p>
-  </li>
-  <li>
-    <p>注意数据库自动补充的空格，比如 <code class="language-psql">'F_y'</code>只能匹配“F开头-间隔一个字符-y结尾”的字符串，如果字符串后跟有空格，则不能匹配。</p>
-  </li>
-  <li>
-    <p><a href="http://www.postgresql.org/docs/9.4/static/functions-matching.html">PostgreSQL支持的通配符</a></p>
-  </li>
-  <li>
-    <p>模式匹配效率不高，尽量后置，不要过度使用。</p>
-  </li>
-</ul>
-
-<h2 id="section-4">5. 函数</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Function </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-</pre></td><td class="code"><pre><code class="psql"><span class="line"><span class="c1">--数学计算</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span> <span class="o">*</span> <span class="n">column3</span> <span class="k">AS</span> <span class="n">newName</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">-- 字符串连接</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="n">RTRIM</span><span class="p">(</span><span class="n">column1</span><span class="p">)</span> <span class="o">||</span> <span class="s1">&#39; (&#39;</span> <span class="o">||</span> <span class="n">RTRIM</span><span class="p">(</span><span class="n">column1</span><span class="p">)</span> <span class="o">||</span> <span class="s1">&#39;)&#39;</span> <span class="k">AS</span> <span class="n">newName</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line"><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column1</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">-- 使用函数</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">UPPER</span><span class="p">(</span><span class="n">column2</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">-- 筛选日期</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">columnDate</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line"><span class="k">WHERE</span> <span class="n">DATE_PART</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="n">columnDate</span><span class="p">)</span> <span class="o">=</span> <span class="mf">2015</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">-- 汇总数据</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="n">AVG</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="n">column1</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName1</span><span class="p">,</span>
-</span><span class="line">       <span class="n">SUM</span><span class="p">(</span><span class="n">column2</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName2</span><span class="p">,</span>
-</span><span class="line">       <span class="n">MAX</span><span class="p">(</span><span class="n">column3</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName3</span><span class="p">,</span>
-</span><span class="line">       <span class="n">MIN</span><span class="p">(</span><span class="n">column4</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName4</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">Products</span>
-</span><span class="line"><span class="k">WHERE</span> <span class="n">vend_id</span> <span class="o">=</span> <span class="s1">&#39;DLL01&#39;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>
-    <p>使用<code class="language-psql">AS</code>及时命名新列。</p>
-  </li>
-  <li>
-    <p>支持数字列的运算有<code class="language-psql">+</code>、<code class="language-psql">-</code>、<code class="language-psql">*</code>和<code class="language-psql">/</code>，更多操作参考<a href="http://www.postgresql.org/docs/9.4/static/functions-math.html">PostgreSQL支持的数值操作</a>。</p>
-  </li>
-  <li>
-    <p>为了移植性考虑，如果使用数据库内置函数，需要对代码相应部分添加详细注释。</p>
-  </li>
-</ul>
-
-<h2 id="section-5">6. 分组</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Group </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class="psql"><span class="line"><span class="c1">-- 分组的意思是对一列或者多列数据归总</span>
-</span><span class="line"><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span><span class="p">,</span> <span class="n">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName</span>
-</span><span class="line"><span class="k">FROM</span> <span class="n">dataset</span>
-</span><span class="line"><span class="k">WHERE</span> <span class="n">column4</span> <span class="o">&gt;</span> <span class="mf">3</span>
-</span><span class="line"><span class="k">GROUP</span> <span class="k">BY</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
-</span><span class="line"><span class="k">HAVING</span> <span class="n">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1</span>
-</span><span class="line"><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">newName</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>
-    <p><code class="language-psql">GROUP BY</code>必须出现在<code class="language-psql">WHERE</code>后，<code class="language-psql">ORDER BY</code>前。</p>
-  </li>
-  <li>
-    <p><code class="language-psql">GROUP BY</code>需要配合聚集函数，比如<code class="language-psql">AVE()</code>，一起使用。</p>
-  </li>
-  <li>
-    <p><code class="language-psql">GROUP BY</code>不保证返回结果有特定顺序，如果需要特定顺序，需要指明<code class="language-psql">ORDER BY</code>。<code class="language-psql">ORDER BY</code>可以使用新列名。</p>
-  </li>
-  <li>
-    <p><code class="language-psql">SELECT</code>语句中出现的列，必须在<code class="language-psql">GROUP BY</code>中出现。</p>
-  </li>
-  <li>
-    <p><code class="language-psql">NULL</code>单独给出，多个<code class="language-psql">NULL</code>合并为一组。</p>
-  </li>
-  <li>
-    <p><code class="language-psql">HAVING</code>对分组汇总后数据筛选，区别<code class="language-psql">WHERE</code>（汇总分组前筛选）。不能使用新列名，比如<code class="language-psql">HAVING newName &gt; 1</code>非法。</p>
-  </li>
-</ul>
-
-<h2 id="postgresql">8. PostgreSQL支持的函数</h2>
-
-<h3 id="section-6">8.1 数值</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>函数名</th>
-      <th>意义</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-psql">ABS()</code></td>
-      <td>绝对值</td>
-    </tr>
-    <tr>
-      <td><code class="language-psql">SQRT()</code></td>
-      <td>平方根</td>
-    </tr>
-    <tr>
-      <td><code class="language-psql">ROUND(v numeric, s int)</code></td>
-      <td>取特定小数位数</td>
-    </tr>
-    <tr>
-      <td><code class="language-psql">AVG()</code></td>
-      <td>平均值，忽略<code class="language-psql">NULL</code></td>
-    </tr>
-    <tr>
-      <td><code class="language-psql">MAX()</code></td>
-      <td>最大值，忽略<code class="language-psql">NULL</code></td>
-    </tr>
-    <tr>
-      <td><code class="language-psql">MIN()</code></td>
-      <td>最小指，忽略<code class="language-psql">NULL</code></td>
-    </tr>
-    <tr>
-      <td><code class="language-psql">SUM()</code></td>
-      <td>求和，忽略<code class="language-psql">NULL</code></td>
-    </tr>
-    <tr>
-      <td><code class="language-psql">COUNT(*)</code></td>
-      <td>所有行数，包括<code class="language-psql">NULL</code></td>
-    </tr>
-    <tr>
-      <td><code class="language-psql">COUNT(column1)</code></td>
-      <td>行数，忽略<code class="language-psql">NULL</code></td>
-    </tr>
-  </tbody>
-</table>
-
-<p>详细参考：<a href="http://www.postgresql.org/docs/9.4/static/functions-math.html">PostgreSQL支持的数值操作</a></p>
-
-<h3 id="section-7">8.2 字符串</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>函数名</th>
-      <th>意义</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-psql">RTRIM()</code></td>
-      <td>删除字符串左侧空格</td>
-    </tr>
-    <tr>
-      <td><code class="language-psql">LTRIM()</code></td>
-      <td>删除字符串右侧空格</td>
-    </tr>
-    <tr>
-      <td><code class="language-psql">TRIM()</code></td>
-      <td>删除双侧空格</td>
-    </tr>
-    <tr>
-      <td><code class="language-psql">SUBSTRING(string [from int] [for int])</code></td>
-      <td>按照索引取字符串（从1开始）</td>
-    </tr>
-    <tr>
-      <td><code class="language-psql">SUBSTRING(string [from int] [for int])</code></td>
-      <td>选取符合POSIX正则匹配字符串</td>
-    </tr>
-    <tr>
-      <td><code class="language-psql">CHAR_LENGTH()</code></td>
-      <td>计算字符串长度，等同于<code class="language-psql">LENGTH()</code></td>
-    </tr>
-    <tr>
-      <td><code class="language-psql">UPPER()</code></td>
-      <td>大写</td>
-    </tr>
-    <tr>
-      <td><code class="language-psql">LOWER()</code></td>
-      <td>小写</td>
-    </tr>
-    <tr>
-      <td><code class="language-psql">LEFT(string, n int)</code></td>
-      <td>截取左侧n个字符串（从1开始）</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>详细参考：<a href="http://www.postgresql.org/docs/9.4/static/functions-string.html">PostgreSQL支持的字符串操作</a></p>
-
-<h3 id="section-8">8.3 日期</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>函数名</th>
-      <th>意义</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-psql">CURRENT_DATE</code></td>
-      <td>当前日期</td>
-    </tr>
-    <tr>
-      <td><code class="language-psql">DATE_PART(text, timestamp)</code></td>
-      <td>选取日期中的年、月或日</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>详细参考：<a href="http://www.postgresql.org/docs/9.4/static/functions-datetime.html">PostgreSQL支持的日期操作</a></p>
-
-<h2 id="section-9">使用建议</h2>
-
-<ol>
-  <li>数据集的名字为一个单词，比如<code class="language-psql">priceCustom</code>而不是一个字符串 <code class="language-psql">'price custom'</code>。同样，命名别名（使用<code class="language-psql">AS</code>）也如此。</li>
-</ol>
-
-<h3 id="section-10">参考资料</h3>
-
-<ul>
-  <li>
-    <p>《SQL必知必会（SQL in 10 Minutes, Sams Teach Yourself (4th Edition)）》<a href="https://book.douban.com/subject/24250054/">豆瓣链接</a></p>
-  </li>
-  <li>
-    <p><a href="https://wiki.postgresql.org/wiki/9.1%E7%AC%AC%E5%9B%9B%E7%AB%A0">PostgreSQL Wiki</a></p>
-  </li>
-</ul>
-
-<h3 id="section-11">更新记录</h3>
-
-<p>2015年7月29日</p>
 ]]></content>
   </entry>
   

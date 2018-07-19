@@ -4,7 +4,7 @@
   <title><![CDATA[Category: R | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/r/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-07-09T12:37:00+08:00</updated>
+  <updated>2018-07-20T00:58:17+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -12,6 +12,156 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[使用RcppParallel并行计算]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2018/07/19/rcppparallel-test/"/>
+    <updated>2018-07-19T22:19:24+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2018/07/19/rcppparallel-test</id>
+    <content type="html"><![CDATA[<p>在之前的<a href="http://yulongniu.bionutshell.org/blog/2014/06/25/parallel-package/">博文</a>中，我详细讨论了使用多种R包实现并行计算。其中，提到一个非常重要的问题：</p>
+
+<pre><code>当循环数很大时（1万以上），`foreach`会变得非常慢。
+</code></pre>
+
+<p>这个问题在Florian Privé的<a href="https://privefl.github.io/blog/a-guide-to-parallelism-in-r/">A guide to parallelism in R</a>中也提到，解释是<code>foreach</code>每次只合并100个循环结果。</p>
+
+<!--more-->
+
+<p>这篇博文里，我尝试使用<span style="color: blue">RcppParallel</span>包调用<code>C++</code>的并行方法。结论是：<strong>在循环数很大时，<span style="color: blue">RcppParallel</span>包提供的并行方法优于<code>foreach</code></strong>。</p>
+
+<p>一个简单的测试场景：对一个数值向量的每个元素做平方根运算，结果按原始顺序返回。在<a href="https://gist.github.com/YulongNiu/add0d9f066299613b64b8458fd5d741a">Gist1</a>和<a href="https://gist.github.com/YulongNiu/9331ea0d3ef46f0571c5f2dc061c3f8a">Gist2</a>中，分别实现了：</p>
+
+<ul>
+  <li>
+    <p><code>SqrtR</code>：用循环非并行操作每个元素。这种方法在<code>R</code>语言编程中不推荐，而应该尽量“向量化”操作。</p>
+  </li>
+  <li>
+    <p><code>SqrtRPara</code>：<code>foreach</code>并行版本。</p>
+  </li>
+  <li>
+    <p><code>SqrtCpp</code>：<code>C++</code>非并行版本。</p>
+  </li>
+  <li>
+    <p><code>SqrtCppPara</code>：<span style="color: blue">RcppParallel</span>包的<code>C++</code>并行版本。</p>
+  </li>
+  <li>
+    <p><code>sqrt</code>：R内置的向量化方法，<code>C</code>非并行版本。</p>
+  </li>
+</ul>
+
+<p>首先，比较5种实现效率，并行计算调用8个线程（Intel i7-4790 CPU@3.6GHz）。测试结果显示<code>SqrtRPara</code>（使用<code>foreach</code>）和非向量化的R版本<code>SqrtR</code>效率较低。</p>
+
+<p><figure class='code'><figcaption><span>5 versions </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>tmp1 <span class="p">&amp;</span>lt<span class="p">;</span>- runif<span class="o">(</span>10e3<span class="o">)</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;all.equal<span class="o">(</span>SqrtCpp<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class='line'>          sqrt<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class='line'>          SqrtR<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class='line'>          SqrtRPara<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class='line'>          SqrtCppPara<span class="o">(</span>tmp1<span class="o">))</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h2 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>&gt;TRUE&lt;/h2&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;microbenchmark<span class="o">(</span>
+</span><span class='line'>  SqrtCpp<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class='line'>  sqrt<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class='line'>  SqrtRPara<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class='line'>  SqrtR<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class='line'>  SqrtCppPara<span class="o">(</span>tmp1<span class="o">))</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h2 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;unit-microseconds&quot;</span>&gt;Unit: microseconds&lt;/h2&gt;
+</span><span class='line'>&lt;p&gt;##               expr         min           lq         mean       median
+</span><span class='line'><span class="c">##      SqrtCpp(tmp1)      55.936      70.8940 8.512877e+01      76.3405</span>
+</span><span class='line'><span class="c">##         sqrt(tmp1)      35.801      46.1545 4.984745e+01      49.2785</span>
+</span><span class='line'><span class="c">##    SqrtRPara(tmp1) 1467517.454 1525986.5995 1.574319e+06 1571794.1885</span>
+</span><span class='line'><span class="c">##        SqrtR(tmp1)    3009.722    3092.6530 4.208856e+03    3165.9255</span>
+</span><span class='line'><span class="c">##  SqrtCppPara(tmp1)      23.432      57.3595 9.719465e+01      93.6050</span>
+</span><span class='line'><span class="c">##            uq         max neval</span>
+</span><span class='line'><span class="c">##       82.8530     837.569   100</span>
+</span><span class='line'><span class="c">##       53.2275      96.710   100</span>
+</span><span class='line'><span class="c">##  1607484.0645 1768153.919   100</span>
+</span><span class='line'><span class="c">##     3461.4475   55492.891   100</span>
+</span><span class='line'><span class="c">##      107.2245    1144.543   100</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>然后，增加循环数，比较效率较高的前三种方法。测试结果显示调用<span style="color: blue">RcppParallel</span>包的<code>C++</code>并行版本<code>SqrtCppPara</code>胜出。</p>
+
+<p><figure class='code'><figcaption><span>top 3 versions </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>tmp1 <span class="p">&amp;</span>lt<span class="p">;</span>- runif<span class="o">(</span>10e6<span class="o">)</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;all.equal<span class="o">(</span>SqrtCpp<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class='line'>          sqrt<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class='line'>          SqrtCppPara<span class="o">(</span>tmp1<span class="o">))</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h2 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;true-1&quot;</span>&gt;TRUE&lt;/h2&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;microbenchmark<span class="o">(</span>
+</span><span class='line'>  SqrtCpp<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class='line'>  sqrt<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class='line'>  SqrtCppPara<span class="o">(</span>tmp1<span class="o">))</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h2 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;unit-milliseconds&quot;</span>&gt;Unit: milliseconds&lt;/h2&gt;
+</span><span class='line'>&lt;p&gt;##               expr      min       lq     mean   median       uq       max neval
+</span><span class='line'><span class="c">##      SqrtCpp(tmp1) 76.68263 78.55146 82.51442 79.48709 87.03026 100.56873   100</span>
+</span><span class='line'><span class="c">##         sqrt(tmp1) 52.19705 53.67441 58.16940 54.60512 66.67642  70.94672   100</span>
+</span><span class='line'><span class="c">##  SqrtCppPara(tmp1) 37.10116 38.34199 42.23896 39.17889 42.98785  61.94529   100</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li><a href="http://gallery.rcpp.org/articles/parallel-vector-sum/">Summing a Vector in Parallel with RcppParallel</a></li>
+</ul>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[为什么不推荐在R语言中随意按照下标操作矩阵]]></title>
@@ -716,172 +866,6 @@ LinkingTo:
 <h3 id="section-3">更新记录</h3>
 
 <p>2016年1月6日</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[R Ggplot2 Notes]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2013/10/02/ggplot2-notes/"/>
-    <updated>2013-10-02T14:47:11+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2013/10/02/ggplot2-notes</id>
-    <content type="html"><![CDATA[<h1 id="r-package-span-stylecolor-blueggplot2span-notes">R Package <span style="color: blue">ggplot2</span> Notes</h1>
-
-<h2 id="basic-grammar">1. Basic grammar</h2>
-
-<h3 id="plot-types">1.1 Plot types</h3>
-
-<p>The R package <span style="color: blue">ggplot2</span> is a famous plot tool for high quality scientific figures. The <span style="color: blue">ggplot2</span> style figures are widely seen in papers published in high quality journals such as <em>PNAS</em>, <em>Nature</em> and <em>Cell</em>.</p>
-
-<p>The input data should be in <strong>data frame</strong> form, and it is easily to use the function <code class="language-r">as.data.frame()</code>. “<span style="color:red"><strong>+</strong></span>” is used to connect different plot statement. A typical <span style="color: blue">ggplot2</span> plot statement is like:</p>
-
-<!--more-->
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="kn">require</span><span class="p">(</span>‘ggplot2’<span class="p">)</span>
-</span><span class='line'>ggplot<span class="p">(</span>data<span class="o">=</span>mpg<span class="p">,</span> mapping<span class="o">=</span>aes<span class="p">(</span>x<span class="o">=</span>cty<span class="p">,</span> y<span class="o">=</span>hwy<span class="p">,</span> colour<span class="o">=</span><span class="kp">factor</span><span class="p">(</span>year<span class="p">)))</span> <span class="o">+</span>
-</span><span class='line'>geom_point<span class="p">()</span> <span class="o">+</span> stat_smooth<span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-<code class="language-r">ggplot()</code>: <strong>data</strong> is a <span style="color:blue">data.frame</span> class object. <strong>mapping</strong> is an <code class="language-r">aes()</code> function to specify the X-axis and Y-axis. When a <code class="language-r">aes()</code> is used, a figure legend will be added. If we do not want the legends appear, use <code class="language-r">show_guide = FALSE</code> in <em>geom_XXX</em> or <em>stat_XXX</em></p>
-
-<p><code class="language-r">geom_point()</code>: is used to plot points with the attributes <strong>x</strong>, <strong>y</strong>, alpha, colour, fill, shape, size.</p>
-
-<p><code class="language-r">geom_line()</code>: is used to plot points with the attributes <strong>x</strong>, <strong>y</strong>, alpha, colour, fill, shape, size.</p>
-
-<p><code class="language-r">geom_bar()</code>: bar plot. <code class="language-r">stat = 'identity'</code> for draw the identical, <code class="language-r">hjust</code> and <code class="language-r">vjust</code> is to adjust the x and y axis distance. <code class="language-r">coord_flip()</code> to reverse X and Y axis. <code class="language-r">position = 'dodge'</code> to set position of two bars, can be set as ‘dodge’, ‘stack’, ‘fill’ and ‘identity’.</p>
-
-<p><code class="language-r">geom_box()</code>: boxplot.</p>
-
-<p><code class="language-r">geom_tile()</code>: fill blocks.</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="c1"># example</span>
-</span><span class='line'><span class="kn">require</span><span class="p">(</span>‘ggplot2’<span class="p">)</span>
-</span><span class='line'>p <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> ggplot<span class="p">(</span>mtcars<span class="p">,</span> aes<span class="p">(</span><span class="kp">factor</span><span class="p">(</span>cyl<span class="p">),</span> mpg<span class="p">))</span>
-</span><span class='line'><span class="c1"># basic plot</span>
-</span><span class='line'>p <span class="o">+</span> geom_boxplot<span class="p">()</span>
-</span><span class='line'><span class="c1"># add colors to boxes</span>
-</span><span class='line'>p <span class="o">+</span> geom_boxplot<span class="p">(</span>aes<span class="p">(</span>fill <span class="o">=</span> <span class="kp">factor</span><span class="p">(</span>cyl<span class="p">)))</span>
-</span><span class='line'><span class="c1"># change default colors</span>
-</span><span class='line'>p <span class="o">+</span> geom_boxplot<span class="p">(</span>aes<span class="p">(</span>fill <span class="o">=</span> <span class="kp">factor</span><span class="p">(</span>cyl<span class="p">)))</span> <span class="o">+</span> scale_fill_manual<span class="p">(</span>values <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>‘red’<span class="p">,</span> ‘green’<span class="p">,</span> ‘blue’<span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-<code class="language-r">geom_rect(mapping = NULL, data = NULL, stat = "identity", position = "identity", ...)</code>: plot rectangles. 
-In <code class="language-r">aes()</code>, <code class="language-r">xmin</code>, <code class="language-r">xmax</code>, <code class="language-r">ymin</code>, and <code class="language-r">ymax</code> are necessary. 
-<code class="language-r">inherit.aes = FALSE</code> may be used if new <code class="language-r">data</code> is applied.</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="c1"># example</span>
-</span><span class='line'>ggplot<span class="p">(</span>mtcars<span class="p">)</span> <span class="o">+</span>
-</span><span class='line'>  geom_density<span class="p">(</span>aes<span class="p">(</span>x<span class="o">=</span>disp<span class="p">,</span> group<span class="o">=</span>cyl<span class="p">,</span> fill<span class="o">=</span>cyl<span class="p">),</span> alpha<span class="o">=</span><span class="m">0.6</span><span class="p">,</span> adjust<span class="o">=</span><span class="m">0.75</span><span class="p">)</span> <span class="o">+</span>
-</span><span class='line'>  geom_rect<span class="p">(</span>data<span class="o">=</span>mtcars<span class="p">[</span><span class="m">1</span><span class="p">,],</span> aes<span class="p">(</span>xmin<span class="o">=</span><span class="m">100</span><span class="p">,</span> xmax<span class="o">=</span><span class="m">200</span><span class="p">,</span> ymin<span class="o">=</span><span class="m">0</span><span class="p">,</span>ymax<span class="o">=</span><span class="kc">Inf</span><span class="p">),</span> fill<span class="o">=</span>”red”<span class="p">,</span> alpha<span class="o">=</span><span class="m">0.2</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<h3 id="statistics">1.2 Statistics</h3>
-
-<p><code class="language-r">geom_smooth()</code>: is used for the add smooth line with the <strong>method</strong> lm, glm, gam, loess and rlm. <code class="language-r">se = TRUE</code> is to display the confident region. The following aesthetics <strong>x</strong>, <strong>y</strong>, alpha, colour, fill, linetype, size, weight could be added.</p>
-
-<p><code class="language-r">stat_boxplot()</code>: plot error lines in boxplot.</p>
-
-<h3 id="add-elements">1.3 Add elements</h3>
-
-<p><code class="language-r">xlab()</code>: change X axis label, set <code>xlab('')</code> to remove the X axis label; <code class="language-r">ylab()</code>: change Y axis label; <code class="language-r">ggtitle()</code>: add figure title; <code class="language-r">scale_y_continuous(limits=c(0, 20))</code> and <code class="language-r">scale_x_continuous(limits=c(0, 20))</code> to adjust range of X and Y axis.</p>
-
-<p><code class="language-r">geom_abline(intercept = 37, slope = -5)</code>: to add line.</p>
-
-<p><code class="language-r">geom_hline</code> and <code class="language-r">geom_vline</code>: to add horizontal and vertical lines.</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="c1"># example </span>
-</span><span class='line'>p <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> ggplot<span class="p">(</span>mtcars<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> wt<span class="p">,</span> y <span class="o">=</span> mpg<span class="p">))</span> <span class="o">+</span> geom_point<span class="p">()</span>
-</span><span class='line'>geom_vline<span class="p">(</span>xintercept <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,</span> colour<span class="o">=</span>”green”<span class="p">,</span> linetype <span class="o">=</span> “longdash”<span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="c1"># ggplot2 line type</span>
-</span><span class='line'>d <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> <span class="kt">data.frame</span><span class="p">(</span>lt<span class="o">=</span><span class="kt">c</span><span class="p">(</span>‘blank’<span class="p">,</span> ‘solid’<span class="p">,</span> ‘dashed’<span class="p">,</span> ‘dotted’<span class="p">,</span> ‘dotdash’<span class="p">,</span> ‘longdash’<span class="p">,</span> ‘twodash’<span class="p">,</span> ‘<span class="m">1</span><span class="bp">F</span>’<span class="p">,</span> ‘F1’<span class="p">,</span> ‘<span class="m">4</span>C88C488’<span class="p">,</span> ‘<span class="m">12345678</span>’<span class="p">))</span>
-</span><span class='line'>ggplot<span class="p">()</span> <span class="o">+</span>
-</span><span class='line'>  scale_x_continuous<span class="p">(</span>name<span class="o">=</span>’’<span class="p">,</span> limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> breaks<span class="o">=</span><span class="kc">NULL</span><span class="p">)</span> <span class="o">+</span>
-</span><span class='line'>  scale_y_discrete<span class="p">(</span>name<span class="o">=</span>’linetype’<span class="p">)</span> <span class="o">+</span>
-</span><span class='line'>  scale_linetype_identity<span class="p">()</span> <span class="o">+</span>
-</span><span class='line'>  geom_segment<span class="p">(</span>data<span class="o">=</span>d<span class="p">,</span> mapping<span class="o">=</span>aes<span class="p">(</span>x<span class="o">=</span><span class="m">0</span><span class="p">,</span> xend<span class="o">=</span><span class="m">1</span><span class="p">,</span> y<span class="o">=</span>lt<span class="p">,</span> yend<span class="o">=</span>lt<span class="p">,</span> linetype<span class="o">=</span>lt<span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p><code class="language-r">geom_text()</code>: to add text. Set <code>parse = TRUE</code> to use expression and greek letters.</p>
-
-<p><code class="language-r">scale_fill_discrete(..., values)</code>: change labels. <code class="language-r">name</code> to reset label names, <code class="language-r">labels</code> to reset labels.</p>
-
-<p><code class="language-r">scale_shape_manual(..., values)</code>: change the shape of points.</p>
-
-<p><code class="language-r">scale_linetype_manual(..., values)</code>: change the types of lines. line referring <a href="http://www.cookbook-r.com/Graphs/Shapes_and_line_types/">R plot</a>.<code>name</code>, <code>value</code>, <code>labels</code> are used to change value.</p>
-
-<p><code class="language-r">scale_color_manual</code> is used for change the colors. Please refer to <a href="http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/">Useful color palette</a>, <a href="http://blog.ggplot2.org/post/24607351280/choosing-colour-palettes-part-ii-educated-choices">Introduction of ggplot2 colors</a>, and <a href="http://research.stowers-institute.org/efg/R/Color/Chart/">R Color Chart</a> 
-. The default ggplot2 colors are generated from the “<em>scales</em>” package, for example the default “hue pallet” could be view as <code class="language-r">show_col(hue_pal(h = c(0, 360) + 15, c = 100, l = 65, h.start = 0, direction = 1)(9))</code></p>
-
-<p><code class="language-r">scale_fill_manual(..., alues)</code> to change filled colors.</p>
-
-<p><code class="language-r">theme</code> is used for exact control. <code>legend.position='none'</code> to remove the side legend.</p>
-
-<h2 id="save-plot">2. Save plot</h2>
-
-<p>The function <code class="language-r">ggsave()</code> is used to save the screen plot to file. <code class="language-r">print()</code> is also applied like:</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='r'><span class='line'>pdf<span class="p">(</span>‘testfile.pdf’<span class="p">)</span>
-</span><span class='line'>q <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> ggplot<span class="p">()</span>
-</span><span class='line'><span class="kp">print</span><span class="p">(</span><span class="kp">q</span><span class="p">)</span>
-</span><span class='line'>dev.off<span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<h2 id="other-issues">3. Other issues</h2>
-
-<h3 id="plot-mutiple-ggplot2">3.1 Plot mutiple ggplot2</h3>
-
-<p>Use <span style="color: blue">gridExtra</span> package to plot multiple ggplot2 figures in the one figure.</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="c1"># example</span>
-</span><span class='line'><span class="kn">require</span><span class="p">(</span>‘gridExtra’<span class="p">)</span>
-</span><span class='line'><span class="c1"># save ggplot object into a list like “plotList”</span>
-</span><span class='line'><span class="kp">do.call</span><span class="p">(</span>grid.arrange<span class="p">,</span> plotList<span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
-
-<ul>
-  <li><a href="http://directlabels.r-forge.r-project.org/examples.html">Better labels</a></li>
-  <li><a href="http://docs.ggplot2.org/current/">ggplot2 doc</a></li>
-  <li><a href="http://zevross.com/blog/2014/08/04/beautiful-plotting-in-r-a-ggplot2-cheatsheet-3/#working-with-colors">ggplot2 cheatsheet</a></li>
-</ul>
-
-<h3 id="section">更新记录</h3>
-
-<p>2014年8月28日</p>
 ]]></content>
   </entry>
   

@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8">
-  <title>两个git的rebase命令应用 - 牛牛龙</title>
+  <title>使用RcppParallel并行计算 - 牛牛龙</title>
   <meta name="author" content="Yulong Niu">
 
   
@@ -14,15 +14,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yulongniu.bionutshell.org/blog/2016/11/11/git-rebase-examples">
+  <link rel="canonical" href="http://yulongniu.bionutshell.org/blog/2018/07/19/rcppparallel-test">
   <link href="/favicon.ico" type="image/png" rel="icon">
   <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
 
   <!-- http://opengraphprotocol.org/ -->
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2016/11/11/git-rebase-examples">
-  <meta property="og:title" content="两个git的rebase命令应用 - 牛牛龙">
+  <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2018/07/19/rcppparallel-test">
+  <meta property="og:title" content="使用RcppParallel并行计算 - 牛牛龙">
   
 
   <!-- mathjax config similar to math.stackexchange -->
@@ -180,7 +180,7 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2016-11-11T16:24:39+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2018-07-19T22:19:24+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="#disqus_thread" itemprop="discussionUrl"
              data-disqus-identifier="http://yulongniu.bionutshell.org">Comments</a>
@@ -189,106 +189,47 @@
     
     
     <h1 class="entry-title" itemprop="name headline">
-        两个git的rebase命令应用
+        使用RcppParallel并行计算
         
     </h1>
     
   </header>
 
 
-<div class="entry-content clearfix" itemprop="articleBody description"><p>介绍两个<code>git rebase</code>的应用场景，一个是合并commits记录，另一个是贡献代码。</p>
+<div class="entry-content clearfix" itemprop="articleBody description"><p>在之前的<a href="http://yulongniu.bionutshell.org/blog/2014/06/25/parallel-package/">博文</a>中，我详细讨论了使用多种R包实现并行计算。其中，提到一个非常重要的问题：</p>
 
-<h2 id="commit">1. 合并commit记录</h2>
+<pre><code>当循环数很大时（1万以上），`foreach`会变得非常慢。
+</code></pre>
 
-<p>假定有多条commits，按照离当前时间从近至远依次为：<code>c1</code>、<code>b2</code>、<code>b1</code>和<code>a1</code>。希望合并<code>c1</code>、<code>b2</code>和<code>b1</code>，即只保留<code>c1</code>和<code>a1</code>。操作流程如下：</p>
+<p>这个问题在Florian Privé的<a href="https://privefl.github.io/blog/a-guide-to-parallelism-in-r/">A guide to parallelism in R</a>中也提到，解释是<code>foreach</code>每次只合并100个循环结果。</p>
 
 <!--more-->
 
-<ul>
-  <li>打开交互式rebase</li>
-</ul>
+<p>这篇博文里，我尝试使用<span style="color: blue">RcppParallel</span>包调用<code>C++</code>的并行方法。结论是：<strong>在循环数很大时，<span style="color: blue">RcppParallel</span>包提供的并行方法优于<code>foreach</code></strong>。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>interactive rebase </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>git rebase -i sha1id-of-a1
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>一个简单的测试场景：对一个数值向量的每个元素做平方根运算，结果按原始顺序返回。在<a href="https://gist.github.com/YulongNiu/add0d9f066299613b64b8458fd5d741a">Gist1</a>和<a href="https://gist.github.com/YulongNiu/9331ea0d3ef46f0571c5f2dc061c3f8a">Gist2</a>中，分别实现了：</p>
 
 <ul>
-  <li>标记合并commits</li>
+  <li>
+    <p><code>SqrtR</code>：用循环非并行操作每个元素。这种方法在<code>R</code>语言编程中不推荐，而应该尽量“向量化”操作。</p>
+  </li>
+  <li>
+    <p><code>SqrtRPara</code>：<code>foreach</code>并行版本。</p>
+  </li>
+  <li>
+    <p><code>SqrtCpp</code>：<code>C++</code>非并行版本。</p>
+  </li>
+  <li>
+    <p><code>SqrtCppPara</code>：<span style="color: blue">RcppParallel</span>包的<code>C++</code>并行版本。</p>
+  </li>
+  <li>
+    <p><code>sqrt</code>：R内置的向量化方法，<code>C</code>非并行版本。</p>
+  </li>
 </ul>
 
-<p>弹出的文本编辑器初始可能为：</p>
+<p>首先，比较5种实现效率，并行计算调用8个线程（Intel i7-4790 CPU@3.6GHz）。测试结果显示<code>SqrtRPara</code>（使用<code>foreach</code>）和非向量化的R版本<code>SqrtR</code>效率较低。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">pick sha1id-of-c1 c1
-</span><span class="line">pick sha1id-of-b2 b2
-</span><span class="line">pick sha1id-of-b1 b1
-</span><span class="line">...</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>修改为：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">pick sha1id-of-c1 c1
-</span><span class="line">squash sha1id-of-b2 b2
-</span><span class="line">squash sha1id-of-b1 b1
-</span><span class="line">...</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>记录合并commits</li>
-</ul>
-
-<p>在弹出的文本编辑器中标记和注释commits</p>
-
-<ul>
-  <li>提交远程</li>
-</ul>
-
-<p>由于本地和远程记录不一致，需要强制合并。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>force push </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>git push -f origin mybranch
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section">2. 贡献代码</h2>
-
-<ul>
-  <li>Fork项目</li>
-</ul>
-
-<p>Fork在GitHub对应的项目（famous/project，master分支）至自己账户（my/project），克隆至本地并添加远程地址：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>clone project </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>git clone https://github.com/my/project.git
-</span><span class="line"><span class="nv">$ </span>git remote add upstream https://github.com/famous/project.git
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>建立分支并提交修改</li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>commit </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>git checkout -b devbranch
-</span><span class="line"><span class="nv">$ </span>git commit -a -m <span class="s1">&#39;these commits&#39;</span>
-</span><span class="line"><span class="nv">$ </span>git push origin devbranch
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ul>
-  <li>获取和合并最新远程修改</li>
-</ul>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>commit </span></figcaption>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>5 versions </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -299,37 +240,104 @@
 <span class="line-number">8</span>
 <span class="line-number">9</span>
 <span class="line-number">10</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>git checkout master
-</span><span class="line"><span class="nv">$ </span>git pull upstream master
-</span><span class="line"><span class="nv">$ </span>git checkout devbranch
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line">tmp1 &lt;- runif<span class="o">(</span>10e3<span class="o">)</span>
 </span><span class="line">
-</span><span class="line"><span class="nv">$ </span>git rebase master
-</span><span class="line"><span class="c">## compare and merge the latest commits</span>
-</span><span class="line"><span class="nv">$ </span>git rebase --continue
+</span><span class="line">all.equal<span class="o">(</span>SqrtCpp<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">          sqrt<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">          SqrtR<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">          SqrtRPara<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">          SqrtCppPara<span class="o">(</span>tmp1<span class="o">))</span>
 </span><span class="line">
-</span><span class="line"><span class="c">## force push</span>
-</span><span class="line"><span class="nv">$ </span>git push -f origin devbranch
+</span><span class="line"><span class="c">## TRUE</span>
+</span><span class="line">
+</span><span class="line">microbenchmark<span class="o">(</span>
+</span><span class="line">  SqrtCpp<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">  sqrt<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">  SqrtRPara<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">  SqrtR<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">  SqrtCppPara<span class="o">(</span>tmp1<span class="o">))</span>
+</span><span class="line">
+</span><span class="line"><span class="c">## Unit: microseconds</span>
+</span><span class="line"><span class="c">##               expr         min           lq         mean       median</span>
+</span><span class="line"><span class="c">##      SqrtCpp(tmp1)      55.936      70.8940 8.512877e+01      76.3405</span>
+</span><span class="line"><span class="c">##         sqrt(tmp1)      35.801      46.1545 4.984745e+01      49.2785</span>
+</span><span class="line"><span class="c">##    SqrtRPara(tmp1) 1467517.454 1525986.5995 1.574319e+06 1571794.1885</span>
+</span><span class="line"><span class="c">##        SqrtR(tmp1)    3009.722    3092.6530 4.208856e+03    3165.9255</span>
+</span><span class="line"><span class="c">##  SqrtCppPara(tmp1)      23.432      57.3595 9.719465e+01      93.6050</span>
+</span><span class="line"><span class="c">##            uq         max neval</span>
+</span><span class="line"><span class="c">##       82.8530     837.569   100</span>
+</span><span class="line"><span class="c">##       53.2275      96.710   100</span>
+</span><span class="line"><span class="c">##  1607484.0645 1768153.919   100</span>
+</span><span class="line"><span class="c">##     3461.4475   55492.891   100</span>
+</span><span class="line"><span class="c">##      107.2245    1144.543   100</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<p>然后，增加循环数，比较效率较高的前三种方法。测试结果显示调用<span style="color: blue">RcppParallel</span>包的<code>C++</code>并行版本<code>SqrtCppPara</code>胜出。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>top 3 versions </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line">tmp1 &lt;- runif<span class="o">(</span>10e6<span class="o">)</span>
+</span><span class="line">
+</span><span class="line">all.equal<span class="o">(</span>SqrtCpp<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">          sqrt<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">          SqrtCppPara<span class="o">(</span>tmp1<span class="o">))</span>
+</span><span class="line">
+</span><span class="line"><span class="c">## TRUE</span>
+</span><span class="line">
+</span><span class="line">microbenchmark<span class="o">(</span>
+</span><span class="line">  SqrtCpp<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">  sqrt<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">  SqrtCppPara<span class="o">(</span>tmp1<span class="o">))</span>
+</span><span class="line">
+</span><span class="line"><span class="c">## Unit: milliseconds</span>
+</span><span class="line"><span class="c">##               expr      min       lq     mean   median       uq       max neval</span>
+</span><span class="line"><span class="c">##      SqrtCpp(tmp1) 76.68263 78.55146 82.51442 79.48709 87.03026 100.56873   100</span>
+</span><span class="line"><span class="c">##         sqrt(tmp1) 52.19705 53.67441 58.16940 54.60512 66.67642  70.94672   100</span>
+</span><span class="line"><span class="c">##  SqrtCppPara(tmp1) 37.10116 38.34199 42.23896 39.17889 42.98785  61.94529   100</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
 <ul>
-  <li>发起pull request。</li>
+  <li><a href="http://gallery.rcpp.org/articles/parallel-vector-sum/">Summing a Vector in Parallel with RcppParallel</a></li>
 </ul>
-
-<h3 id="section-1">参考资料</h3>
-
-<ol>
-  <li>
-    <p><a href="http://itspg.logdown.com/posts/1731-git-squash-master-commits">合并分支</a></p>
-  </li>
-  <li>
-    <p><a href="https://segmentfault.com/a/1190000000736629">贡献代码</a></p>
-  </li>
-</ol>
-
-<h3 id="section-2">更新记录</h3>
-
-<p>2016年11月11日</p>
-
 </div>
 
 
@@ -353,13 +361,13 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2016-11-11T16:24:39+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2018-07-19T22:19:24+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
           
 
 <span class="glyphicon glyphicon-tags"></span>&nbsp;
 <span class="categories">
   
-    <a class='category' href='/blog/categories/linux/'>linux</a>
+    <a class='category' href='/blog/categories/r/'>r</a>
   
 </span>
 
@@ -368,7 +376,7 @@
         
           <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.bionutshell.org/blog/2016/11/11/git-rebase-examples/" data-via="" data-counturl="http://yulongniu.bionutshell.org/blog/2016/11/11/git-rebase-examples/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.bionutshell.org/blog/2018/07/19/rcppparallel-test/" data-via="" data-counturl="http://yulongniu.bionutshell.org/blog/2018/07/19/rcppparallel-test/" >Tweet</a>
   
   
   
@@ -378,10 +386,8 @@
         
           <ul class="meta text-muted pager">
             
-            <li class="previous"><a href="/blog/2016/10/21/linux-sync-google-drive/" title="Previous Post: 命令行使用Google Drive">&laquo; 命令行使用Google Drive</a></li>
+            <li class="previous"><a href="/blog/2018/02/17/estimate-rna-seq/" title="Previous Post: 通过RNA-Seq评估基因表达量的模型">&laquo; 通过RNA-Seq评估基因表达量的模型</a></li>
             
-            
-            <li class="next"><a href="/blog/2017/05/16/java-binary/" title="Next Post: 探索Java基本类型的二进制表示">探索Java基本类型的二进制表示 &raquo;</a></li>
             
           </ul>
         
@@ -406,7 +412,7 @@
   
   <div id="recent_posts" class="list-group">
     
-    <a class="list-group-item " href="/blog/2018/07/19/rcppparallel-test/">使用RcppParallel并行计算</a>
+    <a class="list-group-item active" href="/blog/2018/07/19/rcppparallel-test/">使用RcppParallel并行计算</a>
     
     <a class="list-group-item " href="/blog/2018/02/17/estimate-rna-seq/">通过RNA-Seq评估基因表达量的模型</a>
     
@@ -518,8 +524,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://yulongniu.bionutshell.org/blog/2016/11/11/git-rebase-examples/';
-        var disqus_url = 'http://yulongniu.bionutshell.org/blog/2016/11/11/git-rebase-examples/';
+        var disqus_identifier = 'http://yulongniu.bionutshell.org/blog/2018/07/19/rcppparallel-test/';
+        var disqus_url = 'http://yulongniu.bionutshell.org/blog/2018/07/19/rcppparallel-test/';
         var disqus_script = 'embed.js';
       
     (function () {
