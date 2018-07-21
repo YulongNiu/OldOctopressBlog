@@ -21,27 +21,26 @@ Shadowsocks在主流平台上都有[客户端](https://shadowsocks.org/en/downlo
 
 ### 3.1 软件准备 ###
 
+参考[shadowsocks网站](https://github.com/shadowsocks/shadowsocks-libev)安装。
+
 {% codeblock lang:bash %}
-# apt-get install python-setuptools m2crypto supervisor
-# apt-get install python-pip
-# pip install --upgrade pip
-# pip install --upgrade shadowsocks
+# dnf copr enable librehat/shadowsocks
+# dnf update
+# dnf install shadowsocks-libev
 {% endcodeblock %}
 
 ### 3.2 配置文件 ###
 
-文件位置`/etc/shadowsocks.json`，设置模板：
+文件位置`/etc/shadowsocks-libenv/config.json`，设置模板：
 
 {% raw %}
 ```
 {
-    "server":"***.***.***.***",
-    "local_address": "127.0.0.1",
+    "server":"0.0.0.0",
     "port_password":{
      "8381":"******",
      "8382":"******"
     },
-    "local_port":1080,
     "timeout":600,
     "method":"aes-256-cfb"
 }
@@ -51,7 +50,7 @@ Shadowsocks在主流平台上都有[客户端](https://shadowsocks.org/en/downlo
 ### 3.3 启动 ###
 
 {% codeblock lang:bash %}
-# ssserver -c /etc/shadowsocks.json -d start
+# service shadowsocks-libev start
 {% endcodeblock %}
 
 ## 4. 使用TCP BBR加速 ##
