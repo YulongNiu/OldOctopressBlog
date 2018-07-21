@@ -210,19 +210,19 @@
 
 <h3 id="section-1">3.1 软件准备</h3>
 
+<p>参考<a href="https://github.com/shadowsocks/shadowsocks-libev">shadowsocks网站</a>安装。</p>
+
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># apt-get install python-setuptools m2crypto supervisor</span>
-</span><span class="line"><span class="c"># apt-get install python-pip</span>
-</span><span class="line"><span class="c"># pip install --upgrade pip</span>
-</span><span class="line"><span class="c"># pip install --upgrade shadowsocks</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># dnf copr enable librehat/shadowsocks</span>
+</span><span class="line"><span class="c"># dnf update</span>
+</span><span class="line"><span class="c"># dnf install shadowsocks-libev</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="section-2">3.2 配置文件</h3>
 
-<p>文件位置<code>/etc/shadowsocks.json</code>，设置模板：</p>
+<p>文件位置<code>/etc/shadowsocks-libenv/config.json</code>，设置模板：</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -233,16 +233,12 @@
 <span class="line-number">7</span>
 <span class="line-number">8</span>
 <span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">{
-</span><span class="line">    "server":"***.***.***.***",
-</span><span class="line">    "local_address": "127.0.0.1",
+</span><span class="line">    "server":"0.0.0.0",
 </span><span class="line">    "port_password":{
 </span><span class="line">     "8381":"******",
 </span><span class="line">     "8382":"******"
 </span><span class="line">    },
-</span><span class="line">    "local_port":1080,
 </span><span class="line">    "timeout":600,
 </span><span class="line">    "method":"aes-256-cfb"
 </span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
@@ -250,7 +246,7 @@
 <h3 id="section-3">3.3 启动</h3>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># ssserver -c /etc/shadowsocks.json -d start</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># service shadowsocks-libev start</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h2 id="tcp-bbr">4. 使用TCP BBR加速</h2>
