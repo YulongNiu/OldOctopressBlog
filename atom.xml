@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-07-21T17:08:55+08:00</updated>
+  <updated>2018-07-21T23:10:46+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -36,7 +36,10 @@
     <p><code>SqrtR</code>：用循环非并行操作每个元素。这种方法在<code>R</code>语言编程中不推荐，而应该尽量“向量化”操作。</p>
   </li>
   <li>
-    <p><code>SqrtRPara</code>：<code>foreach</code>并行版本。</p>
+    <p><code>SqrtRforeach</code>：<code>foreach</code>并行版本。</p>
+  </li>
+  <li>
+    <p><code>SqrtRParSapply</code>: <code>parSapply</code>并行版本。</p>
   </li>
   <li>
     <p><code>SqrtCpp</code>：<code>C++</code>非并行版本。</p>
@@ -82,36 +85,44 @@
 <span class="line-number">28</span>
 <span class="line-number">29</span>
 <span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
 </pre></td><td class="code"><pre><code class="bash"><span class="line">tmp1 &lt;- runif<span class="o">(</span>10e3<span class="o">)</span>
 </span><span class="line">
 </span><span class="line">all.equal<span class="o">(</span>SqrtCpp<span class="o">(</span>tmp1<span class="o">)</span>,
 </span><span class="line">          sqrt<span class="o">(</span>tmp1<span class="o">)</span>,
 </span><span class="line">          SqrtR<span class="o">(</span>tmp1<span class="o">)</span>,
-</span><span class="line">          SqrtRPara<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">          SqrtRforeach<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">          SqrtRParSapply<span class="o">(</span>tmp1<span class="o">)</span>,
 </span><span class="line">          SqrtCppPara<span class="o">(</span>tmp1<span class="o">))</span>
 </span><span class="line">
 </span><span class="line"><span class="c">## TRUE</span>
 </span><span class="line">
 </span><span class="line">microbenchmark<span class="o">(</span>
-</span><span class="line">  SqrtCpp<span class="o">(</span>tmp1<span class="o">)</span>,
-</span><span class="line">  sqrt<span class="o">(</span>tmp1<span class="o">)</span>,
-</span><span class="line">  SqrtRPara<span class="o">(</span>tmp1<span class="o">)</span>,
-</span><span class="line">  SqrtR<span class="o">(</span>tmp1<span class="o">)</span>,
-</span><span class="line">  SqrtCppPara<span class="o">(</span>tmp1<span class="o">))</span>
+</span><span class="line">    SqrtCpp<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">    sqrt<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">    SqrtR<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">    SqrtRforeach<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">    SqrtRParSapply<span class="o">(</span>tmp1<span class="o">)</span>,
+</span><span class="line">    SqrtCppPara<span class="o">(</span>tmp1<span class="o">))</span>
 </span><span class="line">
 </span><span class="line"><span class="c">## Unit: microseconds</span>
-</span><span class="line"><span class="c">##               expr         min           lq         mean       median</span>
-</span><span class="line"><span class="c">##      SqrtCpp(tmp1)      55.936      70.8940 8.512877e+01      76.3405</span>
-</span><span class="line"><span class="c">##         sqrt(tmp1)      35.801      46.1545 4.984745e+01      49.2785</span>
-</span><span class="line"><span class="c">##    SqrtRPara(tmp1) 1467517.454 1525986.5995 1.574319e+06 1571794.1885</span>
-</span><span class="line"><span class="c">##        SqrtR(tmp1)    3009.722    3092.6530 4.208856e+03    3165.9255</span>
-</span><span class="line"><span class="c">##  SqrtCppPara(tmp1)      23.432      57.3595 9.719465e+01      93.6050</span>
-</span><span class="line"><span class="c">##            uq         max neval</span>
-</span><span class="line"><span class="c">##       82.8530     837.569   100</span>
-</span><span class="line"><span class="c">##       53.2275      96.710   100</span>
-</span><span class="line"><span class="c">##  1607484.0645 1768153.919   100</span>
-</span><span class="line"><span class="c">##     3461.4475   55492.891   100</span>
-</span><span class="line"><span class="c">##      107.2245    1144.543   100</span>
+</span><span class="line"><span class="c">##                 expr         min          lq         mean       median</span>
+</span><span class="line"><span class="c">##        SqrtCpp(tmp1)      56.295      72.648 9.338755e+01      82.0335</span>
+</span><span class="line"><span class="c">##           sqrt(tmp1)      36.216      46.074 4.865115e+01      48.3090</span>
+</span><span class="line"><span class="c">##          SqrtR(tmp1)    3030.682    3116.718 4.229971e+03    3947.9380</span>
+</span><span class="line"><span class="c">##   SqrtRforeach(tmp1) 1488851.181 1532937.096 1.561865e+06 1547849.9610</span>
+</span><span class="line"><span class="c">## SqrtRParSapply(tmp1)  954757.348  963478.755 9.701841e+05  969925.9090</span>
+</span><span class="line"><span class="c">##    SqrtCppPara(tmp1)      23.837      79.314 1.069003e+02     104.5975</span>
+</span><span class="line"><span class="c">##           uq         max neval</span>
+</span><span class="line"><span class="c">##      89.0800    1183.279   100</span>
+</span><span class="line"><span class="c">##      52.2995      66.875   100</span>
+</span><span class="line"><span class="c">##    4560.0930   10391.379   100</span>
+</span><span class="line"><span class="c">## 1584297.5760 1750382.995   100</span>
+</span><span class="line"><span class="c">##  974233.5690 1012400.281   100</span>
+</span><span class="line"><span class="c">##     111.9160    1331.442   100</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>然后，增加循环数，比较效率较高的前三种方法。测试结果显示调用<span style="color: blue">RcppParallel</span>包的<code>C++</code>并行版本<code>SqrtCppPara</code>胜出。</p>
@@ -160,6 +171,10 @@
 <ul>
   <li><a href="http://gallery.rcpp.org/articles/parallel-vector-sum/">Summing a Vector in Parallel with RcppParallel</a></li>
 </ul>
+
+<h3 id="section">更新记录</h3>
+
+<p>2018年6月21日</p>
 ]]></content>
   </entry>
   
