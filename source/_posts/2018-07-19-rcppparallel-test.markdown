@@ -20,7 +20,9 @@ categories: R
 
 * `SqrtR`：用循环非并行操作每个元素。这种方法在`R`语言编程中不推荐，而应该尽量“向量化”操作。
 
-* `SqrtRPara`：`foreach`并行版本。
+* `SqrtRforeach`：`foreach`并行版本。
+
+* `SqrtRParSapply`: `parSapply`并行版本。
 
 * `SqrtCpp`：`C++`非并行版本。
 
@@ -36,31 +38,36 @@ tmp1 <- runif(10e3)
 all.equal(SqrtCpp(tmp1),
           sqrt(tmp1),
           SqrtR(tmp1),
-          SqrtRPara(tmp1),
+          SqrtRforeach(tmp1),
+          SqrtRParSapply(tmp1),
           SqrtCppPara(tmp1))
 
 ## TRUE
 
 microbenchmark(
-  SqrtCpp(tmp1),
-  sqrt(tmp1),
-  SqrtRPara(tmp1),
-  SqrtR(tmp1),
-  SqrtCppPara(tmp1))
-  
+    SqrtCpp(tmp1),
+    sqrt(tmp1),
+    SqrtR(tmp1),
+    SqrtRforeach(tmp1),
+    SqrtRParSapply(tmp1),
+    SqrtCppPara(tmp1))
+
 ## Unit: microseconds
-##               expr         min           lq         mean       median
-##      SqrtCpp(tmp1)      55.936      70.8940 8.512877e+01      76.3405
-##         sqrt(tmp1)      35.801      46.1545 4.984745e+01      49.2785
-##    SqrtRPara(tmp1) 1467517.454 1525986.5995 1.574319e+06 1571794.1885
-##        SqrtR(tmp1)    3009.722    3092.6530 4.208856e+03    3165.9255
-##  SqrtCppPara(tmp1)      23.432      57.3595 9.719465e+01      93.6050
-##            uq         max neval
-##       82.8530     837.569   100
-##       53.2275      96.710   100
-##  1607484.0645 1768153.919   100
-##     3461.4475   55492.891   100
-##      107.2245    1144.543   100
+##                 expr         min          lq         mean       median
+##        SqrtCpp(tmp1)      56.295      72.648 9.338755e+01      82.0335
+##           sqrt(tmp1)      36.216      46.074 4.865115e+01      48.3090
+##          SqrtR(tmp1)    3030.682    3116.718 4.229971e+03    3947.9380
+##   SqrtRforeach(tmp1) 1488851.181 1532937.096 1.561865e+06 1547849.9610
+## SqrtRParSapply(tmp1)  954757.348  963478.755 9.701841e+05  969925.9090
+##    SqrtCppPara(tmp1)      23.837      79.314 1.069003e+02     104.5975
+##           uq         max neval
+##      89.0800    1183.279   100
+##      52.2995      66.875   100
+##    4560.0930   10391.379   100
+## 1584297.5760 1750382.995   100
+##  974233.5690 1012400.281   100
+##     111.9160    1331.442   100
+
 {% endcodeblock %} 
 
 然后，增加循环数，比较效率较高的前三种方法。测试结果显示调用<span style="color: blue">RcppParallel</span>包的`C++`并行版本`SqrtCppPara`胜出。
@@ -90,3 +97,7 @@ microbenchmark(
 ### <a id="Ref">参考网址</a> ###
 
 * [Summing a Vector in Parallel with RcppParallel](http://gallery.rcpp.org/articles/parallel-vector-sum/)
+
+### 更新记录 ###
+
+2018年6月21日
