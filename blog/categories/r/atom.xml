@@ -4,7 +4,7 @@
   <title><![CDATA[Category: R | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/r/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-07-21T23:10:46+08:00</updated>
+  <updated>2018-07-23T14:29:57+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -279,7 +279,7 @@
 
     <ul>
       <li>
-        <p>全是0<code>ones&lt;mat&gt;(3, 4);</code>/<code>vec(10, fill::ones);</code>/；全是1<code>zeros&lt;vec&gt;(10);</code>/<code>mat(3, 4, fill::zeros);</code>；全是某个数<code>mat a(4, 5); a.fill(123.4);</code>。</p>
+        <p>全是1<code>ones&lt;mat&gt;(3, 4);</code>/<code>vec(10, fill::ones);</code>/；全是0<code>zeros&lt;vec&gt;(10);</code>/<code>mat(3, 4, fill::zeros);</code>；全是某个数<code>mat a(4, 5); a.fill(123.4);</code>。</p>
       </li>
       <li>
         <p>连续向量，规定长度<code>linspace&lt;vec&gt;(0, 5, 6);</code>；连续向量，规定间距<code>regspace&lt;vec&gt;(0, 2, 9);</code>。</p>
