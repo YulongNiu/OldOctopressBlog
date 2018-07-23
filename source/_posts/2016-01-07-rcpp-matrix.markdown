@@ -26,7 +26,7 @@ categories: R
 
 * 特殊向量或矩阵
 
-   * 全是0`ones<mat>(3, 4);`/`vec(10, fill::ones);`/；全是1`zeros<vec>(10);`/`mat(3, 4, fill::zeros);`；全是某个数`mat a(4, 5); a.fill(123.4);`。
+   * 全是1`ones<mat>(3, 4);`/`vec(10, fill::ones);`/；全是0`zeros<vec>(10);`/`mat(3, 4, fill::zeros);`；全是某个数`mat a(4, 5); a.fill(123.4);`。
    
    * 连续向量，规定长度`linspace<vec>(0, 5, 6);`；连续向量，规定间距`regspace<vec>(0, 2, 9);`。
 
