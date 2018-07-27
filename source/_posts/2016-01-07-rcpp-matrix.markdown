@@ -75,10 +75,46 @@ arma::mat TestMat(arma::mat M, double a) {
 
 
 
+## 3. <span style="color: blue">bigmemory</span> ##
+
+<span style="color: blue">bigmemory</span>包提供了四种数据类型的矩阵，即`double`（默认）、`integer`、`short`和`char`。对于`big.matrix`对象`pMat`，四种类型通过通过`MatrixAccessor<double> macc(*pMat)`、`MatrixAccessor<int> macc(*pMat)`、`MatrixAccessor<short> macc(*pMat)`和`MatrixAccessor<char> macc(*pMat)`提取元素。`pMat`有三种属性`nrow()`、`ncol()`和`matrix_type()`可以使用。一下代码示例展示了将`big.matrix`转换为`matrix`：
 
 
+{% codeblock lang:cpp manipulate big.matrix with cpp %}
+#include <Rcpp.h>
+// [[Rcpp::depends(BH, bigmemory)]]
+#include <bigmemory/MatrixAccessor.hpp>
+
+#include <numeric>
+
+using namespace Rcpp;
 
 
+// [[Rcpp::export]]
+Rcpp::NumericMatrix TestBigMat(XPtr<BigMatrix> pMat) {
+
+  MatrixAccessor<int> macc(*pMat);
+
+  int n = pMat->nrow();
+  int m = pMat->ncol();
+
+  NumericMatrix resMat(n, m);
+
+  for (int i = 0; i < n; ++i) {
+    for (int j = 0; j < m; ++j) {
+      resMat(i, j) = macc[j][i];
+    }
+  }
+
+  return resMat;
+}
+{% endcodeblock %}
+
+注意事项：
+
+* 获取元素为`列-行`形式，因为`big.matrix`按照列存储矩阵。例如`macc[j][i]`表示`i-1`行的`j-1`元素。
+
+* 调用函数使用`big.matrix`的地址，例如`TestBigMat(bigmat@address)`。
 
 ### <a id="Ref">参考网址</a> ###
 
