@@ -4,7 +4,7 @@
   <title><![CDATA[Category: R | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/r/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-07-27T16:16:48+08:00</updated>
+  <updated>2018-07-29T01:34:58+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -883,7 +883,7 @@
 </pre></td><td class='code'><pre><code class='r'><span class='line'>use_rcpp<span class="p">()</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
-<p>之后，在<code class="language-r">DESCRIPTION</code>中添加依赖或者需要链接的包名称，比如：</p>
+<p>其次，在<code class="language-r">DESCRIPTION</code>中添加依赖或者需要链接的包名称，比如：</p>
 
 <p>
 <code>
@@ -895,19 +895,41 @@ LinkingTo:
 </code>
 </p>
 
-<p>然后，在包的<code class="language-bash">R/</code>目录下，添加一个文件<code class="language-bash">RcppChk.R</code>（文件名称自定），并写入：</p>
+<p>之后，在包的<code class="language-bash">R/</code>目录下，添加一个文件<code class="language-bash">RcppChk.R</code>（文件名称自定），并写入：</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="c1">#’ @useDynLib my-pkg-name, .registration = TRUE</span>
+</span><span class='line'><span class="c1">#’ @importFrom Rcpp sourceCpp</span>
+</span><span class='line'><span class="kc">NULL</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>注意，修改<code class="language-bash">my-pkg-name</code>为自己的包名称。</p>
+
+<p>然后，在包的<code class="language-bash">src/</code>目录下，添加一个文件<code class="language-bash">registerDynamicSymbol.c</code>（文件名称自定），并写入：</p>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="c1">#’ @useDynLib my-pkg-name</span>
-</span><span class='line'><span class="c1">#’ @importFrom Rcpp sourceCpp</span>
-</span><span class='line'><span class="kc">NULL</span>
-</span><span class='line'><span class="c1">#&amp;gt; NULL </span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="c1">// RegisteringDynamic Symbols&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;include-rh&quot;</span><span class="o">&gt;</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">R</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;&lt;/</span><span class="n">R</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">Rinternals</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span><span class='line'><span class="cp">#include &amp;lt;R_ext/Rdynload.h&amp;gt;&lt;/Rinternals.h&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">void</span> <span class="n">R_init_markovchain</span><span class="p">(</span><span class="n">DllInfo</span><span class="o">*</span> <span class="n">info</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">R_registerRoutines</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">R_useDynamicSymbols</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">TRUE</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure></p>
-
-<p>注意，修改<code class="language-bash">my-pkg-name</code>为自己的包名称。</p>
 
 <p>最后，所有cpp代码都写在src文件夹下。</p>
 
@@ -954,7 +976,7 @@ LinkingTo:
 
 <h3 id="section-3">更新记录</h3>
 
-<p>2016年1月6日</p>
+<p>2018年7月28日</p>
 ]]></content>
   </entry>
   
