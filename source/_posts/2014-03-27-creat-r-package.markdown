@@ -29,7 +29,7 @@ library('roxygen2')
 use_rcpp()
 {% endcodeblock %}
 
-之后，在`DESCRIPTION`{:.language-r}中添加依赖或者需要链接的包名称，比如：
+其次，在`DESCRIPTION`{:.language-r}中添加依赖或者需要链接的包名称，比如：
 
 {% raw %}
 ```
@@ -41,16 +41,30 @@ LinkingTo:
 ```
 {% endraw %}
 
-然后，在包的`R/`{:.language-bash}目录下，添加一个文件`RcppChk.R`{:.language-bash}（文件名称自定），并写入：
+之后，在包的`R/`{:.language-bash}目录下，添加一个文件`RcppChk.R`{:.language-bash}（文件名称自定），并写入：
 
 {% codeblock lang:r %}
-#' @useDynLib my-pkg-name
+#' @useDynLib my-pkg-name, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
 NULL
-#> NULL 
 {% endcodeblock %}
 
 注意，修改`my-pkg-name`{:.language-bash}为自己的包名称。
+
+然后，在包的`src/`{:.language-bash}目录下，添加一个文件`registerDynamicSymbol.c`{:.language-bash}（文件名称自定），并写入：
+
+{% codeblock lang:c %}
+// RegisteringDynamic Symbols
+
+#include <R.h>
+#include <Rinternals.h>
+#include <R_ext/Rdynload.h>
+
+void R_init_markovchain(DllInfo* info) {
+  R_registerRoutines(info, NULL, NULL, NULL, NULL);
+  R_useDynamicSymbols(info, TRUE);
+} 
+{% endcodeblock %}
 
 最后，所有cpp代码都写在src文件夹下。
 
@@ -92,4 +106,4 @@ build()
 
 ### 更新记录 ###
 
-2016年1月6日
+2018年7月28日
