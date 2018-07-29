@@ -116,6 +116,42 @@ Rcpp::NumericMatrix TestBigMat(XPtr<BigMatrix> pMat) {
 
 * 调用函数使用`big.matrix`的地址，例如`TestBigMat(bigmat@address)`。
 
+同样，<span style="color: blue">RcppArmadillo</span>也能与<span style="color: blue">bigmemory</span>结合，例如：
+
+{% codeblock lang:cpp manipulate big.matrix with armadillo %}
+#include <RcppArmadillo.h>
+#include <bigmemory/MatrixAccessor.hpp>
+
+#include <numeric>
+
+// [[Rcpp::depends(RcppArmadillo, bigmemory)]]
+
+using namespace Rcpp;
+using namespace arma;
+
+// [[Rcpp::export]]
+Rcpp::NumericMatrix TestBigMatArma(SEXP pMat) {
+
+  XPtr<BigMatrix> xpMat(pMat);
+
+  Mat<int> macc = Mat<int>((int *)xpMat->matrix(), xpMat->nrow(), xpMat->ncol(), false);
+
+  int n = xpMat->nrow();
+  int m = xpMat->ncol();
+
+  NumericMatrix resMat(n, m);
+
+  for (int i = 0; i < n; ++i) {
+    for (int j = 0; j < m; ++j) {
+      resMat(i, j) = macc(i, j);
+    }
+  }
+
+  return resMat;
+}
+{% endcodeblock %}
+
+
 ### <a id="Ref">参考网址</a> ###
 
 * [Armadillo矩阵](http://arma.sourceforge.net/docs.html#adv_constructors_mat)
@@ -132,7 +168,7 @@ Rcpp::NumericMatrix TestBigMat(XPtr<BigMatrix> pMat) {
 
 ### 更新记录 ###
 
-2018年7月27日
+2018年7月29日
 
 
 
