@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-07-29T21:45:14+08:00</updated>
+  <updated>2018-08-01T23:57:02+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -2554,6 +2554,9 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
   </li>
   <li>
     <p><a href="http://statr.me/rcpp-note/">Rcpp note</a></p>
+  </li>
+  <li>
+    <p><a href="https://teuder.github.io/rcpp4everyone_en/">Rcpp for everyone</a></p>
   </li>
 </ul>
 
