@@ -164,7 +164,7 @@ Rcpp::NumericMatrix TestBigMatArma(SEXP pMat) {
 
 * [Rcpp note](http://statr.me/rcpp-note/) 
 
-
+* [Rcpp for everyone](https://teuder.github.io/rcpp4everyone_en/)
 
 ### 更新记录 ###
 
