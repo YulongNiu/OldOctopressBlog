@@ -6,13 +6,13 @@ comments: true
 categories: bioinfor
 ---
 
-本文收集了一些常用参考基因组的下载网址。
+本文收集了一些常用参考基因组的下载网址和补充说明。
 
 1. [NCBI genome](https://www.ncbi.nlm.nih.gov/genome/) 
 
 2. [Ensembl FTP](http://uswest.ensembl.org/info/data/ftp/index.html) 
 
-3. [UCSC FTP](http://hgdownload.cse.ucsc.edu/goldenPath/) 
+3. [UCSC FTP](http://hgdownload.cse.ucsc.edu/goldenPath/)：cytoband文件可能含有`gneg`等标识，其中`acen`表示着丝粒区域、`stalk`表示近端着丝粒区域、`gvar`表示异染色质，例如臂间或端粒区域。
 
 4. [GENCODE](http://www.gencodegenes.org/)：只有人和大鼠，注释较好。
 
@@ -27,7 +27,7 @@ categories: bioinfor
 
 ### 更新记录 ###
 
-2016年9月10日
+2018年8月6日
 
 
 
