@@ -246,7 +246,7 @@
 <h3 id="section-3">3.3 启动</h3>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># service shadowsocks-libev start</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># ss-manager -c /etc/shadowsocks-libev/config.json --manager-address 127.0.0.1:8000 -u config.json</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h2 id="tcp-bbr">4. 使用TCP BBR加速</h2>
@@ -295,6 +295,9 @@
   </li>
   <li>
     <p><a href="https://dirtysalt.github.io/blogs/boost-shadowsocks-with-tcp-bbr.html">通过TCP BBR为ShadowSocks加速</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/shadowsocks/shadowsocks-libev/issues/1668">shadowsocks-libev多用户</a></p>
   </li>
 </ol>
 
