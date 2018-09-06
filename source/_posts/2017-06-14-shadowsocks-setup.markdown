@@ -50,7 +50,7 @@ Shadowsocks在主流平台上都有[客户端](https://shadowsocks.org/en/downlo
 ### 3.3 启动 ###
 
 {% codeblock lang:bash %}
-# service shadowsocks-libev start
+# ss-manager -c /etc/shadowsocks-libev/config.json --manager-address 127.0.0.1:8000 -u config.json
 {% endcodeblock %}
 
 ## 4. 使用TCP BBR加速 ##
@@ -88,6 +88,8 @@ $ proxychains4 git push origin master
 1. [更改谷歌语言偏好](http://nga.178.com/read.php?tid=8798506)
 
 2. [通过TCP BBR为ShadowSocks加速](https://dirtysalt.github.io/blogs/boost-shadowsocks-with-tcp-bbr.html) 
+
+3. [shadowsocks-libev多用户](https://github.com/shadowsocks/shadowsocks-libev/issues/1668)
 
 
 ### 更新记录 ###
