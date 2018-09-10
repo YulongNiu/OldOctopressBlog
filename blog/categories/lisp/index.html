@@ -25,28 +25,35 @@
   <meta property="og:title" content="Category: Lisp - 牛牛龙">
   <meta property="og:description" content="Category: lisp">
 
-  <!-- ref of mathjax config https://zishuaiz.github.io/blog/how-to-enable-mathjax-in-github-pages -->
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script>
+  <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
  MathJax.Hub.Config({
-     config: ["MMLorHTML.js"],
-     extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js", "color.js"],
-     jax: ["input/TeX"],
      tex2jax: {
          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-         skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-         processEscapes: false
-     },
-     TeX: {
-         TagSide: "right",
-         TagIndent: ".8em",
-         MultLineWidth: "85%",
-         unicode: {
-             fonts: "STIXGeneral,'Arial Unicode MS'"
-         }
-     },
-     showProcessingMessages: false
+         processEscapes: true
+     }
  });
+</script>
+
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Config({
+     tex2jax: {
+         skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+     }
+ });
+</script>
+
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Queue(function() {
+     var all = MathJax.Hub.getAllJax(), i;
+     for(i=0; i < all.length; i += 1) {
+         all[i].SourceElement().parentNode.className += ' has-jax';
+     }
+ });
+</script>
+
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
 <script type="text/x-mathjax-config">
