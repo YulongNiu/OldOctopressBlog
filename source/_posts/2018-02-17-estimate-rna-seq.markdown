@@ -5,7 +5,6 @@ date: 2018-02-17 18:23:29 +0800
 comments: true
 categories: bioinfor 
 published: true
-mathjax: true
 ---
 
 <script type="text/x-mathjax-config">
