@@ -1,23 +1,25 @@
-<!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
+<!-- ref of mathjax config https://zishuaiz.github.io/blog/how-to-enable-mathjax-in-github-pages -->
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+ MathJax.Hub.Config({
+     config: ["MMLorHTML.js"],
+     extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js", "color.js"],
+     jax: ["input/TeX"],
+     tex2jax: {
+         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+         displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+         processEscapes: false
+     },
+     TeX: {
+         TagSide: "right",
+         TagIndent: ".8em",
+         MultLineWidth: "85%",
+         unicode: {
+             fonts: "STIXGeneral,'Arial Unicode MS'"
+         }
+     },
+     showProcessingMessages: false
+ });
 </script>
 
 <script src="{{ root_url }}/javascripts/libs/jquery/jquery-2.0.3.min.js"></script>
