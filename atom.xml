@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-09-10T15:44:06+08:00</updated>
+  <updated>2018-09-11T19:11:55+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -340,8 +340,8 @@ L &= \prod_{f \in F_t} \prod_{t \in T} \frac{\alpha_t}{\tildel} \\
 <script type="math/tex; mode=display">% &lt;![CDATA[
 \begin{align*}
 \begin{split}
-\lambda_k &= \frac{y_k \rho_k^{(n)}}{\sum\limits_{i=1}^{K} y_i \rho_i^{(n)}} ,\ k=1, 2, \dots, K \\
-\rho_k^{(n+1)} &= \frac{\frac{\sum_\limits{f \in F} \lambda_k}{\widetilde{l_k}}}{\sum\limits_{i=1}^{K} \frac{\sum_\limits{f \in F} \lambda_i}{\widetilde{l_i}}} ,\ k=1, 2, \dots, K
+\lambda_k^{(n+1)} &= \frac{y_k \rho_k^{(n)}}{\sum\limits_{i=1}^{K} y_i \rho_i^{(n)}} ,\ k=1, 2, \dots, K \\
+\rho_k^{(n+1)} &= \frac{\frac{\sum_\limits{f \in F} \lambda_k^{(n+1)}}{\widetilde{l_k}}}{\sum\limits_{i=1}^{K} \frac{\sum_\limits{f \in F} \lambda_i^{(n+1)}}{\widetilde{l_i}}} ,\ k=1, 2, \dots, K
 \end{split}
 \end{align*} %]]&gt;</script>
 
