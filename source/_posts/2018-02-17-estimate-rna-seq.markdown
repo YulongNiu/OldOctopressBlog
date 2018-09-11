@@ -182,8 +182,8 @@ $$
 $$
 \begin{align*}
 \begin{split}
-\lambda_k &= \frac{y_k \rho_k^{(n)}}{\sum\limits_{i=1}^{K} y_i \rho_i^{(n)}} ,\ k=1, 2, \dots, K \\
-\rho_k^{(n+1)} &= \frac{\frac{\sum_\limits{f \in F} \lambda_k}{\widetilde{l_k}}}{\sum\limits_{i=1}^{K} \frac{\sum_\limits{f \in F} \lambda_i}{\widetilde{l_i}}} ,\ k=1, 2, \dots, K
+\lambda_k^{(n+1)} &= \frac{y_k \rho_k^{(n)}}{\sum\limits_{i=1}^{K} y_i \rho_i^{(n)}} ,\ k=1, 2, \dots, K \\
+\rho_k^{(n+1)} &= \frac{\frac{\sum_\limits{f \in F} \lambda_k^{(n+1)}}{\widetilde{l_k}}}{\sum\limits_{i=1}^{K} \frac{\sum_\limits{f \in F} \lambda_i^{(n+1)}}{\widetilde{l_i}}} ,\ k=1, 2, \dots, K
 \end{split}
 \end{align*}
 $$

@@ -25,18 +25,12 @@
  });
 </script>
 
-<script type="text/javascript"
-        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<!-- latest mathjax -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
 </script>
 
-<script type="text/x-mathjax-config">
- MathJax.Hub.Queue(function() {
-     var all = MathJax.Hub.getAllJax(), i;
-     for(i=0; i < all.length; i += 1) {
-         all[i].SourceElement().parentNode.className += ' has-jax';
-     }
- });
-</script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/ ; script-src 'self' https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/ 'unsafe-eval';style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self';">
 
 <script src="{{ root_url }}/javascripts/libs/jquery/jquery-2.0.3.min.js"></script>
 
