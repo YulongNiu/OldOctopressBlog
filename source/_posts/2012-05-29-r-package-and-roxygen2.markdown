@@ -1,6 +1,5 @@
 ---
 layout: post
-bootstrap_theme_url: http://bootswatch.com/readable/bootstrap.css
 title: "R包制作和roxygen2使用说明"
 date: 2012-05-29 19:46:59 -0400
 comments: true
