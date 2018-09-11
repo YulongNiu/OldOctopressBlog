@@ -1,6 +1,5 @@
 ---
 layout: page
-bootstrap_theme_url: https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css
 title: "WhoAmI"
 date: 2014-12-02 20:48
 comments: true

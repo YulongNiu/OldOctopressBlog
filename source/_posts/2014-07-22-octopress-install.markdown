@@ -1,6 +1,5 @@
 ---
 layout: post
-bootstrap_theme_url: https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css
 title: "Octopress安装和使用"
 date: 2014-07-22 13:45:46 -0400
 comments: true
@@ -269,7 +268,7 @@ rake new_page[ANewPage]
 
 ------------------
 
-|---------------+---------------+--------------+---------|
+|---------------|---------------|--------------|---------|
 |**X/Y**        |**1(Presence)**|**0(Absence)**|**Sum**  |
 |:--------------|:-------------:|:------------:|--------:|
 |**1(Presence)**|a              |b             |a+b      |
@@ -283,7 +282,7 @@ rake new_page[ANewPage]
 
 {% raw %}
 ```
-|---------------+---------------+--------------+---------|
+|---------------|---------------|--------------|---------|
 |**X/Y**        |**1(Presence)**|**0(Absence)**|**Sum**  |
 |:--------------|:-------------:|:------------:|--------:|
 |**1(Presence)**|a              |b             |a+b      |
@@ -297,7 +296,49 @@ rake new_page[ANewPage]
 
 如果使用Emacs，可以使用Emacs的[org模式](http://orgmode.org/)快速建立和编辑表格。
 
-## 16. 重新克隆github上的博文和设置 ##
+## 16. 设置MathJax ##
+
+在`source/_includes/custom/head.html`设置：
+
+{% codeblock lang:html Setting MathJax for https %}
+<!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Config({
+     tex2jax: {
+         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+         processEscapes: true,
+         extensions: ["color.js"]
+     }
+ });
+</script>
+
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Config({
+     tex2jax: {
+         skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+     }
+ });
+</script>
+
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Queue(function() {
+     var all = MathJax.Hub.getAllJax(), i;
+     for(i=0; i < all.length; i += 1) {
+         all[i].SourceElement().parentNode.className += ' has-jax';
+     }
+ });
+</script>
+
+<!-- latest mathjax -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+</script>
+
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/ ; script-src 'self' https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/ 'unsafe-eval';style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self';">
+{% endcodeblock %}
+
+
+## 17. 重新克隆github上的博文和设置 ##
 
 {% codeblock lang:bash Re-set Octopress on local computer %}
 # 注意切换到指定ruby版本
@@ -319,7 +360,7 @@ $ cd ..
 $ rake gen_deploy
 {% endcodeblock %}
 
-## 17. 多台电脑共同编写博客 ##
+## 18. 多台电脑共同编写博客 ##
 
 {% codeblock lang:bash Writing Octopress on more than one computer %}
 # 设定好Octopress，假定Octopress目录为octopress
@@ -336,9 +377,7 @@ $ git pull origin master
 
 * Octopress其他配制：[1](http://812lcl.com/blog/2013/10/26/octopressce-bian-lan-ji-ping-lun-xi-tong-ding-zhi/), [2](http://cn.soulmachine.me/blog/20130402/)
 
-* 添加多说：[1](http://havee.me/internet/2013-02/add-duoshuo-commemt-system-into-octopress.html), [2](http://kaiimeng.cn/my-first-octopress-blog/), [3](http://cn.soulmachine.me/blog/20130402/)
-
-* 添加Mathjax支持：[1](http://yanping.me/cn/blog/2012/03/10/octopress-with-latex/), [2](http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/), [Mathjax彩色公式](http://adereth.github.io/blog/2013/11/29/colorful-equations/)
+* 添加MathJax支持：[1](http://yanping.me/cn/blog/2012/03/10/octopress-with-latex/), [2](http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/), [MathJax彩色公式](http://adereth.github.io/blog/2013/11/29/colorful-equations/), [https支持MathJax](https://unsafe.hen.ne.ke/labs/mathjax-csp/)
 
 * [Kramdown语法](http://kramdown.gettalong.org/syntax.html)
 

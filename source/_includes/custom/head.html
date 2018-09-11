@@ -3,7 +3,8 @@
  MathJax.Hub.Config({
      tex2jax: {
          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-         processEscapes: true
+         processEscapes: true,
+         extensions: ["color.js"]
      }
  });
 </script>
@@ -36,10 +37,10 @@
 
 <!--enable to choose theme in octostrap-->
 {% if page.bootstrap_theme_url %}
-  <link href="{{ page.bootstrap_theme_url }}" rel="stylesheet" type="text/css">
+<link href="{{ page.bootstrap_theme_url }}" rel="stylesheet" type="text/css">
 {% else %}
-  <link href="{{ root_url }}/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-  <link href="{{ root_url }}/assets/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+<link href="{{ root_url }}/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="{{ root_url }}/assets/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
 {% endif %}
 
 

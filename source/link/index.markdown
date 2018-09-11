@@ -1,6 +1,5 @@
 ---
 layout: page
-bootstrap_theme_url: https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css
 title: "Links"
 date: 2014-12-15 17:55
 comments: true
