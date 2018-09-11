@@ -30,7 +30,8 @@
  MathJax.Hub.Config({
      tex2jax: {
          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-         processEscapes: true
+         processEscapes: true,
+         extensions: ["color.js"]
      }
  });
 </script>
@@ -63,8 +64,8 @@
 
 <!--enable to choose theme in octostrap-->
 
-  <link href="/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-  <link href="/assets/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+<link href="/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="/assets/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
 
 
 
@@ -361,36 +362,26 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-07-05T10:04:38+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-06-26T14:51:56+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
-           | <a href="/blog/2014/07/05/my-first-post/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2014/07/05/my-first-post/">Comments</a>
+           | <a href="/blog/2014/06/26/tophat-cufflinks-cummerbund/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2014/06/26/tophat-cufflinks-cummerbund/">Comments</a>
         
       </p>
     
     
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2014/07/05/my-first-post/" itemprop="url">My First Post</a></h2>
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2014/06/26/tophat-cufflinks-cummerbund/" itemprop="url">TopHat/Cufflinks/CummeRbund使用介绍</a></h2>
     
   </header>
 
 
-  <div class="entry-content clearfix" itemprop="articleBody description"><p>This is my first post. I want to say something. Then say something.</p>
-
-<p>This is a piece of html code <code class="language-html">&lt;html&gt;</code></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="k">def</span> <span class="nf">what?</span>
-</span><span class="line">  <span class="mi">42</span>
-</span><span class="line"><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+  <div class="entry-content clearfix" itemprop="articleBody description"><p><a href="http://ccb.jhu.edu/software/tophat/index.shtml">TopHat</a>、<a href="http://cole-trapnell-lab.github.io/cufflinks/">Cufflinks</a>和cummeRbund，被称为处理RNA-seq数据的“燕尾服（tuxedo）”。TopHat负责RNA-seq的reads映射比对到基因组，并且自动识别mRNA“内含子-外显子”剪切；Cufflinks擅长组装转录组和寻找差异表达基因（或转录起始位点TSS等）；cummeRbund主攻数据可视化。</p>
 
 </div>
   
   
     <footer>
-      <a class="btn btn-default" href="/blog/2014/07/05/my-first-post/">Read on &rarr;</a>
+      <a class="btn btn-default" href="/blog/2014/06/26/tophat-cufflinks-cummerbund/">Read on &rarr;</a>
     </footer>
   
 
@@ -416,26 +407,30 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-06-26T14:51:56+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-06-25T10:10:20+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
-           | <a href="/blog/2014/06/26/tophat-cufflinks-cummerbund/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2014/06/26/tophat-cufflinks-cummerbund/">Comments</a>
+           | <a href="/blog/2014/06/25/parallel-package/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2014/06/25/parallel-package/">Comments</a>
         
       </p>
     
     
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2014/06/26/tophat-cufflinks-cummerbund/" itemprop="url">TopHat/Cufflinks/CummeRbund使用介绍</a></h2>
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2014/06/25/parallel-package/" itemprop="url">R使用parallel包并行计算</a></h2>
     
   </header>
 
 
-  <div class="entry-content clearfix" itemprop="articleBody description"><p><a href="http://ccb.jhu.edu/software/tophat/index.shtml">TopHat</a>、<a href="http://cole-trapnell-lab.github.io/cufflinks/">Cufflinks</a>和cummeRbund，被称为处理RNA-seq数据的“燕尾服（tuxedo）”。TopHat负责RNA-seq的reads映射比对到基因组，并且自动识别mRNA“内含子-外显子”剪切；Cufflinks擅长组装转录组和寻找差异表达基因（或转录起始位点TSS等）；cummeRbund主攻数据可视化。</p>
+  <div class="entry-content clearfix" itemprop="articleBody description"><p>最新版本的R已经内置<span style="color: blue">parallel</span>包，<span style="color: blue">parallel</span>包是从<span style="color: blue"><a href="http://cran.r-project.org/web/packages/snow/index.html">snow</a></span>包和<span style="color: blue"><a href="http://cran.r-project.org/web/packages/multicore/index.html">multicore</a></span>包继承而来，包含了很多非常好用的函数。<span style="color: blue">parallel</span>包可以通过PVM（<span style="color: blue">rpvm</span>包）、MPI（<span style="color: blue"><a href="http://cran.r-project.org/web/packages/Rmpi/index.html">Rmpi</a></span>包）、NetWorkSpaces（<span style="color: blue"><a href="http://cran.r-project.org/web/packages/nws/index.html">nws</a></span>包）和raw sockets（如果以上3种都不能使用）平台进行分布计算，支持cluster和多核个人/服务器计算机。在Linux系统上，通常使用<a href="http://www.open-mpi.org/">openMPI</a>。</p>
+
+<h2 id="span-stylecolor-bluermpispan">1. 安装<span style="color: blue">Rmpi</span>包</h2>
+
+<p>因为使用openMPI，所以<span style="color: blue">parallel</span>包需要<span style="color: blue">Rmpi</span>包来设定节点，所以首先需要在计算机上安装openMPI。</p>
 
 </div>
   
   
     <footer>
-      <a class="btn btn-default" href="/blog/2014/06/26/tophat-cufflinks-cummerbund/">Read on &rarr;</a>
+      <a class="btn btn-default" href="/blog/2014/06/25/parallel-package/">Read on &rarr;</a>
     </footer>
   
 
@@ -511,12 +506,6 @@
     <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
         <span class="badge">22</span>
         bioinfor
-      </a>
-    
-    
-    <a class="list-group-item " href="/blog/categories/saysomething/index.html">
-        <span class="badge">1</span>
-        saysomething
       </a>
     
     

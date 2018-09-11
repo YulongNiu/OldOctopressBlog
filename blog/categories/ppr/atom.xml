@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ppr | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/ppr/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-09-11T19:19:25+08:00</updated>
+  <updated>2018-09-11T20:46:40+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -842,7 +842,7 @@ code snippet
 
 <p>
 <code>
-|---------------+---------------+--------------+---------|
+|---------------|---------------|--------------|---------|
 |**X/Y**        |**1(Presence)**|**0(Absence)**|**Sum**  |
 |:--------------|:-------------:|:------------:|--------:|
 |**1(Presence)**|a              |b             |a+b      |
@@ -856,7 +856,84 @@ code snippet
 
 <p>如果使用Emacs，可以使用Emacs的<a href="http://orgmode.org/">org模式</a>快速建立和编辑表格。</p>
 
-<h2 id="github">16. 重新克隆github上的博文和设置</h2>
+<h2 id="mathjax">16. 设置MathJax</h2>
+
+<p>在<code>source/_includes/custom/head.html</code>设置：</p>
+
+<p><figure class='code'><figcaption><span>Setting MathJax for https </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- mathjax config similar to math.stackexchange --&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/x-mathjax-config&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'> <span class="nx">MathJax</span><span class="p">.</span><span class="nx">Hub</span><span class="p">.</span><span class="nx">Config</span><span class="p">({</span>
+</span><span class='line'>     <span class="nx">tex2jax</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>         <span class="nx">inlineMath</span><span class="o">:</span> <span class="p">[</span> <span class="p">[</span><span class="s1">&#39;$&#39;</span><span class="p">,</span><span class="s1">&#39;$&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;\\(&quot;</span><span class="p">,</span><span class="s2">&quot;\\)&quot;</span><span class="p">]</span> <span class="p">],</span>
+</span><span class='line'>         <span class="nx">processEscapes</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>         <span class="nx">extensions</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;color.js&quot;</span><span class="p">]</span>
+</span><span class='line'>     <span class="p">}</span>
+</span><span class='line'> <span class="p">});</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/x-mathjax-config&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'> <span class="nx">MathJax</span><span class="p">.</span><span class="nx">Hub</span><span class="p">.</span><span class="nx">Config</span><span class="p">({</span>
+</span><span class='line'>     <span class="nx">tex2jax</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>         <span class="nx">skipTags</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;script&#39;</span><span class="p">,</span> <span class="s1">&#39;noscript&#39;</span><span class="p">,</span> <span class="s1">&#39;style&#39;</span><span class="p">,</span> <span class="s1">&#39;textarea&#39;</span><span class="p">,</span> <span class="s1">&#39;pre&#39;</span><span class="p">,</span> <span class="s1">&#39;code&#39;</span><span class="p">]</span>
+</span><span class='line'>     <span class="p">}</span>
+</span><span class='line'> <span class="p">});</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/x-mathjax-config&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'> <span class="nx">MathJax</span><span class="p">.</span><span class="nx">Hub</span><span class="p">.</span><span class="nx">Queue</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>     <span class="kd">var</span> <span class="nx">all</span> <span class="o">=</span> <span class="nx">MathJax</span><span class="p">.</span><span class="nx">Hub</span><span class="p">.</span><span class="nx">getAllJax</span><span class="p">(),</span> <span class="nx">i</span><span class="p">;</span>
+</span><span class='line'>     <span class="k">for</span><span class="p">(</span><span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">all</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>         <span class="nx">all</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">SourceElement</span><span class="p">().</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">className</span> <span class="o">+=</span> <span class="s1">&#39; has-jax&#39;</span><span class="p">;</span>
+</span><span class='line'>     <span class="p">}</span>
+</span><span class='line'> <span class="p">});</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&lt;!-- latest mathjax --&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">async=</span><span class="s">&quot;&quot;</span> <span class="na">src=</span><span class="s">&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;Content-Security-Policy&quot;</span> <span class="na">content=</span><span class="s">&quot;default-src &#39;self&#39; https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/ ; script-src &#39;self&#39; https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/ &#39;unsafe-eval&#39;;style-src &#39;self&#39; &#39;unsafe-inline&#39;; font-src &#39;self&#39;; img-src &#39;self&#39;;&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2 id="github">17. 重新克隆github上的博文和设置</h2>
 
 <p><figure class='code'><figcaption><span>Re-set Octopress on local computer </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -895,7 +972,7 @@ code snippet
 </span><span class='line'><span class="nv">$ </span>rake gen_deploy
 </span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="section-15">17. 多台电脑共同编写博客</h2>
+<h2 id="section-15">18. 多台电脑共同编写博客</h2>
 
 <p><figure class='code'><figcaption><span>Writing Octopress on more than one computer </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -920,10 +997,7 @@ code snippet
     <p>Octopress其他配制：<a href="http://812lcl.com/blog/2013/10/26/octopressce-bian-lan-ji-ping-lun-xi-tong-ding-zhi/">1</a>, <a href="http://cn.soulmachine.me/blog/20130402/">2</a></p>
   </li>
   <li>
-    <p>添加多说：<a href="http://havee.me/internet/2013-02/add-duoshuo-commemt-system-into-octopress.html">1</a>, <a href="http://kaiimeng.cn/my-first-octopress-blog/">2</a>, <a href="http://cn.soulmachine.me/blog/20130402/">3</a></p>
-  </li>
-  <li>
-    <p>添加Mathjax支持：<a href="http://yanping.me/cn/blog/2012/03/10/octopress-with-latex/">1</a>, <a href="http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/">2</a>, <a href="http://adereth.github.io/blog/2013/11/29/colorful-equations/">Mathjax彩色公式</a></p>
+    <p>添加MathJax支持：<a href="http://yanping.me/cn/blog/2012/03/10/octopress-with-latex/">1</a>, <a href="http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/">2</a>, <a href="http://adereth.github.io/blog/2013/11/29/colorful-equations/">MathJax彩色公式</a>, <a href="https://unsafe.hen.ne.ke/labs/mathjax-csp/">https支持MathJax</a></p>
   </li>
   <li>
     <p><a href="http://kramdown.gettalong.org/syntax.html">Kramdown语法</a></p>
