@@ -29,6 +29,8 @@ $$
 
 物种$A$有$U$个长度为$l_u$的转录序列，构成的转录本集合为$T=\\{t_1, t_2, \dots, t_U\\}$，每个转录序列的相对丰度为$\rho_u$，$\sum\limits_{u=1}^U \rho_u= 1$。物种$B$有$V$个长度为$l_v$的转录序列$s_v$，构成转录本集合$S=\\{s_1, s_2, \dots, s_V\\}$，每个转录序列的相对丰度为$\theta_v$, $\sum\limits_{v=1}^V \theta_v= 1$。两物种的所有转录序列集合构成$R=\\{r_1, r_2, \dots, r_{U+V}\\}$。
 
+<!--more-->
+
 对于某个转录片段$f$，来自于转录序列$t_u$（有效长度为$\tildelu$）的概率为：
 
 $$
@@ -113,14 +115,16 @@ $$
 $$
 \begin{align}
 \begin{split}
-\lambda_i &= \frac{\alpha_j^{(n)} \frac{m_i}{\widetilde{l_j}}}{\sum\limits_{i=1}^{U}\alpha_i^{(n)} \frac{m_i}{\widetilde{l_i}} + \sum\limits_{j=U+1}^{V}\beta_j^{(n)} \frac{m_j}{\widetilde{l_j}}}\\
-\lambda_j &= \frac{\beta_j^{(n)} \frac{m_i}{\widetilde{l_j}}}{\sum\limits_{i=1}^{U}\alpha_i^{(n)} \frac{m_i}{\widetilde{l_i}} + \sum\limits_{j=U+1}^{V}\beta_j^{(n)} \frac{m_j}{\widetilde{l_j}}}\\
-\alpha_i &= \frac{\sum\limits_{f \in F} \lambda_i}{N/2} \\
-\beta_j &= \frac{\sum\limits_{f \in F} \lambda_j}{N/2}
+\lambda_i^{(n+1)} &= \frac{\alpha_j^{(n)} \frac{m_i}{\widetilde{l_j}}}{\sum\limits_{i=1}^{U}\alpha_i^{(n)} \frac{m_i}{\widetilde{l_i}} + \sum\limits_{j=U+1}^{V}\beta_j^{(n)} \frac{m_j}{\widetilde{l_j}}}\\
+\lambda_j^{(n+1)} &= \frac{\beta_j^{(n)} \frac{m_i}{\widetilde{l_j}}}{\sum\limits_{i=1}^{U}\alpha_i^{(n)} \frac{m_i}{\widetilde{l_i}} + \sum\limits_{j=U+1}^{V}\beta_j^{(n)} \frac{m_j}{\widetilde{l_j}}}\\
+\alpha_i^{(n+1)} &= \frac{\sum\limits_{f \in F} \lambda_i^{(n+1)}{\sum\limits_{f \in F} \sum\limits_{i=1}^{U} \lambda_i^{(n+1)} \\
+\beta_j^{(n+1)} &= \frac{\sum\limits_{f \in F} \lambda_j^{(n+1)}{N - \sum\limits_{f \in F} \sum\limits_{i=1}^{U} \lambda_i^{(n+1)}
 \end{split}
 \label{eq:7}
 \end{align}
 $$
 
 
+### 更新记录 ###
 
+2018年9月13日

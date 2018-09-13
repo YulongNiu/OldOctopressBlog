@@ -17,9 +17,9 @@ categories: linux
 
 ## 2. 辅助安装工具  ##
 
-* fed
+* Fedy
 
-[fedy](http://folkswithhats.org/)是一个辅助在Fedora系统下，更容易安装Skypy、Chrome、Steam等的工具。
+[Fedy](http://folkswithhats.org/)是一个辅助在Fedora系统下，更容易安装Skypy、Chrome、Steam等的工具。
 
 <!--more-->
 
