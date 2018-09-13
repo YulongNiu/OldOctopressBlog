@@ -117,8 +117,8 @@ $$
 \begin{split}
 \lambda_i^{(n+1)} &= \frac{\alpha_j^{(n)} \frac{m_i}{\widetilde{l_j}}}{\sum\limits_{i=1}^{U}\alpha_i^{(n)} \frac{m_i}{\widetilde{l_i}} + \sum\limits_{j=U+1}^{V}\beta_j^{(n)} \frac{m_j}{\widetilde{l_j}}}\\
 \lambda_j^{(n+1)} &= \frac{\beta_j^{(n)} \frac{m_i}{\widetilde{l_j}}}{\sum\limits_{i=1}^{U}\alpha_i^{(n)} \frac{m_i}{\widetilde{l_i}} + \sum\limits_{j=U+1}^{V}\beta_j^{(n)} \frac{m_j}{\widetilde{l_j}}}\\
-\alpha_i^{(n+1)} &= \frac{\sum\limits_{f \in F} \lambda_i^{(n+1)}{\sum\limits_{f \in F} \sum\limits_{i=1}^{U} \lambda_i^{(n+1)} \\
-\beta_j^{(n+1)} &= \frac{\sum\limits_{f \in F} \lambda_j^{(n+1)}{N - \sum\limits_{f \in F} \sum\limits_{i=1}^{U} \lambda_i^{(n+1)}
+\alpha_i^{(n+1)} &= \frac{\sum\limits_{f \in F} \lambda_i^{(n+1)}}{\sum\limits_{f \in F} \sum\limits_{i=1}^{U} \lambda_i^{(n+1)}} \\
+\beta_j^{(n+1)} &= \frac{\sum\limits_{f \in F} \lambda_j^{(n+1)}}{N - \sum\limits_{f \in F} \sum\limits_{i=1}^{U} \lambda_i^{(n+1)}}
 \end{split}
 \label{eq:7}
 \end{align}
