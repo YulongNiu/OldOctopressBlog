@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-09-17T15:56:40+08:00</updated>
+  <updated>2018-09-17T19:39:22+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -27,7 +27,9 @@
 
 <!--more-->
 
-<p>这篇博文里，我尝试使用<span style="color: blue">RcppParallel</span>包调用<code>C++</code>的并行方法。结论是：<strong>在循环数很大时，<span style="color: blue">RcppParallel</span>包提供的并行方法优于<code>foreach</code></strong>。</p>
+<h2 id="section">1. 测试</h2>
+
+<p>我尝试使用<span style="color: blue">RcppParallel</span>包调用<code>C++</code>的并行方法。结论是：<strong>在循环数很大时，<span style="color: blue">RcppParallel</span>包提供的并行方法优于<code>foreach</code></strong>。</p>
 
 <p>一个简单的测试场景：对一个数值向量的每个元素做平方根运算，结果按原始顺序返回。在<a href="https://gist.github.com/YulongNiu/add0d9f066299613b64b8458fd5d741a">Gist1</a>和<a href="https://gist.github.com/YulongNiu/9331ea0d3ef46f0571c5f2dc061c3f8a">Gist2</a>中，分别实现了：</p>
 
@@ -166,13 +168,18 @@
 </span><span class="line"><span class="c">##  SqrtCppPara(tmp1) 37.10116 38.34199 42.23896 39.17889 42.98785  61.94529   100</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<h2 id="vectorlist">2. 使用<code>vector</code>代替<code>List</code></h2>
+
+<p>在使用<span style="color: blue">RcppParallel</span>并行计算时，不能在并行循环中调用<code>Rcpp::List</code>对象。一个解决办法是：使用<code>std::vector</code>替代<code>Rcpp:List</code>。例如，<code>List</code>中都是数值向量，那么可以建立<code>std::vector&lt;Rcpp::NumericVector&gt;</code>对象替代。
+<a href="https://gist.github.com/YulongNiu/0a11282216162b6e350c9575b68e91cc">Gist3</a>中提供了一个例子。这种方法的局限在于<code>List</code>中每一个元素的类型需要相同。</p>
+
 <h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
 
 <ul>
   <li><a href="http://gallery.rcpp.org/articles/parallel-vector-sum/">Summing a Vector in Parallel with RcppParallel</a></li>
 </ul>
 
-<h3 id="section">更新记录</h3>
+<h3 id="section-1">更新记录</h3>
 
 <p>2018年6月21日</p>
 ]]></content>
