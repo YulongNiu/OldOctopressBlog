@@ -14,7 +14,9 @@ categories: R
 
 <!--more-->
 
-这篇博文里，我尝试使用<span style="color: blue">RcppParallel</span>包调用`C++`的并行方法。结论是：**在循环数很大时，<span style="color: blue">RcppParallel</span>包提供的并行方法优于`foreach`**。
+## 1. 测试 ##
+
+我尝试使用<span style="color: blue">RcppParallel</span>包调用`C++`的并行方法。结论是：**在循环数很大时，<span style="color: blue">RcppParallel</span>包提供的并行方法优于`foreach`**。
 
 一个简单的测试场景：对一个数值向量的每个元素做平方根运算，结果按原始顺序返回。在[Gist1](https://gist.github.com/YulongNiu/add0d9f066299613b64b8458fd5d741a)和[Gist2](https://gist.github.com/YulongNiu/9331ea0d3ef46f0571c5f2dc061c3f8a)中，分别实现了：
 
@@ -93,6 +95,10 @@ microbenchmark(
 ##  SqrtCppPara(tmp1) 37.10116 38.34199 42.23896 39.17889 42.98785  61.94529   100
 {% endcodeblock %} 
 
+## 2. 使用`vector`代替`List` ##
+
+在使用<span style="color: blue">RcppParallel</span>并行计算时，不能在并行循环中调用`Rcpp::List`对象。一个解决办法是：使用`std::vector`替代`Rcpp:List`。例如，`List`中都是数值向量，那么可以建立`std::vector<Rcpp::NumericVector>`对象替代。
+[Gist3](https://gist.github.com/YulongNiu/0a11282216162b6e350c9575b68e91cc)中提供了一个例子。这种方法的局限在于`List`中每一个元素的类型需要相同。
 
 ### <a id="Ref">参考网址</a> ###
 
