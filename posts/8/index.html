@@ -184,6 +184,53 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-07-28T20:11:18+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2014/07/28/clean-seq-data/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2014/07/28/clean-seq-data/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2014/07/28/clean-seq-data/" itemprop="url">清洗二代测序数据</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><h2 id="fastqc">1. FastQC</h2>
+
+<p><strong>简介</strong>：<a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>是用于对二代测序数据质量快速检验的工具，可以输入fastq（fastq.gz）、sam或者bam文件。查看<a href="http://www.bioinformatics.nl/courses/RNAseq/FastQC_Manual.pdf">输出结果解释</a>。</p>
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2014/07/28/clean-seq-data/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-07-26T02:04:25+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2014/07/26/short-sequence-alignment/#disqus_thread" itemprop="discussionUrl"
@@ -388,55 +435,6 @@
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2014-06-25T10:10:20+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2014/06/25/parallel-package/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2014/06/25/parallel-package/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2014/06/25/parallel-package/" itemprop="url">R使用parallel包并行计算</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><p>最新版本的R已经内置<span style="color: blue">parallel</span>包，<span style="color: blue">parallel</span>包是从<span style="color: blue"><a href="http://cran.r-project.org/web/packages/snow/index.html">snow</a></span>包和<span style="color: blue"><a href="http://cran.r-project.org/web/packages/multicore/index.html">multicore</a></span>包继承而来，包含了很多非常好用的函数。<span style="color: blue">parallel</span>包可以通过PVM（<span style="color: blue">rpvm</span>包）、MPI（<span style="color: blue"><a href="http://cran.r-project.org/web/packages/Rmpi/index.html">Rmpi</a></span>包）、NetWorkSpaces（<span style="color: blue"><a href="http://cran.r-project.org/web/packages/nws/index.html">nws</a></span>包）和raw sockets（如果以上3种都不能使用）平台进行分布计算，支持cluster和多核个人/服务器计算机。在Linux系统上，通常使用<a href="http://www.open-mpi.org/">openMPI</a>。</p>
-
-<h2 id="span-stylecolor-bluermpispan">1. 安装<span style="color: blue">Rmpi</span>包</h2>
-
-<p>因为使用openMPI，所以<span style="color: blue">parallel</span>包需要<span style="color: blue">Rmpi</span>包来设定节点，所以首先需要在计算机上安装openMPI。</p>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2014/06/25/parallel-package/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -460,6 +458,8 @@
   
   <div id="recent_posts" class="list-group">
     
+    <a class="list-group-item " href="/blog/2018/10/03/profile-r-and-rcpp/">R和Rcpp的性能检测</a>
+    
     <a class="list-group-item " href="/blog/2018/07/19/rcppparallel-test/">使用RcppParallel并行计算</a>
     
     <a class="list-group-item " href="/blog/2018/02/17/estimate-rna-seq/">通过RNA-Seq评估基因表达量的模型</a>
@@ -467,8 +467,6 @@
     <a class="list-group-item " href="/blog/2017/10/24/bray-curtis-distance/">Bray-Curtis Distance解释</a>
     
     <a class="list-group-item " href="/blog/2017/10/22/google-distance/">Normalized Google Distance解释</a>
-    
-    <a class="list-group-item " href="/blog/2017/10/16/max-entropy/">最大熵模型</a>
     
   </div>
 </section>
@@ -486,7 +484,7 @@
     
     
     <a class="list-group-item " href="/blog/categories/r/index.html">
-        <span class="badge">10</span>
+        <span class="badge">11</span>
         r
       </a>
     

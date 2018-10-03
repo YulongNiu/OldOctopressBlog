@@ -4,7 +4,7 @@
   <title><![CDATA[Category: R | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/r/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-09-17T19:39:22+08:00</updated>
+  <updated>2018-10-03T20:16:08+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -12,6 +12,121 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[R和Rcpp的性能检测]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2018/10/03/profile-r-and-rcpp/"/>
+    <updated>2018-10-03T19:38:37+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2018/10/03/profile-r-and-rcpp</id>
+    <content type="html"><![CDATA[<h2 id="r">1. R性能检测</h2>
+
+<p>直接使用<span style="color: blue">profvis</span>包即可，例如<a href="https://rstudio.github.io/profvis/">示例</a>。</p>
+
+<h2 id="rcpp">2. Rcpp性能检测</h2>
+
+<h3 id="section">2.1 安装依赖软件</h3>
+
+<p><figure class='code'><figcaption><span>Pre-requested tools </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo dnf install gperftools-devel google-perftools graphviz ghostscript
+</span></code></pre></td></tr></table></div></figure></p>
+
+<!--more-->
+
+<h3 id="section-1">2.2 编译</h3>
+
+<p>在包（包名称为<code>Mypkg</code>）目录<code>src</code>建立如下文件：</p>
+
+<p><figure class='code'><figcaption><span>Profiler Rcpp code </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cp">#include &lt;Rcpp.h&gt;</span>
+</span><span class='line'><span class="cp">#include &amp;lt;gperftools/profiler.h&amp;gt;&lt;/Rcpp.h&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">Rcpp</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">// [[Rcpp::export]]</span>
+</span><span class='line'><span class="n">SEXP</span> <span class="n">start_profiler</span><span class="p">(</span><span class="n">SEXP</span> <span class="n">str</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">ProfilerStart</span><span class="p">(</span><span class="n">as</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="k">const</span> <span class="kt">char</span><span class="o">*&amp;</span><span class="n">gt</span><span class="p">;(</span><span class="n">str</span><span class="p">));</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">R_NilValue</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">// [[Rcpp::export]]</span>
+</span><span class='line'><span class="n">SEXP</span> <span class="n">stop_profiler</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">ProfilerStop</span><span class="p">();</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">R_NilValue</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>包目录<code>src</code>的Makevars文件中添加<code>-lprofile</code>选项，例如<code>PKG_LIBS = $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) -lprofiler</code>。之后，安装包，并重新载入。</p>
+
+<h3 id="section-2">2.3 调试</h3>
+
+<p>使用方法为：</p>
+
+<p><figure class='code'><figcaption><span>Profiling </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>Mypkg<span class="o">:::</span>start_profiler<span class="p">(</span>“<span class="o">/</span>tmp<span class="o">/</span>profile.out”<span class="p">)</span>
+</span><span class='line'>run_cpp_codes<span class="p">()</span>
+</span><span class='line'>Mypkg<span class="o">:::</span>stop_profiler<span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>查看profile结果：</p>
+
+<p><figure class='code'><figcaption><span>Profiling results </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">## text</span>
+</span><span class='line'>pprof –text src/Mypkg.so /tmp/profile.out&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h2 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;pdf&quot;</span>&gt;pdf&lt;/h2&gt;
+</span><span class='line'>&lt;p&gt;pprof –pdf src/Mypkg.so /tmp/profile.out <span class="p">&amp;</span>gt<span class="p">;</span> profile.pdf&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h2 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;kcachegrind&quot;</span>&gt;kcachegrind&lt;/h2&gt;
+</span><span class='line'>&lt;p&gt;pprof –callgrind src/RNASeqEM.so R/profile.out <span class="p">&amp;</span>gt<span class="p">;</span> profile.res
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h3 id="a-idrefa"><a id="Ref">参考资料</a></h3>
+
+<ul>
+  <li>
+    <p><a href="https://arxiv.org/abs/1104.3889">Introduction to High-Performance Computing with R by Dr. Dirk Eddelbuettel</a></p>
+  </li>
+  <li>
+    <p><a href="https://minimallysufficient.github.io/r%20programming%20cpp/2018/02/16/profiling-rcpp-packages.html">Profiling Rcpp packages</a></p>
+  </li>
+  <li>
+    <p><a href="https://airekans.github.io/cpp/2014/07/04/gperftools-profile">用gperftools对C/C++程序进行profile</a></p>
+  </li>
+</ul>
+
+<h3 id="section-3">更新记录</h3>
+
+<p>2018年2月18日</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[使用RcppParallel并行计算]]></title>
@@ -929,132 +1044,6 @@
 <h3 id="section-5">更新记录</h3>
 
 <p>2015年12月30日</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[创建R包的最简流程]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2014/03/28/creat-r-package/"/>
-    <updated>2014-03-28T02:53:05+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2014/03/28/creat-r-package</id>
-    <content type="html"><![CDATA[<p>一个最简单创建R包的流程。</p>
-
-<h2 id="section">1. 载入工具包</h2>
-
-<p>安装并载入<span style="color: blue">devtools</span>包和<span style="color: blue">roxygen2</span>包。<span style="color: blue">devtools</span>包提供了一些包的检查、安装和打包的基本工具。<span style="color: blue">roxygen2</span>包则使得书写R帮助文档变得轻松简单。如果习惯使用Emacs，可以结合<a href="http://ess.r-project.org/">ESS</a>建立R包，可以将R代码和帮助文档有效组合在一起，便于管理。当然，也可以使用<a href="http://www.rstudio.com/">Rstudio</a>。</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="kn">library</span><span class="p">(</span>‘devtools’<span class="p">)</span>
-</span><span class='line'><span class="kn">library</span><span class="p">(</span>‘roxygen2’<span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<!--more-->
-
-<h2 id="span-stylecolor-bluercppspan">2. <span style="color: blue">Rcpp</span>和相关的包</h2>
-
-<p>如果使用了<span style="color: blue">Rcpp</span>或者相关的包，比如<span style="color: blue">RcppArmadillo</span>，需要格外设置。</p>
-
-<p>首先，执行：</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='r'><span class='line'>use_rcpp<span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p>其次，在<code class="language-r">DESCRIPTION</code>中添加依赖或者需要链接的包名称，比如：</p>
-
-<p>
-<code>
-Imports: 
-    Rcpp
-LinkingTo: 
-    Rcpp,
-    RcppArmadillo
-</code>
-</p>
-
-<p>之后，在包的<code class="language-bash">R/</code>目录下，添加一个文件<code class="language-bash">RcppChk.R</code>（文件名称自定），并写入：</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="c1">#’ @useDynLib my-pkg-name, .registration = TRUE</span>
-</span><span class='line'><span class="c1">#’ @importFrom Rcpp sourceCpp</span>
-</span><span class='line'><span class="kc">NULL</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p>注意，修改<code class="language-bash">my-pkg-name</code>为自己的包名称。</p>
-
-<p>然后，在包的<code class="language-bash">src/</code>目录下，添加一个文件<code class="language-bash">registerDynamicSymbol.c</code>（文件名称自定），并写入：</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="c1">// RegisteringDynamic Symbols&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;include-rh&quot;</span><span class="o">&gt;</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">R</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;&lt;/</span><span class="n">R</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">Rinternals</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
-</span><span class='line'><span class="cp">#include &amp;lt;R_ext/Rdynload.h&amp;gt;&lt;/Rinternals.h&gt;&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">void</span> <span class="n">R_init_markovchain</span><span class="p">(</span><span class="n">DllInfo</span><span class="o">*</span> <span class="n">info</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">R_registerRoutines</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">R_useDynamicSymbols</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">TRUE</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p>最后，所有cpp代码都写在src文件夹下。</p>
-
-<h2 id="description">3. 创建DESCRIPTION文件模板</h2>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='r'><span class='line'>load_all<span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-其中<code class="language-bash">import</code>栏目，在源代码中使用了哪些包，需要逐步在import项目中添加和修改。</p>
-
-<h2 id="section-1">4. 更新文档和检查包</h2>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='r'><span class='line'>document<span class="p">()</span>
-</span><span class='line'>check<span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<h2 id="section-2">5. 安装包</h2>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='r'><span class='line'>install<span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<h2 id="targzlanguage-bash">6. 生成<code class="language-bash">.tar.gz</code>压缩文件</h2>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='r'><span class='line'>build<span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
-
-<ul>
-  <li>
-    <p><a href="https://www.youtube.com/watch?v=9PyQlbAEujY">创建R包视频</a></p>
-  </li>
-  <li>
-    <p><a href="http://r-pkgs.had.co.nz/src.html">R package by Hadley Wickham</a></p>
-  </li>
-  <li>
-    <p><a href="http://adv-r.had.co.nz/Rcpp.html">Advanced R by Hadley Wickham</a></p>
-  </li>
-</ul>
-
-<h3 id="section-3">更新记录</h3>
-
-<p>2018年7月28日</p>
 ]]></content>
   </entry>
   

@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8">
-  <title>XML中XPath规则总结 - 牛牛龙</title>
+  <title>R和Rcpp的性能检测 - 牛牛龙</title>
   <meta name="author" content="Yulong Niu">
 
   
@@ -14,15 +14,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yulongniu.bionutshell.org/blog/2015/10/25/xpath-xml">
+  <link rel="canonical" href="http://yulongniu.bionutshell.org/blog/2018/10/03/profile-r-and-rcpp">
   <link href="/favicon.ico" type="image/png" rel="icon">
   <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
 
   <!-- http://opengraphprotocol.org/ -->
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2015/10/25/xpath-xml">
-  <meta property="og:title" content="XML中XPath规则总结 - 牛牛龙">
+  <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2018/10/03/profile-r-and-rcpp">
+  <meta property="og:title" content="R和Rcpp的性能检测 - 牛牛龙">
   
 
   <!-- mathjax config similar to math.stackexchange -->
@@ -180,7 +180,7 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-10-25T19:05:33+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2018-10-03T19:38:37+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="#disqus_thread" itemprop="discussionUrl"
              data-disqus-identifier="http://yulongniu.bionutshell.org">Comments</a>
@@ -189,148 +189,120 @@
     
     
     <h1 class="entry-title" itemprop="name headline">
-        XML中XPath规则总结
+        R和Rcpp的性能检测
         
     </h1>
     
   </header>
 
 
-<div class="entry-content clearfix" itemprop="articleBody description"><p><a href="http://www.w3.org/TR/xpath-30/">XPath</a>提供了一种对XML节点、节点属性和内容快速查询的规则。在各种编程语言中都有实现，比如C语言的<a href="http://www.xmlsoft.org/">libxml2</a>和对应的R包 <a href="https://cran.r-project.org/web/packages/xml2/index.html">xml2</a>。</p>
+<div class="entry-content clearfix" itemprop="articleBody description"><h2 id="r">1. R性能检测</h2>
 
-<h2 id="section">1. 查询规则</h2>
+<p>直接使用<span style="color: blue">profvis</span>包即可，例如<a href="https://rstudio.github.io/profvis/">示例</a>。</p>
 
-<p>XPath查询集中在三个对象：节点、节点属性和节点内容。</p>
+<h2 id="rcpp">2. Rcpp性能检测</h2>
 
-<h3 id="section-1">1.1 选择节点</h3>
+<h3 id="section">2.1 安装依赖软件</h3>
 
-<ul>
-  <li>
-    <p><code>/nodeA/nodeB</code>：nodeA为根节点，nodeA下的所有nodeB节点；等价于<code>nodeB</code>。</p>
-  </li>
-  <li>
-    <p><code>//nodeB</code>：所有nodeB节点，在R包xml2中（比如函数<code class="language-bash">xml_find_all()</code>），<code>//nodeB</code>搜索范围是整个文档，忽略当前节点；而<code>.//nodeB</code>搜索范围是当前节点之下。</p>
-  </li>
-</ul>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Pre-requested tools </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>sudo dnf install gperftools-devel google-perftools graphviz ghostscript
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <!--more-->
 
-<ul>
-  <li>
-    <p><code>//nodeB[1]</code>：所有nodeB节点的第一个；<code>//nodeB[last()-1]</code>：所有nodeB节点的倒数第二个；<code>nodeA/nodeB[position()&lt;3]</code>:当前nodeA节点，其下所有nodeB子节点的前两个。</p>
-  </li>
-  <li>
-    <p><code>/nodeA/*</code>：nodeA为根节点，nodeA下的所有节点；<code>/*/*/nodeC</code>：所有拥有两个父节点的nodeC节点；<code>//*</code>：所有节点。</p>
-  </li>
-  <li>
-    <p><code>//*[count(nodeD)=3]</code>：含有3个nodeD子节点的节点；<code>//*[count(*)=2]</code>：含有任意2个子节点的节点。</p>
-  </li>
-  <li>
-    <p><code>//*[name()='nodeB']</code>：所有名称为“nodeB”的节点，等价于<code>//nodeB</code>；<code>//*[starts-with(name(),'N')]</code>：所有名称以“N”开头的节点；<code>//*[contains(name(),'N')]</code>：所有名称中含有“N”的节点；<code>//*[string-length(name()) = 3]</code>：所有名称的字符串长度等于3的节点。</p>
-  </li>
-  <li>
-    <p><code>//nodeA | //nodeB</code>：所有nodeA，以及nodeB的节点，多个搜索条件合并，搜索添加没有限制。</p>
-  </li>
-</ul>
+<h3 id="section-1">2.2 编译</h3>
 
-<h3 id="section-2">1.2 选择节点属性</h3>
+<p>在包（包名称为<code>Mypkg</code>）目录<code>src</code>建立如下文件：</p>
 
-<ul>
-  <li>
-    <p><code>//@attr1</code>：所有拥有attr1的<strong>属性</strong>，注意：返回的不是节点，而是类此<code>attr1=text1</code>的属性；<code>//node1/@attr1</code>：所有node1带有的attr1属性；<code>//nodeB[@attr1]</code>：所有拥有“attr1”属性的nodeB节点；<code>//nodeB[@attr1='test1']</code>：所有拥有“attr1”属性为“test1”的nodeB节点；<code>//nodeB[normalize-space(@attr1)='test1']</code>：所有拥有attr1属性为“test1”（属性去除字符串前后空格，内部连续空格替换为一个空格）的nodeB节点。</p>
-  </li>
-  <li>
-    <p><code>//node1[@*]</code>：所有node1带有任意属性的节点；<code>//node1[not(@*)]</code>：所有node1不带属性的节点。</p>
-  </li>
-  <li>
-    <p><code>//node1[TEST1][TEST2]</code>：多个属性形选择可以首位相接，依次判断是否为真。TEST1和TEST2同时为真，返回选择结果。<code>//nodeA[nodeB/@attr1='test1']</code>：选择所有nodeA节点，这些nodeA节点拥有nodeB子节点且属性“attr1”为“test1”。<code>//nodeC[@attr1='test1'][../nodeB/@attr2='test2']</code>：选择所有拥有“attr1”为“test1”的nodeC节点，而且这些nodeC节点有属性“attr2”为“test2”的nodeB父亲节点。</p>
-  </li>
-</ul>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Profiler Rcpp code </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+</pre></td><td class="code"><pre><code class="c++"><span class="line"><span class="cp">#include &lt;Rcpp.h&gt;</span>
+</span><span class="line"><span class="cp">#include &lt;gperftools/profiler.h&gt;</span>
+</span><span class="line">
+</span><span class="line"><span class="k">using</span> <span class="k">namespace</span> <span class="n">Rcpp</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">// [[Rcpp::export]]</span>
+</span><span class="line"><span class="n">SEXP</span> <span class="nf">start_profiler</span><span class="p">(</span><span class="n">SEXP</span> <span class="n">str</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">  <span class="n">ProfilerStart</span><span class="p">(</span><span class="n">as</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">str</span><span class="p">));</span>
+</span><span class="line">  <span class="k">return</span> <span class="n">R_NilValue</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">// [[Rcpp::export]]</span>
+</span><span class="line"><span class="n">SEXP</span> <span class="nf">stop_profiler</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="line">  <span class="n">ProfilerStop</span><span class="p">();</span>
+</span><span class="line">  <span class="k">return</span> <span class="n">R_NilValue</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h3 id="section-3">1.3 选择节点内容</h3>
+<p>包目录<code>src</code>的Makevars文件中添加<code>-lprofile</code>选项，例如<code>PKG_LIBS = $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) -lprofiler</code>。之后，安装包，并重新载入。</p>
 
-<ul>
-  <li>
-    <p><code>/nodeA/nodeB[nodeC&gt;5]</code>：nodeA为根节点，nodeA下的nodeB节点，而且这些nodeB节点必须有nodeC子节点，并且nodeC子节点内容大于5。</p>
-  </li>
-  <li>
-    <p><code>/nodeA/nodeB[nodeC&gt;5]/nodeD</code>：nodeA为根节点，nodeA下的nodeB节点，而且这些nodeB节点必须有nodeC子节点，并且nodeC子节点内容大于5。</p>
-  </li>
-  <li>
-    <p><code>//nodeC[.=5]</code>：所有nodeC节点，其内容等于5。使用<code>.</code>代替自身。</p>
-  </li>
-  <li>
-    <p><code>//nodeC/node()</code>：选择所有nodeC节点下的所有点，包括节点下内容和子节点（距离最近，不包括子节点的子节点）。</p>
-  </li>
-  <li>
-    <p><code>//nodeC/text()</code>：选择所有nodeC节点下的内容。</p>
-  </li>
-</ul>
+<h3 id="section-2">2.3 调试</h3>
 
-<h3 id="section-4">1.4 函数使用</h3>
+<p>使用方法为：</p>
 
-<ul>
-  <li><code>//nodeC[contains(text(), 'test1')]</code>：选择所有nodeC节点，而且nodeC节点下内容包括“test1”。</li>
-</ul>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Profiling </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line">Mypkg<span class="o">:::</span>start_profiler<span class="p">(</span><span class="s">&quot;/tmp/profile.out&quot;</span><span class="p">)</span>
+</span><span class="line">run_cpp_codes<span class="p">()</span>
+</span><span class="line">Mypkg<span class="o">:::</span>stop_profiler<span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h2 id="section-5">2. 轴</h2>
+<p>查看profile结果：</p>
 
-<ul>
-  <li>
-    <p><code>child::</code>：默认轴，可以省略。比如<code>/child::nodeA</code>等价于<code>/AAA</code>。</p>
-  </li>
-  <li>
-    <p><code>descendant::</code>：选择上下文节点的所有子节点、子节点的子节点、子节点的子节点的子节点（依次类推，直至最后一个子节点）。<code>//nodeA/descendant::*</code>：所有nodeA节点的所有子节点、子节点的子节点等等；<code>//nodeA/descendant::nodeC</code>：所有nodeA节点的所有的nodeC子节点，nodeC可能是nodeA的某个子节点的子节点，区别与<code>//nodeA/nodeD</code>；<code>/descendant::*</code>：文档所有子节点、子节点的子节点等等，等价于<code>//*</code>。</p>
-  </li>
-  <li>
-    <p><code>descendant-or-self::*</code>：选择上下文节点自身及其所有子节点、子节点的子节点（依次类推，直至最后一个子节点）。</p>
-  </li>
-  <li>
-    <p><code>parent::</code>：选择上下文节点的父节点（最靠近的父节点）。<code>//nodeC/parent::*</code>：所有nodeC节点的所有父节点；<code>//nodeC/parent::nodeA[@attr1='test1']</code>：nodeC节点的nodeA父节点，这些nodeA父节点的“attr1”属性等于“test1”。</p>
-  </li>
-  <li>
-    <p><code>ancestor::</code>：选择上下文节点的父节点，父节点的父节点（依次类推，直至最前一个父节点，包括根节点）。<code>//nodeC/ancestor::nodeA</code>：所有nodeC的父节点和父节点的父节点等等中的nodeA节点。</p>
-  </li>
-  <li>
-    <p><code>ancestor-or-self::</code>：：选择上下文节点自身及其所有父节点，父节点的父节点（依次类推，直至最前一个父节点，包括根节点）。</p>
-  </li>
-  <li>
-    <p><code>following-sibling::</code>：选择与上下文节点等级相同（即深度相同）的且位置靠后（上为前，下为后）的兄弟节点。<code>//nodeC/following-sibling::*</code>：所有nodeC节点等级相同的且位置靠后的兄弟节点。</p>
-  </li>
-  <li>
-    <p><code>preceding-sibling::</code>：同<code>following-sibling::</code>，也是兄弟节点但位置靠前。</p>
-  </li>
-  <li>
-    <p><code>following::</code>：选择上下文节点之后的所有节点（包括对应的子节点），但除了根节点。<code>//nodeC/following::*</code>：所有nodeC节点之后的所有节点。</p>
-  </li>
-  <li>
-    <p><code>preceding::</code>：选择上下文节点之前的所有节点（包括对应的子节点），但除了根节点。</p>
-  </li>
-  <li>
-    <p><code>//nodeC/ancestor::* | //nodeC/descendant::* | //nodeC/following::* | //nodeC/preceding::* | //nodeC/self::*</code>：所有节点，等价于<code>//*</code>或者等价于<code>/descendant::*</code>。</p>
-  </li>
-</ul>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Profiling results </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c">## text</span>
+</span><span class="line">pprof --text src/Mypkg.so /tmp/profile.out
+</span><span class="line">
+</span><span class="line"><span class="c">## pdf</span>
+</span><span class="line">pprof --pdf src/Mypkg.so /tmp/profile.out &gt; profile.pdf
+</span><span class="line">
+</span><span class="line"><span class="c">## kcachegrind</span>
+</span><span class="line">pprof --callgrind src/RNASeqEM.so R/profile.out &gt; profile.res
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h2 id="section-6">参考网址</h2>
+<h3 id="a-idrefa"><a id="Ref">参考资料</a></h3>
 
 <ul>
   <li>
-    <p><a href="https://zh.wikipedia.org/wiki/XPath">维基百科对XPath介绍</a></p>
+    <p><a href="https://arxiv.org/abs/1104.3889">Introduction to High-Performance Computing with R by Dr. Dirk Eddelbuettel</a></p>
   </li>
   <li>
-    <p><a href="http://www.zvon.org/xxl/XPathTutorial/General_chi/examples.html">zvon中XPath的有趣例子</a></p>
+    <p><a href="https://minimallysufficient.github.io/r%20programming%20cpp/2018/02/16/profiling-rcpp-packages.html">Profiling Rcpp packages</a></p>
   </li>
   <li>
-    <p><a href="http://www.w3school.com.cn/xpath/index.asp">w3school的XPath中文教程</a></p>
-  </li>
-  <li>
-    <p><a href="http://xccds1977.blogspot.sg/2013/02/xmlxpath.html">博文《XML和XPath使用方法备忘》</a></p>
+    <p><a href="https://airekans.github.io/cpp/2014/07/04/gperftools-profile">用gperftools对C/C++程序进行profile</a></p>
   </li>
 </ul>
 
-<h3 id="section-7">更新记录</h3>
+<h3 id="section-3">更新记录</h3>
 
-<p>2015年10月24日</p>
+<p>2018年2月18日</p>
 </div>
 
 
@@ -354,13 +326,13 @@
 
 
 
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2015-10-25T19:05:33+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2018-10-03T19:38:37+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
           
 
 <span class="glyphicon glyphicon-tags"></span>&nbsp;
 <span class="categories">
   
-    <a class='category' href='/blog/categories/hcj/'>hcj</a>
+    <a class='category' href='/blog/categories/r/'>r</a>
   
 </span>
 
@@ -369,7 +341,7 @@
         
           <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.bionutshell.org/blog/2015/10/25/xpath-xml/" data-via="" data-counturl="http://yulongniu.bionutshell.org/blog/2015/10/25/xpath-xml/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.bionutshell.org/blog/2018/10/03/profile-r-and-rcpp/" data-via="" data-counturl="http://yulongniu.bionutshell.org/blog/2018/10/03/profile-r-and-rcpp/" >Tweet</a>
   
   
   
@@ -379,10 +351,8 @@
         
           <ul class="meta text-muted pager">
             
-            <li class="previous"><a href="/blog/2015/09/30/spacemacs-tutorial/" title="Previous Post: Spacemacs使用记录">&laquo; Spacemacs使用记录</a></li>
+            <li class="previous"><a href="/blog/2018/07/19/rcppparallel-test/" title="Previous Post: 使用RcppParallel并行计算">&laquo; 使用RcppParallel并行计算</a></li>
             
-            
-            <li class="next"><a href="/blog/2016/01/07/rcpp-matrix/" title="Next Post: Rcpp操作矩阵和向量集锦">Rcpp操作矩阵和向量集锦 &raquo;</a></li>
             
           </ul>
         
@@ -407,7 +377,7 @@
   
   <div id="recent_posts" class="list-group">
     
-    <a class="list-group-item " href="/blog/2018/10/03/profile-r-and-rcpp/">R和Rcpp的性能检测</a>
+    <a class="list-group-item active" href="/blog/2018/10/03/profile-r-and-rcpp/">R和Rcpp的性能检测</a>
     
     <a class="list-group-item " href="/blog/2018/07/19/rcppparallel-test/">使用RcppParallel并行计算</a>
     
@@ -513,8 +483,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://yulongniu.bionutshell.org/blog/2015/10/25/xpath-xml/';
-        var disqus_url = 'http://yulongniu.bionutshell.org/blog/2015/10/25/xpath-xml/';
+        var disqus_identifier = 'http://yulongniu.bionutshell.org/blog/2018/10/03/profile-r-and-rcpp/';
+        var disqus_url = 'http://yulongniu.bionutshell.org/blog/2018/10/03/profile-r-and-rcpp/';
         var disqus_script = 'embed.js';
       
     (function () {

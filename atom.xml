@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-09-17T19:39:22+08:00</updated>
+  <updated>2018-10-03T20:16:08+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -12,6 +12,121 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[R和Rcpp的性能检测]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2018/10/03/profile-r-and-rcpp/"/>
+    <updated>2018-10-03T19:38:37+08:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2018/10/03/profile-r-and-rcpp</id>
+    <content type="html"><![CDATA[<h2 id="r">1. R性能检测</h2>
+
+<p>直接使用<span style="color: blue">profvis</span>包即可，例如<a href="https://rstudio.github.io/profvis/">示例</a>。</p>
+
+<h2 id="rcpp">2. Rcpp性能检测</h2>
+
+<h3 id="section">2.1 安装依赖软件</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Pre-requested tools </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>sudo dnf install gperftools-devel google-perftools graphviz ghostscript
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<!--more-->
+
+<h3 id="section-1">2.2 编译</h3>
+
+<p>在包（包名称为<code>Mypkg</code>）目录<code>src</code>建立如下文件：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Profiler Rcpp code </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+</pre></td><td class="code"><pre><code class="c++"><span class="line"><span class="cp">#include &lt;Rcpp.h&gt;</span>
+</span><span class="line"><span class="cp">#include &lt;gperftools/profiler.h&gt;</span>
+</span><span class="line">
+</span><span class="line"><span class="k">using</span> <span class="k">namespace</span> <span class="n">Rcpp</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">// [[Rcpp::export]]</span>
+</span><span class="line"><span class="n">SEXP</span> <span class="nf">start_profiler</span><span class="p">(</span><span class="n">SEXP</span> <span class="n">str</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">  <span class="n">ProfilerStart</span><span class="p">(</span><span class="n">as</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">str</span><span class="p">));</span>
+</span><span class="line">  <span class="k">return</span> <span class="n">R_NilValue</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">// [[Rcpp::export]]</span>
+</span><span class="line"><span class="n">SEXP</span> <span class="nf">stop_profiler</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="line">  <span class="n">ProfilerStop</span><span class="p">();</span>
+</span><span class="line">  <span class="k">return</span> <span class="n">R_NilValue</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>包目录<code>src</code>的Makevars文件中添加<code>-lprofile</code>选项，例如<code>PKG_LIBS = $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) -lprofiler</code>。之后，安装包，并重新载入。</p>
+
+<h3 id="section-2">2.3 调试</h3>
+
+<p>使用方法为：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Profiling </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line">Mypkg<span class="o">:::</span>start_profiler<span class="p">(</span><span class="s">&quot;/tmp/profile.out&quot;</span><span class="p">)</span>
+</span><span class="line">run_cpp_codes<span class="p">()</span>
+</span><span class="line">Mypkg<span class="o">:::</span>stop_profiler<span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>查看profile结果：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Profiling results </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c">## text</span>
+</span><span class="line">pprof --text src/Mypkg.so /tmp/profile.out
+</span><span class="line">
+</span><span class="line"><span class="c">## pdf</span>
+</span><span class="line">pprof --pdf src/Mypkg.so /tmp/profile.out &gt; profile.pdf
+</span><span class="line">
+</span><span class="line"><span class="c">## kcachegrind</span>
+</span><span class="line">pprof --callgrind src/RNASeqEM.so R/profile.out &gt; profile.res
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="a-idrefa"><a id="Ref">参考资料</a></h3>
+
+<ul>
+  <li>
+    <p><a href="https://arxiv.org/abs/1104.3889">Introduction to High-Performance Computing with R by Dr. Dirk Eddelbuettel</a></p>
+  </li>
+  <li>
+    <p><a href="https://minimallysufficient.github.io/r%20programming%20cpp/2018/02/16/profiling-rcpp-packages.html">Profiling Rcpp packages</a></p>
+  </li>
+  <li>
+    <p><a href="https://airekans.github.io/cpp/2014/07/04/gperftools-profile">用gperftools对C/C++程序进行profile</a></p>
+  </li>
+</ul>
+
+<h3 id="section-3">更新记录</h3>
+
+<p>2018年2月18日</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[使用RcppParallel并行计算]]></title>
@@ -2867,239 +2982,6 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
 
 <p>常用的快捷键参考使用layer的说明文档。</p>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[一些共轭先验]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2015/08/02/conjugate-priors/"/>
-    <updated>2015-08-02T15:53:54+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2015/08/02/conjugate-priors</id>
-    <content type="html"><![CDATA[<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-TeX: { equationNumbers: { autoNumber: "AMS" } }
-});
-</script>
-
-<script type="math/tex; mode=display">\newcommand{\md}{\mathrm{d}}</script>
-
-<p><a href="https://en.wikipedia.org/wiki/Conjugate_prior#cite_note-beta_rate-6">共轭先验（Conjugate prior）</a>在贝叶斯估计中被广泛应用，本文尝试详细推理一些常见分布的共轭先验证。</p>
-
-<!--more-->
-
-<p>贝叶斯公式：</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-\begin{align}
-\begin{split}
-f(\theta | x) &= \frac{f(\theta, x)}{f(x)} \\
-&= \frac{f(x | \theta)f(\theta)}{\int f(x | \theta)f(\theta) \md \theta}
-\end{split}
-\label{eq:1}
-\end{align} %]]&gt;</script>
-
-<h2 id="section">1. 离散分布</h2>
-
-<h3 id="section-1">1.1 伯努利分布</h3>
-
-<p>伯努利分布（Bernoulli distribution）的概率质量函数为：</p>
-
-<script type="math/tex; mode=display">\begin{align}
-\begin{split}
-f(k;p) = p^k (1-p)^{1-k} \quad \mathrm{for} \quad k \in \{0, 1\}
-\end{split}
-\label{eq:2}
-\end{align}</script>
-
-<p>对于随机变量$X_i \in \{X_1, X_2, \dots, X_m\}$易得，$p$的极大似然估计（Maximum Likelihood Estimator, MLE）为$\hat{p}=\frac{\sum_{i=1}^{m}k_i}{m}$。</p>
-
-<p>该分布的共轭先验为Beta分布$\mathrm{Beta}(\alpha, \beta)$，即对于随机变量$X_i$：</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-\begin{align}
-\begin{split}
-f(p|X_i) &= \frac{p^{k_i} (1-p)^{1-k_i} \frac{1}{\mathrm{B}(\alpha, \beta)} p^{\alpha - 1} (1-p)^{\beta -1}}{f(X_i)} \\
-&=\frac{\frac{1}{\mathrm{B}(\alpha, \beta)} p^{k_i+\alpha-1}(1-p)^{\beta - k_i}}{\int_0^1 \frac{1}{\mathrm{B}(\alpha, \beta)} p^{k_i+\alpha-1}(1-p)^{\beta - k_i} \md p} \\
-&= \frac{p^{k_i+\alpha-1}(1-p)^{\beta - k_i}}{\mathrm{B}(k_i+\alpha, \beta+1 -k_i)} \\
-&= \mathrm{Beta}(k_i+\alpha, \beta+1-k_i)
-\end{split}
-\label{eq:3}
-\end{align} %]]&gt;</script>
-
-<p>根据$\eqref{eq:3}$易得，$f(p \vert X_1, X_2, \dots, X_m) = \mathrm{Beta}(\sum_{i=1}^{m}k_i+\alpha, \beta+m-\sum_{i=1}^{m}k_i)$，期望$\hat{p}=\frac{\sum_{i=1}^{m}k_i+\alpha}{m+\alpha+\beta}$。特别，当$\alpha=1$和$\beta=1$时，即共轭先验为$0-1$之间的均匀分布，$\hat{p}=\frac{\sum_{i=1}^{m}k_i+1}{m+2}$。</p>
-
-<h3 id="section-2">1.2 二项分布</h3>
-
-<p>二项分布（binomial distribution）的概率质量函数为：</p>
-
-<script type="math/tex; mode=display">\begin{align}
-\begin{split}
-f(k;n,p) = \binom{n}{k} p^k (1-p)^{n-k}
-\end{split}
-\label{eq:4}
-\end{align}</script>
-
-<p>对于随机变量$X_i \in \{X_1, X_2, \dots, X_m\}$易得，MLE为$\hat{p}=\frac{\sum_{i=1}^{m}k_i}{nm}$。</p>
-
-<p>该分布的共轭先验为Beta分布$\mathrm{Beta}(\alpha, \beta)$。因此，类似于$\eqref{eq:3}$，$f(p \vert X_1, X_2, \dots, X_m) = \mathrm{Beta}(\sum_{i=1}^{m}k_i+\alpha, \beta+nm-\sum_{i=1}^{m}k_i)$，期望$\hat{p}=\frac{\sum_{i=1}^{m}k_i+\alpha}{nm+\alpha+\beta}$。</p>
-
-<h3 id="section-3">1.3 负二项分布</h3>
-
-<p>负二项（negative binomial distribution）的概率质量函数为：</p>
-
-<script type="math/tex; mode=display">\begin{align}
-\begin{split}
-f(k;r,p) = \binom{r+k-1}{k} p^k (1-p)^{r}
-\end{split}
-\label{eq:5}
-\end{align}</script>
-
-<p>对于随机变量$X_i \in \{X_1, X_2, \dots, X_m\}$易得，MLE为$\hat{p}=\frac{\sum_{i=1}^{m}k_i}{mr+\sum_{i=1}^{m}k_i}$。</p>
-
-<p>该分布的共轭先验为Beta分布$\mathrm{Beta}(\alpha, \beta)$。因此，类似于$\eqref{eq:3}$，$f(p \vert X_1, X_2, \dots, X_m) = \mathrm{Beta}(\sum_{i=1}^{m}k_i+\alpha, \beta+mr)$，期望$\hat{p}=\frac{\sum_{i=1}^{m}k_i+\alpha}{mr+\sum_{i=1}^{m}k_i+\alpha+\beta}$。</p>
-
-<h3 id="section-4">1.4 多项分布</h3>
-
-<p>多项二项（multinomial distribution）的概率质量函数为：</p>
-
-<script type="math/tex; mode=display">\begin{align}
-\begin{split}
-f(x_1, x_2,\dots,x_k;n,p_1,p_2,\dots,p_k) = \frac{n!}{x_1!x_2!\dots x_k!}p_1^{x_1}p_2^{x_2}\dots p_k^{x_k} \quad \mathrm{for} \quad \sum_{i=1}^k p_i=1 \quad \sum_{i=1}^k x_i=n
-\end{split}
-\label{eq:6}
-\end{align}</script>
-
-<p>对于随机变量$X_j \in \{X_1, X_2, \dots, X_m\}$易得，MLE为$\hat{p_i}=\frac{\sum_{j=1}^{m}x_{ij}}{\sum_{i=1}^{k}\sum_{j=1}^{m}x_{ij}}$。</p>
-
-<p>该分布的共轭先验为Dirichlet分布$\mathrm{Dir}(\alpha_1,\alpha_2,\dots,\alpha_k)$，即对于随机变量$X_i$：</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-\begin{align}
-\begin{split}
-f(p_1,p_2,\dots,p_k|X_1) &= \frac{\frac{n!}{x_{11}!x_{21}!\dots x_{k1}!}p_1^{x_{11}}p_2^{x_{21}}\dots p_k^{x_{k1}} \frac{1}{\mathrm{B}(\boldsymbol{\alpha})} p_1^{\alpha_1-1} p_2^{\alpha_2-1} \dots p_k^{\alpha_k-1}}{f(X_i)} \\
-&= \frac{p_1^{\alpha_1+x_{11}-1} p_2^{\alpha_2+x_{21}-1} \dots p_k^{\alpha_k+x_{k1}-1}}{\int_0^1 \int_0^{1-p_1} \cdots \int_0^{1-\sum_{i=1}^{k-2} p_i}p_1^{\alpha_1+x_{11}-1} p_2^{\alpha_2+x_{21}-1} \dots (1-\sum_{i=1}^{k-1}p_i)^{\alpha_k+x_{k1}-1} \md p_1 \md p_2 \dots \md p_{k-1}} \\
-&=\frac{\mathrm{\Gamma}\left(\sum_{i=1}^{k}(\alpha_i+x_{i1})\right)}{\prod_{i=1}^{k}\mathrm{\Gamma}(\alpha_i+x_{i1})}p_1^{\alpha_1+x_{11}-1} p_2^{\alpha_2+x_{21}-1} \dots p_k^{\alpha_k+x_{k1}-1} \\
-&=\mathrm{Dir}(\alpha_1+x_{11},\alpha_2+x_{21},\dots,\alpha_k+x_{k1})
-\end{split}
-\label{eq:7}
-\end{align} %]]&gt;</script>
-
-<p>根据$\eqref{eq:7}$易得，$f(p_1,p_2,\dots,p_k \vert X_1, X_2, \dots, X_m) = \mathrm{Dir}(\alpha_1+\sum_{j=1}^{m}x_{1j},\alpha_2+\sum_{j=1}^{m}x_{2j},\dots,\alpha_k+\sum_{j=1}^{m}x_{kj})$，期望为$\hat{p_i}=\frac{\sum_{j=1}^{m}x_{ij}+\alpha_i}{\sum_{i=1}^{k}\sum_{j=1}^{m}x_{ij} + \sum_{i=1}^{k}\alpha_i}$。特别，当$\alpha_1=\alpha_2=\dots=\alpha_k=1$时，$\hat{p_i}=\frac{\sum_{j=1}^{m}x_{ij}+1}{\sum_{i=1}^{k}\sum_{j=1}^{m}x_{ij}+k}$。</p>
-
-<h3 id="section-5">1.5 泊松分布</h3>
-
-<p>泊松分布（Poisson distribution）的概率质量函数为：</p>
-
-<script type="math/tex; mode=display">\begin{align}
-\begin{split}
-f(k;\lambda) = \frac{\lambda^k \mathrm{e}^{-\lambda}}{k!}
-\end{split}
-\label{eq:8}
-\end{align}</script>
-
-<p>对于随机变量$X_j \in \{X_1, X_2, \dots, X_m\}$易得，MLE为$\hat{\lambda}=\frac{\sum_{i=1}^m k_i}{m}$。</p>
-
-<p>该分布的共轭先验为Gamma分布$\mathrm{Gamma}(\alpha, \beta)$，即对于随机变量$X_i$：</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-\begin{align}
-\begin{split}
-f(\lambda|X_i) &= \frac{\frac{1}{k_i!}\lambda^{k_i} \mathrm{e}^{-\lambda}\frac{1}{\mathrm{\Gamma}(\alpha)}\beta^\alpha \lambda^{\alpha-1}\mathrm{e}^{-\beta\lambda}}{f(X_i)} \\
-&= \frac{\lambda^{k_i+\alpha-1}\mathrm{e}^{-(\beta+1)\lambda}}{\int_0^\infty \lambda^{k_i+\alpha-1}\mathrm{e}^{-(\beta+1)\lambda} \md \lambda} \\
-&= \frac{(\beta+1)^{k_i+\alpha} \lambda^{k_i+\alpha-1}\mathrm{e}^{-(\beta+1)\lambda}}{\mathrm{\Gamma}(k_i+\alpha)} \\
-&= \mathrm{Gamma}(k_i+\alpha, \beta+1)
-\end{split}
-\label{eq:9}
-\end{align} %]]&gt;</script>
-
-<p>根据$\eqref{eq:9}$易得，$f(\lambda \vert X_1, X_2, \dots, X_m) = \mathrm{Gamma}(\sum_{i=1}^{m}k_i+\alpha, \beta+m)$，期望$\hat{p}=\frac{\sum_{i=1}^{m}k_i+\alpha}{\beta+m}$。</p>
-
-<h2 id="section-6">2. 连续分布</h2>
-
-<h3 id="section-7">2.1 指数分布</h3>
-
-<p>指数分布（exponential distribution）的概率密度函数为：</p>
-
-<script type="math/tex; mode=display">\begin{align}
-\begin{split}
-f(x;\lambda) = \lambda \mathrm{e}^{-\lambda x} \quad \mathrm{for} \quad x\ge0
-\end{split}
-\label{eq:10}
-\end{align}</script>
-
-<p>对于随机变量$X_j \in \{X_1, X_2, \dots, X_m\}$易得，MLE为$\hat{\lambda}=\frac{m}{\sum_{i=1}^m k_i}$。</p>
-
-<p>该分布的共轭先验为Gamma分布$\mathrm{Gamma}(\alpha, \beta)$。因此，类似于$\eqref{eq:9}$，$f(\lambda \vert X_1, X_2, \dots, X_m) = \mathrm{Gamma}(\alpha+m, \beta+\sum_{i=1}^{m}k_i)$，期望$\hat{p}=\frac{\alpha+m}{\beta+\sum_{i=1}^{m}k_i}$</p>
-
-<h3 id="section-8">2.2 已知均值的正态分布</h3>
-
-<p>正态分布的概率密度函数为：</p>
-
-<script type="math/tex; mode=display">\begin{align}
-\begin{split}
-f(x; \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \mathrm{e}^{-\frac{(x-\mu)^2}{2\sigma^2}}
-\end{split}
-\label{eq:11}
-\end{align}</script>
-
-<p>对于随机变量$X_j \in \{X_1, X_2, \dots, X_m\}$易得，MLE为$\hat{\sigma}^2=\frac{\sum_{i=1}^m(x_i-\mu)^2}{m}$。</p>
-
-<p>该分布的共轭先验为inverse Gamma分布$\mathrm{Inv-Gamma}(\alpha, \beta)$，即对于随机变量$X_i$：</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-\begin{align}
-\begin{split}
-f(\sigma^2|X_i) &= \frac{\frac{1}{\sqrt{2\pi}} \frac{1}{\sigma} \mathrm{e}^{-\frac{(x_i-\mu)^2}{2\sigma^2}} \frac{\beta^\alpha}{\mathrm{\Gamma}(\alpha)} \sigma^{2(-\alpha-1)}\mathrm{e}^{-\frac{\beta}{\sigma^2}}}{f(X_i)} \\
-&=\frac{\sigma^{2\left(-\alpha-\frac{3}{2}\right)} e^{\frac{(x_i-\mu)^2+2\beta}{2\sigma^2}}}{\int_0^\infty \sigma^{2\left(-\alpha-\frac{3}{2}\right)} e^{\frac{(x_i-\mu)^2+2\beta}{2\sigma^2}} \md \sigma^2} \\
-&= \frac{\left(\beta+\frac{(x_i-\mu)^2}{2}\right)^{\left(-\alpha-\frac{1}{2}\right)}}{\mathrm{\Gamma}\left(\alpha+\frac{1}{2}\right)} \sigma^{2\left(-\alpha-\frac{3}{2}\right)} e^{\frac{(x_i-\mu)^2+2\beta}{2\sigma^2}}\\
-&= \mathrm{Inv-Gamma}(\alpha+\frac{1}{2}, \beta+\frac{(x_i-\mu)^2}{2})
-\end{split}
-\label{eq:12}
-\end{align} %]]&gt;</script>
-
-<p>根据$\eqref{eq:12}$易得，$f(\sigma^2 \vert X_1, X_2, \dots, X_m) = \mathrm{Inv-Gamma}(\alpha+\frac{m}{2}, \beta+\frac{\sum_{i=1}^m(x_i-\mu)^2}{2})$，期望$\hat{\sigma}^2=\frac{\beta+\frac{\sum_{i=1}^m(x_i-\mu)^2}{2}}{\alpha+\frac{m}{2}-1}$。</p>
-
-<h2 id="section-9">3. 一些积分证明</h2>
-
-<h3 id="beta">3.1 多元beta函数</h3>
-
-<p>$\int_0^1 \int_0^{1-p_1} \cdots \int_0^{1-\sum_{i=1}^{k-2} p_i}p_1^{\alpha_1-1} p_2^{\alpha_2-1} \dots (1-\sum_{i=1}^{k-1}p_i)^{\alpha_k-1} \md p_1 \md p_2 \dots \md p_{k-1} = \frac{\mathrm{\Gamma}\left(\sum_{i=1}^{k}(\alpha_i)\right)}{\prod_{i=1}^{k}\mathrm{\Gamma}(\alpha_i)} \quad \mathrm{for} \quad \sum_{i=1}^k p_i=1$</p>
-
-<p>令$p_{k-1} = (1-\sum_{i=1}^{k-2}p_i)u$，考察积分：</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-\begin{align*}
-\begin{split}
-\int_0^{1-\sum_{i=1}^{k-2} p_i} p_{k-1}^{\alpha_{k-1}-1} (1-\sum_{i=1}^{k-1}p_i)^{\alpha_k-1} \md p_{k-1} &= \left(1-\sum_{i=1}^{k-2}p_i \right)^{\alpha_{k-1}+\alpha_k-2} \int_0^1 u^{\alpha_{k-1}-1}(1-u)^{\alpha_k-1} \md u \\
-&= \left(1-\sum_{i=1}^{k-2}p_i \right)^{\alpha_{k-1}+\alpha_k-2} \frac{\mathrm{\Gamma}(\alpha_{k-1})\mathrm{\Gamma}(\alpha_{k})}{\mathrm{\Gamma}(\alpha_{k-1} + \alpha_{k})}
-\end{split}
-\end{align*} %]]&gt;</script>
-
-<p>迭代相乘后即得。</p>
-
-<h3 id="gamma">3.2 Gamma积分</h3>
-
-<p>$\int_0^\infty \frac{x^{\alpha-1}}{\mathrm{e}^{\lambda x}} \md x=\frac{\mathrm{\Gamma}(\alpha)}{\lambda^\alpha}$</p>
-
-<p>令$\lambda x=u$：</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-\begin{align*}
-\begin{split}
-\int_0^\infty \frac{x^{\alpha-1}}{\mathrm{e}^{\lambda x}} \md x &= \lambda^{-\alpha} \int_0^\infty \frac{u^{\alpha-1}}{\mathrm{e}^u} \md u \\
-&= \frac{\mathrm{\Gamma}(\alpha)}{\lambda^\alpha}
-\end{split}
-\end{align*} %]]&gt;</script>
-
-<h3 id="section-10">参考资料</h3>
-
-<ul>
-  <li><a href="https://people.eecs.berkeley.edu/~jordan/courses/260-spring10/other-readings/chapter9.pdf">Chapter 9 The exponential family: Conjugate priors</a></li>
-</ul>
-
-<h3 id="section-11">更新记录</h3>
-
-<p>2017年11月9日</p>
 ]]></content>
   </entry>
   
