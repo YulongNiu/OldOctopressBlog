@@ -100,10 +100,33 @@ microbenchmark(
 在使用<span style="color: blue">RcppParallel</span>并行计算时，不能在并行循环中调用`Rcpp::List`对象。一个解决办法是：使用`std::vector`替代`Rcpp:List`。例如，`List`中都是数值向量，那么可以建立`std::vector<Rcpp::NumericVector>`对象替代。
 [Gist3](https://gist.github.com/YulongNiu/0a11282216162b6e350c9575b68e91cc)中提供了一个例子。这种方法的局限在于`List`中每一个元素的类型需要相同。
 
+## 3. 同步 ##
+
+如果多个线程同时操作某一个共享内存对象，需要在<span style="color: blue">RcppParallel</span>包中使用“锁”。如[Gist4](https://gist.github.com/YulongNiu/5af268df461c8890c73c9640ae9ac754)所示，多个线程都需要操作`estcount`对象。测试代码如下：
+
+{% codeblock lang:r Synchronization %}
+library('Rcpp')
+
+sourceCpp('TestSynchron.cpp')
+
+n <- 10
+g <- 1000
+ecin <- sample(0:9, g*n, replace = TRUE) %>%
+  split(1:g)
+
+ecin %>% unlist %>% table
+
+TestShare(ecin, 10)
+{% endcodeblock %} 
+
+如果去掉[Gist4](https://gist.github.com/YulongNiu/5af268df461c8890c73c9640ae9ac754)代码中的第`27`和`31`行，可以发现测试结果不正确。
+
 ### <a id="Ref">参考网址</a> ###
 
 * [Summing a Vector in Parallel with RcppParallel](http://gallery.rcpp.org/articles/parallel-vector-sum/)
 
+* [Intel TBB Simple Mutex - Example](https://scc.ustc.edu.cn/zlsc/tc4600/intel/2017.0.098/advisor/help/GUID-D98B389E-61B9-414A-9450-D28EF9F61A95.htm)
+
 ### 更新记录 ###
 
-2018年6月21日
+2018年10月5日

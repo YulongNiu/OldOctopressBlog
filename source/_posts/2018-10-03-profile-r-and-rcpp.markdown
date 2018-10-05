@@ -80,4 +80,4 @@ pprof --callgrind src/RNASeqEM.so R/profile.out > profile.res
 
 ### 更新记录 ###
 
-2018年2月18日
+2018年10月4日
