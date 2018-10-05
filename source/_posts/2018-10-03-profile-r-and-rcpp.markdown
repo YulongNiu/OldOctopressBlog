@@ -15,7 +15,7 @@ categories: r
 ### 2.1 安装依赖软件 ###
 
 {% codeblock lang:bash Pre-requested tools %}
-$ sudo dnf install gperftools-devel google-perftools graphviz ghostscript
+$ sudo dnf install gperftools-devel google-perftools graphviz ghostscript kcachegrind
 {% endcodeblock %} 
 
 <!--more-->
