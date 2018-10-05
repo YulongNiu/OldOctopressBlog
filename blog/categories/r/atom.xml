@@ -4,7 +4,7 @@
   <title><![CDATA[Category: R | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/r/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-10-05T15:46:47+08:00</updated>
+  <updated>2018-10-05T21:45:34+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -124,7 +124,7 @@
 
 <h3 id="section-3">更新记录</h3>
 
-<p>2018年2月18日</p>
+<p>2018年10月4日</p>
 ]]></content>
   </entry>
   
@@ -292,15 +292,53 @@
 <p>在使用<span style="color: blue">RcppParallel</span>并行计算时，不能在并行循环中调用<code>Rcpp::List</code>对象。一个解决办法是：使用<code>std::vector</code>替代<code>Rcpp:List</code>。例如，<code>List</code>中都是数值向量，那么可以建立<code>std::vector&lt;Rcpp::NumericVector&gt;</code>对象替代。
 <a href="https://gist.github.com/YulongNiu/0a11282216162b6e350c9575b68e91cc">Gist3</a>中提供了一个例子。这种方法的局限在于<code>List</code>中每一个元素的类型需要相同。</p>
 
+<h2 id="section-1">3. 同步</h2>
+
+<p>如果多个线程同时操作某一个共享内存对象，需要在<span style="color: blue">RcppParallel</span>包中使用“锁”。如<a href="https://gist.github.com/YulongNiu/5af268df461c8890c73c9640ae9ac754">Gist4</a>所示，多个线程都需要操作<code>estcount</code>对象。测试代码如下：</p>
+
+<p><figure class='code'><figcaption><span>Synchronization </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="kn">library</span><span class="p">(</span>‘Rcpp’<span class="p">)</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>sourceCpp<span class="p">(</span>‘TestSynchron.cpp’<span class="p">)</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>n <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> <span class="m">10</span>
+</span><span class='line'>g <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> <span class="m">1000</span>
+</span><span class='line'>ecin <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> <span class="kp">sample</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="m">9</span><span class="p">,</span> g<span class="o">*</span>n<span class="p">,</span> replace <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">%&amp;gt;%</span>
+</span><span class='line'>  <span class="kp">split</span><span class="p">(</span><span class="m">1</span><span class="o">:</span>g<span class="p">)</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>ecin <span class="o">%&amp;gt;%</span> unlist <span class="o">%&amp;gt;%</span> <span class="kp">table</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>TestShare<span class="p">(</span>ecin<span class="p">,</span> <span class="m">10</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>如果去掉<a href="https://gist.github.com/YulongNiu/5af268df461c8890c73c9640ae9ac754">Gist4</a>代码中的第<code>27</code>和<code>31</code>行，可以发现测试结果不正确。</p>
+
 <h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
 
 <ul>
-  <li><a href="http://gallery.rcpp.org/articles/parallel-vector-sum/">Summing a Vector in Parallel with RcppParallel</a></li>
+  <li>
+    <p><a href="http://gallery.rcpp.org/articles/parallel-vector-sum/">Summing a Vector in Parallel with RcppParallel</a></p>
+  </li>
+  <li>
+    <p><a href="https://scc.ustc.edu.cn/zlsc/tc4600/intel/2017.0.098/advisor/help/GUID-D98B389E-61B9-414A-9450-D28EF9F61A95.htm">Intel TBB Simple Mutex - Example</a></p>
+  </li>
 </ul>
 
-<h3 id="section-1">更新记录</h3>
+<h3 id="section-2">更新记录</h3>
 
-<p>2018年6月21日</p>
+<p>2018年10月5日</p>
 ]]></content>
   </entry>
   
