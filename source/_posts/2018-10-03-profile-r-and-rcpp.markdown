@@ -65,7 +65,7 @@ pprof --text src/Mypkg.so /tmp/profile.out
 pprof --pdf src/Mypkg.so /tmp/profile.out > profile.pdf
 
 ## kcachegrind
-pprof --callgrind src/RNASeqEM.so R/profile.out > profile.res
+pprof --callgrind src/Mypkg.so R/profile.out > profile.res
 {% endcodeblock %} 
 
 
