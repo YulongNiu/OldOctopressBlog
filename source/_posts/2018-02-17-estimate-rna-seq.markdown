@@ -29,7 +29,7 @@ $$
 
 ## 1. 符号表示 ##
 
-$K$个长度为$l_i$的转录序列$t_i$，构成转录本的集合$T=\\{t_1, t_2, \dots, t_K\\}$。单个转录组中，每个转录序列$t_i$有$c_i$个拷贝数，全部转录序列的总拷贝数为$M$。单个转录序列的相对丰度为$\rho_i=\frac{c_i}{\sum\limits_{t \in T}c_t} = \frac{c_i}{M}$，易得$\sum\limits_{i=1}^K \rho_i= 1$。
+$K$个长度为$l_i$的转录序列$t_i$，构成转录本的集合$T=\\{t_1, t_2, \dots, t_K\\}$。单个转录组中，每个转录序列$t_i$有$c_i$个拷贝数，全部转录序列的总拷贝数为$M$。单个转录序列的相对丰度为$\rho_k=\frac{c_k}{\sum\limits_{t \in T}c_t} = \frac{c_k}{M}$，易得$\sum\limits_{k=1}^K \rho_k=1$。
 
 单个转录组中，全部转录片段构成集合$F=\\{f_1, f_2, \dots, f_N\\}$，总转录片段数目为$N=\|F\|$。比对到的转录序列$t_i$上的转录片段，构成集合$F_t \in F$，对应的转录片段数目为$X_t=\|F_t\|$。
 <!--more-->
@@ -56,8 +56,8 @@ $$
 $$
 \begin{align}
 \begin{split}
-\P(f \in t) &= \frac{\rho_t M \tildel}{\sum\limits_{s \in T} \rho_s M \widetilde{l_s}} \\
-&= \frac{\rho_t \tildel}{\sum\limits_{s \in T} \rho_s \widetilde{l_s}} \\
+\P(f \in t) &= \frac{\rho_t M \tildel}{\sum\limits_{k=1}^{K} \rho_k M \widetilde{l_k}} \\
+&= \frac{\rho_t \tildel}{\sum\limits_{k=1}^{K} \rho_k \widetilde{l_k}} \\
 &= \alpha_t
 \end{split}
 \label{eq:1}
