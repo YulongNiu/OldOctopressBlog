@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Lisp | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/lisp/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-10-20T15:19:46+08:00</updated>
+  <updated>2018-10-22T04:43:40+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -189,7 +189,7 @@
 
 <p>将<a href="#c-mode-config">附加环境设置</a>添加到Emacs设置文件，比如<code class="language-bash">~/.emacs</code>，此环境配置参考<a href="https://github.com/tuhdo/emacs-c-ide-demo/blob/master/custom/setup-helm.el">tuhdo</a>。</p>
 
-<h2 id="section-2">2. 文件操作</h2>
+<h2 id="section-2">2. 文件操作##</h2>
 
 <h3 id="section-3">2.1. 查找</h3>
 
