@@ -12,7 +12,6 @@ categories: PPR
 ## 1. 安装 ##
 
 请参考[官网](http://octopress.org/)，其他的博客介绍的安装已经失效或者错误。
-
 常用命令:
 
 {% codeblock lang:bash %}
@@ -22,7 +21,7 @@ $ rake preview
     
 ## 2. Ruby版本调整 ##
 
-因为Octopress需要使用Ruby旧版本，推荐使用[RVM](https://rvm.io/)安装Ruby 1.9.3版本。在安转过程中可能会出现`"gpg: Can't check signature: public key not found"`的错误提示，需要执行一下类似命名，添加公用匙。
+Octopress推荐使用[RVM](https://rvm.io/)安装Ruby 2.2.10版本。在安转过程中可能会出现`"gpg: Can't check signature: public key not found"`的错误提示，需要执行一下类似命名，添加公用匙。
 
 {% codeblock lang:bash %}
 $ gpg2 --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
@@ -348,6 +347,7 @@ $ git clone -b source git@github.com:YulongNiu/YulongNiu.github.io.git octopress
 # 安装bundle
 $ cd octopress
 $ gem install bundler
+$ bundle update
 $ bundle install
 
 # 克隆master分支到_deploy文件夹
@@ -396,6 +396,6 @@ $ git pull origin master
 
 ### 更新记录 ###
 
-2015年12月19日
+2018年10月21日
 
 
