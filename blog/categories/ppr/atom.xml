@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ppr | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/ppr/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-10-22T04:43:40+08:00</updated>
+  <updated>2018-10-22T04:54:39+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -421,9 +421,8 @@
 
 <h2 id="section">1. 安装</h2>
 
-<p>请参考<a href="http://octopress.org/">官网</a>，其他的博客介绍的安装已经失效或者错误。</p>
-
-<p>常用命令:</p>
+<p>请参考<a href="http://octopress.org/">官网</a>，其他的博客介绍的安装已经失效或者错误。
+常用命令:</p>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -433,7 +432,7 @@
 
 <h2 id="ruby">2. Ruby版本调整</h2>
 
-<p>因为Octopress需要使用Ruby旧版本，推荐使用<a href="https://rvm.io/">RVM</a>安装Ruby 1.9.3版本。在安转过程中可能会出现<code>"gpg: Can't check signature: public key not found"</code>的错误提示，需要执行一下类似命名，添加公用匙。</p>
+<p>Octopress推荐使用<a href="https://rvm.io/">RVM</a>安装Ruby 2.2.10版本。在安转过程中可能会出现<code>"gpg: Can't check signature: public key not found"</code>的错误提示，需要执行一下类似命名，添加公用匙。</p>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>gpg2 –keyserver hkp://keys.gnupg.net –recv-keys D39DC0E3
@@ -953,6 +952,7 @@ code snippet
 <span class='line-number'>15</span>
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
+<span class='line-number'>18</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 注意切换到指定ruby版本</span>
 </span><span class='line'><span class="c"># 克隆source分支到本地，注意替换“YulongNiu”为自己的GitHub名称</span>
 </span><span class='line'><span class="nv">$ </span>git clone -b <span class="nb">source </span>git@github.com:YulongNiu/YulongNiu.github.io.git octopress&lt;/p&gt;
@@ -960,6 +960,7 @@ code snippet
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;bundle&quot;</span>&gt;安装bundle&lt;/h1&gt;
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span><span class="nb">cd </span>octopress
 </span><span class='line'><span class="nv">$ </span>gem install bundler
+</span><span class='line'><span class="nv">$ </span>bundle update
 </span><span class='line'><span class="nv">$ </span>bundle install&lt;/p&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;masterdeploy&quot;</span>&gt;克隆master分支到_deploy文件夹&lt;/h1&gt;
@@ -1024,7 +1025,7 @@ code snippet
 
 <h3 id="section-16">更新记录</h3>
 
-<p>2015年12月19日</p>
+<p>2018年10月21日</p>
 
 ]]></content>
   </entry>
