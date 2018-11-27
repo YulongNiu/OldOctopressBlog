@@ -1,0 +1,45 @@
+---
+layout: post
+title: "R包dplyr使用集锦"
+date: 2018-11-26 16:31:58 +0800
+comments: true
+categories: r
+---
+
+## 1. 使用<span style="color: blue">dplyr</span>包的好处 ##
+
+1. 大多数时间在操作`tbl_df`对象，而不是`data.frame`（特别是含有`factor`的`data.frame`）。
+
+2. 与<span style="color: blue">magrittr</span>包的管道更好地结合。
+
+3. 更丰富的列操作，例如`mutate`、`select`。`group_by`会节省很多for循环。
+
+<!--more-->
+
+## 2. 列操作 ##
+
+* `filter()`：过滤列，需要输入一个逻辑向量（注意`xor(x, y)`：x和y并集除去交集的部分。`between(x, left, right)`：left <= x <= right。`near(x, y)`：x和y在一定精度下相等，比`==`安全）。直接使用列名操作，例如`year == 2018`。多列操作相当于`&`。
+
+* `arrange()`：列排序（默认升序）。多列操作时，先排序第一个，再对第一个相等的排第二个。`desc()`降序排列。`.by_group = FALSE`控制是否需要按照group进行组内操作。
+
+* `select()`：选择列，重新组合新的`tbl_df`。结合<span style="color: blue">tidyselect</span>包`的starts_with()`前缀、`end_with()`后缀、`contains()`部分字符串、`matches()`正则匹配、`num_range`类似V01和x02之类、`everything()`（剩余）所有的列、`last_col(offset = n)`倒数第n+1列（默认n为0）。`select(Col1 = col1)`更改col1列名为Col1，并只返回Col1列。`rename(Col1 = col1)`返回全部列，但更改列名为Col1。
+
+* `mutate()`：增加列，返回原始对象和增加列，增加列放置最后。`transmute()`：只返回增加的列。
+
+
+## 3. 行操作 ##
+
+
+
+### <a id="Ref">参考资料</a> ###
+
+* Hadley Wickham, Garrett Grolemund: [R for Data Science](https://r4ds.had.co.nz/).
+
+* [dplyr vignettes](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html)
+
+* [dplyr in tidyverse](https://dplyr.tidyverse.org/)
+
+
+### 更新记录 ###
+
+2018年11月26日

@@ -205,7 +205,7 @@ Error: duplicate switch defaults: '"no"' and '"value"'
 
 ## 8. `|`{:.language-r} 和 `||`{:.language-r} 有区别，返回向量与单值 ##
 
-R中的逻辑运算符号有两组，`|`{:.language-r}或者`||`{:.language-r}（`&`{:.language-r}或者`&&`{:.language-r}），看起来觉得有些多余。其实，这是为了R独特的“**向量运算**”考虑的。`|`{:.language-r}或者`&`{:.language-r}首先考虑返回一个向量，而`||`{:.language-r}和`&&`{:.language-r}则只返回最后一个值。比如：
+R中的逻辑运算符号有两组，`|`{:.language-r}或者`||`{:.language-r}（`&`{:.language-r}或者`&&`{:.language-r}），看起来觉得有些多余。其实，这是为了R独特的“**向量运算**”考虑的。`|`{:.language-r}或者`&`{:.language-r}首先考虑返回一个向量，而`||`{:.language-r}和`&&`{:.language-r}则只返回第一个比较结果。比如：
 
 {% codeblock lang:r %}
 > c(FALSE, TRUE) | c(FALSE, FALSE)
@@ -394,4 +394,4 @@ for (i in tmp1) {
 
 ### 更新记录 ###
 
-2015年11月21日
+2018年11月26日
