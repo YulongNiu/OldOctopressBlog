@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://yulongniu.bionutshell.org/blog/2018/11/26/r-dplyr/</loc>
+<lastmod>2018-11-26T16:31:58+08:00</lastmod>
+</url>
+<url>
 <loc>http://yulongniu.bionutshell.org/blog/2018/10/03/profile-r-and-rcpp/</loc>
 <lastmod>2018-10-03T19:38:37+08:00</lastmod>
 </url>

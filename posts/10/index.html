@@ -184,6 +184,102 @@
 
 
 
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2013-11-10T14:21:16+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="/blog/2013/11/10/mutual-information/#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2013/11/10/mutual-information/">Comments</a>
+        
+      </p>
+    
+    
+      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2013/11/10/mutual-information/" itemprop="url">A Brief Intruction of Mutual Information and Demonstration With R</a></h2>
+    
+  </header>
+
+
+  <div class="entry-content clearfix" itemprop="articleBody description"><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<p>$\newcommand{\entropfrac}[2]{\frac{#1}{#2} \log \left( \frac{#1}{#2} \right)}$</p>
+
+<h2 id="mututal-information-mi">Mututal Information (MI)</h2>
+
+<h3 id="introduction">Introduction</h3>
+
+<p><a href="http://en.wikipedia.org/wiki/Mutual_information">Mutual Information (MI)</a> distance is used to measure the distance between two genes vectors, for example $x_1 = {1, 0, 1, 1, 1, 1, 0}$ and $y_1 = {0, 1, 1, 1, 1, 1, 0}$. It is easily to transfer the two vectors into a binary table:</p>
+
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>X/Y</strong></th>
+      <th style="text-align: center"><strong>1(Presence)</strong></th>
+      <th style="text-align: center"><strong>0(Absence)</strong></th>
+      <th style="text-align: center"><strong>Sum</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>1(Presence)</strong></td>
+      <td style="text-align: center">a</td>
+      <td style="text-align: center">b</td>
+      <td style="text-align: center">a+b</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>0(Absence)</strong></td>
+      <td style="text-align: center">c</td>
+      <td style="text-align: center">d</td>
+      <td style="text-align: center">c+d</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>Sum</strong></td>
+      <td style="text-align: center">a+c</td>
+      <td style="text-align: center">b+d</td>
+      <td style="text-align: center">n=a+b+c+d</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+</div>
+  
+  
+    <footer>
+      <a class="btn btn-default" href="/blog/2013/11/10/mutual-information/">Read on &rarr;</a>
+    </footer>
+  
+
+
+        </article>
+      
+      
+        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+          
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="glyphicon glyphicon-calendar"></span> <time datetime="2013-10-02T14:47:11+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
         
            | <a href="/blog/2013/10/02/ggplot2-notes/#disqus_thread" itemprop="discussionUrl"
@@ -443,64 +539,6 @@ f(Y) &= \int_{-\infty}^{+\infty}f(Y, x) \mathrm{d}x \\
 
         </article>
       
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2012-08-21T19:33:47+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-           | <a href="/blog/2012/08/21/python-r-rpy2/#disqus_thread" itemprop="discussionUrl"
-             data-disqus-identifier="http://yulongniu.bionutshell.org/blog/2012/08/21/python-r-rpy2/">Comments</a>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2012/08/21/python-r-rpy2/" itemprop="url">Python中使用rpy2模块调用R</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><p>需要在python中调用R，实在是一种无奈的选择。如果能在一门语言中独立完成课题，是一个比较理想的做法。但是，这种想法也不太现实，毕竟每一种语言都有自己的长处。如果能取长补短，综合使用各种语言，也能起到不错的效果。</p>
-
-<p>现在遇到的问题是，如何在python中调用R？这其中包括了如何调用R的对象（函数和包），R和python的对象如何互相转换，以及如何调用R的脚本（外界参数的输入）。python提供了一个模块<a href="http://rpy.sourceforge.net/">rpy2</a> ，可以较好地完成这项工作。rpy2只是提供了一个Python调用R的接口，因此也直接继承了所有R的缺点。一个有意思的项目是<a href="http://www.renjin.org/">renjin</a>，一个基于JVM的R语言解释器。</p>
-
-<p>本文着重记录一些使用过程中的注意事项和小技巧，如有不一致则以<a href="http://rpy.sourceforge.net/rpy2/doc-2.5/html/">官方文档</a>为准。</p>
-
-<h2 id="section">1. 安装</h2>
-
-<p>rpy2作为Python的一个模块，其<a href="http://rpy.sourceforge.net/rpy2/doc-2.5/html/overview.html#installation">安装</a>非常方便。需要做的准备工作是在本地安装好R。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Install rpy2 from pip </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># pip install rpy2</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-</div>
-  
-  
-    <footer>
-      <a class="btn btn-default" href="/blog/2012/08/21/python-r-rpy2/">Read on &rarr;</a>
-    </footer>
-  
-
-
-        </article>
-      
     </div>
 
     <ul class="pager">
@@ -524,6 +562,8 @@ f(Y) &= \int_{-\infty}^{+\infty}f(Y, x) \mathrm{d}x \\
   
   <div id="recent_posts" class="list-group">
     
+    <a class="list-group-item " href="/blog/2018/11/26/r-dplyr/">R包dplyr使用集锦</a>
+    
     <a class="list-group-item " href="/blog/2018/10/03/profile-r-and-rcpp/">R和Rcpp的性能检测</a>
     
     <a class="list-group-item " href="/blog/2018/07/19/rcppparallel-test/">使用RcppParallel并行计算</a>
@@ -531,8 +571,6 @@ f(Y) &= \int_{-\infty}^{+\infty}f(Y, x) \mathrm{d}x \\
     <a class="list-group-item " href="/blog/2018/02/17/estimate-rna-seq/">通过RNA-Seq评估基因表达量的模型</a>
     
     <a class="list-group-item " href="/blog/2017/10/24/bray-curtis-distance/">Bray-Curtis Distance解释</a>
-    
-    <a class="list-group-item " href="/blog/2017/10/22/google-distance/">Normalized Google Distance解释</a>
     
   </div>
 </section>
@@ -550,7 +588,7 @@ f(Y) &= \int_{-\infty}^{+\infty}f(Y, x) \mathrm{d}x \\
     
     
     <a class="list-group-item " href="/blog/categories/r/index.html">
-        <span class="badge">11</span>
+        <span class="badge">12</span>
         r
       </a>
     
