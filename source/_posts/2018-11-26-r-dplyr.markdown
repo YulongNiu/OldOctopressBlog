@@ -28,7 +28,9 @@ categories: r
 
 ## 3. 行操作 ##
 
-`sample_n()`和`sample_frac()`：随机选择行。
+* `sample_n()`和`sample_frac()`：随机选择行。
+
+* `top_n()`：选择前n行。可以使用负数值，表示倒数n行。
 
 ## 4. 两个表的操作 ##
 
@@ -49,6 +51,14 @@ categories: r
 * `intersect(x, y)`、`setdiff(x, y)`和`union(x, y)`：对行判断，x和y的交集、x中的余集和并集。
 
 * `setequal(x, y)`：x和y的行是否相同（与行顺序无关）。
+
+
+## 5. 行名操作 ##
+
+* `rownames_to_column()`：把行名变成某列。
+
+* `column_to_rownames()`：把某列变为行名。
+
 
 ### <a id="Ref">参考资料</a> ###
 
