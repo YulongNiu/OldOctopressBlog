@@ -648,6 +648,53 @@ $ crontab -r
 $ crontab -e
 {% endcodeblock %}
 
+## 38. 添加大于2T的硬盘 ##
+
+{% codeblock lang:bash Disk number %}
+# 确定添加硬盘，比如/dev/sda
+$ sudo fdisk -l
+{% endcodeblock %}
+
+使用`parted`分区
+
+{% raw %}
+```
+$ sudo parted /dev/sda
+GNU Parted 3.2
+Using /dev/sda
+Welcome to GNU Parted! Type 'help' to view a list of commands.
+(parted) mklabel gpt                                                      
+Warning: The existing disk label on /dev/sda will be destroyed and all data on this disk will be
+lost. Do you want to continue?
+Yes/No? yes                                                               
+(parted) mkpart                                                           
+Partition name?  []?                                                      
+File system type?  [ext2]? ext4                                           
+Start? 0%                                                                 
+End? 100%                                                                 
+(parted) print                                                            
+Model: ATA WDC WD4005FZBX-0 (scsi)
+Disk /dev/sda: 4001GB
+Sector size (logical/physical): 512B/4096B
+Partition Table: gpt
+Disk Flags: 
+
+Number  Start   End     Size    File system  Name  Flags
+ 1      1049kB  4001GB  4001GB  ext4
+
+(parted) quit                                                             
+Information: You may need to update /etc/fstab.
+```
+{% endraw %}
+
+格式化硬盘
+
+{% codeblock lang:bash format disk %}
+$ sudo mkfs.ext4 /dev/sda1
+{% endcodeblock %}
+
+
+
 
 ### 参考资料 ###
 
@@ -677,8 +724,10 @@ $ crontab -e
 
 * [crontab 定时任务](http://linuxtools-rst.readthedocs.org/zh_CN/latest/tool/crontab.html) 
 
+* [添加大于2T的硬盘](http://magicmonster.com/kb/os/linux/large_hdd.html)
+
 
 
 ### 更新记录 ###
 
-2018年3月9日
+2018年12月7日

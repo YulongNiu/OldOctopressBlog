@@ -31,7 +31,7 @@ $ gpg2 --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
 
 {% codeblock lang:bash %}
 $ source ~/.rvm/scripts/rvm
-$ rvm use 2.2.10
+$ rvm use ruby-2.2.10
 {% endcodeblock %}
 <!--more-->    
 
