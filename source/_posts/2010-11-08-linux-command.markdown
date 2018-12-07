@@ -663,26 +663,26 @@ $ sudo parted /dev/sda
 GNU Parted 3.2
 Using /dev/sda
 Welcome to GNU Parted! Type 'help' to view a list of commands.
-(parted) mklabel gpt                                                      
+(parted) mklabel gpt
 Warning: The existing disk label on /dev/sda will be destroyed and all data on this disk will be
 lost. Do you want to continue?
-Yes/No? yes                                                               
-(parted) mkpart                                                           
-Partition name?  []?                                                      
-File system type?  [ext2]? ext4                                           
-Start? 0%                                                                 
-End? 100%                                                                 
-(parted) print                                                            
+Yes/No? yes
+(parted)
+Partition
+File system type?  [ext2]?
+Start?
+End?
+(parted)
 Model: ATA WDC WD4005FZBX-0 (scsi)
 Disk /dev/sda: 4001GB
 Sector size (logical/physical): 512B/4096B
 Partition Table: gpt
-Disk Flags: 
+Disk Flags:
 
 Number  Start   End     Size    File system  Name  Flags
  1      1049kB  4001GB  4001GB  ext4
 
-(parted) quit                                                             
+(parted)
 Information: You may need to update /etc/fstab.
 ```
 {% endraw %}
@@ -693,7 +693,11 @@ Information: You may need to update /etc/fstab.
 $ sudo mkfs.ext4 /dev/sda1
 {% endcodeblock %}
 
+查看硬盘供应商信息
 
+{% codeblock lang:bash %}
+$ sudo lshw -C disk
+{% endcodeblock %}
 
 
 ### 参考资料 ###
