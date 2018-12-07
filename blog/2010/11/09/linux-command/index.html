@@ -1117,6 +1117,75 @@
 </span><span class="line"><span class="nv">$ </span>crontab -e
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<h2 id="t">38. 添加大于2T的硬盘</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Disk number </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 确定添加硬盘，比如/dev/sda</span>
+</span><span class="line"><span class="nv">$ </span>sudo fdisk -l
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>使用<code>parted</code>分区</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo parted /dev/sda
+</span><span class="line">GNU Parted 3.2
+</span><span class="line">Using /dev/sda
+</span><span class="line">Welcome to GNU Parted! Type 'help' to view a list of commands.
+</span><span class="line">(parted) mklabel gpt                                                      
+</span><span class="line">Warning: The existing disk label on /dev/sda will be destroyed and all data on this disk will be
+</span><span class="line">lost. Do you want to continue?
+</span><span class="line">Yes/No? yes                                                               
+</span><span class="line">(parted) mkpart                                                           
+</span><span class="line">Partition name?  []?                                                      
+</span><span class="line">File system type?  [ext2]? ext4                                           
+</span><span class="line">Start? 0%                                                                 
+</span><span class="line">End? 100%                                                                 
+</span><span class="line">(parted) print                                                            
+</span><span class="line">Model: ATA WDC WD4005FZBX-0 (scsi)
+</span><span class="line">Disk /dev/sda: 4001GB
+</span><span class="line">Sector size (logical/physical): 512B/4096B
+</span><span class="line">Partition Table: gpt
+</span><span class="line">Disk Flags: 
+</span><span class="line">
+</span><span class="line">Number  Start   End     Size    File system  Name  Flags
+</span><span class="line"> 1      1049kB  4001GB  4001GB  ext4
+</span><span class="line">
+</span><span class="line">(parted) quit                                                             
+</span><span class="line">Information: You may need to update /etc/fstab.</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>格式化硬盘</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>format disk </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>sudo mkfs.ext4 /dev/sda1
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
 <h3 id="section-26">参考资料</h3>
 
 <ul>
@@ -1159,11 +1228,14 @@
   <li>
     <p><a href="http://linuxtools-rst.readthedocs.org/zh_CN/latest/tool/crontab.html">crontab 定时任务</a></p>
   </li>
+  <li>
+    <p><a href="http://magicmonster.com/kb/os/linux/large_hdd.html">添加大于2T的硬盘</a></p>
+  </li>
 </ul>
 
 <h3 id="section-27">更新记录</h3>
 
-<p>2018年3月9日</p>
+<p>2018年12月7日</p>
 </div>
 
 
