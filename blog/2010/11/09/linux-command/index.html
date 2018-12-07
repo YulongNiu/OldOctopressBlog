@@ -1157,26 +1157,26 @@
 </span><span class="line">GNU Parted 3.2
 </span><span class="line">Using /dev/sda
 </span><span class="line">Welcome to GNU Parted! Type 'help' to view a list of commands.
-</span><span class="line">(parted) mklabel gpt                                                      
+</span><span class="line">(parted) mklabel gpt
 </span><span class="line">Warning: The existing disk label on /dev/sda will be destroyed and all data on this disk will be
 </span><span class="line">lost. Do you want to continue?
-</span><span class="line">Yes/No? yes                                                               
-</span><span class="line">(parted) mkpart                                                           
-</span><span class="line">Partition name?  []?                                                      
-</span><span class="line">File system type?  [ext2]? ext4                                           
-</span><span class="line">Start? 0%                                                                 
-</span><span class="line">End? 100%                                                                 
-</span><span class="line">(parted) print                                                            
+</span><span class="line">Yes/No? yes
+</span><span class="line">(parted)
+</span><span class="line">Partition
+</span><span class="line">File system type?  [ext2]?
+</span><span class="line">Start?
+</span><span class="line">End?
+</span><span class="line">(parted)
 </span><span class="line">Model: ATA WDC WD4005FZBX-0 (scsi)
 </span><span class="line">Disk /dev/sda: 4001GB
 </span><span class="line">Sector size (logical/physical): 512B/4096B
 </span><span class="line">Partition Table: gpt
-</span><span class="line">Disk Flags: 
+</span><span class="line">Disk Flags:
 </span><span class="line">
 </span><span class="line">Number  Start   End     Size    File system  Name  Flags
 </span><span class="line"> 1      1049kB  4001GB  4001GB  ext4
 </span><span class="line">
-</span><span class="line">(parted) quit                                                             
+</span><span class="line">(parted)
 </span><span class="line">Information: You may need to update /etc/fstab.</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>格式化硬盘</p>
@@ -1184,6 +1184,12 @@
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>format disk </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>sudo mkfs.ext4 /dev/sda1
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>查看硬盘供应商信息</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>sudo lshw -C disk
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="section-26">参考资料</h3>
