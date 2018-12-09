@@ -4,7 +4,7 @@
   <title><![CDATA[Category: R | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/r/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-12-07T13:01:15+08:00</updated>
+  <updated>2018-12-09T20:59:17+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -59,6 +59,9 @@
   </li>
   <li>
     <p><code>top_n()</code>：选择前n行。可以使用负数值，表示倒数n行。</p>
+  </li>
+  <li>
+    <p><code>slice()</code>: 根据行号选择。可以选择多行。收<code>group</code>操作影响。</p>
   </li>
 </ul>
 
@@ -124,7 +127,7 @@
 
 <h3 id="section-4">更新记录</h3>
 
-<p>2018年11月26日</p>
+<p>2018年12月09日</p>
 ]]></content>
   </entry>
   
