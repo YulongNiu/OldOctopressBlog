@@ -30,9 +30,7 @@ categories: r
 
 * `filter()`、`arrange()`、`mutate()`、`select()`、`transmute()`和`summerise()`：有`_all()`、`_at()`和`_if()`操作，分别表示对全部列、指定列（序号`1:4`和`-1:-2`）和满足条件的列操作。参数中的`.funs`操作是一个匿名函数，例如`.funs = funs(ifelse(x, ., NA))`，`.`表示对应的列。
 
-* 
-
-
+* `$`依然有效，可以方便取某列或者对某列赋值。
 
 ## 3. 行操作 ##
 
