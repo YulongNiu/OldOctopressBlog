@@ -28,7 +28,9 @@ categories: r
 
 * `summerise()`：聚合列，对某一列或多列进行聚合操作。比如，求均值、方差、极大/小值等。受`group`操作影响。
 
-* `filter()`、`arrange()`、`mutate()`、`select()`、`transmute()`和`summerise()`：有`_all()`、`_at()`和`_if()`操作，分别表示对全部列、指定列名的列和满足条件的列操作。
+* `filter()`、`arrange()`、`mutate()`、`select()`、`transmute()`和`summerise()`：有`_all()`、`_at()`和`_if()`操作，分别表示对全部列、指定列（序号`1:4`和`-1:-2`）和满足条件的列操作。参数中的`.funs`操作是一个匿名函数，例如`.funs = funs(ifelse(x, ., NA))`，`.`表示对应的列。
+
+* 
 
 
 
@@ -38,7 +40,7 @@ categories: r
 
 * `top_n()`：选择前n行。可以使用负数值，表示倒数n行。
 
-* `slice()`: 根据行号选择。可以选择多行。收`group`操作影响。
+* `slice()`: 根据行号选择。可以选择多行。受`group`操作影响。
 
 ## 4. 两个表的操作 ##
 
