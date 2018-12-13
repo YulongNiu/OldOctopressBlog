@@ -4,7 +4,7 @@
   <title><![CDATA[Category: R | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/r/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-12-13T14:37:49+08:00</updated>
+  <updated>2018-12-13T22:56:38+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -53,7 +53,7 @@
     <p><code>summerise()</code>：聚合列，对某一列或多列进行聚合操作。比如，求均值、方差、极大/小值等。受<code>group</code>操作影响。</p>
   </li>
   <li>
-    <p><code>filter()</code>、<code>arrange()</code>、<code>mutate()</code>、<code>select()</code>、<code>transmute()</code>和<code>summerise()</code>：有<code>_all()</code>、<code>_at()</code>和<code>_if()</code>操作，分别表示对全部列、指定列（序号<code>1:4</code>和<code>-1:-2</code>）和满足条件的列操作。参数中的<code>.funs</code>操作是一个匿名函数，例如<code>.funs = funs(ifelse(x, ., NA))</code>，<code>.</code>表示对应的列。</p>
+    <p><code>filter()</code>、<code>arrange()</code>、<code>mutate()</code>、<code>select()</code>、<code>transmute()</code>和<code>summerise()</code>：有<code>_all()</code>、<code>_at()</code>和<code>_if()</code>操作，分别表示对全部列、指定列（序号<code>1:4</code>和<code>-1:-2</code>）和满足条件的列操作。参数中的<code>.funs</code>操作是一个匿名函数，例如<code>.funs = funs(ifelse(x, ., NA))</code>，<code>.</code>表示对应的列。同时，<code>.funs</code>可以有多个操作(同时赋值列名)，比如<code>.funs = funs(repNA = ifelse(x, ., NA), repEmp = replace_na(., ''))</code></p>
   </li>
   <li>
     <p><code>$</code>依然有效，可以方便取某列或者对某列赋值。</p>
