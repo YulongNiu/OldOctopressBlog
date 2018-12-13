@@ -216,7 +216,7 @@
 
 <ul>
   <li>
-    <p><code>filter()</code>：过滤列，需要输入一个逻辑向量（注意<code>xor(x, y)</code>：x和y并集除去交集的部分。<code>between(x, left, right)</code>：left &lt;= x &lt;= right。<code>near(x, y)</code>：x和y在一定精度下相等，比<code>==</code>安全）。直接使用列名操作，例如<code>year == 2018</code>。多列操作相当于<code>&amp;</code>。受<code>group</code>操作影响。</p>
+    <p><code>filter()</code>：过滤列，需要输入一个逻辑向量（注意<code>xor(x, y)</code>：x和y并集除去交集的部分。<code>between(x, left, right)</code>：left &lt;= x &lt;= right。<code>near(x, y)</code>：x和y在一定精度下相等，比<code>==</code>安全）。直接使用列名操作，例如<code>year == 2018</code>。多列操作相当于<code>&amp;</code>。受<code>group</code>操作影响。返回一个空的表格，只保留列名，<code>filter(x, FALSE)</code>。</p>
   </li>
   <li>
     <p><code>arrange()</code>：列排序（默认升序）。多列操作时，先排序第一个，再对第一个相等的排第二个。<code>desc()</code>降序排列。<code>.by_group = FALSE</code>控制是否需要按照group进行组内操作。</p>
@@ -314,7 +314,7 @@
 
 <h3 id="section-4">更新记录</h3>
 
-<p>2018年12月09日</p>
+<p>2018年12月13日</p>
 </div>
 
 
