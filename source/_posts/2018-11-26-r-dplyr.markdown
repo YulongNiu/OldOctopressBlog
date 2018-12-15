@@ -28,7 +28,7 @@ categories: r
 
 * `summerise()`：聚合列，对某一列或多列进行聚合操作。比如，求均值、方差、极大/小值等。受`group`操作影响。
 
-* `filter()`、`arrange()`、`mutate()`、`select()`、`transmute()`和`summerise()`：有`_all()`、`_at()`和`_if()`操作，分别表示对全部列、指定列（序号`1:4`和`-1:-2`）和满足条件的列操作。参数中的`.funs`操作是一个匿名函数，例如`.funs = funs(ifelse(x, ., NA))`，`.`表示对应的列。同时，`.funs`可以有多个操作(同时赋值列名)，比如`.funs = funs(repNA = ifelse(x, ., NA), repEmp = replace_na(., ''))`
+* `filter()`、`arrange()`、`mutate()`、`select()`、`transmute()`和`summerise()`：有`_all()`、`_at()`和`_if()`操作，分别表示对全部列、指定列（序号`1:4`和`-1:-2`）和满足条件的列操作。参数中的`.funs`操作是一个匿名函数，例如`.funs = funs(ifelse(x, ., NA))`，`.`表示对应的列。同时，`.funs`可以有多个操作(同时赋值列名)，比如`.funs = funs(repNA = ifelse(x, ., NA), repEmp = replace_na(., ''))`。使用`expr(.)`引用列名。
 
 * `$`依然有效，可以方便取某列或者对某列赋值。
 
@@ -80,4 +80,4 @@ categories: r
 
 ### 更新记录 ###
 
-2018年12月13日
+2018年12月15日
