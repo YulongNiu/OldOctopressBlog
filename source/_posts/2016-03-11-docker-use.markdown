@@ -29,6 +29,7 @@ $ docker run hello-world
 
 # Docker镜象列表
 $ docker image ls
+$ docker image ls --digests
 
 # Docker容器列表
 $ docker container ls
@@ -37,6 +38,9 @@ $ docker container ls --all
 # 列出容器
 $ docker ps
 $ docker ps -al
+
+# 删除镜像
+$ docker image rm myImg@sha256:xxx
 {% endcodeblock %}
 
 ## 3. 运行镜象 ##
@@ -89,4 +93,4 @@ $ ln -s /localpath/docker /var/lib/docker
 
 ### 更新记录 ###
 
-2018年7月9日
+2018年12月16日
