@@ -46,9 +46,9 @@ $ docker stop myImgID
 $ docker image rm myImg@sha256:xxx
 
 ## 删除虚悬镜像
-$ docker ps -a | grep "Exited" | awk '{print $1 }'| xargs docker stop
-$ docker ps -a | grep "Exited" | awk '{print $1 }'| xargs docker rm
-$ docker images|grep none|awk '{print $3 }'| xargs docker rmi
+$ docker ps -a | grep "Exited" | awk '{print $1 }'|xargs docker stop
+$ docker ps -a | grep "Exited" | awk '{print $1 }'|xargs docker rm
+$ docker images|grep none|awk '{print $3 }'|xargs docker rmi
 {% endcodeblock %}
 
 ## 3. 运行镜象 ##
@@ -98,6 +98,8 @@ $ ln -s /localpath/docker /var/lib/docker
 * [Docker官方文档](https://docs.docker.com/)
 
 * [Docker — 从入门到实践](https://www.gitbook.com/book/yeasy/docker_practice/details)
+
+* [删除Docker镜像中为none的镜像](https://www.centos.bz/2017/08/docker-delete-none-images/)
 
 ### 更新记录 ###
 

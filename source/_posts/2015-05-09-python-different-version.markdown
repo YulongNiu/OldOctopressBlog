@@ -53,14 +53,12 @@ $ pyenv rehash
 
 如果在使用`pip`{:.language-bash}安装包时，下载速度过慢，可以考虑使用国内源。比如：
 
-* http://pypi.mirrors.ustc.edu.cn/
-
-* http://pypi.douban.com/
+* https://pypi.tuna.tsinghua.edu.cn/simple
 
 使用方法为：
 
 {% codeblock lang:bash Using different pip mirror%}
-$ pip install --upgrade numpy -i http://pypi.mirrors.ustc.edu.cn/simple
+$ pip install --upgrade numpy -i https://pypi.tuna.tsinghua.edu.cn/simple
 {% endcodeblock %}
 
 ## 3. 更新pyenv ##
@@ -91,4 +89,4 @@ $ rm -rf ~/.pyenv/versions/3.4.3
 
 ### 更新记录 ###
 
-2015年5月23日
+2018年12月17日
