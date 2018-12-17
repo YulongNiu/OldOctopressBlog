@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-12-17T15:27:46+08:00</updated>
+  <updated>2018-12-17T20:41:10+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -473,9 +473,9 @@ squash sha1id-of-b1 b1
 </span><span class='line'>&lt;p&gt;<span class="nv">$ </span>docker image rm myImg@sha256:xxx&lt;/p&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;h2 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-3&quot;</span>&gt;删除虚悬镜像&lt;/h2&gt;
-</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>docker ps -a <span class="p">|</span> grep “Exited” <span class="p">|</span> awk ‘<span class="o">{</span>print <span class="nv">$1</span> <span class="o">}</span>’<span class="p">|</span> xargs docker stop
-</span><span class='line'><span class="nv">$ </span>docker ps -a <span class="p">|</span> grep “Exited” <span class="p">|</span> awk ‘<span class="o">{</span>print <span class="nv">$1</span> <span class="o">}</span>’<span class="p">|</span> xargs docker rm
-</span><span class='line'><span class="nv">$ </span>docker images<span class="p">|</span>grep none<span class="p">|</span>awk ‘<span class="o">{</span>print <span class="nv">$3</span> <span class="o">}</span>’<span class="p">|</span> xargs docker rmi
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>docker ps -a <span class="p">|</span> grep “Exited” <span class="p">|</span> awk ‘<span class="o">{</span>print <span class="nv">$1</span> <span class="o">}</span>’<span class="p">|</span>xargs docker stop
+</span><span class='line'><span class="nv">$ </span>docker ps -a <span class="p">|</span> grep “Exited” <span class="p">|</span> awk ‘<span class="o">{</span>print <span class="nv">$1</span> <span class="o">}</span>’<span class="p">|</span>xargs docker rm
+</span><span class='line'><span class="nv">$ </span>docker images<span class="p">|</span>grep none<span class="p">|</span>awk ‘<span class="o">{</span>print <span class="nv">$3</span> <span class="o">}</span>’<span class="p">|</span>xargs docker rmi
 </span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="section-4">3. 运行镜象</h2>
@@ -536,6 +536,9 @@ squash sha1id-of-b1 b1
   </li>
   <li>
     <p><a href="https://www.gitbook.com/book/yeasy/docker_practice/details">Docker — 从入门到实践</a></p>
+  </li>
+  <li>
+    <p><a href="https://www.centos.bz/2017/08/docker-delete-none-images/">删除Docker镜像中为none的镜像</a></p>
   </li>
 </ul>
 

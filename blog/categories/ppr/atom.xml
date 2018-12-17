@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ppr | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/ppr/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-12-17T15:27:46+08:00</updated>
+  <updated>2018-12-17T20:41:10+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -362,19 +362,14 @@
 <p>如果在使用<code class="language-bash">pip</code>安装包时，下载速度过慢，可以考虑使用国内源。比如：</p>
 
 <ul>
-  <li>
-    <p>http://pypi.mirrors.ustc.edu.cn/</p>
-  </li>
-  <li>
-    <p>http://pypi.douban.com/</p>
-  </li>
+  <li>https://pypi.tuna.tsinghua.edu.cn/simple</li>
 </ul>
 
 <p>使用方法为：</p>
 
 <p><figure class='code'><figcaption><span>Using different pip mirror</span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>pip install –upgrade numpy -i http://pypi.mirrors.ustc.edu.cn/simple
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>pip install –upgrade numpy -i https://pypi.tuna.tsinghua.edu.cn/simple
 </span></code></pre></td></tr></table></div></figure></p>
 
 <h2 id="pyenv">3. 更新pyenv</h2>
@@ -408,7 +403,7 @@
 
 <h3 id="section-3">更新记录</h3>
 
-<p>2015年5月23日</p>
+<p>2018年12月17日</p>
 ]]></content>
   </entry>
   
