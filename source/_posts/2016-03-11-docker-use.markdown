@@ -39,8 +39,16 @@ $ docker container ls --all
 $ docker ps
 $ docker ps -al
 
+# 终止容器
+$ docker stop myImgID
+
 # 删除镜像
 $ docker image rm myImg@sha256:xxx
+
+## 删除虚悬镜像
+$ docker ps -a | grep "Exited" | awk '{print $1 }'| xargs docker stop
+$ docker ps -a | grep "Exited" | awk '{print $1 }'| xargs docker rm
+$ docker images|grep none|awk '{print $3 }'| xargs docker rmi
 {% endcodeblock %}
 
 ## 3. 运行镜象 ##
