@@ -254,8 +254,8 @@
 </span><span class="line"><span class="nv">$ </span>docker ps
 </span><span class="line"><span class="nv">$ </span>docker ps -al
 </span><span class="line">
-</span><span class="line"><span class="c"># 终止容器</span>
-</span><span class="line"><span class="nv">$ </span>docker stop myImgID
+</span><span class="line"><span class="c"># 终止所有容器</span>
+</span><span class="line"><span class="nv">$ </span>docker stop <span class="k">$(</span>docker ps -aq<span class="k">)</span>
 </span><span class="line">
 </span><span class="line"><span class="c"># 删除镜像</span>
 </span><span class="line"><span class="nv">$ </span>docker image rm myImg@sha256:xxx

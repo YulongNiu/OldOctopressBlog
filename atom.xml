@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-12-17T20:41:10+08:00</updated>
+  <updated>2018-12-18T19:38:04+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -2524,8 +2524,8 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
 </span><span class="line"><span class="nv">$ </span>docker ps
 </span><span class="line"><span class="nv">$ </span>docker ps -al
 </span><span class="line">
-</span><span class="line"><span class="c"># 终止容器</span>
-</span><span class="line"><span class="nv">$ </span>docker stop myImgID
+</span><span class="line"><span class="c"># 终止所有容器</span>
+</span><span class="line"><span class="nv">$ </span>docker stop <span class="k">$(</span>docker ps -aq<span class="k">)</span>
 </span><span class="line">
 </span><span class="line"><span class="c"># 删除镜像</span>
 </span><span class="line"><span class="nv">$ </span>docker image rm myImg@sha256:xxx
