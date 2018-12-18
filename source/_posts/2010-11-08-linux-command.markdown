@@ -699,6 +699,14 @@ $ sudo mkfs.ext4 /dev/sda1
 $ sudo lshw -C disk
 {% endcodeblock %}
 
+## 39. 安装Perl模块 ##
+
+使用`cpanm`安装Perl模块。
+
+{% codeblock lang:bash Disk number %}
+$ sudo dnf install cpanm
+$ sudo cpanm My::Module
+{% endcodeblock %}
 
 ### 参考资料 ###
 
@@ -730,8 +738,8 @@ $ sudo lshw -C disk
 
 * [添加大于2T的硬盘](http://magicmonster.com/kb/os/linux/large_hdd.html)
 
-
+* [Perl modules](https://developer.fedoraproject.org/tech/languages/perl/perl-modules.html)
 
 ### 更新记录 ###
 
-2018年12月7日
+2018年12月18日
