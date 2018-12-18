@@ -39,8 +39,8 @@ $ docker container ls --all
 $ docker ps
 $ docker ps -al
 
-# 终止容器
-$ docker stop myImgID
+# 终止所有容器
+$ docker stop $(docker ps -aq)
 
 # 删除镜像
 $ docker image rm myImg@sha256:xxx
