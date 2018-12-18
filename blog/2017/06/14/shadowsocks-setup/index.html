@@ -271,7 +271,7 @@
 
 <p>使用proxychains全局调用Shadowsocks。</p>
 
-<p>首先，安装和配置proxychains：</p>
+<p>首先，安装和配置<code>proxychains</code>：</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -287,6 +287,36 @@
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>proxychains4 git push origin master
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<h2 id="privoxy">6. privoxy全局代理</h2>
+
+<p>首先，安装和配置<code>privoxy</code>：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># dnf install -y privoxy</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># /etc/privoxy/config修改</span>
+</span><span class="line"><span class="c"># listen-address 127.0.0.1:8118 </span>
+</span><span class="line"><span class="c"># forward-socks5t / 127.0.0.1:1080 </span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>配置环境变量并启动：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nb">export </span><span class="nv">http_proxy</span><span class="o">=</span><span class="s2">&quot;127.0.0.1:8118&quot;</span>
+</span><span class="line"><span class="nb">export </span><span class="nv">https_proxy</span><span class="o">=</span><span class="s2">&quot;127.0.0.1:8118&quot;</span>
+</span><span class="line"><span class="nb">export </span><span class="nv">ftp_proxy</span><span class="o">=</span><span class="s2">&quot;127.0.0.1:8118&quot;</span>
+</span><span class="line">
+</span><span class="line">sudo systemctl restart privoxy
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
 <h3 id="section-5">参考资料</h3>
 
 <ol>
@@ -299,11 +329,14 @@
   <li>
     <p><a href="https://github.com/shadowsocks/shadowsocks-libev/issues/1668">shadowsocks-libev多用户</a></p>
   </li>
+  <li>
+    <p><a href="https://blog.csdn.net/ypbsyy/article/details/81146866">linux下的ss+privoxy代理配置</a></p>
+  </li>
 </ol>
 
 <h3 id="section-6">更新记录</h3>
 
-<p>2017年10月16日</p>
+<p>2017年12月19日</p>
 </div>
 
 
