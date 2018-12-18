@@ -69,7 +69,7 @@ Shadowsocks在主流平台上都有[客户端](https://shadowsocks.org/en/downlo
 
 使用proxychains全局调用Shadowsocks。
 
-首先，安装和配置proxychains：
+首先，安装和配置`proxychains`：
 
 {% codeblock lang:bash %}
 # dnf install -y proxychains-ng
@@ -83,6 +83,28 @@ Shadowsocks在主流平台上都有[客户端](https://shadowsocks.org/en/downlo
 $ proxychains4 git push origin master
 {% endcodeblock %}
 
+## 6. privoxy全局代理 ##
+
+首先，安装和配置`privoxy`：
+
+{% codeblock lang:bash %}
+# dnf install -y privoxy
+
+# /etc/privoxy/config修改
+# listen-address 127.0.0.1:8118 
+# forward-socks5t / 127.0.0.1:1080 
+{% endcodeblock %}
+
+配置环境变量并启动：
+
+{% codeblock lang:bash %}
+export http_proxy="127.0.0.1:8118"
+export https_proxy="127.0.0.1:8118"
+export ftp_proxy="127.0.0.1:8118"
+
+sudo systemctl restart privoxy
+{% endcodeblock %}
+
 ### 参考资料 ###
 
 1. [更改谷歌语言偏好](http://nga.178.com/read.php?tid=8798506)
@@ -91,7 +113,9 @@ $ proxychains4 git push origin master
 
 3. [shadowsocks-libev多用户](https://github.com/shadowsocks/shadowsocks-libev/issues/1668)
 
+4. [linux下的ss+privoxy代理配置](https://blog.csdn.net/ypbsyy/article/details/81146866)
+
 
 ### 更新记录 ###
 
-2017年10月16日
+2017年12月19日
