@@ -24,9 +24,9 @@ Shadowsocks在主流平台上都有[客户端](https://shadowsocks.org/en/downlo
 参考[shadowsocks网站](https://github.com/shadowsocks/shadowsocks-libev)安装。
 
 {% codeblock lang:bash %}
-# dnf copr enable librehat/shadowsocks
-# dnf update
-# dnf install shadowsocks-libev
+$ sudo dnf copr enable librehat/shadowsocks
+$ sudo dnf update
+$ sudo dnf install shadowsocks-libev
 {% endcodeblock %}
 
 ### 3.2 配置文件 ###
@@ -50,19 +50,19 @@ Shadowsocks在主流平台上都有[客户端](https://shadowsocks.org/en/downlo
 ### 3.3 启动 ###
 
 {% codeblock lang:bash %}
-# ss-manager -c /etc/shadowsocks-libev/config.json --manager-address 127.0.0.1:8000 -u config.json
+$ sudo ss-manager -c /etc/shadowsocks-libev/config.json --manager-address 127.0.0.1:8000 -u config.json
 {% endcodeblock %}
 
 ## 4. 使用TCP BBR加速 ##
 
 {% codeblock lang:bash %}
-# echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
-# echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+$ sudo echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
+$ sudo echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
 
-# sysctl -p
+$ sudo sysctl -p
 
-# sysctl net.ipv4.tcp_available_congestion_control
-# sysctl net.ipv4.tcp_congestion_control
+$ sudo sysctl net.ipv4.tcp_available_congestion_control
+$ sudo sysctl net.ipv4.tcp_congestion_control
 {% endcodeblock %}
 
 ## 5. 全局配置 ##
@@ -72,9 +72,9 @@ Shadowsocks在主流平台上都有[客户端](https://shadowsocks.org/en/downlo
 首先，安装和配置`proxychains`：
 
 {% codeblock lang:bash %}
-# dnf install -y proxychains-ng
+$ sudo dnf install -y proxychains-ng
 
-# echo 'socks5    127.0.0.1    1080' >> /etc/proxychains.conf
+$ sudo echo 'socks5    127.0.0.1    1080' >> /etc/proxychains.conf
 {% endcodeblock %}
 
 之后，打开Shadowsocks后，在需要使用的命令行前加入`proxychains4`，例如：
@@ -88,7 +88,7 @@ $ proxychains4 git push origin master
 首先，安装和配置`privoxy`：
 
 {% codeblock lang:bash %}
-# dnf install -y privoxy
+$ sudo dnf install -y privoxy
 
 # /etc/privoxy/config修改
 # listen-address 127.0.0.1:8118 
@@ -98,11 +98,11 @@ $ proxychains4 git push origin master
 配置环境变量并启动：
 
 {% codeblock lang:bash %}
-export http_proxy="127.0.0.1:8118"
-export https_proxy="127.0.0.1:8118"
-export ftp_proxy="127.0.0.1:8118"
+$ export http_proxy="127.0.0.1:8118"
+$ export https_proxy="127.0.0.1:8118"
+$ export ftp_proxy="127.0.0.1:8118"
 
-sudo systemctl restart privoxy
+$ sudo systemctl restart privoxy
 {% endcodeblock %}
 
 ### 参考资料 ###
