@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-12-19T03:45:40+08:00</updated>
+  <updated>2018-12-21T16:00:02+08:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -1139,9 +1139,9 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># dnf copr enable librehat/shadowsocks</span>
-</span><span class="line"><span class="c"># dnf update</span>
-</span><span class="line"><span class="c"># dnf install shadowsocks-libev</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>sudo dnf copr <span class="nb">enable </span>librehat/shadowsocks
+</span><span class="line"><span class="nv">$ </span>sudo dnf update
+</span><span class="line"><span class="nv">$ </span>sudo dnf install shadowsocks-libev
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="section-2">3.2 配置文件</h3>
@@ -1170,7 +1170,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
 <h3 id="section-3">3.3 启动</h3>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># ss-manager -c /etc/shadowsocks-libev/config.json --manager-address 127.0.0.1:8000 -u config.json</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>sudo ss-manager -c /etc/shadowsocks-libev/config.json --manager-address 127.0.0.1:8000 -u config.json
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h2 id="tcp-bbr">4. 使用TCP BBR加速</h2>
@@ -1182,13 +1182,13 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
 <span class="line-number">5</span>
 <span class="line-number">6</span>
 <span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># echo &quot;net.core.default_qdisc=fq&quot; &gt;&gt; /etc/sysctl.conf</span>
-</span><span class="line"><span class="c"># echo &quot;net.ipv4.tcp_congestion_control=bbr&quot; &gt;&gt; /etc/sysctl.conf</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>sudo <span class="nb">echo</span> <span class="s2">&quot;net.core.default_qdisc=fq&quot;</span> &gt;&gt; /etc/sysctl.conf
+</span><span class="line"><span class="nv">$ </span>sudo <span class="nb">echo</span> <span class="s2">&quot;net.ipv4.tcp_congestion_control=bbr&quot;</span> &gt;&gt; /etc/sysctl.conf
 </span><span class="line">
-</span><span class="line"><span class="c"># sysctl -p</span>
+</span><span class="line"><span class="nv">$ </span>sudo sysctl -p
 </span><span class="line">
-</span><span class="line"><span class="c"># sysctl net.ipv4.tcp_available_congestion_control</span>
-</span><span class="line"><span class="c"># sysctl net.ipv4.tcp_congestion_control</span>
+</span><span class="line"><span class="nv">$ </span>sudo sysctl net.ipv4.tcp_available_congestion_control
+</span><span class="line"><span class="nv">$ </span>sudo sysctl net.ipv4.tcp_congestion_control
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h2 id="section-4">5. 全局配置</h2>
@@ -1200,9 +1200,9 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># dnf install -y proxychains-ng</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>sudo dnf install -y proxychains-ng
 </span><span class="line">
-</span><span class="line"><span class="c"># echo &#39;socks5    127.0.0.1    1080&#39; &gt;&gt; /etc/proxychains.conf</span>
+</span><span class="line"><span class="nv">$ </span>sudo <span class="nb">echo</span> <span class="s1">&#39;socks5    127.0.0.1    1080&#39;</span> &gt;&gt; /etc/proxychains.conf
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>之后，打开Shadowsocks后，在需要使用的命令行前加入<code>proxychains4</code>，例如：</p>
@@ -1220,7 +1220,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># dnf install -y privoxy</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>sudo dnf install -y privoxy
 </span><span class="line">
 </span><span class="line"><span class="c"># /etc/privoxy/config修改</span>
 </span><span class="line"><span class="c"># listen-address 127.0.0.1:8118 </span>
@@ -1234,11 +1234,11 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nb">export </span><span class="nv">http_proxy</span><span class="o">=</span><span class="s2">&quot;127.0.0.1:8118&quot;</span>
-</span><span class="line"><span class="nb">export </span><span class="nv">https_proxy</span><span class="o">=</span><span class="s2">&quot;127.0.0.1:8118&quot;</span>
-</span><span class="line"><span class="nb">export </span><span class="nv">ftp_proxy</span><span class="o">=</span><span class="s2">&quot;127.0.0.1:8118&quot;</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span><span class="nb">export </span><span class="nv">http_proxy</span><span class="o">=</span><span class="s2">&quot;127.0.0.1:8118&quot;</span>
+</span><span class="line"><span class="nv">$ </span><span class="nb">export </span><span class="nv">https_proxy</span><span class="o">=</span><span class="s2">&quot;127.0.0.1:8118&quot;</span>
+</span><span class="line"><span class="nv">$ </span><span class="nb">export </span><span class="nv">ftp_proxy</span><span class="o">=</span><span class="s2">&quot;127.0.0.1:8118&quot;</span>
 </span><span class="line">
-</span><span class="line">sudo systemctl restart privoxy
+</span><span class="line"><span class="nv">$ </span>sudo systemctl restart privoxy
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="section-5">参考资料</h3>
