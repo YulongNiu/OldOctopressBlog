@@ -36,7 +36,7 @@ XPath查询集中在三个对象：节点、节点属性和节点内容。
 
 * `//@attr1`：所有拥有attr1的**属性**，注意：返回的不是节点，而是类此`attr1=text1`的属性；`//node1/@attr1`：所有node1带有的attr1属性；`//nodeB[@attr1]`：所有拥有“attr1”属性的nodeB节点；`//nodeB[@attr1='test1']`：所有拥有“attr1”属性为“test1”的nodeB节点；`//nodeB[normalize-space(@attr1)='test1']`：所有拥有attr1属性为“test1”（属性去除字符串前后空格，内部连续空格替换为一个空格）的nodeB节点。
 
-* `//node1[@*]`：所有node1带有任意属性的节点；`//node1[not(@*)]`：所有node1不带属性的节点。
+* `//node1[@*]`：所有node1带有任意属性的节点；`//node1[not(@*)]`：所有node1不带属性的节点；`//node1[contains(@attr1, 'N')]`：带有“attr1”属性的node1节点，“attr1”属性中含有“N”。
 
 * `//node1[TEST1][TEST2]`：多个属性形选择可以首位相接，依次判断是否为真。TEST1和TEST2同时为真，返回选择结果。`//nodeA[nodeB/@attr1='test1']`：选择所有nodeA节点，这些nodeA节点拥有nodeB子节点且属性“attr1”为“test1”。`//nodeC[@attr1='test1'][../nodeB/@attr2='test2']`：选择所有拥有“attr1”为“test1”的nodeC节点，而且这些nodeC节点有属性“attr2”为“test2”的nodeB父亲节点。
 
@@ -100,4 +100,4 @@ XPath查询集中在三个对象：节点、节点属性和节点内容。
 
 ### 更新记录 ###
 
-2015年10月24日
+2018年12月25日
