@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Lisp | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/lisp/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-12-25T23:53:16+08:00</updated>
+  <updated>2019-03-25T16:21:09+01:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Spacemacs使用记录]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2015/09/30/spacemacs-tutorial/"/>
-    <updated>2015-09-30T16:31:09+08:00</updated>
+    <updated>2015-09-30T10:31:09+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2015/09/30/spacemacs-tutorial</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/syl20bnr/spacemacs">Spacemacs</a>结合了Vim和Emacs，而且定制了各种好用的设置，极大地减轻了Emacs的配置负担。推荐使用<code>hybrid</code>模式，这样浏览代码时可以使用Vim快捷键，进入Insert mode后使用Emacs快捷键。<code>hybrid</code>模式还有一个好处，编辑时方便汉字输入。Vim模式的先导键是<code>SPC</code>，在Emacs模式下是<code>M-m</code>。</p>
 
@@ -162,9 +162,9 @@
   
   <entry>
     <title type="html"><![CDATA[Emacs配置C语言编程环境]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2014/12/02/emacs-config-c/"/>
-    <updated>2014-12-02T06:36:41+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2014/12/02/emacs-config-c</id>
+    <link href="http://yulongniu.bionutshell.org/blog/2014/12/01/emacs-config-c/"/>
+    <updated>2014-12-01T23:36:41+01:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2014/12/01/emacs-config-c</id>
     <content type="html"><![CDATA[<p>有很多优秀的C语言IDE用来实现高效的编程，比如<a href="https://www.jetbrains.com/clion/">CLion</a>。目前，CLion还在处于公开测试阶段，可以下载试用。本文介绍在Emacs下配置C/C++编程环境。</p>
 
 <!--more-->
@@ -757,7 +757,7 @@
   <entry>
     <title type="html"><![CDATA[Emacs配置HTML/JS/CSS编辑环境]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2012/07/30/emacs-html-css-js/"/>
-    <updated>2012-07-30T22:31:13+08:00</updated>
+    <updated>2012-07-30T16:31:13+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2012/07/30/emacs-html-css-js</id>
     <content type="html"><![CDATA[<p>以下所有Emacs mode都使用<a href="http://yulongniu.bionutshell.org/blog/2012/06/25/emacs-extend-skills/">Emacs包安装系统</a>。</p>
 
@@ -884,7 +884,7 @@
   <entry>
     <title type="html"><![CDATA[Emacs高级使用技巧]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2012/06/25/emacs-extend-skills/"/>
-    <updated>2012-06-25T08:01:36+08:00</updated>
+    <updated>2012-06-25T02:01:36+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2012/06/25/emacs-extend-skills</id>
     <content type="html"><![CDATA[<h2 id="emacs">1. Emacs配置文件位置</h2>
 
@@ -1031,9 +1031,9 @@
   
   <entry>
     <title type="html"><![CDATA[Emacs和ESS的使用技巧]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2011/08/13/emacs-ess-tips/"/>
-    <updated>2011-08-13T05:20:57+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2011/08/13/emacs-ess-tips</id>
+    <link href="http://yulongniu.bionutshell.org/blog/2011/08/12/emacs-ess-tips/"/>
+    <updated>2011-08-12T23:20:57+02:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2011/08/12/emacs-ess-tips</id>
     <content type="html"><![CDATA[<h2 id="ess">1. 安装ESS</h2>
 
 <p>有两种方法可以安装，一种是直接使用系统自带的包安装系统，比如<code>yum</code>：</p>
@@ -1155,6 +1155,14 @@
       <p><code>M-q</code>：整理roxygen注释，将多行注释压缩整理。</p>
     </li>
   </ol>
+</blockquote>
+
+<ul>
+  <li><code>/ssh:user@host: RET</code>:</li>
+</ul>
+
+<blockquote>
+  <p>远程连接服务器R。</p>
 </blockquote>
 
 <p><img class="middle" src="/images/Emacs_ESS_snap.jpg" width="900" height="900" title="‘Emacs ESS #1’ ‘a snap of Emacs ESS’" ></p>

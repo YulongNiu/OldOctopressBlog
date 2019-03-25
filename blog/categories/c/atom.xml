@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/c/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-12-25T23:53:16+08:00</updated>
+  <updated>2019-03-25T16:21:09+01:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[C语言指针记录]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2016/04/17/pointers-in-c/"/>
-    <updated>2016-04-17T22:42:25+08:00</updated>
+    <updated>2016-04-17T16:42:25+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2016/04/17/pointers-in-c</id>
     <content type="html"><![CDATA[<h2 id="c">1. C语言指针基础</h2>
 
@@ -459,7 +459,7 @@ me
   <entry>
     <title type="html"><![CDATA[C语言学习记录]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2014/12/08/c-program-note/"/>
-    <updated>2014-12-08T07:23:16+08:00</updated>
+    <updated>2014-12-08T00:23:16+01:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2014/12/08/c-program-note</id>
     <content type="html"><![CDATA[<h2 id="section">1. 基本数据类型</h2>
 

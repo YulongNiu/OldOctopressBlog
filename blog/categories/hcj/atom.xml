@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Hcj | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/hcj/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-12-25T23:53:16+08:00</updated>
+  <updated>2019-03-25T16:21:09+01:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[XML中XPath规则总结]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2015/10/25/xpath-xml/"/>
-    <updated>2015-10-25T19:05:33+08:00</updated>
+    <updated>2015-10-25T12:05:33+01:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2015/10/25/xpath-xml</id>
     <content type="html"><![CDATA[<p><a href="http://www.w3.org/TR/xpath-30/">XPath</a>提供了一种对XML节点、节点属性和内容快速查询的规则。在各种编程语言中都有实现，比如C语言的<a href="http://www.xmlsoft.org/">libxml2</a>和对应的R包 <a href="https://cran.r-project.org/web/packages/xml2/index.html">xml2</a>。</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: R | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/r/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-12-25T23:53:16+08:00</updated>
+  <updated>2019-03-25T16:21:09+01:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[R包dplyr使用集锦]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2018/11/26/r-dplyr/"/>
-    <updated>2018-11-26T16:31:58+08:00</updated>
+    <updated>2018-11-26T09:31:58+01:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2018/11/26/r-dplyr</id>
     <content type="html"><![CDATA[<h2 id="span-stylecolor-bluedplyrspan">1. 使用<span style="color: blue">dplyr</span>包的好处</h2>
 
@@ -152,7 +152,7 @@
   <entry>
     <title type="html"><![CDATA[R和Rcpp的性能检测]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2018/10/03/profile-r-and-rcpp/"/>
-    <updated>2018-10-03T19:38:37+08:00</updated>
+    <updated>2018-10-03T13:38:37+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2018/10/03/profile-r-and-rcpp</id>
     <content type="html"><![CDATA[<h2 id="r">1. R性能检测</h2>
 
@@ -267,7 +267,7 @@
   <entry>
     <title type="html"><![CDATA[使用RcppParallel并行计算]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2018/07/19/rcppparallel-test/"/>
-    <updated>2018-07-19T22:19:24+08:00</updated>
+    <updated>2018-07-19T16:19:24+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2018/07/19/rcppparallel-test</id>
     <content type="html"><![CDATA[<p>在之前的<a href="http://yulongniu.bionutshell.org/blog/2014/06/25/parallel-package/">博文</a>中，我详细讨论了使用多种R包实现并行计算。其中，提到一个非常重要的问题：</p>
 
@@ -481,7 +481,7 @@
   <entry>
     <title type="html"><![CDATA[为什么不推荐在R语言中随意按照下标操作矩阵]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2016/07/21/subset-matrix-in-r/"/>
-    <updated>2016-07-21T19:35:29+08:00</updated>
+    <updated>2016-07-21T13:35:29+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2016/07/21/subset-matrix-in-r</id>
     <content type="html"><![CDATA[<p>这篇博文的目的是展示R语言中下标操作矩阵的潜在问题。R语言提供了多种方法提取一个矩阵的单个或者部分元素，不同方法对应的效率在Hadley Wickham的<a href="http://adv-r.had.co.nz/Performance.html#language-performance">Advance R</a>中已有讨论。这些方法中，使用最广泛的是通过下标（行或者列）取值，即操作符<code class="language-R">[</code>。然而，这种方法存在潜在问题，即内存中会拷贝原始对象。</p>
 
@@ -546,7 +546,7 @@
   <entry>
     <title type="html"><![CDATA[Rcpp操作矩阵和向量集锦]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2016/01/07/rcpp-matrix/"/>
-    <updated>2016-01-07T20:50:41+08:00</updated>
+    <updated>2016-01-07T13:50:41+01:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2016/01/07/rcpp-matrix</id>
     <content type="html"><![CDATA[<p>收集和记录<span style="color: blue">Rcpp</span>或者<span style="color: blue">RcppArmadillo</span>操作矩阵和向量。</p>
 

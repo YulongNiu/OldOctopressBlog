@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ppr | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/ppr/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-12-25T23:53:16+08:00</updated>
+  <updated>2019-03-25T16:21:09+01:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Python使用小技巧]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2015/07/28/python-tips/"/>
-    <updated>2015-07-28T14:37:38+08:00</updated>
+    <updated>2015-07-28T08:37:38+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2015/07/28/python-tips</id>
     <content type="html"><![CDATA[<p>收集了一些使用Python过程中的小技巧或者常见错误。</p>
 
@@ -91,9 +91,9 @@
   
   <entry>
     <title type="html"><![CDATA[Python打包和上传PyPI]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2015/05/23/python-pkg/"/>
-    <updated>2015-05-23T01:03:26+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2015/05/23/python-pkg</id>
+    <link href="http://yulongniu.bionutshell.org/blog/2015/05/22/python-pkg/"/>
+    <updated>2015-05-22T19:03:26+02:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2015/05/22/python-pkg</id>
     <content type="html"><![CDATA[<p>一个简单的Python包创建和上传PyPI流程。</p>
 
 <h2 id="section">1. 打包</h2>
@@ -155,7 +155,7 @@
   <entry>
     <title type="html"><![CDATA[Django使用介绍]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2015/05/09/django-tutorial/"/>
-    <updated>2015-05-09T13:42:15+08:00</updated>
+    <updated>2015-05-09T07:42:15+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2015/05/09/django-tutorial</id>
     <content type="html"><![CDATA[<p>本文是学习<a href="https://docs.djangoproject.com/en/1.8/intro/tutorial01/">Django Tutorial</a>的记录，目的为了帮助快速浏览和查找Django使用细节。</p>
 
@@ -284,9 +284,9 @@
   
   <entry>
     <title type="html"><![CDATA[使用Pyenv控制多个版本Python]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2015/05/09/python-different-version/"/>
-    <updated>2015-05-09T00:14:10+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2015/05/09/python-different-version</id>
+    <link href="http://yulongniu.bionutshell.org/blog/2015/05/08/python-different-version/"/>
+    <updated>2015-05-08T18:14:10+02:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2015/05/08/python-different-version</id>
     <content type="html"><![CDATA[<p>同时在一台电脑上使用多个版本的Python，可以通过<a href="https://github.com/yyuu/pyenv">pyenv</a>控制和管理。</p>
 
 <h2 id="section">1. 安装方法</h2>
@@ -409,9 +409,9 @@
   
   <entry>
     <title type="html"><![CDATA[Octopress安装和使用]]></title>
-    <link href="http://yulongniu.bionutshell.org/blog/2014/07/23/octopress-install/"/>
-    <updated>2014-07-23T01:45:46+08:00</updated>
-    <id>http://yulongniu.bionutshell.org/blog/2014/07/23/octopress-install</id>
+    <link href="http://yulongniu.bionutshell.org/blog/2014/07/22/octopress-install/"/>
+    <updated>2014-07-22T19:45:46+02:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2014/07/22/octopress-install</id>
     <content type="html"><![CDATA[<p>安装和使用Octopress的一些注意事项，详细的内容可以<a href="#Ref">参考网址</a>。</p>
 
 <h2 id="section">1. 安装</h2>

@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Linux常用命令集锦 - 牛牛龙</title>
+  <meta name="author" content="Yulong Niu">
+
+  
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://yulongniu.bionutshell.org/blog/2010/11/08/linux-command">
+  <link href="/favicon.ico" type="image/png" rel="icon">
+  <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
+
+  <!-- http://opengraphprotocol.org/ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2010/11/08/linux-command">
+  <meta property="og:title" content="Linux常用命令集锦 - 牛牛龙">
+  
+
+  <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Config({
+     tex2jax: {
+         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+         processEscapes: true,
+         extensions: ["color.js"]
+     }
+ });
+</script>
+
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Config({
+     tex2jax: {
+         skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+     }
+ });
+</script>
+
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Queue(function() {
+     var all = MathJax.Hub.getAllJax(), i;
+     for(i=0; i < all.length; i += 1) {
+         all[i].SourceElement().parentNode.className += ' has-jax';
+     }
+ });
+</script>
+
+<!-- latest mathjax -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+</script>
+
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/ ; script-src 'self' https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/ 'unsafe-eval';style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self';">
+
+<script src="/javascripts/libs/jquery/jquery-2.0.3.min.js"></script>
+
+<!--enable to choose theme in octostrap-->
+
+<link href="/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="/assets/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+
+
+
+<!-- link open with new tab  -->
+<script>
+  function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+  $(this).attr('target', '_blank');
+  });
+  }
+
+  $(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+  });
+</script>
+
+
+  
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  
+
+  
+   <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-53073828-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+  <body   >
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div id="wrap">
+      <header role="banner">
+        <nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">牛牛龙</a>
+        </div>
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a rel="index" href="/">Blog</a>
+                </li>
+                <li >
+                    <a href="/blog/archives">Archives</a>
+                </li>
+		<li >
+                  <a href="/whoami">WhoAmI</a>
+                </li>
+		<li >
+                  <a href="/link">Link</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="subscribe-rss" href="/atom.xml" title="subscribe via RSS">
+                        <span class="visible-xs">RSS</span>
+                        <img class="hidden-xs" src="/images/rss.png" alt="RSS">
+                    </a>
+                </li>
+                
+            </ul>
+            
+                <form class="search navbar-form navbar-right" action="https://www.google.com/search" method="GET">
+                    <input type="hidden" name="q" value="site:yulongniu.bionutshell.org">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="q" placeholder="Search">
+                    </div>
+                </form>
+            
+        </div>
+    </div>
+</nav>
+
+
+      </header>
+      <div id="main" role="main" class="container">
+        <div id="content">
+          <div class="row">
+  <div class="page-content col-md-9" itemscope itemtype="http://schema.org/Blog">
+    <meta itemprop="name" content="牛牛龙" />
+    
+    <meta itemprop="url" content="http://yulongniu.bionutshell.org" />
+    <article class="hentry" role="article" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+      
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2010-11-08T23:00:40+01:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org">Comments</a>
+        
+      </p>
+    
+    
+    <h1 class="entry-title" itemprop="name headline">
+        Linux常用命令集锦
+        
+    </h1>
+    
+  </header>
+
+
+<div class="entry-content clearfix" itemprop="articleBody description"><h2 id="section">1. 压缩与解压缩</h2>
+
+<p><code class="language-bash">.tar.gz</code>格式文件</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 解压 </span>
+</span><span class="line"><span class="nv">$ </span>tar -zxvf /filePath/filename.tar.gz
+</span><span class="line">
+</span><span class="line"><span class="c"># 压缩 </span>
+</span><span class="line"><span class="nv">$ </span>tar -zcvf /filePath/filename.tar.gz /filePath/filename
+</span><span class="line">
+</span><span class="line"><span class="c"># 解压到特定文件夹</span>
+</span><span class="line"><span class="nv">$ </span>tar -zxvf /filePath/filename.tar.gz -C /filePath/filename
+</span><span class="line">
+</span><span class="line"><span class="c"># 压缩到特定文件夹</span>
+</span><span class="line"><span class="nv">$ </span>tar -zcvf /filePath/filename.tar.gz -C /filePath/filename
+</span><span class="line">
+</span><span class="line"><span class="c"># 压缩所有txt类型文件 </span>
+</span><span class="line"><span class="nv">$ </span>gzip *.txt
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code class="language-bash">.tar.bz2</code>格式文件</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 解压 </span>
+</span><span class="line"><span class="nv">$ </span>tar -jxvf /filePath/filename.taz.bz2
+</span><span class="line">
+</span><span class="line"><span class="c"># 压缩</span>
+</span><span class="line"><span class="nv">$ </span>tar -jcvf /filePath/filename.tar.bz2 /filePath/filename
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<!--more-->
+
+<p><code class="language-bash">.rar</code>格式文件</p>
+
+<p>需要安装<a href="http://www.rarsoft.com/download.html">rar工具</a>, 下载对应的linux版本，解压，<code class="language-bash">make</code>即可。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 解压</span>
+</span><span class="line"><span class="nv">$ </span>rar e /filePath/filename.rar /filePath/filename
+</span><span class="line">
+</span><span class="line"><span class="c"># 压缩</span>
+</span><span class="line"><span class="nv">$ </span>rar a -m5 /filePath/filename.rar /filePath/filename
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code class="language-bash">.zip</code>格式文件</p>
+
+<p>需要安装zip和unzip工具</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># dnf install zip</span>
+</span><span class="line"><span class="c"># dnf install unzip</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 解压</span>
+</span><span class="line"><span class="nv">$ </span>unzip filename.zip
+</span><span class="line">
+</span><span class="line"><span class="c"># 只打印最简短解压信息，并不解压</span>
+</span><span class="line"><span class="nv">$ </span>unzip -tq filename.zip
+</span><span class="line">
+</span><span class="line"><span class="c"># 解压其中一个文件</span>
+</span><span class="line"><span class="nv">$ </span>unzip filename.zip onefile
+</span><span class="line">
+</span><span class="line"><span class="c"># 解压到特定目录</span>
+</span><span class="line"><span class="nv">$ </span>unzip filename.zip -d /filePath/filename
+</span><span class="line">
+</span><span class="line"><span class="c"># 压缩当前目录</span>
+</span><span class="line"><span class="nv">$ </span>zip filename *
+</span><span class="line">
+</span><span class="line"><span class="c"># 压缩当前目录包括所有子目录</span>
+</span><span class="line"><span class="nv">$ </span>zip -r filename *
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code class="language-bash">gzip</code>使用方法:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 保留源文件压缩</span>
+</span><span class="line"><span class="nv">$ </span>gzip -c filename &gt; filename.gz
+</span><span class="line">
+</span><span class="line"><span class="c"># 保留源文件解压</span>
+</span><span class="line"><span class="nv">$ </span>gunzip -c filename.gz &gt; filename
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-1">2. 文件夹操作</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 创建 </span>
+</span><span class="line"><span class="nv">$ </span>mkdir
+</span><span class="line">
+</span><span class="line"><span class="c"># 删除 </span>
+</span><span class="line"><span class="nv">$ </span>rm
+</span><span class="line">
+</span><span class="line"><span class="c"># 删除整个文件夹 </span>
+</span><span class="line"><span class="nv">$ </span>rm -rf
+</span><span class="line">
+</span><span class="line"><span class="c"># 复制 </span>
+</span><span class="line"><span class="nv">$ </span>cp
+</span><span class="line">
+</span><span class="line"><span class="c"># 复制文件夹  </span>
+</span><span class="line"><span class="nv">$ </span>cp -r
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-2">3. 目录</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 显示 </span>
+</span><span class="line"><span class="nv">$ </span>ls
+</span><span class="line">
+</span><span class="line"><span class="c"># 列表显示文件和相关权限 </span>
+</span><span class="line"><span class="nv">$ </span>ls -l
+</span><span class="line">
+</span><span class="line"><span class="c"># 列表显示文件并按照文件名逆序排列</span>
+</span><span class="line"><span class="nv">$ </span>ls -rl
+</span><span class="line">
+</span><span class="line"><span class="c"># 显示隐藏文件 </span>
+</span><span class="line"><span class="nv">$ </span>ls -a
+</span><span class="line">
+</span><span class="line"><span class="c"># 可以配合使用</span>
+</span><span class="line"><span class="nv">$ </span>ls -al
+</span><span class="line">
+</span><span class="line"><span class="c"># 查看文件夹大小 </span>
+</span><span class="line"><span class="nv">$ </span>ls -lhs
+</span><span class="line">
+</span><span class="line"><span class="c"># 查看目录树 </span>
+</span><span class="line"><span class="nv">$ </span>tree
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="sh">4. 运行 *.sh文件</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 将sh文件赋予可执行权限</span>
+</span><span class="line"><span class="nv">$ </span>chomd <span class="m">777</span> filename.sh
+</span><span class="line"><span class="nv">$ </span>sh /filePath/filename.sh
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-3">5. 更改文件名</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>mv oldfile newfile
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="md5">6. md5报文摘要算法</h2>
+
+<p>md5（Message-Digest Algorithm 5）报文摘要，可以用来验证网络文件传输的完整性。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>md5sum file
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="java">7. java类型文件</h2>
+
+<p>Java Control Panel位置<code class="language-bash">/usr/java/jdk1.7.0_45/bin/ControlPanel</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 执行.jar格式文件</span>
+</span><span class="line"><span class="nv">$ </span>java -jar filename.jar
+</span><span class="line"><span class="c"># 指定内存运行.jar格式文件</span>
+</span><span class="line"><span class="nv">$ </span>java -Xmx2000M -jar filename.jar
+</span><span class="line">
+</span><span class="line"><span class="c"># 执行.jnlp格式文件</span>
+</span><span class="line"><span class="nv">$ </span>javaws filename.jnlp
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-4">8. 查看文件</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 将文件直接打印在屏幕上</span>
+</span><span class="line"><span class="nv">$ </span>cat filename
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-5">9. 查看系统</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 32位还是64位</span>
+</span><span class="line"><span class="nv">$ </span>uname -a
+</span><span class="line">
+</span><span class="line"><span class="c"># 查询操作系统发行版本</span>
+</span><span class="line"><span class="c"># lsb_release -a</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-6">10. 查看当前路径</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span><span class="nb">pwd</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-7">11. 查看某个程序/库的安装路径</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 比如查看R的安装位置</span>
+</span><span class="line"><span class="nv">$ </span>which R
+</span><span class="line">
+</span><span class="line"><span class="c"># 查看某个文件的位置</span>
+</span><span class="line"><span class="nv">$ </span>whereis filename
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-8">12. 查看一个命令的文档帮助</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 比如man R</span>
+</span><span class="line"><span class="nv">$ </span>man commandname
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-9">13. 批量处理文件</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 删除满足条件的数据</span>
+</span><span class="line"><span class="nv">$ </span>find ./ -name <span class="s1">&#39;*&#39;</span> <span class="p">|</span> xargs rm -rf
+</span><span class="line">
+</span><span class="line"><span class="c"># 移动大数据量的文件.</span>
+</span><span class="line"><span class="nv">$ </span>find ./ -name <span class="s2">&quot;*.gif&quot;</span> <span class="p">|</span> xargs -i mv <span class="o">{}</span> /filePath/
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="pathldlibrarypath">14. 修改PATH和LD_LIBRARY_PATH</h2>
+
+<p>假设我们程序的绝对路径是<code class="language-bash">/opt/arbtest/arb</code>
+两种方法:</p>
+
+<ul>
+  <li>直接命令行运行</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># export PATH=$PATH:/opt/arbtest</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>这种方法当前有效，重启之后就失效了。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 查看修改该好的PATH</span>
+</span><span class="line"><span class="nv">$ </span><span class="nb">export</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+<ul>
+  <li>修改<code class="language-bash">/etc/profile</code>（系统设置，任何用户都可使用）或者<code class="language-bash">~/.bashrc</code>（当前用户）文件。
+向这两个文件中添加<code class="language-bash">export PATH=$PATH:/opt/arbtest</code>或者<code class="language-bash">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/arbtest</code>。</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 载入修改好的文件 </span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 载入root权限profile</span>
+</span><span class="line"><span class="c"># source /etc/profile</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 载入当前用户.bashrc文件</span>
+</span><span class="line"><span class="nv">$ </span><span class="nb">source</span> ~/.bashrc
+</span><span class="line">
+</span><span class="line"><span class="c"># 查看修改好的路径</span>
+</span><span class="line"><span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$PATH</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-10">15. 定向输入输出</h2>
+
+<p>禁止屏幕输出，即将屏幕输出导入Linux的无底洞 <code class="language-bash">/dev/null</code>，比如</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>cat myFile &gt; /dev/null
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>此时，导入的是标准屏幕输出（标号为1）stdout。如果要导入标准错误输出（标号为2）stderr，执行</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>cat myFile <span class="m">2</span> &gt; /dev/null
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>如果将两种输出全部导入<code class="language-bash">/dev/null</code>，执行</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 最后的&quot;2&gt;$1&quot;表示2的操作等同于1</span>
+</span><span class="line"><span class="nv">$ </span>cat myFile &gt; /dev/null 2&gt;<span class="nv">$1</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-11">16. 更改文件权限和所有者</h2>
+
+<p>使用命令<code class="language-bash">chmod</code>更改文件权限。</p>
+
+<ul>
+  <li>
+    <p><code class="language-bash">u</code>：所有者（user）</p>
+  </li>
+  <li>
+    <p><code class="language-bash">g</code>：群组（group）</p>
+  </li>
+  <li>
+    <p><code class="language-bash">o</code>：其他人（others）</p>
+  </li>
+  <li>
+    <p><code class="language-bash">a</code>：所有人（all）</p>
+  </li>
+  <li>
+    <p><code class="language-bash">r</code>：表示可读（read），对应数值4</p>
+  </li>
+  <li>
+    <p><code class="language-bash">w</code>：表示可写（write），对应数值2</p>
+  </li>
+  <li>
+    <p><code class="language-bash">x</code>：表示可执行（excute），对应数值1</p>
+  </li>
+  <li>
+    <p><code class="language-bash">-</code>：表示什么操作都不行，对应数值0</p>
+  </li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 比如rw-rw-r--对应664</span>
+</span><span class="line"><span class="nv">$ </span>chomd <span class="m">664</span> filename
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>使用命令<code class="language-bash">chown</code>更改文件所有者：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>An instance of using chown</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># chown -R myOwner:myGroup fileName</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-12">17.更改文件时间戳</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 更新myfile的存取和修改时间；如果myfile不存在，则创建该文件</span>
+</span><span class="line"><span class="nv">$ </span>touch filename
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="ntfs">18. 挂载NTFS分区</h2>
+
+<p>CentOS需要手动挂在NTFS分区，下载并安装<a href="http://www.tuxera.com/community/ntfs-3g-download/">NTFS-3G</a>，安装方法：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># ./configure </span>
+</span><span class="line"><span class="c"># make</span>
+</span><span class="line"><span class="c"># make install </span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>查找NTFS分区路径，此处假定为<code class="language-bash">/dev/sta1</code>：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 查看硬盘分区</span>
+</span><span class="line"><span class="c"># fdisk -l</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 挂载NTFS分区</span>
+</span><span class="line"><span class="c"># mkdir /mnt/NTFStest</span>
+</span><span class="line"><span class="c"># mount -t ntfs-3g /dev/sta1 /mnt/NTFStest</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 卸载分区</span>
+</span><span class="line"><span class="c"># umount /mnt/NTFStest</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>如果需要自动挂载ntfs分区，首先要查看分区信息，比如uuid</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># blkid</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>之后修改<code class="language-bash">/etc/fstab</code>，添加需要挂载的分区</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">UUID</span><span class="o">=</span>12D345251F34 /media/D ntfs defaults <span class="m">0</span> 0
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="dnf">19. dnf服务相关</h2>
+
+<p>以下命令都可以配合<code class="language-bash">grep</code>使用</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 安装最快源插件</span>
+</span><span class="line"><span class="c"># dnf install dnf-plugin-fastestmirror</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 安装并行下载工具</span>
+</span><span class="line"><span class="c"># dnf install dnf-axelget</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 终止dnf安装</span>
+</span><span class="line"><span class="c"># rm -f /var/run/yum.pid</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 查询包</span>
+</span><span class="line"><span class="c"># dnf search pkg</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 重新安装包</span>
+</span><span class="line"><span class="c"># dnf reinstall pkg</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 升级包</span>
+</span><span class="line"><span class="c"># dnf update pkg</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 卸载包</span>
+</span><span class="line"><span class="c"># dnf remove pkg</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 查询已安装包信息</span>
+</span><span class="line"><span class="c"># dnf info pkg</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 查看仓库包列表</span>
+</span><span class="line"><span class="c"># dnf list pkg*</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 查看已安装的包</span>
+</span><span class="line"><span class="c"># dnf list installed</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-13">20. 修改配置文件</h2>
+
+<p>可以使用多种文本编辑器，最常用的是<a href="http://www.gnu.org/software/emacs/">Emacs</a>和<a href="http://www.vim.org/">Vim</a>，使用方法直<code class="language-bash">emacs</code>或者<code class="language-bash">vim</code>和文件名即可。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 修改Apache服务器配制文件</span>
+</span><span class="line"><span class="nv">$ </span>vim httpd.conf
+</span><span class="line"><span class="nv">$ </span>emacs httpd.conf
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-14">21. 用户管理</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 查看用户 </span>
+</span><span class="line"><span class="nv">$ </span>w
+</span><span class="line"><span class="nv">$ </span>who
+</span><span class="line"><span class="c"># 超过500为后建用户</span>
+</span><span class="line"><span class="nv">$ </span>cat /etc/passwd
+</span><span class="line">
+</span><span class="line"><span class="c"># 新建用户 </span>
+</span><span class="line"><span class="nv">$ </span>useradd usrname
+</span><span class="line">
+</span><span class="line"><span class="c"># 新建用户设置密码 </span>
+</span><span class="line"><span class="nv">$ </span>passwd usrname newpasswd
+</span><span class="line">
+</span><span class="line"><span class="c"># 删除用户 </span>
+</span><span class="line"><span class="nv">$ </span>userdel -r usrname
+</span><span class="line">
+</span><span class="line"><span class="c"># 查看用户登陆</span>
+</span><span class="line"><span class="nv">$ </span>last
+</span><span class="line"><span class="nv">$ </span>last usrname
+</span><span class="line">
+</span><span class="line"><span class="c"># 查看当前任务 </span>
+</span><span class="line"><span class="nv">$ </span>top
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="debrpm">22. deb和rpm包互转</h2>
+
+<ul>
+  <li>第一种方法是使用<a href="http://joeyh.name/code/alien/">alien</a></li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># deb转换为rpm</span>
+</span><span class="line"><span class="nv">$ </span>alien -r filename.deb
+</span><span class="line">
+</span><span class="line"><span class="c"># rpm转换成deb</span>
+</span><span class="line"><span class="nv">$ </span>alien -d filename.rpm
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>第二种方法是直接使用<code class="language-bash">apt</code>，非常方便，配置方法如下</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># dnf install apt</span>
+</span><span class="line"><span class="c"># apt-get update</span>
+</span><span class="line"><span class="c"># apt-get pkg</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-15">23. 查看和终止进程</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 查看进程树</span>
+</span><span class="line"><span class="nv">$ </span>pstree -p
+</span><span class="line">
+</span><span class="line"><span class="c"># 看全部进程</span>
+</span><span class="line"><span class="nv">$ </span>ps -A
+</span><span class="line">
+</span><span class="line"><span class="c"># 强制终止进程</span>
+</span><span class="line"><span class="nv">$ </span><span class="nb">kill</span> -9 7473
+</span><span class="line">
+</span><span class="line"><span class="c"># 释放内存</span>
+</span><span class="line"><span class="nv">$ </span>free -m
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-16">24. 查看网络有监听的端口</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>netstat -lntp
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="ssh">25. SSH服务行</h2>
+
+<p>断开SSH终端，仍需要程序后台执，则使用<code class="language-bash">nohup</code>命令</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>nohup /filepath/testScript.py
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>解决SSH终端链接一段时间后自动断开，修改文件<code class="language-bash">/etc/ssh/sshd_config</code>，找到<code class="language-bash">ServerAliveInterval</code>语句，将其注释去掉，改为</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line">ServerAliveInterval 60
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-17">26. 查看某一个库文件的位置</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>locate libGLU.so
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="rpm">27. rpm包</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 安装rpm包 </span>
+</span><span class="line"><span class="c"># rpm -ivh pkg.rpm</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 更新rpm包</span>
+</span><span class="line"><span class="c"># rpm -Uvh pkg.rpm</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 查看已经安装的包 </span>
+</span><span class="line"><span class="c"># rpm -qa | grep pkg.rpm</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># 卸载rpm包 </span>
+</span><span class="line"><span class="c"># rpm -e pkg</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="centos-6--python-27">28. Centos 6 升级 python 2.7</h2>
+
+<p>参考网址 <a href="https://github.com/0xdata/h2o/wiki/Installing-python-2.7-on-centos-6.3.-Follow-this-sequence-exactly-for-centos-machine-only">1</a>, <a href="http://toomuchdata.com/2012/06/25/how-to-install-python-2-7-3-on-centos-6-2/">2</a></p>
+
+<h2 id="cpu">29. CPU信息</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 查询CPU信息</span>
+</span><span class="line"><span class="nv">$ </span>lscpu
+</span><span class="line">
+</span><span class="line"><span class="c"># 物理CPU个数</span>
+</span><span class="line"><span class="nv">$ </span>grep <span class="s1">&#39;physical id&#39;</span> /proc/cpuinfo <span class="p">|</span> sort -u <span class="p">|</span> wc -l
+</span><span class="line">
+</span><span class="line"><span class="c"># 核心个数</span>
+</span><span class="line"><span class="nv">$ </span>grep <span class="s1">&#39;core id&#39;</span> /proc/cpuinfo <span class="p">|</span> sort -u <span class="p">|</span> wc -l
+</span><span class="line">
+</span><span class="line"><span class="c"># 线程个数</span>
+</span><span class="line"><span class="nv">$ </span>grep <span class="s1">&#39;processor&#39;</span> /proc/cpuinfo <span class="p">|</span> sort -u <span class="p">|</span> wc -l
+</span><span class="line"><span class="nv">$ </span>nproc
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>查看CPU温度</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 安装lm_sensors工具</span>
+</span><span class="line"><span class="c"># dnf install lm_sensors</span>
+</span><span class="line"><span class="nv">$ </span>sensors
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-18">30. 查询文件和文件夹大小</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>du -h myfile
+</span><span class="line"><span class="nv">$ </span>du -h filepath
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-19">31. 查看内存情况</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 查看内存使用情况</span>
+</span><span class="line"><span class="nv">$ </span>free
+</span><span class="line">
+</span><span class="line"><span class="c"># 物理内存</span>
+</span><span class="line"><span class="c"># dmidecode -t memory | grep Size</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-20">32. 查看文件头部和尾部</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 头部</span>
+</span><span class="line"><span class="nv">$ </span>head -5 file
+</span><span class="line">
+</span><span class="line"><span class="c"># 尾部</span>
+</span><span class="line"><span class="nv">$ </span>tail -7 file
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-21">33. 下载命令##</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>wget -c -t <span class="m">0</span> -w <span class="m">30</span> httplink
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>
+    <p><code class="language-bash">-c</code>：表示接着下载没下载的文件</p>
+  </li>
+  <li>
+    <p><code class="language-bash">-t</code>：表示尝试连接次数</p>
+  </li>
+  <li>
+    <p><code>0</code>：表示不停尝试</p>
+  </li>
+  <li>
+    <p><code class="language-bash">-w</code>：表示每两次尝试的时间间隔</p>
+  </li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>axel -n <span class="m">8</span> -a -S5 httplink -o folder
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>
+    <p><code class="language-bash">-n</code>：设定下载线程数</p>
+  </li>
+  <li>
+    <p><code class="language-bash">-a</code>：简单进度条</p>
+  </li>
+  <li>
+    <p><code class="language-bash">-S5</code>：搜索<a href="filesearching.com">filesearching.com</a>镜像，以加快下载速度</p>
+  </li>
+  <li>
+    <p><code class="language-bash">-o</code>：储存目录</p>
+  </li>
+</ul>
+
+<h2 id="section-22">34. 开机启动</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 开机启动httpd</span>
+</span><span class="line"><span class="c"># chkconfig httpd on</span>
+</span><span class="line"><span class="c"># 关闭httpd</span>
+</span><span class="line"><span class="c"># chkconfig httpd off</span>
+</span><span class="line"><span class="c"># 开启启动列表</span>
+</span><span class="line"><span class="c"># chkconfig --list</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-23">35. 系统运行日志</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># cat /var/log/messages</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-24">36. 获取系统时间</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Time </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 获取文件时间</span>
+</span><span class="line"><span class="nv">$ </span>stat filename <span class="p">|</span> grep Modify <span class="p">|</span> awk <span class="s1">&#39;{print $2, $3}</span>
+</span><span class="line">
+</span><span class="line"><span class="s1"># 获取当前时间</span>
+</span><span class="line"><span class="s1">$ date</span>
+</span><span class="line"><span class="s1">$ date -d &#39;</span>-1 day<span class="s1">&#39;</span>
+</span><span class="line"><span class="s1">$ date -d &#39;</span>+1 hour<span class="s1">&#39;</span>
+</span><span class="line"><span class="s1">$ date -d yesterday &#39;</span>+%F %T<span class="err">&#39;</span>
+</span><span class="line"><span class="nv">$ </span>date -d tomorrow +%s
+</span><span class="line">
+</span><span class="line"><span class="c"># 获取本月日历</span>
+</span><span class="line"><span class="nv">$ </span>cal
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-25">37. 定时执行程序</h2>
+
+<p>使用cron，首先开启：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Start Crond </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 开启</span>
+</span><span class="line"><span class="c"># service crond start</span>
+</span><span class="line"><span class="c"># 重启</span>
+</span><span class="line"><span class="c"># service crond restart</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>建立描述文件，比如<code class="language-bash">testCron</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Description file </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 每半个小时执行command</span>
+</span><span class="line">0,30 * * * * commmand
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>提交</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Submit cron files </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 提交</span>
+</span><span class="line"><span class="nv">$ </span>crontab testCron
+</span><span class="line"><span class="c"># 查看</span>
+</span><span class="line"><span class="nv">$ </span>crontab -l
+</span><span class="line"><span class="c"># 删除</span>
+</span><span class="line"><span class="nv">$ </span>crontab -r
+</span><span class="line"><span class="c"># 编辑</span>
+</span><span class="line"><span class="nv">$ </span>crontab -e
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="t">38. 添加大于2T的硬盘</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Disk number </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># 确定添加硬盘，比如/dev/sda</span>
+</span><span class="line"><span class="nv">$ </span>sudo fdisk -l
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>使用<code>parted</code>分区</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo parted /dev/sda
+</span><span class="line">GNU Parted 3.2
+</span><span class="line">Using /dev/sda
+</span><span class="line">Welcome to GNU Parted! Type 'help' to view a list of commands.
+</span><span class="line">(parted) mklabel gpt
+</span><span class="line">Warning: The existing disk label on /dev/sda will be destroyed and all data on this disk will be
+</span><span class="line">lost. Do you want to continue?
+</span><span class="line">Yes/No? yes
+</span><span class="line">(parted)
+</span><span class="line">Partition
+</span><span class="line">File system type?  [ext2]?
+</span><span class="line">Start?
+</span><span class="line">End?
+</span><span class="line">(parted)
+</span><span class="line">Model: ATA WDC WD4005FZBX-0 (scsi)
+</span><span class="line">Disk /dev/sda: 4001GB
+</span><span class="line">Sector size (logical/physical): 512B/4096B
+</span><span class="line">Partition Table: gpt
+</span><span class="line">Disk Flags:
+</span><span class="line">
+</span><span class="line">Number  Start   End     Size    File system  Name  Flags
+</span><span class="line"> 1      1049kB  4001GB  4001GB  ext4
+</span><span class="line">
+</span><span class="line">(parted)
+</span><span class="line">Information: You may need to update /etc/fstab.</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>格式化硬盘</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>format disk </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>sudo mkfs.ext4 /dev/sda1
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>查看硬盘供应商信息</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>sudo lshw -C disk
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="perl">39. 安装Perl模块</h2>
+
+<p>使用<code>cpanm</code>安装Perl模块。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Disk number </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>sudo dnf install cpanm
+</span><span class="line"><span class="nv">$ </span>sudo cpanm My::Module
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-26">参考资料</h3>
+
+<ul>
+  <li>
+    <p><a href="http://blog.csdn.net/dqswuyundong/article/details/5970004">大量文件操作</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.cnblogs.com/amboyna/archive/2008/03/08/1096024.html">修改PATH</a></p>
+  </li>
+  <li>
+    <p>挂载NTFS分区：<a href="http://www.ha97.com/2832.html">1</a>, <a href="http://blog.csdn.net/zouyongjin/article/details/6439232">2</a></p>
+  </li>
+  <li>
+    <p>rpm下的apt：<a href="http://wiki.debian.org.hk/w/Install_APT_in_Fedora_Linux">1</a>, <a href="http://yinbiao.blog.51cto.com/2765456/511542">2</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.liukai.cn/in-linux-setup-rar-for-linux/">Linux使用rar</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.ibm.com/developerworks/cn/linux/l-cn-nohup/">后台执行程序</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.dayuer.com/freebsd-tooltips/wget_help">wget使用</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.cyberciti.biz/tips/how-can-i-zipping-and-unzipping-files-under-linux.html">zip/unzip</a></p>
+  </li>
+  <li>
+    <p><a href="http://seisman.info/linux-environment-for-seismology-research.html">用CentOS 7打造合适的科研环境</a></p>
+  </li>
+  <li>
+    <p><a href="http://blog.sina.com.cn/s/blog_c078bab701015sih.html">解决SSH闲置时间过长中断命令执行</a></p>
+  </li>
+  <li>
+    <p><a href="http://codingstandards.iteye.com/blog/1157513">Linux时间</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.linuxsong.org/2010/09/shell-date-compare/">http://www.linuxsong.org/2010/09/shell-date-compare/</a></p>
+  </li>
+  <li>
+    <p><a href="http://linuxtools-rst.readthedocs.org/zh_CN/latest/tool/crontab.html">crontab 定时任务</a></p>
+  </li>
+  <li>
+    <p><a href="http://magicmonster.com/kb/os/linux/large_hdd.html">添加大于2T的硬盘</a></p>
+  </li>
+  <li>
+    <p><a href="https://developer.fedoraproject.org/tech/languages/perl/perl-modules.html">Perl modules</a></p>
+  </li>
+</ul>
+
+<h3 id="section-27">更新记录</h3>
+
+<p>2018年12月18日</p>
+</div>
+
+
+      <footer>
+        <p class="meta text-muted">
+          
+  
+
+<span class="glyphicon glyphicon-user"></span> <span class="byline author vcard" itemprop="author" itemscope itemtype="http://schema.org/Person">Posted by <span class="fn" itemprop="name">Yulong Niu</span></span>
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2010-11-08T23:00:40+01:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+          
+
+<span class="glyphicon glyphicon-tags"></span>&nbsp;
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>
+  
+</span>
+
+
+        </p>
+        
+          <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.bionutshell.org/blog/2010/11/08/linux-command/" data-via="" data-counturl="http://yulongniu.bionutshell.org/blog/2010/11/08/linux-command/" >Tweet</a>
+  
+  
+  
+</div>
+
+        
+        
+          <ul class="meta text-muted pager">
+            
+            <li class="previous"><a href="/blog/2010/09/04/linux-install-r/" title="Previous Post: Linux安装R语言包">&laquo; Linux安装R语言包</a></li>
+            
+            
+            <li class="next"><a href="/blog/2011/08/12/emacs-tips/" title="Next Post: Emacs使用技巧">Emacs使用技巧 &raquo;</a></li>
+            
+          </ul>
+        
+      </footer>
+    </article>
+    
+      <section>
+        <h2>Comments</h2>
+        <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+      </section>
+    
+  </div>
+
+  
+  <aside class="sidebar col-md-3">
+    
+      <section class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Recent Posts</h3>
+  </div>
+  
+  <div id="recent_posts" class="list-group">
+    
+    <a class="list-group-item " href="/blog/2018/11/26/r-dplyr/">R包dplyr使用集锦</a>
+    
+    <a class="list-group-item " href="/blog/2018/10/03/profile-r-and-rcpp/">R和Rcpp的性能检测</a>
+    
+    <a class="list-group-item " href="/blog/2018/07/19/rcppparallel-test/">使用RcppParallel并行计算</a>
+    
+    <a class="list-group-item " href="/blog/2018/02/17/estimate-rna-seq/">通过RNA-Seq评估基因表达量的模型</a>
+    
+    <a class="list-group-item " href="/blog/2017/10/24/bray-curtis-distance/">Bray-Curtis Distance解释</a>
+    
+  </div>
+</section>
+<section class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Categories</h3>
+  </div>
+  <div class="list-group">
+    
+    
+    <a class="list-group-item " href="/blog/categories/linux/index.html">
+        <span class="badge">10</span>
+        linux
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/r/index.html">
+        <span class="badge">12</span>
+        r
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/lisp/index.html">
+        <span class="badge">6</span>
+        lisp
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/ppr/index.html">
+        <span class="badge">6</span>
+        ppr
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
+        <span class="badge">22</span>
+        bioinfor
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/c/index.html">
+        <span class="badge">2</span>
+        c
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/hcj/index.html">
+        <span class="badge">1</span>
+        hcj
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/share/index.html">
+        <span class="badge">1</span>
+        share
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/java/index.html">
+        <span class="badge">1</span>
+        java
+      </a>
+    
+  </div>
+</section>
+
+
+
+
+
+
+    
+  </aside>
+  
+</div>
+
+        </div>
+      </div>
+    </div>
+    <footer role="contentinfo"><div class="container">
+    <p class="text-muted credits">
+  Copyright &copy; 2019 - Yulong Niu<br>
+  <small>
+      <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>,
+      <span class="credit">customized with <a href="https://github.com/kAworu/octostrap3">octostrap3</a></span>.
+  </small>
+</p>
+
+</div>
+</footer>
+    
+
+<script type="text/javascript">
+      var disqus_shortname = 'yulongniu';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://yulongniu.bionutshell.org/blog/2010/11/08/linux-command/';
+        var disqus_url = 'http://yulongniu.bionutshell.org/blog/2010/11/08/linux-command/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+<script src="/assets/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/javascripts/modernizr-2.0.js"></script>
+
+
+  </body>
+</html>

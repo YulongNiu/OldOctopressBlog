@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-12-25T23:53:16+08:00</updated>
+  <updated>2019-03-25T16:21:09+01:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Shadowsocks设置推荐]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2017/06/14/shadowsocks-setup/"/>
-    <updated>2017-06-14T23:49:13+08:00</updated>
+    <updated>2017-06-14T17:49:13+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2017/06/14/shadowsocks-setup</id>
     <content type="html"><![CDATA[<h2 id="shadowsocks">1. Shadowsocks客户端</h2>
 
@@ -160,7 +160,7 @@
   <entry>
     <title type="html"><![CDATA[两个git的rebase命令应用]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2016/11/11/git-rebase-examples/"/>
-    <updated>2016-11-11T16:24:39+08:00</updated>
+    <updated>2016-11-11T09:24:39+01:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2016/11/11/git-rebase-examples</id>
     <content type="html"><![CDATA[<p>介绍两个<code>git rebase</code>的应用场景，一个是合并commits记录，另一个是贡献代码。</p>
 
@@ -302,7 +302,7 @@ squash sha1id-of-b1 b1
   <entry>
     <title type="html"><![CDATA[命令行使用Google Drive]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2016/10/21/linux-sync-google-drive/"/>
-    <updated>2016-10-21T18:24:31+08:00</updated>
+    <updated>2016-10-21T12:24:31+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2016/10/21/linux-sync-google-drive</id>
     <content type="html"><![CDATA[<p>本文简单介绍<a href="https://github.com/prasmussen/gdrive">gdrive</a>，它是一个跨多个平台软件，提供命令行操作Google Drive。同类软件还有<a href="https://github.com/odeke-em/drive">drive</a>和<a href="https://www.thefanclub.co.za/overgrive">overGrive</a>（Linux下Google Drive界面客户端）。</p>
 
@@ -437,7 +437,7 @@ squash sha1id-of-b1 b1
   <entry>
     <title type="html"><![CDATA[Docker使用记录]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2016/03/11/docker-use/"/>
-    <updated>2016-03-11T16:53:51+08:00</updated>
+    <updated>2016-03-11T09:53:51+01:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2016/03/11/docker-use</id>
     <content type="html"><![CDATA[<p>关于Docker的安装和使用，有详细的<a href="https://docs.docker.com/">文档</a>可供参考。本文收集一些有趣和重要的记录。</p>
 
@@ -582,7 +582,7 @@ squash sha1id-of-b1 b1
   <entry>
     <title type="html"><![CDATA[PostgreSQL使用指南]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2015/07/29/postgresql-usage/"/>
-    <updated>2015-07-29T18:24:10+08:00</updated>
+    <updated>2015-07-29T12:24:10+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2015/07/29/postgresql-usage</id>
     <content type="html"><![CDATA[<h2 id="section">1. 查询</h2>
 

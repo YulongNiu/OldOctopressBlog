@@ -4,7 +4,7 @@
   <title><![CDATA[牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2018-12-25T23:53:16+08:00</updated>
+  <updated>2019-03-25T16:21:09+01:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[R包dplyr使用集锦]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2018/11/26/r-dplyr/"/>
-    <updated>2018-11-26T16:31:58+08:00</updated>
+    <updated>2018-11-26T09:31:58+01:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2018/11/26/r-dplyr</id>
     <content type="html"><![CDATA[<h2 id="span-stylecolor-bluedplyrspan">1. 使用<span style="color: blue">dplyr</span>包的好处</h2>
 
@@ -152,7 +152,7 @@
   <entry>
     <title type="html"><![CDATA[R和Rcpp的性能检测]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2018/10/03/profile-r-and-rcpp/"/>
-    <updated>2018-10-03T19:38:37+08:00</updated>
+    <updated>2018-10-03T13:38:37+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2018/10/03/profile-r-and-rcpp</id>
     <content type="html"><![CDATA[<h2 id="r">1. R性能检测</h2>
 
@@ -267,7 +267,7 @@
   <entry>
     <title type="html"><![CDATA[使用RcppParallel并行计算]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2018/07/19/rcppparallel-test/"/>
-    <updated>2018-07-19T22:19:24+08:00</updated>
+    <updated>2018-07-19T16:19:24+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2018/07/19/rcppparallel-test</id>
     <content type="html"><![CDATA[<p>在之前的<a href="http://yulongniu.bionutshell.org/blog/2014/06/25/parallel-package/">博文</a>中，我详细讨论了使用多种R包实现并行计算。其中，提到一个非常重要的问题：</p>
 
@@ -477,7 +477,7 @@
   <entry>
     <title type="html"><![CDATA[通过RNA-Seq评估基因表达量的模型]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2018/02/17/estimate-rna-seq/"/>
-    <updated>2018-02-17T18:23:29+08:00</updated>
+    <updated>2018-02-17T11:23:29+01:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2018/02/17/estimate-rna-seq</id>
     <content type="html"><![CDATA[<script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -661,7 +661,7 @@ L &= \prod_{f \in F_t} \prod_{t \in T} \frac{\alpha_t}{\tildel} \\
   <entry>
     <title type="html"><![CDATA[Bray-Curtis Distance解释]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2017/10/24/bray-curtis-distance/"/>
-    <updated>2017-10-24T12:26:00+08:00</updated>
+    <updated>2017-10-24T06:26:00+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2017/10/24/bray-curtis-distance</id>
     <content type="html"><![CDATA[<script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -708,7 +708,7 @@ BCS(X, Y) = 1 - BCD(X, Y)
   <entry>
     <title type="html"><![CDATA[Normalized Google Distance解释]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2017/10/22/google-distance/"/>
-    <updated>2017-10-22T21:35:30+08:00</updated>
+    <updated>2017-10-22T15:35:30+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2017/10/22/google-distance</id>
     <content type="html"><![CDATA[<script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -778,7 +778,7 @@ NGS(X, Y) &= 1 - NGD(X, Y) \\
   <entry>
     <title type="html"><![CDATA[最大熵模型]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2017/10/16/max-entropy/"/>
-    <updated>2017-10-16T13:16:12+08:00</updated>
+    <updated>2017-10-16T07:16:12+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2017/10/16/max-entropy</id>
     <content type="html"><![CDATA[<script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -929,7 +929,7 @@ s.t. \quad & \sum_{x}p(x)x = 1.75 \\
   <entry>
     <title type="html"><![CDATA[朴素贝叶斯分类器应用于二元数据类型]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2017/10/15/naive-bayes-binary-multinomial/"/>
-    <updated>2017-10-15T17:38:16+08:00</updated>
+    <updated>2017-10-15T11:38:16+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2017/10/15/naive-bayes-binary-multinomial</id>
     <content type="html"><![CDATA[<script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -1118,7 +1118,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
   <entry>
     <title type="html"><![CDATA[Shadowsocks设置推荐]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2017/06/14/shadowsocks-setup/"/>
-    <updated>2017-06-14T23:49:13+08:00</updated>
+    <updated>2017-06-14T17:49:13+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2017/06/14/shadowsocks-setup</id>
     <content type="html"><![CDATA[<h2 id="shadowsocks">1. Shadowsocks客户端</h2>
 
@@ -1267,7 +1267,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
   <entry>
     <title type="html"><![CDATA[探索Java基本类型的二进制表示]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2017/05/16/java-binary/"/>
-    <updated>2017-05-16T20:17:46+08:00</updated>
+    <updated>2017-05-16T14:17:46+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2017/05/16/java-binary</id>
     <content type="html"><![CDATA[<h2 id="section">1. 基本数据类型</h2>
 
@@ -1452,7 +1452,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
   <entry>
     <title type="html"><![CDATA[两个git的rebase命令应用]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2016/11/11/git-rebase-examples/"/>
-    <updated>2016-11-11T16:24:39+08:00</updated>
+    <updated>2016-11-11T09:24:39+01:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2016/11/11/git-rebase-examples</id>
     <content type="html"><![CDATA[<p>介绍两个<code>git rebase</code>的应用场景，一个是合并commits记录，另一个是贡献代码。</p>
 
@@ -1594,7 +1594,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
   <entry>
     <title type="html"><![CDATA[命令行使用Google Drive]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2016/10/21/linux-sync-google-drive/"/>
-    <updated>2016-10-21T18:24:31+08:00</updated>
+    <updated>2016-10-21T12:24:31+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2016/10/21/linux-sync-google-drive</id>
     <content type="html"><![CDATA[<p>本文简单介绍<a href="https://github.com/prasmussen/gdrive">gdrive</a>，它是一个跨多个平台软件，提供命令行操作Google Drive。同类软件还有<a href="https://github.com/odeke-em/drive">drive</a>和<a href="https://www.thefanclub.co.za/overgrive">overGrive</a>（Linux下Google Drive界面客户端）。</p>
 
@@ -1725,7 +1725,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
   <entry>
     <title type="html"><![CDATA[如何在Nature Communications上发表文章]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2016/09/22/how-to-publish-in-nc/"/>
-    <updated>2016-09-22T16:25:13+08:00</updated>
+    <updated>2016-09-22T10:25:13+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2016/09/22/how-to-publish-in-nc</id>
     <content type="html"><![CDATA[<p>我最近看到一个<a href="http://spotidoc.com/doc/159334/how-to-get-published-in-nature-communications">幻灯片</a>，主要讲了在Nature Communications（NC）上发表文章的建议，作者是NC的副主编Nicky Dean。整个幻灯片一种轻松幽默的口吻，讲述了投稿和发表文章过程的各种问题，并提出了针对性建议，值得推荐。以下记录一些关键信息。</p>
 
@@ -1861,7 +1861,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
   <entry>
     <title type="html"><![CDATA[HISAT2使用问答]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2016/09/10/hisat2-faq/"/>
-    <updated>2016-09-10T16:32:47+08:00</updated>
+    <updated>2016-09-10T10:32:47+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2016/09/10/hisat2-faq</id>
     <content type="html"><![CDATA[<p><a href="https://ccb.jhu.edu/software/hisat2/manual.shtml#the-hisat2-build-indexer">HISAT2</a>是一款用于“对应（map）”二代测序数据（全基因组、转录组和外显子组）至目标基因组的工具，用来替代<a href="http://ccb.jhu.edu/software/hisat/index.shtml">HISAT</a>和<a href="http://www.ccb.jhu.edu/software/tophat/index.shtml">TopHat2</a>。本文汇集一些使用HISAT2的常见问题问答。</p>
 
@@ -1930,7 +1930,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
   <entry>
     <title type="html"><![CDATA[常用参考基因组下载地址]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2016/09/10/reference-genome-location/"/>
-    <updated>2016-09-10T13:17:00+08:00</updated>
+    <updated>2016-09-10T07:17:00+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2016/09/10/reference-genome-location</id>
     <content type="html"><![CDATA[<p>本文收集了一些常用参考基因组的下载网址和补充说明。</p>
 
@@ -1968,7 +1968,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
   <entry>
     <title type="html"><![CDATA[为什么不推荐在R语言中随意按照下标操作矩阵]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2016/07/21/subset-matrix-in-r/"/>
-    <updated>2016-07-21T19:35:29+08:00</updated>
+    <updated>2016-07-21T13:35:29+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2016/07/21/subset-matrix-in-r</id>
     <content type="html"><![CDATA[<p>这篇博文的目的是展示R语言中下标操作矩阵的潜在问题。R语言提供了多种方法提取一个矩阵的单个或者部分元素，不同方法对应的效率在Hadley Wickham的<a href="http://adv-r.had.co.nz/Performance.html#language-performance">Advance R</a>中已有讨论。这些方法中，使用最广泛的是通过下标（行或者列）取值，即操作符<code class="language-R">[</code>。然而，这种方法存在潜在问题，即内存中会拷贝原始对象。</p>
 
@@ -2033,7 +2033,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
   <entry>
     <title type="html"><![CDATA[C语言指针记录]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2016/04/17/pointers-in-c/"/>
-    <updated>2016-04-17T22:42:25+08:00</updated>
+    <updated>2016-04-17T16:42:25+02:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2016/04/17/pointers-in-c</id>
     <content type="html"><![CDATA[<h2 id="c">1. C语言指针基础</h2>
 
@@ -2497,7 +2497,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
   <entry>
     <title type="html"><![CDATA[Docker使用记录]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2016/03/11/docker-use/"/>
-    <updated>2016-03-11T16:53:51+08:00</updated>
+    <updated>2016-03-11T09:53:51+01:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2016/03/11/docker-use</id>
     <content type="html"><![CDATA[<p>关于Docker的安装和使用，有详细的<a href="https://docs.docker.com/">文档</a>可供参考。本文收集一些有趣和重要的记录。</p>
 
@@ -2642,7 +2642,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
   <entry>
     <title type="html"><![CDATA[Rcpp操作矩阵和向量集锦]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2016/01/07/rcpp-matrix/"/>
-    <updated>2016-01-07T20:50:41+08:00</updated>
+    <updated>2016-01-07T13:50:41+01:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2016/01/07/rcpp-matrix</id>
     <content type="html"><![CDATA[<p>收集和记录<span style="color: blue">Rcpp</span>或者<span style="color: blue">RcppArmadillo</span>操作矩阵和向量。</p>
 
@@ -2932,7 +2932,7 @@ p(F3|C_j) &= \left(\frac{4+1}{4+2}\right)^2
   <entry>
     <title type="html"><![CDATA[XML中XPath规则总结]]></title>
     <link href="http://yulongniu.bionutshell.org/blog/2015/10/25/xpath-xml/"/>
-    <updated>2015-10-25T19:05:33+08:00</updated>
+    <updated>2015-10-25T12:05:33+01:00</updated>
     <id>http://yulongniu.bionutshell.org/blog/2015/10/25/xpath-xml</id>
     <content type="html"><![CDATA[<p><a href="http://www.w3.org/TR/xpath-30/">XPath</a>提供了一种对XML节点、节点属性和内容快速查询的规则。在各种编程语言中都有实现，比如C语言的<a href="http://www.xmlsoft.org/">libxml2</a>和对应的R包 <a href="https://cran.r-project.org/web/packages/xml2/index.html">xml2</a>。</p>
 
