@@ -76,6 +76,10 @@ categories: lisp
 > 
 > 6. `M-q`：整理roxygen注释，将多行注释压缩整理。
 
+* `/ssh:user@host: RET`:
+
+> 远程连接服务器R。
+
 {% img middle /images/Emacs_ESS_snap.jpg 900 900 'Emacs ESS #1' 'a snap of Emacs ESS' %}
 
 
