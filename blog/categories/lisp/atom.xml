@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Lisp | 牛牛龙]]></title>
   <link href="http://yulongniu.bionutshell.org/blog/categories/lisp/atom.xml" rel="self"/>
   <link href="http://yulongniu.bionutshell.org/"/>
-  <updated>2019-03-25T16:21:09+01:00</updated>
+  <updated>2019-03-25T19:11:35+01:00</updated>
   <id>http://yulongniu.bionutshell.org/</id>
   <author>
     <name><![CDATA[Yulong Niu]]></name>
@@ -1158,7 +1158,7 @@
 </blockquote>
 
 <ul>
-  <li><code>/ssh:user@host: RET</code>:</li>
+  <li><code>C-x C-f /ssh:user@host: RET</code>:</li>
 </ul>
 
 <blockquote>
