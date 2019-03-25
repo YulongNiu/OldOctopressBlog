@@ -76,7 +76,7 @@ categories: lisp
 > 
 > 6. `M-q`：整理roxygen注释，将多行注释压缩整理。
 
-* `/ssh:user@host: RET`:
+* `C-x C-f /ssh:user@host: RET`:
 
 > 远程连接服务器R。
 
