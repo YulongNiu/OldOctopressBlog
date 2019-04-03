@@ -857,19 +857,29 @@
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>netstat -lntp
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h2 id="ssh">25. SSH服务行</h2>
+<h2 id="ssh">25. SSH服务</h2>
 
-<p>断开SSH终端，仍需要程序后台执，则使用<code class="language-bash">nohup</code>命令</p>
+<ul>
+  <li>断开SSH终端，仍需要程序后台执，则使用<code class="language-bash">nohup</code>命令</li>
+</ul>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>nohup /filepath/testScript.py
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>解决SSH终端链接一段时间后自动断开，修改文件<code class="language-bash">/etc/ssh/sshd_config</code>，找到<code class="language-bash">ServerAliveInterval</code>语句，将其注释去掉，改为</p>
+<ul>
+  <li>解决SSH终端链接一段时间后自动断开，修改文件<code class="language-bash">/etc/ssh/sshd_config</code>，找到<code class="language-bash">ServerAliveInterval</code>语句，将其注释去掉，改为</li>
+</ul>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class="bash"><span class="line">ServerAliveInterval 60
 </span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>免密码登录</li>
+</ul>
+
+<p>两步操作。首先，<code>ssh-keygen -t rsa</code>生成密钥和公钥。之后，<code>ssh-copy-id usrname@remote-server</code>上传公钥。</p>
 
 <h2 id="section-17">26. 查看某一个库文件的位置</h2>
 
@@ -1251,11 +1261,14 @@
   <li>
     <p><a href="https://developer.fedoraproject.org/tech/languages/perl/perl-modules.html">Perl modules</a></p>
   </li>
+  <li>
+    <p><a href="https://www.linuxdashen.com/ssh-key%EF%BC%9A%E4%B8%A4%E4%B8%AA%E7%AE%80%E5%8D%95%E6%AD%A5%E9%AA%A4%E5%AE%9E%E7%8E%B0ssh%E6%97%A0%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95">SSH无密码登录：只需两个简单步骤 (Linux)</a></p>
+  </li>
 </ul>
 
 <h3 id="section-27">更新记录</h3>
 
-<p>2018年12月18日</p>
+<p>2019年04月03日</p>
 </div>
 
 
