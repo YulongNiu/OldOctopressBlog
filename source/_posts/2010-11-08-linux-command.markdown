@@ -463,19 +463,23 @@ $ free -m
 $ netstat -lntp
 {% endcodeblock %}
 
-## 25. SSH服务行 ##
+## 25. SSH服务 ##
 
-断开SSH终端，仍需要程序后台执，则使用`nohup`{:.language-bash}命令
+* 断开SSH终端，仍需要程序后台执，则使用`nohup`{:.language-bash}命令
 
 {% codeblock lang:bash %}
 $ nohup /filepath/testScript.py 
 {% endcodeblock %}
 
-解决SSH终端链接一段时间后自动断开，修改文件`/etc/ssh/sshd_config`{:.language-bash}，找到`ServerAliveInterval`{:.language-bash}语句，将其注释去掉，改为
+* 解决SSH终端链接一段时间后自动断开，修改文件`/etc/ssh/sshd_config`{:.language-bash}，找到`ServerAliveInterval`{:.language-bash}语句，将其注释去掉，改为
 
 {% codeblock lang:bash %}
 ServerAliveInterval 60
 {% endcodeblock %}
+
+* 免密码登录
+
+两步操作。首先，`ssh-keygen -t rsa`生成密钥和公钥。之后，`ssh-copy-id usrname@remote-server`上传公钥。
 
 ## 26. 查看某一个库文件的位置 ##
 
@@ -740,6 +744,8 @@ $ sudo cpanm My::Module
 
 * [Perl modules](https://developer.fedoraproject.org/tech/languages/perl/perl-modules.html)
 
+* [SSH无密码登录：只需两个简单步骤 (Linux)](https://www.linuxdashen.com/ssh-key%EF%BC%9A%E4%B8%A4%E4%B8%AA%E7%AE%80%E5%8D%95%E6%AD%A5%E9%AA%A4%E5%AE%9E%E7%8E%B0ssh%E6%97%A0%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95)
+
 ### 更新记录 ###
 
-2018年12月18日
+2019年04月03日
