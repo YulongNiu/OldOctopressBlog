@@ -19,7 +19,7 @@ library('roxygen2')
 
 <!--more-->
 
-## 2. <span style="color: blue">Rcpp</span>和相关的包##
+## 2. <span style="color: blue">Rcpp</span>和相关的包 ##
 
 如果使用了<span style="color: blue">Rcpp</span>或者相关的包，比如<span style="color: blue">RcppArmadillo</span>，需要格外设置。
 
