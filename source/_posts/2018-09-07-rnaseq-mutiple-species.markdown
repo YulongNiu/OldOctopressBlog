@@ -90,21 +90,23 @@ $\eqref{eq:1}$和从$\eqref{eq:2}$也提供了$\rho_u$和$\alpha_u$，$\theta_v$
 $$
 \begin{align}
 \begin{split}
-\P(\mathrm{pos}, f \in r|\eta) &= n_1\sum_{i=1}^{U} \P(z_i, \mathrm{pos}, f \in r_i|\eta) + n_2\sum_{j=U+1}^{V} \P(z_j, \mathrm{pos}, f \in r_j|\eta) \\
-&= \sum_{i=1}^{U} n_1 m_i \frac{\alpha_i}{\widetilde{l_i}} + \sum_{j=U+1}^{V} n_2 m_j \frac{\beta_j}{\widetilde{l_j}} \\
+\P(\mathrm{pos}|\eta)  &= \P(\mathrm{pos}, f \in A|\eta) + \P(\mathrm{pos}, f \in B|\eta)\\
+&= \P(\mathrm{pos} | f \in A, \eta) \P(f \in A) + \P(\mathrm{pos} | f \in B, \eta) \P(f \in B) \\
+&= \sum_{i=1}^{U} \P(\mathrm{pos}, f \in r_i|\eta) \P(f \in A) + \sum_{j=U+1}^{U+V} \P(\mathrm{pos}, f \in r_j|\eta) \P(f \in B) \\
+&= \sum_{i=1}^{U} n_1 m_i \frac{\alpha_i}{\widetilde{l_i}} \P(f \in A) + \sum_{j=U+1}^{U+V} n_2 m_j \frac{\beta_j}{\widetilde{l_j}} \P(f \in B) \\
 \end{split}
 \label{eq:5}
 \end{align}
 $$
 
-由于$n_1 m_i = m_i$，即如果观察到转录片段$f$对应至物种$A$，则一定可以观察到$f$对应至物种$A$中的某个转录片段$\\{r_1, \dots, r_U\\}$。同理，$n_2 m_j = m_j$。
+其中，$\P(f \in A) + \P(f \in B) = 1$。由于$n_1 m_i = m_i$，即如果观察到转录片段$f$对应至物种$A$，则一定可以观察到$f$对应至物种$A$中的某个转录片段$\\{r_1, \dots, r_U\\}$。同理，$n_2 m_j = m_j$。
 
 $\eqref{eq:5}$可以写为：
 
 $$
 \begin{align}
 \begin{split}
-\P(\mathrm{pos}, f \in r|\eta) &= \sum_{i=1}^{U}m_i \frac{\alpha_i}{\widetilde{l_i}} + \sum_{j=U+1}^{V}m_j \frac{\beta_j}{\widetilde{l_j}} \\
+\P(\mathrm{pos}, f \in r|\eta) &= \sum_{i=1}^{U}m_i \frac{\alpha_i}{\widetilde{l_i}} \P(f \in A) + \sum_{j=U+1}^{U+V}m_j \frac{\beta_j}{\widetilde{l_j}} \P(f \in B) \\
 \end{split}
 \label{eq:6}
 \end{align}
@@ -115,10 +117,12 @@ $$
 $$
 \begin{align}
 \begin{split}
-\lambda_i^{(n+1)} &= \frac{\alpha_j^{(n)} \frac{m_i}{\widetilde{l_j}}}{\sum\limits_{i=1}^{U}\alpha_i^{(n)} \frac{m_i}{\widetilde{l_i}} + \sum\limits_{j=U+1}^{V}\beta_j^{(n)} \frac{m_j}{\widetilde{l_j}}}\\
-\lambda_j^{(n+1)} &= \frac{\beta_j^{(n)} \frac{m_i}{\widetilde{l_j}}}{\sum\limits_{i=1}^{U}\alpha_i^{(n)} \frac{m_i}{\widetilde{l_i}} + \sum\limits_{j=U+1}^{V}\beta_j^{(n)} \frac{m_j}{\widetilde{l_j}}}\\
+\lambda_i^{(n+1)} &= \frac{\alpha_j^{(n)} \frac{m_i}{\widetilde{l_j}} \P(f \in A)}{\sum\limits_{i=1}^{U}\alpha_i^{(n)} \frac{m_i}{\widetilde{l_i}} \P(f \in A) + \sum\limits_{j=U+1}^{U+V}\beta_j^{(n)} \frac{m_j}{\widetilde{l_j}} \P(f \in B)}\\
+\lambda_j^{(n+1)} &= \frac{\beta_j^{(n)} \frac{m_i}{\widetilde{l_j}} \P(f \in A)}{\sum\limits_{i=1}^{U}\alpha_i^{(n)} \frac{m_i}{\widetilde{l_i}} \P(f \in A) + \sum\limits_{j=U+1}^{U+V}\beta_j^{(n)} \frac{m_j}{\widetilde{l_j}} \P(f \in B)}\\
 \alpha_i^{(n+1)} &= \frac{\sum\limits_{f \in F} \lambda_i^{(n+1)}}{\sum\limits_{f \in F} \sum\limits_{i=1}^{U} \lambda_i^{(n+1)}} \\
-\beta_j^{(n+1)} &= \frac{\sum\limits_{f \in F} \lambda_j^{(n+1)}}{N - \sum\limits_{f \in F} \sum\limits_{i=1}^{U} \lambda_i^{(n+1)}}
+\beta_j^{(n+1)} &= \frac{\sum\limits_{f \in F} \lambda_j^{(n+1)}}{\sum\limits_{f \in F} \sum\limits_{j=U+1}^{U+V} \lambda_j^{(n+1)}} \\
+\P(f \in A)^{(n+1)} &= \frac{\sum\limits_{f \in F} \sum\limits_{i=1}^{U} \lambda_i^{(n+1)}}{\sum\limits_{f \in F} \sum\limits_{i=1}^{U} \lambda_i^{(n+1)} + \sum\limits_{f \in F} \sum\limits_{j=U+1}^{U+V} \lambda_j^{(n+1)}} = \frac{\sum\limits_{f \in F} \sum\limits_{i=1}^{U} \lambda_i^{(n+1)}}{N}\\
+\P(f \in B)^{(n+1)} &= \frac{\sum\limits_{f \in F} \sum\limits_{j=U+1}^{U+V} \lambda_j^{(n+1)}}{\sum\limits_{f \in F} \sum\limits_{i=1}^{U} \lambda_i^{(n+1)} + \sum\limits_{f \in F} \sum\limits_{j=U+1}^{U+V} \lambda_j^{(n+1)}} = \frac{\sum\limits_{f \in F} \sum\limits_{j=U+1}^{U+V} \lambda_j^{(n+1)}}{N} 
 \end{split}
 \label{eq:7}
 \end{align}
