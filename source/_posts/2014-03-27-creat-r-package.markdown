@@ -21,18 +21,19 @@ library('roxygen2')
 
 ## 2. <span style="color: blue">Rcpp</span>和相关的包 ##
 
-如果使用了<span style="color: blue">Rcpp</span>或者相关的包，比如<span style="color: blue">RcppArmadillo</span>，需要格外设置。
+如果使用了<span style="color: blue">Rcpp</span>或者相关的包，比如<span style="color: blue">RcppArmadillo</span>，需要格外设置。所有cpp代码都写在src文件夹下。
 
-首先，执行：
+**首先**，执行：
 
 {% codeblock lang:r %}
 use_rcpp()
 {% endcodeblock %}
 
-其次，在`DESCRIPTION`{:.language-r}中添加依赖或者需要链接的包名称，比如：
+**其次**，在`DESCRIPTION`{:.language-r}中添加依赖或者需要链接的包名称，比如：
 
 {% raw %}
 ```
+Encoding: UTF-8
 Imports: 
     Rcpp
 LinkingTo: 
@@ -41,7 +42,7 @@ LinkingTo:
 ```
 {% endraw %}
 
-之后，在包的`R/`{:.language-bash}目录下，添加一个文件`RcppChk.R`{:.language-bash}（文件名称自定），并写入：
+**之后**，在包的`R/`{:.language-bash}目录下，添加一个文件`RcppChk.R`{:.language-bash}（文件名称自定），并写入：
 
 {% codeblock lang:r %}
 #' @useDynLib my-pkg-name, .registration = TRUE
@@ -51,7 +52,7 @@ NULL
 
 注意，修改`my-pkg-name`{:.language-bash}为自己的包名称。
 
-然后，在包的`src/`{:.language-bash}目录下，添加一个文件`registerDynamicSymbol.c`{:.language-bash}（文件名称自定），并写入：
+**然后**，在包的`src/`{:.language-bash}目录下，添加一个文件`registerDynamicSymbol.c`{:.language-bash}（文件名称自定），并写入：
 
 {% codeblock lang:c %}
 // RegisteringDynamic Symbols
@@ -66,7 +67,20 @@ void R_init_markovchain(DllInfo* info) {
 } 
 {% endcodeblock %}
 
-最后，所有cpp代码都写在src文件夹下。
+**最后**，可能需要在`~/.R/Makevars`文件下添加：
+
+{% raw %}
+```
+# Settings from /etc/R/Makeconf with "non-portable flag(s):"
+# ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’ replaced by -Wall -pedantic
+# and without -fdebug-prefix-map=... 
+CFLAGS = -g -O2 -Wall -pedantic -fstack-protector-strong -D_FORTIFY_SOURCE=2 $(LTO)
+CXXFLAGS = -g -O2 -Wall -pedantic -fstack-protector-strong -D_FORTIFY_SOURCE=2 $(LTO)
+CXX98FLAGS = -g -O2 -Wall -pedantic -fstack-protector-strong -D_FORTIFY_SOURCE=2
+CXX11FLAGS = -g -O2 -Wall -pedantic -fstack-protector-strong -D_FORTIFY_SOURCE=2
+CXX14FLAGS = -g -O2 -Wall -pedantic -fstack-protector-strong -D_FORTIFY_SOURCE=2
+```
+{% endraw %}
 
 ## 3. 创建DESCRIPTION文件模板 ##
 
@@ -104,6 +118,10 @@ build()
 
 * [Advanced R by Hadley Wickham](http://adv-r.had.co.nz/Rcpp.html) 
 
+* [CRAN submission - R CMD Check warning - compilation flags used](https://stackoverflow.com/questions/50658198/cran-submission-r-cmd-check-warning-compilation-flags-used/52100124#52100124)
+
+* [Warning about UTF-8 with roxygen2](https://stackoverflow.com/questions/51694929/warning-about-utf-8-with-roxygen2)
+
 ### 更新记录 ###
 
-2018年7月28日
+2019年04月19日

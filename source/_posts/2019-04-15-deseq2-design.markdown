@@ -28,9 +28,9 @@ sample10         B       II
 sample11         B       II
 sample12         B       II
 ```
-<!--more-->
-
 {% endraw %}
+
+<!--more-->
 
 {% codeblock pair-wise comparison lang:r %}
 dds <- makeExampleDESeqDataSet(n = 100, m = 12)
