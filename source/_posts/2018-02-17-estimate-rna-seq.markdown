@@ -116,14 +116,14 @@ $$
 \right]
 $$
 
-因此，对一个每一个read，可观测数值为是否比对到多个转录序列的某个位置，不可观测数据为该read真实来源于哪个转录序列$Z=\\{z_1, z_2, \dots, z_K\\}$，要估计的未知参数为$\alpha=\\{\alpha_1, \alpha_2, \dots, \alpha_K\\}$。[EM算法](http://yulongniu.bionutshell.org/blog/2013/07/13/em/)可以解决类似有隐变量问题。
+因此，对一个每一个read，可观测数值为是否比对到多个转录序列的某个位置，不可观测数据为该read真实来源于哪个转录序列，要估计的未知参数为$\alpha=\\{\alpha_1, \alpha_2, \dots, \alpha_K\\}$。[EM算法](http://yulongniu.bionutshell.org/blog/2013/07/13/em/)可以解决类似有隐变量问题。
 
 首先，异构体模型为：
 
 $$
 \begin{align}
 \begin{split}
-\P(\mathrm{pos}, f \in t|\alpha) &= \sum_{k=1}^{K} \P(z_k, \mathrm{pos}, f \in t|\alpha) \\
+\P(\mathrm{pos}|\alpha) &= \sum_{k=1}^{K} \P(\mathrm{pos}, f \in t_k|\alpha) \\
 &= \sum_{k = 1}^{K} y_k \frac{\alpha_k}{\widetilde{l_k}} \\
 \end{split}
 \label{eq:5}
@@ -132,12 +132,12 @@ $$
 
 其中$y_k$是read在观测矩阵行中的第$k$个元素（$0$或$1$）。
 
-对于第$n$次迭代，观察$\P(z_1\|\mathrm{pos}, f \in t, \alpha^{(n)})$：
+对于第$n$次迭代，观察$\P(f \in t_k\|\mathrm{pos}, \alpha^{(n)})$：
 
 $$
 \begin{align}
 \begin{split}
-\P(z_1|\mathrm{pos}, f \in t, \alpha^{(n)}) &= \frac{\P(z_1, \mathrm{pos}, f \in t|\alpha^{(n)})}{\sum\limits_{k=1}^{K} \P(z_k, \mathrm{pos}, f \in t|\alpha^{(n)})} \\
+\P(f \in t_1|\mathrm{pos}, \alpha^{(n)}) &= \frac{\P(f \in t_1, \mathrm{pos}|\alpha^{(n)})}{\sum\limits_{k=1}^{K} \P(f \in t_k, \mathrm{pos}|\alpha^{(n)})} \\
 &= \frac{\alpha_1^{(n)} \frac{y_1}{\widetilde{l_1}}}{\sum\limits_{k=1}^{K} \alpha_k^{(n)} \frac{y_k}{\widetilde{l_k}}} \\
 &= \lambda_1
 \end{split}
@@ -196,4 +196,4 @@ $$
 
 ### 更新记录 ###
 
-2018年2月18日
+2019年04月19日
