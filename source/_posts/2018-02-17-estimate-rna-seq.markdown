@@ -116,7 +116,7 @@ $$
 \right]
 $$
 
-因此，对一个每一个read，可观测数值为是否比对到多个转录序列的某个位置，不可观测数据为该read真实来源于哪个转录序列，要估计的未知参数为$\alpha=\\{\alpha_1, \alpha_2, \dots, \alpha_K\\}$。[EM算法](http://yulongniu.bionutshell.org/blog/2013/07/13/em/)可以解决类似有隐变量问题。
+因此，对一个每一个read，可观测数值为是否比对到多个转录序列的某个位置，不可观测数据为该read真实来源于哪个转录序列$T=\\{t_1, t_2, \dots, t_K\\}$，要估计的未知参数为$\alpha=\\{\alpha_1, \alpha_2, \dots, \alpha_K\\}$。[EM算法](http://yulongniu.bionutshell.org/blog/2013/07/13/em/)可以解决类似有隐变量问题。
 
 首先，异构体模型为：
 

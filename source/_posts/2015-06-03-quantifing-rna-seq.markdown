@@ -3,7 +3,6 @@ layout: post
 title: "估计RNA-seq转录本表达量和寻找差异表达基因"
 date: 2015-06-03 16:58:01 +0800
 comments: true
-published: false
 categories: Bioinfor
 ---
 
@@ -163,37 +162,9 @@ vstMat <- assay(vsd)
 {% endcodeblock %}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### 参考资料 ###
 
 * Biconductor DESeq2 workflows: [RNA-Seq workflow at the gene level](http://www.bioconductor.org/help/workflows/rnaseqGene/) 
-
 
 
 ### 更新记录 ###

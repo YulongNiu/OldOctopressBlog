@@ -27,16 +27,16 @@ $$
 
 ## 1. 符号表示 ##
 
-物种$A$有$U$个长度为$l_u$的转录序列，构成的转录本集合为$T=\\{t_1, t_2, \dots, t_U\\}$，每个转录序列的相对丰度为$\rho_u$，$\sum\limits_{u=1}^U \rho_u= 1$。物种$B$有$V$个长度为$l_v$的转录序列$s_v$，构成转录本集合$S=\\{s_1, s_2, \dots, s_V\\}$，每个转录序列的相对丰度为$\theta_v$, $\sum\limits_{v=1}^V \theta_v= 1$。两物种的所有转录序列集合构成$R=\\{r_1, r_2, \dots, r_{U+V}\\}$。
+物种$A$有$U$个长度为$l_u$的转录序列，构成的转录本集合为$R=\\{r_1, r_2, \dots, r_U\\}$，每个转录序列的相对丰度为$\rho_u$，$\sum\limits_{u=1}^U \rho_u= 1$。物种$B$有$V$个长度为$l_v$的转录序列$s_v$，构成转录本集合$S=\\{s_1, s_2, \dots, s_V\\}$，每个转录序列的相对丰度为$\theta_v$, $\sum\limits_{v=1}^V \theta_v= 1$。两物种的所有转录序列集合构成$T=\\{t_1, t_2, \dots, t_{U+V}\\}$。
 
 <!--more-->
 
-对于某个转录片段$f$，来自于转录序列$t_u$（有效长度为$\tildelu$）的概率为：
+对于某个转录片段$f$，来自于转录序列$r_u$（有效长度为$\tildelu$）的概率为：
 
 $$
 \begin{align}
 \begin{split}
-\P(f \in t_u) &= \frac{\rho_u \tildelu}{\sum\limits_{t \in T} \rho_t \widetilde{l_t}} \\
+\P(f \in r_u) &= \frac{\rho_u \tildelu}{\sum\limits_{r \in R} \rho_r \widetilde{l_r}} \\
 &= \alpha_u
 \end{split}
 \label{eq:1}
@@ -48,7 +48,7 @@ $$
 $$
 \begin{align}
 \begin{split}
-\P(\mathrm{pos}, f \in t_u) = \frac{\alpha_u}{\tildelu}
+\P(\mathrm{pos}, f \in r_u) = \frac{\alpha_u}{\tildelu}
 \end{split}
 \label{eq:2}
 \end{align}
@@ -72,7 +72,7 @@ $$
 $$
 \begin{align}
 \begin{split}
-\P(\mathrm{pos}, f \in t_v) = \frac{\beta_v}{\tildesv}
+\P(\mathrm{pos}, f \in s_v) = \frac{\beta_v}{\tildesv}
 \end{split}
 \label{eq:4}
 \end{align}
@@ -83,7 +83,7 @@ $\eqref{eq:1}$和从$\eqref{eq:2}$也提供了$\rho_u$和$\alpha_u$，$\theta_v$
 
 ## 2. 混合物种模型 ##
 
-所有转录片段的长度为定值，事实上某一个转录片段只能来自于单一物种的单一转录序列。实际上，可观测为：某一个转录片段对应至多个可能物种的多个可能转录序列。不可观测数据为：该转录片段真实来源于哪个物种$Y = \\{y_A, y_B\\}$的哪个转录序列$Z=\\{z_1, z_2, \dots, z_{U+V}\\}$。混合物种模型要估计的参数为$\eta=\\{\alpha_1, \dots, \alpha_u, \beta_1, \dots, \beta_v\\}$。
+所有转录片段的长度为定值，事实上某一个转录片段只能来自于单一物种的单一转录序列。实际上，可观测为：某一个转录片段对应至多个可能物种的多个可能转录序列。不可观测数据为：该转录片段真实来源于哪个物种$Y = \\{y_A, y_B\\}$的哪个转录序列$T=\\{t_1, t_2, \dots, t_{U+V}\\}$。混合物种模型要估计的参数为$\eta=\\{\alpha_1, \dots, \alpha_u, \beta_1, \dots, \beta_v\\}$。
 
 对于转录片段$f$，实际观测数据为$0$和$1$构成的长度为$U+V$的指示向量$M$。元素$m_i=1$表示$f$对应至转录序列$r_i$，反之$0$表示$f$没有比对至$r_i$。同时，还可以构造另一个$0$和$1$构成长度为$2$的指示向量$N=(n_1, n_2)$表示$f$是否对应至某一物种。例如：$(1, 1)$表示$f$对应至物种$A$或$B$，$(0, 1)$表示$f$只对应到物种$B$。
 
