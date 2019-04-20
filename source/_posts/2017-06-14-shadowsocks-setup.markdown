@@ -31,7 +31,7 @@ $ sudo dnf install shadowsocks-libev
 
 ### 3.2 配置文件 ###
 
-文件位置`/etc/shadowsocks-libenv/config.json`，设置模板：
+文件位置`/etc/shadowsocks-libev/config.json`，设置模板：
 
 {% raw %}
 ```
