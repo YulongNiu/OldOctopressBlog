@@ -1,10 +1,12 @@
 ---
 layout: post
-title: "命令行使用Google Drive"
+title: "命令行使用Google Drive**
 date: 2016-10-21 18:24:31 +0800
 comments: true
 categories: linux
 ---
+
+**推荐使用更方便的[ODrive](https://liberodark.github.io/ODrive/)。**
 
 本文简单介绍[gdrive](https://github.com/prasmussen/gdrive)，它是一个跨多个平台软件，提供命令行操作Google Drive。同类软件还有[drive](https://github.com/odeke-em/drive)和[overGrive](https://www.thefanclub.co.za/overgrive)（Linux下Google Drive界面客户端）。
 
