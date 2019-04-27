@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "命令行使用Google Drive**
+title: "命令行使用Google Drive"
 date: 2016-10-21 18:24:31 +0800
 comments: true
 categories: linux
@@ -25,13 +25,13 @@ categories: linux
 [查找规则](https://developers.google.com/drive/v3/web/search-parameters)
 
 {% codeblock lang:bash %}
-# 查找所有文件夹，不包括垃圾箱，所有者为自己
+## 查找所有文件夹，不包括垃圾箱，所有者为自己
 $ gdrive list --query "mimeType = 'application/vnd.google-apps.folder' and trashed = false and 'me' in owners"
 
-# 加入上层目录Id
+## 加入上层目录Id
 gdrive list --query "mimeType = 'application/vnd.google-apps.folder' and trashed = false and 'me' in owners and 'YUlPWWdLcy1mX2c' in parents"
 
-# 查询信息
+## 查询信息
 gdrive info YUlPWWdLcy1mX2c
 {% endcodeblock %}
 
@@ -39,59 +39,59 @@ gdrive info YUlPWWdLcy1mX2c
 ## 3. 建立和删除 ##
 
 {% codeblock lang:bash %}
-# 建立文件夹
+## 建立文件夹
 $ gdrive mkdir newFolder
 
-# 建立下一层文件夹，-p指定上层目录Id
+## 建立下一层文件夹，-p指定上层目录Id
 $ gdrive mkdir -p M1h4M1dGYUhpSFE newFolder
 
-# 删除文件（文件Id，非名称）
+## 删除文件（文件Id，非名称）
 $ gdrive delete 0BzTeuubJesi
 
-# 删除文件夹（文件Id，非名称）
+## 删除文件夹（文件Id，非名称）
 $ gdrive delete -r 0BzTeuubJesi
 {% endcodeblock %}
 
 ## 4. 普通上传和下载 ##
 
 {% codeblock lang:bash %}
-# 上传文件至制定文件夹
+## 上传文件至制定文件夹
 $ gdrive upload -p M1h4M1dGYUhpSFE myFile
 
-# 下载文件
+## 下载文件
 $ gdrive download 0BzTeuubJesi
-
 {% endcodeblock %}
 
 
 ## 5. 同步 ##
+
 {% codeblock lang:bash %}
-# gdrive sync会标记同步文件，因此不要在同步文件夹中使用gdrive upload或者网页上传文件。未标记文件会被忽略。
-# 同步列表
+## gdrive sync会标记同步文件，因此不要在同步文件夹中使用gdrive upload或者网页上传文件。未标记文件会被忽略。
+## 同步列表
 $ gdrive sync list
 
-# 同步列表内容
+## 同步列表内容
 $ gdrive sync content VUxydm5iMnM5LWs
 
-# 上传
+## 上传
 $ gdrive sync upload myLocaldir 0BzTeuubJesi
 
-# 下载
+## 下载
 $ gdrive sync download 0BzTeuubJesi myLocaldir
 
-# 查询所有版本
+## 查询所有版本
 gdrive revision list YUlPWWdLcy1mX2c
 
-# 下载某一版本，最后两个Id分别为文件Id和版本Id
+## 下载某一版本，最后两个Id分别为文件Id和版本Id
 gdrive revision download YUlPWWdLcy1mX2c Y3JBWEJ5a0gwZndlR3hzWlZubFlUMWFnaHVnPQ
 
-# 删除某一版本
+## 删除某一版本
 gdrive revision delete YUlPWWdLcy1mX2c Y3JBWEJ5a0gwZndlR3hzWlZubFlUMWFnaHVnPQ
 {% endcodeblock %}
 
 ### 更新记录 ###
 
-2016年10月21日
+2019年4月27日
 
 
 
