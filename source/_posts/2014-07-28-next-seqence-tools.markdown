@@ -102,15 +102,7 @@ Bowtie使用介绍，详见[二代测序中的短序列比对](http://yulongniu.
 
 ## 5. MISO ##
 
-**简介**：[MISO](http://genes.mit.edu/burgelab/miso/)（Mixture-of-Isoforms）是用来计算和探测RNA-seq数据中不同样本的基因选择剪切。
-
-**平台**：Python跨平台使用。
-
-**快速运行**：
-
-{% codeblock lang:bash An Example of Running MISO%}
-
-{% endcodeblock %}
+[MISO](http://genes.mit.edu/burgelab/miso/)（Mixture-of-Isoforms）是用来计算和探测RNA-seq数据中不同样本的基因选择剪切。
 
 ## 6. 质量检测 ##
 
@@ -166,6 +158,12 @@ $ zcat mySeq_1_1.fastq.gz | awk '{if(NR%4==2) print length($1)}' | sort -n | uni
 # 序列数目
 $ grep -c '>@' mySeq.fa
 
+# 序列名称
+$ grep -c '>@' mySeq.fa
+
+# 同时合并fa.gz和fa文件
+$ zless mySeq1.fa.gz mySeq.fa | gzip > merge.fa.gz
+
 # 提取特定序列
 samtools faidx mySeq.fa
 samtools faidx mySeq.fa chr1 chr2 chr3
@@ -217,4 +215,4 @@ $ gffread -w myFastaFile.fa -g myGenome.fa myGtfFile.gtf
 
 ### 更新记录 ###
 
-2018年4月3日
+2019年05月04日
