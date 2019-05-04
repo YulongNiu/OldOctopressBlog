@@ -8,6 +8,8 @@ categories: share
 
 我最近看到Nature的一篇[报道](https://www.nature.com/articles/d41586-019-01431-z)，讲述一些小的改进能提升文章的升高速度。内容包括了草稿排版、写作和图表等方面，简要摘录关键信息。尽管遵循这些建议不会增加或减少文章被接受的概率，但能更加清楚地向读者和审稿人展现自己文章的核心内容。
 
+<!--more-->
+
 1. 草稿排版
 
     * 宽行间距和大号字体。单列排版时，推荐使用1.5倍行距，每行12-15个单词。
@@ -15,8 +17,6 @@ categories: share
     * 连续行编号，方便审稿人指出问题所在位置。
     
     * 图和图例尽量靠近相关文字。
-
-<!--more-->
 
 2. 写作
 
@@ -34,7 +34,6 @@ categories: share
     
     {% img middle /images/Nature_abstract_template.jpg 900 900 'Emacs ESS #1' 'a snap of Emacs ESS' %}
 
-
 3. 数据和图标
 
     * 定义不确定量（统计学）。在图例中描述error bar、盒箱图等不确定量的定义。
@@ -48,7 +47,6 @@ categories: share
     * 简化图。去除3D、阴影或不必要的颜色等。
     
     * 图例中添加小标题。
-
 
 ### 参考资料 ###
 
