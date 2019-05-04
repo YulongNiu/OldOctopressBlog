@@ -56,6 +56,7 @@ categories: share
 
 * [Statistics for Biologists](https://www.nature.com/collections/qghhqm)
 
+* [When I use a word … Declarative titles](https://academic.oup.com/qjmed/article/103/3/207/1589103)
 
 ### 更新记录 ###
 
