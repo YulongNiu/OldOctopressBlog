@@ -22,7 +22,7 @@ $$
 $$
 
 $$
-\newcommand{\P}{\mathrm{P}}
+\newcommand{\Pro}{\mathrm{P}}
 $$
 
 ## 1. 符号表示 ##
@@ -36,7 +36,7 @@ $$
 $$
 \begin{align}
 \begin{split}
-\P(f \in r_u) &= \frac{\rho_u \tildelu}{\sum\limits_{r \in R} \rho_r \widetilde{l_r}} \\
+\Pro(f \in r_u) &= \frac{\rho_u \tildelu}{\sum\limits_{r \in R} \rho_r \widetilde{l_r}} \\
 &= \alpha_u
 \end{split}
 \label{eq:1}
@@ -48,7 +48,7 @@ $$
 $$
 \begin{align}
 \begin{split}
-\P(\mathrm{pos}, f \in r_u) = \frac{\alpha_u}{\tildelu}
+\Pro(\mathrm{pos}, f \in r_u) = \frac{\alpha_u}{\tildelu}
 \end{split}
 \label{eq:2}
 \end{align}
@@ -60,7 +60,7 @@ $$
 $$
 \begin{align}
 \begin{split}
-\P(f \in s_v) &= \frac{\theta_v \tildesv}{\sum\limits_{s \in S} \theta_s \widetilde{l_s}} \\
+\Pro(f \in s_v) &= \frac{\theta_v \tildesv}{\sum\limits_{s \in S} \theta_s \widetilde{l_s}} \\
 &= \beta_v
 \end{split}
 \label{eq:3}
@@ -72,7 +72,7 @@ $$
 $$
 \begin{align}
 \begin{split}
-\P(\mathrm{pos}, f \in s_v) = \frac{\beta_v}{\tildesv}
+\Pro(\mathrm{pos}, f \in s_v) = \frac{\beta_v}{\tildesv}
 \end{split}
 \label{eq:4}
 \end{align}
@@ -90,39 +90,39 @@ $\eqref{eq:1}$和从$\eqref{eq:2}$也提供了$\rho_u$和$\alpha_u$，$\theta_v$
 $$
 \begin{align}
 \begin{split}
-\P(\mathrm{pos}|\eta)  &= \P(\mathrm{pos}, f \in A|\eta) + \P(\mathrm{pos}, f \in B|\eta)\\
-&= \P(\mathrm{pos} | f \in A, \eta) \P(f \in A) + \P(\mathrm{pos} | f \in B, \eta) \P(f \in B) \\
-&= \sum_{i=1}^{U} \P(\mathrm{pos}, f \in r_i|\eta) \P(f \in A) + \sum_{j=U+1}^{U+V} \P(\mathrm{pos}, f \in r_j|\eta) \P(f \in B) \\
-&= \sum_{i=1}^{U} n_1 m_i \frac{\alpha_i}{\widetilde{l_i}} \P(f \in A) + \sum_{j=U+1}^{U+V} n_2 m_j \frac{\beta_j}{\widetilde{l_j}} \P(f \in B) \\
+\Pro(\mathrm{pos}|\eta)  &= \Pro(\mathrm{pos}, f \in A|\eta) + \Pro(\mathrm{pos}, f \in B|\eta)\\
+&= \Pro(\mathrm{pos} | f \in A, \eta) \Pro(f \in A) + \Pro(\mathrm{pos} | f \in B, \eta) \Pro(f \in B) \\
+&= \sum_{i=1}^{U} \Pro(\mathrm{pos}, f \in r_i|\eta) \Pro(f \in A) + \sum_{j=U+1}^{U+V} \Pro(\mathrm{pos}, f \in r_j|\eta) \Pro(f \in B) \\
+&= \sum_{i=1}^{U} n_1 m_i \frac{\alpha_i}{\widetilde{l_i}} \Pro(f \in A) + \sum_{j=U+1}^{U+V} n_2 m_j \frac{\beta_j}{\widetilde{l_j}} \Pro(f \in B) \\
 \end{split}
 \label{eq:5}
 \end{align}
 $$
 
-其中，$\P(f \in A) + \P(f \in B) = 1$。由于$n_1 m_i = m_i$，即如果观察到转录片段$f$对应至物种$A$，则一定可以观察到$f$对应至物种$A$中的某个转录片段$\\{r_1, \dots, r_U\\}$。同理，$n_2 m_j = m_j$。
+其中，$\Pro(f \in A) + \Pro(f \in B) = 1$。由于$n_1 m_i = m_i$，即如果观察到转录片段$f$对应至物种$A$，则一定可以观察到$f$对应至物种$A$中的某个转录片段$\\{r_1, \dots, r_U\\}$。同理，$n_2 m_j = m_j$。
 
 $\eqref{eq:5}$可以写为：
 
 $$
 \begin{align}
 \begin{split}
-\P(\mathrm{pos}, f \in r|\eta) &= \sum_{i=1}^{U}m_i \frac{\alpha_i}{\widetilde{l_i}} \P(f \in A) + \sum_{j=U+1}^{U+V}m_j \frac{\beta_j}{\widetilde{l_j}} \P(f \in B) \\
+\Pro(\mathrm{pos}, f \in r|\eta) &= \sum_{i=1}^{U}m_i \frac{\alpha_i}{\widetilde{l_i}} \Pro(f \in A) + \sum_{j=U+1}^{U+V}m_j \frac{\beta_j}{\widetilde{l_j}} \Pro(f \in B) \\
 \end{split}
 \label{eq:6}
 \end{align}
 $$
 
-使用EM算法，对于第$n$次迭代：
+使用EM算法，对于第$n+1$次迭代：
 
 $$
 \begin{align}
 \begin{split}
-\lambda_i^{(n+1)} &= \frac{\alpha_j^{(n)} \frac{m_i}{\widetilde{l_j}} \P(f \in A)}{\sum\limits_{i=1}^{U}\alpha_i^{(n)} \frac{m_i}{\widetilde{l_i}} \P(f \in A) + \sum\limits_{j=U+1}^{U+V}\beta_j^{(n)} \frac{m_j}{\widetilde{l_j}} \P(f \in B)}\\
-\lambda_j^{(n+1)} &= \frac{\beta_j^{(n)} \frac{m_i}{\widetilde{l_j}} \P(f \in A)}{\sum\limits_{i=1}^{U}\alpha_i^{(n)} \frac{m_i}{\widetilde{l_i}} \P(f \in A) + \sum\limits_{j=U+1}^{U+V}\beta_j^{(n)} \frac{m_j}{\widetilde{l_j}} \P(f \in B)}\\
+\lambda_i^{(n+1)} &= \frac{\alpha_i^{(n)} \frac{m_i}{\widetilde{l_i}} \Pro(f \in A)}{\sum\limits_{i=1}^{U}\alpha_i^{(n)} \frac{m_i}{\widetilde{l_i}} \Pro(f \in A) + \sum\limits_{j=U+1}^{U+V}\beta_j^{(n)} \frac{m_j}{\widetilde{l_j}} \Pro(f \in B)}\\
+\lambda_j^{(n+1)} &= \frac{\beta_j^{(n)} \frac{m_j}{\widetilde{l_j}} \Pro(f \in A)}{\sum\limits_{i=1}^{U}\alpha_i^{(n)} \frac{m_i}{\widetilde{l_i}} \Pro(f \in A) + \sum\limits_{j=U+1}^{U+V}\beta_j^{(n)} \frac{m_j}{\widetilde{l_j}} \Pro(f \in B)}\\
 \alpha_i^{(n+1)} &= \frac{\sum\limits_{f \in F} \lambda_i^{(n+1)}}{\sum\limits_{f \in F} \sum\limits_{i=1}^{U} \lambda_i^{(n+1)}} \\
 \beta_j^{(n+1)} &= \frac{\sum\limits_{f \in F} \lambda_j^{(n+1)}}{\sum\limits_{f \in F} \sum\limits_{j=U+1}^{U+V} \lambda_j^{(n+1)}} \\
-\P(f \in A)^{(n+1)} &= \frac{\sum\limits_{f \in F} \sum\limits_{i=1}^{U} \lambda_i^{(n+1)}}{\sum\limits_{f \in F} \sum\limits_{i=1}^{U} \lambda_i^{(n+1)} + \sum\limits_{f \in F} \sum\limits_{j=U+1}^{U+V} \lambda_j^{(n+1)}} = \frac{\sum\limits_{f \in F} \sum\limits_{i=1}^{U} \lambda_i^{(n+1)}}{N}\\
-\P(f \in B)^{(n+1)} &= \frac{\sum\limits_{f \in F} \sum\limits_{j=U+1}^{U+V} \lambda_j^{(n+1)}}{\sum\limits_{f \in F} \sum\limits_{i=1}^{U} \lambda_i^{(n+1)} + \sum\limits_{f \in F} \sum\limits_{j=U+1}^{U+V} \lambda_j^{(n+1)}} = \frac{\sum\limits_{f \in F} \sum\limits_{j=U+1}^{U+V} \lambda_j^{(n+1)}}{N} 
+\Pro(f \in A)^{(n+1)} &= \frac{\sum\limits_{f \in F} \sum\limits_{i=1}^{U} \lambda_i^{(n+1)}}{\sum\limits_{f \in F} \sum\limits_{i=1}^{U} \lambda_i^{(n+1)} + \sum\limits_{f \in F} \sum\limits_{j=U+1}^{U+V} \lambda_j^{(n+1)}} = \frac{\sum\limits_{f \in F} \sum\limits_{i=1}^{U} \lambda_i^{(n+1)}}{N}\\
+\Pro(f \in B)^{(n+1)} &= \frac{\sum\limits_{f \in F} \sum\limits_{j=U+1}^{U+V} \lambda_j^{(n+1)}}{\sum\limits_{f \in F} \sum\limits_{i=1}^{U} \lambda_i^{(n+1)} + \sum\limits_{f \in F} \sum\limits_{j=U+1}^{U+V} \lambda_j^{(n+1)}} = \frac{\sum\limits_{f \in F} \sum\limits_{j=U+1}^{U+V} \lambda_j^{(n+1)}}{N} 
 \end{split}
 \label{eq:7}
 \end{align}

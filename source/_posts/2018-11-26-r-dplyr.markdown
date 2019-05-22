@@ -36,6 +36,8 @@ categories: r
 
 * `$`依然有效，可以方便取某列或者对某列赋值。
 
+* `coalesce()`用于转换`NA`。
+
 ## 3. 行操作 ##
 
 * `sample_n()`和`sample_frac()`：随机选择行。
