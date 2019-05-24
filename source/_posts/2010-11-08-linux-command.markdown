@@ -122,7 +122,7 @@ $ ls -l
 $ ls -rl
 
 # 显示隐藏文件 
-$ ls -a      
+$ ls -a
 
 # 可以配合使用
 $ ls -al
@@ -711,6 +711,17 @@ $ sudo lshw -C disk
 $ sudo dnf install cpanm
 $ sudo cpanm My::Module
 {% endcodeblock %}
+
+## 40. rsync同步文件
+
+{% codeblock lang:bash Disk number %}
+$ rsync -rlptDP testFolder romateMachine:/home/test
+
+## 保持文件group和owner
+## -a相当于-rlptgoD
+$ rsync -aP testFolder romateMachine:/home/test
+{% endcodeblock %}
+
 
 ### 参考资料 ###
 
