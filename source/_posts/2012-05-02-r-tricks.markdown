@@ -236,7 +236,7 @@ R在解释代码时，不支持尾递归优化，所以在R中不要写递归。
 
 ## 12. factor如需换标签，`c()`{:.language-r}函数有妙招 ##
 
-如果我们需要对一个factor的标签（label）进行转换，并且返回一个向量，有两种方法可以使用:
+如果我们需要对一个factor的标签（level）进行转换，并且返回一个向量，有两种方法可以使用:
 
 
 * 第一种方法，使用`c()`函数
@@ -260,6 +260,8 @@ Levels: a b c
 > as.character(tmp2)
 [1] "a" "a" "a" "b" "b" "b" "c" "c" "c"
 {% endcodeblock %}
+
+同时，配合使用`droplevels()`（去除多余level）、`relevel()`（以某个level为基准）和`ordered(.., levels)`（调整level顺序）等操作factor的level。
 
 ## 13. 操作符也是函数，使用起来有妙招 ##
 
