@@ -383,6 +383,9 @@ UUID=12D345251F34 /media/D ntfs defaults 0 0
 
 # 查看已安装的包
 # dnf list installed
+
+# 搜索命令
+$ dnf whatprovides MyCommand
 {% endcodeblock %}
 
 ## 20. 修改配置文件 ##
