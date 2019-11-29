@@ -1,6 +1,0 @@
-<div class="highlight"><pre><span class="c"># 查看GFF文件中基因组命名</span>
-<span class="nv">$ </span>awk <span class="s1">&#39;{print $1}&#39;</span> hg19USCS.gff <span class="p">|</span> sort -n <span class="p">|</span> uniq -c
-
-<span class="c"># 查看bam文件中基因组命名</span>
-samtools view accepted_hits.bam <span class="p">|</span> head -1000 <span class="p">|</span> awk <span class="s1">&#39;{print $3}&#39;</span> <span class="p">|</span> sort -n <span class="p">|</span> uniq -c
-</pre></div>

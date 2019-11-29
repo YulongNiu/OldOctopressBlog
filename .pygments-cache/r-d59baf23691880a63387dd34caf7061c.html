@@ -1,9 +1,0 @@
-<div class="highlight"><pre>Getft <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>i<span class="p">,</span> adAllRowColDesc<span class="p">,</span> adMatDesc<span class="p">){</span>
-  adAllRowColData <span class="o">&lt;-</span> attach.big.matrix<span class="p">(</span>adAllRowColDesc<span class="p">)</span>
-  adMatData <span class="o">&lt;-</span> attach.big.matrix<span class="p">(</span>adMatDesc<span class="p">)</span>
-  rowIndex <span class="o">&lt;-</span> adAllRowColData<span class="p">[</span>i<span class="p">,</span> <span class="m">1</span><span class="p">]</span>
-  colIndex <span class="o">&lt;-</span> adAllRowColData<span class="p">[</span>i<span class="p">,</span> <span class="m">2</span><span class="p">]</span>
-  linkData <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>rowNames<span class="p">[</span>rowIndex<span class="p">],</span> rowNames<span class="p">[</span>colIndex<span class="p">],</span> adMatData<span class="p">[</span>rowIndex<span class="p">,</span> colIndex<span class="p">])</span>
-  <span class="kr">return</span><span class="p">(</span>linkData<span class="p">)</span>
-<span class="p">}</span>
-</pre></div>

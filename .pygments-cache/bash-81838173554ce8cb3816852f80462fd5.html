@@ -1,9 +1,0 @@
-<div class="highlight"><pre><span class="c"># 输入bam文件和GFF文件</span>
-<span class="nv">$ </span>pe_utils --compute-insert-len accepted_hits.bam hg19USCS_selected.gff --output-dir insert-dist/
-
-<span class="c"># 在insert-dist会出现类似accepted_filtered.bam.insert_len文件</span>
-<span class="c"># -r/--mate-inner-dist估计值为mean</span>
-<span class="c"># --mate-std-dev估计值为sdev</span>
-<span class="nv">$ </span>head -1 accepted_filtered.bam.insert_len
-<span class="c">#mean=165.3,sdev=45.2,dispersion=3.5,num_pairs=5622239</span>
-</pre></div>

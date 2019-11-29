@@ -1,8 +1,0 @@
-<div class="highlight"><pre><span class="err">–</span> <span class="err">分组的意思是对一列或者多列数据归总</span>
-<span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span><span class="p">,</span> <span class="n">COUNT</span><span class="p">(</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName</span> 
-<span class="k">FROM</span> <span class="n">dataset</span>
-<span class="k">WHERE</span> <span class="n">column4</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="mf">3</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
-<span class="k">HAVING</span> <span class="n">COUNT</span><span class="p">(</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="mf">1</span>
-<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">newName</span>
-</pre></div>

@@ -1,9 +1,0 @@
-<div class="highlight"><pre><span class="c">## 查找所有文件夹，不包括垃圾箱，所有者为自己</span>
-<span class="nv">$ </span>gdrive list --query <span class="s2">&quot;mimeType = &#39;application/vnd.google-apps.folder&#39; and trashed = false and &#39;me&#39; in owners&quot;</span>
-
-<span class="c">## 加入上层目录Id</span>
-gdrive list --query <span class="s2">&quot;mimeType = &#39;application/vnd.google-apps.folder&#39; and trashed = false and &#39;me&#39; in owners and &#39;YUlPWWdLcy1mX2c&#39; in parents&quot;</span>
-
-<span class="c">## 查询信息</span>
-gdrive info YUlPWWdLcy1mX2c
-</pre></div>

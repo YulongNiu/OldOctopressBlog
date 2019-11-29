@@ -1,6 +1,0 @@
-<div class="highlight"><pre><span class="c"># store all debug output in circos.debug.txt and display only karyotype</span>
-&gt; circos ... -group_debug _all <span class="p">|</span> tee circos.debug.txt <span class="p">|</span> egrep <span class="s2">&quot;debuggroup karyotype&quot;</span>
-<span class="c"># extract other debug reports</span>
-&gt; egrep <span class="s2">&quot;debuggroup rule&quot;</span> circos.debug.txt
-&gt; egrep <span class="s2">&quot;debuggroup (rule|scale)&quot;</span> circos.debug.txt
-</pre></div>
