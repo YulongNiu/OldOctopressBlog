@@ -1,0 +1,118 @@
+---
+layout: post
+title: "梯度下降法估计RNA-Seq基因表达量"
+date: 2018-10-17 22:20:25 +0800
+comments: true
+categories: bioinfor
+published: false
+---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+$$
+\newcommand{\tildel}{\widetilde{l_t}}
+$$
+
+$$
+\newcommand{\P}{\mathrm{P}}
+$$
+
+$$
+\newcommand{\e}{\mathrm{e}}
+$$
+
+$$
+\DeclareMathOperator*{\argmax}{arg\,max} 
+$$
+
+## 1. 符号表示 ##
+
+$K$个长度为$l_i$的转录序列$t_i$，构成转录本的集合$T=\\{t_1, t_2, \dots, t_K\\}$。单个转录组中，每个转录序列$t_i$有$c_i$个拷贝数，全部转录序列的总拷贝数为$M$。单个转录序列的相对丰度为$\rho_k=\frac{c_k}{\sum\limits_{t \in T}c_t} = \frac{c_k}{M}$，易得$\sum\limits_{k=1}^K \rho_k=1$。
+
+单个转录组中，全部转录片段构成集合$F=\\{f_1, f_2, \dots, f_N\\}$，总转录片段数目为$N=\|F\|$。比对到的转录序列$t_i$上的转录片段，构成集合$F_t \in F$，对应的转录片段数目为$X_t=\|F_t\|$。
+
+RNA-Seq要估计的参数为$\alpha_t = \frac{\rho_t \widetilde{l_t}}{\sum\limits_{k=1}^{K} \rho_k \widetilde{l_k}}$，约束条件为$\sum\limits_{i=1}^K \alpha_i=1$。该约束条件可以通过[softmax函数](https://en.wikipedia.org/wiki/Softmax_functio)去除，从而对$\alpha_t$的估计转换为对$w_t$的估计。这样转化后，就可以使用梯度下降法估计$w_t$。
+
+$$
+\begin{align}
+\begin{split}
+\alpha_t & = \frac{\e^{w_t}}{\sum\limits_{k=1}^K \e^{w_k}}
+\end{split}
+\label{eq:1}
+\end{align}
+$$
+
+同时，也可以考虑使用softplus转换：
+$$
+\begin{align}
+\begin{split}
+\alpha_t & = \frac{\log(1+\e^{w_t})}{\sum\limits_{k=1}^K \log(1+\e^{w_k})}
+\end{split}
+\label{eq:2}
+\end{align}
+$$
+
+<!--more-->
+
+## 2. 梯度计算 ##
+
+损失函数设置为负对数似然函数为：
+
+$$
+\begin{align}
+\begin{split}
+NLL & = -\sum_{n \in N} \log \left( \sum_{t \in T} \alpha_t \frac{y_t}{\widetilde{l_t}} \right) \\
+&= -\sum_{n \in N} \left( \log \left( \sum_{t \in T} \e^{w_t} \frac{y_t}{\widetilde{l_t}} \right) - \log \left( \sum_{t \in T} \e^{w_t} \right) \right)
+\end{split}
+\label{eq:3}
+\end{align}
+$$
+
+对每一个$w_t$求偏导数，得出对应的梯度为:
+
+$$
+\begin{align}
+\begin{split}
+g(w_t) & = -\sum_{n \in N} \left( \frac{ \e^{w_t} \frac{y_t}{\widetilde{l_t}}}{\sum\limits_{t \in T} \e^{w_t} \frac{y_t}{\widetilde{l_t}}} - \frac{\e^{w_t}}{\sum\limits_{t \in T} \e^{w_t}} \right )
+\end{split}
+\label{eq:4}
+\end{align}
+$$
+
+全梯度下降可以表示为：
+
+$$
+\begin{align}
+\begin{split}
+w_t^{(n+1)} &= w_t^{(n)} - \alpha \cdot g\left( w_t^{(n+1)} \right)
+\end{split}
+\label{eq:5}
+\end{align}
+$$
+
+其中，$\alpha$为学习率。
+
+## 3. 混合物种模型 ##
+
+损失函数为：
+
+$$
+\begin{align}
+\begin{split}
+NLL &= -\sum_{n \in N} \log \left( \sum_{i=1}^{U}m_i \frac{\alpha_i}{\widetilde{l_i}} + \sum_{j=U+1}^{V}m_j \frac{\beta_j}{\widetilde{l_j}} \right )
+\end{split}
+\label{eq:6}
+\end{align}
+$$
+
+### <a id="Ref">参考资料</a> ###
+
+* Lior Pachter: Models for transcript quantification from RNA-Seq. [arXiv:1104.3889v2](https://arxiv.org/abs/1104.3889) [q-bio.GN], 2011.
+
+### 更新记录 ###
+
+2018年10月20日

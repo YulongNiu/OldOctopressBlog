@@ -1,0 +1,198 @@
+---
+layout: post
+title: "探索EM算法"
+date: 2013-07-13 19:23:22 +0800
+comments: true
+categories: bioinfor
+---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+$$
+\newcommand{\P}{\mathrm{P}}
+$$
+
+$$
+\DeclareMathOperator*{\argmax}{arg\,max} 
+$$
+
+## EM算法的推出 ##
+
+考虑观测数据$Y=\\{y_1, y_2, \dots, y_m\\}$，其中不可观测数据为$Z=\\{z_1, z_2, \dots, z_k\\}$，需要估计的参数为$\theta=\\{\theta_1, \theta_2, \dots, \theta_t\\}$。$Z$可以是离散或连续型随机变量，以下过程中假设$Z$为离散型（$Z$为连续型，则全概率公式由求和改为积分）。则观测数据的对数似然函数为：
+
+<!--more-->
+
+$$
+\begin{align}
+\begin{split}
+L(\theta) &= \log\left(\prod_{j=1}^m \P(y_j|\theta)\right) \\
+&= \sum_{j=1}^m \log\left( \sum_{z \in Z} \P(y_j, z|\theta)\right)
+\end{split}
+\label{eq:1}
+\end{align}
+$$
+
+为了使$L(\theta)$最大，很容易想到对$\theta$偏导求极值。但有一个困难，即$Z$不可观测，导致的直接后果是对数套求和，计算难度增加。直觉是，**否能找到一个方法，将求和放在对数外面？**一个常用的技巧是转化为不等式，[Jensen's inequality](https://en.wikipedia.org/wiki/Jensen%27s_inequality)描述了积分的函数与函数的积分的关系。由于$\log(x)$是凹函数，尝试考察某一次特定的$\theta^{(n)}$取值后，$L(\theta)$与$L(\theta^{(n)})$的差：
+
+$$
+\begin{align}
+\begin{split}
+L(\theta) - L(\theta^{(n)}) &= \sum_{j=1}^m \log\left( \sum_{z \in Z} \P(y_j, z|\theta)\right) - L(\theta^{(n)}) \\
+&= \sum_{j=1}^m \log\left( \sum_{z \in Z} \P(z|y_j, \theta^{(n)}) \frac{\P(y_j, z|\theta)}{\P(z|y_j, \theta^{(n)})}\right) - L(\theta^{(n)}) \\
+&\geq \sum_{j=1}^m  \sum_{z \in Z} \P(z|y_j, \theta^{(n)}) \log \left( \frac{\P(y_j, z|\theta)}{\P(z|y_j, \theta^{(n)})} \right) \\
+&- \sum_{j=1}^m \sum_{z \in Z} \P(z|y_j, \theta^{(n)}) \log(\P(y_j|\theta^{n})) \\
+&= \sum_{j=1}^m  \sum_{z \in Z} \P(z|y_j, \theta^{(n)}) \log\left(\frac{\P(y_j, z|\theta)}{\P(y_j, z|\theta^{(n)})} \right)
+\end{split}
+\label{eq:2}
+\end{align}
+$$
+
+从$\eqref{eq:2}$可以得到$L(\theta)$的一个下限：
+
+$$
+\begin{align}
+\begin{split}
+L(\theta) \geq L(\theta^{(n)}) + \sum_{j=1}^m  \sum_{z \in Z} \P(z|y_j, \theta^{(n)}) \log\left(\frac{\P(y_j, z|\theta)}{\P(y_j, z|\theta^{(n)})} \right)
+\end{split}
+\label{eq:3}
+\end{align}
+$$
+
+当$\theta=\theta^{(n)}$时，等号成立。有意思的是，由于$\theta^{(n)}$已知，$\eqref{eq:3}$的右半部分极大化要比$\eqref{eq:1}$简单很多，尽管右边的极值是一个下限，此时的$\theta$的估计值为：
+
+$$
+\begin{align}
+\begin{split}
+\theta^{(n+1)} &= \argmax_\theta \left( L(\theta^{(n)}) + \sum_{j=1}^m  \sum_{z \in Z} \P(z|y_j, \theta^{(n)}) \log\left(\frac{\P(y_j, z|\theta)}{\P(y_j, z|\theta^{(n)})} \right) \right) \\
+&=  \argmax_\theta \left(\sum_{j=1}^m  \sum_{z \in Z} \P(z|y_j, \theta^{(n)}) \log\left(\P(y_j, z|\theta)\right) \right)
+\end{split}
+\label{eq:4}
+\end{align}
+$$
+
+EM算法的核心是通过迭代$L(\theta)$的下限极大化，进而逼近极值。EM算法每次迭代，都会靠近$L(\theta)$，但是最终可能得到局部最优。因此，EM算法对初始值敏感，可以多选几个初始值，对比结果。
+
+
+## 双硬币模型 ##
+
+[参考资料2](#Ref)中使用EM算法解决双硬币模型：
+
+$$
+\begin{align*}
+\begin{split}
+\P(y|\theta) = \theta_1^{y}(1-\theta_1)^{N-y} + \theta_2^{y}(1-\theta_2)^{N-y}
+\end{split}
+\end{align*}
+$$
+
+每次从两个硬币中选择一个，抛$N$次并记录正反面，同样的“选硬币-抛$N$次”进行$m$次，估计两个硬币正面出现的概率。观测数据$Y=\\{y_1, y_2, \dots, y_m\\}$为每次正面朝上的次数，每次抽样的不可观测数据$Z=\\{z_1, z_2\\\}$为选择的硬币，估计参数为$\theta=\\{\theta_1, \theta_2\\}$。
+
+对于第$n$次迭代，观察$\P(z_1\|y_j, \theta^{(n)})$为：
+
+$$
+\begin{align*}
+\begin{split}
+\P(z_1|y_j, \theta^{(n)}) &= \frac{\P(z_1, y_j|\theta^{(n)})}{\sum\limits_{z \in Z}\P(z, y_j|\theta^{(n)})} \\
+&= \frac{\theta_1^{(n)y_j} (1-\theta_1^{(n)})^{N-y_j}}{\theta_1^{(n)y_j} (1-\theta_1^{(n)})^{N-y_j} + \theta_2^{(n)y_j} (1-\theta_2^{(n)})^{N-y_j}} \\
+&= \mu_{1j}
+\end{split}
+\end{align*}
+$$
+
+易得$\P(z_2\|y_j, \theta^{(n)}) = 1-\mu_{1j} = \mu_{2j}$
+
+根据$\eqref{eq:4}$得，
+
+$$
+\begin{align*}
+\begin{split}
+\sum_{j=1}^m \left( \mu_{1j}\log\left(\theta_1^{y_j} (1-\theta_1)^{N-y_j}\right) + \mu_{2j}\log\left(\theta_2^{y_j} (1-\theta_2)^{N-y_j}\right) \right)
+\end{split}
+\end{align*}
+$$
+
+分别对$\theta_1$和$\theta_2$求偏导取极限，得第$n+1$次$\theta$估计为：
+
+$$
+\begin{align*}
+\begin{split}
+\theta_1^{(n+1)} &= \frac{\sum\limits_{j=1}^m \mu_{1j} y_j}{N\sum\limits
+_{j=1}^m \mu_{1j}} \\
+\theta_2^{(n+1)} &= \frac{\sum\limits_{j=1}^m \mu_{2j} y_j}{N\sum\limits_{j=1}^m \mu_{2j}} \\
+\end{split}
+\end{align*}
+$$
+
+## 混合高斯模型 ##
+
+混合高斯分布模型：
+
+$$
+\begin{align*}
+\begin{split}
+\P(y|\theta) &= \sum\limits_{k=1}^{K}\alpha_k\phi(y|\theta_k), \theta_k = \{\mu_k, \sigma_k\} \\
+\phi(y|\theta_k) &= \frac{1}{\sigma_k \sqrt{2\pi}} \exp \left( -\frac{(y-\mu_k)^2}{2\sigma_k^2} \right) \\
+\sum_{k=1}^{K}\alpha_k &= 1
+\end{split}
+\end{align*}
+$$
+
+每次取样，依概率$\alpha_k$选择第$k$个高斯分布，根据相应概率分布生成观测数据$y_i$，由此组成观测数据$Y=\\{y_1, y_2, \dots, y_m\\}$。每次取样不可观测数据$Z=\\{z_1, z_2, \dots, z_K\\}$为抽取的高斯分布。估计参数为$\\{\theta_1, \theta_2, \dots, \theta_K, \alpha_1, \alpha_2, \dots, \alpha_K\\}$。
+
+对于第$n$次迭代，观察$\P(z_1\|y_j, \theta^{(n)})$为：
+
+$$
+\begin{align*}
+\begin{split}
+\P(z_1|y_j, \theta^{(n)}) &= \frac{\P(z_1, y_j|\theta^{(n)})}{\sum\limits_{z \in Z}\P(z, y_j|\theta^{(n)})} \\
+&= \frac{\alpha_1^{(n)}\phi(y_j|\theta_1^{(n)})}{\sum\limits_{k=1}^{K}\alpha_k^{(n)}\phi(y_j|\theta_k^{(n)})} \\
+&= \lambda_{1j}
+\end{split}
+\end{align*}
+$$
+
+易得$\sum\limits_{k=1}^{K} \lambda_{kj} = 1$
+
+根据$\eqref{eq:4}$得，
+
+$$
+\begin{align*}
+\begin{split}
+\sum_{j=1}^m \sum_{k=1}^{K} \lambda_{kj} \left( \log(\alpha_k) + \log\left( \frac{1}{\sqrt{2\pi}} \right) - \log(\sigma_k) - \frac{(y_j-\mu_k)^2}{2\sigma_k^2} \right)
+\end{split}
+\end{align*}
+$$
+
+
+对各个参数求偏导取极限，第$n+1$次参数估计为：
+
+$$
+\begin{align*}
+\begin{split}
+\alpha_k^{(n+1)} &= \frac{\sum_{j=1}^{m} \lambda_{kj}}{m}, \ k=1, 2, \dots, K\\
+\mu_k^{(n+1)} &= \frac{\sum_{j=1}^{m} \lambda_{kj} y_j}{\sum_{j=1}^{m} \lambda_{kj}}, \ k=1, 2, \dots, K\\
+\sigma_k^{2(n+1)} &= \frac{\sum_{j=1}^{m} \lambda_{kj} (y_j-\mu_k)^2}{\sum_{j=1}^{m} \lambda_{kj}}, \ k=1, 2, \dots, K
+\end{split}
+\end{align*}
+$$
+
+混合高斯模型在生物信息学中有广泛的应用，例如[参考资料4](#Ref)用于家族拷贝数变异（copy number variations，CNV）检测。
+
+### <a id="Ref">参考资料</a> ###
+
+* 李航《统计学习方法》
+
+* Do CB, Batzoglou S: What is the expectation maximization algorithm? Nat Biotechnol. 2008;26(8):897-9. 
+
+* [The Expectation Maximization Algorithm A short tutorial](https://www.cs.utah.edu/~piyush/teaching/EM_algorithm.pdf)
+
+* Chu JH, Rogers A, Ionita-Laza I, Darvishi K, Mills RE, Lee C, Raby BA: Copy number variation genotyping using family information. BMC Bioinformatics. 2013;14:157.
+
+### 更新记录 ###
+
+2018年2月4日
+

@@ -1,0 +1,108 @@
+---
+layout: post
+title: "Illumina的甲基化450K芯片分析"
+date: 2015-03-25 22:07:39 +0800
+comments: true
+published: false
+categories: bioinfor
+---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+## 1. 原理 ##
+
+Illumina甲基化芯片[Infinium HumanMethylation450 BeadChip](http://www.illumina.com/products/methylation_450_beadchip_kits.html)（简称450K芯片）的[原理](http://en.wikipedia.org/wiki/Illumina_Methylation_Assay)是使用亚硫酸盐处理基因组DNA。如果CpG岛中的C被甲基化，那么保持不变；如果未被甲基化，则由C变为T。450K芯片中含有两种探针，图示如下：
+
+* 第一类探针需要两个探针检测一个甲基化位点：
+
+<table>
+<tr>
+<td>
+<b>A：未被甲基化位点</b>
+</td>
+<td>
+<b>B：甲基化位点</b>
+</td>
+</tr>
+<tr>
+<td><img src="/images/450K_probe1_unmethy.jpg" title="第一类探针未被甲基化位点" width="350" height="350"></td>
+<td><img src="/images/450K_probe1_methy.jpg" title="第一类探针甲基化位点" width="350" height="350"></td>
+</tr>
+</table>
+
+<!--more-->
+
+* 第二类探针只需要一个探针即可：
+
+<table>
+<tr>
+<td>
+<b>A：未被甲基化位点</b>
+</td>
+<td>
+<b>B：甲基化位点</b>
+</td>
+</tr>
+<tr>
+<td><img src="/images/450K_probe2_unmethy.jpg" title="第二类探针未被甲基化位点" width="350" height="350"></td>
+<td><img src="/images/450K_probe2_methy.jpg" title="第二类探针甲基化位点" width="350" height="350"></td>
+</tr>
+</table>
+
+
+采用了$\beta$和$M$两种数值，对某个CpG位点的甲基化进行数值衡量。
+
+$\beta$值可以理解为甲基化的百分比，取值范围为$[0, 1]$。越接近1，表示甲基化程度越高;反之，甲基化越低。在公式$\eqref{eq:1}$中，$M$和$U$分别为探针甲基化和未甲基化的原始信号值（signale indensity），如果在背景去除后小于0，则将其转为为0；而$\alpha$是一个任意规定的阈值，通常设定为100。
+
+$$
+\begin{align}
+\beta = \frac{M}{M+U+\alpha}
+\label{eq:1}
+\end{align}
+$$
+
+$M$值的原始定义为公式为$\eqref{eq:2}$[[Du et.al., 2010]](#Du et.al., 2010)，其中$\alpha$通常设定为1：
+
+$$
+\begin{align}
+M = \log2 \left (
+\frac{M+\alpha}{U+\alpha}
+\right )
+\label{eq:2}
+\end{align}
+$$
+
+
+由于在Illumina 450K芯片中，超过95%的探针信号强度高于1000。这使得$\eqref{eq:1}$和$\eqref{eq:2}$中的$\alpha$数值的作用基本忽略不计。因此，$M$值可以看做$\beta$值的[logit转换](http://mathworld.wolfram.com/LogitTransformation.html)，如公式$\eqref{eq:3}$所示，这使得$M$的取值范围为$(-\infty, +\infty)$。$M$值越接近$-\infty$，表示该CpG位点程度越低；$M$值越接近$\infty$，表示该CpG位点程度越高。
+
+$$
+\begin{align}
+M = \log2 \left (
+\frac{\beta}{1-\beta}
+\right )
+\label{eq:3}
+\end{align}
+$$
+
+## 2. 数据前处理 ##
+
+### 2.1 数据类型  ###
+
+Illumina甲基化芯片的原始数据，通常命名为`.IDAT`。
+
+
+### 2.2 原始数据载入 ###
+
+
+
+
+
+
+
+### 参考资料 ###
+
+* $M$值和$\beta$数值的比较 <a id="Du et.al., 2010">Du P</a>, Zhang X  *BMC Bioinformatics.* 2010
