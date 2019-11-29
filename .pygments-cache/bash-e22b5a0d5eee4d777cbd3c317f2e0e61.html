@@ -1,0 +1,47 @@
+<div class="highlight"><pre><span class="c"># 查看accepted_hits.bam文件的MAPQ数值，并统计出现频数</span>
+<span class="nv">$ </span>samtools view accepted_hits.bam <span class="p">|</span> awk <span class="s1">&#39;{print $5}&#39;</span> <span class="p">|</span> sort --parallel<span class="o">=</span><span class="m">4</span> -n <span class="p">|</span> uniq -c
+<span class="m">5057430</span> 0
+<span class="m">3117731</span> 1
+<span class="m">8058500</span> 3
+<span class="m">93044727</span> 50
+
+<span class="c"># 查看前100位MAPQ数值和NH:i:n分布</span>
+<span class="nv">$ </span>samtools view accepted_hits.bam <span class="p">|</span> awk <span class="s1">&#39;{print $5}&#39;</span> <span class="p">|</span> head -100 <span class="p">|</span> sort --parallel<span class="o">=</span><span class="m">4</span> -n <span class="p">|</span> uniq -c
+<span class="m">35</span> 0
+<span class="m">42</span> 1
+<span class="m">22</span> 3
+<span class="m">1</span> 50
+
+<span class="nv">$ </span>samtools view accepted_hits.bam <span class="p">|</span> awk <span class="s1">&#39;{print $20}&#39;</span> <span class="p">|</span> head -100 <span class="p">|</span> sort --parallel<span class="o">=</span><span class="m">4</span> -n <span class="p">|</span> uniq -c
+<span class="m">1</span> NH:i:1
+<span class="m">22</span> NH:i:2
+<span class="m">3</span> NH:i:20
+<span class="m">13</span> NH:i:3
+<span class="m">29</span> NH:i:4
+<span class="m">5</span> NH:i:5
+<span class="m">21</span> NH:i:6
+<span class="m">1</span> NH:i:7
+<span class="m">2</span> NH:i:8
+<span class="m">3</span> NH:i:9
+
+<span class="c"># 查看前200位MAPQ数值和NH:i:n分布</span>
+<span class="nv">$ </span>samtools view accepted_hits.bam <span class="p">|</span> awk <span class="s1">&#39;{print $5}&#39;</span> <span class="p">|</span> head -200 <span class="p">|</span> sort --parallel<span class="o">=</span><span class="m">4</span> -n <span class="p">|</span> uniq -c
+<span class="m">60</span> 0
+<span class="m">43</span> 1
+<span class="m">67</span> 3
+<span class="m">30</span> 50
+
+<span class="nv">$ </span>samtools view accepted_hits.bam <span class="p">|</span> awk <span class="s1">&#39;{print $20}&#39;</span> <span class="p">|</span> head -200 <span class="p">|</span> sort --parallel<span class="o">=</span><span class="m">4</span> -n <span class="p">|</span> uniq -c
+<span class="m">30</span> NH:i:1
+<span class="m">8</span> NH:i:12
+<span class="m">7</span> NH:i:14
+<span class="m">67</span> NH:i:2
+<span class="m">3</span> NH:i:20
+<span class="m">13</span> NH:i:3
+<span class="m">30</span> NH:i:4
+<span class="m">5</span> NH:i:5
+<span class="m">31</span> NH:i:6
+<span class="m">1</span> NH:i:7
+<span class="m">2</span> NH:i:8
+<span class="m">3</span> NH:i:9
+</pre></div>

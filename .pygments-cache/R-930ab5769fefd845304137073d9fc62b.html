@@ -1,0 +1,34 @@
+<div class="highlight"><pre><span class="c1">## new class</span>
+setClass<span class="p">(</span>Class <span class="o">=</span> <span class="s">&#39;trick&#39;</span><span class="p">,</span>
+         slots <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>id <span class="o">=</span> <span class="s">&#39;character&#39;</span><span class="p">,</span> time <span class="o">=</span> <span class="s">&#39;matrix&#39;</span><span class="p">),</span>
+         validity <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>object<span class="p">)</span> <span class="p">{</span>
+           <span class="kr">if</span> <span class="p">(</span><span class="kp">length</span><span class="p">(</span>object<span class="o">@</span>id<span class="p">)</span> <span class="o">!=</span> <span class="kp">nrow</span><span class="p">(</span>object<span class="o">@</span>time<span class="p">))</span> <span class="p">{</span>
+             warns <span class="o">&lt;-</span> <span class="kp">paste</span><span class="p">(</span><span class="s">&#39;length of id is&#39;</span><span class="p">,</span> <span class="kp">length</span><span class="p">(</span>object<span class="o">@</span>id<span class="p">),</span> <span class="s">&#39;is not equal to row number of time&#39;</span><span class="p">,</span> <span class="kp">nrow</span><span class="p">(</span>object<span class="o">@</span>time<span class="p">))</span>
+             <span class="kr">return</span><span class="p">(</span>warns<span class="p">)</span>
+           <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+             <span class="kr">return</span><span class="p">(</span><span class="kc">TRUE</span><span class="p">)</span>
+           <span class="p">}},</span>
+         prototype <span class="o">=</span> <span class="kt">list</span><span class="p">(</span>id <span class="o">=</span> <span class="kt">character</span><span class="p">(),</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)))</span>
+
+setClass<span class="p">(</span>Class <span class="o">=</span> <span class="s">&#39;trickNum&#39;</span><span class="p">,</span>
+         slots <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>number <span class="o">=</span> <span class="s">&#39;numeric&#39;</span><span class="p">),</span>
+         contains <span class="o">=</span> <span class="s">&#39;trick&#39;</span><span class="p">)</span>
+
+setClass<span class="p">(</span>Class <span class="o">=</span> <span class="s">&#39;trickMult&#39;</span><span class="p">,</span>
+         slots <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>trick1 <span class="o">=</span> <span class="s">&#39;trick&#39;</span><span class="p">,</span> trick2 <span class="o">=</span> <span class="s">&#39;trick&#39;</span><span class="p">))</span>
+
+<span class="c1">## from setClass() help document, extend from built-in data type</span>
+setClass<span class="p">(</span><span class="s">&quot;numWithId&quot;</span><span class="p">,</span> 
+         slots <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>id <span class="o">=</span> <span class="s">&quot;character&quot;</span><span class="p">),</span>
+         contains <span class="o">=</span> <span class="s">&quot;numeric&quot;</span><span class="p">)</span>
+
+numWI1 <span class="o">&lt;-</span> new<span class="p">(</span><span class="s">&#39;numWithId&#39;</span><span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">])</span>
+<span class="c1">## retrieve data of numWI1</span>
+numWI1<span class="o">@</span><span class="m">.</span>Data
+
+<span class="c1">## without slots</span>
+numNoSlot <span class="o">&lt;-</span> setClass<span class="p">(</span><span class="s">&quot;num&quot;</span><span class="p">,</span> contains <span class="o">=</span> <span class="s">&quot;numeric&quot;</span><span class="p">)</span>
+
+<span class="c1">## simplest class</span>
+setClass<span class="p">(</span>Class <span class="o">=</span> <span class="s">&#39;simpleClass&#39;</span><span class="p">)</span>
+</pre></div>

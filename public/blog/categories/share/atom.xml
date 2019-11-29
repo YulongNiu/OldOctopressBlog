@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Share | 牛牛龙]]></title>
+  <link href="http://yulongniu.bionutshell.org/blog/categories/share/atom.xml" rel="self"/>
+  <link href="http://yulongniu.bionutshell.org/"/>
+  <updated>2019-10-31T16:39:02+01:00</updated>
+  <id>http://yulongniu.bionutshell.org/</id>
+  <author>
+    <name><![CDATA[Yulong Niu]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[小的改进能提升文章审稿速度]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2019/05/04/small-changes-smooth-review/"/>
+    <updated>2019-05-04T16:03:35+02:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2019/05/04/small-changes-smooth-review</id>
+    <content type="html"><![CDATA[<p>我最近看到Nature的一篇<a href="https://www.nature.com/articles/d41586-019-01431-z">报道</a>，讲述一些小的改进能提升文章的审稿速度。内容包括了草稿排版、写作和图表等方面，简要摘录关键信息。尽管遵循这些建议不会增加或减少文章被接受的概率，但能更加清楚地向读者和审稿人展现自己文章的核心内容。</p>
+
+<!--more-->
+
+<ol>
+  <li>
+    <p>草稿排版</p>
+
+    <ul>
+      <li>
+        <p>宽行间距和大号字体。单列排版时，推荐使用1.5倍行距，每行12-15个单词。</p>
+      </li>
+      <li>
+        <p>连续行编号，方便审稿人指出问题所在位置。</p>
+      </li>
+      <li>
+        <p>图和图例尽量靠近相关文字。</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>写作</p>
+
+    <ul>
+      <li>
+        <p>避免主观词汇。审稿人通常反感主观词汇，例如：unprecedented、 paradigm shift、 amazing、 dramatic、 interesting、 remarkable等。</p>
+      </li>
+      <li>
+        <p>减少使用缩写。当文中出现5次或以上时，再考虑使用缩写。但一些熟知的专业名词，例如DNA、RNA等要使用缩写。</p>
+      </li>
+      <li>
+        <p>避免使用无方向性词汇，influence。应该明确指出怎样影响（增加或减少），最好能有具体的数值表述。例如，改变×××倍提高了×××产量等。</p>
+      </li>
+      <li>
+        <p>避免在所有情况下都使用significant。应为signficant容易和统计检验混淆，应该使用具体数值描述影响。</p>
+      </li>
+      <li>
+        <p>文章起一个陈述性的题目。避免使用暗示性、假设性的题目，而应该具体描述文章的发现。注意不要夸大结果或者模糊描述。“通过避免使用主观词汇、仔细描述文章真实而非潜在暗示的发现，应该能找到一个可读性高、信息量大、有趣的题目，从而不会夸大文章的发现”。</p>
+      </li>
+      <li>
+        <p>摘要写法，Nature提供了一个<a href="https://www.nature.com/documents/nature-summary-paragraph.pdf">模板</a>。</p>
+      </li>
+    </ul>
+
+    <p><img class="middle" src="/images/Nature_abstract_template.jpg" width="900" height="900" title="‘Emacs ESS #1’ ‘a snap of Emacs ESS’" ></p>
+  </li>
+  <li>
+    <p>数据和图标</p>
+
+    <ul>
+      <li>
+        <p>定义不确定量（统计学）。在图例中描述error bar、盒箱图等不确定量的定义。</p>
+      </li>
+      <li>
+        <p>使用<a href="https://www.nature.com/collections/qghhqm">统计检验</a>。</p>
+      </li>
+      <li>
+        <p>展示和提取潜在数据。例如使用散点图（小数据）、盒箱图/小提琴图（大数据）等、提交数据至数据库等。</p>
+      </li>
+      <li>
+        <p>合理上色。避免使用彩虹图、使用<a href="http://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">ColorBrewer</a>等更加友好的配色方案。比如一种diverge配色方案（热图），中间数据使用白色、两边渐进黄蓝强对比色。</p>
+      </li>
+      <li>
+        <p>简化图。去除3D、阴影或不必要的颜色等。</p>
+      </li>
+      <li>
+        <p>图例中添加小标题。</p>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="section">参考资料</h3>
+
+<ul>
+  <li>
+    <p><a href="https://www.nature.com/articles/d41586-019-01431-z">How small changes to a paper can help to smooth the review process</a></p>
+  </li>
+  <li>
+    <p><a href="https://www.nature.com/collections/qghhqm">Statistics for Biologists</a></p>
+  </li>
+  <li>
+    <p><a href="https://academic.oup.com/qjmed/article/103/3/207/1589103">When I use a word … Declarative titles</a></p>
+  </li>
+</ul>
+
+<h3 id="section-1">更新记录</h3>
+
+<p>2019年05月04日</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[如何在Nature Communications上发表文章]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2016/09/22/how-to-publish-in-nc/"/>
+    <updated>2016-09-22T10:25:13+02:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2016/09/22/how-to-publish-in-nc</id>
+    <content type="html"><![CDATA[<p>我最近看到一个<a href="http://spotidoc.com/doc/159334/how-to-get-published-in-nature-communications">幻灯片</a>，主要讲了在Nature Communications（NC）上发表文章的建议，作者是NC的副主编Nicky Dean。整个幻灯片一种轻松幽默的口吻，讲述了投稿和发表文章过程的各种问题，并提出了针对性建议，值得推荐。以下记录一些关键信息。</p>
+
+<!--more-->
+
+<ol>
+  <li>
+    <p>投稿前注意事项</p>
+
+    <blockquote>
+      <ul>
+        <li>
+          <p><em>Nature</em>杂志（可能此处也指NC）只考虑有重大创新（conceptually novel）的工作，而不是补充完善数据类型研究。</p>
+        </li>
+        <li>
+          <p>不要有快速发表的想法。</p>
+        </li>
+        <li>
+          <p>不介意会议报告或者预印服务网站发表。</p>
+        </li>
+        <li>
+          <p>介意发表在出版的会议录（conference proceedings）或者其他大规模传播的媒介上。</p>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>
+    <p>准备充分</p>
+
+    <blockquote>
+      <ul>
+        <li>
+          <p>问问自己这个研究适合于本领域的哪些地方？这个研究是否有显著的进步？</p>
+        </li>
+        <li>
+          <p>从一开始就好好准备文稿，比如文稿有清晰的结构、容易理解，并且能够传达出最主要信息。</p>
+        </li>
+        <li>
+          <p>阅读《作者须知》，使得文稿符合杂志的要求。</p>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>
+    <p>准备cover letters</p>
+
+    <blockquote>
+      <ul>
+        <li>
+          <p>解释工作的创新，但不要过了。</p>
+        </li>
+        <li>
+          <p>推荐审稿人，但不能都是自己的熟人。</p>
+        </li>
+        <li>
+          <p>可以推荐需要屏蔽的审稿人。</p>
+        </li>
+        <li>
+          <p>明确一切相关的正在发表或者已经投稿的文章。</p>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>
+    <p>文章要素</p>
+
+    <blockquote>
+      <ul>
+        <li>
+          <p>解释清楚研究领域背景，即回答“我们为什么要重视这项研究？”</p>
+        </li>
+        <li>
+          <p>清晰地描述做了什么工作。</p>
+        </li>
+        <li>
+          <p>连接研究内容和领域背景，以说服别人这项研究确实有重大突破。</p>
+        </li>
+        <li>
+          <p>发表文章的目的是为了更有效地交流，而不是显示自己有聪明!</p>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>
+    <p>NC编辑审核常规要点</p>
+
+    <blockquote>
+      <ul>
+        <li>
+          <p>研究的创新性。</p>
+        </li>
+        <li>
+          <p>支持数据。</p>
+        </li>
+        <li>
+          <p>作者或者他人之前的研究。</p>
+        </li>
+        <li>
+          <p>参考文献是否完成，是否重大遗漏。</p>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>
+    <p>应对审稿人意见</p>
+
+    <blockquote>
+      <ul>
+        <li>
+          <p>如果被邀请重新提交文章，确保文章解决了<strong>所有</strong>审稿人提出的问题。</p>
+        </li>
+        <li>
+          <p>如果被要求进一步实验，不要尝试规避。</p>
+        </li>
+        <li>
+          <p>保持专业，不要使用侮辱性语言、自大或者恐吓。</p>
+        </li>
+        <li>
+          <p>审稿人也可能会犯错，并且记住他们是自己同行专家。不管怎样，以后大家还是要一起打交道。</p>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+</ol>
+
+<h3 id="section">更新记录</h3>
+
+<p>2016年9月22日</p>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,19 @@
+<div class="highlight"><pre><span class="c1"># 查看包的安装目录</span>
+<span class="m">.</span>libPaths<span class="p">()</span>
+
+<span class="c1"># 查看已经安装的包目录</span>
+<span class="kn">library</span><span class="p">()</span>
+
+<span class="c1"># 查看已安装包信息</span>
+installed.packages<span class="p">()</span>
+
+<span class="c1"># 载入myPackage包</span>
+<span class="kn">library</span><span class="p">(</span>myPackage<span class="p">)</span>
+<span class="kn">require</span><span class="p">(</span>myPackage<span class="p">)</span>
+
+<span class="c1"># 查看当前载入的包</span>
+<span class="kp">search</span><span class="p">()</span>
+
+<span class="c1"># 查看启动R时自动载入的包。</span>
+<span class="kp">getOption</span><span class="p">(</span><span class="s">&#39;defaultPackages&#39;</span><span class="p">)</span>
+</pre></div>

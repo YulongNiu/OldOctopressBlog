@@ -1,0 +1,13 @@
+<div class="highlight"><pre><span class="err">–</span> <span class="k">LIKE</span><span class="err">和</span><span class="k">NOT</span> <span class="k">LIKE</span><span class="err">支持对字符串的模式匹配</span>
+<span class="err">–</span> <span class="err">“</span><span class="n">_</span><span class="err">”匹配单一一个字符</span>
+<span class="err">–</span> <span class="err">“</span><span class="o">%</span><span class="err">”匹配</span><span class="mf">0</span><span class="err">个或多个字符</span>
+<span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
+<span class="k">FROM</span> <span class="n">dataset</span>
+<span class="k">WHERE</span> <span class="n">column1</span> <span class="k">LIKE</span> <span class="err">‘</span><span class="n">F_y</span><span class="o">%</span><span class="err">’</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="k">SIMILAR</span> <span class="k">TO</span><span class="err">和</span><span class="k">NOT</span> <span class="k">SIMILAR</span> <span class="k">TO</span><span class="err">支持正则匹配</span>
+<span class="err">–</span> <span class="err">正则匹配中，仍然使用“</span><span class="n">_</span><span class="err">”和“</span><span class="o">%</span><span class="err">”</span>
+<span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
+<span class="k">FROM</span> <span class="n">dataset</span>
+<span class="k">WHERE</span> <span class="n">column1</span> <span class="k">SIMILAR</span> <span class="k">TO</span> <span class="err">‘</span><span class="p">[</span><span class="o">^</span><span class="n">JM</span><span class="p">]</span><span class="o">%</span><span class="err">’</span>
+</pre></div>

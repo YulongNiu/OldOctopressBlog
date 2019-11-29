@@ -1,0 +1,7 @@
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">rpy2.robjects.packages</span> <span class="kn">import</span> <span class="n">importr</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">importr</span><span class="p">(</span><span class="s">&#39;hwriter&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">r</span><span class="p">(</span><span class="s">&#39;hwriter:::hwrite.table(matrix(1:10, 2))&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="s">&quot;&lt;table border=</span><span class="se">\&quot;</span><span class="s">1</span><span class="se">\&quot;</span><span class="s">&gt;</span><span class="se">\n</span><span class="s">&lt;tr&gt;</span><span class="se">\n</span><span class="s">&lt;td&gt;1&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;td&gt;7&lt;/td&gt;&lt;td&gt;9&lt;/td&gt;&lt;/tr&gt;</span><span class="se">\n</span><span class="s">&lt;tr&gt;</span><span class="se">\n</span><span class="s">&lt;td&gt;2&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;6&lt;/td&gt;&lt;td&gt;8&lt;/td&gt;&lt;td&gt;10&lt;/td&gt;&lt;/tr&gt;</span><span class="se">\n</span><span class="s">&lt;/table&gt;</span><span class="se">\n</span><span class="s">&quot;</span>
+</pre></div>

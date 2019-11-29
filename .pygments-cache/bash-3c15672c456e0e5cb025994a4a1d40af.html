@@ -1,0 +1,6 @@
+<div class="highlight"><pre><span class="c"># 删除满足条件的数据</span>
+<span class="nv">$ </span>find ./ -name <span class="s1">&#39;*&#39;</span> <span class="p">|</span> xargs rm -rf 
+
+<span class="c"># 移动大数据量的文件.</span>
+<span class="nv">$ </span>find ./ -name <span class="s2">&quot;*.gif&quot;</span> <span class="p">|</span> xargs -i mv <span class="o">{}</span> /filePath/ 
+</pre></div>

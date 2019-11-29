@@ -1,0 +1,13 @@
+<div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>‘Rcpp’<span class="p">)</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+
+<span class="o">&lt;</span>p<span class="o">&gt;</span>sourceCpp<span class="p">(</span>‘TestSynchron.cpp’<span class="p">)</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+
+<span class="o">&lt;</span>p<span class="o">&gt;</span>n <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> <span class="m">10</span>
+g <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> <span class="m">1000</span>
+ecin <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> <span class="kp">sample</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="m">9</span><span class="p">,</span> g<span class="o">*</span>n<span class="p">,</span> replace <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">%&amp;gt;%</span>
+  <span class="kp">split</span><span class="p">(</span><span class="m">1</span><span class="o">:</span>g<span class="p">)</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+
+<span class="o">&lt;</span>p<span class="o">&gt;</span>ecin <span class="o">%&amp;gt;%</span> unlist <span class="o">%&amp;gt;%</span> <span class="kp">table</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+
+<span class="o">&lt;</span>p<span class="o">&gt;</span>TestShare<span class="p">(</span>ecin<span class="p">,</span> <span class="m">10</span><span class="p">)</span>
+</pre></div>

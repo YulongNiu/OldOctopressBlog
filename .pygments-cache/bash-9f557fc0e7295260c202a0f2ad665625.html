@@ -1,0 +1,25 @@
+<div class="highlight"><pre><span class="c"># 登录testdb数据库控制台</span>
+<span class="nv">$ </span>psql testdb
+
+<span class="c"># 完整登录命令</span>
+<span class="c"># -U：用户名</span>
+<span class="c"># -d：数据库</span>
+<span class="c"># -h：host，默认为local socket</span>
+<span class="c"># -p：端口</span>
+<span class="nv">$ </span>psql -U Kitty -d testdb -h /var/run/postgresql -p 5432
+
+<span class="c"># 查看PostgreSQL配制文件路径</span>
+<span class="nv">testdb</span><span class="o">=</span><span class="c"># SHOW config_file;</span>
+
+<span class="c"># 查看所有用户</span>
+<span class="nv">testdb</span><span class="o">=</span><span class="c"># \du</span>
+
+<span class="c"># 查看表格（table）</span>
+<span class="nv">testdb</span><span class="o">=</span><span class="c"># \dt</span>
+
+<span class="c"># 查看所有数据库</span>
+<span class="nv">testdb</span><span class="o">=</span><span class="c"># \l</span>
+
+<span class="c"># 退出</span>
+<span class="nv">testdb</span><span class="o">=</span><span class="c"># \q</span>
+</pre></div>

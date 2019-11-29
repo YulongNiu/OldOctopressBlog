@@ -1,0 +1,13 @@
+<div class="highlight"><pre>setClass<span class="p">(</span>Class <span class="o">=</span> <span class="s">&#39;trickVirtual&#39;</span><span class="p">,</span>
+         contains <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>id <span class="o">=</span> <span class="s">&#39;character&#39;</span><span class="p">,</span> <span class="s">&#39;VIRTUAL&#39;</span><span class="p">))</span>
+setClass<span class="p">(</span>Class <span class="o">=</span> <span class="s">&#39;trickA&#39;</span><span class="p">,</span>
+         contains <span class="o">=</span> <span class="s">&#39;trickVirtual&#39;</span><span class="p">,</span>
+         slots <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>number <span class="o">=</span> <span class="s">&#39;numeric&#39;</span><span class="p">))</span>
+setClass<span class="p">(</span>Class <span class="o">=</span> <span class="s">&#39;trickB&#39;</span><span class="p">,</span>
+         contains <span class="o">=</span> <span class="s">&#39;trickVirtual&#39;</span><span class="p">,</span>
+         slots <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>log <span class="o">=</span> <span class="s">&#39;logical&#39;</span><span class="p">))</span>
+getClass<span class="p">(</span><span class="s">&#39;trickVirtual&#39;</span><span class="p">)</span>
+
+setClass<span class="p">(</span>Class <span class="o">=</span> <span class="s">&#39;testVirtual&#39;</span><span class="p">)</span>
+getClass<span class="p">(</span><span class="s">&#39;testVirtual&#39;</span><span class="p">)</span>
+</pre></div>

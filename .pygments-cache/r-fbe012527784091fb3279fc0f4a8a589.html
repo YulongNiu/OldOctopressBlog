@@ -1,0 +1,20 @@
+<div class="highlight"><pre>adj2ftBig3 <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>adMat<span class="p">,</span> adAllRowCol<span class="p">,</span> n <span class="o">=</span> <span class="m">2</span><span class="p">){</span>
+  
+  <span class="c1"># INPUT: &#39;adMat&#39; is a matrix. &#39;adAllRowCol&#39; is the row and column combination, also a matrix.</span>
+  
+  <span class="kn">library</span><span class="p">(</span>parallel<span class="p">)</span>
+  cl <span class="o">&lt;-</span> makeCluster<span class="p">(</span>n<span class="p">,</span> type <span class="o">=</span> <span class="s">&quot;MPI&quot;</span><span class="p">)</span>
+  
+  rowNames <span class="o">&lt;-</span> <span class="kp">rownames</span><span class="p">(</span>adMat<span class="p">)</span>
+  colNames <span class="o">&lt;-</span> <span class="kp">colnames</span><span class="p">(</span>adMat<span class="p">)</span>
+    
+  adft <span class="o">&lt;-</span> parRapply<span class="p">(</span>cl <span class="o">=</span> cl<span class="p">,</span> adAllRowCol<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="p">{</span>
+    linkData <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>rowNames<span class="p">[</span>x<span class="p">[</span><span class="m">1</span><span class="p">]],</span> colNames<span class="p">[</span>x<span class="p">[</span><span class="m">2</span><span class="p">]],</span> adMat<span class="p">[</span>x<span class="p">[</span><span class="m">1</span><span class="p">],</span> x<span class="p">[</span><span class="m">2</span><span class="p">]])</span>
+    <span class="kr">return</span><span class="p">(</span>linkData<span class="p">)</span>
+  <span class="p">})</span>
+  
+  stopCluster<span class="p">(</span>cl<span class="p">)</span>
+
+  <span class="kr">return</span><span class="p">(</span>adft<span class="p">)</span>
+<span class="p">}</span>
+</pre></div>

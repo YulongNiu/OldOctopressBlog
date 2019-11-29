@@ -1,0 +1,19 @@
+<div class="highlight"><pre><span class="c"># 注意切换到指定ruby版本</span>
+<span class="c"># 克隆source分支到本地，注意替换“YulongNiu”为自己的GitHub名称</span>
+<span class="nv">$ </span>git clone -b <span class="nb">source </span>git@github.com:YulongNiu/YulongNiu.github.io.git octopress&lt;/p&gt;
+
+&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;bundle&quot;</span>&gt;安装bundle&lt;/h1&gt;
+&lt;p&gt;<span class="nv">$ </span><span class="nb">cd </span>octopress
+<span class="nv">$ </span>gem install bundler
+<span class="nv">$ </span>bundle update
+<span class="nv">$ </span>bundle install&lt;/p&gt;
+
+&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;masterdeploy&quot;</span>&gt;克隆master分支到_deploy文件夹&lt;/h1&gt;
+&lt;p&gt;<span class="nv">$ </span>mkdir _deploy
+<span class="nv">$ </span><span class="nb">cd </span>_deploy
+<span class="nv">$ </span>git init
+<span class="nv">$ </span>git remote add origin git@github.com:YulongNiu/YulongNiu.github.io.git
+<span class="nv">$ </span>git pull origin master
+<span class="nv">$ </span><span class="nb">cd</span> ..
+<span class="nv">$ </span>rake gen_deploy
+</pre></div>

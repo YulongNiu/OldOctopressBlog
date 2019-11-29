@@ -1,0 +1,19 @@
+<div class="highlight"><pre><span class="err">–</span> <span class="err">选取特定的一列或者多列</span>
+<span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
+<span class="k">FROM</span> <span class="n">dataset</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">选取全部列</span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">dataset</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">去除重复，选取一列或多列中唯一元素</span>
+<span class="err">–</span> <span class="err">如输入多列，则去除多列组合后的重复</span>
+<span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span>
+<span class="k">FROM</span> <span class="n">dataset</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">指定输出列数</span>
+<span class="err">–</span> <span class="n">a</span><span class="err">是输出行数，</span><span class="n">b</span><span class="err">是输出起始行（第一行计为</span><span class="mf">0</span><span class="err">）</span>
+<span class="k">SELECT</span> <span class="k">column</span>
+<span class="k">FROM</span> <span class="n">dataset</span>
+<span class="k">LIMIT</span> <span class="n">a</span> <span class="k">OFFSET</span> <span class="n">b</span>
+</pre></div>

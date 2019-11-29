@@ -1,0 +1,18 @@
+<div class="highlight"><pre><span class="k">union</span> <span class="n">test1</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">b</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="k">union</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">b</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="p">}</span> <span class="n">p3</span><span class="p">;</span>
+
+<span class="k">union</span> <span class="n">test1</span> <span class="n">p1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+
+<span class="cm">/* c99 */</span>
+<span class="k">union</span> <span class="n">test1</span> <span class="n">p2</span> <span class="o">=</span> <span class="p">{.</span><span class="n">b</span> <span class="o">=</span> <span class="s">&quot;world&quot;</span><span class="p">};</span>
+
+<span class="cm">/* c99 */</span>
+<span class="p">(</span><span class="k">union</span> <span class="n">test1</span><span class="p">){.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">};</span>
+</pre></div>

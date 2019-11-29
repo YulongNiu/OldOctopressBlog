@@ -1,0 +1,11 @@
+<div class="highlight"><pre><span class="c1"># 以下代码摘抄自Parallel R，其中packages</span>
+<span class="c1"># 是一个要选择加载的package列表，</span>
+<span class="c1"># 比如c(&#39;bigmemory&#39;, &#39;foreach&#39;, &#39;doMC&#39;)</span>
+worker.init <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>packages<span class="p">)</span> <span class="p">{</span>
+  <span class="kr">for</span> <span class="p">(</span>p <span class="kr">in</span> packages<span class="p">)</span> <span class="p">{</span>
+    <span class="kn">library</span><span class="p">(</span>p<span class="p">,</span> character.only<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="kc">NULL</span>
+<span class="p">}</span>
+clusterCall<span class="p">(</span>cl<span class="p">,</span> worker.init<span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;bigmemory&#39;</span><span class="p">,</span> <span class="s">&#39;foreach&#39;</span><span class="p">,</span> <span class="s">&#39;doMC&#39;</span><span class="p">))</span>
+</pre></div>

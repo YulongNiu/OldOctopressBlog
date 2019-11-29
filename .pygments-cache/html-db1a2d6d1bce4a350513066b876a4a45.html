@@ -1,0 +1,13 @@
+<div class="highlight"><pre><span class="c">&lt;!-- link open with new tab  --&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+  <span class="kd">function</span> <span class="nx">addBlankTargetForLinks</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;a[href^=&quot;http&quot;]&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="s1">&#39;_blank&#39;</span><span class="p">);</span>
+  <span class="p">});</span>
+  <span class="p">}</span><span class="nt">&lt;/script&gt;&lt;/p&gt;</span>
+
+<span class="nt">&lt;p&gt;</span>$(document).bind(‘DOMNodeInserted’, function(event) {
+  addBlankTargetForLinks();
+  });
+<span class="ni">&amp;lt;</span>/script<span class="ni">&amp;gt;</span>
+</pre></div>

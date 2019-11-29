@@ -1,0 +1,27 @@
+<div class="highlight"><pre><span class="c"># sam格式文件转换为bam格式文件</span>
+<span class="c"># 新版本samtools不用使用-S</span>
+<span class="nv">$ </span>samtools view -b samFile &gt; bamFile
+
+<span class="c"># bam格式文件转换为sam格式文件</span>
+<span class="nv">$ </span>samtools view -h bamFile &gt; samFile
+
+<span class="c"># bam格式文件转换为sorted bam格式文件，用于长期储存和后续分析</span>
+<span class="c"># 后一个‘sortedBamFilePrefix’是指需要存储文件名前缀，比如想存储“human_1.bam”，则输入“human_1”</span>
+<span class="nv">$ </span>samtools sort bamFile sortedBamFilePrefix
+
+<span class="c"># bam文件按照reads名称排序</span>
+<span class="nv">$ </span>samtools sort -n bamFile sortedBamFilePrefix
+
+<span class="c"># 直接查看bam文件</span>
+<span class="nv">$ </span>samtools view bamFile <span class="p">|</span> head -2
+
+<span class="c"># 创建bam的index文件</span>
+<span class="nv">$ </span>samtools index bamFile
+
+<span class="c"># 输出alignment数目，配合-f和-F过滤reads</span>
+<span class="nv">$ </span>samtools view -c bamFile
+
+<span class="c"># 统计bam文件map数量，可以用于评估mapping的质量。需要输入indexed的bam文件</span>
+<span class="c"># 输出结果每一列分别为参考序列名称、参考序列长度、map上的reads数目、未map上的reads数目</span>
+<span class="nv">$ </span>samtools idxstats sortedIndexedBamFile
+</pre></div>

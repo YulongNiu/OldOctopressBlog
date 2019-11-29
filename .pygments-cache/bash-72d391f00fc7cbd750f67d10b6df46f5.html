@@ -1,0 +1,26 @@
+<div class="highlight"><pre><span class="c"># 测试Docker</span>
+<span class="nv">$ </span>docker run hello-world&lt;/p&gt;
+
+&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;docker-2&quot;</span>&gt;Docker镜象列表&lt;/h1&gt;
+&lt;p&gt;<span class="nv">$ </span>docker image ls
+<span class="nv">$ </span>docker image ls –digests&lt;/p&gt;
+
+&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;docker-3&quot;</span>&gt;Docker容器列表&lt;/h1&gt;
+&lt;p&gt;<span class="nv">$ </span>docker container ls
+<span class="nv">$ </span>docker container ls –all&lt;/p&gt;
+
+&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section&quot;</span>&gt;列出容器&lt;/h1&gt;
+&lt;p&gt;<span class="nv">$ </span>docker ps
+<span class="nv">$ </span>docker ps -al&lt;/p&gt;
+
+&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-1&quot;</span>&gt;终止所有容器&lt;/h1&gt;
+&lt;p&gt;<span class="nv">$ </span>docker stop <span class="k">$(</span>docker ps -aq<span class="k">)</span>&lt;/p&gt;
+
+&lt;h1 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-2&quot;</span>&gt;删除镜像&lt;/h1&gt;
+&lt;p&gt;<span class="nv">$ </span>docker image rm myImg@sha256:xxx&lt;/p&gt;
+
+&lt;h2 <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;section-3&quot;</span>&gt;删除虚悬镜像&lt;/h2&gt;
+&lt;p&gt;<span class="nv">$ </span>docker ps -a <span class="p">|</span> grep “Exited” <span class="p">|</span> awk ‘<span class="o">{</span>print <span class="nv">$1</span> <span class="o">}</span>’<span class="p">|</span>xargs docker stop
+<span class="nv">$ </span>docker ps -a <span class="p">|</span> grep “Exited” <span class="p">|</span> awk ‘<span class="o">{</span>print <span class="nv">$1</span> <span class="o">}</span>’<span class="p">|</span>xargs docker rm
+<span class="nv">$ </span>docker images<span class="p">|</span>grep none<span class="p">|</span>awk ‘<span class="o">{</span>print <span class="nv">$3</span> <span class="o">}</span>’<span class="p">|</span>xargs docker rmi
+</pre></div>

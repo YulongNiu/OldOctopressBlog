@@ -1,0 +1,9 @@
+<div class="highlight"><pre><span class="c">## text</span>
+pprof --text src/Mypkg.so /tmp/profile.out
+
+<span class="c">## pdf</span>
+pprof --pdf src/Mypkg.so /tmp/profile.out &gt; profile.pdf
+
+<span class="c">## kcachegrind</span>
+pprof --callgrind src/Mypkg.so R/profile.out &gt; profile.res
+</pre></div>

@@ -1,0 +1,4 @@
+<div class="highlight"><pre><span class="kn">require</span><span class="p">(</span><span class="s">&#39;ggplot2&#39;</span><span class="p">)</span>
+ggplot<span class="p">(</span>data<span class="o">=</span>mpg<span class="p">,</span> mapping<span class="o">=</span>aes<span class="p">(</span>x<span class="o">=</span>cty<span class="p">,</span> y<span class="o">=</span>hwy<span class="p">,</span> colour<span class="o">=</span><span class="kp">factor</span><span class="p">(</span>year<span class="p">)))</span> <span class="o">+</span>
+geom_point<span class="p">()</span> <span class="o">+</span> stat_smooth<span class="p">()</span>
+</pre></div>

@@ -1,0 +1,18 @@
+<div class="highlight"><pre>dds <span class="o">&lt;-</span> makeExampleDESeqDataSet<span class="p">(</span>n <span class="o">=</span> <span class="m">100</span><span class="p">,</span> m <span class="o">=</span> <span class="m">12</span><span class="p">)</span>
+dds<span class="o">$</span>genotype <span class="o">&lt;-</span> <span class="kp">factor</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;I&#39;</span><span class="p">,</span> <span class="s">&#39;II&#39;</span><span class="p">),</span> each<span class="o">=</span><span class="m">3</span><span class="p">),</span> <span class="m">2</span><span class="p">))</span>
+
+<span class="c1">## condition: A vs. B</span>
+design<span class="p">(</span>dds<span class="p">)</span> <span class="o">&lt;-</span> <span class="o">~</span>condition
+ddres <span class="o">&lt;-</span> DESeq<span class="p">(</span>dds<span class="p">)</span>
+res <span class="o">&lt;-</span> results<span class="p">(</span>ddres<span class="p">,</span> contrast <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;condition&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="s">&#39;A&#39;</span><span class="p">))</span>
+
+<span class="c1">## genotype I vs. II</span>
+design<span class="p">(</span>dds<span class="p">)</span> <span class="o">&lt;-</span> <span class="o">~</span>genotype
+ddres <span class="o">&lt;-</span> DESeq<span class="p">(</span>dds<span class="p">)</span>
+res <span class="o">&lt;-</span> results<span class="p">(</span>ddres<span class="p">,</span> contrast <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;genotype&#39;</span><span class="p">,</span> <span class="s">&#39;I&#39;</span><span class="p">,</span> <span class="s">&#39;II&#39;</span><span class="p">))</span>
+
+<span class="c1">## </span>
+dds<span class="o">$</span>group <span class="o">&lt;-</span> <span class="kp">factor</span><span class="p">(</span><span class="kp">paste0</span><span class="p">(</span>dds<span class="o">$</span>genotype<span class="p">,</span> dds<span class="o">$</span>condition<span class="p">))</span>
+design<span class="p">(</span>dds<span class="p">)</span> <span class="o">&lt;-</span> <span class="o">~</span>group
+dds <span class="o">&lt;-</span> DESeq<span class="p">(</span>dds<span class="p">)</span>
+</pre></div>

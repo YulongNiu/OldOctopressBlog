@@ -1,0 +1,26 @@
+<div class="highlight"><pre><span class="err">–数学计算</span>
+<span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span> <span class="o">*</span> <span class="n">column3</span> <span class="k">AS</span> <span class="n">newName</span>
+<span class="k">FROM</span> <span class="n">dataset</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">字符串连接</span>
+<span class="k">SELECT</span> <span class="n">RTRIM</span><span class="p">(</span><span class="n">column1</span><span class="p">)</span> <span class="o">||</span> <span class="err">‘</span> <span class="p">(</span><span class="err">‘</span> <span class="o">||</span> <span class="n">RTRIM</span><span class="p">(</span><span class="n">column1</span><span class="p">)</span> <span class="o">||</span> <span class="err">‘</span><span class="p">)</span><span class="err">’</span> <span class="k">AS</span> <span class="n">newName</span>
+<span class="k">FROM</span> <span class="n">dataset</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column1</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">使用函数</span>
+<span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">UPPER</span><span class="p">(</span><span class="n">column2</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName</span>
+<span class="k">FROM</span> <span class="n">dataset</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">筛选日期</span>
+<span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">columnDate</span> 
+<span class="k">FROM</span> <span class="n">dataset</span>
+<span class="k">WHERE</span> <span class="n">DATE_PART</span><span class="p">(</span><span class="err">‘</span><span class="k">year</span><span class="err">’</span><span class="p">,</span> <span class="n">columnDate</span><span class="p">)</span> <span class="o">=</span> <span class="mf">2015</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">–</span> <span class="err">汇总数据</span>
+<span class="k">SELECT</span> <span class="n">AVG</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="n">column1</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName1</span><span class="p">,</span>
+       <span class="n">SUM</span><span class="p">(</span><span class="n">column2</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName2</span><span class="p">,</span>
+       <span class="n">MAX</span><span class="p">(</span><span class="n">column3</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName3</span><span class="p">,</span>
+       <span class="n">MIN</span><span class="p">(</span><span class="n">column4</span><span class="p">)</span> <span class="k">AS</span> <span class="n">newName4</span>
+<span class="k">FROM</span> <span class="n">Products</span> 
+<span class="k">WHERE</span> <span class="n">vend_id</span> <span class="o">=</span> <span class="err">‘</span><span class="n">DLL01</span><span class="err">’</span>
+</pre></div>

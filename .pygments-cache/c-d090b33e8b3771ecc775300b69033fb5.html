@@ -1,0 +1,26 @@
+<div class="highlight"><pre><span class="cm">/* 一维VLA */</span>
+<span class="kt">int</span> <span class="nf">oneArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">len</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">len</span><span class="p">])</span> <span class="p">{</span>
+<span class="err">…</span>
+<span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="cm">/* 一维VLA声明的各种形式 &lt;em&gt;/ </span>
+<span class="cm">int oneArrayFun(int len, int a[len]);</span>
+<span class="cm">int oneArrayFun(int len, int a[&lt;/em&gt;]);</span>
+<span class="cm">int oneArrayFun(int, int [*]);</span>
+<span class="cm">int oneArrayFun(int len, int a[]);</span>
+<span class="cm">int oneArrayFun(int, int []);&lt;/p&gt;</span>
+
+<span class="cm">&lt;p&gt;/* 实际调用 */</span>
+<span class="n">oneArrayFun</span><span class="p">(</span><span class="n">testArry</span><span class="p">,</span> <span class="n">testLen</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="cm">/* 二维VLA */</span>
+<span class="kt">int</span> <span class="n">twoArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">])</span> <span class="p">{</span>
+<span class="err">…</span>
+<span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;/*</span> <span class="err">二维</span><span class="n">VLA</span><span class="err">声明的各种形式</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;/</span> 
+<span class="kt">int</span> <span class="n">twoArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]);</span> 
+<span class="kt">int</span> <span class="nf">twoArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">][</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">]);</span> 
+<span class="kt">int</span> <span class="nf">twoArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[][</span><span class="n">col</span><span class="p">]);</span> 
+<span class="kt">int</span> <span class="nf">twoArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[][</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">]);</span> 
+</pre></div>

@@ -1,0 +1,16 @@
+<div class="highlight"><pre><span class="k">union</span> <span class="n">test</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+  <span class="k">struct</span> <span class="n">test1</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">b1</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">b2</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+  <span class="p">}</span> <span class="n">b</span><span class="p">;</span>
+  <span class="k">struct</span> <span class="n">test2</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">c1</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">c2</span><span class="p">;</span>
+  <span class="p">}</span> <span class="n">c</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">t1</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">t1</span><span class="p">.</span><span class="n">b</span><span class="p">.</span><span class="n">b1</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="cm">/* t.c.c1 is 10 */</span>
+<span class="n">printf</span><span class="p">(</span><span class="err">“</span><span class="o">%</span><span class="n">d</span> <span class="err">\</span><span class="n">n</span><span class="err">”</span><span class="p">,</span> <span class="n">t1</span><span class="p">.</span><span class="n">c</span><span class="p">.</span><span class="n">c1</span><span class="p">);</span>
+</pre></div>

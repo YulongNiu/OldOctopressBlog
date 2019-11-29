@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>R和Rcpp的性能检测 - 牛牛龙</title>
+  <meta name="author" content="Yulong Niu">
+
+  
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://yulongniu.bionutshell.org/blog/2018/10/03/profile-r-and-rcpp">
+  <link href="/favicon.ico" type="image/png" rel="icon">
+  <link href="/atom.xml" rel="alternate" title="牛牛龙" type="application/atom+xml">
+
+  <!-- http://opengraphprotocol.org/ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://yulongniu.bionutshell.org/blog/2018/10/03/profile-r-and-rcpp">
+  <meta property="og:title" content="R和Rcpp的性能检测 - 牛牛龙">
+  
+
+  <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Config({
+     tex2jax: {
+         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+         processEscapes: true,
+         extensions: ["color.js"]
+     }
+ });
+</script>
+
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Config({
+     tex2jax: {
+         skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+     }
+ });
+</script>
+
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Queue(function() {
+     var all = MathJax.Hub.getAllJax(), i;
+     for(i=0; i < all.length; i += 1) {
+         all[i].SourceElement().parentNode.className += ' has-jax';
+     }
+ });
+</script>
+
+<!-- latest mathjax -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+</script>
+
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/ ; script-src 'self' https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/ 'unsafe-eval';style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self';">
+
+<script src="/javascripts/libs/jquery/jquery-2.0.3.min.js"></script>
+
+<!--enable to choose theme in octostrap-->
+
+<link href="/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="/assets/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+
+
+
+<!-- link open with new tab  -->
+<script>
+  function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+  $(this).attr('target', '_blank');
+  });
+  }
+
+  $(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+  });
+</script>
+
+
+  
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  
+
+  
+   <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-53073828-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+  <body   >
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div id="wrap">
+      <header role="banner">
+        <nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">牛牛龙</a>
+        </div>
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a rel="index" href="/">Blog</a>
+                </li>
+                <li >
+                    <a href="/blog/archives">Archives</a>
+                </li>
+		<li >
+                  <a href="/whoami">WhoAmI</a>
+                </li>
+		<li >
+                  <a href="/link">Link</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="subscribe-rss" href="/atom.xml" title="subscribe via RSS">
+                        <span class="visible-xs">RSS</span>
+                        <img class="hidden-xs" src="/images/rss.png" alt="RSS">
+                    </a>
+                </li>
+                
+            </ul>
+            
+                <form class="search navbar-form navbar-right" action="https://www.google.com/search" method="GET">
+                    <input type="hidden" name="q" value="site:yulongniu.bionutshell.org">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="q" placeholder="Search">
+                    </div>
+                </form>
+            
+        </div>
+    </div>
+</nav>
+
+
+      </header>
+      <div id="main" role="main" class="container">
+        <div id="content">
+          <div class="row">
+  <div class="page-content col-md-9" itemscope itemtype="http://schema.org/Blog">
+    <meta itemprop="name" content="牛牛龙" />
+    
+    <meta itemprop="url" content="http://yulongniu.bionutshell.org" />
+    <article class="hentry" role="article" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+      
+  <header class="page-header">
+    
+      <p class="meta text-muted text-uppercase">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2018-10-03T13:38:37+02:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+        
+           | <a href="#disqus_thread" itemprop="discussionUrl"
+             data-disqus-identifier="http://yulongniu.bionutshell.org">Comments</a>
+        
+      </p>
+    
+    
+    <h1 class="entry-title" itemprop="name headline">
+        R和Rcpp的性能检测
+        
+    </h1>
+    
+  </header>
+
+
+<div class="entry-content clearfix" itemprop="articleBody description"><h2 id="r">1. R性能检测</h2>
+
+<p>直接使用<span style="color: blue">profvis</span>包即可，例如<a href="https://rstudio.github.io/profvis/">示例</a>。</p>
+
+<h2 id="rcpp">2. Rcpp性能检测</h2>
+
+<h3 id="section">2.1 安装依赖软件</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Pre-requested tools </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>sudo dnf install gperftools-devel google-perftools graphviz ghostscript kcachegrind
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<!--more-->
+
+<h3 id="section-1">2.2 编译</h3>
+
+<p>在包（包名称为<code>Mypkg</code>）目录<code>src</code>建立如下文件：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Profiler Rcpp code </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+</pre></td><td class="code"><pre><code class="c++"><span class="line"><span class="cp">#include &lt;Rcpp.h&gt;</span>
+</span><span class="line"><span class="cp">#include &lt;gperftools/profiler.h&gt;</span>
+</span><span class="line">
+</span><span class="line"><span class="k">using</span> <span class="k">namespace</span> <span class="n">Rcpp</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">// [[Rcpp::export]]</span>
+</span><span class="line"><span class="n">SEXP</span> <span class="nf">start_profiler</span><span class="p">(</span><span class="n">SEXP</span> <span class="n">str</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">  <span class="n">ProfilerStart</span><span class="p">(</span><span class="n">as</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">str</span><span class="p">));</span>
+</span><span class="line">  <span class="k">return</span> <span class="n">R_NilValue</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">// [[Rcpp::export]]</span>
+</span><span class="line"><span class="n">SEXP</span> <span class="nf">stop_profiler</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="line">  <span class="n">ProfilerStop</span><span class="p">();</span>
+</span><span class="line">  <span class="k">return</span> <span class="n">R_NilValue</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>包目录<code>src</code>的Makevars文件中添加<code>-lprofile</code>选项，例如<code>PKG_LIBS = $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) -lprofiler</code>。之后，安装包，并重新载入。</p>
+
+<h3 id="section-2">2.3 调试</h3>
+
+<p>使用方法为：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Profiling </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line">Mypkg<span class="o">:::</span>start_profiler<span class="p">(</span><span class="s">&quot;/tmp/profile.out&quot;</span><span class="p">)</span>
+</span><span class="line">run_cpp_codes<span class="p">()</span>
+</span><span class="line">Mypkg<span class="o">:::</span>stop_profiler<span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>查看profile结果：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Profiling results </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c">## text</span>
+</span><span class="line">pprof --text src/Mypkg.so /tmp/profile.out
+</span><span class="line">
+</span><span class="line"><span class="c">## pdf</span>
+</span><span class="line">pprof --pdf src/Mypkg.so /tmp/profile.out &gt; profile.pdf
+</span><span class="line">
+</span><span class="line"><span class="c">## kcachegrind</span>
+</span><span class="line">pprof --callgrind src/Mypkg.so R/profile.out &gt; profile.res
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="a-idrefa"><a id="Ref">参考资料</a></h3>
+
+<ul>
+  <li>
+    <p><a href="https://arxiv.org/abs/1104.3889">Introduction to High-Performance Computing with R by Dr. Dirk Eddelbuettel</a></p>
+  </li>
+  <li>
+    <p><a href="https://minimallysufficient.github.io/r%20programming%20cpp/2018/02/16/profiling-rcpp-packages.html">Profiling Rcpp packages</a></p>
+  </li>
+  <li>
+    <p><a href="https://airekans.github.io/cpp/2014/07/04/gperftools-profile">用gperftools对C/C++程序进行profile</a></p>
+  </li>
+</ul>
+
+<h3 id="section-3">更新记录</h3>
+
+<p>2018年10月4日</p>
+</div>
+
+
+      <footer>
+        <p class="meta text-muted">
+          
+  
+
+<span class="glyphicon glyphicon-user"></span> <span class="byline author vcard" itemprop="author" itemscope itemtype="http://schema.org/Person">Posted by <span class="fn" itemprop="name">Yulong Niu</span></span>
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="glyphicon glyphicon-calendar"></span> <time datetime="2018-10-03T13:38:37+02:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
+          
+
+<span class="glyphicon glyphicon-tags"></span>&nbsp;
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/r/'>r</a>
+  
+</span>
+
+
+        </p>
+        
+          <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yulongniu.bionutshell.org/blog/2018/10/03/profile-r-and-rcpp/" data-via="" data-counturl="http://yulongniu.bionutshell.org/blog/2018/10/03/profile-r-and-rcpp/" >Tweet</a>
+  
+  
+  
+</div>
+
+        
+        
+          <ul class="meta text-muted pager">
+            
+            <li class="previous"><a href="/blog/2018/07/19/rcppparallel-test/" title="Previous Post: 使用RcppParallel并行计算">&laquo; 使用RcppParallel并行计算</a></li>
+            
+            
+            <li class="next"><a href="/blog/2018/11/26/r-dplyr/" title="Next Post: R包dplyr使用集锦">R包dplyr使用集锦 &raquo;</a></li>
+            
+          </ul>
+        
+      </footer>
+    </article>
+    
+      <section>
+        <h2>Comments</h2>
+        <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+      </section>
+    
+  </div>
+
+  
+  <aside class="sidebar col-md-3">
+    
+      <section class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Recent Posts</h3>
+  </div>
+  
+  <div id="recent_posts" class="list-group">
+    
+    <a class="list-group-item " href="/blog/2019/05/04/small-changes-smooth-review/">小的改进能提升文章审稿速度</a>
+    
+    <a class="list-group-item " href="/blog/2019/04/15/deseq2-design/">DESeq2包的对比组设计</a>
+    
+    <a class="list-group-item " href="/blog/2018/11/26/r-dplyr/">R包dplyr使用集锦</a>
+    
+    <a class="list-group-item active" href="/blog/2018/10/03/profile-r-and-rcpp/">R和Rcpp的性能检测</a>
+    
+    <a class="list-group-item " href="/blog/2018/07/19/rcppparallel-test/">使用RcppParallel并行计算</a>
+    
+  </div>
+</section>
+<section class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Categories</h3>
+  </div>
+  <div class="list-group">
+    
+    
+    <a class="list-group-item " href="/blog/categories/linux/index.html">
+        <span class="badge">10</span>
+        linux
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/r/index.html">
+        <span class="badge">12</span>
+        r
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/lisp/index.html">
+        <span class="badge">6</span>
+        lisp
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/ppr/index.html">
+        <span class="badge">6</span>
+        ppr
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/bioinfor/index.html">
+        <span class="badge">24</span>
+        bioinfor
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/c/index.html">
+        <span class="badge">2</span>
+        c
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/hcj/index.html">
+        <span class="badge">1</span>
+        hcj
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/share/index.html">
+        <span class="badge">2</span>
+        share
+      </a>
+    
+    
+    <a class="list-group-item " href="/blog/categories/java/index.html">
+        <span class="badge">1</span>
+        java
+      </a>
+    
+  </div>
+</section>
+
+
+
+
+
+
+    
+  </aside>
+  
+</div>
+
+        </div>
+      </div>
+    </div>
+    <footer role="contentinfo"><div class="container">
+    <p class="text-muted credits">
+  Copyright &copy; 2019 - Yulong Niu<br>
+  <small>
+      <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>,
+      <span class="credit">customized with <a href="https://github.com/kAworu/octostrap3">octostrap3</a></span>.
+  </small>
+</p>
+
+</div>
+</footer>
+    
+
+<script type="text/javascript">
+      var disqus_shortname = 'yulongniu';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://yulongniu.bionutshell.org/blog/2018/10/03/profile-r-and-rcpp/';
+        var disqus_url = 'http://yulongniu.bionutshell.org/blog/2018/10/03/profile-r-and-rcpp/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+<script src="/assets/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/javascripts/modernizr-2.0.js"></script>
+
+
+  </body>
+</html>

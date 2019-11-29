@@ -1,0 +1,10 @@
+<div class="highlight"><pre><span class="c"># 查看帮助</span>
+<span class="nv">$ </span>htseq-count --help
+
+<span class="c"># 对bam文件按照reads名称排序</span>
+<span class="nv">$ </span>samtools sort -n accepted_filtered.bam accepted_sortname
+
+<span class="c"># 注意“=”前后无空格</span>
+<span class="nv">$ </span>htseq-count --mode<span class="o">=</span>union --stranded<span class="o">=</span>no --type<span class="o">=</span>exon --idattr<span class="o">=</span>gene_id <span class="se">\</span>
+	          --format<span class="o">=</span>bam accepted_sort.bam hg19USCS_ensembl.gtf &gt; htseqcount_accepted.hsc
+</pre></div>

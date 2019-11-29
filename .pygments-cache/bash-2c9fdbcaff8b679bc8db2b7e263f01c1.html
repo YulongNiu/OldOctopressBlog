@@ -1,0 +1,12 @@
+<div class="highlight"><pre><span class="c"># 处理双端测序结果</span>
+<span class="nv">$ </span>java -jar /path/trimmomatic-0.33.jar PE<span class="se">\</span>
+       -threads <span class="m">12</span> -phred33 -trimlog mySeq_1-trim.log <span class="se">\</span>
+       mySeq_1_1.fastq.gz mySeq_1_2.fastq.gz <span class="se">\</span>
+       mySeq_1_1-trim.fastq.gz mySeq_1_1-unpair.fastq.gz <span class="se">\</span>
+       mySeq_1_2-trim.fastq.gz mySeq_1_2-unpair.fastq.gz <span class="se">\</span>
+       ILLUMINACLIP:/path/TruSeq3-PE.fa:2:30:10 <span class="se">\</span>
+       LEADING:3 <span class="se">\</span>
+       TRAILING:3 <span class="se">\</span>
+       SLIDINGWINDOW:4:15 <span class="se">\</span>
+       MINLEN:51
+</pre></div>

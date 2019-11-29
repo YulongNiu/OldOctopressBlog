@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Bioinfor | 牛牛龙]]></title>
+  <link href="http://yulongniu.bionutshell.org/blog/categories/bioinfor/atom.xml" rel="self"/>
+  <link href="http://yulongniu.bionutshell.org/"/>
+  <updated>2019-10-31T16:39:02+01:00</updated>
+  <id>http://yulongniu.bionutshell.org/</id>
+  <author>
+    <name><![CDATA[Yulong Niu]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[DESeq2包的对比组设计]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2019/04/15/deseq2-design/"/>
+    <updated>2019-04-15T14:58:58+02:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2019/04/15/deseq2-design</id>
+    <content type="html"><![CDATA[<h2 id="section">1. 两两比对</h2>
+
+<p>组A <em>vs.</em> 组B。</p>
+
+<p>
+<code>
+DataFrame with 12 rows and 2 columns
+         condition genotype
+          &lt;factor&gt; &lt;factor&gt;
+sample1          A        I
+sample2          A        I
+sample3          A        I
+sample4          A       II
+sample5          A       II
+...            ...      ...
+sample8          B        I
+sample9          B        I
+sample10         B       II
+sample11         B       II
+sample12         B       II
+</code>
+</p>
+
+<!--more-->
+
+<p><figure class='code'><figcaption><span>pair-wise comparison </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>dds <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> makeExampleDESeqDataSet<span class="p">(</span>n <span class="o">=</span> <span class="m">100</span><span class="p">,</span> m <span class="o">=</span> <span class="m">12</span><span class="p">)</span>
+</span><span class='line'>dds<span class="o">$</span>genotype <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> <span class="kp">factor</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span>‘<span class="kp">I</span>’<span class="p">,</span> ‘II’<span class="p">),</span> each<span class="o">=</span><span class="m">3</span><span class="p">),</span> <span class="m">2</span><span class="p">))</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>h2 id<span class="o">=</span><span class="s">&quot;condition-a-vs-b&quot;</span><span class="o">&gt;</span>condition<span class="o">:</span> A vs. B<span class="o">&lt;/</span>h2<span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>design<span class="p">(</span>dds<span class="p">)</span> <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> <span class="o">~</span> condition
+</span><span class='line'>ddres <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> DESeq<span class="p">(</span>dds<span class="p">)</span>
+</span><span class='line'>res <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> results<span class="p">(</span>ddres<span class="p">,</span> contrast <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>‘condition’<span class="p">,</span> ‘B’<span class="p">,</span> ‘A’<span class="p">))</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>h2 id<span class="o">=</span><span class="s">&quot;genotype-i-vs-ii&quot;</span><span class="o">&gt;</span>genotype I vs. II<span class="o">&lt;/</span>h2<span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>design<span class="p">(</span>dds<span class="p">)</span> <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> <span class="o">~</span> genotype
+</span><span class='line'>ddres <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> DESeq<span class="p">(</span>dds<span class="p">)</span>
+</span><span class='line'>res <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> results<span class="p">(</span>ddres<span class="p">,</span> contrast <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>‘genotype’<span class="p">,</span> ‘<span class="kp">I</span>’<span class="p">,</span> ‘II’<span class="p">))</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>h2 id<span class="o">=</span><span class="s">&quot;a-vs-b-at-genotype-ii&quot;</span><span class="o">&gt;</span>A vs. B at genotype II<span class="o">&lt;/</span>h2<span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>dds<span class="o">$</span>group <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> <span class="kp">factor</span><span class="p">(</span><span class="kp">paste0</span><span class="p">(</span>dds<span class="o">$</span>genotype<span class="p">,</span> dds<span class="o">$</span>condition<span class="p">))</span>
+</span><span class='line'>design<span class="p">(</span>dds<span class="p">)</span> <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> <span class="o">~</span> group
+</span><span class='line'>ddres <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> DESeq<span class="p">(</span>dds<span class="p">)</span>
+</span><span class='line'>results<span class="p">(</span>ddres<span class="p">,</span> contrast <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>‘group’<span class="p">,</span> ‘IIB’<span class="p">,</span> ‘IIA’<span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2 id="section-1">2. 交叉项</h2>
+
+<p><figure class='code'><figcaption><span>pair-wise comparison </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>dds <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> makeExampleDESeqDataSet<span class="p">(</span>n <span class="o">=</span> <span class="m">100</span><span class="p">,</span> m <span class="o">=</span> <span class="m">12</span><span class="p">)</span>
+</span><span class='line'>dds<span class="o">$</span>genotype <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> <span class="kp">factor</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span>‘<span class="kp">I</span>’<span class="p">,</span> ‘II’<span class="p">),</span> each<span class="o">=</span><span class="m">3</span><span class="p">),</span> <span class="m">2</span><span class="p">))</span>
+</span><span class='line'>design<span class="p">(</span>dds<span class="p">)</span> <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> <span class="o">~</span> genotype <span class="o">+</span> condition <span class="o">+</span> genotype<span class="o">:</span>condition
+</span><span class='line'>ddres <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> DESeq<span class="p">(</span>dds<span class="p">)</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>h2 id<span class="o">=</span><span class="s">&quot;a-vs-b-at-genotype-i&quot;</span><span class="o">&gt;</span>A vs. B at genotype <span class="kp">I</span><span class="o">&lt;/</span>h2<span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>res <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> results<span class="p">(</span>ddres<span class="p">,</span> contrast <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>‘condition’<span class="p">,</span> ‘B’<span class="p">,</span> ‘A’<span class="p">))</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>h2 id<span class="o">=</span><span class="s">&quot;a-vs-b-at-genotype-ii-1&quot;</span><span class="o">&gt;</span>A vs. B at genotype II<span class="o">&lt;/</span>h2<span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>res <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> results<span class="p">(</span>ddres<span class="p">,</span> <span class="kt">list</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span>‘condition_B_vs_A’<span class="p">,</span> ‘genotypeII.conditionB’<span class="p">)))</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>h2 id<span class="o">=</span><span class="s">&quot;condition-effect-different-across-genotypes&quot;</span><span class="o">&gt;</span>condition effect <span class="o">&lt;</span>em<span class="o">&gt;</span>different<span class="o">&lt;/</span>em<span class="o">&gt;</span> across genotypes<span class="o">&lt;/</span>h2<span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>res <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> results<span class="p">(</span>ddres<span class="p">,</span> name <span class="o">=</span> ‘genotypeII.conditionB’<span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>其中，第二例子中的<code>A vs. B at genotype II</code>与第一个的区别是，考虑了交叉项的影响。如果只是为了两两比对，可以考虑使用第一个例子的处理方法。</p>
+
+<h3 id="a-idrefa"><a id="Ref">参考网址</a></h3>
+
+<ul>
+  <li>
+    <p><a href="http://master.bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#nested-indiv">Analyzing RNA-seq data with DESeq2</a></p>
+  </li>
+  <li>
+    <p><a href="https://support.bioconductor.org/p/64352/">Question: DESeq2 factor design vs pair-wise comparison</a></p>
+  </li>
+</ul>
+
+<h3 id="section-2">更新记录</h3>
+
+<p>2019年04月15日</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[通过RNA-Seq评估基因表达量的模型]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2018/02/17/estimate-rna-seq/"/>
+    <updated>2018-02-17T11:23:29+01:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2018/02/17/estimate-rna-seq</id>
+    <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="math/tex; mode=display">\newcommand{\tildel}{\widetilde{l_t}}</script>
+
+<script type="math/tex; mode=display">\newcommand{\P}{\mathrm{P}}</script>
+
+<script type="math/tex; mode=display">\DeclareMathOperator*{\argmax}{arg\,max}</script>
+
+<p>本文基于<a href="#Ref">参考资料1</a>，展示RNA-Seq在评估基因表达量模型的细节。</p>
+
+<h2 id="section">1. 符号表示</h2>
+
+<p>$K$个长度为$l_i$的转录序列$t_i$，构成转录本的集合$T=\{t_1, t_2, \dots, t_K\}$。单个转录组中，每个转录序列$t_i$有$c_i$个拷贝数，全部转录序列的总拷贝数为$M$。单个转录序列的相对丰度为$\rho_k=\frac{c_k}{\sum\limits_{t \in T}c_t} = \frac{c_k}{M}$，易得$\sum\limits_{k=1}^K \rho_k=1$。</p>
+
+<p>单个转录组中，全部转录片段构成集合$F=\{f_1, f_2, \dots, f_N\}$，总转录片段数目为$N=|F|$。比对到的转录序列$t_i$上的转录片段，构成集合$F_t \in F$，对应的转录片段数目为$X_t=|F_t|$。
+<!--more--></p>
+
+<h2 id="section-1">2. 简单模型</h2>
+
+<p>简单模型为：单端RNA-Seq，每一个read只比对到一个转录序列上，且每个read的长度都为定值$m$。对于转录序列$t_i$，从<code>5'</code>到<code>3'</code>一共可能比对上的read数目为$\tildel = l_i - m + 1$。建立模型的思路是：当给定一个read，它会被比对到某个转录序列的某个位置是一个随机事件。通过实际观测（即将read比对到转录序列），进而估计未知参数$\rho = \{\rho_1, \rho_2, \dots, \rho_K\}$。</p>
+
+<p>通过read序列比对，可得观测数据类似如下矩阵。每一行表示某个read是否比对到某个转录序列的某个位置，行和为1。$1$表示read比对到对应转录序列上，$0$表示没有比对到对应转录序列。</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\left[
+\begin{matrix}
+0 & 0 & \cdots & 1 \\
+0 & 0 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & 1 \\
+\end{matrix}
+\right] %]]&gt;</script>
+
+<p>对于某个read $f$，来自于转录序列$t$的概率为：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align}
+\begin{split}
+\P(f \in t) &= \frac{\rho_t M \tildel}{\sum\limits_{k=1}^{K} \rho_k M \widetilde{l_k}} \\
+&= \frac{\rho_t \tildel}{\sum\limits_{k=1}^{K} \rho_k \widetilde{l_k}} \\
+&= \alpha_t
+\end{split}
+\label{eq:1}
+\end{align} %]]&gt;</script>
+
+<p>当$f$来自于转录序列$t$时，$f$比对该转录序列某个位置的概率为：</p>
+
+<script type="math/tex; mode=display">\begin{align}
+\begin{split}
+\P(\mathrm{pos}|f \in t) = \frac{1}{\tildel}
+\end{split}
+\label{eq:2}
+\end{align}</script>
+
+<p>联合$\eqref{eq:1}$和$\eqref{eq:2}$，对于$f$来自于转录序列$t$的某个位置概率为：</p>
+
+<script type="math/tex; mode=display">\begin{align}
+\begin{split}
+\P(\mathrm{pos}, f \in t) = \frac{\alpha_t}{\tildel}
+\end{split}
+\label{eq:3}
+\end{align}</script>
+
+<p>因此，极大似然函数为：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align}
+\begin{split}
+L &= \prod_{f \in F_t} \prod_{t \in T} \frac{\alpha_t}{\tildel} \\
+&= \prod_{t \in T} \left( \frac{\alpha_t}{\tildel} \right)^{X_t} \\
+&\propto \prod_{t \in T} \alpha_t^{X_t}
+\end{split}
+\label{eq:4}
+\end{align} %]]&gt;</script>
+
+<p>在约束条件$\sum\limits_{t \in T} \alpha_t= 1$，求得极大似然估计为$\alpha_t = \frac{X_t}{N}$。有趣的是，在简单模型条件下，该极大似然估计可以来源于<a href="https://www.statlect.com/probability-distributions/multinoulli-distribution">multinoulli分布</a>。</p>
+
+<h2 id="section-2">2. 异构体模型</h2>
+
+<p>在异构体模型中，某一个read可以比对到多个转录序列上，但每一个read的长度为定值$m$。因此，可得观测数据类似如下矩阵：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\left[
+\begin{matrix}
+1 & 0 & \cdots & 1 \\
+1 & 1 & \cdots & 1 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 1 & \cdots & 1 \\
+\end{matrix}
+\right] %]]&gt;</script>
+
+<p>因此，对一个每一个read，可观测数值为是否比对到多个转录序列的某个位置，不可观测数据为该read真实来源于哪个转录序列$T=\{t_1, t_2, \dots, t_K\}$，要估计的未知参数为$\alpha=\{\alpha_1, \alpha_2, \dots, \alpha_K\}$。<a href="http://yulongniu.bionutshell.org/blog/2013/07/13/em/">EM算法</a>可以解决类似有隐变量问题。</p>
+
+<p>首先，异构体模型为：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align}
+\begin{split}
+\P(\mathrm{pos}|\alpha) &= \sum_{k=1}^{K} \P(\mathrm{pos}, f \in t_k|\alpha) \\
+&= \sum_{k = 1}^{K} y_k \frac{\alpha_k}{\widetilde{l_k}} \\
+\end{split}
+\label{eq:5}
+\end{align} %]]&gt;</script>
+
+<p>其中$y_k$是read在观测矩阵行中的第$k$个元素（$0$或$1$）。</p>
+
+<p>对于第$n$次迭代，观察$\P(f \in t_1|\mathrm{pos}, \alpha^{(n)})$：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align}
+\begin{split}
+\P(f \in t_1|\mathrm{pos}, \alpha^{(n)}) &= \frac{\P(f \in t_1, \mathrm{pos}|\alpha^{(n)})}{\sum\limits_{k=1}^{K} \P(f \in t_k, \mathrm{pos}|\alpha^{(n)})} \\
+&= \frac{\alpha_1^{(n)} \frac{y_1}{\widetilde{l_1}}}{\sum\limits_{k=1}^{K} \alpha_k^{(n)} \frac{y_k}{\widetilde{l_k}}} \\
+&= \lambda_1
+\end{split}
+\label{eq:6}
+\end{align} %]]&gt;</script>
+
+<p>根据$\eqref{eq:6}$易得，$\sum\limits_{k=1}^{K} \lambda_k = 1$。</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align}
+\begin{split}
+\alpha^{(n+1)} &= \argmax_\alpha \left( 
+\sum_{f \in F} \sum_{k=1}^{K} \lambda_k \log\left(
+\alpha_k \frac{y_k}{\widetilde{l_k}}
+\right)
+\right) \\
+&= \argmax_\alpha \left(
+\sum_{f \in F} \sum_{k=1}^{K}  \lambda_k \log\left(
+\alpha_k
+\right)
+\right)
+\end{split}
+\label{eq:7}
+\end{align} %]]&gt;</script>
+
+<p>对$\alpha_k$求偏导取极限，第$n+1$次参数估计为：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align*}
+\begin{split}
+\alpha_k^{(n+1)} &= \frac{\sum_\limits{f \in F} \lambda_k}{\sum\limits_{i=1}^{K} \sum\limits_{f \in F} \lambda_i} \\
+&= \frac{\sum\limits_{f \in F} \lambda_k}{N}
+,\ k=1, 2, \dots, K
+\end{split}
+\end{align*} %]]&gt;</script>
+
+<p>根据转换公式$\rho_t = \frac{\frac{\alpha_t}{\tildel}}{\sum\limits_{k=1}^{K} \frac{\alpha_k}{\widetilde{l_k}}}$，以上EM递推式可以转换为：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align*}
+\begin{split}
+\lambda_k^{(n+1)} &= \frac{y_k \rho_k^{(n)}}{\sum\limits_{i=1}^{K} y_i \rho_i^{(n)}} ,\ k=1, 2, \dots, K \\
+\rho_k^{(n+1)} &= \frac{\frac{\sum_\limits{f \in F} \lambda_k^{(n+1)}}{\widetilde{l_k}}}{\sum\limits_{i=1}^{K} \frac{\sum_\limits{f \in F} \lambda_i^{(n+1)}}{\widetilde{l_i}}} ,\ k=1, 2, \dots, K
+\end{split}
+\end{align*} %]]&gt;</script>
+
+<h3 id="a-idrefa"><a id="Ref">参考资料</a></h3>
+
+<ul>
+  <li>
+    <p>Lior Pachter: Models for transcript quantification from RNA-Seq. <a href="https://arxiv.org/abs/1104.3889">arXiv:1104.3889v2</a> [q-bio.GN], 2011.</p>
+  </li>
+  <li>
+    <p>Wing-Kin Sung: Algorithms for Next-Generation Sequencing. <a href="https://www.crcpress.com/Algorithms-for-Next-Generation-Sequencing/Sung/p/book/9781466565500">Chapman and Hall/CRC</a>, 2017.</p>
+  </li>
+</ul>
+
+<h3 id="section-3">更新记录</h3>
+
+<p>2019年04月19日</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Bray-Curtis Distance解释]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2017/10/24/bray-curtis-distance/"/>
+    <updated>2017-10-24T06:26:00+02:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2017/10/24/bray-curtis-distance</id>
+    <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="math/tex; mode=display">\newcommand{\sumup}[1] {\sum\limits_{i=1}^{n} #1}</script>
+
+<p>Bray-Curtis distance（BCD）的定义为：</p>
+
+<!--more-->
+
+<script type="math/tex; mode=display">\begin{align}
+\begin{split}
+BCD(X, Y) = \frac{\sumup{|x_i - y_j|}}{\sumup{x_i} + \sumup{y_i}}
+\end{split}
+\label{eq:1}
+\end{align}</script>
+
+<p>其中，$X$和$Y$分别为长度为$n$的数值向量。根据$\eqref{eq:1}$可以得出：$BCD$的取值范围为$[0, 1]$；当$X$和$Y$完全相同时，$BCD$为0；反之，$BCD$为1。</p>
+
+<p>同样，Bray-Curtis similarity（BCS）或Bray-Curtis index为：</p>
+
+<script type="math/tex; mode=display">\begin{align}
+\begin{split}
+BCS(X, Y) = 1 - BCD(X, Y)
+\end{split}
+\label{eq:2}
+\end{align}</script>
+
+<h3 id="section">参考资料</h3>
+
+<ul>
+  <li><a href="http://84.89.132.1/~michael/stanford/maeb6.pdf">Chapter 6 Measures of distance and correlation between variables</a></li>
+</ul>
+
+<h3 id="section-1">更新记录</h3>
+
+<p>2017年10月22日</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Normalized Google Distance解释]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2017/10/22/google-distance/"/>
+    <updated>2017-10-22T15:35:30+02:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2017/10/22/google-distance</id>
+    <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script type="math/tex; mode=display">\newcommand{\sumup}[1] {\sum\limits_{i=1}^{n} #1}</script>
+
+<p>本文尝试探索Normalized Google distance（简称NGD）的定义和拓展应用。</p>
+
+<h3 id="ngd">1. NGD原始定义</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Normalized_Google_distance">维基百科</a>的定义为：</p>
+
+<!--more-->
+
+<script type="math/tex; mode=display">\begin{align}
+\begin{split}
+NGD(x, y) = \frac{\max\{\log f(x), \log f(y)\} - \log f(x, y)}{\log N - \min\{\log f(x), \log f(y)\}}
+\end{split}
+\label{eq:1}
+\end{align}</script>
+
+<p>其中，$f(x)$和$f(y)$分别为关键词$x$和$y$出现的次数，$f(x,y)$为$x$和$y$同时出现的次数，$N$为全部搜索单词数目。根据$\eqref{eq:1}$可以得出：如果$x$和$y$几乎总是同时出现时，$NGD$趋近于$0$；如果$x$和$y$出现的次数很少，即$\log f(x,y)$趋近于负无穷，则$NGD$可能大于$1$。</p>
+
+<h3 id="ngd-1">2. NGD定义延伸</h3>
+
+<p>Choi and Rashid在2008年的<a href="#Ref">文章</a>提出一种针对向量的$NGD$定义：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align}
+\begin{split}
+NGD(X, Y) &= \frac{\max\left\{\sumup{x_i}, \sumup{y_i}\right\} - \sumup{\min(x_i, y_i)}}{\sumup{x_i} + \sumup{y_i} - \sumup{\min(x_i, y_i)}} \\
+&= \frac{\max\left\{\sumup{x_i}, \sumup{y_i}\right\} - \sumup{\min(x_i, y_i)}}{\max\left\{\sumup{x_i}, \sumup{y_i}\right\}}
+\end{split}
+\label{eq:2}
+\end{align} %]]&gt;</script>
+
+<p>其中，$X$和$Y$分别为长度为$n$的数值向量，$\min(x_i, y_i)$为$x_i$和$y_i$中各个元素最小值所组成的数值向量。根据$\eqref{eq:2}$可以得出：$NGD$的取值范围为$[0, 1]$；当$X$和$Y$完全相同时，$NGD$为0；反之，$NGD$为1。</p>
+
+<p>由此，可以得到normalized Google similarity（NGS）为：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align}
+\begin{split}
+NGS(X, Y) &= 1 - NGD(X, Y) \\
+&= \frac{\sumup{\min(x_i, y_i)}}{\max\left\{\sumup{x_i}, \sumup{y_i}\right\}}
+\end{split}
+\label{eq:3}
+\end{align} %]]&gt;</script>
+
+<p>一个例子：$X = (1, 2, 0, 3)$和$Y = (0, 2, 1, 1)$，则$NGD = 0.5$和$NGS = 0.5$。</p>
+
+<h3 id="a-idrefa"><a id="Ref">参考资料</a></h3>
+
+<ul>
+  <li><a href="http://ieeexplore.ieee.org/document/4631601/?reload=true">Adapting Normalized Google Similarity in Protein Sequence Comparison</a></li>
+</ul>
+
+<h3 id="section">更新记录</h3>
+
+<p>2017年10月21日</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[最大熵模型]]></title>
+    <link href="http://yulongniu.bionutshell.org/blog/2017/10/16/max-entropy/"/>
+    <updated>2017-10-16T07:16:12+02:00</updated>
+    <id>http://yulongniu.bionutshell.org/blog/2017/10/16/max-entropy</id>
+    <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<h3 id="section">1. 熵和条件熵</h3>
+
+<p>对于随机变量$X$，熵为：</p>
+
+<script type="math/tex; mode=display">\begin{align}
+\begin{split}
+H(X) = -\sum_{x \in X}p(x)\log{p(x)}
+\end{split}
+\label{eq:1}
+\end{align}</script>
+
+<!--more-->
+
+<p>其中：</p>
+
+<script type="math/tex; mode=display">\begin{align}
+\begin{split}
+\sum_{x \in X}p(x) = 1
+\end{split}
+\label{eq:2}
+\end{align}</script>
+
+<p>同样道理，对于任意随机变量$X$和$Y$，联合熵为：</p>
+
+<script type="math/tex; mode=display">\begin{align}
+\begin{split}
+H(X,Y) = -\sum_{x \in X, y \in Y}p(x,y)\log{p(x,y)}
+\end{split}
+\label{eq:3}
+\end{align}</script>
+
+<p>基于$X$的$Y$的熵为条件熵：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align}
+\begin{split}
+H(Y|X) &= H(X, Y) - H(X) \\
+&= -\sum_{x \in X, y \in Y}p(x,y)\log{p(x,y)} + \sum_{x \in X}p(x)\log{p(x)} \\
+&= -\sum_{x \in X, y \in Y}p(x,y)\log{p(x,y)} + \sum_{x \in X, y \in Y}p(x, y)\log{p(x)} \\
+&= -\sum_{x \in X, y \in Y}p(x, y)\log \frac{p(x, y)}{p(x)}
+\end{split}
+\label{eq:4}
+\end{align} %]]&gt;</script>
+
+<h3 id="section-1">2. 最大熵原理简介</h3>
+
+<p>最大熵原理可以表述为，在满足$k+1$个约束条件的模型集合中，选取熵$H(p)$最大的模型。约束条件为：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align}
+\begin{split}
+\sum_{x}p(x) &= 1 \\
+\sum_{x}p(x)f_1(x) &= \tau_1 \\
+\vdots \\
+\sum_{x}p(x)f_k(x) &= \tau_k
+\end{split}
+\label{eq:5}
+\end{align} %]]&gt;</script>
+
+<p>使用拉格朗日乘子法求解带上述有约束的极值，即：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align*}
+\begin{split}
+L(p) = -\sum_{x}p(x)\log{p(x)} &+ \\
+\lambda_0(\sum_{x}p(x) - 1) &+ \\
+\lambda_1(\sum_{x}p(x)f_1(x) - \tau_1) &+ \\
+\cdots &+\\
+\lambda_k(\sum_{x}p(x)f_1(x) - \tau_k)
+\end{split}
+\end{align*} %]]&gt;</script>
+
+<p>$L(p)$对每一个$p(x)$偏导数$\frac{\partial L(p)}{\partial p(x)}$为0，即：</p>
+
+<script type="math/tex; mode=display">-\log{p(x)} - 1 + \lambda_0 + \sum_{j=1}^{k}\lambda_j f_j(x) = 0</script>
+
+<p>解得</p>
+
+<script type="math/tex; mode=display">p(x) = \frac{\exp\left(\sum\limits_{j=1}^{k}\lambda_j f_j(x)\right)}{\exp(1 - \lambda_0)}</script>
+
+<p>由约束条件$\sum\limits_x p(x)=1$得：</p>
+
+<script type="math/tex; mode=display">\begin{align}
+p(x) = \frac{1}{Z}\exp\left(\sum\limits_{j=1}^{k}\lambda_j f_j(x)\right)
+\label{eq:6}
+\end{align}</script>
+
+<p>其中</p>
+
+<script type="math/tex; mode=display">\begin{align}
+Z = \sum\limits_x \exp\left(\sum\limits_{j=1}^{k}\lambda_j f_j(x)\right)
+\label{eq:7}
+\end{align}</script>
+
+<p>将$\eqref{eq:3}$带入约束条件$\eqref{eq:2}$中，即可解得$\lambda_j$。</p>
+
+<h3 id="section-2">3. 最大熵应用例子</h3>
+
+<p>根据参考资料2的例子，应用最大熵模型。例子简述为：</p>
+
+<blockquote>
+  <p>三种食物的售价分别为1、2和3元，平均一餐花费1.75元。</p>
+
+  <p>估算每种食物被购买的概率。</p>
+</blockquote>
+
+<p>建立最大熵模型：</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align*}
+\begin{split}
+max \quad & H(p) = \sum_{x}p(x) \log p(x) \\
+s.t. \quad & \sum_{x}p(x)x = 1.75 \\
+\quad & \sum_{x}p(x) = 1
+\end{split}
+\end{align*} %]]&gt;</script>
+
+<p>解方程得：$p(x_1) = 0.466$、 $p(x_2) = 0.318$、$p(x_3) = 0.216$</p>
+
+<h3 id="section-3">参考资料</h3>
+
+<ul>
+  <li>
+    <p><a href="https://www.cs.cmu.edu/afs/cs/user/aberger/www/html/tutorial/tutorial.html">A Brief Maxent Tutorial</a></p>
+  </li>
+  <li>
+    <p><a href="http://www-mtl.mit.edu/Courses/6.050/2003/notes/chapter9.pdf">Chapter 9 Principle of Maximum Entropy: Simple Form</a></p>
+  </li>
+  <li>
+    <p><a href="http://spaces.ac.cn/archives/3552/">“熵”不起：从熵、最大熵原理到最大熵模型</a></p>
+  </li>
+</ul>
+
+<h3 id="section-4">更新记录</h3>
+
+<p>2017年7月15日</p>
+
+]]></content>
+  </entry>
+  
+</feed>

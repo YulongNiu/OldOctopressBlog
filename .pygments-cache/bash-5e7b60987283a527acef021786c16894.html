@@ -1,0 +1,12 @@
+<div class="highlight"><pre><span class="c"># 建立一系列FASTA文件目录</span>
+<span class="nv">$ </span>bowtie2-build /filePath/genomeFastaFile indexName
+
+<span class="c"># 从已经index文件中提取原始基因组</span>
+<span class="nv">$ </span>bowtie2-inspect indexName &gt; genomeFastaFile
+
+<span class="c"># unpaired序列比对</span>
+<span class="nv">$ </span>bowtie2 -p <span class="m">4</span> -x indexName -U readFiles -S samFileName
+
+<span class="c"># paired序列比对</span>
+<span class="nv">$ </span>bowtie2 -p <span class="m">4</span> -x indexName  -1 readFiles1 -2 readFiles2 -S eg2.sam
+</pre></div>

@@ -1,0 +1,26 @@
+<div class="highlight"><pre><span class="cm">/* 一维VLA */</span>
+<span class="kt">int</span> <span class="nf">oneArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">len</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">len</span><span class="p">])</span> <span class="p">{</span>
+<span class="p">...</span>
+<span class="p">}</span>
+
+<span class="cm">/* 一维VLA声明的各种形式 */</span> 
+<span class="kt">int</span> <span class="nf">oneArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">len</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">len</span><span class="p">]);</span>
+<span class="kt">int</span> <span class="nf">oneArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">len</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="o">*</span><span class="p">]);</span>
+<span class="kt">int</span> <span class="nf">oneArrayFun</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span> <span class="p">[</span><span class="o">*</span><span class="p">]);</span>
+<span class="kt">int</span> <span class="nf">oneArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">len</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[]);</span>
+<span class="kt">int</span> <span class="nf">oneArrayFun</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span> <span class="p">[]);</span>
+
+<span class="cm">/* 实际调用 */</span>
+<span class="n">oneArrayFun</span><span class="p">(</span><span class="n">testArry</span><span class="p">,</span> <span class="n">testLen</span><span class="p">);</span>
+
+<span class="cm">/* 二维VLA */</span>
+<span class="kt">int</span> <span class="nf">twoArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">])</span> <span class="p">{</span>
+<span class="p">...</span>
+<span class="p">}</span>
+
+<span class="cm">/* 二维VLA声明的各种形式 */</span> 
+<span class="kt">int</span> <span class="nf">twoArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]);</span> 
+<span class="kt">int</span> <span class="nf">twoArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="o">*</span><span class="p">][</span><span class="o">*</span><span class="p">]);</span> 
+<span class="kt">int</span> <span class="nf">twoArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[][</span><span class="n">col</span><span class="p">]);</span> 
+<span class="kt">int</span> <span class="nf">twoArrayFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[][</span><span class="o">*</span><span class="p">]);</span> 
+</pre></div>

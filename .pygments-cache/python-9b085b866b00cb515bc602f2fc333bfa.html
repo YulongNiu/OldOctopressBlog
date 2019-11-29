@@ -1,0 +1,24 @@
+<div class="highlight"><pre><span class="c"># import r</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">rpy2.robjects</span> <span class="kn">import</span> <span class="n">r</span>
+
+<span class="c"># creat an R function</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">r</span><span class="p">(</span><span class="s">&#39;&#39;&#39;f &lt;- function(r){pi * r}&#39;&#39;&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="p">[</span><span class="mf">9.424778</span><span class="p">]</span>
+
+<span class="c"># internal function in R</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">r</span><span class="p">[</span><span class="s">&#39;ls&#39;</span><span class="p">]()</span>
+
+<span class="c"># two ways of getting &#39;paste&#39; function in R</span>
+<span class="c"># first: direct use R function</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s">&#39;paste&#39;</span><span class="p">](</span><span class="n">l</span><span class="p">,</span> <span class="n">collapse</span> <span class="o">=</span> <span class="s">&#39;-&#39;</span><span class="p">))</span>
+<span class="c"># second: eavl R codes</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">coder</span> <span class="o">=</span> <span class="s">&#39;paste(</span><span class="si">%s</span><span class="s">, collapse = &quot;-&quot;)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">r_repr</span><span class="p">())</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">(</span><span class="n">coder</span><span class="p">))</span>
+
+<span class="c"># call Python function</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">l</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s">&#39;letters&#39;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="mi">26</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">dir</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</pre></div>

@@ -1,0 +1,13 @@
+<div class="highlight"><pre><span class="n">arma</span><span class="o">::</span><span class="n">mat</span> <span class="n">TestMat</span><span class="p">(</span><span class="n">arma</span><span class="o">::</span><span class="n">mat</span> <span class="n">M</span><span class="p">,</span> <span class="kt">double</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">M</span><span class="p">.</span><span class="n">for_each</span><span class="p">(</span><span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s">&quot;mat::elem_type&amp;amp; val&quot;</span><span class="o">&gt;</span><span class="n">a</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="p">{</span>
+      <span class="n">val</span> <span class="o">=</span> <span class="n">val</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="mi">0</span> <span class="o">?</span> <span class="nl">val</span> <span class="p">:</span> <span class="n">a</span><span class="p">;</span>
+    <span class="p">});</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">M</span><span class="p">.</span><span class="n">each_row</span><span class="p">(</span><span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s">&quot;rowvec&amp;amp; r&quot;</span><span class="o">&gt;&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="p">{</span>
+      <span class="n">r</span> <span class="o">/=</span> <span class="n">r</span><span class="p">.</span><span class="n">max</span><span class="p">();</span>
+    <span class="p">});</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">return</span> <span class="n">M</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>

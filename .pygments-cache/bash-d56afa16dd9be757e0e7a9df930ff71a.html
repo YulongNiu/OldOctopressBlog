@@ -1,0 +1,13 @@
+<div class="highlight"><pre><span class="c"># 查询CPU信息</span>
+<span class="nv">$ </span>lscpu
+
+<span class="c"># 物理CPU个数</span>
+<span class="nv">$ </span>grep <span class="s1">&#39;physical id&#39;</span> /proc/cpuinfo <span class="p">|</span> sort -u <span class="p">|</span> wc -l
+
+<span class="c"># 核心个数</span>
+<span class="nv">$ </span>grep <span class="s1">&#39;core id&#39;</span> /proc/cpuinfo <span class="p">|</span> sort -u <span class="p">|</span> wc -l
+
+<span class="c"># 线程个数</span>
+<span class="nv">$ </span>grep <span class="s1">&#39;processor&#39;</span> /proc/cpuinfo <span class="p">|</span> sort -u <span class="p">|</span> wc -l
+<span class="nv">$ </span>nproc
+</pre></div>

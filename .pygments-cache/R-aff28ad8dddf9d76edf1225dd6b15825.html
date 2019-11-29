@@ -1,0 +1,38 @@
+<div class="highlight"><pre>t2 <span class="o">&lt;-</span> new<span class="p">(</span><span class="s">&#39;trick&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">LETTERS</span><span class="p">[</span><span class="m">3</span><span class="o">:</span><span class="m">1</span><span class="p">],</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">9</span><span class="o">:</span><span class="m">1</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">3</span><span class="p">))</span>
+tn2 <span class="o">&lt;-</span> new<span class="p">(</span><span class="s">&#39;trickNum&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">LETTERS</span><span class="p">[</span><span class="m">3</span><span class="o">:</span><span class="m">1</span><span class="p">],</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">10</span><span class="o">:</span><span class="m">2</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">3</span><span class="p">),</span> number <span class="o">=</span> <span class="m">5</span><span class="o">:</span><span class="m">6</span><span class="p">)</span>
+
+as<span class="p">(</span>tn2<span class="p">,</span> <span class="s">&#39;trick&#39;</span><span class="p">)</span>
+as<span class="p">(</span>t2<span class="p">,</span> <span class="s">&#39;trickNum&#39;</span><span class="p">)</span>
+
+as<span class="p">(</span>tn2<span class="p">,</span> <span class="s">&#39;trick&#39;</span><span class="p">)</span> <span class="o">&lt;-</span> tn1
+as<span class="p">(</span>tn2<span class="p">,</span> <span class="s">&#39;trick&#39;</span><span class="p">)</span> <span class="o">&lt;-</span> t2
+<span class="kp">try</span><span class="p">(</span>as<span class="p">(</span>t2<span class="p">,</span> <span class="s">&#39;trickNum&#39;</span><span class="p">)</span> <span class="o">&lt;-</span> tn1<span class="p">)</span>
+<span class="kp">try</span><span class="p">(</span>as<span class="p">(</span>t2<span class="p">,</span> <span class="s">&#39;trickNum&#39;</span><span class="p">)</span> <span class="o">&lt;-</span> t1<span class="p">)</span>
+
+setClass<span class="p">(</span>Class <span class="o">=</span> <span class="s">&#39;trickNumMat&#39;</span><span class="p">,</span>
+         slots <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>number <span class="o">=</span> <span class="s">&#39;matrix&#39;</span><span class="p">,</span>
+                   id <span class="o">=</span> <span class="s">&#39;character&#39;</span><span class="p">,</span>
+                   time <span class="o">=</span> <span class="s">&#39;matrix&#39;</span><span class="p">))</span>
+setIs<span class="p">(</span>class1 <span class="o">=</span> <span class="s">&#39;trickNum&#39;</span><span class="p">,</span>
+      class2 <span class="o">=</span> <span class="s">&#39;trickNumMat&#39;</span><span class="p">,</span>
+      coerce <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>from<span class="p">)</span> <span class="p">{</span>
+        toObj <span class="o">&lt;-</span> new<span class="p">(</span><span class="s">&#39;trickNumMat&#39;</span><span class="p">,</span>
+                     number <span class="o">=</span> <span class="kp">as.matrix</span><span class="p">(</span>from<span class="o">@</span>number<span class="p">),</span>
+                     id <span class="o">=</span> from<span class="o">@</span>id<span class="p">,</span>
+                     time <span class="o">=</span> from<span class="o">@</span>time<span class="p">)</span>
+        <span class="kr">return</span><span class="p">(</span>toObj<span class="p">)</span>
+      <span class="p">},</span>
+      replace <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>from<span class="p">,</span> value<span class="p">)</span> <span class="p">{</span>
+        from<span class="o">@</span>number <span class="o">=</span> <span class="kp">as.numeric</span><span class="p">(</span>value<span class="o">@</span>number<span class="p">)</span>
+        from<span class="o">@</span>id <span class="o">=</span> value<span class="o">@</span>id
+        from<span class="o">@</span>time <span class="o">=</span> value<span class="o">@</span>time
+
+        <span class="kr">return</span><span class="p">(</span>from<span class="p">)</span>
+      <span class="p">})</span>
+as<span class="p">(</span>tn1<span class="p">,</span> <span class="s">&#39;trickNumMat&#39;</span><span class="p">)</span>
+tnm1 <span class="o">&lt;-</span> new<span class="p">(</span><span class="s">&#39;trickNumMat&#39;</span><span class="p">,</span>
+            number <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span>rnorm<span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">),</span> nrow <span class="o">=</span> <span class="m">3</span><span class="p">),</span>
+            id <span class="o">=</span> <span class="kc">LETTERS</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span>
+            time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">3</span><span class="p">))</span>
+as<span class="p">(</span>tn1<span class="p">,</span> <span class="s">&#39;trickNumMat&#39;</span><span class="p">)</span> <span class="o">&lt;-</span> tnm1
+</pre></div>

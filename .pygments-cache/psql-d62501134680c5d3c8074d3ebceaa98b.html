@@ -1,0 +1,18 @@
+<div class="highlight"><pre><span class="c1">-- 按照一列或者多列升序排序</span>
+<span class="c1">-- 可以按照“不查询”的列排序</span>
+<span class="c1">-- 先按照column2排，再按照column5排</span>
+<span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span><span class="p">,</span> <span class="n">column3</span>
+<span class="k">FROM</span> <span class="n">dataset</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column2</span><span class="p">,</span> <span class="n">column5</span>
+
+<span class="c1">-- 降序</span>
+<span class="c1">-- DESC只作用于最靠近的唯一一列，即column2，不作用于column5</span>
+<span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span><span class="p">,</span> <span class="n">column3</span>
+<span class="k">FROM</span> <span class="n">dataset</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column2</span> <span class="k">DESC</span><span class="p">,</span> <span class="n">column5</span>
+
+<span class="c1">--使用查询列相对编号</span>
+<span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span><span class="p">,</span> <span class="n">column3</span>
+<span class="k">FROM</span> <span class="n">dataset</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="mf">2</span><span class="p">,</span> <span class="n">column5</span>
+</pre></div>

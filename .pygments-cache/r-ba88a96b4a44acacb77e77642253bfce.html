@@ -1,0 +1,10 @@
+<div class="highlight"><pre><span class="o">&gt;</span> test1 <span class="o">&lt;-</span> <span class="kp">rep</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">),</span> <span class="kt">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">))</span>
+<span class="o">&gt;</span> test1
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;a&quot;</span> <span class="s">&quot;a&quot;</span> <span class="s">&quot;a&quot;</span> <span class="s">&quot;b&quot;</span> <span class="s">&quot;b&quot;</span> <span class="s">&quot;b&quot;</span> <span class="s">&quot;b&quot;</span>
+<span class="o">&gt;</span> <span class="kp">split</span><span class="p">(</span>test1<span class="p">,</span> <span class="kp">factor</span><span class="p">(</span>test1<span class="p">))</span>
+<span class="o">$</span>a
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;a&quot;</span> <span class="s">&quot;a&quot;</span> <span class="s">&quot;a&quot;</span>
+
+<span class="o">$</span>b
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;b&quot;</span> <span class="s">&quot;b&quot;</span> <span class="s">&quot;b&quot;</span> <span class="s">&quot;b&quot;</span>
+</pre></div>

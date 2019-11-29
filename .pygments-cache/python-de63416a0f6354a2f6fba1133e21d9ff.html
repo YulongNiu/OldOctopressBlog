@@ -1,0 +1,13 @@
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">rpy2.robjects</span> <span class="kn">import</span> <span class="n">r</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">rpy2.robjects.vectors</span> <span class="kn">import</span> <span class="n">StrVector</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">rpy2.robjects</span> <span class="kn">import</span> <span class="n">globalenv</span><span class="p">,</span> <span class="n">NA_Character</span>
+
+<span class="c"># test string NA</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">testNA</span> <span class="o">=</span> <span class="n">StrVector</span><span class="p">([</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">testNA</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">NA_Character</span>
+
+<span class="c"># test global objects</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">testGlobal</span> <span class="o">=</span> <span class="n">StrVector</span><span class="p">([</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">globalenv</span><span class="p">[</span><span class="s">&#39;testGlobal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">testGlobal</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">connectVec</span> <span class="o">=</span> <span class="n">r</span><span class="p">(</span><span class="s">&quot;paste(testGlobal, collapse = &#39;-&#39;)&quot;</span><span class="p">)</span>
+</pre></div>

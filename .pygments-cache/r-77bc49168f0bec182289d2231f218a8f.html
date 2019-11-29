@@ -1,0 +1,43 @@
+<div class="highlight"><pre><span class="c1"># 查看&quot;myPackage&quot;中的所有对象</span>
+<span class="kp">ls</span><span class="p">(</span><span class="s">&#39;package:myPackage&#39;</span><span class="p">)</span>
+
+<span class="c1"># 查看函数的参数</span>
+<span class="kp">args</span><span class="p">(</span>myFunction<span class="p">)</span>
+
+<span class="c1"># 自动运行该函数帮助文档中的例子</span>
+example<span class="p">(</span>myFunction<span class="p">)</span>
+
+<span class="c1"># 查看某个对象的模式（mode）</span>
+<span class="kp">mode</span><span class="p">(</span>myObject<span class="p">)</span>
+
+<span class="c1"># 查看某个对象的属性（attribute）</span>
+<span class="kp">attributes</span><span class="p">(</span>myObject<span class="p">)</span>
+
+<span class="c1"># 快速查看某个对象的信息</span>
+<span class="c1"># 尤其适用于对象有很多行/列</span>
+str<span class="p">(</span>myObject<span class="p">)</span>
+
+<span class="c1"># 查看某个对象的类</span>
+<span class="kp">class</span><span class="p">(</span>myObject<span class="p">)</span>
+
+<span class="c1"># 查询某个中某个类的帮助信息，举例如下</span>
+<span class="kp">class</span><span class="o">?</span>graph<span class="o">::</span>graph
+
+<span class="c1"># 查看某个S3泛型函数中所有的方法或者一个类中所有的方法（S3：S version 3）</span>
+methods<span class="p">(</span><span class="s">&#39;myMethods&#39;</span><span class="p">)</span>
+
+<span class="c1"># 查看S4类的方法</span>
+showMethods<span class="p">(</span>class <span class="o">=</span> <span class="s">&#39;myClass&#39;</span><span class="p">)</span>
+
+<span class="c1"># 查看某个类或者包的具体内容</span>
+getClass<span class="p">(</span><span class="s">&#39;class/package&#39;</span><span class="p">)</span>
+
+<span class="c1"># 查看某个类的slot</span>
+getSlots<span class="p">(</span><span class="s">&#39;class&#39;</span><span class="p">)</span>
+
+<span class="c1"># 查看某个对象的slot</span>
+slotNames<span class="p">(</span>myObject<span class="p">)</span>
+
+<span class="c1"># 访问对象的slot值使用@，可以连续用</span>
+Myobject<span class="o">@</span>slotNames
+</pre></div>

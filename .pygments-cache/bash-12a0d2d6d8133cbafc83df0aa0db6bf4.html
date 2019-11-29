@@ -1,0 +1,19 @@
+<div class="highlight"><pre>tmp1 &lt;- runif<span class="o">(</span>10e6<span class="o">)</span>
+
+all.equal<span class="o">(</span>SqrtCpp<span class="o">(</span>tmp1<span class="o">)</span>,
+          sqrt<span class="o">(</span>tmp1<span class="o">)</span>,
+          SqrtCppPara<span class="o">(</span>tmp1<span class="o">))</span>
+
+<span class="c">## TRUE</span>
+
+microbenchmark<span class="o">(</span>
+  SqrtCpp<span class="o">(</span>tmp1<span class="o">)</span>,
+  sqrt<span class="o">(</span>tmp1<span class="o">)</span>,
+  SqrtCppPara<span class="o">(</span>tmp1<span class="o">))</span>
+  
+<span class="c">## Unit: milliseconds</span>
+<span class="c">##               expr      min       lq     mean   median       uq       max neval</span>
+<span class="c">##      SqrtCpp(tmp1) 76.68263 78.55146 82.51442 79.48709 87.03026 100.56873   100</span>
+<span class="c">##         sqrt(tmp1) 52.19705 53.67441 58.16940 54.60512 66.67642  70.94672   100</span>
+<span class="c">##  SqrtCppPara(tmp1) 37.10116 38.34199 42.23896 39.17889 42.98785  61.94529   100</span>
+</pre></div>

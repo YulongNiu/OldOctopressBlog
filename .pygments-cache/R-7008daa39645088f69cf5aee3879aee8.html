@@ -1,0 +1,51 @@
+<div class="highlight"><pre><span class="c1">## first initialize can not be correctly inherited</span>
+setMethod<span class="p">(</span>f <span class="o">=</span> <span class="s">&#39;initialize&#39;</span><span class="p">,</span>
+          signature <span class="o">=</span> <span class="s">&#39;trick&#39;</span><span class="p">,</span>
+          definition <span class="o">=</span> <span class="kr">function</span><span class="p">(</span><span class="m">.</span>Object<span class="p">,</span> id <span class="o">=</span> <span class="kt">character</span><span class="p">(),</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span> <span class="p">{</span>
+
+            colNum <span class="o">&lt;-</span> <span class="kp">ncol</span><span class="p">(</span>time<span class="p">)</span>
+            <span class="kr">if</span> <span class="p">(</span>colNum <span class="o">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+              <span class="kp">colnames</span><span class="p">(</span>time<span class="p">)</span> <span class="o">&lt;-</span> <span class="kp">paste0</span><span class="p">(</span><span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span>colNum<span class="p">],</span> <span class="m">1</span><span class="o">:</span>colNum<span class="p">)</span>
+            <span class="p">}</span> <span class="kr">else</span> <span class="p">{}</span>
+
+            <span class="m">.</span>Object<span class="o">@</span>id <span class="o">&lt;-</span> id
+            <span class="m">.</span>Object<span class="o">@</span>time <span class="o">&lt;-</span> time
+
+            <span class="kr">return</span><span class="p">(</span><span class="m">.</span>Object<span class="p">)</span>
+          <span class="p">})</span>
+t1 <span class="o">&lt;-</span> new<span class="p">(</span><span class="s">&#39;trick&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">3</span><span class="p">))</span>
+<span class="kp">try</span><span class="p">(</span>new<span class="p">(</span><span class="s">&#39;trickNum&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">3</span><span class="p">),</span> number <span class="o">=</span> <span class="m">5</span><span class="o">:</span><span class="m">6</span><span class="p">))</span>
+
+<span class="c1">## second initialize can not be correctly inherited</span>
+setMethod<span class="p">(</span>f <span class="o">=</span> <span class="s">&#39;initialize&#39;</span><span class="p">,</span>
+          signature <span class="o">=</span> <span class="s">&#39;trick&#39;</span><span class="p">,</span>
+          definition <span class="o">=</span> <span class="kr">function</span><span class="p">(</span><span class="m">.</span>Object<span class="p">,</span> <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
+
+            colNum <span class="o">&lt;-</span> <span class="kp">ncol</span><span class="p">(</span><span class="m">.</span>Object<span class="o">@</span>time<span class="p">)</span>
+            <span class="kr">if</span> <span class="p">(</span>colNum <span class="o">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+              <span class="kp">colnames</span><span class="p">(</span><span class="m">.</span>Object<span class="o">@</span>time<span class="p">)</span> <span class="o">&lt;-</span> <span class="kp">paste0</span><span class="p">(</span><span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span>colNum<span class="p">],</span> <span class="m">1</span><span class="o">:</span>colNum<span class="p">)</span>
+            <span class="p">}</span> <span class="kr">else</span> <span class="p">{}</span>
+
+            <span class="kr">return</span><span class="p">(</span><span class="m">.</span>Object<span class="p">)</span>
+          <span class="p">})</span>
+<span class="kp">try</span><span class="p">(</span>new<span class="p">(</span><span class="s">&#39;trick&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">3</span><span class="p">)))</span>
+<span class="c1">## not as expected, all slots are empty</span>
+<span class="kp">try</span><span class="p">(</span>new<span class="p">(</span><span class="s">&#39;trickNum&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">3</span><span class="p">),</span> number <span class="o">=</span> <span class="m">5</span><span class="o">:</span><span class="m">6</span><span class="p">))</span>
+
+<span class="c1">## third initialize using callNextMethod() works well</span>
+setMethod<span class="p">(</span>f <span class="o">=</span> <span class="s">&#39;initialize&#39;</span><span class="p">,</span>
+          signature <span class="o">=</span> <span class="s">&#39;trick&#39;</span><span class="p">,</span>
+          definition <span class="o">=</span> <span class="kr">function</span><span class="p">(</span><span class="m">.</span>Object<span class="p">,</span> <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="m">.</span>Object <span class="o">&lt;-</span> callNextMethod<span class="p">()</span>
+
+            colNum <span class="o">&lt;-</span> <span class="kp">ncol</span><span class="p">(</span><span class="m">.</span>Object<span class="o">@</span>time<span class="p">)</span>
+            <span class="kr">if</span> <span class="p">(</span>colNum <span class="o">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+              <span class="kp">colnames</span><span class="p">(</span><span class="m">.</span>Object<span class="o">@</span>time<span class="p">)</span> <span class="o">&lt;-</span> <span class="kp">paste0</span><span class="p">(</span><span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span>colNum<span class="p">],</span> <span class="m">1</span><span class="o">:</span>colNum<span class="p">)</span>
+            <span class="p">}</span> <span class="kr">else</span> <span class="p">{}</span>
+
+            <span class="kr">return</span><span class="p">(</span><span class="m">.</span>Object<span class="p">)</span>
+          <span class="p">})</span>
+t1 <span class="o">&lt;-</span> new<span class="p">(</span><span class="s">&#39;trick&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">3</span><span class="p">))</span>
+tn1 <span class="o">&lt;-</span> new<span class="p">(</span><span class="s">&#39;trickNum&#39;</span><span class="p">,</span> id <span class="o">=</span> <span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> time <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">,</span> ncol <span class="o">=</span> <span class="m">3</span><span class="p">),</span> number <span class="o">=</span> <span class="m">5</span><span class="o">:</span><span class="m">6</span><span class="p">)</span>
+</pre></div>

@@ -1,0 +1,30 @@
+<div class="highlight"><pre><span class="c"># Fastq文件前几行</span>
+<span class="nv">$ </span>head mySeq_1_1.fastq
+@HISEQ2000-06:325:C2RC0ACXX:5:1101:1217:2215 1:N:0:TGCCGGCT
+GGCACAGTCCATGCTTTTAACCAGATTTGAACAGAAGAATGGCCACTTGNNNNNNGTAGNNNNNNANNNNGNNNTNNNTNNCATGTGTCACATAACTACC
++
+@C@FFFFDFFHHHGFFIIBEGHJIFHIIGCGIJJIJIJJIJIJJIIIGI######-.&lt;B######-####,###,###<span class="o">(</span><span class="c">##,,5&lt;?CDDDDCCDDDCDDD</span>
+@HISEQ2000-06:325:C2RC0ACXX:5:1101:1621:2040 1:N:0:TGCCGGCT
+NGGTGACCTTCTCCCGCCAGAAGCCAAAAACTGCAGCCTACTTTTCTGAAGTGGTTATCTTGGGACTGAGGTATGGGCTATCTTGGGCTGTTTCCTATTT
++
+<span class="c">#1==D;ADBHDFDHFHGGIIB;FFHIIGGGIGADEGEIIAHEEHIGHH==C8BGC;=FCDHICHCAAC&gt;CE..;A&gt;AC?9@CCCCCBBCB?CCCCCCCCC</span>
+@HISEQ2000-06:325:C2RC0ACXX:5:1101:1663:2146 1:N:0:TGCCGGCT
+AGAGCCAAATATTTCAACAAAACTGCAGTTTAATTTCAGAAAATGTTAAAATATATATTTATACATCAATTTCTGACATACACTTAATGTGTTAGTATAC
+
+<span class="c"># 统计fastq文件中的reads数量</span>
+<span class="nv">$ </span>awk <span class="s1">&#39;END{print NR/4}&#39;</span> mySeq_1_1.fastq
+
+<span class="c"># 查看fastq.gz文件</span>
+<span class="nv">$ </span>zcat mySeq_1_1.fastq.gz
+
+<span class="c"># 统计fastq.gz文件reads数量</span>
+<span class="c"># 以下两种方法等价</span>
+<span class="nv">$ </span>zcat mySeq_1_1.fastq.gz <span class="p">|</span> awk <span class="s1">&#39;END{print NR/4}&#39;</span>
+<span class="nv">$ </span>zcat mySeq_1_1.fastq.gz <span class="p">|</span> <span class="nb">echo</span> <span class="k">$((</span><span class="sb">`</span>wc -l<span class="sb">`</span><span class="o">/</span><span class="m">4</span><span class="k">))</span>
+<span class="c"># 同时，由于一些测序文件会对read做特殊标记，比如“@HISEQ2000”。所以，可以使用正则匹配。</span>
+<span class="c"># 注意：这种方法有潜在错误，慎重使用。</span>
+<span class="nv">$ </span>zgrep -c <span class="s1">&#39;@HISEQ200&#39;</span> mySeq_1_1.fastq
+
+<span class="c"># 统计fastq文件reads长度分布</span>
+<span class="nv">$ </span>zcat mySeq_1_1.fastq.gz <span class="p">|</span> awk <span class="s1">&#39;{if(NR%4==2) print length($1)}&#39;</span> <span class="p">|</span> sort -n <span class="p">|</span> uniq -c
+</pre></div>

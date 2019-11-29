@@ -1,0 +1,216 @@
+<div class="highlight"><pre><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span class="c1">;set up helm</span>
+<span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span class="p">(</span><span class="nb">require</span> <span class="err">‘</span><span class="nv">helm-config</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">require</span> <span class="err">‘</span><span class="nv">helm-grep</span><span class="p">)</span>
+<span class="c1">;; The default “C-x c” is quite close to “C-x C-c”, which quits Emacs.</span>
+<span class="c1">;; Changed to “C-c h”. Note: We must set “C-c h” globally, because we</span>
+<span class="c1">;; cannot change &lt;code&gt;helm-command-prefix-key&#39; once &lt;/code&gt;helm-config’ is loaded.</span>
+<span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">C-c</span> <span class="nv">h</span><span class="err">”</span><span class="p">)</span> <span class="err">‘</span><span class="nv">helm-command-prefix</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">global-unset-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">C-x</span> <span class="nv">c</span><span class="err">”</span><span class="p">))</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">&lt;tab&gt;</span><span class="s">&quot;) &#39;helm-execute-persistent-action) ; rebihnd tab to do persistent action</span>
+<span class="s">(define-key helm-map (kbd &quot;</span><span class="nv">C-i</span><span class="s">&quot;) &#39;helm-execute-persistent-action) ; make TAB works in terminal</span>
+<span class="s">(define-key helm-map (kbd &quot;</span><span class="nv">C-z</span><span class="s">&quot;)  &#39;helm-select-action) ; list actions using C-z&lt;/tab&gt;&lt;/p&gt;</span>
+
+<span class="s">&lt;p&gt;(define-key helm-grep-mode-map (kbd “&lt;return&gt;&quot;</span><span class="p">)</span>  <span class="ss">&#39;helm-grep-mode-jump-other-window</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-grep-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;n&quot;</span><span class="p">)</span>  <span class="ss">&#39;helm-grep-mode-jump-other-window-forward</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-grep-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;p&quot;</span><span class="p">)</span>  <span class="ss">&#39;helm-grep-mode-jump-other-window-backward</span><span class="p">)</span><span class="nv">&lt;/return&gt;&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">executable-find</span> <span class="err">“</span><span class="nv">curl</span><span class="err">”</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">helm-google-suggest-use-curl-p</span> <span class="no">t</span><span class="p">))</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="p">(</span><span class="k">setq</span>
+ <span class="nv">helm-scroll-amount</span> <span class="mi">4</span> <span class="c1">; scroll 4 lines other window using M-&lt;next&gt;/M-&lt;prior&gt;</span>
+ <span class="nv">helm-quick-update</span> <span class="no">t</span> <span class="c1">; do not display invisible candidates</span>
+ <span class="nv">helm-ff-search-library-in-sexp</span> <span class="no">t</span> <span class="c1">; search for library in `require&#39; and `declare-function&#39; sexp.</span>
+ <span class="nv">helm-split-window-in-side-p</span> <span class="no">t</span> <span class="c1">;; open helm buffer inside current window, not occupy whole other window</span>
+ <span class="nv">helm-candidate-number-limit</span> <span class="mi">500</span> <span class="c1">; limit the number of displayed canidates</span>
+ <span class="nv">helm-ff-file-name-history-use-recentf</span> <span class="no">t</span>
+ <span class="nv">helm-move-to-line-cycle-in-source</span> <span class="no">t</span> <span class="c1">; move to end or beginning of source when reaching top or bottom of source.</span>
+ <span class="nv">helm-buffers-fuzzy-matching</span> <span class="no">t</span>          <span class="c1">; fuzzy matching buffer names when non-nil</span>
+                                        <span class="c1">; useful in helm-mini that lists buffers&lt;/prior&gt;&lt;/next&gt;&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="p">(</span><span class="nv">add-to-list</span> <span class="err">‘</span><span class="nv">helm-sources-using-default-as-input</span> <span class="err">‘</span><span class="nv">helm-source-man-pages</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">M-x</span><span class="err">”</span><span class="p">)</span> <span class="err">‘</span><span class="nv">helm-M-x</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">M-y</span><span class="err">”</span><span class="p">)</span> <span class="err">‘</span><span class="nv">helm-show-kill-ring</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">C-x</span> <span class="nv">b</span><span class="err">”</span><span class="p">)</span> <span class="err">‘</span><span class="nv">helm-mini</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">C-x</span> <span class="nv">C-f</span><span class="err">”</span><span class="p">)</span> <span class="err">‘</span><span class="nv">helm-find-files</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">C-h</span> <span class="nv">SPC</span><span class="err">”</span><span class="p">)</span> <span class="err">‘</span><span class="nv">helm-all-mark-rings</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">C-c</span> <span class="nv">h</span> <span class="nv">o</span><span class="err">”</span><span class="p">)</span> <span class="err">‘</span><span class="nv">helm-occur</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">C-c</span> <span class="nv">h</span> <span class="nv">C-c</span> <span class="nv">w</span><span class="err">”</span><span class="p">)</span> <span class="err">‘</span><span class="nv">helm-wikipedia-suggest</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">C-c</span> <span class="nv">h</span> <span class="nv">x</span><span class="err">”</span><span class="p">)</span> <span class="err">‘</span><span class="nv">helm-register</span><span class="p">)</span>
+<span class="c1">;; (global-set-key (kbd “C-x r j”) ‘jump-to-register)&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="p">(</span><span class="nv">define-key</span> <span class="err">‘</span><span class="nv">help-command</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">C-f</span><span class="err">”</span><span class="p">)</span> <span class="err">‘</span><span class="nv">helm-apropos</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">define-key</span> <span class="err">‘</span><span class="nv">help-command</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">r</span><span class="err">”</span><span class="p">)</span> <span class="err">‘</span><span class="nv">helm-info-emacs</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">define-key</span> <span class="err">‘</span><span class="nv">help-command</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">C-l</span><span class="err">”</span><span class="p">)</span> <span class="err">‘</span><span class="nv">helm-locate-library</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="c1">;; use helm to list eshell history</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">eshell-mode-hook</span>
+          <span class="err">#’</span><span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+              <span class="p">(</span><span class="nv">define-key</span> <span class="nv">eshell-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">M-l</span><span class="err">”</span><span class="p">)</span>  <span class="err">‘</span><span class="nv">helm-eshell-history</span><span class="p">)))</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="c1">;;; Save current position to mark ring</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">helm-goto-line-before-hook</span> <span class="err">‘</span><span class="nv">helm-save-current-pos-to-mark-ring</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="c1">;; show minibuffer history with Helm</span>
+<span class="p">(</span><span class="nv">define-key</span> <span class="nv">minibuffer-local-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">M-p</span><span class="err">”</span><span class="p">)</span> <span class="err">‘</span><span class="nv">helm-minibuffer-history</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">define-key</span> <span class="nv">minibuffer-local-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">M-n</span><span class="err">”</span><span class="p">)</span> <span class="err">‘</span><span class="nv">helm-minibuffer-history</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[remap</span> <span class="nv">find-tag]</span> <span class="err">‘</span><span class="nv">helm-etags-select</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[remap</span> <span class="nv">list-buffers]</span> <span class="err">‘</span><span class="nv">helm-buffers-list</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span class="c1">;; PACKAGE: helm-swoop                ;;</span>
+<span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span class="c1">;; Locate the helm-swoop folder to your path</span>
+<span class="p">(</span><span class="nb">require</span> <span class="err">‘</span><span class="nv">helm-swoop</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="c1">;; Change the keybinds to whatever you like :)</span>
+<span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">C-c</span> <span class="nv">h</span> <span class="nv">o</span><span class="err">”</span><span class="p">)</span> <span class="err">‘</span><span class="nv">helm-swoop</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">C-c</span> <span class="nv">s</span><span class="err">”</span><span class="p">)</span> <span class="err">‘</span><span class="nv">helm-multi-swoop-all</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="c1">;; When doing isearch, hand the word over to helm-swoop</span>
+<span class="p">(</span><span class="nv">define-key</span> <span class="nv">isearch-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">M-i</span><span class="err">”</span><span class="p">)</span> <span class="err">‘</span><span class="nv">helm-swoop-from-isearch</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="c1">;; From helm-swoop to helm-multi-swoop-all</span>
+<span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-swoop-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">M-i</span><span class="err">”</span><span class="p">)</span> <span class="err">‘</span><span class="nv">helm-multi-swoop-all-from-helm-swoop</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="c1">;; Save buffer when helm-multi-swoop-edit complete</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">helm-multi-swoop-edit-save</span> <span class="no">t</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="c1">;; If this value is t, split window inside the current window</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">helm-swoop-split-with-multiple-windows</span> <span class="no">t</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="c1">;; Split direcion. ‘split-window-vertically or ‘split-window-horizontally</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">helm-swoop-split-direction</span> <span class="err">‘</span><span class="nv">split-window-vertically</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="c1">;; If nil, you can slightly boost invoke speed in exchange for text color</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">helm-swoop-speed-or-color</span> <span class="no">t</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="p">(</span><span class="nv">helm-mode</span> <span class="mi">1</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="p">(</span><span class="nb">provide</span> <span class="err">‘</span><span class="nv">setup-helm</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="p">(</span><span class="nb">require</span> <span class="err">‘</span><span class="nv">setup-helm</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span>
+ <span class="nv">helm-gtags-ignore-case</span> <span class="no">t</span>
+ <span class="nv">helm-gtags-auto-update</span> <span class="no">t</span>
+ <span class="nv">helm-gtags-use-input-at-cursor</span> <span class="no">t</span>
+ <span class="nv">helm-gtags-pulse-at-cursor</span> <span class="no">t</span>
+ <span class="nv">helm-gtags-prefix-key</span> <span class="err">“</span><span class="nv">\C-cg</span><span class="err">”</span>
+ <span class="nv">helm-gtags-suggested-key-mapping</span> <span class="no">t</span>
+ <span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="p">(</span><span class="nb">require</span> <span class="err">‘</span><span class="nv">helm-gtags</span><span class="p">)</span>
+<span class="c1">;; Enable helm-gtags-mode</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">dired-mode-hook</span> <span class="err">‘</span><span class="nv">helm-gtags-mode</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">eshell-mode-hook</span> <span class="err">‘</span><span class="nv">helm-gtags-mode</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">c-mode-hook</span> <span class="err">‘</span><span class="nv">helm-gtags-mode</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">c++-mode-hook</span> <span class="err">‘</span><span class="nv">helm-gtags-mode</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">asm-mode-hook</span> <span class="err">‘</span><span class="nv">helm-gtags-mode</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-gtags-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">C-c</span> <span class="nv">g</span> <span class="nv">a</span><span class="err">”</span><span class="p">)</span> <span class="err">‘</span><span class="nv">helm-gtags-tags-in-this-function</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-gtags-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">C-j</span><span class="err">”</span><span class="p">)</span> <span class="err">‘</span><span class="nv">helm-gtags-select</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-gtags-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">M-.</span><span class="err">”</span><span class="p">)</span> <span class="err">‘</span><span class="nv">helm-gtags-dwim</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-gtags-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">M-,</span><span class="err">”</span><span class="p">)</span> <span class="err">‘</span><span class="nv">helm-gtags-pop-stack</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-gtags-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">C-c</span> <span class="nv">&amp;lt</span><span class="c1">;”) ‘helm-gtags-previous-history)</span>
+<span class="p">(</span><span class="nv">define-key</span> <span class="nv">helm-gtags-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="err">“</span><span class="nv">C-c</span> <span class="nv">&amp;gt</span><span class="c1">;”) ‘helm-gtags-next-history)&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="c1">;;;;;;;;;;;;;;;;;;;;;</span>
+<span class="c1">;enable semantic mode</span>
+<span class="c1">;;;;;;;;;;;;;;;;;;;;;</span>
+<span class="p">(</span><span class="nb">require</span> <span class="err">‘</span><span class="nv">cc-mode</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">require</span> <span class="err">‘</span><span class="nv">semantic</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="p">(</span><span class="nv">global-semanticdb-minor-mode</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">global-semantic-idle-scheduler-mode</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">global-semantic-idle-summary-mode</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">global-semantic-stickyfunc-mode</span> <span class="mi">1</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="p">(</span><span class="nv">semantic-mode</span> <span class="mi">1</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span class="c1">;open hs-mode</span>
+<span class="c1">;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">c-mode-common-hook</span>   <span class="err">‘</span><span class="nv">hs-minor-mode</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="c1">;;;;;;;;;;;;;;;;;;</span>
+<span class="c1">;google-c-style</span>
+<span class="c1">;;;;;;;;;;;;;;;;;;</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">c-mode-common-hook</span> <span class="err">‘</span><span class="nv">google-set-c-style</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">c-mode-common-hook</span> <span class="err">‘</span><span class="nv">google-make-newline-indent</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="c1">;;;;;;;;;;;;;;;;;;;;;</span>
+<span class="c1">;smartparens</span>
+<span class="c1">;;;;;;;;;;;;;;;;;;;;;</span>
+<span class="p">(</span><span class="nb">require</span> <span class="err">‘</span><span class="nv">smartparens-config</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">show-smartparens-global-mode</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">smartparens-global-mode</span> <span class="no">t</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span class="c1">; auto-complete</span>
+<span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span class="p">(</span><span class="nb">require</span> <span class="err">‘</span><span class="nv">auto-complete</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">require</span> <span class="err">‘</span><span class="nv">auto-complete-config</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">ac-config-default</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span class="c1">;; auto-complete-c-headers </span>
+<span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">my:ac-c-header-init</span><span class="p">()</span>
+  <span class="p">(</span><span class="nb">require</span> <span class="err">‘</span><span class="nv">auto-complete-c-headers</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">add-to-list</span> <span class="err">‘</span><span class="nv">ac-sources</span> <span class="err">‘</span><span class="nv">ac-source-c-headers</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">add-to-list</span> <span class="err">‘</span><span class="nv">achead:include-directories</span> <span class="err">‘“</span><span class="nv">/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2</span><span class="err">”</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">add-to-list</span> <span class="err">‘</span><span class="nv">achead:include-directories</span> <span class="err">‘“</span><span class="nv">/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/x86_64-redhat-linux</span><span class="err">”</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">add-to-list</span> <span class="err">‘</span><span class="nv">achead:include-directories</span> <span class="err">‘“</span><span class="nv">/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/backward</span><span class="err">”</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">add-to-list</span> <span class="err">‘</span><span class="nv">achead:include-directories</span> <span class="err">‘“</span><span class="nv">/usr/lib/gcc/x86_64-redhat-linux/4.9.2/include</span><span class="err">”</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">add-to-list</span> <span class="err">‘</span><span class="nv">achead:include-directories</span> <span class="err">‘“</span><span class="nv">/usr/local/include</span><span class="err">”</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">add-to-list</span> <span class="err">‘</span><span class="nv">achead:include-directories</span> <span class="err">‘“</span><span class="nv">/usr/include</span><span class="err">”</span><span class="p">)</span>
+  <span class="p">)</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">c++-mode-hook</span> <span class="err">‘</span><span class="nv">my:ac-c-header-init</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">c-mode-hook</span> <span class="err">‘</span><span class="nv">my:ac-c-header-init</span><span class="p">)</span><span class="nv">&lt;/p&gt;</span>
+
+<span class="nv">&lt;p&gt;</span><span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span class="c1">;; auto-complete-clang </span>
+<span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span class="p">(</span><span class="nb">require</span> <span class="err">‘</span><span class="nv">auto-complete-clang</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">ac-auto-start</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">ac-quick-help-delay</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="c1">;; (ac-set-trigger-key “TAB”)</span>
+<span class="c1">;; (define-key ac-mode-map  [(control tab)] ‘auto-complete)</span>
+<span class="p">(</span><span class="nv">define-key</span> <span class="nv">ac-mode-map</span>  <span class="nv">[</span><span class="p">(</span><span class="nv">control</span> <span class="nv">tab</span><span class="p">)</span><span class="nv">]</span> <span class="err">‘</span><span class="nv">auto-complete</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">my-ac-config</span> <span class="p">()</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">ac-clang-flags</span>
+	<span class="p">(</span><span class="nb">mapcar</span><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">item</span><span class="p">)(</span><span class="nv">concat</span> <span class="err">“</span><span class="nv">-I</span><span class="err">”</span> <span class="nv">item</span><span class="p">))</span>
+	       <span class="p">(</span><span class="nv">split-string</span>
+		<span class="err">“</span>
+<span class="nv">/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2</span>
+<span class="nv">/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/x86_64-redhat-linux</span>
+<span class="nv">/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/backward</span>
+<span class="nv">/usr/lib/gcc/x86_64-redhat-linux/4.9.2/include</span>
+<span class="nv">/usr/local/include</span>
+<span class="nv">/usr/include</span><span class="err">”</span>
+		<span class="p">)))</span>
+  <span class="p">(</span><span class="nv">setq-default</span> <span class="nv">ac-sources</span> <span class="err">‘</span><span class="p">(</span><span class="nv">ac-source-abbrev</span> <span class="nv">ac-source-dictionary</span> <span class="nv">ac-source-words-in-same-mode-buffers</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">emacs-lisp-mode-hook</span> <span class="err">‘</span><span class="nv">ac-emacs-lisp-mode-setup</span><span class="p">)</span>
+  <span class="c1">;; (add-hook ‘c-mode-common-hook ‘ac-cc-mode-setup)</span>
+  <span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">ruby-mode-hook</span> <span class="err">‘</span><span class="nv">ac-ruby-mode-setup</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">css-mode-hook</span> <span class="err">‘</span><span class="nv">ac-css-mode-setup</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">auto-complete-mode-hook</span> <span class="err">‘</span><span class="nv">ac-common-setup</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">global-auto-complete-mode</span> <span class="no">t</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">my-ac-cc-mode-setup</span> <span class="p">()</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">ac-sources</span> <span class="p">(</span><span class="nb">append</span> <span class="err">‘</span><span class="p">(</span><span class="nv">ac-source-clang</span> <span class="nv">ac-source-yasnippet</span><span class="p">)</span> <span class="nv">ac-sources</span><span class="p">)))</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="err">‘</span><span class="nv">c-mode-common-hook</span> <span class="err">‘</span><span class="nv">my-ac-cc-mode-setup</span><span class="p">)</span>
+<span class="c1">;; ac-source-gtags</span>
+<span class="p">(</span><span class="nv">my-ac-config</span><span class="p">)</span>
+</pre></div>
